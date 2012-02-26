@@ -44,25 +44,39 @@ $(function () {
     return points;
   }
 
+  function printf (formatter, args) {
+    var composedStr = formatter;
+    _.each(args, function (arg) {
+      composedStr = composedStr.replace('%s', arg);
+
+    });
+
+    return composedStr;
+  }
+
   var CSS_EQUIV_KEYS = {
     'x': 'left'
     ,'y': 'top'
   };
 
-  function generateCSS3Keyframes (identifier, x1, y1, x2, y2, easeX, easeY) {
-    var points = generatePathPoints.apply(this, arguments);
-    var cssString = ['@keyframes ' + identifier + ' {'];
+  function generateCSS3Keyframes (
+      identifier, x1, y1, x2, y2, easeX, easeY, opt_vendorPrefix) {
+    var points = generatePathPoints.apply(this,
+        Array.prototype.slice.call(arguments, 1));
+    var cssString = [printf('@%skeyframes %s {\n',
+        [opt_vendorPrefix || '', identifier])];
     var pointsLen = points.length;
 
     _.each(points, function (point, i) {
-      var keyframeStr = ((pointsLen / 100) * i).toFixed(2) + '% { ';
+      var keyframeStr = printf('  %s% { ',
+          [((pointsLen / 100) * i).toFixed(2)]);
 
       _.each(point, function (pointVal, pointKey) {
         var cssProp = CSS_EQUIV_KEYS[pointKey] || cssProp;
-        keyframeStr += cssProp + ': ' + pointVal.toFixed(2) + 'px; ';
+        keyframeStr += printf('%s: %spx; ', [cssProp, pointVal.toFixed(2)]);
       });
 
-      keyframeStr += '} ';
+      keyframeStr += '} \n';
       cssString.push(keyframeStr);
     });
 
@@ -213,8 +227,9 @@ $(function () {
 
     var fromCoords = getCrosshairCoords(crosshairs.from);
     var toCoords = getCrosshairCoords(crosshairs.to);
-    console.log(generateCSS3Keyframes('.foo', fromCoords.x, fromCoords.y,
-          toCoords.x, toCoords.y, selects._from.val(), selects._to.val()));
+    console.log(generateCSS3Keyframes('foo', fromCoords.x, fromCoords.y,
+          toCoords.x, toCoords.y, selects._from.val(), selects._to.val(),
+          '-webkit-'));
   }
 
   function initSelect (select) {
