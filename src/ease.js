@@ -59,6 +59,19 @@ $(function () {
     ,'y': 'top'
   };
 
+  function renderCSS3KeyframeSegment (point, index, totalPoints) {
+    var keyframeStr = printf('  %s% { ',
+        [((totalPoints / 100) * index).toFixed(2)]);
+
+    _.each(point, function (pointVal, pointKey) {
+      var cssProp = CSS_EQUIV_KEYS[pointKey] || cssProp;
+      keyframeStr += printf('%s: %spx; ', [cssProp, pointVal.toFixed(2)]);
+    });
+
+    keyframeStr += '} \n';
+    return keyframeStr;
+  }
+
   function generateCSS3Keyframes (
       identifier, x1, y1, x2, y2, easeX, easeY, opt_vendorPrefix) {
     var points = generatePathPoints.apply(this,
@@ -68,15 +81,7 @@ $(function () {
     var pointsLen = points.length;
 
     _.each(points, function (point, i) {
-      var keyframeStr = printf('  %s% { ',
-          [((pointsLen / 100) * i).toFixed(2)]);
-
-      _.each(point, function (pointVal, pointKey) {
-        var cssProp = CSS_EQUIV_KEYS[pointKey] || cssProp;
-        keyframeStr += printf('%s: %spx; ', [cssProp, pointVal.toFixed(2)]);
-      });
-
-      keyframeStr += '} \n';
+      keyframeStr = renderCSS3KeyframeSegment(point, i, pointsLen);
       cssString.push(keyframeStr);
     });
 
@@ -230,9 +235,9 @@ $(function () {
   genKeyframesBtn.on('click', function (evt) {
     var fromCoords = getCrosshairCoords(crosshairs.from);
     var toCoords = getCrosshairCoords(crosshairs.to);
-    console.log(generateCSS3Keyframes('foo', fromCoords.x, fromCoords.y,
-          toCoords.x, toCoords.y, selects._from.val(), selects._to.val(),
-          '-webkit-'));
+    console.log(
+      generateCSS3Keyframes('foo', fromCoords.x, fromCoords.y, toCoords.x,
+          toCoords.y, selects._from.val(), selects._to.val(), '-webkit-'));
   });
 
   function initSelect (select) {
