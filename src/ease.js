@@ -224,13 +224,16 @@ $(function () {
 
   function handleDragStop (evt, ui) {
     handleDrag.apply(this, arguments);
+  }
 
+  var genKeyframesBtn = $('#gen-keyframes');
+  genKeyframesBtn.on('click', function (evt) {
     var fromCoords = getCrosshairCoords(crosshairs.from);
     var toCoords = getCrosshairCoords(crosshairs.to);
     console.log(generateCSS3Keyframes('foo', fromCoords.x, fromCoords.y,
           toCoords.x, toCoords.y, selects._from.val(), selects._to.val(),
           '-webkit-'));
-  }
+  });
 
   function initSelect (select) {
     _.each(Tweenable.prototype.formula, function (formula, name) {
@@ -311,5 +314,6 @@ $(function () {
   var controls = new RekapiScrubber(kapi);
   updatePath();
   kapi.play();
+  kapi.pause();
 
 });
