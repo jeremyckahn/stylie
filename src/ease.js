@@ -44,6 +44,32 @@ $(function () {
     return points;
   }
 
+  var CSS_EQUIV_KEYS = {
+    'x': 'left'
+    ,'y': 'top'
+  };
+
+  function generateCSS3Keyframes (identifier, x1, y1, x2, y2, easeX, easeY) {
+    var points = generatePathPoints.apply(this, arguments);
+    var cssString = ['@keyframes ' + identifier + ' {'];
+    var pointsLen = points.length;
+
+    _.each(points, function (point, i) {
+      var keyframeStr = ((pointsLen / 100) * i).toFixed(2) + '% { ';
+
+      _.each(point, function (pointVal, pointKey) {
+        var cssProp = CSS_EQUIV_KEYS[pointKey] || cssProp;
+        keyframeStr += cssProp + ': ' + pointVal.toFixed(2) + 'px; ';
+      });
+
+      keyframeStr += '} ';
+      cssString.push(keyframeStr);
+    });
+
+    cssString.push('}');
+    return cssString.join('');
+  }
+
   var prerenderedPath;
   function generatePathPrerender (x1, y1, x2, y2, easeX, easeY) {
     prerenderedPath = document.createElement('canvas');
@@ -184,6 +210,11 @@ $(function () {
 
   function handleDragStop (evt, ui) {
     handleDrag.apply(this, arguments);
+
+    var fromCoords = getCrosshairCoords(crosshairs.from);
+    var toCoords = getCrosshairCoords(crosshairs.to);
+    console.log(generateCSS3Keyframes('.foo', fromCoords.x, fromCoords.y,
+          toCoords.x, toCoords.y, selects._from.val(), selects._to.val()));
   }
 
   function initSelect (select) {
