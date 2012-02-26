@@ -60,8 +60,13 @@ $(function () {
   };
 
   function renderCSS3KeyframeSegment (point, index, totalPoints) {
-    var keyframeStr = printf('  %s% { ',
-        [((totalPoints / 100) * index).toFixed(2)]);
+    var keyframeStr;
+    if (index === 'to' || index === 'from') {
+      keyframeStr = printf('  %s { ', [index]);
+    } else {
+      keyframeStr = printf('  %s% { ',
+          [((totalPoints / 100) * index).toFixed(2)]);
+    }
 
     _.each(point, function (pointVal, pointKey) {
       var cssProp = CSS_EQUIV_KEYS[pointKey] || cssProp;
@@ -79,12 +84,14 @@ $(function () {
     var cssString = [printf('@%skeyframes %s {\n',
         [opt_vendorPrefix || '', identifier])];
     var pointsLen = points.length;
+    cssString.push(renderCSS3KeyframeSegment(points[0], 'from', pointsLen));
 
     _.each(points, function (point, i) {
       keyframeStr = renderCSS3KeyframeSegment(point, i, pointsLen);
       cssString.push(keyframeStr);
     });
 
+    cssString.push(renderCSS3KeyframeSegment(points[0], 'to', pointsLen));
     cssString.push('}');
     return cssString.join('');
   }
