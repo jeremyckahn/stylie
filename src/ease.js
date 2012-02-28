@@ -45,8 +45,6 @@
       return points;
     }
 
-    global.generatePathPoints = generatePathPoints;
-
     var prerenderedPath;
     function generatePathPrerender (x1, y1, x2, y2, easeX, easeY) {
       prerenderedPath = document.createElement('canvas');
@@ -193,10 +191,9 @@
     genKeyframesBtn.on('click', function (evt) {
       var fromCoords = getCrosshairCoords(crosshairs.from);
       var toCoords = getCrosshairCoords(crosshairs.to);
-      console.log(
-        global.generateCSS3Keyframes('foo', fromCoords.x, fromCoords.y,
-          toCoords.x, toCoords.y, selects._from.val(), selects._to.val(),
-          '-webkit-'));
+      var points = generatePathPoints(fromCoords.x, fromCoords.y,
+          toCoords.x, toCoords.y, selects._from.val(), selects._to.val());
+      console.log(global.generateCSS3Keyframes('foo', points,'-webkit-'));
     });
 
     function initSelect (select) {

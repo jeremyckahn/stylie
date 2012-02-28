@@ -32,9 +32,7 @@
   }
 
   function generateCSS3Keyframes (
-      identifier, x1, y1, x2, y2, easeX, easeY, opt_vendorPrefix) {
-    var points = global.generatePathPoints.apply(this,
-        Array.prototype.slice.call(arguments, 1));
+      identifier, points, opt_vendorPrefix) {
     var cssString = [printf('@%skeyframes %s {\n',
         [opt_vendorPrefix || '', identifier])];
     var pointsLen = points.length;
