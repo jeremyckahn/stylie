@@ -1,4 +1,4 @@
-require(['src/css-gen', 'src/ease'], function () {
+require(['src/ease'], function (ease) {
   // Fancy schmancy way of getting global scope.
   var global;
   (function () { global = this; } (null));

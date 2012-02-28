@@ -1,4 +1,7 @@
-;(function (global) {
+define(function () {
+
+  var cssGen = {};
+
   function printf (formatter, args) {
     var composedStr = formatter;
     _.each(args, function (arg) {
@@ -13,7 +16,7 @@
     ,'y': 'top'
   };
 
-  function renderCSS3KeyframeSegment (point, index, totalPoints) {
+  cssGen.renderCSS3KeyframeSegment = function (point, index, totalPoints) {
     var keyframeStr;
     if (index === 'to' || index === 'from') {
       keyframeStr = printf('  %s { ', [index]);
@@ -29,24 +32,25 @@
 
     keyframeStr += '} \n';
     return keyframeStr;
-  }
+  };
 
-  function generateCSS3Keyframes (
+  cssGen.generateCSS3Keyframes = function (
       identifier, points, opt_vendorPrefix) {
     var cssString = [printf('@%skeyframes %s {\n',
         [opt_vendorPrefix || '', identifier])];
     var pointsLen = points.length;
-    cssString.push(renderCSS3KeyframeSegment(points[0], 'from', pointsLen));
+    cssString.push(cssGen.renderCSS3KeyframeSegment(points[0], 'from', pointsLen));
 
     _.each(points, function (point, i) {
-      keyframeStr = renderCSS3KeyframeSegment(point, i, pointsLen);
+      keyframeStr = cssGen.renderCSS3KeyframeSegment(point, i, pointsLen);
       cssString.push(keyframeStr);
     });
 
-    cssString.push(renderCSS3KeyframeSegment(points[0], 'to', pointsLen));
+    cssString.push(cssGen.renderCSS3KeyframeSegment(points[0], 'to',
+          pointsLen));
     cssString.push('}');
     return cssString.join('');
-  }
+  };
 
-  global.generateCSS3Keyframes = generateCSS3Keyframes;
-} (this));
+  return cssGen;
+});

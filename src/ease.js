@@ -1,4 +1,4 @@
-;(function (global) {
+require(['src/css-gen'], function (cssGen) {
 
   var duration = $('#duration');
   var animationDuration = initialDuration = duration.val();
@@ -192,7 +192,7 @@
     var toCoords = getCrosshairCoords(crosshairs.to);
     var points = generatePathPoints(fromCoords.x, fromCoords.y,
         toCoords.x, toCoords.y, selects._from.val(), selects._to.val());
-    console.log(global.generateCSS3Keyframes('foo', points,'-webkit-'));
+    console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
   });
 
   function initSelect (select) {
@@ -276,4 +276,4 @@
   kapi.play();
   kapi.pause();
 
-} (this));
+});
