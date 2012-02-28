@@ -1,5 +1,43 @@
 require(['src/css-gen'], function (cssGen) {
 
+  var appConfig = {};
+
+  var ButtonView = Backbone.View.extend({
+
+  });
+
+  var SelectView = Backbone.View.extend({
+
+  });
+
+  var CheckboxView = Backbone.View.extend({
+
+    'events': {
+      'change': 'onChange'
+    }
+
+    ,'initialize': function (opts) {
+      _.extend(this, opts);
+      this.delegateEvents();
+      this.$el.trigger('change');
+    }
+
+    ,'onChange': function () {}
+
+  });
+
+  var AutoUpdateTextFieldView = Backbone.View.extend({
+
+  });
+
+  //var showPath = $('#show-path');
+  //var isPathShowing = true;
+  //showPath.on('change', function (evt) {
+    //var checked = showPath.attr('checked');
+    //isPathShowing = !!checked;
+    //kapi.redraw();
+  //});
+
   var duration = $('#duration');
   var animationDuration = initialDuration = duration.val();
 
@@ -133,7 +171,7 @@ require(['src/css-gen'], function (cssGen) {
     ,circle = new Kapi.Actor({
       'draw': function (canvas_context, state) {
 
-        if (isPathShowing && prerenderedPath) {
+        if (appConfig.isPathShowing && prerenderedPath) {
           canvas_context.drawImage(prerenderedPath, 0, 0);
         }
 
@@ -228,14 +266,6 @@ require(['src/css-gen'], function (cssGen) {
       .redraw();
   });
 
-  var showPath = $('#show-path');
-  var isPathShowing = true;
-  showPath.on('change', function (evt) {
-    var checked = showPath.attr('checked');
-    isPathShowing = !!checked;
-    kapi.redraw();
-  });
-
   duration.on('keyup', function (evt) {
     var val = duration.val();
     var validVal = Math.abs(val);
@@ -274,6 +304,17 @@ require(['src/css-gen'], function (cssGen) {
   var controls = new RekapiScrubber(kapi);
   updatePath();
   kapi.play();
-  kapi.pause();
+
+  var showPathView = new CheckboxView({
+    'el': $('#show-path')
+
+    ,'kapi': kapi
+
+    ,'onChange': function (evt) {
+      var checked = this.$el.attr('checked');
+      appConfig.isPathShowing = !!checked;
+      this.kapi.redraw();
+    }
+  });
 
 });
