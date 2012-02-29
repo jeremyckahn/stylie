@@ -274,7 +274,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
       'color': '#333'
     }));
 
-  var controls = new RekapiScrubber(app.kapi);
+  app.kapi.controls = new RekapiScrubber(app.kapi);
   app.util.updatePath();
   app.kapi.play();
 
