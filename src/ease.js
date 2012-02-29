@@ -1,8 +1,9 @@
 require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     function (cssGen, checkbox, button) {
 
-  var appConfig = {
-    'view': {}
+  var app = {
+    'config': {}
+    ,'view': {}
   };
 
   var SelectView = Backbone.View.extend({
@@ -60,8 +61,8 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   var prerenderedPath;
   function generatePathPrerender (x1, y1, x2, y2, easeX, easeY) {
     prerenderedPath = document.createElement('canvas');
-    prerenderedPath.width = appConfig.kapi.canvas_width();
-    prerenderedPath.height = appConfig.kapi.canvas_height();
+    prerenderedPath.width = app.kapi.canvas_width();
+    prerenderedPath.height = app.kapi.canvas_height();
     var ctx = prerenderedPath.ctx = prerenderedPath.getContext('2d');
     var points = generatePathPoints.apply(this, arguments);
 
@@ -138,7 +139,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   }
 
   var canvas = $('canvas')[0];
-  appConfig.kapi = new Kapi(canvas, {
+  app.kapi = new Kapi(canvas, {
       'fps': 60
       ,'height': 400
       ,'width': 500
@@ -146,7 +147,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     ,circle = new Kapi.Actor({
       'draw': function (canvas_context, state) {
 
-        if (appConfig.isPathShowing && prerenderedPath) {
+        if (app.config.isPathShowing && prerenderedPath) {
           canvas_context.drawImage(prerenderedPath, 0, 0);
         }
 
@@ -164,7 +165,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
           return this;
         }
       });
-  appConfig.kapi.canvas_style('background', '#eee');
+  app.kapi.canvas_style('background', '#eee');
 
   var crosshairs = {
     'from': $('.crosshair.from')
@@ -189,7 +190,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     var pos = target.data('pos');
     var timeToModify = pos === 'from' ? 0 : animationDuration;
     circle.modifyKeyframe(timeToModify, getCrosshairCoords(crosshairs[pos]));
-    appConfig.kapi
+    app.kapi
       .canvas_clear()
       .redraw();
     updatePath();
@@ -227,7 +228,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     easingObj[target.data('axis')] = target.val();
     circle.modifyKeyframe(animationDuration, {}, easingObj)
     updatePath();
-    appConfig.kapi
+    app.kapi
       .canvas_clear()
       .redraw();
   });
@@ -258,7 +259,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     duration.trigger('keyup');
   });
 
-  appConfig.kapi.addActor(circle);
+  app.kapi.addActor(circle);
   circle.keyframe(0, _.extend(getCrosshairCoords(crosshairs.from), {
       'color': '#777'
       ,'radius': 15
@@ -267,26 +268,26 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
       'color': '#333'
     }));
 
-  var controls = new RekapiScrubber(appConfig.kapi);
+  var controls = new RekapiScrubber(app.kapi);
   updatePath();
-  appConfig.kapi.play();
+  app.kapi.play();
 
-  appConfig.view.showPathView = new checkbox.view({
+  app.view.showPathView = new checkbox.view({
     'el': $('#show-path')
 
-    ,'kapi': appConfig.kapi
+    ,'kapi': app.kapi
 
     ,'onChange': function (evt) {
       var checked = this.$el.attr('checked');
-      appConfig.isPathShowing = !!checked;
+      app.config.isPathShowing = !!checked;
       this.kapi.redraw();
     }
   });
 
-  appConfig.view.genKeyframesBtn = new button.view({
+  app.view.genKeyframesBtn = new button.view({
     'el': $('#gen-keyframes')
 
-    ,'kapi': appConfig.kapi
+    ,'kapi': app.kapi
 
     ,'onClick': function (evt) {
       var fromCoords = getCrosshairCoords(crosshairs.from);
