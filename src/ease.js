@@ -59,7 +59,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     return points;
   }
 
-  function generatePathPrerender (x1, y1, x2, y2, easeX, easeY) {
+  app.util.generatePathPrerender = function (x1, y1, x2, y2, easeX, easeY) {
     app.config.prerenderedPath = document.createElement('canvas');
     app.config.prerenderedPath.width = app.kapi.canvas_width();
     app.config.prerenderedPath.height = app.kapi.canvas_height();
@@ -100,7 +100,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
           + ' = function (x) {return ' + val + '}');
       el.data('lastvalidfn', val);
       el.removeClass('error');
-      updatePath();
+      app.util.updatePath();
     } catch (ex) {
       eval('Tweenable.prototype.formula.' + easename
           + ' = function (x) {return ' + lastValid + '}');
@@ -117,7 +117,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     el.data('lastvalidfn', fnString);
   });
 
-  function getCrosshairCoords (crosshair) {
+  app.util.getCrosshairCoords = function (crosshair) {
     var pos = crosshair.position();
     return {
       x: pos.left + crosshair.width()/2
@@ -125,7 +125,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     };
   }
 
-  function  moveLastKeyframe (actor, toMillisecond) {
+  app.util.moveLastKeyframe = function (actor, toMillisecond) {
     var trackNames = actor.getTrackNames();
     var lastFrameIndex = actor.getTrackLength(trackNames[0]) - 1;
 
@@ -168,6 +168,28 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
       });
   app.kapi.canvas_style('background', '#eee');
 
+  app.util.updatePath = function () {
+    var fromCoords = app.util.getCrosshairCoords(crosshairs.from);
+    var toCoords = app.util.getCrosshairCoords(crosshairs.to);
+    app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x, toCoords.y,
+        selects._from.val(), selects._to.val());
+  }
+
+  app.util.handleDrag = function (evt, ui) {
+    var target = $(evt.target);
+    var pos = target.data('pos');
+    var timeToModify = pos === 'from' ? 0 : animationDuration;
+    circle.modifyKeyframe(timeToModify, app.util.getCrosshairCoords(crosshairs[pos]));
+    app.kapi
+      .canvas_clear()
+      .redraw();
+    app.util.updatePath();
+  }
+
+  app.util.handleDragStop = function (evt, ui) {
+    app.util.handleDrag.apply(this, arguments);
+  }
+
   var crosshairs = {
     'from': $('.crosshair.from')
     ,'to': $('.crosshair.to')
@@ -175,33 +197,11 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
 
   crosshairs.from.add(crosshairs.to).draggable({
     'containment': 'parent'
-    ,'drag': handleDrag
-    ,'stop': handleDragStop
+    ,'drag': app.util.handleDrag
+    ,'stop': app.util.handleDragStop
   });
 
-  function updatePath () {
-    var fromCoords = getCrosshairCoords(crosshairs.from);
-    var toCoords = getCrosshairCoords(crosshairs.to);
-    generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x, toCoords.y,
-        selects._from.val(), selects._to.val());
-  }
-
-  function handleDrag (evt, ui) {
-    var target = $(evt.target);
-    var pos = target.data('pos');
-    var timeToModify = pos === 'from' ? 0 : animationDuration;
-    circle.modifyKeyframe(timeToModify, getCrosshairCoords(crosshairs[pos]));
-    app.kapi
-      .canvas_clear()
-      .redraw();
-    updatePath();
-  }
-
-  function handleDragStop (evt, ui) {
-    handleDrag.apply(this, arguments);
-  }
-
-  function initSelect (select) {
+  app.util.initSelect = function (select) {
     _.each(Tweenable.prototype.formula, function (formula, name) {
       var option = $(document.createElement('option'), {
           'value': name
@@ -220,7 +220,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   selects._to = selects.filter('#y-easing');
 
   selects.each(function (i, el) {
-    initSelect($(el));
+    app.util.initSelect($(el));
   });
 
   selects.on('change', function (evt) {
@@ -228,7 +228,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     var easingObj = {};
     easingObj[target.data('axis')] = target.val();
     circle.modifyKeyframe(animationDuration, {}, easingObj)
-    updatePath();
+    app.util.updatePath();
     app.kapi
       .canvas_clear()
       .redraw();
@@ -238,7 +238,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     var val = duration.val();
     var validVal = Math.abs(val);
     if (!isNaN(val)) {
-      moveLastKeyframe(circle, validVal);
+      app.util.moveLastKeyframe(circle, validVal);
     }
   });
 
@@ -261,16 +261,16 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   });
 
   app.kapi.addActor(circle);
-  circle.keyframe(0, _.extend(getCrosshairCoords(crosshairs.from), {
+  circle.keyframe(0, _.extend(app.util.getCrosshairCoords(crosshairs.from), {
       'color': '#777'
       ,'radius': 15
     }))
-    .keyframe(initialDuration, _.extend(getCrosshairCoords(crosshairs.to), {
+    .keyframe(initialDuration, _.extend(app.util.getCrosshairCoords(crosshairs.to), {
       'color': '#333'
     }));
 
   var controls = new RekapiScrubber(app.kapi);
-  updatePath();
+  app.util.updatePath();
   app.kapi.play();
 
   app.view.showPathView = new checkbox.view({
@@ -291,8 +291,8 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     ,'kapi': app.kapi
 
     ,'onClick': function (evt) {
-      var fromCoords = getCrosshairCoords(crosshairs.from);
-      var toCoords = getCrosshairCoords(crosshairs.to);
+      var fromCoords = app.util.getCrosshairCoords(crosshairs.from);
+      var toCoords = app.util.getCrosshairCoords(crosshairs.to);
       var points = app.util.generatePathPoints(fromCoords.x, fromCoords.y,
           toCoords.x, toCoords.y, selects._from.val(), selects._to.val());
       console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
