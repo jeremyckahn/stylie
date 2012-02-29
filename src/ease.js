@@ -1,11 +1,9 @@
-require(['src/css-gen', 'src/views/view.checkbox'],
-    function (cssGen, checkbox) {
+require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
+    function (cssGen, checkbox, button) {
 
-  var appConfig = {};
-
-  var ButtonView = Backbone.View.extend({
-
-  });
+  var appConfig = {
+    'view': {}
+  };
 
   var SelectView = Backbone.View.extend({
 
@@ -201,15 +199,6 @@ require(['src/css-gen', 'src/views/view.checkbox'],
     handleDrag.apply(this, arguments);
   }
 
-  var genKeyframesBtn = $('#gen-keyframes');
-  genKeyframesBtn.on('click', function (evt) {
-    var fromCoords = getCrosshairCoords(crosshairs.from);
-    var toCoords = getCrosshairCoords(crosshairs.to);
-    var points = generatePathPoints(fromCoords.x, fromCoords.y,
-        toCoords.x, toCoords.y, selects._from.val(), selects._to.val());
-    console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
-  });
-
   function initSelect (select) {
     _.each(Tweenable.prototype.formula, function (formula, name) {
       var option = $(document.createElement('option'), {
@@ -282,7 +271,7 @@ require(['src/css-gen', 'src/views/view.checkbox'],
   updatePath();
   kapi.play();
 
-  var showPathView = new checkbox.view({
+  appConfig.view.showPathView = new checkbox.view({
     'el': $('#show-path')
 
     ,'kapi': kapi
@@ -291,6 +280,20 @@ require(['src/css-gen', 'src/views/view.checkbox'],
       var checked = this.$el.attr('checked');
       appConfig.isPathShowing = !!checked;
       this.kapi.redraw();
+    }
+  });
+
+  appConfig.view.genKeyframesBtn = new button.view({
+    'el': $('#gen-keyframes')
+
+    ,'kapi': kapi
+
+    ,'onClick': function (evt) {
+      var fromCoords = getCrosshairCoords(crosshairs.from);
+      var toCoords = getCrosshairCoords(crosshairs.to);
+      var points = generatePathPoints(fromCoords.x, fromCoords.y,
+          toCoords.x, toCoords.y, selects._from.val(), selects._to.val());
+      console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
     }
   });
 
