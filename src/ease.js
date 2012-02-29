@@ -3,6 +3,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
 
   var app = {
     'config': {}
+    ,'const': {}
     ,'util': {}
     ,'view': {}
   };
@@ -16,7 +17,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   });
 
   var duration = $('#duration');
-  var animationDuration = initialDuration = duration.val();
+  app.config.animationDuration = app.config.initialDuration = duration.val();
 
   // The code in these are deliberately using some weird formatting.  The code
   // within gets used as a string.  Like magic!
@@ -34,7 +35,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     return desuffixed;
   }
 
-  var PRERENDER_GRANULARITY = 100;
+  app.const.PRERENDER_GRANULARITY = 100;
   app.util.generatePathPoints = function (x1, y1, x2, y2, easeX, easeY) {
     var points = [];
     var from = {
@@ -50,9 +51,9 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
       ,'y': easeY
     };
     var i, point;
-    for (i = 0; i <= PRERENDER_GRANULARITY; i++) {
+    for (i = 0; i <= app.const.PRERENDER_GRANULARITY; i++) {
       point = Tweenable.util.interpolate(
-          from, to, (1 / PRERENDER_GRANULARITY) * i, easing);
+          from, to, (1 / app.const.PRERENDER_GRANULARITY) * i, easing);
       points.push(point);
     }
 
@@ -136,7 +137,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     });
 
     actor.kapi.updateInternalState();
-    animationDuration = toMillisecond;
+    app.config.animationDuration = toMillisecond;
   }
 
   var canvas = $('canvas')[0];
@@ -171,15 +172,16 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   app.util.updatePath = function () {
     var fromCoords = app.util.getCrosshairCoords(crosshairs.from);
     var toCoords = app.util.getCrosshairCoords(crosshairs.to);
-    app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x, toCoords.y,
-        selects._from.val(), selects._to.val());
+    app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x,
+        toCoords.y, selects._from.val(), selects._to.val());
   }
 
   app.util.handleDrag = function (evt, ui) {
     var target = $(evt.target);
     var pos = target.data('pos');
-    var timeToModify = pos === 'from' ? 0 : animationDuration;
-    app.config.circle.modifyKeyframe(timeToModify, app.util.getCrosshairCoords(crosshairs[pos]));
+    var timeToModify = pos === 'from' ? 0 : app.config.animationDuration;
+    app.config.circle.modifyKeyframe(timeToModify,
+        app.util.getCrosshairCoords(crosshairs[pos]));
     app.kapi
       .canvas_clear()
       .redraw();
@@ -227,7 +229,8 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     var target = $(evt.target);
     var easingObj = {};
     easingObj[target.data('axis')] = target.val();
-    app.config.circle.modifyKeyframe(animationDuration, {}, easingObj)
+    app.config.circle.modifyKeyframe(
+        app.config.animationDuration, {}, easingObj)
     app.util.updatePath();
     app.kapi
       .canvas_clear()
@@ -256,16 +259,18 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
       augmentBy = -10;
     }
 
-    duration.val(parseInt(animationDuration, 10) + augmentBy);
+    duration.val(parseInt(app.config.animationDuration, 10) + augmentBy);
     duration.trigger('keyup');
   });
 
   app.kapi.addActor(app.config.circle);
-  app.config.circle.keyframe(0, _.extend(app.util.getCrosshairCoords(crosshairs.from), {
+  app.config.circle.keyframe(0,
+        _.extend(app.util.getCrosshairCoords(crosshairs.from), {
       'color': '#777'
       ,'radius': 15
     }))
-    .keyframe(initialDuration, _.extend(app.util.getCrosshairCoords(crosshairs.to), {
+    .keyframe(app.config.initialDuration,
+        _.extend(app.util.getCrosshairCoords(crosshairs.to), {
       'color': '#333'
     }));
 
