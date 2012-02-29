@@ -1,4 +1,5 @@
-require(['src/css-gen'], function (cssGen) {
+require(['src/css-gen', 'src/views/view.checkbox'],
+    function (cssGen, checkbox) {
 
   var appConfig = {};
 
@@ -10,33 +11,9 @@ require(['src/css-gen'], function (cssGen) {
 
   });
 
-  var CheckboxView = Backbone.View.extend({
-
-    'events': {
-      'change': 'onChange'
-    }
-
-    ,'initialize': function (opts) {
-      _.extend(this, opts);
-      this.delegateEvents();
-      this.$el.trigger('change');
-    }
-
-    ,'onChange': function () {}
-
-  });
-
   var AutoUpdateTextFieldView = Backbone.View.extend({
 
   });
-
-  //var showPath = $('#show-path');
-  //var isPathShowing = true;
-  //showPath.on('change', function (evt) {
-    //var checked = showPath.attr('checked');
-    //isPathShowing = !!checked;
-    //kapi.redraw();
-  //});
 
   var duration = $('#duration');
   var animationDuration = initialDuration = duration.val();
@@ -305,7 +282,7 @@ require(['src/css-gen'], function (cssGen) {
   updatePath();
   kapi.play();
 
-  var showPathView = new CheckboxView({
+  var showPathView = new checkbox.view({
     'el': $('#show-path')
 
     ,'kapi': kapi
