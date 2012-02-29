@@ -144,28 +144,28 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
       'fps': 60
       ,'height': 400
       ,'width': 500
-    })
-    ,circle = new Kapi.Actor({
-      'draw': function (canvas_context, state) {
+    });
+  app.config.circle = new Kapi.Actor({
+    'draw': function (canvas_context, state) {
 
-        if (app.config.isPathShowing && app.config.prerenderedPath) {
-          canvas_context.drawImage(app.config.prerenderedPath, 0, 0);
-        }
+      if (app.config.isPathShowing && app.config.prerenderedPath) {
+        canvas_context.drawImage(app.config.prerenderedPath, 0, 0);
+      }
 
-        canvas_context.beginPath();
-          canvas_context.arc(
-            state.x || 0,
-            state.y || 0,
-            state.radius || 50,
-            0,
-            Math.PI*2,
-            true);
-          canvas_context.fillStyle = state.color || '#444';
-          canvas_context.fill();
-          canvas_context.closePath();
-          return this;
-        }
-      });
+      canvas_context.beginPath();
+        canvas_context.arc(
+          state.x || 0,
+          state.y || 0,
+          state.radius || 50,
+          0,
+          Math.PI*2,
+          true);
+        canvas_context.fillStyle = state.color || '#444';
+        canvas_context.fill();
+        canvas_context.closePath();
+        return this;
+      }
+    });
   app.kapi.canvas_style('background', '#eee');
 
   app.util.updatePath = function () {
@@ -179,7 +179,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     var target = $(evt.target);
     var pos = target.data('pos');
     var timeToModify = pos === 'from' ? 0 : animationDuration;
-    circle.modifyKeyframe(timeToModify, app.util.getCrosshairCoords(crosshairs[pos]));
+    app.config.circle.modifyKeyframe(timeToModify, app.util.getCrosshairCoords(crosshairs[pos]));
     app.kapi
       .canvas_clear()
       .redraw();
@@ -227,7 +227,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     var target = $(evt.target);
     var easingObj = {};
     easingObj[target.data('axis')] = target.val();
-    circle.modifyKeyframe(animationDuration, {}, easingObj)
+    app.config.circle.modifyKeyframe(animationDuration, {}, easingObj)
     app.util.updatePath();
     app.kapi
       .canvas_clear()
@@ -238,7 +238,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     var val = duration.val();
     var validVal = Math.abs(val);
     if (!isNaN(val)) {
-      app.util.moveLastKeyframe(circle, validVal);
+      app.util.moveLastKeyframe(app.config.circle, validVal);
     }
   });
 
@@ -260,8 +260,8 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     duration.trigger('keyup');
   });
 
-  app.kapi.addActor(circle);
-  circle.keyframe(0, _.extend(app.util.getCrosshairCoords(crosshairs.from), {
+  app.kapi.addActor(app.config.circle);
+  app.config.circle.keyframe(0, _.extend(app.util.getCrosshairCoords(crosshairs.from), {
       'color': '#777'
       ,'radius': 15
     }))
