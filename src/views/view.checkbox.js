@@ -1,8 +1,8 @@
 define(function () {
 
-  var Checkbox = {}
+  var checkbox = {}
 
-  Checkbox.view = Backbone.View.extend({
+  checkbox.view = Backbone.View.extend({
 
     'events': {
       'change': 'onChange'
@@ -18,6 +18,6 @@ define(function () {
 
   });
 
-  return Checkbox;
+  return checkbox;
 
 });
