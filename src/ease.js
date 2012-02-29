@@ -3,6 +3,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
 
   var app = {
     'config': {}
+    ,'util': {}
     ,'view': {}
   };
 
@@ -25,7 +26,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   Tweenable.prototype.formula.customEase2 =
       function (x) {return Math.pow(x, 0.25)};
 
-  function getFormulaFromEasingFunc (fn) {
+  app.util.getFormulaFromEasingFunc = function (fn) {
     var fnString = fn.toString(); // An f'n string
     var indexOfReturn = fnString.indexOf('return');
     var deprefixed = fnString.slice(indexOfReturn + 7);
@@ -34,7 +35,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   }
 
   var PRERENDER_GRANULARITY = 100;
-  function generatePathPoints (x1, y1, x2, y2, easeX, easeY) {
+  app.util.generatePathPoints = function (x1, y1, x2, y2, easeX, easeY) {
     var points = [];
     var from = {
         'x': x1
@@ -58,13 +59,13 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     return points;
   }
 
-  var prerenderedPath;
   function generatePathPrerender (x1, y1, x2, y2, easeX, easeY) {
-    prerenderedPath = document.createElement('canvas');
-    prerenderedPath.width = app.kapi.canvas_width();
-    prerenderedPath.height = app.kapi.canvas_height();
-    var ctx = prerenderedPath.ctx = prerenderedPath.getContext('2d');
-    var points = generatePathPoints.apply(this, arguments);
+    app.config.prerenderedPath = document.createElement('canvas');
+    app.config.prerenderedPath.width = app.kapi.canvas_width();
+    app.config.prerenderedPath.height = app.kapi.canvas_height();
+    var ctx = app.config.prerenderedPath.ctx =
+        app.config.prerenderedPath.getContext('2d');
+    var points = app.util.generatePathPoints.apply(this, arguments);
 
     var previousPoint;
     ctx.beginPath();
@@ -111,7 +112,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     el = $(el);
     var easename = el.data('easename');
     var fn = Tweenable.prototype.formula[easename];
-    var fnString = getFormulaFromEasingFunc(fn);
+    var fnString = app.util.getFormulaFromEasingFunc(fn);
     el.val(fnString);
     el.data('lastvalidfn', fnString);
   });
@@ -147,8 +148,8 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     ,circle = new Kapi.Actor({
       'draw': function (canvas_context, state) {
 
-        if (app.config.isPathShowing && prerenderedPath) {
-          canvas_context.drawImage(prerenderedPath, 0, 0);
+        if (app.config.isPathShowing && app.config.prerenderedPath) {
+          canvas_context.drawImage(app.config.prerenderedPath, 0, 0);
         }
 
         canvas_context.beginPath();
@@ -292,7 +293,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
     ,'onClick': function (evt) {
       var fromCoords = getCrosshairCoords(crosshairs.from);
       var toCoords = getCrosshairCoords(crosshairs.to);
-      var points = generatePathPoints(fromCoords.x, fromCoords.y,
+      var points = app.util.generatePathPoints(fromCoords.x, fromCoords.y,
           toCoords.x, toCoords.y, selects._from.val(), selects._to.val());
       console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
     }
