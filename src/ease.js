@@ -1,4 +1,4 @@
-require(['src/css-gen', 'src/ui/view.checkbox', 'src/ui/view.button'],
+require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
     function (cssGen, checkbox, button) {
 
   var app = {
