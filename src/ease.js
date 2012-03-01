@@ -1,4 +1,4 @@
-require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
+require(['src/css-gen', 'src/ui/view.checkbox', 'src/ui/view.button'],
     function (cssGen, checkbox, button) {
 
   var app = {
@@ -277,6 +277,7 @@ require(['src/css-gen', 'src/views/view.checkbox', 'src/views/view.button'],
   app.kapi.controls = new RekapiScrubber(app.kapi);
   app.util.updatePath();
   app.kapi.play();
+  app.kapi.pause();
 
   app.view.showPathView = new checkbox.view({
     'el': $('#show-path')
