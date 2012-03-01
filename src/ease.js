@@ -10,6 +10,105 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'view': {}
   };
 
+  app.const.PRERENDER_GRANULARITY = 100;
+
+  app.util.updatePath = function () {
+    var fromCoords = app.util.getCrosshairCoords(crosshairs.from);
+    var toCoords = app.util.getCrosshairCoords(crosshairs.to);
+    app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x,
+        toCoords.y, selects._from.val(), selects._to.val());
+  };
+
+  app.util.initSelect = function (select) {
+    _.each(Tweenable.prototype.formula, function (formula, name) {
+      var option = $(document.createElement('option'), {
+          'value': name
+        });
+
+      option.html(name);
+      select.append(option);
+    });
+  };
+
+  app.util.generatePathPoints = function (x1, y1, x2, y2, easeX, easeY) {
+    var points = [];
+    var from = {
+        'x': x1
+        ,'y': y1
+      };
+    var to = {
+        'x': x2
+        ,'y': y2
+      };
+    var easing = {
+      'x': easeX
+      ,'y': easeY
+    };
+    var i, point;
+    for (i = 0; i <= app.const.PRERENDER_GRANULARITY; i++) {
+      point = Tweenable.util.interpolate(
+          from, to, (1 / app.const.PRERENDER_GRANULARITY) * i, easing);
+      points.push(point);
+    }
+
+    return points;
+  };
+
+  app.util.generatePathPrerender = function (x1, y1, x2, y2, easeX, easeY) {
+    app.config.prerenderedPath = document.createElement('canvas');
+    app.config.prerenderedPath.width = app.kapi.canvas_width();
+    app.config.prerenderedPath.height = app.kapi.canvas_height();
+    var ctx = app.config.prerenderedPath.ctx =
+        app.config.prerenderedPath.getContext('2d');
+    var points = app.util.generatePathPoints.apply(this, arguments);
+
+    var previousPoint;
+    ctx.beginPath();
+    _.each(points, function (point) {
+      if (previousPoint) {
+        ctx.lineTo(point.x, point.y);
+      } else {
+        ctx.moveTo(point.x, point.y);
+      }
+
+      previousPoint = point;
+    });
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#fa0';
+    ctx.stroke();
+    ctx.closePath();
+  };
+
+  app.util.getCrosshairCoords = function (crosshair) {
+    var pos = crosshair.position();
+    return {
+      x: pos.left + crosshair.width()/2
+      ,y: pos.top + crosshair.height()/2
+    };
+  };
+
+  app.util.moveLastKeyframe = function (actor, toMillisecond) {
+    var trackNames = actor.getTrackNames();
+    var lastFrameIndex = actor.getTrackLength(trackNames[0]) - 1;
+
+    _.each(trackNames, function (trackName) {
+      actor.modifyKeyframeProperty(trackName, lastFrameIndex, {
+            'millisecond': toMillisecond
+          });
+    });
+
+    actor.kapi.updateInternalState();
+    app.config.animationDuration = toMillisecond;
+  };
+
+  app.util.getFormulaFromEasingFunc = function (fn) {
+    var fnString = fn.toString(); // An f'n string
+    var indexOfReturn = fnString.indexOf('return');
+    var deprefixed = fnString.slice(indexOfReturn + 7);
+    var desuffixed = deprefixed.replace(/\}$/, '');
+    return desuffixed;
+  };
+
   var SelectView = Backbone.View.extend({
 
   });
@@ -55,64 +154,6 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button',
   Tweenable.prototype.formula.customEase2 =
       function (x) {return Math.pow(x, 0.25)};
 
-  app.util.getFormulaFromEasingFunc = function (fn) {
-    var fnString = fn.toString(); // An f'n string
-    var indexOfReturn = fnString.indexOf('return');
-    var deprefixed = fnString.slice(indexOfReturn + 7);
-    var desuffixed = deprefixed.replace(/\}$/, '');
-    return desuffixed;
-  }
-
-  app.const.PRERENDER_GRANULARITY = 100;
-  app.util.generatePathPoints = function (x1, y1, x2, y2, easeX, easeY) {
-    var points = [];
-    var from = {
-        'x': x1
-        ,'y': y1
-      };
-    var to = {
-        'x': x2
-        ,'y': y2
-      };
-    var easing = {
-      'x': easeX
-      ,'y': easeY
-    };
-    var i, point;
-    for (i = 0; i <= app.const.PRERENDER_GRANULARITY; i++) {
-      point = Tweenable.util.interpolate(
-          from, to, (1 / app.const.PRERENDER_GRANULARITY) * i, easing);
-      points.push(point);
-    }
-
-    return points;
-  }
-
-  app.util.generatePathPrerender = function (x1, y1, x2, y2, easeX, easeY) {
-    app.config.prerenderedPath = document.createElement('canvas');
-    app.config.prerenderedPath.width = app.kapi.canvas_width();
-    app.config.prerenderedPath.height = app.kapi.canvas_height();
-    var ctx = app.config.prerenderedPath.ctx =
-        app.config.prerenderedPath.getContext('2d');
-    var points = app.util.generatePathPoints.apply(this, arguments);
-
-    var previousPoint;
-    ctx.beginPath();
-    _.each(points, function (point) {
-      if (previousPoint) {
-        ctx.lineTo(point.x, point.y);
-      } else {
-        ctx.moveTo(point.x, point.y);
-      }
-
-      previousPoint = point;
-    });
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = '#fa0';
-    ctx.stroke();
-    ctx.closePath();
-  }
-
   var ease = $('.ease');
   ease.on('keyup', function (evt) {
     var el = $(evt.target);
@@ -146,28 +187,6 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     el.data('lastvalidfn', fnString);
   });
 
-  app.util.getCrosshairCoords = function (crosshair) {
-    var pos = crosshair.position();
-    return {
-      x: pos.left + crosshair.width()/2
-      ,y: pos.top + crosshair.height()/2
-    };
-  }
-
-  app.util.moveLastKeyframe = function (actor, toMillisecond) {
-    var trackNames = actor.getTrackNames();
-    var lastFrameIndex = actor.getTrackLength(trackNames[0]) - 1;
-
-    _.each(trackNames, function (trackName) {
-      actor.modifyKeyframeProperty(trackName, lastFrameIndex, {
-            'millisecond': toMillisecond
-          });
-    });
-
-    actor.kapi.updateInternalState();
-    app.config.animationDuration = toMillisecond;
-  }
-
   var canvas = $('canvas')[0];
   app.kapi = new Kapi(canvas, {
       'fps': 60
@@ -197,12 +216,10 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     });
   app.kapi.canvas_style('background', '#eee');
 
-  app.util.updatePath = function () {
-    var fromCoords = app.util.getCrosshairCoords(crosshairs.from);
-    var toCoords = app.util.getCrosshairCoords(crosshairs.to);
-    app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x,
-        toCoords.y, selects._from.val(), selects._to.val());
-  }
+  var crosshairs = {
+    'from': $('.crosshair.from')
+    ,'to': $('.crosshair.to')
+  };
 
   app.util.handleDrag = function (evt, ui) {
     var target = $(evt.target);
@@ -214,15 +231,10 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button',
       .canvas_clear()
       .redraw();
     app.util.updatePath();
-  }
+  };
 
   app.util.handleDragStop = function (evt, ui) {
     app.util.handleDrag.apply(this, arguments);
-  }
-
-  var crosshairs = {
-    'from': $('.crosshair.from')
-    ,'to': $('.crosshair.to')
   };
 
   crosshairs.from.add(crosshairs.to).draggable({
@@ -230,17 +242,6 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'drag': app.util.handleDrag
     ,'stop': app.util.handleDragStop
   });
-
-  app.util.initSelect = function (select) {
-    _.each(Tweenable.prototype.formula, function (formula, name) {
-      var option = $(document.createElement('option'), {
-          'value': name
-        });
-
-      option.html(name);
-      select.append(option);
-    });
-  }
 
   var selects = $('#tween-controls select');
 
