@@ -14,36 +14,67 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
 
   var AutoUpdateTextFieldView = Backbone.View.extend({
 
-  });
-
-  var duration = $('#duration');
-  app.config.animationDuration = app.config.initialDuration = duration.val();
-
-  duration.on('keyup', function (evt) {
-    var val = duration.val();
-    var validVal = Math.abs(val);
-    if (!isNaN(val)) {
-      app.util.moveLastKeyframe(app.config.circle, validVal);
-    }
-  });
-
-  duration.on('keydown', function (evt) {
-    var augmentBy;
-    var which = evt.which;
-
-    if (which != 38 && which != 40) {
-      return;
+    'events': {
+      'keyup': 'onKeyup'
+      ,'keydown': 'onKeydown'
     }
 
-    if (which == 38) { // up
-      augmentBy = 10;
-    } else if (which == 40) { // down
-      augmentBy = -10;
+    ,'initialize': function (opts) {
+      _.extend(this, opts);
     }
 
-    duration.val(parseInt(app.config.animationDuration, 10) + augmentBy);
-    duration.trigger('keyup');
+    ,'onKeyup': function (evt) {
+      var val = this.$el.val();
+      if (this.options.onValReenter) {
+        this.options.onValReenter(val);
+      }
+    }
+
+    ,'onKeydown': function (evt) {
+      var which = evt.which;
+
+      if (which == 38 && this.options.onArrowUp) { // up
+        this.options.onArrowUp();
+      } else if (which == 40 && this.options.onArrowDown) { // down
+        this.options.onArrowDown();
+      }
+    }
+
   });
+
+  app.view.durationField = new AutoUpdateTextFieldView({
+
+    'app': app
+
+    ,'$el':$('#duration')
+
+    ,'ARROW_KEY_INCREMENT': 10
+
+    ,'onValReenter': function (val) {
+      var validVal = Math.abs(val);
+
+      if (!isNaN(val)) {
+        this.app.util.moveLastKeyframe(this.app.config.circle, validVal);
+      }
+    }
+
+    ,'tweakVal': function (tweakAmount) {
+      this.$el.val(parseInt(app.config.animationDuration, 10) + tweakAmount);
+      this.$el.trigger('keyup');
+    }
+
+    ,'onArrowUp': function () {
+      this.tweakVal(this.ARROW_KEY_INCREMENT);
+    }
+
+    ,'onArrowDown': function () {
+      this.tweakVal(-this.ARROW_KEY_INCREMENT);
+    }
+
+  });
+
+  app.config.animationDuration = app.config.initialDuration =
+      app.view.durationField.$el.val();
 
   // The code in these are deliberately using some weird formatting.  The code
   // within gets used as a string.  Like magic!
@@ -283,7 +314,7 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
 
     'app': app
 
-    ,'el': $('#show-path')
+    ,'$el': $('#show-path')
 
     ,'onChange': function (evt) {
       var checked = this.$el.attr('checked');
@@ -296,7 +327,7 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
 
     'app': app
 
-    ,'el': $('#gen-keyframes')
+    ,'$el': $('#gen-keyframes')
 
     ,'onClick': function (evt) {
       var fromCoords = this.app.util.getCrosshairCoords(crosshairs.from);
