@@ -1,5 +1,7 @@
-require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
-    function (cssGen, checkbox, button) {
+require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button',
+        'src/ui/auto-update-textfield'],
+    function (cssGen, checkbox, button,
+        autoUpdateTextField) {
 
   var app = {
     'config': {}
@@ -12,48 +14,17 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
 
   });
 
-  var AutoUpdateTextFieldView = Backbone.View.extend({
-
-    'events': {
-      'keyup': 'onKeyup'
-      ,'keydown': 'onKeydown'
-    }
-
-    ,'initialize': function (opts) {
-      _.extend(this, opts);
-    }
-
-    ,'onKeyup': function (evt) {
-      var val = this.$el.val();
-      if (this.options.onValReenter) {
-        this.options.onValReenter(val);
-      }
-    }
-
-    ,'onKeydown': function (evt) {
-      var which = evt.which;
-
-      if (which == 38 && this.options.onArrowUp) { // up
-        this.options.onArrowUp();
-      } else if (which == 40 && this.options.onArrowDown) { // down
-        this.options.onArrowDown();
-      }
-    }
-
-  });
-
-  app.view.durationField = new AutoUpdateTextFieldView({
+  app.view.durationField = new autoUpdateTextField.view({
 
     'app': app
 
-    ,'$el':$('#duration')
+    ,'$el': $('#duration')
 
     ,'ARROW_KEY_INCREMENT': 10
 
     ,'onValReenter': function (val) {
-      var validVal = Math.abs(val);
-
       if (!isNaN(val)) {
+        var validVal = Math.abs(val);
         this.app.util.moveLastKeyframe(this.app.config.circle, validVal);
       }
     }
