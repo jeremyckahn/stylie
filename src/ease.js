@@ -19,6 +19,32 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
   var duration = $('#duration');
   app.config.animationDuration = app.config.initialDuration = duration.val();
 
+  duration.on('keyup', function (evt) {
+    var val = duration.val();
+    var validVal = Math.abs(val);
+    if (!isNaN(val)) {
+      app.util.moveLastKeyframe(app.config.circle, validVal);
+    }
+  });
+
+  duration.on('keydown', function (evt) {
+    var augmentBy;
+    var which = evt.which;
+
+    if (which != 38 && which != 40) {
+      return;
+    }
+
+    if (which == 38) { // up
+      augmentBy = 10;
+    } else if (which == 40) { // down
+      augmentBy = -10;
+    }
+
+    duration.val(parseInt(app.config.animationDuration, 10) + augmentBy);
+    duration.trigger('keyup');
+  });
+
   // The code in these are deliberately using some weird formatting.  The code
   // within gets used as a string.  Like magic!
   Tweenable.prototype.formula.customEase1 =
@@ -237,32 +263,6 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
       .redraw();
   });
 
-  duration.on('keyup', function (evt) {
-    var val = duration.val();
-    var validVal = Math.abs(val);
-    if (!isNaN(val)) {
-      app.util.moveLastKeyframe(app.config.circle, validVal);
-    }
-  });
-
-  duration.on('keydown', function (evt) {
-    var augmentBy;
-    var which = evt.which;
-
-    if (which != 38 && which != 40) {
-      return;
-    }
-
-    if (which == 38) { // up
-      augmentBy = 10;
-    } else if (which == 40) { // down
-      augmentBy = -10;
-    }
-
-    duration.val(parseInt(app.config.animationDuration, 10) + augmentBy);
-    duration.trigger('keyup');
-  });
-
   app.kapi.addActor(app.config.circle);
   app.config.circle.keyframe(0,
         _.extend(app.util.getCrosshairCoords(crosshairs.from), {
@@ -280,26 +280,28 @@ require(['src/css-gen', 'src/ui/checkbox', 'src/ui/button'],
   app.kapi.pause();
 
   app.view.showPathView = new checkbox.view({
-    'el': $('#show-path')
 
-    ,'kapi': app.kapi
+    'app': app
+
+    ,'el': $('#show-path')
 
     ,'onChange': function (evt) {
       var checked = this.$el.attr('checked');
-      app.config.isPathShowing = !!checked;
-      this.kapi.redraw();
+      this.app.config.isPathShowing = !!checked;
+      this.app.kapi.redraw();
     }
   });
 
   app.view.genKeyframesBtn = new button.view({
-    'el': $('#gen-keyframes')
 
-    ,'kapi': app.kapi
+    'app': app
+
+    ,'el': $('#gen-keyframes')
 
     ,'onClick': function (evt) {
-      var fromCoords = app.util.getCrosshairCoords(crosshairs.from);
-      var toCoords = app.util.getCrosshairCoords(crosshairs.to);
-      var points = app.util.generatePathPoints(fromCoords.x, fromCoords.y,
+      var fromCoords = this.app.util.getCrosshairCoords(crosshairs.from);
+      var toCoords = this.app.util.getCrosshairCoords(crosshairs.to);
+      var points = this.app.util.generatePathPoints(fromCoords.x, fromCoords.y,
           toCoords.x, toCoords.y, selects._from.val(), selects._to.val());
       console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
     }
