@@ -2,10 +2,10 @@ define(function () {
 
   var autoUpdateTextField = {};
 
-  // Bindable events:
-  //   onArrowUp
-  //   onArrowDown
-  //   onValReenter
+  // Bindable event handlers:
+  //   onArrowUp()
+  //   onArrowDown()
+  //   onValReenter(val)
   autoUpdateTextField.view = Backbone.View.extend({
 
     'events': {
@@ -19,18 +19,18 @@ define(function () {
 
     ,'onKeyup': function (evt) {
       var val = this.$el.val();
-      if (this.options.onValReenter) {
-        this.options.onValReenter(val);
+      if (this.onValReenter) {
+        this.onValReenter(val);
       }
     }
 
     ,'onKeydown': function (evt) {
       var which = evt.which;
 
-      if (which == 38 && this.options.onArrowUp) { // up
-        this.options.onArrowUp();
-      } else if (which == 40 && this.options.onArrowDown) { // down
-        this.options.onArrowDown();
+      if (which == 38 && this.onArrowUp) { // up
+        this.onArrowUp();
+      } else if (which == 40 && this.onArrowDown) { // down
+        this.onArrowDown();
       }
     }
 

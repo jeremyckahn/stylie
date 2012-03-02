@@ -70,44 +70,15 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
   app.config.animationDuration = app.config.initialDuration =
       app.view.durationField.$el.val();
 
+  app.config.easeFields = [];
+  $('.ease').each(function (i, el) {
+    var easeFieldInst = new easeField.view({
+      '$el': $(el)
+      ,'app': app
+    });
 
-
-
-  var ease = $('.ease');
-  ease.on('keyup', function (evt) {
-    var el = $(evt.target);
-    var val = el.val();
-    var easename = el.data('easename');
-    var lastValid = el.data('lastvalidfn');
-
-    if (lastValid === val) {
-      return;
-    }
-
-    try {
-      eval('Tweenable.prototype.formula.' + easename
-          + ' = function (x) {return ' + val + '}');
-      el.data('lastvalidfn', val);
-      el.removeClass('error');
-      app.util.updatePath();
-    } catch (ex) {
-      eval('Tweenable.prototype.formula.' + easename
-          + ' = function (x) {return ' + lastValid + '}');
-      el.addClass('error');
-    }
+    app.config.easeFields.push(easeFieldInst);
   });
-
-  ease.each(function (i, el) {
-    el = $(el);
-    var easename = el.data('easename');
-    var fn = Tweenable.prototype.formula[easename];
-    var fnString = app.util.getFormulaFromEasingFunc(fn);
-    el.val(fnString);
-    el.data('lastvalidfn', fnString);
-  });
-
-
-
 
   var canvas = $('canvas')[0];
   app.kapi = new Kapi(canvas, {
