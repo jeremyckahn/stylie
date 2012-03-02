@@ -14,13 +14,57 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     'from': $('.crosshair.from')
     ,'to': $('.crosshair.to')
   };
-  app.config.selects = $('#tween-controls select');
   app.const.PRERENDER_GRANULARITY = 100;
   utils.init(app);
 
+  // The code in these are deliberately using some weird formatting.  The code
+  // within gets used as a string.  Like magic!
+  Tweenable.prototype.formula.customEase1 =
+      function (x) {return Math.pow(x, 4)};
+
+  Tweenable.prototype.formula.customEase2 =
+      function (x) {return Math.pow(x, 0.25)};
+
   var SelectView = Backbone.View.extend({
 
+    'events': {
+      'change': 'onChange'
+    }
+
+    ,'initialize': function (opts) {
+      _.extend(this, opts);
+      _.each(Tweenable.prototype.formula, function (formula, name) {
+        var option = $(document.createElement('option'), {
+            'value': name
+          });
+
+        option.html(name);
+        this.$el.append(option);
+      }, this);
+    }
+
+    ,'onChange': function (evt) {
+      var easingObj = {};
+      easingObj[this.$el.data('axis')] = this.$el.val();
+      app.config.circle.modifyKeyframe(
+          app.config.animationDuration, {}, easingObj)
+      app.util.updatePath();
+      app.kapi
+        .canvas_clear()
+        .redraw();
+    }
+
   });
+
+  app.config.selects = {
+    'x': new SelectView({
+      '$el': $('#x-easing')
+    })
+
+    ,'y': new SelectView({
+      '$el': $('#y-easing')
+    })
+  };
 
   app.view.durationField = new autoUpdateTextField.view({
 
@@ -54,14 +98,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   app.config.animationDuration = app.config.initialDuration =
       app.view.durationField.$el.val();
-
-  // The code in these are deliberately using some weird formatting.  The code
-  // within gets used as a string.  Like magic!
-  Tweenable.prototype.formula.customEase1 =
-      function (x) {return Math.pow(x, 4)};
-
-  Tweenable.prototype.formula.customEase2 =
-      function (x) {return Math.pow(x, 0.25)};
 
   var ease = $('.ease');
   ease.on('keyup', function (evt) {
@@ -147,27 +183,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'stop': app.util.handleDragStop
   });
 
-  // TODO: This is reeeeeeeally sloppy, just attaching the app.config.selects to $ instance
-  // itself. Clean this silliness up.
-  app.config.selects._from = app.config.selects.filter('#x-easing');
-  app.config.selects._to = app.config.selects.filter('#y-easing');
-
-  app.config.selects.each(function (i, el) {
-    app.util.initSelect($(el));
-  });
-
-  app.config.selects.on('change', function (evt) {
-    var target = $(evt.target);
-    var easingObj = {};
-    easingObj[target.data('axis')] = target.val();
-    app.config.circle.modifyKeyframe(
-        app.config.animationDuration, {}, easingObj)
-    app.util.updatePath();
-    app.kapi
-      .canvas_clear()
-      .redraw();
-  });
-
   app.kapi.addActor(app.config.circle);
   app.config.circle.keyframe(0,
         _.extend(app.util.getCrosshairCoords(app.config.crosshairs.from), {
@@ -207,7 +222,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
       var fromCoords = this.app.util.getCrosshairCoords(app.config.crosshairs.from);
       var toCoords = this.app.util.getCrosshairCoords(app.config.crosshairs.to);
       var points = this.app.util.generatePathPoints(fromCoords.x, fromCoords.y,
-          toCoords.x, toCoords.y, app.config.selects._from.val(), app.config.selects._to.val());
+          toCoords.x, toCoords.y, app.config.selects.x.$el.val(), app.config.selects.y.$el.val());
       console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
     }
   });

@@ -8,7 +8,7 @@ define(function () {
       var fromCoords = app.util.getCrosshairCoords(app.config.crosshairs.from);
       var toCoords = app.util.getCrosshairCoords(app.config.crosshairs.to);
       app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x,
-          toCoords.y, app.config.selects._from.val(), app.config.selects._to.val());
+          toCoords.y, app.config.selects.x.$el.val(), app.config.selects.y.$el.val());
     };
 
     app.util.initSelect = function (select) {
