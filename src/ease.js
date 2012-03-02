@@ -1,7 +1,7 @@
 require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
-        'src/ui/select', 'src/ui/auto-update-textfield'],
+        'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'],
     function (utils, cssGen, checkbox, button,
-        select, autoUpdateTextField) {
+        select, autoUpdateTextfield, easeField) {
 
   var app = {
     'config': {}
@@ -37,7 +37,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     })
   };
 
-  app.view.durationField = new autoUpdateTextField.view({
+  app.view.durationField = new autoUpdateTextfield.view({
 
     'app': app
 
@@ -69,6 +69,9 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   app.config.animationDuration = app.config.initialDuration =
       app.view.durationField.$el.val();
+
+
+
 
   var ease = $('.ease');
   ease.on('keyup', function (evt) {
@@ -102,6 +105,9 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     el.val(fnString);
     el.data('lastvalidfn', fnString);
   });
+
+
+
 
   var canvas = $('canvas')[0];
   app.kapi = new Kapi(canvas, {
