@@ -1,7 +1,7 @@
 require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
-        'src/ui/auto-update-textfield'],
+        'src/ui/select', 'src/ui/auto-update-textfield'],
     function (utils, cssGen, checkbox, button,
-        autoUpdateTextField) {
+        select, autoUpdateTextField) {
 
   var app = {
     'config': {}
@@ -25,44 +25,15 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
   Tweenable.prototype.formula.customEase2 =
       function (x) {return Math.pow(x, 0.25)};
 
-  var SelectView = Backbone.View.extend({
-
-    'events': {
-      'change': 'onChange'
-    }
-
-    ,'initialize': function (opts) {
-      _.extend(this, opts);
-      _.each(Tweenable.prototype.formula, function (formula, name) {
-        var option = $(document.createElement('option'), {
-            'value': name
-          });
-
-        option.html(name);
-        this.$el.append(option);
-      }, this);
-    }
-
-    ,'onChange': function (evt) {
-      var easingObj = {};
-      easingObj[this.$el.data('axis')] = this.$el.val();
-      app.config.circle.modifyKeyframe(
-          app.config.animationDuration, {}, easingObj)
-      app.util.updatePath();
-      app.kapi
-        .canvas_clear()
-        .redraw();
-    }
-
-  });
-
   app.config.selects = {
-    'x': new SelectView({
+    'x': new select.view({
       '$el': $('#x-easing')
+      ,'app': app
     })
 
-    ,'y': new SelectView({
+    ,'y': new select.view({
       '$el': $('#y-easing')
+      ,'app': app
     })
   };
 
@@ -219,10 +190,12 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'$el': $('#gen-keyframes')
 
     ,'onClick': function (evt) {
-      var fromCoords = this.app.util.getCrosshairCoords(app.config.crosshairs.from);
+      var fromCoords = this.app.util.getCrosshairCoords(
+          app.config.crosshairs.from);
       var toCoords = this.app.util.getCrosshairCoords(app.config.crosshairs.to);
       var points = this.app.util.generatePathPoints(fromCoords.x, fromCoords.y,
-          toCoords.x, toCoords.y, app.config.selects.x.$el.val(), app.config.selects.y.$el.val());
+          toCoords.x, toCoords.y, app.config.selects.x.$el.val(),
+          app.config.selects.y.$el.val());
       console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
     }
   });

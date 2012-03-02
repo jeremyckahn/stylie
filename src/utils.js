@@ -8,18 +8,8 @@ define(function () {
       var fromCoords = app.util.getCrosshairCoords(app.config.crosshairs.from);
       var toCoords = app.util.getCrosshairCoords(app.config.crosshairs.to);
       app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x,
-          toCoords.y, app.config.selects.x.$el.val(), app.config.selects.y.$el.val());
-    };
-
-    app.util.initSelect = function (select) {
-      _.each(Tweenable.prototype.formula, function (formula, name) {
-        var option = $(document.createElement('option'), {
-            'value': name
-          });
-
-        option.html(name);
-        select.append(option);
-      });
+          toCoords.y, app.config.selects.x.$el.val(),
+          app.config.selects.y.$el.val());
     };
 
     app.util.generatePathPoints = function (x1, y1, x2, y2, easeX, easeY) {
