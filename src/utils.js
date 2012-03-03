@@ -5,8 +5,10 @@ define(function () {
   utils.init = function (app) {
 
     app.util.updatePath = function () {
-      var fromCoords = app.util.getCrosshairCoords(app.config.crosshairs.from);
-      var toCoords = app.util.getCrosshairCoords(app.config.crosshairs.to);
+      //var fromCoords = app.util.getCrosshairCoords(app.config.crosshairs.from);
+      //var toCoords = app.util.getCrosshairCoords(app.config.crosshairs.to);
+      fromCoords = app.config.crosshairs.from.getCenter();
+      toCoords = app.config.crosshairs.to.getCenter();
       app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x,
           toCoords.y, app.config.selects.x.$el.val(),
           app.config.selects.y.$el.val());

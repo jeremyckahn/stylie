@@ -10,10 +10,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'view': {}
   };
 
-  app.config.crosshairs = {
-    'from': $('.crosshair.from')
-    ,'to': $('.crosshair.to')
-  };
   app.const.PRERENDER_GRANULARITY = 100;
   utils.init(app);
 
@@ -109,6 +105,47 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     });
   app.kapi.canvas_style('background', '#eee');
 
+
+  var crosshairView = Backbone.View.extend({
+
+    // $.fn.draggable events don't propagate, so event delegation doesn't work.
+    // Drag event handlers must be bound in `initialize`.
+    'events': {}
+
+    ,'initialize': function (opts) {
+      _.extend(this, opts);
+      this.$el.draggable({
+        'containment': 'parent'
+        ,'drag': _.bind(this.onDrag, this)
+        ,'stop': _.bind(this.onDragStop, this)
+      });
+    }
+
+    ,'onDrag': function (evt, ui) {
+      var pos = this.$el.data('pos');
+      var timeToModify = pos === 'from' ? 0 : this.app.config.animationDuration;
+      this.app.config.circle.modifyKeyframe(timeToModify, this.getCenter());
+      this.app.kapi
+        .canvas_clear()
+        .redraw();
+      this.app.util.updatePath();
+    }
+
+    ,'onDragStop': function (evt, ui) {
+      this.onDrag.apply(this, arguments);
+    }
+
+    ,'getCenter': function () {
+      var pos = this.$el.position();
+      return {
+        x: pos.left + this.$el.width()/2
+        ,y: pos.top + this.$el.height()/2
+      };
+
+    }
+
+  });
+
   app.util.handleDrag = function (evt, ui) {
     var target = $(evt.target);
     var pos = target.data('pos');
@@ -125,20 +162,38 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     app.util.handleDrag.apply(this, arguments);
   };
 
-  app.config.crosshairs.from.add(app.config.crosshairs.to).draggable({
-    'containment': 'parent'
-    ,'drag': app.util.handleDrag
-    ,'stop': app.util.handleDragStop
-  });
+  //app.config.crosshairs = {
+    //'from': $('.crosshair.from')
+    //,'to': $('.crosshair.to')
+  //};
+  //app.config.crosshairs.from.add(app.config.crosshairs.to).draggable({
+    //'containment': 'parent'
+    //,'drag': app.util.handleDrag
+    //,'stop': app.util.handleDragStop
+  //});
+
+  app.config.crosshairs = {
+    'from': new crosshairView({
+        'app': app
+        ,'$el': $('.crosshair.from')
+      })
+    ,'to': new crosshairView({
+        'app': app
+        ,'$el': $('.crosshair.to')
+      })
+  };
+
+
+
 
   app.kapi.addActor(app.config.circle);
   app.config.circle.keyframe(0,
-        _.extend(app.util.getCrosshairCoords(app.config.crosshairs.from), {
+        _.extend(app.config.crosshairs.from.getCenter(), {
       'color': '#777'
       ,'radius': 15
     }))
     .keyframe(app.config.initialDuration,
-        _.extend(app.util.getCrosshairCoords(app.config.crosshairs.to), {
+        _.extend(app.config.crosshairs.to.getCenter(), {
       'color': '#333'
     }));
 
@@ -158,6 +213,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
       this.app.config.isPathShowing = !!checked;
       this.app.kapi.redraw();
     }
+
   });
 
   app.view.genKeyframesBtn = new button.view({
@@ -175,6 +231,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
           app.config.selects.y.$el.val());
       console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
     }
+
   });
 
 });
