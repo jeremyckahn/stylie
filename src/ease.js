@@ -146,32 +146,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   });
 
-  app.util.handleDrag = function (evt, ui) {
-    var target = $(evt.target);
-    var pos = target.data('pos');
-    var timeToModify = pos === 'from' ? 0 : app.config.animationDuration;
-    app.config.circle.modifyKeyframe(timeToModify,
-        app.util.getCrosshairCoords(app.config.crosshairs[pos]));
-    app.kapi
-      .canvas_clear()
-      .redraw();
-    app.util.updatePath();
-  };
-
-  app.util.handleDragStop = function (evt, ui) {
-    app.util.handleDrag.apply(this, arguments);
-  };
-
-  //app.config.crosshairs = {
-    //'from': $('.crosshair.from')
-    //,'to': $('.crosshair.to')
-  //};
-  //app.config.crosshairs.from.add(app.config.crosshairs.to).draggable({
-    //'containment': 'parent'
-    //,'drag': app.util.handleDrag
-    //,'stop': app.util.handleDragStop
-  //});
-
   app.config.crosshairs = {
     'from': new crosshairView({
         'app': app
@@ -223,9 +197,8 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'$el': $('#gen-keyframes')
 
     ,'onClick': function (evt) {
-      var fromCoords = this.app.util.getCrosshairCoords(
-          app.config.crosshairs.from);
-      var toCoords = this.app.util.getCrosshairCoords(app.config.crosshairs.to);
+      var fromCoords = this.app.config.crosshairs.from.getCenter();
+      var toCoords = this.app.config.crosshairs.to.getCenter();
       var points = this.app.util.generatePathPoints(fromCoords.x, fromCoords.y,
           toCoords.x, toCoords.y, app.config.selects.x.$el.val(),
           app.config.selects.y.$el.val());

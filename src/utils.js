@@ -5,10 +5,8 @@ define(function () {
   utils.init = function (app) {
 
     app.util.updatePath = function () {
-      //var fromCoords = app.util.getCrosshairCoords(app.config.crosshairs.from);
-      //var toCoords = app.util.getCrosshairCoords(app.config.crosshairs.to);
-      fromCoords = app.config.crosshairs.from.getCenter();
-      toCoords = app.config.crosshairs.to.getCenter();
+      var fromCoords = app.config.crosshairs.from.getCenter();
+      var toCoords = app.config.crosshairs.to.getCenter();
       app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x,
           toCoords.y, app.config.selects.x.$el.val(),
           app.config.selects.y.$el.val());
@@ -61,14 +59,6 @@ define(function () {
       ctx.strokeStyle = '#fa0';
       ctx.stroke();
       ctx.closePath();
-    };
-
-    app.util.getCrosshairCoords = function (crosshair) {
-      var pos = crosshair.position();
-      return {
-        x: pos.left + crosshair.width()/2
-        ,y: pos.top + crosshair.height()/2
-      };
     };
 
     app.util.moveLastKeyframe = function (actor, toMillisecond) {
