@@ -15,13 +15,13 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
   app.const.PRERENDER_GRANULARITY = 100;
   utils.init(app);
 
-  // The code in these are deliberately using some weird formatting.  The code
-  // within gets used as a string.  Like magic!
-  Tweenable.prototype.formula.customEase1 =
-      function (x) {return Math.pow(x, 4)};
+  Tweenable.prototype.formula.customEase1 = function (x) {
+    return Math.pow(x, 4);
+  };
 
-  Tweenable.prototype.formula.customEase2 =
-      function (x) {return Math.pow(x, 0.25)};
+  Tweenable.prototype.formula.customEase2 = function (x) {
+    return Math.pow(x, 0.25);
+  };
 
   app.config.selects = {
     'x': new select.view({

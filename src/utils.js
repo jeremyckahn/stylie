@@ -76,10 +76,9 @@ define(function () {
     };
 
     app.util.getFormulaFromEasingFunc = function (fn) {
-      var fnString = fn.toString(); // An f'n string
-      var indexOfReturn = fnString.indexOf('return');
-      var deprefixed = fnString.slice(indexOfReturn + 7);
-      var desuffixed = deprefixed.replace(/\}$/, '');
+      var fnString = fn.toString().replace('\n', ''); // An effin' string
+      var deprefixed = fnString.replace(/.*return\s*/g, '');
+      var desuffixed = deprefixed.replace(/\}|;\s*}$/g, '');
       return desuffixed;
     };
 
