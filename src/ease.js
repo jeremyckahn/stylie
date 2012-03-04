@@ -78,6 +78,17 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     app.config.easeFields.push(easeFieldInst);
   });
 
+  app.config.crosshairs = {
+    'from': new crosshair.view({
+        'app': app
+        ,'$el': $('.crosshair.from')
+      })
+    ,'to': new crosshair.view({
+        'app': app
+        ,'$el': $('.crosshair.to')
+      })
+  };
+
   var canvas = $('canvas')[0];
   app.kapi = new Kapi(canvas, {
       'fps': 60
@@ -106,17 +117,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
       }
     });
   app.kapi.canvas_style('background', '#eee');
-
-  app.config.crosshairs = {
-    'from': new crosshair.view({
-        'app': app
-        ,'$el': $('.crosshair.from')
-      })
-    ,'to': new crosshair.view({
-        'app': app
-        ,'$el': $('.crosshair.to')
-      })
-  };
 
   app.kapi.addActor(app.config.circle);
   app.config.circle.keyframe(0,
