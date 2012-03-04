@@ -5,15 +5,20 @@ define(function () {
   canvas.view = Backbone.View.extend({
 
     'initialize': function (opts) {
-      this.app.kapi = new Kapi(opts.canvas, {
+      _.extend(this, opts);
+      this.app.kapi = new Kapi(this.$el[0], {
           'fps': 60
           ,'height': 400
           ,'width': 500
         });
       var circle = this.createActor();
       this.app.kapi.addActor(circle);
+      //TODO: This is sloppy.  The actor will eventually not be a circle, and
+      //there may be more than one.
+      this.app.config.circle = circle;
       this.app.kapi.canvas_style('background', '#eee');
-      this.setKeyframePoints(actor);
+      this.setKeyframePoints(circle);
+      this.initRekapiControls();
     }
 
     ,'initRekapiControls': function () {

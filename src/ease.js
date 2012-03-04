@@ -1,9 +1,9 @@
 require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
         'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field',
-        'src/ui/crosshair'],
+        'src/ui/crosshair', 'src/ui/canvas'],
     function (utils, cssGen, checkbox, button,
         select, autoUpdateTextfield, easeField,
-        crosshair) {
+        crosshair, canvas) {
 
   var app = {
     'config': {}
@@ -89,48 +89,11 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
       })
   };
 
-  var canvas = $('canvas')[0];
-  app.kapi = new Kapi(canvas, {
-      'fps': 60
-      ,'height': 400
-      ,'width': 500
-    });
-  app.config.circle = new Kapi.Actor({
-    'draw': function (canvas_context, state) {
+  app.canvasView = new canvas.view({
+    'app': app
+    ,'$el': $('canvas')
+  });
 
-      if (app.config.isPathShowing && app.config.prerenderedPath) {
-        canvas_context.drawImage(app.config.prerenderedPath, 0, 0);
-      }
-
-      canvas_context.beginPath();
-        canvas_context.arc(
-          state.x || 0,
-          state.y || 0,
-          state.radius || 50,
-          0,
-          Math.PI*2,
-          true);
-        canvas_context.fillStyle = state.color || '#444';
-        canvas_context.fill();
-        canvas_context.closePath();
-        return this;
-      }
-    });
-  app.kapi.canvas_style('background', '#eee');
-
-  app.kapi.addActor(app.config.circle);
-  app.config.circle.keyframe(0,
-        _.extend(app.config.crosshairs.from.getCenter(), {
-      'color': '#777'
-      ,'radius': 15
-    }))
-    .keyframe(app.config.initialDuration,
-        _.extend(app.config.crosshairs.to.getCenter(), {
-      'color': '#333'
-    }));
-
-  app.kapi.controls = new RekapiScrubber(app.kapi);
-  app.util.updatePath();
   app.kapi.play();
   app.kapi.pause();
 
