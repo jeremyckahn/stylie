@@ -46,7 +46,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
         var validVal = Math.abs(val);
-        this.app.util.moveLastKeyframe(this.app.config.circle, validVal);
+        this.app.util.moveLastKeyframe(this.app.config.currentActor, validVal);
       }
     }
 

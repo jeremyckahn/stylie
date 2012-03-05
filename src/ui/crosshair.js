@@ -20,7 +20,8 @@ define(function () {
     ,'onDrag': function (evt, ui) {
       var pos = this.$el.data('pos');
       var timeToModify = pos === 'from' ? 0 : this.app.config.animationDuration;
-      this.app.config.circle.modifyKeyframe(timeToModify, this.getCenter());
+      this.app.config.currentActor.modifyKeyframe(
+          timeToModify, this.getCenter());
       this.app.kapi
         .canvas_clear()
         .redraw();

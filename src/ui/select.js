@@ -22,7 +22,7 @@ define(function () {
     ,'onChange': function (evt) {
       var easingObj = {};
       easingObj[this.$el.data('axis')] = this.$el.val();
-      this.app.config.circle.modifyKeyframe(
+      this.app.config.currentActor.modifyKeyframe(
           this.app.config.animationDuration, {}, easingObj)
       this.app.util.updatePath();
       this.app.kapi

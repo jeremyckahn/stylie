@@ -15,13 +15,11 @@ define(function () {
           ,'height': 400
           ,'width': 500
         });
-      var circle = this.createActor();
-      this.app.kapi.addActor(circle);
-      //TODO: This is sloppy.  The actor will eventually not be a circle, and
-      //there may be more than one.
-      this.app.config.circle = circle;
+      var currentActor = this.createActor();
+      this.app.kapi.addActor(currentActor);
+      this.app.config.currentActor = currentActor;
       this.app.kapi.canvas_style('background', '#eee');
-      this.setKeyframePoints(circle);
+      this.setKeyframePoints(currentActor);
       this.initRekapiControls();
     }
 
