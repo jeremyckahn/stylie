@@ -6,6 +6,10 @@ define(function () {
 
     'initialize': function (opts) {
       _.extend(this, opts);
+      this.initCanvas();
+    }
+
+    ,'initCanvas': function () {
       this.app.kapi = new Kapi(this.$el[0], {
           'fps': 60
           ,'height': 400
@@ -19,6 +23,10 @@ define(function () {
       this.app.kapi.canvas_style('background', '#eee');
       this.setKeyframePoints(circle);
       this.initRekapiControls();
+    }
+
+    ,'initDOM': function () {
+
     }
 
     ,'initRekapiControls': function () {
@@ -50,6 +58,10 @@ define(function () {
       return new Kapi.Actor({
         'draw': _.bind(draw, this)
         });
+    }
+
+    ,'getDOMActor': function () {
+      return new Kapi.DOMActor($('#rekapi-canvas').children()[0]);
     }
 
     ,'setKeyframePoints': function (actor) {
