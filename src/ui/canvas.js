@@ -1,6 +1,4 @@
-define(function () {
-
-  var canvas = {};
+define(['exports', 'src/ui/background'], function (canvas, background) {
 
   canvas.view = Backbone.View.extend({
 
@@ -15,17 +13,12 @@ define(function () {
           ,'height': 400
           ,'width': 500
         });
-      this.$canvasBG
-        .css({
-          'background': '#eee'
-          ,'height': 400
-          ,'width': 500
-        })
-        .attr({
-          'height': 400
-          ,'width': 500
-        });
-      this.bgContext = this.$canvasBG[0].getContext('2d');
+      this.backgroundView = new background.view({
+        'app': this.app
+        ,'$el': this.$canvasBG
+        ,'height': 400
+        ,'width': 500
+      });
       var currentActor = this.getDOMActor();
       this.app.kapi.addActor(currentActor);
       this.app.config.currentActor = currentActor;
@@ -60,16 +53,9 @@ define(function () {
     }
 
     ,'updateDOMBackground': function () {
-      if (this.app.config.prerenderedPath) {
-        this.$canvasBG[0].width = this.$canvasBG.width();
-        if (this.app.config.isPathShowing) {
-          this.bgContext.drawImage(this.app.config.prerenderedPath, 0, 0);
-        }
-      }
+      this.backgroundView.update();
     }
 
   });
-
-  return canvas;
 
 });
