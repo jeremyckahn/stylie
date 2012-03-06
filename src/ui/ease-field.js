@@ -1,6 +1,5 @@
-define(['./auto-update-textfield'], function (autoUpdateTextfield) {
-
-  var easeField = {};
+define(['exports', './auto-update-textfield'],
+    function (easeField, autoUpdateTextfield) {
 
   easeField.view = autoUpdateTextfield.view.extend({
 
@@ -35,7 +34,5 @@ define(['./auto-update-textfield'], function (autoUpdateTextfield) {
     }
 
   });
-
-  return easeField;
 
 });

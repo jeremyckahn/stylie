@@ -1,6 +1,4 @@
-define(function () {
-
-  var button = {}
+define(['exports'], function (button) {
 
   button.view = Backbone.View.extend({
 
@@ -16,7 +14,5 @@ define(function () {
     ,'onClick': function () {}
 
   });
-
-  return button;
 
 });

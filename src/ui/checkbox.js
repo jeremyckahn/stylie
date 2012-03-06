@@ -1,6 +1,4 @@
-define(function () {
-
-  var checkbox = {}
+define(['exports'], function (checkbox) {
 
   checkbox.view = Backbone.View.extend({
 
@@ -17,7 +15,5 @@ define(function () {
     ,'onChange': function () {}
 
   });
-
-  return checkbox;
 
 });

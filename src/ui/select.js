@@ -1,5 +1,4 @@
-define(function () {
-  var select = {};
+define(['exports'], function (select) {
 
   select.view = Backbone.View.extend({
 
@@ -32,7 +31,5 @@ define(function () {
     }
 
   });
-
-  return select;
 
 });

@@ -1,6 +1,4 @@
-define(function () {
-
-  var autoUpdateTextField = {};
+define(['exports'], function (autoUpdateTextField) {
 
   // Bindable event handlers:
   //   onArrowUp()
@@ -35,7 +33,5 @@ define(function () {
     }
 
   });
-
-  return autoUpdateTextField;
 
 });

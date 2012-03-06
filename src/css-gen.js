@@ -1,6 +1,4 @@
-define(function () {
-
-  var cssGen = {};
+define(['exports'], function (cssGen) {
 
   function printf (formatter, args) {
     var composedStr = formatter;
@@ -52,5 +50,4 @@ define(function () {
     return cssString.join('');
   };
 
-  return cssGen;
 });
