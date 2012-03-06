@@ -91,9 +91,11 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   app.canvasView = new canvas.view({
     'app': app
-    ,'$el': $('canvas')
+    ,'$el': $('#rekapi-canvas')
+    ,'$canvasBG': $('#tween-path')
   });
 
+  app.canvasView.updateDOMBackground();
   app.kapi.play();
   app.kapi.pause();
 
@@ -107,6 +109,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
       var checked = this.$el.attr('checked');
       this.app.config.isPathShowing = !!checked;
       this.app.kapi.redraw();
+      this.app.canvasView.updateDOMBackground();
     }
 
   });

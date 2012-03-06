@@ -26,6 +26,7 @@ define(function () {
         .canvas_clear()
         .redraw();
       this.app.util.updatePath();
+      this.app.canvasView.updateDOMBackground();
     }
 
     ,'onDragStop': function (evt, ui) {
@@ -35,8 +36,8 @@ define(function () {
     ,'getCenter': function () {
       var pos = this.$el.position();
       return {
-        x: pos.left + this.$el.width()/2
-        ,y: pos.top + this.$el.height()/2
+        'left': (pos.left + this.$el.width()/2) + 'px'
+        ,'top': (pos.top + this.$el.height()/2) + 'px'
       };
 
     }

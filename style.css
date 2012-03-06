@@ -201,9 +201,19 @@ canvas {
       background: #f55;
     }
 
-#tweenbox {
-
+#rekapi-canvas {
+  height: 400px;
+  left: 0;
+  margin: 0 0 12px;
+  top: 0;
+  width: 500px;
 }
+
+  #rekapi-canvas .rekapi-actor {
+    background: #f0f;
+    height: 40px;
+    width: 40px;
+  }
 
 #editor-wrapper {
   float: left;

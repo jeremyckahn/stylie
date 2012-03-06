@@ -6,24 +6,31 @@ define(function () {
 
     'initialize': function (opts) {
       _.extend(this, opts);
-      this.initCanvas();
+      this.initDOM();
     }
 
-    ,'initCanvas': function () {
+    ,'initDOM': function () {
       this.app.kapi = new Kapi(this.$el[0], {
           'fps': 60
           ,'height': 400
           ,'width': 500
         });
-      var currentActor = this.createActor();
+      this.$canvasBG
+        .css({
+          'background': '#eee'
+          ,'height': 400
+          ,'width': 500
+        })
+        .attr({
+          'height': 400
+          ,'width': 500
+        });
+      this.bgContext = this.$canvasBG[0].getContext('2d');
+      var currentActor = this.getDOMActor();
       this.app.kapi.addActor(currentActor);
       this.app.config.currentActor = currentActor;
-      this.app.kapi.canvas_style('background', '#eee');
-      this.setKeyframePoints(currentActor);
+      this.setDOMKeyframePoints(currentActor);
       this.initRekapiControls();
-    }
-
-    ,'initDOM': function () {
 
     }
 
@@ -32,38 +39,16 @@ define(function () {
       this.app.util.updatePath();
     }
 
-    ,'createActor': function () {
-      function draw (canvas_context, state) {
-        if (this.app.config.isPathShowing
-            && this.app.config.prerenderedPath) {
-          canvas_context.drawImage(this.app.config.prerenderedPath, 0, 0);
-        }
-
-        canvas_context.beginPath();
-          canvas_context.arc(
-            state.x || 0,
-            state.y || 0,
-            state.radius || 50,
-            0,
-            Math.PI*2,
-            true);
-          canvas_context.fillStyle = state.color || '#444';
-          canvas_context.fill();
-          canvas_context.closePath();
-          return this;
-      };
-
-      return new Kapi.Actor({
-        'draw': _.bind(draw, this)
-        });
-    }
-
     ,'getDOMActor': function () {
-      return new Kapi.DOMActor($('#rekapi-canvas').children()[0]);
+      var actorEl = $('#rekapi-canvas').children();
+      actorEl
+        .height(actorEl.height())
+        .width(actorEl.width());
+      return new Kapi.DOMActor(actorEl[0]);
     }
 
-    ,'setKeyframePoints': function (actor) {
-      actor.keyframe(0,
+    ,'setDOMKeyframePoints': function (DOMActor) {
+      DOMActor.keyframe(0,
             _.extend(this.app.config.crosshairs.from.getCenter(), {
           'color': '#777'
           ,'radius': 15
@@ -72,6 +57,15 @@ define(function () {
             _.extend(this.app.config.crosshairs.to.getCenter(), {
           'color': '#333'
         }));
+    }
+
+    ,'updateDOMBackground': function () {
+      if (this.app.config.prerenderedPath) {
+        this.$canvasBG[0].width = this.$canvasBG.width();
+        if (this.app.config.isPathShowing) {
+          this.bgContext.drawImage(this.app.config.prerenderedPath, 0, 0);
+        }
+      }
     }
 
   });

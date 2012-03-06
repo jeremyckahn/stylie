@@ -7,7 +7,9 @@
   <link href='style.css' rel='stylesheet' type='text/css'>
   <link href='lib/rekapi-controls/rekapi-controls.jquery-ui-bundle.css' rel='stylesheet' type='text/css'>
   <link href='lib/rekapi-controls/rekapi-controls.css' rel='stylesheet' type='text/css'>
-  <script src="lib/rekapi.bundle.min.js"></script>
+  <script src="lib/underscore.js"></script>
+  <script src="lib/shifty.js"></script>
+  <script src="lib/rekapi.js"></script>
   <script src="lib/jquery.js"></script>
   <script src="lib/rekapi-controls/rekapi-controls.jquery-ui.min.js"></script>
   <script src="lib/rekapi-controls/rekapi-controls.min.js"></script>
@@ -19,7 +21,7 @@
   <div id="main-container">
     <div class="float-wrap">
       <div id="crosshairs">
-        <canvas></canvas>
+        <canvas id="tween-path"></canvas>
         <div id="rekapi-canvas">
           <div class="rekapi-actor"></div>
         </div>
@@ -35,11 +37,11 @@
       <ul id="tween-controls">
         <li>
           <label for="x-easing">X:</label>
-          <select id="x-easing" data-axis="x"></select>
+          <select id="x-easing" data-axis="left"></select>
         </li>
         <li>
           <label for="y-easing">Y:</label>
-          <select id="y-easing" data-axis="y"></select>
+          <select id="y-easing" data-axis="top"></select>
         </li>
         <li>
           <hr>

@@ -4,11 +4,19 @@ define(function () {
 
   utils.init = function (app) {
 
+    app.util.pxToNumber = function (px) {
+      return +(px.replace('px', ''));
+    }
+
     app.util.updatePath = function () {
       var fromCoords = app.config.crosshairs.from.getCenter();
       var toCoords = app.config.crosshairs.to.getCenter();
-      app.util.generatePathPrerender(fromCoords.x, fromCoords.y, toCoords.x,
-          toCoords.y, app.config.selects.x.$el.val(),
+      app.util.generatePathPrerender(
+          app.util.pxToNumber(fromCoords.left),
+          app.util.pxToNumber(fromCoords.top),
+          app.util.pxToNumber(toCoords.left),
+          app.util.pxToNumber(toCoords.top),
+          app.config.selects.x.$el.val(),
           app.config.selects.y.$el.val());
     };
 
