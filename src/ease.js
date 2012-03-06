@@ -139,4 +139,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'$el': $('#tween-controls')
   });
 
+  $(window).trigger('resize');
+
 });

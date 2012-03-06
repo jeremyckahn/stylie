@@ -91,7 +91,6 @@ button#pause {
 
 canvas {
   display: block;
-  margin: 20px auto;
 }
 
 #sandbox {
@@ -101,13 +100,11 @@ canvas {
 #crosshairs {
   float: left;
   margin: 0 auto;
-  padding-bottom: 32px;
   position: relative;
 }
 
   #crosshairs canvas {
     float: left;
-    margin: 0 0 12px;
   }
 
   #crosshairs .crosshair {
@@ -205,7 +202,6 @@ canvas {
 #rekapi-canvas {
   height: 400px;
   left: 0;
-  margin: 0 0 12px;
   top: 0;
   width: 500px;
 }
@@ -232,4 +228,10 @@ canvas {
 
 #editor {
   margin: 20px 0;
+}
+
+.rekapi-scrubber-wrapper {
+  position: absolute;
+  left: 20px;
+  top: 20px;
 }

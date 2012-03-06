@@ -27,8 +27,7 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
       this.setDOMKeyframePoints(currentActor);
       this.initRekapiControls();
       $(window)
-        .on('resize', _.bind(this.onWindowResize, this))
-        .trigger('resize');
+        .on('resize', _.bind(this.onWindowResize, this));
     }
 
     ,'onWindowResize': function (evt) {
