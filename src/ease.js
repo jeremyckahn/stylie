@@ -95,7 +95,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'$canvasBG': $('#tween-path')
   });
 
-  app.canvasView.updateDOMBackground();
+  app.canvasView.backgroundView.update();
   app.kapi.play();
   app.kapi.pause();
 
@@ -109,7 +109,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
       var checked = this.$el.attr('checked');
       this.app.config.isPathShowing = !!checked;
       this.app.kapi.redraw();
-      this.app.canvasView.updateDOMBackground();
+      this.app.canvasView.backgroundView.update();
     }
 
   });

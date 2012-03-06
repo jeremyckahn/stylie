@@ -25,7 +25,7 @@ define(function () {
       this.app.config.currentActor.modifyKeyframe(
           this.app.config.animationDuration, {}, easingObj)
       this.app.util.updatePath();
-      this.app.canvasView.updateDOMBackground();
+      this.app.canvasView.backgroundView.update();
       this.app.kapi
         .canvas_clear()
         .redraw();

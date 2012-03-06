@@ -1,6 +1,4 @@
-define(function () {
-
-  var crosshair = {};
+define(['exports'], function (crosshair) {
 
   crosshair.view = Backbone.View.extend({
 
@@ -26,7 +24,7 @@ define(function () {
         .canvas_clear()
         .redraw();
       this.app.util.updatePath();
-      this.app.canvasView.updateDOMBackground();
+      this.app.canvasView.backgroundView.update();
     }
 
     ,'onDragStop': function (evt, ui) {
@@ -43,7 +41,5 @@ define(function () {
     }
 
   });
-
-  return crosshair;
 
 });

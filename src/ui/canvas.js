@@ -52,10 +52,6 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
         }));
     }
 
-    ,'updateDOMBackground': function () {
-      this.backgroundView.update();
-    }
-
   });
 
 });
