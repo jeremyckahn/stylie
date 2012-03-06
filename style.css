@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #fork-me-link {
   left: 0px;
   position: absolute;
@@ -7,8 +12,6 @@
 #main-container {
   font-family: 'Petrona', serif;
   line-height: 1.7em;
-  margin: 50px auto;
-  width: 800px;
 }
 
 .center {
@@ -96,12 +99,10 @@ canvas {
 }
 
 #crosshairs {
-  height: 400px;
   float: left;
   margin: 0 auto;
   padding-bottom: 32px;
   position: relative;
-  width: 500px;
 }
 
   #crosshairs canvas {
@@ -215,11 +216,15 @@ canvas {
     width: 40px;
   }
 
-#editor-wrapper {
-  float: left;
-  height: 480px;
-  overflow: auto;
+.pane {
+  border: solid 1px #000;
+  position: absolute;
 }
+
+  .pane .pane-handle {
+    height: 18px;
+    background: #00f;
+  }
 
 .float-wrap {
   overflow: auto;

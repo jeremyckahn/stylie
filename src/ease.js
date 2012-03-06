@@ -1,9 +1,9 @@
 require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
         'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field',
-        'src/ui/crosshair', 'src/ui/canvas'],
+        'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane'],
     function (utils, cssGen, checkbox, button,
         select, autoUpdateTextfield, easeField,
-        crosshair, canvas) {
+        crosshair, canvas, pane) {
 
   var app = {
     'config': {}
@@ -132,6 +132,11 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
       console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
     }
 
+  });
+
+  app.view.controlPane = new pane.view({
+    'app': app
+    ,'$el': $('#tween-controls')
   });
 
 });

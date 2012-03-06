@@ -1,5 +1,7 @@
 define(['exports', 'src/ui/background'], function (canvas, background) {
 
+  var $win = $(window);
+
   canvas.view = Backbone.View.extend({
 
     'initialize': function (opts) {
@@ -24,7 +26,21 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
       this.app.config.currentActor = currentActor;
       this.setDOMKeyframePoints(currentActor);
       this.initRekapiControls();
+      $(window)
+        .on('resize', _.bind(this.onWindowResize, this))
+        .trigger('resize');
+    }
 
+    ,'onWindowResize': function (evt) {
+      var height = $win.height();
+      var width = $win.width();
+      this.app.kapi.canvas_height(height);
+      this.app.kapi.canvas_width(width);
+      this.backgroundView.resize({
+        'height': height
+        ,'width': width
+      });
+      this.backgroundView.update();
     }
 
     ,'initRekapiControls': function () {
