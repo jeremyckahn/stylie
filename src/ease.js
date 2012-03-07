@@ -5,6 +5,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
         select, autoUpdateTextfield, easeField,
         crosshair, canvas, pane) {
 
+  var $win = $(window);
   var app = {
     'config': {}
     ,'const': {}
@@ -12,7 +13,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'view': {}
   };
 
-  app.const.PRERENDER_GRANULARITY = 100;
+  app.const.PRERENDER_GRANULARITY = 102;
   utils.init(app);
 
   Tweenable.prototype.formula.customEase1 = function (x) {
@@ -78,14 +79,24 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     app.config.easeFields.push(easeFieldInst);
   });
 
+  var crosshairFrom = $('.crosshair.from');
+  crosshairFrom.css({
+    'left': 20
+    ,'top': ($win.height() / 2) - (crosshairFrom.height() / 2)
+  });
+  var crosshairTo = $('.crosshair.to');
+  crosshairTo.css({
+    'left': $win.width() / 2
+    ,'top': ($win.height() / 2) - (crosshairTo.height() / 2)
+  });
   app.config.crosshairs = {
     'from': new crosshair.view({
         'app': app
-        ,'$el': $('.crosshair.from')
+        ,'$el': crosshairFrom
       })
     ,'to': new crosshair.view({
         'app': app
-        ,'$el': $('.crosshair.to')
+        ,'$el': crosshairTo
       })
   };
 
@@ -131,7 +142,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
           app.config.selects.x.$el.val(), app.config.selects.y.$el.val());
       console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
     }
-
   });
 
   app.view.controlPane = new pane.view({

@@ -4,6 +4,10 @@ body {
   padding: 0;
 }
 
+label {
+  cursor: pointer;
+}
+
 #fork-me-link {
   left: 0px;
   position: absolute;
@@ -101,6 +105,7 @@ canvas {
 #crosshairs {
   float: left;
   margin: 0 auto;
+  overflow: hidden;
   position: relative;
 }
 
@@ -242,4 +247,15 @@ canvas {
   position: absolute;
   padding-bottom: 0px;
   padding: 8px;
+
+  /* TODO: This rule is !important because explicit width control is not
+   implemented in Rekapi Controls.  One the feature is added, set the width
+   with JavaScript and remove this rule. */
+  width: auto !important;
 }
+
+  .rekapi-scrubber-timeline {
+    /* TODO:  Remove the !important here once Rekapi Controls has width
+     control. */
+    width: 400px !important;
+  }

@@ -10,16 +10,19 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
     }
 
     ,'initDOM': function () {
+      var height = $win.height();
+      var width = $win.width();
+
       this.app.kapi = new Kapi(this.$el[0], {
           'fps': 60
-          ,'height': 400
-          ,'width': 500
+          ,'height': height
+          ,'width': width
         });
       this.backgroundView = new background.view({
         'app': this.app
         ,'$el': this.$canvasBG
-        ,'height': 400
-        ,'width': 500
+        ,'height': height
+        ,'width': width
       });
       var currentActor = this.getDOMActor();
       this.app.kapi.addActor(currentActor);
