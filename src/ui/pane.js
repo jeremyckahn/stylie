@@ -4,8 +4,16 @@ define(['exports'], function (pane) {
 
   pane.view = Backbone.View.extend({
 
-    'HANDLE_TEMPLATE': [
+    'CONTAINER_TEMPLATE': [
+      '<div class="pane"></div>'
+    ].join('')
+
+    ,'HANDLE_TEMPLATE': [
       '<div class="pane-handle"></div>'
+    ].join('')
+
+    ,'CONTENT_WRAPPER_TEMPLATE': [
+      '<div class="pane-content"></div>'
     ].join('')
 
     ,'events': {}
@@ -13,8 +21,10 @@ define(['exports'], function (pane) {
     ,'initialize': function (opts) {
       _.extend(this, opts);
       this.$handle = $(this.HANDLE_TEMPLATE);
+      this.$el.wrap($(this.CONTAINER_TEMPLATE));
+      this.$el = this.$el.parent();
       this.$el
-        .addClass('pane')
+        .wrapInner($(this.CONTENT_WRAPPER_TEMPLATE))
         .prepend(this.$handle)
         .css({
           'left': $win.width() - this.$el.outerWidth(true)

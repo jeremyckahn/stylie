@@ -158,7 +158,7 @@ canvas {
   #tween-controls {
     float: left;
     list-style-type: none;
-    padding: 12px;
+    padding: 0;
   }
 
     #tween-controls li {
@@ -225,9 +225,13 @@ canvas {
 }
 
   .pane .pane-handle {
-    background: #00f;
+    background: #ccc;
     cursor: move;
-    height: 18px;
+    height: 28px;
+  }
+
+  .pane .pane-content {
+    padding: 12px;
   }
 
 .float-wrap {
