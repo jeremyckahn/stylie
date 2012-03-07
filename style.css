@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  overflow: hidden;
   padding: 0;
 }
 
@@ -152,7 +153,6 @@ canvas {
   #tween-controls {
     float: left;
     list-style-type: none;
-    margin: 0;
     padding: 12px;
   }
 
@@ -213,13 +213,16 @@ canvas {
   }
 
 .pane {
+  background: rgba(255,255,255,0.8);
   border: solid 1px #000;
+  margin: 20px;
   position: absolute;
 }
 
   .pane .pane-handle {
-    height: 18px;
     background: #00f;
+    cursor: move;
+    height: 18px;
   }
 
 .float-wrap {
@@ -231,7 +234,12 @@ canvas {
 }
 
 .rekapi-scrubber-wrapper {
-  position: absolute;
+  background: #B5B5B5;
+  border-radius: 3px;
+  border: solid 1px #888;
+  bottom: 20px;
   left: 20px;
-  top: 20px;
+  position: absolute;
+  padding-bottom: 0px;
+  padding: 8px;
 }

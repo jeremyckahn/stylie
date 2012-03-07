@@ -1,4 +1,7 @@
 define(['exports'], function (pane) {
+
+  var $win = $(window);
+
   pane.view = Backbone.View.extend({
 
     'HANDLE_TEMPLATE': [
@@ -13,6 +16,9 @@ define(['exports'], function (pane) {
       this.$el
         .addClass('pane')
         .prepend(this.$handle)
+        .css({
+          'left': $win.width() - this.$el.outerWidth(true)
+        })
         .draggable({
           'containment': 'parent'
           ,'handle': this.$handle
