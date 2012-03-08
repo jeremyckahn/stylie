@@ -1,6 +1,8 @@
 define(['exports', 'src/ui/background'], function (canvas, background) {
 
   var $win = $(window);
+  // There is only one header in a DOM, so this is fine (if ugly).
+  var $header = $('header');
 
   canvas.view = Backbone.View.extend({
 
@@ -29,12 +31,11 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
       this.app.config.currentActor = currentActor;
       this.setDOMKeyframePoints(currentActor);
       this.initRekapiControls();
-      $(window)
-        .on('resize', _.bind(this.onWindowResize, this));
+      $win.on('resize', _.bind(this.onWindowResize, this));
     }
 
     ,'onWindowResize': function (evt) {
-      var height = $win.height();
+      var height = $win.height() - $header.outerHeight();
       var width = $win.width();
       this.app.kapi.canvas_height(height);
       this.app.kapi.canvas_width(width);

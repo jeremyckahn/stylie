@@ -17,6 +17,8 @@ label {
 #main-container {
   font-family: 'Petrona', serif;
   line-height: 1.7em;
+  overflow: hidden;
+  padding-top: 40px;
 }
 
 .center {
@@ -24,16 +26,19 @@ label {
 }
 
 header {
-  padding-bottom: 20px;
-}
-
-h1, h2 {
-  font-family: 'Candal', sans-serif;
-  text-align: center;
+  background: #222;
+  font-family: helvetica, sans-serif;
+  line-height: 40px;
+  padding: 0 6px;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 h1 {
-  font-size: 4.2em;
+  color: #eee;
+  font-size: 1.5em;
+  margin: 0;
 }
 
 h1 a:active,
