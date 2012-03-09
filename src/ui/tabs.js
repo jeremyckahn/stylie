@@ -1,0 +1,3 @@
+define(['exports'], function (tabs) {
+
+});

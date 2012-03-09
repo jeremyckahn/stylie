@@ -1,9 +1,9 @@
 require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field',
-    'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane'],
+    'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'],
     function (utils, cssGen, checkbox, button,
       select, autoUpdateTextfield, easeField,
-      crosshair, canvas, pane) {
+      crosshair, canvas, pane, tabs) {
 
   var $win = $(window);
   var app = {
