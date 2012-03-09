@@ -33,6 +33,18 @@ define(['exports'], function (pane) {
           'containment': 'parent'
           ,'handle': this.$handle
         });
+      this.oldSize = this.getSize();
+    }
+
+    ,'onResize': function () {
+      this.oldSize = this.getSize();
+    }
+
+    ,'getSize': function () {
+      return {
+        'height': this.$el.height()
+        ,'width': this.$el.width()
+      };
     }
 
   });

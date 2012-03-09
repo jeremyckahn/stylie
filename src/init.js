@@ -149,6 +149,9 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'$el': $('#tween-controls')
   });
 
+  subscribe('mainPanel-resize',
+      _.bind(app.view.controlPane.onResize, app.view.controlPane));
+
   $(window).trigger('resize');
 
 });
