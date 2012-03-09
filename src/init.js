@@ -146,7 +146,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   app.view.controlPane = new pane.view({
     'app': app
-    ,'$el': $('#tween-controls')
+    ,'$el': $('#control-pane')
   });
 
   subscribe('mainPanel-resize',

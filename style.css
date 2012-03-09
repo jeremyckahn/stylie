@@ -183,7 +183,6 @@ canvas {
 
     #tween-controls hr {
       margin: 14px 0 20px;
-      width: 274px;
     }
 
     #tween-controls .buttons {
@@ -196,13 +195,16 @@ canvas {
       width: 165px;
     }
 
+    #tween-controls input.ease {
+      width: 100%;
+    }
+
     #tween-controls input[type="checkbox"] {
       width: auto;
     }
 
     #tween-controls input.full-width {
       display: block;
-      width: 270px;
     }
 
     #tween-controls input.error {

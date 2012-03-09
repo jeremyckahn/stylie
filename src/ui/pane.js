@@ -32,12 +32,20 @@ define(['exports'], function (pane) {
         .draggable({
           'containment': 'parent'
           ,'handle': this.$handle
+          ,'stop': _.bind(this.onDragStop, this)
         });
       this.oldSize = this.getSize();
     }
 
+    // This may be unnecessary...
     ,'onResize': function () {
       this.oldSize = this.getSize();
+    }
+
+    ,'onDragStop': function (evt, ui) {
+      if (this.$el.position().top < 0) {
+        this.$el.css('top', '0px');
+      }
     }
 
     ,'getSize': function () {
