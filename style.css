@@ -229,9 +229,6 @@ canvas {
 }
 
   #rekapi-canvas .rekapi-actor {
-    background: #f0f;
-    height: 40px;
-    width: 40px;
   }
 
 .pane {
@@ -296,6 +293,15 @@ canvas {
 
   .tabs li:last-child {
     margin-right: 0;
+  }
+
+#html-input {
+  line-height: 0;
+}
+
+  #html-input textarea {
+    height: 255px;
+    width: 250px;
   }
 
 #css-output {

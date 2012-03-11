@@ -24,7 +24,9 @@
     <div id="crosshairs">
       <canvas id="tween-path"></canvas>
       <div id="rekapi-canvas">
-        <div class="rekapi-actor"></div>
+        <div class="rekapi-actor">
+          <img src="img/octocat.png">
+        </div>
       </div>
       <div class="crosshair from" data-pos="from">
         <div class="dashmark horiz"></div>
@@ -38,6 +40,7 @@
     <div id="control-pane">
       <ul class="tabs">
         <li data-target="tween-controls"><a href="#">Tween</a></li>
+        <li data-target="html-input"><a href="#">HTML</a></li>
         <li data-target="css-output"><a href="#">CSS</a></li>
       </ul>
       <hr>
@@ -72,10 +75,12 @@
             </li>
           </ul>
         </li>
+        <li id="html-input">
+          <textarea></textarea>
+        </li>
         <li id="css-output">
           <textarea></textarea>
         </li>
-
       </ul>
     </div>
   </div>
