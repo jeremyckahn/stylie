@@ -38,17 +38,29 @@ ul li {
 header {
   background: #222;
   font-family: helvetica, sans-serif;
-  line-height: 40px;
+  height: 40px;
   padding: 0 6px;
   position: fixed;
   top: 0;
   width: 100%;
 }
 
+h1, h2 {
+  float: left;
+  margin: 0;
+}
+
 h1 {
   color: #eee;
-  font-size: 1.5em;
-  margin: 0;
+  font-size: 24px;
+  line-height: 40px;
+}
+
+h2 {
+  color: #0bf;
+  line-height: 44px;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 h1 a:active,
