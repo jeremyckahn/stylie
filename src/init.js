@@ -1,11 +1,11 @@
 require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field',
     'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs',
-    'src/ui/css-output'],
+    'src/ui/css-output', 'src/ui/html-input'],
     function (utils, cssGen, checkbox, button,
       select, autoUpdateTextfield, easeField,
       crosshair, canvas, pane, tabs,
-      cssOutput) {
+      cssOutput, htmlInput) {
 
   var $win = $(window);
   var app = {
@@ -142,6 +142,11 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     'app': app
     ,'$el': $('#css-output textarea')
     ,'$trigger': app.view.controlPaneTabs.$el.find('[data-target="css-output"]')
+  });
+
+  app.view.htmlInput = new htmlInput.view({
+    'app': app
+    ,'$el': $('#html-input textarea')
   });
 
   subscribe('mainPanel-resize',

@@ -6,7 +6,11 @@ define(function () {
 
     app.util.pxToNumber = function (px) {
       return +(px.replace('px', ''));
-    }
+    };
+
+    app.util.trimString = function (str) {
+      return str.replace(/^\s*|\s*$/g, '');
+    };
 
     app.util.updatePath = function () {
       var fromCoords = app.config.crosshairs.from.getCenter();
