@@ -111,7 +111,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   app.canvasView.backgroundView.update();
   app.kapi.play();
-  app.kapi.pause();
 
   app.view.showPathView = new checkbox.view({
 
