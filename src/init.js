@@ -149,6 +149,11 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'$el': $('#control-pane')
   });
 
+  app.view.controlPaneTabs = new tabs.view({
+    'app': app
+    ,'$el': $('#control-pane')
+  });
+
   subscribe('mainPanel-resize',
       _.bind(app.view.controlPane.onResize, app.view.controlPane));
 

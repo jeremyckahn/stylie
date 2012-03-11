@@ -277,3 +277,20 @@ canvas {
      control. */
     width: 400px !important;
   }
+
+.tabs {
+  display: block;
+}
+
+  .tabs li {
+    margin: 0 6px;
+    float: left;
+  }
+
+  .tabs li:first-child {
+    margin-left: 0;
+  }
+
+  .tabs li:last-child {
+    margin-right: 0;
+  }
