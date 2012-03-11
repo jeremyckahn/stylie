@@ -9,6 +9,10 @@ define(['exports', 'src/css-gen'], function (cssOutput, cssGen) {
     }
 
     ,'onTriggerClick': function (evt) {
+      this.renderCSS();
+    }
+
+    ,'renderCSS': function () {
       var fromCoords = this.app.config.crosshairs.from.getCenter();
       var toCoords = this.app.config.crosshairs.to.getCenter();
       var points = this.app.util.generatePathPoints(
