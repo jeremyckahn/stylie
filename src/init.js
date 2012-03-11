@@ -15,7 +15,8 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'view': {}
   };
 
-  app.const.PRERENDER_GRANULARITY = 102;
+  app.const.PRERENDER_GRANULARITY = 150;
+  app.const.RENDER_GRANULARITY = 100;
   utils.init(app);
 
   Tweenable.prototype.formula.customEase1 = function (x) {

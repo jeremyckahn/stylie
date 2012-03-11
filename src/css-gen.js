@@ -20,7 +20,7 @@ define(['exports'], function (cssGen) {
       keyframeStr = printf('  %s { ', [index]);
     } else {
       keyframeStr = printf('  %s% { ',
-          [((totalPoints / 100) * index).toFixed(2)]);
+          [((100 / totalPoints) * (index + 1)).toFixed(2)]);
     }
 
     _.each(point, function (pointVal, pointKey) {
@@ -37,14 +37,15 @@ define(['exports'], function (cssGen) {
     var cssString = [printf('@%skeyframes %s {\n',
         [opt_vendorPrefix || '', identifier])];
     var pointsLen = points.length;
-    cssString.push(cssGen.renderCSS3KeyframeSegment(points[0], 'from', pointsLen));
+    cssString.push(cssGen.renderCSS3KeyframeSegment(
+        points[0], 'from', pointsLen));
 
-    _.each(points, function (point, i) {
-      keyframeStr = cssGen.renderCSS3KeyframeSegment(point, i, pointsLen);
+    _.each(points.slice(1, -1), function (point, i) {
+      keyframeStr = cssGen.renderCSS3KeyframeSegment(point, i, pointsLen - 1);
       cssString.push(keyframeStr);
     });
 
-    cssString.push(cssGen.renderCSS3KeyframeSegment(points[0], 'to',
+    cssString.push(cssGen.renderCSS3KeyframeSegment(_.last(points), 'to',
           pointsLen));
     cssString.push('}');
     return cssString.join('');

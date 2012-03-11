@@ -35,9 +35,9 @@ define(function () {
         ,'y': easeY
       };
       var i, point;
-      for (i = 0; i <= app.const.PRERENDER_GRANULARITY; i++) {
+      for (i = 0; i <= app.const.RENDER_GRANULARITY; i++) {
         point = Tweenable.util.interpolate(
-            from, to, (1 / app.const.PRERENDER_GRANULARITY) * i, easing);
+            from, to, (1 / app.const.RENDER_GRANULARITY) * i, easing);
         points.push(point);
       }
 
