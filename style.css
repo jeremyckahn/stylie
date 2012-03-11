@@ -9,6 +9,8 @@ label {
 }
 
 ul {
+  margin: 0;
+  overflow: hidden;
   padding: 0;
 }
 
@@ -176,7 +178,7 @@ canvas {
     #tween-controls li {
       display: block;
       font-size: 1.4em;
-      padding-bottom: 6px;
+      padding-top: 6px;
     }
 
     #tween-controls label {
@@ -189,7 +191,7 @@ canvas {
     }
 
     #tween-controls hr {
-      margin: 14px 0 20px;
+      margin: 8px 0 12px;
     }
 
     #tween-controls .buttons {
@@ -293,4 +295,13 @@ canvas {
 
   .tabs li:last-child {
     margin-right: 0;
+  }
+
+#css-output {
+  line-height: 0;
+}
+
+  #css-output textarea {
+    height: 188px;
+    width: 250px;
   }

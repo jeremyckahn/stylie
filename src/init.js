@@ -1,9 +1,11 @@
 require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field',
-    'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'],
+    'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs',
+    'src/ui/css-output'],
     function (utils, cssGen, checkbox, button,
       select, autoUpdateTextfield, easeField,
-      crosshair, canvas, pane, tabs) {
+      crosshair, canvas, pane, tabs,
+      cssOutput) {
 
   var $win = $(window);
   var app = {
@@ -125,25 +127,6 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   });
 
-  app.view.genKeyframesBtn = new button.view({
-
-    'app': app
-
-    ,'$el': $('#gen-keyframes')
-
-    ,'onClick': function (evt) {
-      var fromCoords = this.app.config.crosshairs.from.getCenter();
-      var toCoords = this.app.config.crosshairs.to.getCenter();
-      var points = this.app.util.generatePathPoints(
-          app.util.pxToNumber(fromCoords.left),
-          app.util.pxToNumber(fromCoords.top),
-          app.util.pxToNumber(toCoords.left),
-          app.util.pxToNumber(toCoords.top),
-          app.config.selects.x.$el.val(), app.config.selects.y.$el.val());
-      console.log(cssGen.generateCSS3Keyframes('foo', points,'-webkit-'));
-    }
-  });
-
   app.view.controlPane = new pane.view({
     'app': app
     ,'$el': $('#control-pane')
@@ -152,6 +135,12 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
   app.view.controlPaneTabs = new tabs.view({
     'app': app
     ,'$el': $('#control-pane')
+  });
+
+  app.view.cssOutput = new cssOutput.view({
+    'app': app
+    ,'$el': $('#css-output textarea')
+    ,'$trigger': app.view.controlPaneTabs.$el.find('[data-target="css-output"]')
   });
 
   subscribe('mainPanel-resize',
