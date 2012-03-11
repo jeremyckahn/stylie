@@ -35,8 +35,8 @@ define(['exports'], function (crosshair) {
     ,'getCenter': function () {
       var pos = this.$el.position();
       return {
-        'left': (pos.left + this.$el.width()/2) + 'px'
-        ,'top': (pos.top + this.$el.height()/2) + 'px'
+        'left': pos.left + 'px'
+        ,'top': pos.top + 'px'
       };
 
     }

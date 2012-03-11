@@ -131,6 +131,7 @@ canvas {
   #crosshairs .crosshair {
     cursor: move;
     height: 40px;
+    margin: -20px;
     position: absolute;
     top: 180px;
     width: 40px;
