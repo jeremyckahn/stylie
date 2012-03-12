@@ -29,7 +29,7 @@ fs.readFile('dev.html', function(err,data){
   var html = data.toString();
 
   // Compress lib code
-  var libs = html.match(/lib\/[^\.]*\.js/g);
+  var libs = html.match(/lib\/.*.js/g);
   var command = 'cat ' + libs.join(' ') + ' > ' + config.libOut;
   exec(command, function (error, stdout, stderr) {
     fs.readFile(config.libOut, function (err, data) {
