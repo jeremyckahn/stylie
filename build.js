@@ -47,6 +47,7 @@ fs.readFile('dev.html', function(err,data){
 
   var optimizedHtml = html
     .replace(/\n/g, '')
+    .replace(/>\s*</g, '><')
     .replace(/<!-- scripts -->.*<!-- \/scripts -->/,
       ['<script src="' + config.libOut + '"></script>',
       '<script src="' + 'dist/app.js' + '"></script>'].join(''));
