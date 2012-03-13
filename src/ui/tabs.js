@@ -1,6 +1,9 @@
 define(['exports'], function (tabs) {
   tabs.view = Backbone.View.extend({
-    'events': {
+
+    'ACTIVE_CLASS': 'tabs-active'
+
+    ,'events': {
       'click .tabs li': 'onTabClick'
     }
 
@@ -15,6 +18,8 @@ define(['exports'], function (tabs) {
     ,'onTabClick': function (evt) {
       evt.preventDefault();
       var target = $(evt.currentTarget);
+      this.tabs.removeClass(this.ACTIVE_CLASS);
+      target.addClass(this.ACTIVE_CLASS);
       this.contents.css('display', 'none');
       $('#' + target.data('target')).css('display', 'block');
     }

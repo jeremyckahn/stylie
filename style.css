@@ -246,7 +246,7 @@ canvas {
   }
 
 .pane {
-  background: rgba(255,255,255,0.8);
+  background: rgb(255,255,255);
   border: solid 1px #000;
   margin: 20px;
   position: absolute;
@@ -259,7 +259,6 @@ canvas {
   }
 
   .pane .pane-content {
-    padding: 12px;
   }
 
 .float-wrap {
@@ -294,20 +293,35 @@ canvas {
 
 .tabs {
   display: block;
+  border-bottom: solid 1px #bbb;
+  height: 30px;
+  line-height: 30px;
+  overflow: visible;
+  padding-top: 3px;
 }
 
   .tabs li {
-    margin: 0 6px;
+    border: solid 1px #bbb;
+    height: 29px;
+    margin: 0 3px -1px;
     float: left;
   }
 
+  .tabs li.tabs-active {
+    border-bottom-color: #fff;
+  }
+
   .tabs li:first-child {
-    margin-left: 0;
+    margin-left: 6px;
   }
 
   .tabs li:last-child {
     margin-right: 0;
   }
+
+.tabs-contents {
+  padding: 12px;
+}
 
 #html-input {
   line-height: 0;
