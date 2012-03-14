@@ -1,5 +1,7 @@
 define(['exports'], function (cssGen) {
 
+  var IDENTIFIER_SUFFIX = '-keyframes';
+
   function printf (formatter, args) {
     var composedStr = formatter;
     _.each(args, function (arg) {
@@ -32,10 +34,22 @@ define(['exports'], function (cssGen) {
     return keyframeStr;
   };
 
+  cssGen.generateAnimationClass = function (
+      identifier, duration, opt_vendorPrefixes) {
+    var duration = printf('%sms', [duration]);
+    var classChunks = [printf('.%s {', identifier)];
+    _.each(opt_vendorPrefixes, function (prefix) {
+      classChunks.push(printf('  %sanimation-duration: %s;',
+          [prefix + '-', duration]));
+    });
+    classChunks.push('}');
+    return classChunks.join('\n');
+  };
+
   cssGen.generateCSS3Keyframes = function (
       identifier, points, opt_vendorPrefix) {
     var cssString = [printf('@%skeyframes %s {\n',
-        [opt_vendorPrefix || '', identifier])];
+        [opt_vendorPrefix || '', identifier + 'IDENTIFIER_SUFFIX'])];
     var pointsLen = points.length;
     cssString.push(cssGen.renderCSS3KeyframeSegment(
         points[0], 'from', pointsLen));
