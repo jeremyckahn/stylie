@@ -37,7 +37,7 @@ define(['exports'], function (cssGen) {
   cssGen.generateAnimationClass = function (
       identifier, duration, opt_vendorPrefixes) {
     var duration = printf('%sms', [duration]);
-    var classChunks = [printf('.%s {', identifier)];
+    var classChunks = [printf('.%s {', [identifier])];
     _.each(opt_vendorPrefixes, function (prefix) {
       classChunks.push(printf('  %sanimation-duration: %s;',
           [prefix + '-', duration]));
@@ -67,13 +67,13 @@ define(['exports'], function (cssGen) {
 
   cssGen.generateCSS3ClassAndKeyframes = function (
       identifier, points, duration, opt_vendorPrefixes) {
-    var stringChunks = [generateAnimationClass(
+    var stringChunks = [cssGen.generateAnimationClass(
         identifier, duration, opt_vendorPrefixes) + '\n'];
 
     opt_vendorPrefixes = opt_vendorPrefixes || [''];
     _.each(opt_vendorPrefixes, function (prefix) {
       stringChunks.push(cssGen.generateCSS3Keyframes(
-          identifier, points, prefix) + '\n');
+          identifier, points, prefix));
     });
 
     return stringChunks.join('\n');
