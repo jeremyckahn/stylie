@@ -49,7 +49,7 @@ define(['exports'], function (cssGen) {
   cssGen.generateCSS3Keyframes = function (
       identifier, points, opt_vendorPrefix) {
     var cssString = [printf('@%skeyframes %s {\n',
-        [opt_vendorPrefix || '', identifier + 'IDENTIFIER_SUFFIX'])];
+        [opt_vendorPrefix || '', identifier + IDENTIFIER_SUFFIX])];
     var pointsLen = points.length;
     cssString.push(cssGen.renderCSS3KeyframeSegment(
         points[0], 'from', pointsLen));
@@ -63,6 +63,20 @@ define(['exports'], function (cssGen) {
           pointsLen));
     cssString.push('}');
     return cssString.join('');
+  };
+
+  cssGen.generateCSS3ClassAndKeyframes = function (
+      identifier, points, duration, opt_vendorPrefixes) {
+    var stringChunks = [generateAnimationClass(
+        identifier, duration, opt_vendorPrefixes) + '\n'];
+
+    opt_vendorPrefixes = opt_vendorPrefixes || [''];
+    _.each(opt_vendorPrefixes, function (prefix) {
+      stringChunks.push(cssGen.generateCSS3Keyframes(
+          identifier, points, prefix) + '\n');
+    });
+
+    return stringChunks.join('\n');
   };
 
 });
