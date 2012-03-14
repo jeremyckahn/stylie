@@ -39,8 +39,12 @@ define(['exports'], function (cssGen) {
     var duration = printf('%sms', [duration]);
     var classChunks = [printf('.%s {', [identifier])];
     _.each(opt_vendorPrefixes, function (prefix) {
+      // TODO: This will break if there is no `prefix`. Refactor this into a
+      // helper.
       classChunks.push(printf('  %sanimation-duration: %s;',
           [prefix + '-', duration]));
+      classChunks.push(printf('  %sanimation-name: %s;',
+          [prefix + '-', identifier + IDENTIFIER_SUFFIX]));
     });
     classChunks.push('}');
     return classChunks.join('\n');
@@ -48,6 +52,10 @@ define(['exports'], function (cssGen) {
 
   cssGen.generateCSS3Keyframes = function (
       identifier, points, opt_vendorPrefix) {
+    if (opt_vendorPrefix) {
+      opt_vendorPrefix += '-';
+    }
+
     var cssString = [printf('@%skeyframes %s {\n',
         [opt_vendorPrefix || '', identifier + IDENTIFIER_SUFFIX])];
     var pointsLen = points.length;
