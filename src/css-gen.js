@@ -76,11 +76,11 @@ define(['exports'], function (cssGen) {
   cssGen.generateCSS3ClassAndKeyframes = function (
       identifier, points, duration, opt_vendorPrefixes) {
     var stringChunks = [cssGen.generateAnimationClass(
-        identifier, duration, opt_vendorPrefixes) + '\n'];
+        identifier, duration, opt_vendorPrefixes)];
 
     opt_vendorPrefixes = opt_vendorPrefixes || [''];
     _.each(opt_vendorPrefixes, function (prefix) {
-      stringChunks.push(cssGen.generateCSS3Keyframes(
+      stringChunks.push('\n' + cssGen.generateCSS3Keyframes(
           identifier, points, prefix));
     });
 
