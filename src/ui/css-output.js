@@ -23,9 +23,8 @@ define(['exports', 'src/css-gen'], function (cssOutput, cssGen) {
           this.app.config.selects.x.$el.val(),
           this.app.config.selects.y.$el.val());
       var duration = this.app.view.durationField.$el.val();
-      //var cssOutput = cssGen.generateCSS3Keyframes('foo', points,'-webkit-');
       var cssOutput = cssGen.generateCSS3ClassAndKeyframes(
-          'foo', points, duration, ['-webkit']);
+          'foo', points, duration, ['', '-moz', '-webkit']);
       this.$el.val(cssOutput);
     }
 
