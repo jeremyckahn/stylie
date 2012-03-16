@@ -22,6 +22,20 @@ textarea {
   height: 188px;
 }
 
+input[type="checkbox"] {
+  width: auto;
+}
+
+input[type="text"] {
+  width: 165px;
+}
+
+ul.controls li {
+  display: block;
+  font-size: 1.1em;
+  padding-top: 6px;
+}
+
 #fork-me-link {
   left: 0px;
   position: absolute;
@@ -213,7 +227,10 @@ canvas {
 
   #control-pane input {
     font-size: 0.8em;
-    width: 165px;
+  }
+
+  #control-pane input[type="checkbox"] {
+    font-size: 1.1em;
   }
 
   #control-pane textarea,
@@ -227,17 +244,7 @@ canvas {
   padding: 0;
 }
 
-  ul.controls li {
-    display: block;
-    font-size: 1.1em;
-    padding-top: 6px;
-  }
-
   #tween-controls input.ease {
-  }
-
-  #tween-controls input[type="checkbox"] {
-    width: auto;
   }
 
   #tween-controls input.error {
@@ -335,6 +342,21 @@ canvas {
 .tabs-contents {
   padding: 6px 12px 12px;
 }
+
+.checkboxes {
+
+}
+
+  .checkboxes li {
+    float: left;
+  }
+
+  .checkboxes label {
+  }
+
+    .checkboxes input,
+    .checkboxes label span {
+    }
 
 #html-input {
   line-height: 0;
