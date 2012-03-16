@@ -10,7 +10,11 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
   var $win = $(window);
   var app = {
     'config': {
-        'activeClasses': {}
+        'activeClasses': {
+          'moz': true
+          ,'webkit': true
+          ,'w3': true
+        }
       }
     ,'const': {}
     ,'util': {}
@@ -119,6 +123,8 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     'app': app
 
     ,'$el': $('#show-path')
+
+    ,'preventInitialHandlerCall': true
 
     ,'onChange': function (evt, checked) {
       this.app.config.isPathShowing = !!checked;

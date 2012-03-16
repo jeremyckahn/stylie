@@ -8,12 +8,15 @@ define(['exports'], function (checkbox) {
 
     ,'initialize': function (opts) {
       _.extend(this, opts);
-      this.delegateEvents();
-      this.$el.trigger('change');
+
+      if (opts.preventInitialHandlerCall) {
+        this.delegateEvents();
+        this.$el.trigger('change');
+      }
     }
 
     ,'_onChange': function (evt) {
-      this.onChange.call(this, evt, this.$el.attr('checked'));
+      this.onChange.call(this, evt, this.$el.attr('checked') === 'checked');
     }
 
   });
