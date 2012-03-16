@@ -9,7 +9,9 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   var $win = $(window);
   var app = {
-    'config': {}
+    'config': {
+        'activeClasses': {}
+      }
     ,'const': {}
     ,'util': {}
     ,'view': {}
@@ -39,7 +41,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     })
   };
 
-  app.view.durationField = new autoUpdateTextfield.view({
+  app.view.durationFieldView = new autoUpdateTextfield.view({
 
     'app': app
 
@@ -70,7 +72,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
   });
 
   app.config.animationDuration = app.config.initialDuration =
-      app.view.durationField.$el.val();
+      app.view.durationFieldView.$el.val();
 
   app.config.easeFields = [];
   $('.ease').each(function (i, el) {
@@ -152,7 +154,21 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
     ,'onKeyup': function (val) {
       this.app.config.className = val;
-      this.app.view.cssOutput.renderCSS();
+      this.app.view.cssOutputView.renderCSS();
+    }
+
+  });
+
+  app.view.w3CheckboxView = new checkbox.view({
+
+    'app': app
+
+    ,'$el': $('#w3-toggle')
+
+    ,'onChange': function (evt) {
+      var checked = this.$el.attr('checked');
+      this.app.config.activeClasses.w3 = !!checked;
+      this.app.view.cssOutputView.renderCSS();
     }
 
   });

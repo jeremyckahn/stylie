@@ -22,9 +22,9 @@ define(['exports', 'src/css-gen'], function (cssOutput, cssGen) {
           this.app.util.pxToNumber(toCoords.top),
           this.app.config.selects.x.$el.val(),
           this.app.config.selects.y.$el.val());
-      var duration = this.app.view.durationField.$el.val();
+      var duration = this.app.view.durationFieldView.$el.val();
       var cssOutput = cssGen.generateCSS3ClassAndKeyframes(
-          this.app.view.cssNameField.$el.val(), points, duration,
+          this.app.view.cssNameFieldView.$el.val(), points, duration,
           ['', '-moz', '-webkit']);
       this.$el.val(cssOutput);
     }
