@@ -18,6 +18,10 @@ ul li {
   list-style-type: none;
 }
 
+textarea {
+  height: 188px;
+}
+
 #fork-me-link {
   left: 0px;
   position: absolute;
@@ -185,55 +189,60 @@ canvas {
       left: 19px;
     }
 
-  #tween-controls {
-    float: left;
-    padding: 0;
+#control-pane {
+
+}
+
+  #control-pane label {
+    padding-right: 6px;
   }
 
-    #tween-controls li {
-      display: block;
-      font-size: 1.4em;
-      padding-top: 6px;
-    }
+  #control-pane select {
+    background: transparent;
+    font-size: 0.8em;
+  }
 
-    #tween-controls label {
-      padding-right: 6px;
-    }
+  #control-pane hr {
+    margin: 6px 0 8px;
+  }
 
-    #tween-controls select {
-      background: transparent;
-      font-size: 0.8em;
-    }
+  #control-pane .buttons {
+    padding: 6px 0;
+    text-align: left;
+  }
 
-    #tween-controls hr {
-      margin: 8px 0 12px;
-    }
+  #control-pane input {
+    font-size: 0.8em;
+    width: 165px;
+  }
 
-    #tween-controls .buttons {
-      padding: 6px 0;
-      text-align: left;
-    }
+  #control-pane textarea,
+  #control-pane input.full-width {
+    display: block;
+    width: 270px;
+  }
 
-    #tween-controls input {
-      font-size: 0.8em;
-      width: 165px;
-    }
+#tween-controls {
+  float: left;
+  padding: 0;
+}
 
-    #tween-controls input.ease {
-      width: 100%;
-    }
+  ul.controls li {
+    display: block;
+    font-size: 1.1em;
+    padding-top: 6px;
+  }
 
-    #tween-controls input[type="checkbox"] {
-      width: auto;
-    }
+  #tween-controls input.ease {
+  }
 
-    #tween-controls input.full-width {
-      display: block;
-    }
+  #tween-controls input[type="checkbox"] {
+    width: auto;
+  }
 
-    #tween-controls input.error {
-      background: #f55;
-    }
+  #tween-controls input.error {
+    background: #f55;
+  }
 
 #rekapi-canvas {
   height: 400px;
@@ -320,23 +329,13 @@ canvas {
   }
 
 .tabs-contents {
-  padding: 12px;
+  padding: 6px 12px 12px;
 }
 
 #html-input {
   line-height: 0;
 }
 
-  #html-input textarea {
-    height: 255px;
-    width: 250px;
-  }
-
 #css-output {
-  line-height: 0;
 }
 
-  #css-output textarea {
-    height: 188px;
-    width: 250px;
-  }
