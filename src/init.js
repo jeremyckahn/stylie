@@ -127,23 +127,24 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   });
 
-  app.view.controlPane = new pane.view({
+  app.view.controlPaneView = new pane.view({
     'app': app
     ,'$el': $('#control-pane')
   });
 
-  app.view.controlPaneTabs = new tabs.view({
+  app.view.controlPaneTabsView = new tabs.view({
     'app': app
     ,'$el': $('#control-pane')
   });
 
-  app.view.cssOutput = new cssOutput.view({
+  app.view.cssOutputView = new cssOutput.view({
     'app': app
     ,'$el': $('#css-output textarea')
-    ,'$trigger': app.view.controlPaneTabs.$el.find('[data-target="css-output"]')
+    ,'$trigger': app.view.controlPaneTabsView.$el
+        .find('[data-target="css-output"]')
   });
 
-  app.view.cssNameField = new autoUpdateTextfield.view({
+  app.view.cssNameFieldView = new autoUpdateTextfield.view({
 
     'app': app
 
@@ -162,7 +163,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
   });
 
   subscribe('mainPanel-resize',
-      _.bind(app.view.controlPane.onResize, app.view.controlPane));
+      _.bind(app.view.controlPaneView.onResize, app.view.controlPaneView));
 
   $(window).trigger('resize');
 
