@@ -120,8 +120,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
     ,'$el': $('#show-path')
 
-    ,'onChange': function (evt) {
-      var checked = this.$el.attr('checked');
+    ,'onChange': function (evt, checked) {
       this.app.config.isPathShowing = !!checked;
       this.app.kapi.redraw();
       this.app.canvasView.backgroundView.update();
@@ -165,9 +164,8 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
     ,'$el': $('#moz-toggle')
 
-    ,'onChange': function (evt) {
-      var checked = this.$el.attr('checked');
-      this.app.config.activeClasses.moz = !!checked;
+    ,'onChange': function (evt, checked) {
+      this.app.config.activeClasses.moz = checked;
       this.app.view.cssOutputView.renderCSS();
     }
 
@@ -179,9 +177,8 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
     ,'$el': $('#webkit-toggle')
 
-    ,'onChange': function (evt) {
-      var checked = this.$el.attr('checked');
-      this.app.config.activeClasses.webkit = !!checked;
+    ,'onChange': function (evt, checked) {
+      this.app.config.activeClasses.webkit = checked;
       this.app.view.cssOutputView.renderCSS();
     }
 
@@ -193,9 +190,8 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
     ,'$el': $('#w3-toggle')
 
-    ,'onChange': function (evt) {
-      var checked = this.$el.attr('checked');
-      this.app.config.activeClasses.w3 = !!checked;
+    ,'onChange': function (evt, checked) {
+      this.app.config.activeClasses.w3 = checked;
       this.app.view.cssOutputView.renderCSS();
     }
 

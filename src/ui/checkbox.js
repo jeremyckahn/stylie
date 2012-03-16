@@ -3,7 +3,7 @@ define(['exports'], function (checkbox) {
   checkbox.view = Backbone.View.extend({
 
     'events': {
-      'change': 'onChange'
+      'change': '_onChange'
     }
 
     ,'initialize': function (opts) {
@@ -12,7 +12,9 @@ define(['exports'], function (checkbox) {
       this.$el.trigger('change');
     }
 
-    ,'onChange': function () {}
+    ,'_onChange': function (evt) {
+      this.onChange.call(this, evt, this.$el.attr('checked'));
+    }
 
   });
 
