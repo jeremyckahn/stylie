@@ -159,6 +159,34 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   });
 
+  app.view.mozCheckboxView = new checkbox.view({
+
+    'app': app
+
+    ,'$el': $('#moz-toggle')
+
+    ,'onChange': function (evt) {
+      var checked = this.$el.attr('checked');
+      this.app.config.activeClasses.moz = !!checked;
+      this.app.view.cssOutputView.renderCSS();
+    }
+
+  });
+
+  app.view.webkitCheckboxView = new checkbox.view({
+
+    'app': app
+
+    ,'$el': $('#webkit-toggle')
+
+    ,'onChange': function (evt) {
+      var checked = this.$el.attr('checked');
+      this.app.config.activeClasses.webkit = !!checked;
+      this.app.view.cssOutputView.renderCSS();
+    }
+
+  });
+
   app.view.w3CheckboxView = new checkbox.view({
 
     'app': app
@@ -173,7 +201,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
 
   });
 
-  app.view.htmlInput = new htmlInput.view({
+  app.view.htmlInputView = new htmlInput.view({
     'app': app
     ,'$el': $('#html-input textarea')
   });
