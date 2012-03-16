@@ -29,7 +29,7 @@ define(['exports'], function (crosshair) {
 
     ,'onDragStop': function (evt, ui) {
       this.onDrag.apply(this, arguments);
-      this.app.view.cssOutput.renderCSS();
+      this.app.view.cssOutputView.renderCSS();
     }
 
     ,'getCenter': function () {

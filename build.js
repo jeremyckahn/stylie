@@ -7,8 +7,8 @@ var pro = require("uglify-js").uglify;
 var config = {
   baseUrl: './',
   name: 'src/init',
-  out: 'dist/app.js',
-  libOut: 'dist/libs.js'
+  out: 'bin/app.js',
+  libOut: 'bin/libs.js'
 };
 
 // Compress app code
@@ -50,7 +50,7 @@ fs.readFile('dev.html', function(err,data){
     .replace(/>\s*</g, '><')
     .replace(/<!-- scripts -->.*<!-- \/scripts -->/,
       ['<script src="' + config.libOut + '"></script>',
-      '<script src="' + 'dist/app.js' + '"></script>'].join(''));
+      '<script src="' + 'bin/app.js' + '"></script>'].join(''));
 
   fs.writeFile('index.html', optimizedHtml, function () {
     console.log('Generated index.html.');

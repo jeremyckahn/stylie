@@ -34,17 +34,23 @@ define(['exports'], function (cssGen) {
     return keyframeStr;
   };
 
+  function getClassAttributes (identifier, duration, opt_vendorPrefix) {
+    var classChunks = [];
+    var prefix = opt_vendorPrefix ? opt_vendorPrefix + '-' : ''
+    classChunks.push(printf('  %sanimation-duration: %s;',
+        [prefix, duration]));
+    classChunks.push(printf('  %sanimation-name: %s;',
+        [prefix, identifier + IDENTIFIER_SUFFIX]));
+    return classChunks;
+  }
+
   cssGen.generateAnimationClass = function (
       identifier, duration, opt_vendorPrefixes) {
     var duration = printf('%sms', [duration]);
     var classChunks = [printf('.%s {', [identifier])];
     _.each(opt_vendorPrefixes, function (prefix) {
-      // TODO: This will break if there is no `prefix`. Refactor this into a
-      // helper.
-      classChunks.push(printf('  %sanimation-duration: %s;',
-          [prefix + '-', duration]));
-      classChunks.push(printf('  %sanimation-name: %s;',
-          [prefix + '-', identifier + IDENTIFIER_SUFFIX]));
+      classChunks = classChunks.concat(
+          getClassAttributes(identifier, duration, prefix));
     });
     classChunks.push('}');
     return classChunks.join('\n');
@@ -76,11 +82,11 @@ define(['exports'], function (cssGen) {
   cssGen.generateCSS3ClassAndKeyframes = function (
       identifier, points, duration, opt_vendorPrefixes) {
     var stringChunks = [cssGen.generateAnimationClass(
-        identifier, duration, opt_vendorPrefixes) + '\n'];
+        identifier, duration, opt_vendorPrefixes)];
 
     opt_vendorPrefixes = opt_vendorPrefixes || [''];
     _.each(opt_vendorPrefixes, function (prefix) {
-      stringChunks.push(cssGen.generateCSS3Keyframes(
+      stringChunks.push('\n' + cssGen.generateCSS3Keyframes(
           identifier, points, prefix));
     });
 
