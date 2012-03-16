@@ -143,6 +143,19 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     ,'$trigger': app.view.controlPaneTabs.$el.find('[data-target="css-output"]')
   });
 
+  app.view.cssNameField = new autoUpdateTextfield.view({
+
+    'app': app
+
+    ,'$el': $('#css-name')
+
+    ,'onKeyup': function (val) {
+      this.app.config.className = val;
+      this.app.view.cssOutput.renderCSS();
+    }
+
+  });
+
   app.view.htmlInput = new htmlInput.view({
     'app': app
     ,'$el': $('#html-input textarea')

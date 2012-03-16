@@ -328,6 +328,10 @@ canvas {
     margin-right: 0;
   }
 
+  .tabs li a {
+    padding: 0px 4px;
+  }
+
 .tabs-contents {
   padding: 6px 12px 12px;
 }
