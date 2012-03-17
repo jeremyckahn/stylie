@@ -1,28 +1,41 @@
-require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
+require([
+    // Misc
+    'src/utils', 'src/css-gen',
+
+    // Views
+    'src/ui/checkbox', 'src/ui/button',
     'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field',
     'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs',
-    'src/ui/css-output', 'src/ui/html-input'],
-    function (utils, cssGen, checkbox, button,
+    'src/ui/css-output', 'src/ui/html-input',
+
+    // Models
+    'src/model/keyframe'
+    ], function (utils, cssGen,
+
+      checkbox, button,
       select, autoUpdateTextfield, easeField,
       crosshair, canvas, pane, tabs,
-      cssOutput, htmlInput) {
+      cssOutput, htmlInput,
+
+      keyframe) {
 
   var $win = $(window);
   var app = {
     'config': {
-        'activeClasses': {
-          'moz': true
-          ,'webkit': true
-          ,'w3': true
-        }
+        'activeClasses': {}
       }
     ,'const': {}
+    ,'events': {}
     ,'util': {}
     ,'view': {}
   };
 
   app.const.PRERENDER_GRANULARITY = 150;
   app.const.RENDER_GRANULARITY = 100;
+  app.config.activeClasses.moz = true;
+  app.config.activeClasses.webkit = true;
+  app.config.activeClasses.w3 = true;
+  app.events.KEYFRAME_UPDATED = 'keyframeUpdated';
   utils.init(app);
 
   Tweenable.prototype.formula.customEase1 = function (x) {
@@ -98,6 +111,7 @@ require(['src/utils', 'src/css-gen', 'src/ui/checkbox', 'src/ui/button',
     'left': $win.width() / 2
     ,'top': ($win.height() / 2) - (crosshairTo.height() / 2)
   });
+
   app.config.crosshairs = {
     'from': new crosshair.view({
         'app': app

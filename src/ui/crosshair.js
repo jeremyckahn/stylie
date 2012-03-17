@@ -1,4 +1,4 @@
-define(['exports'], function (crosshair) {
+define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
 
   crosshair.view = Backbone.View.extend({
 
@@ -13,6 +13,9 @@ define(['exports'], function (crosshair) {
         ,'drag': _.bind(this.onDrag, this)
         ,'stop': _.bind(this.onDragStop, this)
       });
+
+      this.model = new keyframe.model();
+      this.updateModel();
     }
 
     ,'onDrag': function (evt, ui) {
@@ -29,7 +32,16 @@ define(['exports'], function (crosshair) {
 
     ,'onDragStop': function (evt, ui) {
       this.onDrag.apply(this, arguments);
+      this.updateModel();
       this.app.view.cssOutputView.renderCSS();
+    }
+
+    ,'updateModel': function () {
+      this.model.set({
+        'left': this.$el.css('left')
+        ,'top': this.$el.css('top')
+      });
+      publish(this.app.events.KEYFRAME_UPDATED);
     }
 
     ,'getCenter': function () {
