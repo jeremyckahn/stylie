@@ -48,6 +48,7 @@ define(['exports'], function (cssGen) {
       identifier, duration, opt_vendorPrefixes) {
     var duration = printf('%sms', [duration]);
     var classChunks = [printf('.%s {', [identifier])];
+    classChunks.push('  position: absolute;');
     _.each(opt_vendorPrefixes, function (prefix) {
       classChunks = classChunks.concat(
           getClassAttributes(identifier, duration, prefix));
