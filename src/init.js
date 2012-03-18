@@ -126,7 +126,9 @@ require([
   };
 
   app.view.keyframes = new keyframes.view({
-    '$el': $('#keyframe-controls .controls')
+    'app': app
+
+    ,'$el': $('#keyframe-controls .controls')
 
     ,'models': [app.config.crosshairs.from.model,
         app.config.crosshairs.to.model]

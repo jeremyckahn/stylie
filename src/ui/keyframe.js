@@ -20,9 +20,11 @@ define(['exports'], function (keyframe) {
 
     ,'initialize': function (opts) {
       _.extend(this, opts);
+      this.app = this.owner.app;
       this.$el = $(this.KEYFRAME_TEMPLATE);
       this.initDOMReferences();
       this.render();
+      subscribe(this.app.events.KEYFRAME_UPDATED, _.bind(this.render, this));
     }
 
     ,'initDOMReferences': function () {

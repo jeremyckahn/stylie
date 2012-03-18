@@ -21,7 +21,8 @@ define(['src/collection/keyframes', 'src/ui/keyframe'],
 
     ,'initKeyframeView': function (model) {
       var keyframeView = new keyframe.view({
-        'model': model
+        'owner': this
+        ,'model': model
       });
 
       this.keyframeViews[keyframeView.cid] = keyframeView;
