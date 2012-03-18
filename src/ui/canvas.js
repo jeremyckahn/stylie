@@ -60,6 +60,8 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
     }
 
     ,'setDOMKeyframePoints': function (DOMActor) {
+      // TODO: This should be getting positonal data from the Models, not the
+      // Views.
       DOMActor.keyframe(0,
             _.extend(this.app.config.crosshairs.from.getCenter(), {
           'color': '#777'

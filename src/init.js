@@ -219,9 +219,6 @@ require([
     ,'$el': $('#html-input textarea')
   });
 
-  subscribe('mainPanel-resize',
-      _.bind(app.view.controlPaneView.onResize, app.view.controlPaneView));
-
   $(window).trigger('resize');
 
 });

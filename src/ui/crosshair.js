@@ -14,9 +14,11 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
         ,'stop': _.bind(this.onDragStop, this)
       });
 
+      // TODO: Setting up the Models should not be done within the View.
       this.model = new keyframe.model();
       this.model.set('percent', this.$el.data('percent'));
       this.updateModel();
+      subscribe(this.app.events.KEYFRAME_UPDATED, _.bind(this.render, this));
     }
 
     ,'onDrag': function (evt, ui) {
@@ -27,14 +29,28 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this.app.kapi
         .canvas_clear()
         .redraw();
-      this.app.util.updatePath();
-      this.app.canvasView.backgroundView.update();
+      this.render();
       this.updateModel();
     }
 
     ,'onDragStop': function (evt, ui) {
       this.onDrag.apply(this, arguments);
       this.app.view.cssOutputView.renderCSS();
+    }
+
+    ,'render': function () {
+      this.$el.css({
+        'left': this.model.get('left') + 'px'
+        ,'top': this.model.get('top') + 'px'
+      });
+
+      // TODO: This should not have to be in a conditional.  The relationship
+      // between the keyframe Models and the Views that render them needs to be
+      // rethought.
+      if (this.app.canvasView) {
+        this.app.util.updatePath();
+        this.app.canvasView.backgroundView.update();
+      }
     }
 
     ,'updateModel': function () {
