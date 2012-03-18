@@ -15,6 +15,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       });
 
       this.model = new keyframe.model();
+      this.model.set('percent', this.$el.data('percent'));
       this.updateModel();
     }
 
@@ -38,8 +39,8 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
 
     ,'updateModel': function () {
       this.model.set({
-        'left': this.$el.css('left')
-        ,'top': this.$el.css('top')
+        'left': this.app.util.pxToNumber(this.$el.css('left'))
+        ,'top': this.app.util.pxToNumber(this.$el.css('top'))
       });
       publish(this.app.events.KEYFRAME_UPDATED);
     }

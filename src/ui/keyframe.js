@@ -32,7 +32,7 @@ define(['exports'], function (keyframe) {
     }
 
     ,'render': function () {
-      this.header.html(this.model.cid);
+      this.header.html(this.model.get('percent') + '%');
       this.inputLeft.val(this.model.get('left'));
       this.inputTop.val(this.model.get('top'));
     }
