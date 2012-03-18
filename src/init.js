@@ -1,23 +1,29 @@
 require([
     // Misc
-    'src/utils', 'src/css-gen',
+    'src/utils', 'src/css-gen'
 
     // Views
-    'src/ui/checkbox', 'src/ui/button',
-    'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field',
-    'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs',
-    'src/ui/css-output', 'src/ui/html-input',
+    ,'src/ui/checkbox', 'src/ui/button'
+    ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
+    ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
+    ,'src/ui/css-output', 'src/ui/html-input'
 
     // Models
-    'src/model/keyframe'
-    ], function (utils, cssGen,
+    ,'src/model/keyframe'
 
-      checkbox, button,
-      select, autoUpdateTextfield, easeField,
-      crosshair, canvas, pane, tabs,
-      cssOutput, htmlInput,
+    // Collections
+    ,'src/collection/keyframes'
 
-      keyframe) {
+    ], function (utils, cssGen
+
+      ,checkbox, button
+      ,select, autoUpdateTextfield, easeField
+      ,crosshair, canvas, pane, tabs
+      ,cssOutput, htmlInput
+
+      ,keyframe
+
+      ,keyframes) {
 
   var $win = $(window);
   var app = {
@@ -28,6 +34,7 @@ require([
     ,'events': {}
     ,'util': {}
     ,'view': {}
+    ,'collection': {}
   };
 
   app.const.PRERENDER_GRANULARITY = 150;
@@ -122,6 +129,11 @@ require([
         ,'$el': crosshairTo
       })
   };
+
+  app.collection.keyframes = new keyframes.collection([
+      app.config.crosshairs.from.model
+      ,app.config.crosshairs.to.model
+    ]);
 
   app.canvasView = new canvas.view({
     'app': app
