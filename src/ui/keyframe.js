@@ -8,7 +8,7 @@ define(['exports', 'src/ui/incrementer-field'],
       ,'$el': $el
 
       ,'onValReenter': _.bind(function (val) {
-        this.model.set($el.data('keyframeattr'), val);
+        this.model.set($el.data('keyframeattr'), +val);
         publish(this.app.events.KEYFRAME_UPDATED);
       }, this)
     });
@@ -37,6 +37,7 @@ define(['exports', 'src/ui/incrementer-field'],
       _.extend(this, opts);
       this.app = this.owner.app;
       this.$el = $(this.KEYFRAME_TEMPLATE);
+      this.model.keyframeView = this;
       this.initDOMReferences();
       this.initIncrementers();
       this.render(true);

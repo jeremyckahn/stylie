@@ -1,16 +1,10 @@
-define(['exports'], function (keyframes) {
+define(['exports', 'src/model/keyframe'], function (keyframes, keyframe) {
   keyframes.collection = Backbone.Collection.extend({
 
-    'initialize': function () {
+    'model': keyframe.model
 
-    }
+    ,'initialize': function () {
 
-    ,'first': function () {
-      return this.at(0);
-    }
-
-    ,'last': function () {
-      return this.at(this.length - 1);
     }
 
   });

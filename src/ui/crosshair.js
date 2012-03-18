@@ -14,9 +14,8 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
         ,'stop': _.bind(this.onDragStop, this)
       });
 
-      // TODO: Setting up the Models should not be done within the View.
-      this.model = new keyframe.model();
-      this.model.set('percent', this.$el.data('percent'));
+      this.model.set('percent', +this.$el.data('percent'));
+      this.model.crosshairView = this;
       this.updateModel();
       subscribe(this.app.events.KEYFRAME_UPDATED, _.bind(this.render, this));
     }
@@ -25,7 +24,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       var pos = this.$el.data('pos');
       var timeToModify = pos === 'from' ? 0 : this.app.config.animationDuration;
       this.app.config.currentActor.modifyKeyframe(
-          timeToModify, this.getCenter());
+          timeToModify, this.model.getCSS());
       this.app.kapi
         .canvas_clear()
         .redraw();
@@ -58,15 +57,6 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
         ,'top': this.app.util.pxToNumber(this.$el.css('top'))
       });
       publish(this.app.events.KEYFRAME_UPDATED);
-    }
-
-    ,'getCenter': function () {
-      var pos = this.$el.position();
-      return {
-        'left': pos.left + 'px'
-        ,'top': pos.top + 'px'
-      };
-
     }
 
   });
