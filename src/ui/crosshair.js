@@ -29,7 +29,6 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this.app.kapi
         .canvas_clear()
         .redraw();
-      this.render();
       this.updateModel();
     }
 
