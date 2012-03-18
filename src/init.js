@@ -6,24 +6,19 @@ require([
     ,'src/ui/checkbox', 'src/ui/button'
     ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
     ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
-    ,'src/ui/css-output', 'src/ui/html-input'
+    ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframes'
 
     // Models
     ,'src/model/keyframe'
-
-    // Collections
-    ,'src/collection/keyframes'
 
     ], function (utils, cssGen
 
       ,checkbox, button
       ,select, autoUpdateTextfield, easeField
       ,crosshair, canvas, pane, tabs
-      ,cssOutput, htmlInput
+      ,cssOutput, htmlInput, keyframes
 
-      ,keyframe
-
-      ,keyframes) {
+      ,keyframe) {
 
   var $win = $(window);
   var app = {
@@ -130,10 +125,12 @@ require([
       })
   };
 
-  app.collection.keyframes = new keyframes.collection([
-      app.config.crosshairs.from.model
-      ,app.config.crosshairs.to.model
-    ]);
+  app.view.keyframes = new keyframes.view({
+    '$el': $('#keyframe-controls .controls')
+
+    ,'models': [app.config.crosshairs.from.model,
+        app.config.crosshairs.to.model]
+  });
 
   app.canvasView = new canvas.view({
     'app': app
