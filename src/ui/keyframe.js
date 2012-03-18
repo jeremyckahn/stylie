@@ -40,7 +40,7 @@ define(['exports', 'src/ui/incrementer-field'],
       this.model.keyframeView = this;
       this.initDOMReferences();
       this.initIncrementers();
-      this.render(true);
+      this.render();
       subscribe(this.app.events.KEYFRAME_UPDATED, _.bind(this.render, this));
     }
 
@@ -58,12 +58,12 @@ define(['exports', 'src/ui/incrementer-field'],
       }, this);
     }
 
-    ,'render': function (force) {
+    ,'render': function () {
       this.header.html(this.model.get('percent') + '%');
-      if (force || this.model.hasChanged('left')) {
+      if (this.model.get('left') !== +this.inputLeft.val()) {
         this.inputLeft.val(this.model.get('left'));
       }
-      if (force || this.model.hasChanged('top')) {
+      if (this.model.get('top') !== +this.inputTop.val()) {
         this.inputTop.val(this.model.get('top'));
       }
     }
