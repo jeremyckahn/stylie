@@ -16,6 +16,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
 
       this.model = new keyframe.model();
       this.model.set('percent', this.$el.data('percent'));
+      this.updateModel();
     }
 
     ,'onDrag': function (evt, ui) {
@@ -33,7 +34,6 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
 
     ,'onDragStop': function (evt, ui) {
       this.onDrag.apply(this, arguments);
-      this.updateModel();
       this.app.view.cssOutputView.renderCSS();
     }
 

@@ -29,6 +29,12 @@ define(['src/collection/keyframes', 'src/ui/keyframe'],
       return keyframeView;
     }
 
+    ,'render': function () {
+      _.each(this.keyframeViews, function (view) {
+        view.render();
+      });
+    }
+
   });
 
   return keyframes;
