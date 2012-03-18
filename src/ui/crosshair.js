@@ -1,4 +1,4 @@
-define(['exports'], function (crosshair) {
+define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
 
   crosshair.view = Backbone.View.extend({
 
@@ -13,6 +13,10 @@ define(['exports'], function (crosshair) {
         ,'drag': _.bind(this.onDrag, this)
         ,'stop': _.bind(this.onDragStop, this)
       });
+
+      this.model = new keyframe.model();
+      this.model.set('percent', this.$el.data('percent'));
+      this.updateModel();
     }
 
     ,'onDrag': function (evt, ui) {
@@ -25,11 +29,20 @@ define(['exports'], function (crosshair) {
         .redraw();
       this.app.util.updatePath();
       this.app.canvasView.backgroundView.update();
+      this.updateModel();
     }
 
     ,'onDragStop': function (evt, ui) {
       this.onDrag.apply(this, arguments);
       this.app.view.cssOutputView.renderCSS();
+    }
+
+    ,'updateModel': function () {
+      this.model.set({
+        'left': this.app.util.pxToNumber(this.$el.css('left'))
+        ,'top': this.app.util.pxToNumber(this.$el.css('top'))
+      });
+      publish(this.app.events.KEYFRAME_UPDATED);
     }
 
     ,'getCenter': function () {

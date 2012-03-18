@@ -90,6 +90,11 @@ h2 {
   margin-left: 10px;
 }
 
+h3 {
+  font-size: 0.9em;
+  margin: 6px 0;
+}
+
 p {
   font-size: 1.2em;
 }
@@ -239,6 +244,14 @@ canvas {
     width: 270px;
   }
 
+  #control-pane input.third-width {
+    width: 90px;
+  }
+
+  #control-pane input.quarter-width {
+    width: 60px;
+  }
+
 #tween-controls {
   float: left;
   padding: 0;
@@ -249,6 +262,14 @@ canvas {
 
   #tween-controls input.error {
     background: #f55;
+  }
+
+#keyframe-controls {
+
+}
+
+  #keyframe-controls hr {
+    margin-top: 12px;
   }
 
 #rekapi-canvas {
@@ -312,6 +333,7 @@ canvas {
   border-bottom: solid 1px #bbb;
   height: 30px;
   line-height: 30px;
+  min-width: 300px;
   overflow: visible;
   padding-top: 3px;
 }
