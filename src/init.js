@@ -7,6 +7,7 @@ require([
     ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
     ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
     ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframes'
+    ,'src/ui/incrementer-field'
 
     // Models
     ,'src/model/keyframe'
@@ -17,6 +18,7 @@ require([
       ,select, autoUpdateTextfield, easeField
       ,crosshair, canvas, pane, tabs
       ,cssOutput, htmlInput, keyframes
+      ,incrementerField
 
       ,keyframe) {
 
@@ -60,13 +62,10 @@ require([
     })
   };
 
-  app.view.durationFieldView = new autoUpdateTextfield.view({
-
+  app.view.durationFieldView = new incrementerField.view({
     'app': app
 
     ,'$el': $('#duration')
-
-    ,'ARROW_KEY_INCREMENT': 10
 
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
@@ -74,21 +73,8 @@ require([
         this.app.util.moveLastKeyframe(this.app.config.currentActor, validVal);
       }
     }
-
-    ,'tweakVal': function (tweakAmount) {
-      this.$el.val(parseInt(app.config.animationDuration, 10) + tweakAmount);
-      this.$el.trigger('keyup');
-    }
-
-    ,'onArrowUp': function () {
-      this.tweakVal(this.ARROW_KEY_INCREMENT);
-    }
-
-    ,'onArrowDown': function () {
-      this.tweakVal(-this.ARROW_KEY_INCREMENT);
-    }
-
   });
+
 
   app.config.animationDuration = app.config.initialDuration =
       app.view.durationFieldView.$el.val();
