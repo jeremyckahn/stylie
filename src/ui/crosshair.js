@@ -21,13 +21,6 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
     }
 
     ,'onDrag': function (evt, ui) {
-      var pos = this.$el.data('pos');
-      var timeToModify = pos === 'from' ? 0 : this.app.config.animationDuration;
-      this.app.config.currentActor.modifyKeyframe(
-          timeToModify, this.model.getCSS());
-      this.app.kapi
-        .canvas_clear()
-        .redraw();
       this.updateModel();
     }
 
@@ -60,5 +53,4 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
     }
 
   });
-
 });

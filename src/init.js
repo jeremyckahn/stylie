@@ -96,7 +96,7 @@ require([
     app.collection.keyframes.add({
       'left': i ? $win.width() - ($win.width() / (i + 1)) : 40
       ,'top': ($win.height() / 2) - ($el.height() / 2)
-    });
+    }, { 'app': app });
     $el.css(app.collection.keyframes.last().getAttrs());
     new crosshair.view({
         'app': app
