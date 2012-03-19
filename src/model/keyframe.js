@@ -21,6 +21,14 @@ define(['exports'], function (keyframe) {
     }
 
     ,'updateActor': function () {
+      // TODO: This should not have to be in a conditional.  The relationship
+      // between the keyframe Models and the Views that render them needs to be
+      // rethought.
+      if (this.app.canvasView) {
+        this.app.util.updatePath();
+        this.app.canvasView.backgroundView.update();
+      }
+
       var timeToModify = this.get('percent') === 0 ? 0
           : this.app.config.animationDuration;
       if (this.app.config.currentActor) {

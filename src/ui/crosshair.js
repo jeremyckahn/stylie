@@ -17,7 +17,6 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this.model.set('percent', +this.$el.data('percent'));
       this.model.crosshairView = this;
       this.updateModel();
-      subscribe(this.app.events.KEYFRAME_UPDATED, _.bind(this.render, this));
     }
 
     ,'onDrag': function (evt, ui) {
@@ -34,22 +33,16 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
         'left': this.model.get('left') + 'px'
         ,'top': this.model.get('top') + 'px'
       });
-
-      // TODO: This should not have to be in a conditional.  The relationship
-      // between the keyframe Models and the Views that render them needs to be
-      // rethought.
-      if (this.app.canvasView) {
-        this.app.util.updatePath();
-        this.app.canvasView.backgroundView.update();
-      }
     }
 
     ,'updateModel': function () {
+      var pxTo = this.app.util.pxToNumber;
       this.model.set({
-        'left': this.app.util.pxToNumber(this.$el.css('left'))
-        ,'top': this.app.util.pxToNumber(this.$el.css('top'))
+        'left': pxTo(this.$el.css('left'))
+        ,'top': pxTo(this.$el.css('top'))
       });
       publish(this.app.events.KEYFRAME_UPDATED);
+      this.app.collection.keyframes.updateModelKeyframeViews();
     }
 
   });
