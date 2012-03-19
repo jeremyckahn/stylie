@@ -6,8 +6,6 @@ define(['src/collection/keyframes', 'src/ui/keyframe'],
 
     ,'initialize': function (opts) {
       _.extend(this, opts);
-      this.collection = new keyframes.collection(opts.models);
-      delete this.models;
       this.keyframeViews = {};
       this.initKeyframeViews();
     }

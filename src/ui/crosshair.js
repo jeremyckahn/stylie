@@ -14,27 +14,34 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
         ,'stop': _.bind(this.onDragStop, this)
       });
 
-      this.model = new keyframe.model();
-      this.model.set('percent', this.$el.data('percent'));
+      this.model.set('percent', +this.$el.data('percent'));
+      this.model.crosshairView = this;
       this.updateModel();
+      subscribe(this.app.events.KEYFRAME_UPDATED, _.bind(this.render, this));
     }
 
     ,'onDrag': function (evt, ui) {
-      var pos = this.$el.data('pos');
-      var timeToModify = pos === 'from' ? 0 : this.app.config.animationDuration;
-      this.app.config.currentActor.modifyKeyframe(
-          timeToModify, this.getCenter());
-      this.app.kapi
-        .canvas_clear()
-        .redraw();
-      this.app.util.updatePath();
-      this.app.canvasView.backgroundView.update();
       this.updateModel();
     }
 
     ,'onDragStop': function (evt, ui) {
       this.onDrag.apply(this, arguments);
       this.app.view.cssOutputView.renderCSS();
+    }
+
+    ,'render': function () {
+      this.$el.css({
+        'left': this.model.get('left') + 'px'
+        ,'top': this.model.get('top') + 'px'
+      });
+
+      // TODO: This should not have to be in a conditional.  The relationship
+      // between the keyframe Models and the Views that render them needs to be
+      // rethought.
+      if (this.app.canvasView) {
+        this.app.util.updatePath();
+        this.app.canvasView.backgroundView.update();
+      }
     }
 
     ,'updateModel': function () {
@@ -45,15 +52,5 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       publish(this.app.events.KEYFRAME_UPDATED);
     }
 
-    ,'getCenter': function () {
-      var pos = this.$el.position();
-      return {
-        'left': pos.left + 'px'
-        ,'top': pos.top + 'px'
-      };
-
-    }
-
   });
-
 });

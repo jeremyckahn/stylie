@@ -31,13 +31,10 @@ define(['exports', 'src/css-gen'], function (cssOutput, cssGen) {
     }
 
     ,'renderCSS': function () {
-      var fromCoords = this.app.config.crosshairs.from.getCenter();
-      var toCoords = this.app.config.crosshairs.to.getCenter();
+      var fromCoords = this.app.collection.keyframes.first().getAttrs();
+      var toCoords = this.app.collection.keyframes.last().getAttrs();
       var points = this.app.util.generatePathPoints(
-          this.app.util.pxToNumber(fromCoords.left),
-          this.app.util.pxToNumber(fromCoords.top),
-          this.app.util.pxToNumber(toCoords.left),
-          this.app.util.pxToNumber(toCoords.top),
+          fromCoords.left, fromCoords.top, toCoords.left, toCoords.top,
           this.app.config.selects.x.$el.val(),
           this.app.config.selects.y.$el.val());
       var duration = this.app.view.durationFieldView.$el.val();

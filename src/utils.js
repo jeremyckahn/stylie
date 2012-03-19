@@ -13,15 +13,11 @@ define(function () {
     };
 
     app.util.updatePath = function () {
-      var fromCoords = app.config.crosshairs.from.getCenter();
-      var toCoords = app.config.crosshairs.to.getCenter();
-      app.util.generatePathPrerender(
-          app.util.pxToNumber(fromCoords.left),
-          app.util.pxToNumber(fromCoords.top),
-          app.util.pxToNumber(toCoords.left),
-          app.util.pxToNumber(toCoords.top),
-          app.config.selects.x.$el.val(),
-          app.config.selects.y.$el.val());
+      var fromCoords = app.collection.keyframes.first().getAttrs();
+      var toCoords = app.collection.keyframes.last().getAttrs();
+      app.util.generatePathPrerender(fromCoords.left, fromCoords.top,
+          toCoords.left, toCoords.top,
+          app.config.selects.x.$el.val(), app.config.selects.y.$el.val());
     };
 
     app.util.generatePathPoints = function (x1, y1, x2, y2, easeX, easeY) {

@@ -7,6 +7,7 @@ require([
     ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
     ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
     ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframes'
+    ,'src/ui/incrementer-field'
 
     // Models
     ,'src/model/keyframe'
@@ -17,6 +18,7 @@ require([
       ,select, autoUpdateTextfield, easeField
       ,crosshair, canvas, pane, tabs
       ,cssOutput, htmlInput, keyframes
+      ,incrementerField
 
       ,keyframe) {
 
@@ -60,13 +62,10 @@ require([
     })
   };
 
-  app.view.durationFieldView = new autoUpdateTextfield.view({
-
+  app.view.durationFieldView = new incrementerField.view({
     'app': app
 
     ,'$el': $('#duration')
-
-    ,'ARROW_KEY_INCREMENT': 10
 
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
@@ -74,21 +73,8 @@ require([
         this.app.util.moveLastKeyframe(this.app.config.currentActor, validVal);
       }
     }
-
-    ,'tweakVal': function (tweakAmount) {
-      this.$el.val(parseInt(app.config.animationDuration, 10) + tweakAmount);
-      this.$el.trigger('keyup');
-    }
-
-    ,'onArrowUp': function () {
-      this.tweakVal(this.ARROW_KEY_INCREMENT);
-    }
-
-    ,'onArrowDown': function () {
-      this.tweakVal(-this.ARROW_KEY_INCREMENT);
-    }
-
   });
+
 
   app.config.animationDuration = app.config.initialDuration =
       app.view.durationFieldView.$el.val();
@@ -103,35 +89,26 @@ require([
     app.config.easeFields.push(easeFieldInst);
   });
 
-  var crosshairFrom = $('.crosshair.from');
-  crosshairFrom.css({
-    'left': 20
-    ,'top': ($win.height() / 2) - (crosshairFrom.height() / 2)
-  });
-  var crosshairTo = $('.crosshair.to');
-  crosshairTo.css({
-    'left': $win.width() / 2
-    ,'top': ($win.height() / 2) - (crosshairTo.height() / 2)
-  });
+  app.collection.keyframes = new keyframes.collection();
 
-  app.config.crosshairs = {
-    'from': new crosshair.view({
+  $('.crosshair').each(function (i, el) {
+    var $el = $(el);
+    app.collection.keyframes.add({
+      'left': i ? $win.width() - ($win.width() / (i + 1)) : 40
+      ,'top': ($win.height() / 2) - ($el.height() / 2)
+    }, { 'app': app });
+    $el.css(app.collection.keyframes.last().getAttrs());
+    new crosshair.view({
         'app': app
-        ,'$el': crosshairFrom
-      })
-    ,'to': new crosshair.view({
-        'app': app
-        ,'$el': crosshairTo
-      })
-  };
+        ,'$el': $el
+        ,'model': app.collection.keyframes.last()
+      });
+  });
 
   app.view.keyframes = new keyframes.view({
     'app': app
-
     ,'$el': $('#keyframe-controls .controls')
-
-    ,'models': [app.config.crosshairs.from.model,
-        app.config.crosshairs.to.model]
+    ,'collection': app.collection.keyframes
   });
 
   app.canvasView = new canvas.view({
@@ -232,9 +209,6 @@ require([
     'app': app
     ,'$el': $('#html-input textarea')
   });
-
-  subscribe('mainPanel-resize',
-      _.bind(app.view.controlPaneView.onResize, app.view.controlPaneView));
 
   $(window).trigger('resize');
 
