@@ -42,13 +42,15 @@ require([
   app.events.KEYFRAME_UPDATED = 'keyframeUpdated';
   utils.init(app);
 
-  Tweenable.prototype.formula.customEase1 = function (x) {
-    return Math.pow(x, 4);
-  };
+  // Doing horrifying hacks here to prevent the variable names from getting
+  // mangled by the compiler.
+  var customEase1FnString = ['Tweenable.prototype.formula.customEase1 = ',
+      'function (x) {return Math.pow(x, 4);}'].join('');
+  eval(customEase1FnString);
 
-  Tweenable.prototype.formula.customEase2 = function (x) {
-    return Math.pow(x, 0.25);
-  };
+  var customEase2FnString = ['Tweenable.prototype.formula.customEase2 = ',
+    'function (x) {return Math.pow(x, 0.25);}'].join('');
+  eval(customEase2FnString);
 
   app.config.selects = {
     'x': new select.view({
