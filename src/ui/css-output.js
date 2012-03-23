@@ -33,7 +33,7 @@ define(['exports', 'src/css-gen'], function (cssOutput, cssGen) {
     ,'renderCSS': function () {
       var fromCoords = this.app.collection.keyframes.first().getAttrs();
       var toCoords = this.app.collection.keyframes.last().getAttrs();
-      var points = this.app.util.generatePathPoints(
+      var points = this.app.canvasView.backgroundView.generatePathPoints(
           fromCoords.left, fromCoords.top, toCoords.left, toCoords.top,
           this.app.config.selects.x.$el.val(),
           this.app.config.selects.y.$el.val());
