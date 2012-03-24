@@ -11,15 +11,6 @@ define(['exports'], function (background) {
       });
     }
 
-    ,'update': function () {
-      if (this.app.config.prerenderedPath) {
-        this.$el[0].width = this.$el.width();
-        if (this.app.config.isPathShowing) {
-          this.context.drawImage(this.app.config.prerenderedPath, 0, 0);
-        }
-      }
-    }
-
     ,'resize': function (dims) {
       _.each(['height', 'width'], function (dim) {
         if (dim in dims) {
@@ -81,12 +72,19 @@ define(['exports'], function (background) {
       ctx.closePath();
     }
 
-    ,'updatePath': function () {
+    ,'update': function () {
       var fromCoords = this.app.collection.keyframes.first().getAttrs();
       var toCoords = this.app.collection.keyframes.last().getAttrs();
       this.generatePathPrerender(fromCoords.left, fromCoords.top,
           toCoords.left, toCoords.top, this.app.config.selects.x.$el.val(),
           this.app.config.selects.y.$el.val());
+
+      if (this.app.config.prerenderedPath) {
+        this.$el[0].width = this.$el.width();
+        if (this.app.config.isPathShowing) {
+          this.context.drawImage(this.app.config.prerenderedPath, 0, 0);
+        }
+      }
     }
 
   });

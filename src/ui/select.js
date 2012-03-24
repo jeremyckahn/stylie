@@ -23,7 +23,6 @@ define(['exports'], function (select) {
       easingObj[this.$el.data('axis')] = this.$el.val();
       this.app.config.currentActor.modifyKeyframe(
           this.app.config.animationDuration, {}, easingObj)
-      this.app.canvasView.backgroundView.updatePath();
       this.app.canvasView.backgroundView.update();
       this.app.kapi
         .canvas_clear()
