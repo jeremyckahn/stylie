@@ -25,7 +25,6 @@ define(['exports'], function (keyframe) {
       // between the keyframe Models and the Views that render them needs to be
       // rethought.
       if (this.app.canvasView) {
-        this.app.canvasView.backgroundView.updatePath();
         this.app.canvasView.backgroundView.update();
       }
 
