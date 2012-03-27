@@ -10,6 +10,7 @@ define(['exports', 'src/ui/incrementer-field'],
       ,'onValReenter': _.bind(function (val) {
         this.model.set($el.data('keyframeattr'), +val);
         publish(this.app.events.KEYFRAME_UPDATED);
+        this.app.collection.keyframes.updateModelCrosshairViews();
       }, this)
     });
   }
@@ -41,7 +42,6 @@ define(['exports', 'src/ui/incrementer-field'],
       this.initDOMReferences();
       this.initIncrementers();
       this.render();
-      subscribe(this.app.events.KEYFRAME_UPDATED, _.bind(this.render, this));
     }
 
     ,'initDOMReferences': function () {

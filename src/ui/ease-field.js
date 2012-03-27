@@ -25,7 +25,7 @@ define(['exports', './auto-update-textfield'],
             + ' = function (x) {return ' + val + '}');
         this.$el.data('lastvalidfn', val);
         this.$el.removeClass('error');
-        this.app.util.updatePath();
+        this.app.canvasView.backgroundView.update();
       } catch (ex) {
         eval('Tweenable.prototype.formula.' + easename
             + ' = function (x) {return ' + lastValid + '}');

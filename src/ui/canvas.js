@@ -48,7 +48,6 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
 
     ,'initRekapiControls': function () {
       this.app.kapi.controls = new RekapiScrubber(this.app.kapi);
-      this.app.util.updatePath();
     }
 
     ,'getDOMActor': function () {
