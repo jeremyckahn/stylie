@@ -29,11 +29,11 @@ define(['exports'], function (pane) {
         .css({
           'left': $win.width() - this.$el.outerWidth(true)
         })
-        .draggable({
-          'containment': 'parent'
-          ,'handle': this.$handle
-          ,'stop': _.bind(this.onDragStop, this)
-        });
+        .dragon({
+          'within': this.$el.parent()
+          ,'handle': '.pane-handle'
+          ,'onDragEnd': _.bind(this.onDragStop, this)
+        })
       this.oldSize = this.getSize();
     }
 
