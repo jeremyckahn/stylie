@@ -2,16 +2,14 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
 
   crosshair.view = Backbone.View.extend({
 
-    // $.fn.draggable events don't propagate, so event delegation doesn't work.
-    // Drag event handlers must be bound in `initialize`.
     'events': {}
 
     ,'initialize': function (opts) {
       _.extend(this, opts);
-      this.$el.draggable({
-        'containment': 'parent'
-        ,'drag': _.bind(this.onDrag, this)
-        ,'stop': _.bind(this.onDragStop, this)
+      this.$el.dragon({
+        'within': this.$el.parent()
+        ,'onDrag': _.bind(this.onDrag, this)
+        ,'onDragStop': _.bind(this.onDragStop, this)
       });
 
       this.model.set('percent', +this.$el.data('percent'));
