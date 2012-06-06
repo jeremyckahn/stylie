@@ -8,8 +8,8 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       _.extend(this, opts);
       this.$el.dragon({
         'within': this.$el.parent()
-        ,'onDrag': _.bind(this.onDrag, this)
-        ,'onDragStop': _.bind(this.onDragStop, this)
+        ,'drag': _.bind(this.drag, this)
+        ,'dragStop': _.bind(this.dragStop, this)
       });
 
       this.model.set('percent', +this.$el.data('percent'));
@@ -17,11 +17,11 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this.updateModel();
     }
 
-    ,'onDrag': function (evt, ui) {
+    ,'drag': function (evt, ui) {
       this.updateModel();
     }
 
-    ,'onDragStop': function (evt, ui) {
+    ,'dragStop': function (evt, ui) {
       this.onDrag.apply(this, arguments);
       this.app.view.cssOutputView.renderCSS();
     }

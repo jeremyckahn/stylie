@@ -79,7 +79,7 @@ require([
 
 
   app.config.animationDuration = app.config.initialDuration =
-      app.view.durationFieldView.$el.val();
+      +app.view.durationFieldView.$el.val();
 
   app.config.easeFields = [];
   $('.ease').each(function (i, el) {

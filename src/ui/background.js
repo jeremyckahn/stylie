@@ -49,8 +49,8 @@ define(['exports'], function (background) {
 
     ,'generatePathPrerender': function (x1, y1, x2, y2, easeX, easeY) {
       this.app.config.prerenderedPath = document.createElement('canvas');
-      this.app.config.prerenderedPath.width = this.app.kapi.canvas_width();
-      this.app.config.prerenderedPath.height = this.app.kapi.canvas_height();
+      this.app.config.prerenderedPath.width = this.app.canvasView.$canvasBG.width();
+      this.app.config.prerenderedPath.height = this.app.canvasView.$canvasBG.height();
       var ctx = this.app.config.prerenderedPath.ctx =
           this.app.config.prerenderedPath.getContext('2d');
       var points = this.generatePathPoints.apply(this, arguments);

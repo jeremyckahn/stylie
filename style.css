@@ -280,6 +280,7 @@ canvas {
 }
 
   #rekapi-canvas .rekapi-actor {
+    position: absolute;
   }
 
 .pane {
