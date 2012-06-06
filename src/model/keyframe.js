@@ -33,7 +33,6 @@ define(['exports'], function (keyframe) {
       if (this.app.config.currentActor) {
         this.app.config.currentActor.modifyKeyframe(timeToModify, this.getCSS());
         this.app.kapi
-          .canvas_clear()
           .redraw();
       }
     }

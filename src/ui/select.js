@@ -24,9 +24,7 @@ define(['exports'], function (select) {
       this.app.config.currentActor.modifyKeyframe(
           this.app.config.animationDuration, {}, easingObj)
       this.app.canvasView.backgroundView.update();
-      this.app.kapi
-        .canvas_clear()
-        .redraw();
+      this.app.kapi.redraw();
     }
 
   });

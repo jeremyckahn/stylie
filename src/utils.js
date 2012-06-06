@@ -13,6 +13,7 @@ define(function () {
     };
 
     app.util.moveLastKeyframe = function (actor, toMillisecond) {
+      var toMillisecond = +toMillisecond;
       var trackNames = actor.getTrackNames();
       var lastFrameIndex = actor.getTrackLength(trackNames[0]) - 1;
 
