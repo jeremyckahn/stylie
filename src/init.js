@@ -66,9 +66,7 @@ require([
 
   app.view.durationFieldView = new incrementerField.view({
     'app': app
-
     ,'$el': $('#duration')
-
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
         var validVal = Math.abs(val);
@@ -123,13 +121,9 @@ require([
   app.kapi.play();
 
   app.view.showPathView = new checkbox.view({
-
     'app': app
-
     ,'$el': $('#show-path')
-
     ,'preventInitialHandlerCall': true
-
     ,'onChange': function (evt, checked) {
       this.app.config.isPathShowing = !!checked;
       this.app.kapi.redraw();
@@ -156,11 +150,8 @@ require([
   });
 
   app.view.cssNameFieldView = new autoUpdateTextfield.view({
-
     'app': app
-
     ,'$el': $('#css-name')
-
     ,'onKeyup': function (val) {
       this.app.config.className = val;
       this.app.view.cssOutputView.renderCSS();
@@ -169,24 +160,17 @@ require([
   });
 
   app.view.mozCheckboxView = new checkbox.view({
-
     'app': app
-
     ,'$el': $('#moz-toggle')
-
     ,'onChange': function (evt, checked) {
       this.app.config.activeClasses.moz = checked;
       this.app.view.cssOutputView.renderCSS();
     }
-
   });
 
   app.view.webkitCheckboxView = new checkbox.view({
-
     'app': app
-
     ,'$el': $('#webkit-toggle')
-
     ,'onChange': function (evt, checked) {
       this.app.config.activeClasses.webkit = checked;
       this.app.view.cssOutputView.renderCSS();
@@ -195,11 +179,8 @@ require([
   });
 
   app.view.w3CheckboxView = new checkbox.view({
-
     'app': app
-
     ,'$el': $('#w3-toggle')
-
     ,'onChange': function (evt, checked) {
       this.app.config.activeClasses.w3 = checked;
       this.app.view.cssOutputView.renderCSS();
