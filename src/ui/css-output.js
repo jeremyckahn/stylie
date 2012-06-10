@@ -31,13 +31,6 @@ define(['exports'], function (cssOutput) {
     }
 
     ,'renderCSS': function () {
-      var fromCoords = this.app.collection.keyframes.first().getAttrs();
-      var toCoords = this.app.collection.keyframes.last().getAttrs();
-      var points = this.app.canvasView.backgroundView.generatePathPoints(
-          fromCoords.left, fromCoords.top, toCoords.left, toCoords.top,
-          this.app.config.selects.x.$el.val(),
-          this.app.config.selects.y.$el.val());
-      var duration = this.app.view.durationFieldView.$el.val();
       var cssOutput = this.app.kapi.toCSS({
         'vendors': getPrefixList(this.app)
         ,'name': this.app.view.cssNameFieldView.$el.val()
