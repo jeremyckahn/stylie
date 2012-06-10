@@ -19,11 +19,11 @@ define(function () {
 
       _.each(trackNames, function (trackName) {
         actor.modifyKeyframeProperty(trackName, lastFrameIndex, {
-              'millisecond': toMillisecond
-            });
+            'millisecond': toMillisecond
+          });
       });
 
-      actor.kapi.updateInternalState();
+      actor.kapi._recalculateAnimationLength();
       app.config.animationDuration = toMillisecond;
     };
 

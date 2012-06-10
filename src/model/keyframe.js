@@ -3,7 +3,7 @@ define(['exports'], function (keyframe) {
 
     'initialize': function (attrs, opts) {
       _.extend(this, opts);
-      subscribe(this.app.events.KEYFRAME_UPDATED,
+      subscribe(this.app.const.KEYFRAME_UPDATED,
           _.bind(this.updateActor, this));
     }
 
@@ -32,8 +32,7 @@ define(['exports'], function (keyframe) {
           : this.app.config.animationDuration;
       if (this.app.config.currentActor) {
         this.app.config.currentActor.modifyKeyframe(timeToModify, this.getCSS());
-        this.app.kapi
-          .redraw();
+        this.app.kapi.redraw();
       }
     }
 

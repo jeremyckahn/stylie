@@ -9,7 +9,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this.$el.dragon({
         'within': this.$el.parent()
         ,'drag': _.bind(this.drag, this)
-        ,'dragStop': _.bind(this.dragStop, this)
+        ,'dragEnd': _.bind(this.dragEnd, this)
       });
 
       this.model.set('percent', +this.$el.data('percent'));
@@ -21,9 +21,10 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this.updateModel();
     }
 
-    ,'dragStop': function (evt, ui) {
-      this.onDrag.apply(this, arguments);
+    ,'dragEnd': function (evt, ui) {
+      this.drag.apply(this, arguments);
       this.app.view.cssOutputView.renderCSS();
+      publish(this.app.const.UPDATE_CSS_OUTPUT);
     }
 
     ,'render': function () {
@@ -39,7 +40,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
         'left': pxTo(this.$el.css('left'))
         ,'top': pxTo(this.$el.css('top'))
       });
-      publish(this.app.events.KEYFRAME_UPDATED);
+      publish(this.app.const.KEYFRAME_UPDATED);
       this.app.collection.keyframes.updateModelKeyframeViews();
     }
 
