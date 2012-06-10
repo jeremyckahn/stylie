@@ -1,6 +1,6 @@
 require([
     // Misc
-    'src/utils', 'src/css-gen'
+    'src/utils'
 
     // Views
     ,'src/ui/checkbox', 'src/ui/button'
@@ -12,7 +12,7 @@ require([
     // Models
     ,'src/model/keyframe'
 
-    ], function (utils, cssGen
+    ], function (utils
 
       ,checkbox, button
       ,select, autoUpdateTextfield, easeField
