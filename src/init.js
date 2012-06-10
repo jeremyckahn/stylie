@@ -156,9 +156,9 @@ require([
         .find('[data-target="css-output"]')
   });
 
-  subscribe(app.const.UPDATE_CSS_OUTPUT, _.bind(function () {
-    this.app.view.cssOutputView.renderCSS();
-  }, this));
+  subscribe(app.const.UPDATE_CSS_OUTPUT, function () {
+    app.view.cssOutputView.renderCSS();
+  });
 
   app.view.cssNameFieldView = new autoUpdateTextfield.view({
     'app': app

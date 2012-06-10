@@ -32,8 +32,6 @@ define(['exports'], function (keyframe) {
           : this.app.config.animationDuration;
       if (this.app.config.currentActor) {
         this.app.config.currentActor.modifyKeyframe(timeToModify, this.getCSS());
-        this.app.kapi
-          .redraw();
       }
     }
 
