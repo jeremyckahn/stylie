@@ -1,9 +1,9 @@
-define(['exports', 'src/css-gen'], function (cssOutput, cssGen) {
+define(['exports'], function (cssOutput) {
 
   var checkboxToVendorMap = {
-    'moz': '-moz'
-    ,'webkit': '-webkit'
-    ,'w3': ''
+    'moz': 'mozilla'
+    ,'webkit': 'webkit'
+    ,'w3': 'w3'
   };
 
   function getPrefixList (app) {
@@ -38,9 +38,10 @@ define(['exports', 'src/css-gen'], function (cssOutput, cssGen) {
           this.app.config.selects.x.$el.val(),
           this.app.config.selects.y.$el.val());
       var duration = this.app.view.durationFieldView.$el.val();
-      var cssOutput = cssGen.generateCSS3ClassAndKeyframes(
-          this.app.view.cssNameFieldView.$el.val(), points, duration,
-          getPrefixList(this.app));
+      var cssOutput = this.app.kapi.toCSS({
+        'vendors': getPrefixList(this.app)
+        ,'name': this.app.view.cssNameFieldView.$el.val()
+      });
       this.$el.val(cssOutput);
     }
 
