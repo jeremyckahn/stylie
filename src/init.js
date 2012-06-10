@@ -34,13 +34,20 @@ require([
     ,'collection': {}
   };
 
+
+  // CONSTANTS
   app.const.PRERENDER_GRANULARITY = 150;
   app.const.RENDER_GRANULARITY = 100;
+  app.const.KEYFRAME_UPDATED = 'keyframeUpdated';
+  app.const.UPDATE_CSS_OUTPUT = 'updateCSSOutput';
+
+
+  // CONFIG
   app.config.activeClasses.moz = true;
   app.config.activeClasses.webkit = true;
   app.config.activeClasses.w3 = true;
-  app.events.KEYFRAME_UPDATED = 'keyframeUpdated';
   utils.init(app);
+
 
   // Doing horrifying hacks here to prevent the variable names from getting
   // mangled by the compiler.
@@ -149,14 +156,17 @@ require([
         .find('[data-target="css-output"]')
   });
 
+  subscribe(app.const.UPDATE_CSS_OUTPUT, _.bind(function () {
+    this.app.view.cssOutputView.renderCSS();
+  }, this));
+
   app.view.cssNameFieldView = new autoUpdateTextfield.view({
     'app': app
     ,'$el': $('#css-name')
     ,'onKeyup': function (val) {
       this.app.config.className = val;
-      this.app.view.cssOutputView.renderCSS();
+      publish(app.const.UPDATE_CSS_OUTPUT);
     }
-
   });
 
   app.view.mozCheckboxView = new checkbox.view({
@@ -164,7 +174,7 @@ require([
     ,'$el': $('#moz-toggle')
     ,'onChange': function (evt, checked) {
       this.app.config.activeClasses.moz = checked;
-      this.app.view.cssOutputView.renderCSS();
+      publish(app.const.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -173,7 +183,7 @@ require([
     ,'$el': $('#webkit-toggle')
     ,'onChange': function (evt, checked) {
       this.app.config.activeClasses.webkit = checked;
-      this.app.view.cssOutputView.renderCSS();
+      publish(app.const.UPDATE_CSS_OUTPUT);
     }
 
   });
@@ -183,7 +193,7 @@ require([
     ,'$el': $('#w3-toggle')
     ,'onChange': function (evt, checked) {
       this.app.config.activeClasses.w3 = checked;
-      this.app.view.cssOutputView.renderCSS();
+      publish(app.const.UPDATE_CSS_OUTPUT);
     }
 
   });

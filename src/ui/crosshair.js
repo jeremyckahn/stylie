@@ -39,7 +39,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
         'left': pxTo(this.$el.css('left'))
         ,'top': pxTo(this.$el.css('top'))
       });
-      publish(this.app.events.KEYFRAME_UPDATED);
+      publish(this.app.const.KEYFRAME_UPDATED);
       this.app.collection.keyframes.updateModelKeyframeViews();
     }
 
