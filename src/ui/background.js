@@ -75,8 +75,8 @@ define(['exports'], function (background) {
     ,'update': function () {
       var fromCoords = this.app.collection.keyframes.first().getAttrs();
       var toCoords = this.app.collection.keyframes.last().getAttrs();
-      this.generatePathPrerender(fromCoords.left, fromCoords.top,
-          toCoords.left, toCoords.top, this.app.config.selects.x.$el.val(),
+      this.generatePathPrerender(fromCoords.x, fromCoords.y,
+          toCoords.x, toCoords.y, this.app.config.selects.x.$el.val(),
           this.app.config.selects.y.$el.val());
 
       if (this.app.config.prerenderedPath) {

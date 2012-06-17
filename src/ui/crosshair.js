@@ -29,19 +29,25 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
 
     ,'render': function () {
       this.$el.css({
-        'left': this.model.get('left') + 'px'
-        ,'top': this.model.get('top') + 'px'
+        'left': this.model.get('x') + 'px'
+        ,'top': this.model.get('y') + 'px'
       });
     }
 
     ,'updateModel': function () {
       var pxTo = this.app.util.pxToNumber;
       this.model.set({
-        'left': pxTo(this.$el.css('left'))
-        ,'top': pxTo(this.$el.css('top'))
+        'x': pxTo(this.$el.css('left'))
+        ,'y': pxTo(this.$el.css('top'))
       });
       publish(this.app.const.KEYFRAME_UPDATED);
       this.app.collection.keyframes.updateModelKeyframeViews();
+
+      // Remove this null check once Kapi initialization is refactored out of
+      // the canvas View.
+      if (this.app.kapi) {
+        this.app.util.redrawKapi(this.app.kapi);
+      }
     }
 
   });

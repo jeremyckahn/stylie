@@ -101,10 +101,14 @@ require([
   $('.crosshair').each(function (i, el) {
     var $el = $(el);
     app.collection.keyframes.add({
-      'left': i ? $win.width() - ($win.width() / (i + 1)) : 40
-      ,'top': ($win.height() / 2) - ($el.height() / 2)
+      'x': i ? $win.width() - ($win.width() / (i + 1)) : 40
+      ,'y': ($win.height() / 2) - ($el.height() / 2)
     }, { 'app': app });
-    $el.css(app.collection.keyframes.last().getAttrs());
+    var keyframeAttrs = app.collection.keyframes.last().getAttrs();
+    $el.css({
+      'left': keyframeAttrs.x
+      ,'top': keyframeAttrs.y
+    });
     new crosshair.view({
         'app': app
         ,'$el': $el
@@ -133,7 +137,7 @@ require([
     ,'preventInitialHandlerCall': true
     ,'onChange': function (evt, checked) {
       this.app.config.isPathShowing = !!checked;
-      this.app.kapi.redraw();
+      this.app.util.redrawKapi(this.app.kapi);
       this.app.canvasView.backgroundView.update();
     }
 

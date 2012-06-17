@@ -32,21 +32,22 @@ define(['exports'], function (keyframe) {
           : this.app.config.animationDuration;
       if (this.app.config.currentActor) {
         this.app.config.currentActor.modifyKeyframe(timeToModify, this.getCSS());
-        this.app.kapi.redraw();
+        this.app.util.redrawKapi(this.app.kapi);
       }
     }
 
     ,'getCSS': function () {
       return {
-        'left': this.get('left') + 'px'
-        ,'top': this.get('top') + 'px'
+        'transform':
+          'translateX(' + this.get('x')
+          + 'px) translateY(' + this.get('y') + 'px)'
       };
     }
 
     ,'getAttrs': function () {
       return {
-        'left': this.get('left')
-        ,'top': this.get('top')
+        'x': this.get('x')
+        ,'y': this.get('y')
       };
     }
 
