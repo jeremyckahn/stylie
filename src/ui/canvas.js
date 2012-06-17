@@ -62,9 +62,12 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
     ,'setDOMKeyframePoints': function (DOMActor) {
       // TODO: Fix this crazy brittleness.
       DOMActor
-        .keyframe(0, this.app.collection.keyframes.first().getCSS())
+        .keyframe(0,
+            this.app.collection.keyframes.first().getCSS(),
+            'linear linear')
         .keyframe(+this.app.config.initialDuration,
-            this.app.collection.keyframes.last().getCSS());
+            this.app.collection.keyframes.last().getCSS(),
+            'linear linear');
     }
 
   });

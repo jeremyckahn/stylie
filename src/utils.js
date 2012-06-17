@@ -23,7 +23,8 @@ define(function () {
           });
       });
 
-      actor.kapi._recalculateAnimationLength();
+      // LEAKY ABSTRACTION!!!!!
+      actor.kapi._recalculateAnimationLength(); // Fix this in Rekapi!
       app.config.animationDuration = toMillisecond;
     };
 
@@ -32,6 +33,12 @@ define(function () {
       var deprefixed = fnString.replace(/.*return\s*/g, '');
       var desuffixed = deprefixed.replace(/\}|;\s*}$/g, '');
       return desuffixed;
+    };
+
+    // TODO:  Remove this once this Rekapi issue is resolved:
+    // https://github.com/jeremyckahn/rekapi/issues/23
+    app.util.redrawKapi = function (kapi) {
+      kapi.update(kapi.lastPositionUpdated() * kapi.animationLength());
     };
 
   };

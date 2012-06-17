@@ -11,6 +11,7 @@ define(['exports', 'src/ui/incrementer-field'],
         this.model.set($el.data('keyframeattr'), +val);
         publish(this.app.const.KEYFRAME_UPDATED);
         this.app.collection.keyframes.updateModelCrosshairViews();
+        this.app.util.redrawKapi(this.app.kapi);
       }, this)
     });
   }
@@ -24,11 +25,11 @@ define(['exports', 'src/ui/incrementer-field'],
         ,'<h3></h3>'
         ,'<label>'
           ,'<span>Left:</span>'
-          ,'<input class="third-width keyframe-attr-left" type="text" data-keyframeattr="left"></input>'
+          ,'<input class="third-width keyframe-attr-x" type="text" data-keyframeattr="x"></input>'
         ,'</label>'
         ,'<label>'
           ,'<span>Top:</span>'
-          ,'<input class="third-width keyframe-attr-top" type="text" data-keyframeattr="top"></input>'
+          ,'<input class="third-width keyframe-attr-y" type="text" data-keyframeattr="y"></input>'
         ,'</label>'
         ,'<hr>'
       ,'</li>'
@@ -46,13 +47,13 @@ define(['exports', 'src/ui/incrementer-field'],
 
     ,'initDOMReferences': function () {
       this.header = this.$el.find('h3');
-      this.inputLeft = this.$el.find('.keyframe-attr-left');
-      this.inputTop = this.$el.find('.keyframe-attr-top');
+      this.inputX = this.$el.find('.keyframe-attr-x');
+      this.inputY = this.$el.find('.keyframe-attr-y');
     }
 
     ,'initIncrementers': function () {
       this.incrementerViews = {};
-      _.each([this.inputLeft, this.inputTop], function ($el) {
+      _.each([this.inputX, this.inputY], function ($el) {
         this.incrementerViews[$el.data('keyframeattr')] =
             incrementerGeneratorHelper.call(this, $el);
       }, this);
@@ -60,11 +61,11 @@ define(['exports', 'src/ui/incrementer-field'],
 
     ,'render': function () {
       this.header.html(this.model.get('percent') + '%');
-      if (this.model.get('left') !== +this.inputLeft.val()) {
-        this.inputLeft.val(this.model.get('left'));
+      if (this.model.get('x') !== +this.inputX.val()) {
+        this.inputX.val(this.model.get('x'));
       }
-      if (this.model.get('top') !== +this.inputTop.val()) {
-        this.inputTop.val(this.model.get('top'));
+      if (this.model.get('y') !== +this.inputY.val()) {
+        this.inputY.val(this.model.get('y'));
       }
     }
 
