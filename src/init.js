@@ -122,6 +122,12 @@ require([
     ,'collection': app.collection.keyframes
   });
 
+  app.kapi = new Kapi({
+    'context': document.getElementById('rekapi-canvas')
+    ,'height': $win.height()
+    ,'width': $win.width()
+  });
+
   app.canvasView = new canvas.view({
     'app': app
     ,'$el': $('#rekapi-canvas')

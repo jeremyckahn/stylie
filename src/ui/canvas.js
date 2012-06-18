@@ -15,11 +15,6 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
       var height = $win.height();
       var width = $win.width();
 
-      this.app.kapi = new Kapi({
-          'context': this.$el[0]
-          ,'height': height
-          ,'width': width
-        });
       this.backgroundView = new background.view({
         'app': this.app
         ,'$el': this.$canvasBG
