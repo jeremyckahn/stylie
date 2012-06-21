@@ -42,12 +42,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       });
       publish(this.app.const.KEYFRAME_UPDATED);
       this.app.collection.keyframes.updateModelKeyframeViews();
-
-      // Remove this null check once Kapi initialization is refactored out of
-      // the canvas View.
-      if (this.app.kapi) {
-        this.app.util.redrawKapi(this.app.kapi);
-      }
+      this.app.util.redrawKapi(this.app.kapi);
     }
 
   });

@@ -59,6 +59,12 @@ require([
     'function (x) {return Math.pow(x, 0.25);}'].join('');
   eval(customEase2FnString);
 
+  app.kapi = new Kapi({
+    'context': document.getElementById('rekapi-canvas')
+    ,'height': $win.height()
+    ,'width': $win.width()
+  });
+
   app.config.selects = {
     'x': new select.view({
       '$el': $('#x-easing')
