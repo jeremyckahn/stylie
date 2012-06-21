@@ -23,8 +23,6 @@ define(function () {
           });
       });
 
-      // LEAKY ABSTRACTION!!!!!
-      actor.kapi._recalculateAnimationLength(); // Fix this in Rekapi!
       app.config.animationDuration = toMillisecond;
     };
 
