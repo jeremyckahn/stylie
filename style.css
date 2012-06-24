@@ -43,7 +43,8 @@ ul.controls li {
 }
 
 #main-container {
-  font-family: 'Petrona', serif;
+  font-family: Helvetica, Arial, serif;
+  font-size: 13px;
   line-height: 1.7em;
   overflow: hidden;
   padding-top: 66px; /* This equals the height of the header */
@@ -60,6 +61,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
+  backgroun-color: #4972c8;
   background-image: linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
   background-image: -o-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
   background-image: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
@@ -108,13 +110,9 @@ p {
 }
 
 a, a:active, a:hover, a:link, a:visited {
-  color: #a00;
+  color: #fefefe;
   font-weight: bold;
   text-decoration: none;
-}
-
-a:hover {
-  color: #f00;
 }
 
 footer {
@@ -218,7 +216,7 @@ canvas {
     }
 
 #control-pane {
-
+  color: #fefefe;
 }
 
   #control-pane label {
@@ -226,7 +224,7 @@ canvas {
   }
 
   #control-pane select {
-    background: transparent;
+    background: #fff;
     font-size: 0.8em;
   }
 
@@ -300,12 +298,13 @@ canvas {
 }
 
   .pane .pane-handle {
-    background: #ccc;
+    background: #1a1a1a;
     cursor: move;
     height: 28px;
   }
 
   .pane .pane-content {
+    background: #353535;
   }
 
 .float-wrap {
@@ -340,7 +339,8 @@ canvas {
 
 .tabs {
   display: block;
-  border-bottom: solid 1px #bbb;
+  background: #1a1a1a;
+  border-bottom: solid 1px #454545;
   height: 30px;
   line-height: 30px;
   min-width: 300px;
@@ -349,15 +349,25 @@ canvas {
 }
 
   .tabs li {
-    border: solid 1px #bbb;
     height: 29px;
-    margin: 0 3px -1px;
+    margin: 0 8px -1px;
+    padding: 0 4px;
     float: left;
   }
 
+    .tabs a {
+      color: #454545;
+    }
+
   .tabs li.tabs-active {
-    border-bottom-color: #fff;
+    background: #353535;
+    border: solid 1px #454545;
+    border-bottom: solid 1px #353535;
   }
+
+    .tabs li.tabs-active a {
+      color: #fefefe;
+    }
 
   .tabs li:first-child {
     margin-left: 6px;
