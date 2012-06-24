@@ -315,6 +315,9 @@ canvas {
   border: solid 1px #000;
   margin: 20px;
   position: absolute;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
   .pane .pane-handle {
@@ -373,6 +376,12 @@ canvas {
     margin: 0 8px -1px;
     padding: 0 4px;
     float: left;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-topright: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
   }
 
     .tabs a {
