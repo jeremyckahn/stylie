@@ -15,10 +15,11 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this.model.set('percent', +this.$el.data('percent'));
       this.model.crosshairView = this;
       this.updateModel();
+      this._throttledUpdate = _.throttle(this.updateModel, 100);
     }
 
     ,'drag': function (evt, ui) {
-      this.updateModel();
+      this._throttledUpdate.call(this);
     }
 
     ,'dragEnd': function (evt, ui) {
@@ -42,7 +43,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       });
       publish(this.app.const.KEYFRAME_UPDATED);
       this.app.collection.keyframes.updateModelKeyframeViews();
-      this.app.util.redrawKapi(this.app.kapi);
+      this.app.kapi.update();
     }
 
   });

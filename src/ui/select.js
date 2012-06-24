@@ -31,7 +31,7 @@ define(['exports'], function (select) {
           this.app.config.animationDuration, {},
           { 'transform': getNewEasingString(this.app) })
       this.app.canvasView.backgroundView.update();
-      this.app.util.redrawKapi(this.app.kapi);
+      this.app.kapi.update();
     }
 
   });

@@ -5,7 +5,7 @@ define(function () {
   utils.init = function (app) {
 
     app.util.pxToNumber = function (px) {
-      return +(px.replace('px', ''));
+      return parseInt(px, 10);
     };
 
     app.util.trimString = function (str) {
@@ -31,12 +31,6 @@ define(function () {
       var deprefixed = fnString.replace(/.*return\s*/g, '');
       var desuffixed = deprefixed.replace(/\}|;\s*}$/g, '');
       return desuffixed;
-    };
-
-    // TODO:  Remove this once this Rekapi issue is resolved:
-    // https://github.com/jeremyckahn/rekapi/issues/23
-    app.util.redrawKapi = function (kapi) {
-      kapi.update(kapi.lastPositionUpdated() * kapi.animationLength());
     };
 
   };
