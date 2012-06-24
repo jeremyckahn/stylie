@@ -33,7 +33,7 @@ input[type="text"] {
 ul.controls li {
   display: block;
   font-size: 1.1em;
-  padding-top: 6px;
+  padding: 6px 0;
 }
 
 #fork-me-link {
@@ -220,8 +220,21 @@ canvas {
 }
 
   #control-pane label {
-    padding-right: 6px;
+    padding-right: 2px;
   }
+
+    #control-pane .keyframe label {
+      padding-right: 54px;
+    }
+
+  #control-pane label:nth-of-type(2) {
+    float: right;
+    padding-right: 0;
+  }
+
+    #control-pane span {
+      padding-right: 12px;
+    }
 
   #control-pane select {
     background: #fff;
@@ -245,14 +258,21 @@ canvas {
     font-size: 1.1em;
   }
 
+  #control-pane input.three-quarters {
+    display: block;
+    margin-top: 6px;
+    width: 200px;
+  }
+
   #control-pane textarea,
   #control-pane input.full-width {
     display: block;
+    margin-top: 6px;
     width: 270px;
   }
 
-  #control-pane input.third-width {
-    width: 90px;
+  #control-pane input.quarter-width {
+    width: 60px;
   }
 
   #control-pane input.quarter-width {
@@ -389,8 +409,9 @@ canvas {
 
 }
 
-  .checkboxes li {
+  ul.controls .checkboxes li {
     float: left;
+    padding-bottom: 0;
   }
 
   .checkboxes label {
