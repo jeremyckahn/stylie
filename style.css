@@ -46,7 +46,7 @@ ul.controls li {
   font-family: 'Petrona', serif;
   line-height: 1.7em;
   overflow: hidden;
-  padding-top: 40px;
+  padding-top: 66px; /* This equals the height of the header */
 }
 
 .center {
@@ -54,13 +54,17 @@ ul.controls li {
 }
 
 header {
-  background: #222;
   font-family: helvetica, sans-serif;
-  height: 40px;
+  height: 66px;
   padding: 0 6px;
   position: fixed;
   top: 0;
   width: 100%;
+  background-image: linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
+  background-image: -o-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
+  background-image: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
+  background-image: -webkit-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
+  background-image: -ms-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
 }
 
 h1, h2 {
@@ -71,6 +75,10 @@ h1, h2 {
 h1 {
   font-size: 24px;
   line-height: 40px;
+}
+
+h1 img {
+  margin: 8px 0 0 60px;
 }
 
 h1 a:active,
@@ -155,6 +163,7 @@ canvas {
 }
 
 #crosshairs {
+  background: url(img/ui/bg_grid.png);
   float: left;
   margin: 0 auto;
   overflow: hidden;
