@@ -9,14 +9,14 @@
 <body>
   <div id="main-container">
     <header>
-    <h1><a href="https://github.com/jeremyckahn/stylie">Stylie</a></h1>
-      <h2>Pre-pre-alpha</h>
+    <h1><a href="https://github.com/jeremyckahn/stylie"><img src="img/ui/stylie_logo.png" alt="Stylie"></a></h1>
+    <h2>A fun CSS animation tool, powered by <a href="http://rekapi.com">Rekapi</a></h>
     </header>
     <div id="crosshairs">
       <canvas id="tween-path"></canvas>
       <div id="rekapi-canvas">
         <div class="rekapi-actor">
-          <img src="img/octocat.png">
+          <img src="img/circle.png">
         </div>
       </div>
       <div class="crosshair from" data-pos="from" data-percent="0">
@@ -47,22 +47,20 @@
               <select id="y-easing" data-axis="y"></select>
             </li>
             <li>
-              <hr>
               <label for="duration">Duration:</label>
-              <input id="duration" class="full-width" type="text" value="2000"></input>
+              <input id="duration" class="three-quarters" type="text" value="2000"></input>
             </li>
             <li>
-              <label for="show-path">Show path:</label>
-              <input id="show-path" type="checkbox" type="text" checked="checked"></input>
-            </li>
-            <li>
-              <hr>
               <label for="custom-1">Custom easing 1:</label>
               <input id="custom-1" class="ease full-width" type="text" data-easename="customEase1"></input>
             </li>
             <li>
               <label for="custom-2">Custom easing 2:</label>
               <input id="custom-2" class="ease full-width" type="text" data-easename="customEase2"></input>
+            </li>
+            <li>
+              <label for="show-path">Show path:</label>
+              <input id="show-path" type="checkbox" type="text" checked="checked"></input>
             </li>
           </ul>
         </li>
@@ -75,9 +73,6 @@
             <li>
               <label for="css-name">Class name:</label>
               <input id="css-name" class="full-width" type="text" value="stylie"></input>
-            </li>
-            <li>
-              <hr>
             </li>
             <li>
               <textarea></textarea>

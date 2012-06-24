@@ -4,7 +4,6 @@ define(['exports'], function (background) {
     'initialize': function (opts) {
       _.extend(this, opts);
       this.context = this.$el[0].getContext('2d');
-      this.$el.css('background', '#eee');
       this.resize({
         'height': opts.height
         ,'width': opts.width

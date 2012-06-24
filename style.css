@@ -33,7 +33,7 @@ input[type="text"] {
 ul.controls li {
   display: block;
   font-size: 1.1em;
-  padding-top: 6px;
+  padding: 6px 0;
 }
 
 #fork-me-link {
@@ -43,10 +43,11 @@ ul.controls li {
 }
 
 #main-container {
-  font-family: 'Petrona', serif;
+  font-family: Helvetica, Arial, serif;
+  font-size: 13px;
   line-height: 1.7em;
   overflow: hidden;
-  padding-top: 40px;
+  padding-top: 66px; /* This equals the height of the header */
 }
 
 .center {
@@ -54,13 +55,18 @@ ul.controls li {
 }
 
 header {
-  background: #222;
   font-family: helvetica, sans-serif;
-  height: 40px;
+  height: 66px;
   padding: 0 6px;
   position: fixed;
   top: 0;
   width: 100%;
+  backgroun-color: #4972c8;
+  background-image: linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
+  background-image: -o-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
+  background-image: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
+  background-image: -webkit-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
+  background-image: -ms-linear-gradient(top, rgb(255,255,255) 0%, rgb(229,229,229) 71%);
 }
 
 h1, h2 {
@@ -71,6 +77,10 @@ h1, h2 {
 h1 {
   font-size: 24px;
   line-height: 40px;
+}
+
+h1 img {
+  margin: 8px 0 0 60px;
 }
 
 h1 a:active,
@@ -84,10 +94,20 @@ h1 a {
 }
 
 h2 {
-  color: #0bf;
-  line-height: 44px;
+  color: #454545;
+  line-height: 66px;
   font-size: 18px;
-  margin-left: 10px;
+  font-weight: lighter;
+  margin-left: 18px;
+}
+
+h2 a:active, h2 a:hover, h2 a:link, h2 a:visited {
+ color: #454545;
+ font-weight: bold;
+}
+
+h2 a:hover {
+  color: #111;
 }
 
 h3 {
@@ -100,13 +120,9 @@ p {
 }
 
 a, a:active, a:hover, a:link, a:visited {
-  color: #a00;
+  color: #fefefe;
   font-weight: bold;
   text-decoration: none;
-}
-
-a:hover {
-  color: #f00;
 }
 
 footer {
@@ -155,6 +171,7 @@ canvas {
 }
 
 #crosshairs {
+  background: url(img/ui/bg_grid.png);
   float: left;
   margin: 0 auto;
   overflow: hidden;
@@ -209,15 +226,28 @@ canvas {
     }
 
 #control-pane {
-
+  color: #fefefe;
 }
 
   #control-pane label {
-    padding-right: 6px;
+    padding-right: 2px;
   }
 
+    #control-pane .keyframe label {
+      padding-right: 54px;
+    }
+
+  #control-pane label:nth-of-type(2) {
+    float: right;
+    padding-right: 0;
+  }
+
+    #control-pane span {
+      padding-right: 12px;
+    }
+
   #control-pane select {
-    background: transparent;
+    background: #fff;
     font-size: 0.8em;
   }
 
@@ -238,14 +268,21 @@ canvas {
     font-size: 1.1em;
   }
 
+  #control-pane input.three-quarters {
+    display: block;
+    margin-top: 6px;
+    width: 200px;
+  }
+
   #control-pane textarea,
   #control-pane input.full-width {
     display: block;
+    margin-top: 6px;
     width: 270px;
   }
 
-  #control-pane input.third-width {
-    width: 90px;
+  #control-pane input.quarter-width {
+    width: 60px;
   }
 
   #control-pane input.quarter-width {
@@ -288,15 +325,19 @@ canvas {
   border: solid 1px #000;
   margin: 20px;
   position: absolute;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
   .pane .pane-handle {
-    background: #ccc;
+    background: #1a1a1a;
     cursor: move;
     height: 28px;
   }
 
   .pane .pane-content {
+    background: #353535;
   }
 
 .float-wrap {
@@ -331,7 +372,8 @@ canvas {
 
 .tabs {
   display: block;
-  border-bottom: solid 1px #bbb;
+  background: #1a1a1a;
+  border-bottom: solid 1px #454545;
   height: 30px;
   line-height: 30px;
   min-width: 300px;
@@ -340,15 +382,31 @@ canvas {
 }
 
   .tabs li {
-    border: solid 1px #bbb;
     height: 29px;
-    margin: 0 3px -1px;
+    margin: 0 8px -1px;
+    padding: 0 4px;
     float: left;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-topright: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
   }
 
+    .tabs a {
+      color: #454545;
+    }
+
   .tabs li.tabs-active {
-    border-bottom-color: #fff;
+    background: #353535;
+    border: solid 1px #454545;
+    border-bottom: solid 1px #353535;
   }
+
+    .tabs li.tabs-active a {
+      color: #fefefe;
+    }
 
   .tabs li:first-child {
     margin-left: 6px;
@@ -370,8 +428,9 @@ canvas {
 
 }
 
-  .checkboxes li {
+  ul.controls .checkboxes li {
     float: left;
+    padding-bottom: 0;
   }
 
   .checkboxes label {

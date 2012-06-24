@@ -25,13 +25,12 @@ define(['exports', 'src/ui/incrementer-field'],
         ,'<h3></h3>'
         ,'<label>'
           ,'<span>Left:</span>'
-          ,'<input class="third-width keyframe-attr-x" type="text" data-keyframeattr="x"></input>'
+          ,'<input class="quarter-width keyframe-attr-x" type="text" data-keyframeattr="x"></input>'
         ,'</label>'
         ,'<label>'
           ,'<span>Top:</span>'
-          ,'<input class="third-width keyframe-attr-y" type="text" data-keyframeattr="y"></input>'
+          ,'<input class="quarter-width keyframe-attr-y" type="text" data-keyframeattr="y"></input>'
         ,'</label>'
-        ,'<hr>'
       ,'</li>'
     ].join('')
 
