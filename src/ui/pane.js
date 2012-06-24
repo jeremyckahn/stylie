@@ -32,19 +32,17 @@ define(['exports'], function (pane) {
         .dragon({
           'within': this.$el.parent()
           ,'handle': '.pane-handle'
-          ,'onDragEnd': _.bind(this.onDragStop, this)
         })
       this.oldSize = this.getSize();
+      $win.on('resize', _.bind(this.onResize, this));
     }
 
-    // This may be unnecessary...
-    ,'onResize': function () {
-      this.oldSize = this.getSize();
-    }
+    ,'onResize': function (evt) {
+      var width = this.$el.outerWidth(true);
+      var winWidth = $win.width();
 
-    ,'onDragStop': function (evt, ui) {
-      if (this.$el.position().top < 0) {
-        this.$el.css('top', '0px');
+      if ((this.$el.offset().left + width) > winWidth) {
+        this.$el.css('left', winWidth - width);
       }
     }
 
