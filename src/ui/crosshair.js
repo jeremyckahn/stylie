@@ -42,7 +42,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       });
       publish(this.app.const.KEYFRAME_UPDATED);
       this.app.collection.keyframes.updateModelKeyframeViews();
-      this.app.util.redrawKapi(this.app.kapi);
+      this.app.kapi.update();
     }
 
   });

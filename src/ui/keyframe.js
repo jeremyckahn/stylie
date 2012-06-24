@@ -11,7 +11,7 @@ define(['exports', 'src/ui/incrementer-field'],
         this.model.set($el.data('keyframeattr'), +val);
         publish(this.app.const.KEYFRAME_UPDATED);
         this.app.collection.keyframes.updateModelCrosshairViews();
-        this.app.util.redrawKapi(this.app.kapi);
+        this.app.kapi.update();
       }, this)
     });
   }

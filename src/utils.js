@@ -33,12 +33,6 @@ define(function () {
       return desuffixed;
     };
 
-    // TODO:  Remove this once this Rekapi issue is resolved:
-    // https://github.com/jeremyckahn/rekapi/issues/23
-    app.util.redrawKapi = function (kapi) {
-      kapi.update(kapi.lastPositionUpdated() * kapi.animationLength());
-    };
-
   };
 
   return utils;

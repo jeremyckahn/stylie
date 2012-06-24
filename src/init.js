@@ -143,7 +143,7 @@ require([
     ,'preventInitialHandlerCall': true
     ,'onChange': function (evt, checked) {
       this.app.config.isPathShowing = !!checked;
-      this.app.util.redrawKapi(this.app.kapi);
+      this.app.kapi.update();
       this.app.canvasView.backgroundView.update();
     }
 
