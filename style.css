@@ -94,10 +94,20 @@ h1 a {
 }
 
 h2 {
-  color: #0bf;
-  line-height: 44px;
+  color: #454545;
+  line-height: 66px;
   font-size: 18px;
-  margin-left: 10px;
+  font-weight: lighter;
+  margin-left: 18px;
+}
+
+h2 a:active, h2 a:hover, h2 a:link, h2 a:visited {
+ color: #454545;
+ font-weight: bold;
+}
+
+h2 a:hover {
+  color: #111;
 }
 
 h3 {
