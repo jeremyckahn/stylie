@@ -5,7 +5,7 @@ define(function () {
   utils.init = function (app) {
 
     app.util.pxToNumber = function (px) {
-      return +(px.replace('px', ''));
+      return parseInt(px, 10);
     };
 
     app.util.trimString = function (str) {
