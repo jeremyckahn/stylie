@@ -425,12 +425,13 @@ canvas {
 }
 
 .checkboxes {
-
+  width: 270px;
 }
 
   ul.controls .checkboxes li {
     float: left;
     padding-bottom: 0;
+    width: 50%;
   }
 
   .checkboxes label {
