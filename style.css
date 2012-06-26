@@ -383,8 +383,9 @@ canvas {
 
   .tabs li {
     height: 29px;
-    margin: 0 8px -1px;
+    margin: 0 8px;
     padding: 0 4px;
+    position: relative;
     float: left;
     -webkit-border-top-left-radius: 2px;
     -webkit-border-top-right-radius: 2px;
@@ -402,6 +403,7 @@ canvas {
     background: #353535;
     border: solid 1px #454545;
     border-bottom: solid 1px #353535;
+    top: 1px;
   }
 
     .tabs li.tabs-active a {
