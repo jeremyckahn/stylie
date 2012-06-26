@@ -2,6 +2,8 @@ define(['exports'], function (cssOutput) {
 
   var checkboxToVendorMap = {
     'moz': 'mozilla'
+    ,'ms': 'microsoft'
+    ,'o': 'opera'
     ,'webkit': 'webkit'
     ,'w3': 'w3'
   };

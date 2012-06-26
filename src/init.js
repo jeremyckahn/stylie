@@ -43,8 +43,10 @@ require([
 
 
   // CONFIG
-  app.config.activeClasses.moz = true;
-  app.config.activeClasses.webkit = true;
+  app.config.activeClasses.moz = false;
+  app.config.activeClasses.ms = false;
+  app.config.activeClasses.o = false;
+  app.config.activeClasses.webkit = false;
   app.config.activeClasses.w3 = true;
   utils.init(app);
 
@@ -184,6 +186,24 @@ require([
     ,'$el': $('#moz-toggle')
     ,'onChange': function (evt, checked) {
       this.app.config.activeClasses.moz = checked;
+      publish(app.const.UPDATE_CSS_OUTPUT);
+    }
+  });
+
+  app.view.msCheckboxView = new checkbox.view({
+    'app': app
+    ,'$el': $('#ms-toggle')
+    ,'onChange': function (evt, checked) {
+      this.app.config.activeClasses.ms = checked;
+      publish(app.const.UPDATE_CSS_OUTPUT);
+    }
+  });
+
+  app.view.oCheckboxView = new checkbox.view({
+    'app': app
+    ,'$el': $('#o-toggle')
+    ,'onChange': function (evt, checked) {
+      this.app.config.activeClasses.o = checked;
       publish(app.const.UPDATE_CSS_OUTPUT);
     }
   });
