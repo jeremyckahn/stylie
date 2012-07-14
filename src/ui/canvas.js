@@ -32,8 +32,8 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
     ,'onWindowResize': function (evt) {
       var height = $win.height() - $header.outerHeight();
       var width = $win.width();
-      this.app.kapi.canvasHeight(height);
-      this.app.kapi.canvasWidth(width);
+      this.app.kapi.canvas.height(height);
+      this.app.kapi.canvas.width(width);
       this.backgroundView.resize({
         'height': height
         ,'width': width
