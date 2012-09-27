@@ -8,22 +8,21 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       _.extend(this, opts);
       this.$el.dragon({
         'within': this.$el.parent()
-        ,'drag': _.bind(this.drag, this)
+        ,'dragStart': _.bind(this.dragStart, this)
         ,'dragEnd': _.bind(this.dragEnd, this)
       });
 
       this.model.set('percent', +this.$el.data('percent'));
       this.model.crosshairView = this;
       this.updateModel();
-      this._throttledUpdate = _.throttle(this.updateModel, 100);
     }
 
-    ,'drag': function (evt, ui) {
-      this._throttledUpdate.call(this);
+    ,'dragStart': function (evt, ui) {
+      this.dimPathLine();
     }
 
     ,'dragEnd': function (evt, ui) {
-      this.drag.apply(this, arguments);
+      this.updateModel();
       this.app.view.cssOutputView.renderCSS();
       publish(this.app.const.UPDATE_CSS_OUTPUT);
     }
@@ -44,6 +43,10 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       publish(this.app.const.KEYFRAME_UPDATED);
       this.app.collection.keyframes.updateModelKeyframeViews();
       this.app.kapi.update();
+    }
+
+    ,'dimPathLine': function () {
+      this.app.canvasView.backgroundView.update(true);
     }
 
   });

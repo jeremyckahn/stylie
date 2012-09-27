@@ -28,10 +28,13 @@ define(['exports'], function (keyframe) {
         this.app.canvasView.backgroundView.update();
       }
 
-      var timeToModify = this.get('percent') === 0 ? 0
+      var timeToModify = this.get('percent') === 0
+          ? 0
           : this.app.config.animationDuration;
+
       if (this.app.config.currentActor) {
-        this.app.config.currentActor.modifyKeyframe(timeToModify, this.getCSS());
+        this.app.config.currentActor.modifyKeyframe(
+            timeToModify, this.getCSS());
         this.app.kapi.update();
       }
     }
