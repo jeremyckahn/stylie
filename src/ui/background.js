@@ -46,10 +46,13 @@ define(['exports'], function (background) {
       return points;
     }
 
-    ,'generatePathPrerender': function (x1, y1, x2, y2, easeX, easeY) {
+    ,'generatePathPrerender': function (
+          x1, y1, x2, y2, easeX, easeY, useDimColor) {
       this.app.config.prerenderedPath = document.createElement('canvas');
-      this.app.config.prerenderedPath.width = this.app.canvasView.$canvasBG.width();
-      this.app.config.prerenderedPath.height = this.app.canvasView.$canvasBG.height();
+      this.app.config.prerenderedPath.width =
+          this.app.canvasView.$canvasBG.width();
+      this.app.config.prerenderedPath.height =
+          this.app.canvasView.$canvasBG.height();
       var ctx = this.app.config.prerenderedPath.ctx =
           this.app.config.prerenderedPath.getContext('2d');
       var points = this.generatePathPoints.apply(this, arguments);
@@ -66,17 +69,20 @@ define(['exports'], function (background) {
         previousPoint = point;
       });
       ctx.lineWidth = 1;
-      ctx.strokeStyle = '#fa0';
+      var strokeColor = useDimColor
+          ? 'rgba(255,176,0,.5)'
+          : 'rgb(255,176,0)';
+      ctx.strokeStyle = strokeColor;
       ctx.stroke();
       ctx.closePath();
     }
 
-    ,'update': function () {
+    ,'update': function (useDimColor) {
       var fromCoords = this.app.collection.keyframes.first().getAttrs();
       var toCoords = this.app.collection.keyframes.last().getAttrs();
       this.generatePathPrerender(fromCoords.x, fromCoords.y,
           toCoords.x, toCoords.y, this.app.config.selects.x.$el.val(),
-          this.app.config.selects.y.$el.val());
+          this.app.config.selects.y.$el.val(), useDimColor);
 
       if (this.app.config.prerenderedPath) {
         this.$el[0].width = this.$el.width();
