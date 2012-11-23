@@ -38,6 +38,9 @@
       <ul class="tabs-contents">
         <li id="tween-controls">
           <ul class="controls">
+            <p>
+              Adjust the properties of the tween.
+            </p>
             <li>
               <label for="x-easing">X:</label>
               <select id="x-easing" data-axis="x"></select>
@@ -65,19 +68,27 @@
           </ul>
         </li>
         <li id="keyframe-controls">
+          <p>
+            Manually adjust the coordinates of the keyframes.  Type new values in or press the &quot;up&quot; or &quot;down&quot; arrow keys when focused on the inputs.
+          </p>
           <ul class="controls">
           </ul>
         </li>
         <li id="css-output">
           <ul class="controls">
+            <p>
+              Customize the generated CSS.
+            </p>
             <li>
-              <label for="css-name">Class name:</label>
+              <h3>
+                <label for="css-name">Class name:</label>
+              </h3>
               <input id="css-name" class="full-width" type="text" value="stylie"></input>
             </li>
             <li>
-              <textarea></textarea>
-            </li>
-            <li>
+              <h3>
+                Vendors:
+              </h3>
               <ul class="checkboxes">
                 <li>
                   <label>
@@ -111,9 +122,16 @@
                 </li>
               </ul>
             </li>
+            <li>
+              <h3>Generated CSS:</h3>
+              <textarea></textarea>
+            </li>
           </ul>
         </li>
         <li id="html-input">
+          <p>
+            Customize the HTML that you want to animate.  The preview is updated as you type.
+          </p>
           <textarea></textarea>
         </li>
       </ul>

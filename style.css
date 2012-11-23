@@ -116,7 +116,10 @@ h3 {
 }
 
 p {
-  font-size: 1.2em;
+  color: #ccc;
+  font-size: 1.0em;
+  line-height: 1.4em;
+  margin-bottom: 0.8em;
 }
 
 a, a:active, a:hover, a:link, a:visited {
@@ -278,15 +281,11 @@ canvas {
   #control-pane input.full-width {
     display: block;
     margin-top: 6px;
-    width: 270px;
+    width: 295px;
   }
 
   #control-pane input.quarter-width {
-    width: 60px;
-  }
-
-  #control-pane input.quarter-width {
-    width: 60px;
+    width: 75px;
   }
 
 #tween-controls {
@@ -376,7 +375,6 @@ canvas {
   border-bottom: solid 1px #454545;
   height: 30px;
   line-height: 30px;
-  min-width: 300px;
   overflow: visible;
   padding-top: 3px;
 }
@@ -426,6 +424,10 @@ canvas {
   padding: 6px 12px 12px;
 }
 
+  .tabs-contents > li {
+    width: 300px;
+  }
+
 .checkboxes {
   width: 270px;
 }
@@ -446,6 +448,10 @@ canvas {
 #html-input {
   line-height: 0;
 }
+
+  #html-input textarea {
+    margin-top: 18px;
+  }
 
 #css-output {
 }
