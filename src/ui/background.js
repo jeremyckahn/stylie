@@ -69,6 +69,7 @@ define(['exports'], function (background) {
         previousPoint = point;
       });
       ctx.lineWidth = 1;
+      // TODO: These need to be constants!
       var strokeColor = useDimColor
           ? 'rgba(255,176,0,.5)'
           : 'rgb(255,176,0)';

@@ -12,6 +12,26 @@ define(function () {
       return str.replace(/^\s*|\s*$/g, '');
     };
 
+    app.util.getQueryParams = function () {
+      var queryString = window.location.search.slice(1);
+      var pairs = queryString.split('&');
+      var params = {};
+
+      _.each(pairs, function (pair) {
+        var splitPair = pair.split('=');
+        params[splitPair[0]] = splitPair[1];
+      });
+
+      return params;
+    };
+
+    app.util.getRotation = function ($el) {
+      // Need to read the style attribute here, not the CSS transform property.
+      // $#css returns the transform info in matrix format, which is harder to
+      // work with.
+      return $el.attr('style').match(/rotate\((\d+)deg\)/)[1];
+    };
+
     app.util.moveLastKeyframe = function (actor, toMillisecond) {
       var toMillisecond = +toMillisecond;
       var trackNames = actor.getTrackNames();

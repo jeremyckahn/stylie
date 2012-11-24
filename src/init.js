@@ -49,6 +49,7 @@ require([
   app.config.activeClasses.webkit = false;
   app.config.activeClasses.w3 = true;
   utils.init(app);
+  app.const.QUERY_STRING = app.util.getQueryParams();
 
 
   // Doing horrifying hacks here to prevent the variable names from getting
@@ -75,6 +76,11 @@ require([
 
     ,'y': new select.view({
       '$el': $('#y-easing')
+      ,'app': app
+    })
+
+    ,'r': new select.view({
+      '$el': $('#r-easing')
       ,'app': app
     })
   };
@@ -111,6 +117,7 @@ require([
     app.collection.keyframes.add({
       'x': i ? $win.width() - ($win.width() / (i + 1)) : 40
       ,'y': ($win.height() / 2) - ($el.height() / 2)
+      ,'r': 0
     }, { 'app': app });
     var keyframeAttrs = app.collection.keyframes.last().getAttrs();
     $el.css({
@@ -137,7 +144,10 @@ require([
   });
 
   app.canvasView.backgroundView.update();
-  app.kapi.play();
+
+  if (!app.const.QUERY_STRING.debug) {
+    app.kapi.play();
+  };
 
   app.view.showPathView = new checkbox.view({
     'app': app
@@ -234,5 +244,9 @@ require([
   });
 
   $(window).trigger('resize');
+
+  if (app.const.QUERY_STRING.debug) {
+    window.app = app;
+  }
 
 });

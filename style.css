@@ -237,17 +237,12 @@ canvas {
   }
 
     #control-pane .keyframe label {
-      padding-right: 54px;
+      padding-right: 14px;
     }
 
-  #control-pane label:nth-of-type(2) {
-    float: right;
-    padding-right: 0;
+  #control-pane span {
+    padding-right: 12px;
   }
-
-    #control-pane span {
-      padding-right: 12px;
-    }
 
   #control-pane select {
     background: #fff;
@@ -285,7 +280,7 @@ canvas {
   }
 
   #control-pane input.quarter-width {
-    width: 75px;
+    width: 50px;
   }
 
 #tween-controls {
