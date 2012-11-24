@@ -3,7 +3,8 @@ define(['exports'], function (select) {
   function getNewEasingString (app) {
     var xEasing = app.config.selects.x.$el.val();
     var yEasing = app.config.selects.y.$el.val();
-    return xEasing + ' ' + yEasing;
+    var rEasing = app.config.selects.r.$el.val();
+    return [xEasing, yEasing, rEasing].join(' ');
   }
 
   // TODO: This View is not generic enough.  It should be either be made more

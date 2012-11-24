@@ -42,8 +42,9 @@ define(['exports'], function (keyframe) {
     ,'getCSS': function () {
       return {
         'transform':
-          'translateX(' + this.get('x')
-          + 'px) translateY(' + this.get('y') + 'px)'
+          ['translateX(', this.get('x')
+            ,'px) translateY(', this.get('y'),
+            ,'px) rotate(', this.get('r'), 'deg)'].join('')
       };
     }
 
@@ -51,6 +52,7 @@ define(['exports'], function (keyframe) {
       return {
         'x': this.get('x')
         ,'y': this.get('y')
+        ,'r': this.get('r')
       };
     }
 

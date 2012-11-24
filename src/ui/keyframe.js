@@ -24,12 +24,16 @@ define(['exports', 'src/ui/incrementer-field'],
       '<li class="keyframe">'
         ,'<h3></h3>'
         ,'<label>'
-          ,'<span>Left:</span>'
+          ,'<span>X:</span>'
           ,'<input class="quarter-width keyframe-attr-x" type="text" data-keyframeattr="x"></input>'
         ,'</label>'
         ,'<label>'
-          ,'<span>Top:</span>'
+          ,'<span>Y:</span>'
           ,'<input class="quarter-width keyframe-attr-y" type="text" data-keyframeattr="y"></input>'
+        ,'</label>'
+        ,'<label>'
+          ,'<span>R:</span>'
+          ,'<input class="quarter-width keyframe-attr-r" type="text" data-keyframeattr="r"></input>'
         ,'</label>'
       ,'</li>'
     ].join('')
@@ -48,11 +52,12 @@ define(['exports', 'src/ui/incrementer-field'],
       this.header = this.$el.find('h3');
       this.inputX = this.$el.find('.keyframe-attr-x');
       this.inputY = this.$el.find('.keyframe-attr-y');
+      this.inputR = this.$el.find('.keyframe-attr-r');
     }
 
     ,'initIncrementers': function () {
       this.incrementerViews = {};
-      _.each([this.inputX, this.inputY], function ($el) {
+      _.each([this.inputX, this.inputY, this.inputR], function ($el) {
         this.incrementerViews[$el.data('keyframeattr')] =
             incrementerGeneratorHelper.call(this, $el);
       }, this);
@@ -60,11 +65,14 @@ define(['exports', 'src/ui/incrementer-field'],
 
     ,'render': function () {
       this.header.html(this.model.get('percent') + '%');
-      if (this.model.get('x') !== +this.inputX.val()) {
+      if (this.model.get('x') !== parseFloat(this.inputX.val())) {
         this.inputX.val(this.model.get('x'));
       }
-      if (this.model.get('y') !== +this.inputY.val()) {
+      if (this.model.get('y') !== parseFloat(this.inputY.val())) {
         this.inputY.val(this.model.get('y'));
+      }
+      if (this.model.get('r') !== parseFloat(this.inputR.val())) {
+        this.inputR.val(this.model.get('r'));
       }
     }
 
