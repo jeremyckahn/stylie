@@ -48,9 +48,6 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
 
     ,'getDOMActor': function () {
       var actorEl = $('#rekapi-canvas').children();
-      actorEl
-        .height(actorEl.height())
-        .width(actorEl.width());
       return new Kapi.DOMActor(actorEl[0]);
     }
 
