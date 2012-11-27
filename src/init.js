@@ -112,6 +112,10 @@ require([
 
   app.collection.keyframes = new keyframes.collection();
 
+  $('#crosshairs')
+    .append($(crosshair.generateHtml('from', 'from', 0)))
+    .append($(crosshair.generateHtml('to', 'to', 100)));
+
   $('.crosshair').each(function (i, el) {
     var $el = $(el);
     app.collection.keyframes.add({
@@ -242,6 +246,18 @@ require([
     'app': app
     ,'$el': $('#html-input textarea')
   });
+
+  var $body = $(document.body);
+
+  $body
+    .on('keydown', function (evt) {
+      if (evt.shiftKey && evt.target === document.body) {
+        $body.addClass('shift-down');
+      }
+    })
+    .on('keyup', function (evt) {
+      $body.removeClass('shift-down');
+    });
 
   $(window).trigger('resize');
 
