@@ -228,6 +228,28 @@ canvas {
       left: 19px;
     }
 
+    .shift-down .crosshair .rotation-arm {
+      cursor: ew-resize;
+      bottom: 50%;
+      background: #fff;
+      border-left: dotted #000 2px;
+      left: 50%;
+      position: absolute;
+      height: 100px;
+      width: 0;
+    }
+
+      .shift-down .crosshair .rotation-handle {
+        background: #444;
+        border: solid #000 2px;
+        border-radius: 50%;
+        height: 10px;
+        left: -8px;
+        position: absolute;
+        right: 8%;
+        width: 10px;
+      }
+
 #control-pane {
   color: #fefefe;
 }

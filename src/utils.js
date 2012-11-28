@@ -27,9 +27,9 @@ define(function () {
 
     app.util.getRotation = function ($el) {
       // Need to read the style attribute here, not the CSS transform property.
-      // $#css returns the transform info in matrix format, which is harder to
+      // $.fn.css returns the transform info in matrix format, which is harder to
       // work with.
-      return $el.attr('style').match(/rotate\((\d+)deg\)/)[1];
+      return parseFloat($el.attr('style').match(/rotate\((-*\d+)deg\)/)[1]);
     };
 
     app.util.moveLastKeyframe = function (actor, toMillisecond) {
