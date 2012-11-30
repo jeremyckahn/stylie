@@ -72,6 +72,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this.$el.css({
         'left': this.model.get('x') + 'px'
         ,'top': this.model.get('y') + 'px'
+        ,'transform': 'rotate(' + this.model.get('r') + 'deg)'
       });
     }
 
