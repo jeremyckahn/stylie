@@ -3,6 +3,9 @@
 Stylie is a fun tool for easily creating CSS 3 animations.  You can configure
 your animation graphically, tweak it, grab the generated CSS and go!
 
+__[Watch this screencast for a quick
+tutorial.](http://www.youtube.com/watch?v=ENTymVsjVo4)__
+
 ## The Stylie Workflow
 
 When you first open the app, you will see a little ball moving from left to
