@@ -100,6 +100,8 @@ require([
   app.config.animationDuration = app.config.initialDuration =
       +app.view.durationFieldView.$el.val();
 
+  app.config.animationIteration = $('#iterations');
+
   app.config.easeFields = [];
   $('.ease').each(function (i, el) {
     var easeFieldInst = new easeField.view({
