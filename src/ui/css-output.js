@@ -36,6 +36,7 @@ define(['exports'], function (cssOutput) {
       var cssOutput = this.app.kapi.toCSS({
         'vendors': getPrefixList(this.app)
         ,'name': this.app.view.cssNameFieldView.$el.val()
+        ,'iterations': this.app.config.animationIteration.val()
       });
       this.$el.val(cssOutput);
     }
