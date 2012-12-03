@@ -158,7 +158,7 @@ require([
   app.view.showPathView = new checkbox.view({
     'app': app
     ,'$el': $('#show-path')
-    ,'preventInitialHandlerCall': true
+    ,'callHandlerOnInit': true
     ,'onChange': function (evt, checked) {
       this.app.config.isPathShowing = !!checked;
       this.app.kapi.update();
@@ -251,6 +251,7 @@ require([
   app.view.centerToPathView = new checkbox.view({
     'app': app
     ,'$el': $('#center-to-path')
+    ,'callHandlerOnInit': true
     ,'onChange': function (evt, checked) {
       this.app.config.isCenteredToPath = !!checked;
       var tranformOrigin = this.app.config.isCenteredToPath

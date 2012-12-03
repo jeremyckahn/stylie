@@ -9,7 +9,7 @@ define(['exports'], function (checkbox) {
     ,'initialize': function (opts) {
       _.extend(this, opts);
 
-      if (opts.preventInitialHandlerCall) {
+      if (opts.callHandlerOnInit) {
         this.delegateEvents();
         this.$el.trigger('change');
       }
