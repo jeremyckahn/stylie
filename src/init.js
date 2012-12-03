@@ -158,13 +158,12 @@ require([
   app.view.showPathView = new checkbox.view({
     'app': app
     ,'$el': $('#show-path')
-    ,'preventInitialHandlerCall': true
+    ,'callHandlerOnInit': true
     ,'onChange': function (evt, checked) {
       this.app.config.isPathShowing = !!checked;
       this.app.kapi.update();
       this.app.canvasView.backgroundView.update();
     }
-
   });
 
   app.view.controlPaneView = new pane.view({
@@ -249,10 +248,27 @@ require([
     ,'$el': $('#html-input textarea')
   });
 
+  app.view.centerToPathView = new checkbox.view({
+    'app': app
+    ,'$el': $('#center-to-path')
+    ,'callHandlerOnInit': true
+    ,'onChange': function (evt, checked) {
+      this.app.config.isCenteredToPath = !!checked;
+      var tranformOrigin = this.app.config.isCenteredToPath
+        ? '0 0'
+        : '';
+      app.view.htmlInputView.$renderTarget.css(
+        'transform-origin', tranformOrigin);
+      publish(this.app.const.KEYFRAME_UPDATED, [true]);
+      this.app.kapi.update();
+    }
+  });
+
   var $body = $(document.body);
 
   $body
     .on('keydown', function (evt) {
+      // Effectively checks that no element was focused.
       if (evt.shiftKey && evt.target === document.body) {
         $body.addClass('shift-down');
       }

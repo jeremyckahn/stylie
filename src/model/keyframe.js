@@ -20,7 +20,7 @@ define(['exports'], function (keyframe) {
       }
     }
 
-    ,'updateActor': function () {
+    ,'updateActor': function (opt_isUpdatePrevented) {
       // TODO: This should not have to be in a conditional.  The relationship
       // between the keyframe Models and the Views that render them needs to be
       // rethought.
@@ -35,7 +35,9 @@ define(['exports'], function (keyframe) {
       if (this.app.config.currentActor) {
         this.app.config.currentActor.modifyKeyframe(
             timeToModify, this.getCSS());
-        this.app.kapi.update();
+        if (!opt_isUpdatePrevented) {
+          this.app.kapi.update();
+        }
       }
     }
 
@@ -44,7 +46,11 @@ define(['exports'], function (keyframe) {
         'transform':
           ['translateX(', this.get('x')
             ,'px) translateY(', this.get('y'),
-            ,'px) rotate(', this.get('r'), 'deg)'].join('')
+            ,'px) rotate(', this.get('r')
+            ,this.app.config.isCenteredToPath
+              ? 'deg) translate(-50%, -50%)'
+              : 'deg)'
+            ].join('')
       };
     }
 
