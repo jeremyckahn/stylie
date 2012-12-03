@@ -37,6 +37,7 @@ define(['exports'], function (cssOutput) {
         'vendors': getPrefixList(this.app)
         ,'name': this.app.view.cssNameFieldView.$el.val()
         ,'iterations': this.app.config.animationIteration.val()
+        ,'isCentered': this.app.config.isCenteredToPath
       });
       this.$el.val(cssOutput);
     }
