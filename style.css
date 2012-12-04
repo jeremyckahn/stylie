@@ -115,6 +115,35 @@ h3 {
   margin: 6px 0;
 }
 
+header h3 {
+  border: solid 4px #eee;
+  border-radius: 50%;
+  color: #fff;
+  float: left;
+  font-size: 1.5em;
+  height: 20px;
+  margin: 10px 30px 0;
+  padding: 8px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #555;
+  width: 20px;
+
+  /* http://www.colorzilla.com/gradient-editor/ */
+  background: -moz-radial-gradient(center, ellipse cover,  #499bea 0%, #207ce5 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#499bea), color-stop(100%,#207ce5)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  #499bea 0%,#207ce5 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  #499bea 0%,#207ce5 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  #499bea 0%,#207ce5 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  #499bea 0%,#207ce5 100%); /* W3C */
+
+  /* http://css3generator.com/ */
+  -moz-box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
+  -ms-box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
+  -o-box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
+  -webkit-box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
+  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
+}
+
 p {
   color: #ccc;
   font-size: 1.0em;
