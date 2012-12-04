@@ -137,11 +137,11 @@ header h3 {
   background: radial-gradient(ellipse at center,  #499bea 0%,#207ce5 100%); /* W3C */
 
   /* http://css3generator.com/ */
-  -moz-box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
-  -ms-box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
-  -o-box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
-  -webkit-box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
-  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, .4);
+  -moz-box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, .4);
+  -ms-box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, .4);
+  -o-box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, .4);
+  -webkit-box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, .4);
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, .4);
 }
 
 p {
