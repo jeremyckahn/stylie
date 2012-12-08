@@ -7,7 +7,7 @@ require([
     ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
     ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
     ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframes'
-    ,'src/ui/incrementer-field'
+    ,'src/ui/incrementer-field', 'src/ui/modal'
 
     // Models
     ,'src/model/keyframe'
@@ -18,7 +18,7 @@ require([
       ,select, autoUpdateTextfield, easeField
       ,crosshair, canvas, pane, tabs
       ,cssOutput, htmlInput, keyframes
-      ,incrementerField
+      ,incrementerField, modal
 
       ,keyframe) {
 
@@ -84,6 +84,12 @@ require([
       ,'app': app
     })
   };
+
+  app.view.helpModal = new modal.view({
+    'app': app
+    ,'$el': $('#help-contents')
+    ,'$triggerEl': $('#help-trigger')
+  });
 
   app.view.durationFieldView = new incrementerField.view({
     'app': app

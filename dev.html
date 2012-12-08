@@ -9,8 +9,9 @@
 <body>
   <div id="main-container">
     <header>
-    <h1><a href="https://github.com/jeremyckahn/stylie"><img src="img/ui/stylie_logo.png" alt="Stylie"></a></h1>
-    <h2>A fun CSS animation tool, powered by <a href="http://rekapi.com">Rekapi</a></h>
+      <h1><a href="https://github.com/jeremyckahn/stylie"><img src="img/ui/stylie_logo.png" alt="Stylie"></a></h1>
+      <h2>A fun CSS animation tool, powered by <a href="http://rekapi.com">Rekapi</a></h2>
+      <a id="help-trigger" href="#">?</a>
     </header>
     <div id="crosshairs">
       <canvas id="tween-path"></canvas>
@@ -137,6 +138,26 @@
           <textarea></textarea>
         </li>
       </ul>
+    </div>
+    <div id="help-contents" class="hid modal">
+      <div class="modal-content">
+        <h2>CSS animation made easy!</h2>
+        <p>Stylie is a fun tool for easily creating CSS 3 animations. You can configure your animation graphically, tweak it, grab the generated CSS and go!</p>
+        <p><a href="http://www.youtube.com/watch?v=ENTymVsjVo4" target="_blank">Watch this screencast for a quick tutorial.</a></p>
+        <h3>The Stylie Workflow</h3>
+        <p>When you first open the app, you will see a little ball moving from left to right. You probably don't want to animate an image of a ball, so click the &quot;HTML&quot; tab in the control panel on the right. This textarea contains the HTML that is being animated. You can put whatever you want in here, but let's stick some text in there for starters:</p>
+        <pre>&lt;h1&gt;Hello there!&lt;/h1&gt;</pre>
+        <p>The preview updates automatically. Next, you&#x27;ll want to change the beginning and ending positions of the animation. Just click and drag the crosshairs to your liking. When your cursor is not focused on a text input, you can hold the Shift key to make rotation handles appear on the crosshairs. Click and drag the handles to modify the starting and ending rotation positions.</p>
+        <img src="img/shift_example.png" alt="An screenshot of Stylie while the rotation handles are shown">
+        <p>If you want to tweak the crosshairs with more granularity, open the &quot;Keyframes&quot; tab and input specific values. &quot;R&quot; means &quot;rotation.&quot;</p>
+        <h3>Motion control</h3>
+        <p>You can have fine-grained control over your animation. Click the &quot;Tween&quot; tab in the control panel to see the properties of the tween. For number fields such as &quot;duration,&quot; you can type in the value or just press the up or down arrow keys to tweak it.</p>
+        <p>You can test out different easing formulae by selecting them from the dropdowns. You can control the easing formulae for each property of the animation. The preview updates automatically. You can also specify a custom easing formula if you don&#x27;t like the provided ones. Simply input your formula into the &quot;custom easing&quot; fields. What you put into these fields must be valid JavaScript. Once you have inputted your custom formula, you can select &quot;customEase1&quot; or &quot;customEase2&quot; from the dropdowns.</p>
+        <h3>Playback control</h3>
+        <p>You&#x27;ll notice a playhead in the bottom left of the screen. This is fully interactive; you can can play, pause and stop the animation. You can also click and drag the playhead and zip to any part of the timeline.</p>
+        <h3>Generating your CSS</h3>
+        <p>Once you&#x27;ve configured the animation to your liking, it is time to generate the CSS to be used in your web page. Click on the &quot;CSS&quot; tab in the control panel to see the ready-to-use CSS. You can configure the generated CSS for your specific needs, such as the name of the CSS class on the DOM element to be animated, and which browser vendors you want to support. More complex animations will generate very verbose CSS, so be aware of that.</p>
+      </div>
     </div>
   </div>
   <!-- scripts -->
