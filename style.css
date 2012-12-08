@@ -308,6 +308,11 @@ canvas {
   color: #fefefe;
 }
 
+  #control-pane h2,
+  #control-pane h3 {
+    color: #fff;
+  }
+
   #control-pane label {
     padding-right: 2px;
   }
