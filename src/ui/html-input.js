@@ -9,6 +9,7 @@ define(['exports'], function (htmlInput) {
       _.extend(this, opts);
       this.$renderTarget = $('#rekapi-canvas .rekapi-actor');
       this.initialValue = this.readFromDOM();
+      this.$el.html(this.initialValue);
     }
 
     ,'onKeyup': function () {
@@ -16,8 +17,7 @@ define(['exports'], function (htmlInput) {
     }
 
     ,'readFromDOM': function () {
-      return this.$el.html(
-        this.app.util.trimString(this.$renderTarget.html()));
+      return this.app.util.trimString(this.$renderTarget.html());
     }
 
     ,'renderToDOM': function () {
