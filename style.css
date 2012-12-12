@@ -592,4 +592,19 @@ canvas {
   .modal .modal-content {
     height: 100%;
     overflow: auto;
+    padding-right: 12px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border: solid 1px rgba(208, 208, 208, .8);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(208, 208, 208);
+    border-radius: 10px;
   }
