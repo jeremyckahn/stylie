@@ -272,7 +272,7 @@ require([
 
   var $body = $(document.body);
 
-  // TODO: This really needs to be refactored out into a view.
+  // TODO: This really needs to be refactored out into a View.
   $body
     .on('keydown', function (evt) {
       // Effectively checks that no element was focused.
@@ -282,6 +282,8 @@ require([
         $body.addClass('shift-down');
       } else if (evt.keyCode === 67) { // "C" key
         app.view.controlPaneView.toggle();
+      } else if (evt.keyCode === 72) { // "H" key
+        app.view.helpModal.toggle();
       }
     })
     .on('keyup', function (evt) {

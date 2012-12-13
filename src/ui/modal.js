@@ -20,12 +20,7 @@ define(['exports'], function (modal) {
     }
 
     ,'onTriggerClick': function (evt) {
-      if (this.$el.is(':visible')) {
-        this.hide();
-      } else {
-        this.show();
-      }
-
+      this.toggle();
       evt.stopPropagation();
       evt.preventDefault();
     }
@@ -56,6 +51,14 @@ define(['exports'], function (modal) {
       $win
         .off('keydown', this._windowKeyhandler)
         .off('click', this._windowClickhandler);
+    }
+
+    ,'toggle': function () {
+      if (this.$el.is(':visible')) {
+        this.hide();
+      } else {
+        this.show();
+      }
     }
 
   });
