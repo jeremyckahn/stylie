@@ -284,6 +284,10 @@ require([
         app.view.controlPaneView.toggle();
       } else if (evt.keyCode === 72) { // "H" key
         app.view.helpModal.toggle();
+      } else if (evt.keyCode === 32) { // Space bar
+        app.kapi.isPlaying()
+          ? app.kapi.pause()
+          : app.kapi.play();
       }
     })
     .on('keyup', function (evt) {
