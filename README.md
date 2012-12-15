@@ -82,3 +82,9 @@ Require.js.  So, libraries are exposed globally.
 I can't design things, but I know people that can.  The overall look of the app
 is courtesy of [Jon Victorino](http://www.jonvictorino.com/).  The Help icon
 was masterfully crafted by [@nrrrdcore](https://github.com/nrrrdcore).
+
+## License
+
+Stylie is distributed under an [MIT
+license](http://opensource.org/licenses/MIT).  You are encouraged to use and
+modify the code to suit your needs, as well as redistribute it.
