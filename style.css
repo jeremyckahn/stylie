@@ -453,13 +453,12 @@ canvas {
 
 .rekapi-scrubber-wrapper {
   background: #B5B5B5;
-  border-radius: 3px;
+  border-radius: 21px;
   border: solid 1px #888;
   bottom: 20px;
   left: 20px;
   position: absolute;
-  padding-bottom: 0px;
-  padding: 8px;
+  padding: 8px 16px 6px;
 
   /* TODO: This rule is !important because explicit width control is not
    implemented in Rekapi Controls.  One the feature is added, set the width
@@ -472,6 +471,16 @@ canvas {
      control. */
     width: 400px !important;
   }
+
+  .rekapi-scrubber-button {
+    margin-top: 0;
+  }
+
+    .rekapi-scrubber-button .icon {
+      font-size: 1.5em;
+      position: relative;
+      top: 2px;
+    }
 
 .tabs {
   display: block;
