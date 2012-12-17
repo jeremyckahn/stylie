@@ -7,7 +7,7 @@ require([
     ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
     ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
     ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframes'
-    ,'src/ui/incrementer-field', 'src/ui/modal'
+    ,'src/ui/incrementer-field', 'src/ui/modal', 'src/ui/hotkey-handler'
 
     // Models
     ,'src/model/keyframe'
@@ -18,7 +18,7 @@ require([
       ,select, autoUpdateTextfield, easeField
       ,crosshair, canvas, pane, tabs
       ,cssOutput, htmlInput, keyframes
-      ,incrementerField, modal
+      ,incrementerField, modal, hotkeyHandler
 
       ,keyframe) {
 
@@ -84,6 +84,11 @@ require([
       ,'app': app
     })
   };
+
+  app.view.hotkeyHandler = new hotkeyHandler.view({
+    'app': app
+    ,'$el': $(document.body)
+  });
 
   app.view.helpModal = new modal.view({
     'app': app
@@ -269,30 +274,6 @@ require([
       this.app.kapi.update();
     }
   });
-
-  var $body = $(document.body);
-
-  // TODO: This really needs to be refactored out into a View.
-  $body
-    .on('keydown', function (evt) {
-      // Effectively checks that no element was focused.
-      if (evt.target !== document.body) {
-        return;
-      } else if (evt.shiftKey) {
-        $body.addClass('shift-down');
-      } else if (evt.keyCode === 67) { // "C" key
-        app.view.controlPaneView.toggle();
-      } else if (evt.keyCode === 72) { // "H" key
-        app.view.helpModal.toggle();
-      } else if (evt.keyCode === 32) { // Space bar
-        app.kapi.isPlaying()
-          ? app.kapi.pause()
-          : app.kapi.play();
-      }
-    })
-    .on('keyup', function (evt) {
-      $body.removeClass('shift-down');
-    });
 
   $(window).trigger('resize');
 
