@@ -378,6 +378,8 @@ canvas {
 
   #control-pane select {
     background: #555;
+    /* Only Webkit gets the fancy background. */
+    background: -webkit-linear-gradient(top,  rgba(34,34,34,1) 0%,rgba(40,52,59,1) 100%); /* Chrome10+,Safari5.1+ */
     border: solid 1px #333;
     color: #fff;
     font-size: 1em;
