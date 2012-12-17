@@ -157,26 +157,8 @@ h3 {
 }
 
 .dragon-slider {
-  height: 21px;
+  width: 380px !important;
 }
-
-  .dragon-slider-handle {
-    height: 21px;
-    width: 21px;
-
-    -moz-box-shadow:     0px 0px 8px #222;
-    -ms-box-shadow:      0px 0px 8px #222;
-    -o-box-shadow:       0px 0px 8px #222;
-    -webkit-box-shadow:  0px 0px 8px #222;
-    box-shadow:          0px 0px 8px #222;
-
-    background: -moz-radial-gradient(center, ellipse cover,  #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); /* FF3.6+ */
-    background: -webkit-radial-gradient(center, ellipse cover,  #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover,  #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover,  #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center,  #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* W3C */
-
-  }
 
 #help-trigger {
   border: solid 4px #fff;
@@ -418,16 +400,9 @@ canvas {
   padding: 0;
 }
 
-  #tween-controls input.ease {
-  }
-
   #tween-controls input.error {
     background: #f55;
   }
-
-#keyframe-controls {
-
-}
 
   #keyframe-controls hr {
     margin-top: 12px;
@@ -474,61 +449,10 @@ canvas {
 }
 
 .rekapi-scrubber-wrapper {
-  border-radius: 21px;
   bottom: 20px;
   left: 20px;
   position: absolute;
-  padding: 8px 16px 6px;
-
-  /* TODO: This rule is !important because explicit width control is not
-   implemented in Rekapi Controls.  One the feature is added, set the width
-   with JavaScript and remove this rule. */
-  width: auto !important;
-
-  background: -moz-linear-gradient(top, #707070 0%, #0e0e0e 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#707070), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #707070 0%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #707070 0%,#0e0e0e 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #707070 0%,#0e0e0e 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #707070 0%,#0e0e0e 100%); /* W3C */
-
-  -moz-box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-  -ms-box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-  -o-box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-  box-shadow: 0 0 12px rgba(0, 0, 0, .21);
 }
-
-  .rekapi-scrubber-timeline {
-    background: #ccc;
-    border: none;
-    /* TODO:  Remove the !important here once Rekapi Controls has width
-     control. */
-    width: 400px !important;
-
-    -moz-box-shadow:     inset 0px 0px 6px rgba(0,0,0,0.6),
-                         0px 0px 6px #333;
-    -ms-box-shadow:      inset 0px 0px 6px rgba(0,0,0,0.6),
-                         0px 0px 6px #333;
-    -o-box-shadow:       inset 0px 0px 6px rgba(0,0,0,0.6),
-                         0px 0px 6px #333;
-    -webkit-box-shadow:  inset 0px 0px 6px rgba(0,0,0,0.6),
-                         0px 0px 6px #333;
-    box-shadow:          inset 0px 0px 6px rgba(0,0,0,0.6),
-                         0px 0px 6px #333;
-  }
-
-  .rekapi-scrubber-button {
-    margin-top: 0;
-  }
-
-    .rekapi-scrubber-button .icon {
-      color: #ccc;
-      font-size: 1.5em;
-      position: relative;
-      text-shadow: 0px 0px 6px #000, -1px -1px 2px #333;
-      top: 2px;
-    }
 
 .tabs {
   display: block;
@@ -599,13 +523,6 @@ canvas {
     width: 50%;
   }
 
-  .checkboxes label {
-  }
-
-    .checkboxes input,
-    .checkboxes label span {
-    }
-
 #html-input {
   line-height: 0;
 }
@@ -613,9 +530,6 @@ canvas {
   #html-input textarea {
     margin-top: 18px;
   }
-
-#css-output {
-}
 
 .modal {
   border-radius: 6px;
