@@ -27,7 +27,22 @@ input[type="checkbox"] {
 }
 
 input[type="text"] {
+  margin-left: 2px;
   width: 165px;
+}
+
+input[type="text"],
+textarea {
+  background: #555;
+  border: none;
+  border-radius: 2px;
+  color: #ddd;
+  padding: 4px;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  background: #585858;
 }
 
 ul.controls li {
@@ -356,9 +371,17 @@ canvas {
     padding-right: 12px;
   }
 
+  #control-pane .ease-label {
+    display: inline-block;
+    width: 20px;
+  }
+
   #control-pane select {
-    background: #fff;
-    font-size: 0.8em;
+    background: #555;
+    border: solid 1px #333;
+    color: #fff;
+    font-size: 1em;
+    width: 170px;
   }
 
   #control-pane hr {
@@ -388,7 +411,7 @@ canvas {
   #control-pane input.full-width {
     display: block;
     margin-top: 6px;
-    width: 295px;
+    width: 288px;
   }
 
   #control-pane input.quarter-width {
