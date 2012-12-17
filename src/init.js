@@ -8,6 +8,7 @@ require([
     ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
     ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframes'
     ,'src/ui/incrementer-field', 'src/ui/modal', 'src/ui/hotkey-handler'
+    ,'src/ui/rekapi-controls'
 
     // Models
     ,'src/model/keyframe'
@@ -19,6 +20,7 @@ require([
       ,crosshair, canvas, pane, tabs
       ,cssOutput, htmlInput, keyframes
       ,incrementerField, modal, hotkeyHandler
+      ,rekapiControls
 
       ,keyframe) {
 
@@ -157,10 +159,15 @@ require([
     ,'collection': app.collection.keyframes
   });
 
+  // TODO: This has the wrong name and namespace.
   app.canvasView = new canvas.view({
     'app': app
     ,'$el': $('#rekapi-canvas')
     ,'$canvasBG': $('#tween-path')
+  });
+
+  app.view.rekapiControls = new rekapiControls.view({
+    'app': app
   });
 
   app.canvasView.backgroundView.update();

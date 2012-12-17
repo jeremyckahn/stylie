@@ -29,6 +29,8 @@ define(['exports'], function (hotkeyHandler) {
         this.app.kapi.isPlaying()
           ? this.app.kapi.pause()
           : this.app.kapi.play();
+      } else if (evt.keyCode === 84) { // "T" key
+        this.app.view.rekapiControls.fadeToggle();
       }
     }
 

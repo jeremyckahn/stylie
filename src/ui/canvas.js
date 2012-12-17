@@ -25,7 +25,6 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
       this.app.kapi.addActor(currentActor);
       this.app.config.currentActor = currentActor;
       this.setDOMKeyframePoints(currentActor);
-      this.initRekapiControls();
       $win.on('resize', _.bind(this.onWindowResize, this));
     }
 
@@ -39,11 +38,6 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
         ,'width': width
       });
       this.backgroundView.update();
-    }
-
-    ,'initRekapiControls': function () {
-      this.app.kapi.controls = new RekapiScrubber(
-          this.app.kapi, this.$canvasBG[0]);
     }
 
     ,'getDOMActor': function () {
