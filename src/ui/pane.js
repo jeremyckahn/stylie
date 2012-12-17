@@ -1,7 +1,6 @@
 define(['exports'], function (pane) {
 
   var $win = $(window);
-  var TOGGLE_FADE_SPEED = 200;
 
   pane.view = Backbone.View.extend({
 
@@ -55,7 +54,7 @@ define(['exports'], function (pane) {
     }
 
     ,'toggle': function () {
-      this.$el.fadeToggle(TOGGLE_FADE_SPEED);
+      this.$el.fadeToggle(this.app.const.TOGGLE_FADE_SPEED);
     }
 
   });

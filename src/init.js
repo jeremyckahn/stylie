@@ -36,10 +36,13 @@ require([
 
 
   // CONSTANTS
-  app.const.PRERENDER_GRANULARITY = 150;
-  app.const.RENDER_GRANULARITY = 100;
-  app.const.KEYFRAME_UPDATED = 'keyframeUpdated';
-  app.const.UPDATE_CSS_OUTPUT = 'updateCSSOutput';
+  _.extend(app.const, {
+    'PRERENDER_GRANULARITY': 150
+    ,'RENDER_GRANULARITY': 100
+    ,'KEYFRAME_UPDATED': 'keyframeUpdated'
+    ,'UPDATE_CSS_OUTPUT': 'updateCSSOutput'
+    ,'TOGGLE_FADE_SPEED': 200
+  });
 
 
   // CONFIG
