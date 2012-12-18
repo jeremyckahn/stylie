@@ -20,6 +20,7 @@ ul li {
 
 textarea {
   height: 188px;
+  resize: none;
 }
 
 input[type="checkbox"] {
@@ -415,6 +416,10 @@ canvas {
     display: block;
     margin-top: 6px;
     width: 288px;
+  }
+
+  #control-pane textarea {
+    width: 292px;
   }
 
   #control-pane input.quarter-width {
