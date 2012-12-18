@@ -112,7 +112,6 @@ require([
     }
   });
 
-
   app.config.animationDuration = app.config.initialDuration =
       +app.view.durationFieldView.$el.val();
 
@@ -136,16 +135,22 @@ require([
 
   $('.crosshair').each(function (i, el) {
     var $el = $(el);
+
     app.collection.keyframes.add({
-      'x': i ? $win.width() - ($win.width() / (i + 1)) : 40
+      'x': i
+        ? $win.width() - ($win.width() / (i + 1))
+        : 40
       ,'y': ($win.height() / 2) - ($el.height() / 2)
       ,'r': 0
     }, { 'app': app });
+
     var keyframeAttrs = app.collection.keyframes.last().getAttrs();
+
     $el.css({
       'left': keyframeAttrs.x
       ,'top': keyframeAttrs.y
     });
+
     new crosshair.view({
         'app': app
         ,'$el': $el
@@ -251,7 +256,6 @@ require([
       this.app.config.activeClasses.webkit = checked;
       publish(app.const.UPDATE_CSS_OUTPUT);
     }
-
   });
 
   app.view.w3CheckboxView = new checkbox.view({
@@ -261,7 +265,6 @@ require([
       this.app.config.activeClasses.w3 = checked;
       publish(app.const.UPDATE_CSS_OUTPUT);
     }
-
   });
 
   app.view.htmlInputView = new htmlInput.view({
