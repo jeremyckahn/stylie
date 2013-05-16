@@ -65,7 +65,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
     ,'dragEnd': function (evt, ui) {
       this.updateModel();
       this.app.view.cssOutputView.renderCSS();
-      publish(this.app.const.UPDATE_CSS_OUTPUT);
+      publish(this.app.constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'render': function () {
@@ -83,7 +83,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
         ,'y': pxTo(this.$el.css('top'))
         ,'r': this.app.util.getRotation(this.$el)
       });
-      publish(this.app.const.KEYFRAME_UPDATED);
+      publish(this.app.constant.KEYFRAME_UPDATED);
       this.app.collection.keyframes.updateModelKeyframeViews();
       this.app.kapi.update();
     }

@@ -9,7 +9,7 @@ define(['exports', 'src/ui/incrementer-field'],
 
       ,'onValReenter': _.bind(function (val) {
         this.model.set($el.data('keyframeattr'), +val);
-        publish(this.app.const.KEYFRAME_UPDATED);
+        publish(this.app.constant.KEYFRAME_UPDATED);
         this.app.collection.keyframes.updateModelCrosshairViews();
         this.app.kapi.update();
       }, this)

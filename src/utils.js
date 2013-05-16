@@ -33,7 +33,7 @@ define(function () {
     };
 
     app.util.moveLastKeyframe = function (actor, toMillisecond) {
-      var toMillisecond = +toMillisecond;
+      toMillisecond = +toMillisecond;
       var trackNames = actor.getTrackNames();
       var lastFrameIndex = actor.getTrackLength(trackNames[0]) - 1;
 
@@ -49,7 +49,7 @@ define(function () {
     app.util.getFormulaFromEasingFunc = function (fn) {
       var fnString = fn.toString().replace('\n', ''); // An effin' string
       var deprefixed = fnString.replace(/.*return\s*/g, '');
-      var desuffixed = deprefixed.replace(/\}|;\s*}$/g, '');
+      var desuffixed = deprefixed.replace(/\}|;\s*\}$/g, '');
       return desuffixed;
     };
 

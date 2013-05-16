@@ -38,7 +38,7 @@ define(['exports'], function (modal) {
     }
 
     ,'show': function () {
-      this.$el.fadeIn(this.app.const.TOGGLE_FADE_SPEED);
+      this.$el.fadeIn(this.app.constant.TOGGLE_FADE_SPEED);
       $win
         .on('keydown', this._windowKeyhandler)
         .on('click', this._windowClickhandler);
@@ -46,7 +46,7 @@ define(['exports'], function (modal) {
 
 
     ,'hide': function () {
-      this.$el.fadeOut(this.app.const.TOGGLE_FADE_SPEED);
+      this.$el.fadeOut(this.app.constant.TOGGLE_FADE_SPEED);
       $win
         .off('keydown', this._windowKeyhandler)
         .off('click', this._windowClickhandler);

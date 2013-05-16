@@ -15,7 +15,7 @@ define(['exports'], function (rekapiControls) {
     }
 
     ,'fadeToggle': function () {
-      this.$el.fadeToggle(this.app.const.TOGGLE_FADE_SPEED);
+      this.$el.fadeToggle(this.app.constant.TOGGLE_FADE_SPEED);
     }
 
   });

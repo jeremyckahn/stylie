@@ -37,9 +37,9 @@ define(['exports'], function (background) {
         ,'y': easeY
       };
       var i, point;
-      for (i = 0; i <= this.app.const.RENDER_GRANULARITY; i++) {
+      for (i = 0; i <= this.app.constant.RENDER_GRANULARITY; i++) {
         point = Tweenable.interpolate(
-            from, to, (1 / this.app.const.RENDER_GRANULARITY) * i, easing);
+            from, to, (1 / this.app.constant.RENDER_GRANULARITY) * i, easing);
         points.push(point);
       }
 

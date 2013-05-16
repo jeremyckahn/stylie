@@ -3,7 +3,7 @@ define(['exports'], function (keyframe) {
 
     'initialize': function (attrs, opts) {
       _.extend(this, opts);
-      subscribe(this.app.const.KEYFRAME_UPDATED,
+      subscribe(this.app.constant.KEYFRAME_UPDATED,
           _.bind(this.updateActor, this));
     }
 
