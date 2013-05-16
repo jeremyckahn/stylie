@@ -1,5 +1,5 @@
-define(['src/collection/keyframes', 'src/ui/keyframe'],
-    function (keyframes, keyframe) {
+define(['src/collection/keyframes', 'src/ui/keyframe-form'],
+    function (keyframes, keyframeForm) {
   keyframes.view = Backbone.View.extend({
 
     'events': {}
@@ -18,7 +18,7 @@ define(['src/collection/keyframes', 'src/ui/keyframe'],
     }
 
     ,'initKeyframeView': function (model) {
-      var keyframeView = new keyframe.view({
+      var keyframeView = new keyframeForm.view({
         'owner': this
         ,'model': model
       });
