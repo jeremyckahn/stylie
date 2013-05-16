@@ -35,4 +35,6 @@ define(['exports', 'src/model/keyframe'], function (keyframes, keyframe) {
     }
 
   });
+
+  return keyframes;
 });

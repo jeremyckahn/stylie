@@ -6,23 +6,28 @@ require([
     ,'src/ui/checkbox', 'src/ui/button'
     ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
     ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
-    ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframes'
+    ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframe-forms'
     ,'src/ui/incrementer-field', 'src/ui/modal', 'src/ui/hotkey-handler'
     ,'src/ui/rekapi-controls'
 
     // Models
     ,'src/model/keyframe'
 
+    // Collections
+    ,'src/collection/keyframes'
+
     ], function (utils
 
       ,checkbox, button
       ,select, autoUpdateTextfield, easeField
       ,crosshair, canvas, pane, tabs
-      ,cssOutput, htmlInput, keyframes
+      ,cssOutput, htmlInput, keyframeForms
       ,incrementerField, modal, hotkeyHandler
       ,rekapiControls
 
-      ,keyframe) {
+      ,keyframe
+
+      ,keyframes) {
 
   var $win = $(window);
   var app = {
@@ -158,7 +163,7 @@ require([
       });
   });
 
-  app.view.keyframes = new keyframes.view({
+  app.view.keyframeForms = new keyframeForms.view({
     'app': app
     ,'$el': $('#keyframe-controls .controls')
     ,'collection': app.collection.keyframes

@@ -1,6 +1,6 @@
-define(['src/collection/keyframes', 'src/ui/keyframe-form'],
-    function (keyframes, keyframeForm) {
-  keyframes.view = Backbone.View.extend({
+define(['exports', 'src/collection/keyframes', 'src/ui/keyframe-form'],
+    function (keyframeForms, keyframes, keyframeForm) {
+  keyframeForms.view = Backbone.View.extend({
 
     'events': {}
 
@@ -34,6 +34,4 @@ define(['src/collection/keyframes', 'src/ui/keyframe-form'],
     }
 
   });
-
-  return keyframes;
 });
