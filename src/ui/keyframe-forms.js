@@ -1,30 +1,20 @@
-define(['exports', 'src/collection/keyframes', 'src/ui/keyframe-form'],
-    function (keyframeForms, keyframes, keyframeForm) {
+define(['exports', 'src/ui/keyframe-form'],
+    function (keyframeForms, keyframeForm) {
   keyframeForms.view = Backbone.View.extend({
 
-    'events': {}
-
-    ,'initialize': function (opts) {
+    'initialize': function (opts) {
       _.extend(this, opts);
       this.keyframeViews = {};
-      this.initKeyframeViews();
     }
 
-    ,'initKeyframeViews': function () {
-      this.collection.each(function (model) {
-        var view = this.initKeyframeView(model);
-        this.$el.append(view.$el);
-      }, this);
-    }
-
-    ,'initKeyframeView': function (model) {
+    ,'addKeyframeView': function (model) {
       var keyframeView = new keyframeForm.view({
         'owner': this
         ,'model': model
       });
 
       this.keyframeViews[keyframeView.cid] = keyframeView;
-      return keyframeView;
+      this.$el.append(keyframeView.$el);
     }
 
     ,'render': function () {

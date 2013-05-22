@@ -45,7 +45,7 @@ define(['exports'], function (keyframe) {
       return {
         'transform':
           ['translateX(', this.get('x')
-            ,'px) translateY(', this.get('y'),
+            ,'px) translateY(', this.get('y')
             ,'px) rotate(', this.get('r')
             ,this.app.config.isCenteredToPath
               ? 'deg) translate(-50%, -50%)'

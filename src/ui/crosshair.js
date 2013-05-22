@@ -38,7 +38,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       this._isRotating = false;
       this.model.set('percent', +this.$el.data('percent'));
       this.model.crosshairView = this;
-      this.updateModel();
+      this.render();
     }
 
     ,'onClickRotationArm': function (evt) {

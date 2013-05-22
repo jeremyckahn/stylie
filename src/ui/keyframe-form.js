@@ -1,5 +1,5 @@
 define(['exports', 'src/ui/incrementer-field'],
-    function (keyframe, incrementerField) {
+    function (keyframeForm, incrementerField) {
 
   function incrementerGeneratorHelper ($el) {
     return new incrementerField.view({
@@ -16,7 +16,7 @@ define(['exports', 'src/ui/incrementer-field'],
     });
   }
 
-  keyframe.view = Backbone.View.extend({
+  keyframeForm.view = Backbone.View.extend({
 
     'events': {}
 

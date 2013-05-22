@@ -5,13 +5,10 @@ require([
     // Views
     ,'src/ui/checkbox', 'src/ui/button'
     ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
-    ,'src/ui/crosshair', 'src/ui/canvas', 'src/ui/pane', 'src/ui/tabs'
-    ,'src/ui/css-output', 'src/ui/html-input', 'src/ui/keyframe-forms'
-    ,'src/ui/incrementer-field', 'src/ui/modal', 'src/ui/hotkey-handler'
-    ,'src/ui/rekapi-controls'
-
-    // Models
-    ,'src/model/keyframe'
+    ,'src/ui/crosshair','src/ui/crosshairs', 'src/ui/canvas', 'src/ui/pane'
+    ,'src/ui/tabs', 'src/ui/css-output', 'src/ui/html-input'
+    ,'src/ui/keyframe-forms', 'src/ui/incrementer-field', 'src/ui/modal'
+    ,'src/ui/hotkey-handler', 'src/ui/rekapi-controls', 'src/ui/keyframe'
 
     // Collections
     ,'src/collection/keyframes'
@@ -20,12 +17,10 @@ require([
 
       ,checkbox, button
       ,select, autoUpdateTextfield, easeField
-      ,crosshair, canvas, pane, tabs
-      ,cssOutput, htmlInput, keyframeForms
-      ,incrementerField, modal, hotkeyHandler
-      ,rekapiControls
-
-      ,keyframe
+      ,crosshair, crosshairs, canvas, pane,
+      tabs ,cssOutput, htmlInput,
+      keyframeForms ,incrementerField, modal,
+      hotkeyHandler ,rekapiControls, keyframe
 
       ,keyframes) {
 
@@ -49,6 +44,7 @@ require([
     ,'KEYFRAME_UPDATED': 'keyframeUpdated'
     ,'UPDATE_CSS_OUTPUT': 'updateCSSOutput'
     ,'TOGGLE_FADE_SPEED': 200
+    ,'INITIAL_KEYFRAMES': 2
   });
 
 
@@ -132,41 +128,34 @@ require([
     app.config.easeFields.push(easeFieldInst);
   });
 
-  app.collection.keyframes = new keyframes.collection();
 
-  $('#crosshairs')
-    .append($(crosshair.generateHtml('from', 'from', 0)))
-    .append($(crosshair.generateHtml('to', 'to', 100)));
-
-  $('.crosshair').each(function (i, el) {
-    var $el = $(el);
-
-    app.collection.keyframes.add({
-      'x': i
-        ? $win.width() - ($win.width() / (i + 1))
-        : 40
-      ,'y': ($win.height() / 2) - ($el.height() / 2)
-      ,'r': 0
-    }, { 'app': app });
-
-    var keyframeAttrs = app.collection.keyframes.last().getAttrs();
-
-    $el.css({
-      'left': keyframeAttrs.x
-      ,'top': keyframeAttrs.y
-    });
-
-    new crosshair.view({
-        'app': app
-        ,'$el': $el
-        ,'model': app.collection.keyframes.last()
-      });
-  });
+  var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
+  var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
 
   app.view.keyframeForms = new keyframeForms.view({
     'app': app
     ,'$el': $('#keyframe-controls .controls')
-    ,'collection': app.collection.keyframes
+  });
+
+  app.view.crosshairs = new crosshairs.view({
+    'app': app
+    ,'$el': $('#crosshairs')
+  });
+
+  app.collection.keyframes = new keyframes.collection([], { 'app': app });
+
+  var winWidth = $win.width();
+
+  // Create the initial keyframes.
+  _.each([0, 100], function (percent, i) {
+    app.collection.keyframes.add({
+      'x': i
+        ? winWidth - (winWidth / (i + 1))
+        : 40 // TODO: Should this be a constant?
+      ,'y': crosshairStartingY
+      ,'r': 0
+      ,'percent': percent
+    }, { 'app': app });
   });
 
   // TODO: This has the wrong name and namespace.

@@ -1,14 +1,15 @@
 {
 
   "globals": {
-    "define": true,
-    "require": true,
     "$": true,
     "Backbone": true,
-    "publish": true,
-    "subscribe": true,
     "Kapi": true,
-    "_": true
+    "Mustache": true,
+    "_": true,
+    "define": true,
+    "publish": true,
+    "require": true,
+    "subscribe": true
   },
 
   "asi": false,

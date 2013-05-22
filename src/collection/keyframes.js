@@ -1,10 +1,21 @@
-define(['exports', 'src/model/keyframe'], function (keyframes, keyframe) {
+define(['exports', 'src/model/keyframe', 'src/ui/keyframe'],
+    // TODO: The naming here is a huge mess.  Need to convert away from the
+    // CommonJS decoration pattern because the model/view/names conflict. :(
+    function (keyframes, keyframe, keyframeView) {
+
   keyframes.collection = Backbone.Collection.extend({
 
     'model': keyframe.model
 
-    ,'initialize': function () {
+    ,'initialize': function (models, opts) {
+      var app = this.app = opts.app;
 
+      this.on('add', function (model) {
+        new keyframeView.view({
+            'app': app
+            ,'model': model
+          });
+      });
     }
 
     ,'updateModelViews': function () {
