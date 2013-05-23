@@ -1,6 +1,6 @@
-define(['exports'], function (hotkeyHandler) {
+define(function () {
 
-  hotkeyHandler.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'events': {
       'keydown': 'onKeydown'

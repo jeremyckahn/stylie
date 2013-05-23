@@ -1,4 +1,4 @@
-define(['exports'], function (select) {
+define(function () {
 
   function getNewEasingString (app) {
     var xEasing = app.config.selects.x.$el.val();
@@ -9,7 +9,7 @@ define(['exports'], function (select) {
 
   // TODO: This View is not generic enough.  It should be either be made more
   // generic or renamed to be specific to the easing selection functionality.
-  select.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'events': {
       'change': 'onChange'
@@ -30,7 +30,7 @@ define(['exports'], function (select) {
     ,'onChange': function (evt) {
       this.app.config.currentActor.modifyKeyframe(
           this.app.config.animationDuration, {},
-          { 'transform': getNewEasingString(this.app) })
+          { 'transform': getNewEasingString(this.app) });
       this.app.canvasView.backgroundView.update();
       this.app.kapi.update();
     }

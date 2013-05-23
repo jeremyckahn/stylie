@@ -1,4 +1,4 @@
-define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
+define(function () {
 
   var $win = $(window);
 
@@ -11,15 +11,7 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
       ,'</div>'
     ,'</div>'].join('');
 
-  crosshair.generateHtml = function (extraClass, position, percent) {
-    return Mustache.render(CROSSHAIR_TEMPLATE, {
-      'extraClass': extraClass
-      ,'position': position
-      ,'percent': percent
-    });
-  };
-
-  crosshair.view = Backbone.View.extend({
+  var CrosshairView = Backbone.View.extend({
 
     'events': {
       'mousedown .rotation-arm': 'onClickRotationArm'
@@ -130,4 +122,15 @@ define(['exports', 'src/model/keyframe'], function (crosshair, keyframe) {
     }
 
   });
+
+  CrosshairView.generateHtml = function (extraClass, position, percent) {
+    return Mustache.render(CROSSHAIR_TEMPLATE, {
+      'extraClass': extraClass
+      ,'position': position
+      ,'percent': percent
+    });
+  };
+
+  return CrosshairView;
+
 });

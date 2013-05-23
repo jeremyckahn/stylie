@@ -1,6 +1,6 @@
-define(['exports', 'src/ui/crosshair'], function (crosshairs, crosshair) {
+define(['src/ui/crosshair'], function (CrosshairView) {
 
-  crosshairs.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'initialize': function (opts) {
       _.extend(this, opts);
@@ -10,12 +10,12 @@ define(['exports', 'src/ui/crosshair'], function (crosshairs, crosshair) {
       var keyframeCount = this.app.collection.keyframes.length;
 
       var $el = keyframeCount % 2
-          ? $(crosshair.generateHtml('from', 'from', model.get('percent')))
-          : $(crosshair.generateHtml('to', 'to', model.get('percent')));
+          ? $(CrosshairView.generateHtml('from', 'from', model.get('percent')))
+          : $(CrosshairView.generateHtml('to', 'to', model.get('percent')));
 
       this.$el.append($el);
 
-      var crosshairView = new crosshair.view({
+      var crosshairView = new CrosshairView({
         'app': this.app
         ,'$el': $el
         ,'model': model

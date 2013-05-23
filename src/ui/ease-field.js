@@ -1,10 +1,10 @@
-define(['exports', './auto-update-textfield'],
-    function (easeField, autoUpdateTextfield) {
+define(['./auto-update-textfield'],
+    function (AutoUpdateTextFieldView) {
 
-  easeField.view = autoUpdateTextfield.view.extend({
+  return AutoUpdateTextFieldView.extend({
 
     'initialize': function (opts) {
-      autoUpdateTextfield.view.prototype.initialize.apply(this, arguments);
+      AutoUpdateTextFieldView.prototype.initialize.apply(this, arguments);
       var easename = this.$el.data('easename');
       var fn = Tweenable.prototype.formula[easename];
       var fnString = this.app.util.getFormulaFromEasingFunc(fn);

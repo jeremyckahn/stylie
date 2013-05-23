@@ -1,8 +1,8 @@
-define(['exports'], function (modal) {
+define(function () {
 
   var $win = $(window);
 
-  modal.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'events': { }
 

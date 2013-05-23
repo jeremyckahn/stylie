@@ -1,6 +1,6 @@
-define(['exports'], function (keyframe) {
+define(function () {
 
-  keyframe.view = Backbone.View.extend({
+  return Backbone.View.extend({
     'initialize': function (opts) {
       _.extend(this, opts);
 

@@ -1,8 +1,8 @@
-define(['exports'], function (pane) {
+define(function () {
 
   var $win = $(window);
 
-  pane.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'CONTAINER_TEMPLATE': [
       '<div class="pane"></div>'
@@ -32,7 +32,7 @@ define(['exports'], function (pane) {
         .dragon({
           'within': this.$el.parent()
           ,'handle': '.pane-handle'
-        })
+        });
       this.oldSize = this.getSize();
       $win.on('resize', _.bind(this.onResize, this));
     }

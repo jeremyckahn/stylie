@@ -1,10 +1,10 @@
-define(['exports', 'src/ui/background'], function (canvas, background) {
+define(['src/ui/background'], function (BackgroundView) {
 
   var $win = $(window);
   // There is only one header in a DOM, so this is fine (if ugly).
   var $header = $('header');
 
-  canvas.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'initialize': function (opts) {
       _.extend(this, opts);
@@ -15,7 +15,7 @@ define(['exports', 'src/ui/background'], function (canvas, background) {
       var height = $win.height();
       var width = $win.width();
 
-      this.backgroundView = new background.view({
+      this.backgroundView = new BackgroundView({
         'app': this.app
         ,'$el': this.$canvasBG
         ,'height': height

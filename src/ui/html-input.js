@@ -1,5 +1,5 @@
-define(['exports'], function (htmlInput) {
-  htmlInput.view = Backbone.View.extend({
+define(function () {
+  return Backbone.View.extend({
 
     'events': {
       'keyup': 'onKeyup'

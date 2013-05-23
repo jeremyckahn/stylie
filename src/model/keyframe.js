@@ -1,5 +1,5 @@
-define(['exports'], function (keyframe) {
-  keyframe.model = Backbone.Model.extend({
+define(function () {
+  return Backbone.Model.extend({
 
     'initialize': function (attrs, opts) {
       _.extend(this, opts);

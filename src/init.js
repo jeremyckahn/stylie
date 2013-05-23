@@ -3,26 +3,24 @@ require([
     'src/utils'
 
     // Views
-    ,'src/ui/checkbox', 'src/ui/button'
-    ,'src/ui/select', 'src/ui/auto-update-textfield', 'src/ui/ease-field'
-    ,'src/ui/crosshair','src/ui/crosshairs', 'src/ui/canvas', 'src/ui/pane'
-    ,'src/ui/tabs', 'src/ui/css-output', 'src/ui/html-input'
-    ,'src/ui/keyframe-forms', 'src/ui/incrementer-field', 'src/ui/modal'
-    ,'src/ui/hotkey-handler', 'src/ui/rekapi-controls', 'src/ui/keyframe'
+    ,'src/ui/checkbox', 'src/ui/select', 'src/ui/auto-update-textfield'
+    ,'src/ui/ease-field', 'src/ui/crosshair', 'src/ui/crosshairs'
+    ,'src/ui/canvas', 'src/ui/pane' ,'src/ui/tabs', 'src/ui/css-output'
+    ,'src/ui/html-input', 'src/ui/keyframe-forms', 'src/ui/incrementer-field'
+    ,'src/ui/modal' ,'src/ui/hotkey-handler', 'src/ui/rekapi-controls'
 
     // Collections
     ,'src/collection/keyframes'
 
     ], function (utils
 
-      ,checkbox, button
-      ,select, autoUpdateTextfield, easeField
-      ,crosshair, crosshairs, canvas, pane,
-      tabs ,cssOutput, htmlInput,
-      keyframeForms ,incrementerField, modal,
-      hotkeyHandler ,rekapiControls, keyframe
+      ,CheckboxView, SelectView, AutoUpdateTextFieldView
+      ,EaseFieldView, crosshair, CrosshairsView
+      ,CanvasView, PaneView, TabsView, CSSOutputView
+      ,HTMLInputView, KeyframeFormsView, IncrementerFieldView
+      ,ModalView, HotkeyHandlerView, RekapiControlsView
 
-      ,keyframes) {
+      ,KeyframeCollection) {
 
   var $win = $(window);
   var app = {
@@ -75,34 +73,34 @@ require([
   });
 
   app.config.selects = {
-    'x': new select.view({
+    'x': new SelectView({
       '$el': $('#x-easing')
       ,'app': app
     })
 
-    ,'y': new select.view({
+    ,'y': new SelectView({
       '$el': $('#y-easing')
       ,'app': app
     })
 
-    ,'r': new select.view({
+    ,'r': new SelectView({
       '$el': $('#r-easing')
       ,'app': app
     })
   };
 
-  app.view.hotkeyHandler = new hotkeyHandler.view({
+  app.view.hotkeyHandlerView = new HotkeyHandlerView({
     'app': app
     ,'$el': $(document.body)
   });
 
-  app.view.helpModal = new modal.view({
+  app.view.helpModal = new ModalView({
     'app': app
     ,'$el': $('#help-contents')
     ,'$triggerEl': $('#help-trigger')
   });
 
-  app.view.durationFieldView = new incrementerField.view({
+  app.view.durationFieldView = new IncrementerFieldView({
     'app': app
     ,'$el': $('#duration')
     ,'onValReenter': function (val) {
@@ -120,29 +118,29 @@ require([
 
   app.config.easeFields = [];
   $('.ease').each(function (i, el) {
-    var easeFieldInst = new easeField.view({
+    var easeFieldView = new EaseFieldView({
       '$el': $(el)
       ,'app': app
     });
 
-    app.config.easeFields.push(easeFieldInst);
+    app.config.easeFields.push(easeFieldView);
   });
 
 
   var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
   var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
 
-  app.view.keyframeForms = new keyframeForms.view({
+  app.view.keyframeForms = new KeyframeFormsView({
     'app': app
     ,'$el': $('#keyframe-controls .controls')
   });
 
-  app.view.crosshairs = new crosshairs.view({
+  app.view.crosshairs = new CrosshairsView({
     'app': app
     ,'$el': $('#crosshairs')
   });
 
-  app.collection.keyframes = new keyframes.collection([], { 'app': app });
+  app.collection.keyframes = new KeyframeCollection([], { 'app': app });
 
   var winWidth = $win.width();
 
@@ -159,13 +157,13 @@ require([
   });
 
   // TODO: This has the wrong name and namespace.
-  app.canvasView = new canvas.view({
+  app.canvasView = new CanvasView({
     'app': app
     ,'$el': $('#rekapi-canvas')
     ,'$canvasBG': $('#tween-path')
   });
 
-  app.view.rekapiControls = new rekapiControls.view({
+  app.view.rekapiControls = new RekapiControlsView({
     'app': app
   });
 
@@ -175,7 +173,7 @@ require([
     app.kapi.play();
   }
 
-  app.view.showPathView = new checkbox.view({
+  app.view.showPathView = new CheckboxView({
     'app': app
     ,'$el': $('#show-path')
     ,'callHandlerOnInit': true
@@ -186,17 +184,17 @@ require([
     }
   });
 
-  app.view.controlPaneView = new pane.view({
+  app.view.controlPaneView = new PaneView({
     'app': app
     ,'$el': $('#control-pane')
   });
 
-  app.view.controlPaneTabsView = new tabs.view({
+  app.view.controlPaneTabsView = new TabsView({
     'app': app
     ,'$el': $('#control-pane')
   });
 
-  app.view.cssOutputView = new cssOutput.view({
+  app.view.cssOutputView = new CSSOutputView({
     'app': app
     ,'$el': $('#css-output textarea')
     ,'$trigger': app.view.controlPaneTabsView.$el
@@ -207,7 +205,7 @@ require([
     app.view.cssOutputView.renderCSS();
   });
 
-  app.view.cssNameFieldView = new autoUpdateTextfield.view({
+  app.view.cssNameFieldView = new AutoUpdateTextFieldView({
     'app': app
     ,'$el': $('#css-name')
     ,'onKeyup': function (val) {
@@ -216,7 +214,7 @@ require([
     }
   });
 
-  app.view.mozCheckboxView = new checkbox.view({
+  app.view.mozCheckboxView = new CheckboxView({
     'app': app
     ,'$el': $('#moz-toggle')
     ,'onChange': function (evt, checked) {
@@ -225,7 +223,7 @@ require([
     }
   });
 
-  app.view.msCheckboxView = new checkbox.view({
+  app.view.msCheckboxView = new CheckboxView({
     'app': app
     ,'$el': $('#ms-toggle')
     ,'onChange': function (evt, checked) {
@@ -234,7 +232,7 @@ require([
     }
   });
 
-  app.view.oCheckboxView = new checkbox.view({
+  app.view.oCheckboxView = new CheckboxView({
     'app': app
     ,'$el': $('#o-toggle')
     ,'onChange': function (evt, checked) {
@@ -243,7 +241,7 @@ require([
     }
   });
 
-  app.view.webkitCheckboxView = new checkbox.view({
+  app.view.webkitCheckboxView = new CheckboxView({
     'app': app
     ,'$el': $('#webkit-toggle')
     ,'onChange': function (evt, checked) {
@@ -252,7 +250,7 @@ require([
     }
   });
 
-  app.view.w3CheckboxView = new checkbox.view({
+  app.view.w3CheckboxView = new CheckboxView({
     'app': app
     ,'$el': $('#w3-toggle')
     ,'onChange': function (evt, checked) {
@@ -261,12 +259,12 @@ require([
     }
   });
 
-  app.view.htmlInputView = new htmlInput.view({
+  app.view.htmlInputView = new HTMLInputView({
     'app': app
     ,'$el': $('#html-input textarea')
   });
 
-  app.view.centerToPathView = new checkbox.view({
+  app.view.centerToPathView = new CheckboxView({
     'app': app
     ,'$el': $('#center-to-path')
     ,'callHandlerOnInit': true

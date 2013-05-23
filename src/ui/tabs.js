@@ -1,5 +1,5 @@
-define(['exports'], function (tabs) {
-  tabs.view = Backbone.View.extend({
+define(function () {
+  return Backbone.View.extend({
 
     'ACTIVE_CLASS': 'tabs-active'
 

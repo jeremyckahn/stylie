@@ -1,4 +1,4 @@
-define(['exports'], function (cssOutput) {
+define(function () {
 
   var checkboxToVendorMap = {
     'moz': 'mozilla'
@@ -19,7 +19,7 @@ define(['exports'], function (cssOutput) {
     return prefixList;
   }
 
-  cssOutput.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'events': { }
 

@@ -1,10 +1,10 @@
-define(['exports'], function (autoUpdateTextField) {
+define(function () {
 
   // Bindable event handlers:
   //   onArrowUp()
   //   onArrowDown()
   //   onValReenter(val)
-  autoUpdateTextField.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'events': {
       'keyup': 'onKeyup'

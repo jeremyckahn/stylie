@@ -1,6 +1,6 @@
-define(['exports'], function (checkbox) {
+define(function () {
 
-  checkbox.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'events': {
       'change': '_onChange'

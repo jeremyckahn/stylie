@@ -1,5 +1,5 @@
-define(['exports'], function (background) {
-  background.view = Backbone.View.extend({
+define(function () {
+  return Backbone.View.extend({
 
     'initialize': function (opts) {
       _.extend(this, opts);

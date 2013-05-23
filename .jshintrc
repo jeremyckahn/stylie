@@ -5,6 +5,8 @@
     "Backbone": true,
     "Kapi": true,
     "Mustache": true,
+    "RekapiScrubber": true,
+    "Tweenable": true,
     "_": true,
     "define": true,
     "publish": true,

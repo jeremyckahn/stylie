@@ -1,6 +1,6 @@
-define(['exports'], function (rekapiControls) {
+define(function () {
 
-  rekapiControls.view = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'events': {
     }

@@ -1,12 +1,12 @@
-define(['exports', 'src/ui/auto-update-textfield'],
-    function (incrementerField, autoUpdateTextField) {
+define(['src/ui/auto-update-textfield'],
+    function (AutoUpdateTextFieldView) {
 
-  incrementerField.view = autoUpdateTextField.view.extend({
+  return AutoUpdateTextFieldView.extend({
 
     'increment': 10
 
     ,'initialize': function (opts) {
-      autoUpdateTextField.view.prototype.initialize.call(this, opts);
+      AutoUpdateTextFieldView.prototype.initialize.call(this, opts);
     }
 
     ,'tweakVal': function (tweakAmount) {
