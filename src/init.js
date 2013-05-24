@@ -4,10 +4,10 @@ require([
 
     // Views
     ,'src/ui/checkbox', 'src/ui/select', 'src/ui/auto-update-textfield'
-    ,'src/ui/ease-field', 'src/ui/crosshair', 'src/ui/crosshairs'
-    ,'src/ui/canvas', 'src/ui/pane' ,'src/ui/tabs', 'src/ui/css-output'
-    ,'src/ui/html-input', 'src/ui/keyframe-forms', 'src/ui/incrementer-field'
-    ,'src/ui/modal' ,'src/ui/hotkey-handler', 'src/ui/rekapi-controls'
+    ,'src/ui/ease-field', 'src/ui/crosshairs' ,'src/ui/canvas', 'src/ui/pane'
+    ,'src/ui/tabs', 'src/ui/css-output' ,'src/ui/html-input'
+    ,'src/ui/keyframe-forms', 'src/ui/incrementer-field', 'src/ui/modal'
+    ,'src/ui/hotkey-handler', 'src/ui/rekapi-controls'
 
     // Collections
     ,'src/collection/keyframes'
@@ -15,10 +15,10 @@ require([
     ], function (utils
 
       ,CheckboxView, SelectView, AutoUpdateTextFieldView
-      ,EaseFieldView, crosshair, CrosshairsView
-      ,CanvasView, PaneView, TabsView, CSSOutputView
-      ,HTMLInputView, KeyframeFormsView, IncrementerFieldView
-      ,ModalView, HotkeyHandlerView, RekapiControlsView
+      ,EaseFieldView, CrosshairsView, CanvasView, PaneView
+      ,TabsView, CSSOutputView, HTMLInputView
+      ,KeyframeFormsView, IncrementerFieldView, ModalView
+      ,HotkeyHandlerView, RekapiControlsView
 
       ,KeyframeCollection) {
 
