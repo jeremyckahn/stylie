@@ -1,11 +1,11 @@
-define(function () {
+define(['src/app'], function (app) {
 
   return Backbone.View.extend({
     'initialize': function (opts) {
       _.extend(this, opts);
 
-      this.app.view.crosshairs.addCrosshairView(this.model);
-      this.app.view.keyframeForms.addKeyframeView(this.model);
+      app.view.crosshairs.addCrosshairView(this.model);
+      app.view.keyframeForms.addKeyframeView(this.model);
     }
   });
 });

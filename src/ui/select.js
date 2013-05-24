@@ -1,4 +1,4 @@
-define(function () {
+define(['src/app'], function (app) {
 
   function getNewEasingString (app) {
     var xEasing = app.config.selects.x.$el.val();
@@ -28,11 +28,11 @@ define(function () {
     }
 
     ,'onChange': function (evt) {
-      this.app.config.currentActor.modifyKeyframe(
-          this.app.config.animationDuration, {},
-          { 'transform': getNewEasingString(this.app) });
-      this.app.canvasView.backgroundView.update();
-      this.app.kapi.update();
+      app.config.currentActor.modifyKeyframe(
+          app.config.animationDuration, {},
+          { 'transform': getNewEasingString(app) });
+      app.canvasView.backgroundView.update();
+      app.kapi.update();
     }
 
   });

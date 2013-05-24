@@ -1,4 +1,4 @@
-define(function () {
+define(['src/app'], function (app) {
   return Backbone.View.extend({
 
     'events': {
@@ -17,7 +17,7 @@ define(function () {
     }
 
     ,'readFromDOM': function () {
-      return this.app.util.trimString(this.$renderTarget.html());
+      return app.util.trimString(this.$renderTarget.html());
     }
 
     ,'renderToDOM': function () {

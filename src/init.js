@@ -1,6 +1,7 @@
 require([
     // Misc
-    'src/utils'
+    'src/app'
+    ,'src/utils'
 
     // Views
     ,'src/ui/checkbox', 'src/ui/select', 'src/ui/auto-update-textfield'
@@ -12,7 +13,9 @@ require([
     // Collections
     ,'src/collection/keyframes'
 
-    ], function (utils
+    ], function (
+      app
+      ,utils
 
       ,CheckboxView, SelectView, AutoUpdateTextFieldView
       ,EaseFieldView, CrosshairsView, CanvasView, PaneView
@@ -23,17 +26,6 @@ require([
       ,KeyframeCollection) {
 
   var $win = $(window);
-  var app = {
-    'config': {
-        'activeClasses': {}
-      }
-    ,'constant': {}
-    ,'events': {}
-    ,'util': {}
-    ,'view': {}
-    ,'collection': {}
-  };
-
 
   // CONSTANTS
   _.extend(app.constant, {
@@ -75,38 +67,32 @@ require([
   app.config.selects = {
     'x': new SelectView({
       '$el': $('#x-easing')
-      ,'app': app
     })
 
     ,'y': new SelectView({
       '$el': $('#y-easing')
-      ,'app': app
     })
 
     ,'r': new SelectView({
       '$el': $('#r-easing')
-      ,'app': app
     })
   };
 
   app.view.hotkeyHandlerView = new HotkeyHandlerView({
-    'app': app
-    ,'$el': $(document.body)
+    '$el': $(document.body)
   });
 
   app.view.helpModal = new ModalView({
-    'app': app
-    ,'$el': $('#help-contents')
+    '$el': $('#help-contents')
     ,'$triggerEl': $('#help-trigger')
   });
 
   app.view.durationFieldView = new IncrementerFieldView({
-    'app': app
-    ,'$el': $('#duration')
+    '$el': $('#duration')
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
         var validVal = Math.abs(val);
-        this.app.util.moveLastKeyframe(this.app.config.currentActor, validVal);
+        app.util.moveLastKeyframe(app.config.currentActor, validVal);
       }
     }
   });
@@ -120,7 +106,6 @@ require([
   $('.ease').each(function (i, el) {
     var easeFieldView = new EaseFieldView({
       '$el': $(el)
-      ,'app': app
     });
 
     app.config.easeFields.push(easeFieldView);
@@ -131,16 +116,14 @@ require([
   var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
 
   app.view.keyframeForms = new KeyframeFormsView({
-    'app': app
-    ,'$el': $('#keyframe-controls .controls')
+    '$el': $('#keyframe-controls .controls')
   });
 
   app.view.crosshairs = new CrosshairsView({
-    'app': app
-    ,'$el': $('#crosshairs')
+    '$el': $('#crosshairs')
   });
 
-  app.collection.keyframes = new KeyframeCollection([], { 'app': app });
+  app.collection.keyframes = new KeyframeCollection([]);
 
   var winWidth = $win.width();
 
@@ -153,19 +136,16 @@ require([
       ,'y': crosshairStartingY
       ,'r': 0
       ,'percent': percent
-    }, { 'app': app });
+    });
   });
 
   // TODO: This has the wrong name and namespace.
   app.canvasView = new CanvasView({
-    'app': app
-    ,'$el': $('#rekapi-canvas')
+    '$el': $('#rekapi-canvas')
     ,'$canvasBG': $('#tween-path')
   });
 
-  app.view.rekapiControls = new RekapiControlsView({
-    'app': app
-  });
+  app.view.rekapiControls = new RekapiControlsView();
 
   app.canvasView.backgroundView.update();
 
@@ -174,29 +154,25 @@ require([
   }
 
   app.view.showPathView = new CheckboxView({
-    'app': app
-    ,'$el': $('#show-path')
+    '$el': $('#show-path')
     ,'callHandlerOnInit': true
     ,'onChange': function (evt, checked) {
-      this.app.config.isPathShowing = !!checked;
-      this.app.kapi.update();
-      this.app.canvasView.backgroundView.update();
+      app.config.isPathShowing = !!checked;
+      app.kapi.update();
+      app.canvasView.backgroundView.update();
     }
   });
 
   app.view.controlPaneView = new PaneView({
-    'app': app
-    ,'$el': $('#control-pane')
+    '$el': $('#control-pane')
   });
 
   app.view.controlPaneTabsView = new TabsView({
-    'app': app
-    ,'$el': $('#control-pane')
+    '$el': $('#control-pane')
   });
 
   app.view.cssOutputView = new CSSOutputView({
-    'app': app
-    ,'$el': $('#css-output textarea')
+    '$el': $('#css-output textarea')
     ,'$trigger': app.view.controlPaneTabsView.$el
         .find('[data-target="css-output"]')
   });
@@ -206,77 +182,69 @@ require([
   });
 
   app.view.cssNameFieldView = new AutoUpdateTextFieldView({
-    'app': app
-    ,'$el': $('#css-name')
+    '$el': $('#css-name')
     ,'onKeyup': function (val) {
-      this.app.config.className = val;
+      app.config.className = val;
       publish(app.constant.UPDATE_CSS_OUTPUT);
     }
   });
 
   app.view.mozCheckboxView = new CheckboxView({
-    'app': app
-    ,'$el': $('#moz-toggle')
+    '$el': $('#moz-toggle')
     ,'onChange': function (evt, checked) {
-      this.app.config.activeClasses.moz = checked;
+      app.config.activeClasses.moz = checked;
       publish(app.constant.UPDATE_CSS_OUTPUT);
     }
   });
 
   app.view.msCheckboxView = new CheckboxView({
-    'app': app
-    ,'$el': $('#ms-toggle')
+    '$el': $('#ms-toggle')
     ,'onChange': function (evt, checked) {
-      this.app.config.activeClasses.ms = checked;
+      app.config.activeClasses.ms = checked;
       publish(app.constant.UPDATE_CSS_OUTPUT);
     }
   });
 
   app.view.oCheckboxView = new CheckboxView({
-    'app': app
-    ,'$el': $('#o-toggle')
+    '$el': $('#o-toggle')
     ,'onChange': function (evt, checked) {
-      this.app.config.activeClasses.o = checked;
+      app.config.activeClasses.o = checked;
       publish(app.constant.UPDATE_CSS_OUTPUT);
     }
   });
 
   app.view.webkitCheckboxView = new CheckboxView({
-    'app': app
-    ,'$el': $('#webkit-toggle')
+    '$el': $('#webkit-toggle')
     ,'onChange': function (evt, checked) {
-      this.app.config.activeClasses.webkit = checked;
+      app.config.activeClasses.webkit = checked;
       publish(app.constant.UPDATE_CSS_OUTPUT);
     }
   });
 
   app.view.w3CheckboxView = new CheckboxView({
-    'app': app
-    ,'$el': $('#w3-toggle')
+    '$el': $('#w3-toggle')
     ,'onChange': function (evt, checked) {
-      this.app.config.activeClasses.w3 = checked;
+      app.config.activeClasses.w3 = checked;
       publish(app.constant.UPDATE_CSS_OUTPUT);
     }
   });
 
   app.view.htmlInputView = new HTMLInputView({
-    'app': app
-    ,'$el': $('#html-input textarea')
+    '$el': $('#html-input textarea')
   });
 
   app.view.centerToPathView = new CheckboxView({
-    'app': app
-    ,'$el': $('#center-to-path')
+    '$el': $('#center-to-path')
     ,'callHandlerOnInit': true
     ,'onChange': function (evt, checked) {
-      this.app.config.isCenteredToPath = !!checked;
-      var tranformOrigin = this.app.config.isCenteredToPath
+      app.config.isCenteredToPath = !!checked;
+      var tranformOrigin = app.config.isCenteredToPath
         ? '0 0'
         : '';
       app.view.htmlInputView.$renderTarget.css(
         'transform-origin', tranformOrigin);
-      publish(this.app.constant.KEYFRAME_UPDATED, [true]);
-      this.app.kapi.update();
+      publish(app.constant.KEYFRAME_UPDATED, [true]);
+      app.kapi.update();
     }
   });
 

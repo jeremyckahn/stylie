@@ -1,4 +1,4 @@
-define(['src/ui/background'], function (BackgroundView) {
+define(['src/app', 'src/ui/background'], function (app, BackgroundView) {
 
   var $win = $(window);
   // There is only one header in a DOM, so this is fine (if ugly).
@@ -16,14 +16,13 @@ define(['src/ui/background'], function (BackgroundView) {
       var width = $win.width();
 
       this.backgroundView = new BackgroundView({
-        'app': this.app
-        ,'$el': this.$canvasBG
+        '$el': this.$canvasBG
         ,'height': height
         ,'width': width
       });
       var currentActor = this.getDOMActor();
-      this.app.kapi.addActor(currentActor);
-      this.app.config.currentActor = currentActor;
+      app.kapi.addActor(currentActor);
+      app.config.currentActor = currentActor;
       this.setDOMKeyframePoints(currentActor);
       $win.on('resize', _.bind(this.onWindowResize, this));
     }
@@ -31,8 +30,8 @@ define(['src/ui/background'], function (BackgroundView) {
     ,'onWindowResize': function (evt) {
       var height = $win.height() - $header.outerHeight();
       var width = $win.width();
-      this.app.kapi.canvas.height(height);
-      this.app.kapi.canvas.width(width);
+      app.kapi.canvas.height(height);
+      app.kapi.canvas.width(width);
       this.backgroundView.resize({
         'height': height
         ,'width': width
@@ -49,10 +48,10 @@ define(['src/ui/background'], function (BackgroundView) {
       // TODO: Fix this crazy brittleness.
       DOMActor
         .keyframe(0,
-            this.app.collection.keyframes.first().getCSS(),
+            app.collection.keyframes.first().getCSS(),
             'linear linear')
-        .keyframe(+this.app.config.initialDuration,
-            this.app.collection.keyframes.last().getCSS(),
+        .keyframe(+app.config.initialDuration,
+            app.collection.keyframes.last().getCSS(),
             'linear linear');
     }
 

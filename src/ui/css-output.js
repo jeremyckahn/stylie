@@ -1,4 +1,4 @@
-define(function () {
+define(['src/app'], function (app) {
 
   var checkboxToVendorMap = {
     'moz': 'mozilla'
@@ -33,11 +33,11 @@ define(function () {
     }
 
     ,'renderCSS': function () {
-      var cssOutput = this.app.kapi.toCSS({
-        'vendors': getPrefixList(this.app)
-        ,'name': this.app.view.cssNameFieldView.$el.val()
-        ,'iterations': this.app.config.animationIteration.val()
-        ,'isCentered': this.app.config.isCenteredToPath
+      var cssOutput = app.kapi.toCSS({
+        'vendors': getPrefixList(app)
+        ,'name': app.view.cssNameFieldView.$el.val()
+        ,'iterations': app.config.animationIteration.val()
+        ,'isCentered': app.config.isCenteredToPath
       });
       this.$el.val(cssOutput);
     }

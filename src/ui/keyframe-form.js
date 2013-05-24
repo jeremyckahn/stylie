@@ -1,17 +1,15 @@
-define(['src/ui/incrementer-field'],
-    function (IncrementerFieldView) {
+define(['src/app', 'src/ui/incrementer-field'],
+    function (app, IncrementerFieldView) {
 
   function incrementerGeneratorHelper ($el) {
     return new IncrementerFieldView({
-      'app': this.app
-
-      ,'$el': $el
+      '$el': $el
 
       ,'onValReenter': _.bind(function (val) {
         this.model.set($el.data('keyframeattr'), +val);
-        publish(this.app.constant.KEYFRAME_UPDATED);
-        this.app.collection.keyframes.updateModelCrosshairViews();
-        this.app.kapi.update();
+        publish(app.constant.KEYFRAME_UPDATED);
+        app.collection.keyframes.updateModelCrosshairViews();
+        app.kapi.update();
       }, this)
     });
   }
@@ -40,7 +38,6 @@ define(['src/ui/incrementer-field'],
 
     ,'initialize': function (opts) {
       _.extend(this, opts);
-      this.app = this.owner.app;
       this.$el = $(this.KEYFRAME_TEMPLATE);
       this.model.keyframeForm = this;
       this.initDOMReferences();

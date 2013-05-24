@@ -1,5 +1,5 @@
-define(['./auto-update-textfield'],
-    function (AutoUpdateTextFieldView) {
+define(['src/app', 'src/ui/auto-update-textfield'],
+    function (app, AutoUpdateTextFieldView) {
 
   return AutoUpdateTextFieldView.extend({
 
@@ -7,7 +7,7 @@ define(['./auto-update-textfield'],
       AutoUpdateTextFieldView.prototype.initialize.apply(this, arguments);
       var easename = this.$el.data('easename');
       var fn = Tweenable.prototype.formula[easename];
-      var fnString = this.app.util.getFormulaFromEasingFunc(fn);
+      var fnString = app.util.getFormulaFromEasingFunc(fn);
       this.$el.val(fnString);
       this.$el.data('lastvalidfn', fnString);
     }
@@ -25,8 +25,8 @@ define(['./auto-update-textfield'],
             + ' = function (x) {return ' + val + '}');
         this.$el.data('lastvalidfn', val);
         this.$el.removeClass('error');
-        this.app.canvasView.backgroundView.update();
-        this.app.kapi.update();
+        app.canvasView.backgroundView.update();
+        app.kapi.update();
       } catch (ex) {
         eval('Tweenable.prototype.formula.' + easename
             + ' = function (x) {return ' + lastValid + '}');

@@ -1,21 +1,18 @@
-define(function () {
+define(['src/app'], function (app) {
 
   return Backbone.View.extend({
 
-    'events': {
-    }
-
-    ,'initialize': function (opts) {
+    'initialize': function (opts) {
       _.extend(this, opts);
 
       this.scrubber = new RekapiScrubber(
-          this.app.kapi, this.app.canvasView.$canvasBG[0]);
+          app.kapi, app.canvasView.$canvasBG[0]);
 
       this.$el = this.scrubber.$container;
     }
 
     ,'fadeToggle': function () {
-      this.$el.fadeToggle(this.app.constant.TOGGLE_FADE_SPEED);
+      this.$el.fadeToggle(app.constant.TOGGLE_FADE_SPEED);
     }
 
   });

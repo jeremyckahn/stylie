@@ -1,4 +1,4 @@
-define(function () {
+define(['src/app'], function (app) {
 
   var $win = $(window);
 
@@ -56,8 +56,8 @@ define(function () {
 
     ,'dragEnd': function (evt, ui) {
       this.updateModel();
-      this.app.view.cssOutputView.renderCSS();
-      publish(this.app.constant.UPDATE_CSS_OUTPUT);
+      app.view.cssOutputView.renderCSS();
+      publish(app.constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'render': function () {
@@ -69,19 +69,19 @@ define(function () {
     }
 
     ,'updateModel': function () {
-      var pxTo = this.app.util.pxToNumber;
+      var pxTo = app.util.pxToNumber;
       this.model.set({
         'x': pxTo(this.$el.css('left'))
         ,'y': pxTo(this.$el.css('top'))
-        ,'r': this.app.util.getRotation(this.$el)
+        ,'r': app.util.getRotation(this.$el)
       });
-      publish(this.app.constant.KEYFRAME_UPDATED);
-      this.app.collection.keyframes.updateModelKeyframeViews();
-      this.app.kapi.update();
+      publish(app.constant.KEYFRAME_UPDATED);
+      app.collection.keyframes.updateModelKeyframeViews();
+      app.kapi.update();
     }
 
     ,'dimPathLine': function () {
-      this.app.canvasView.backgroundView.update(true);
+      app.canvasView.backgroundView.update(true);
     }
 
     ,'startRotating': function (startingX, startingY) {
@@ -116,7 +116,7 @@ define(function () {
       var deltaX = currentX - this._previousRotationDragX;
       var deltaY = currentY - this._previousRotationDragY;
       var totalDelta = deltaX + deltaY;
-      var currentRotation = this.app.util.getRotation(this.$el);
+      var currentRotation = app.util.getRotation(this.$el);
       var newRotation = currentRotation + totalDelta;
       this.$el.css('transform', 'rotate(' + newRotation + 'deg)');
     }

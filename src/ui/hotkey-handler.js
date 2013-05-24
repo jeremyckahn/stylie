@@ -1,4 +1,4 @@
-define(function () {
+define(['src/app'], function (app) {
 
   return Backbone.View.extend({
 
@@ -20,17 +20,19 @@ define(function () {
         this.$el.addClass('shift-down');
 
       } else if (evt.keyCode === 67) { // "C" key
-        this.app.view.controlPaneView.toggle();
+        app.view.controlPaneView.toggle();
 
       } else if (evt.keyCode === 72) { // "H" key
-        this.app.view.helpModal.toggle();
+        app.view.helpModal.toggle();
 
       } else if (evt.keyCode === 32) { // Space bar
-        this.app.kapi.isPlaying()
-          ? this.app.kapi.pause()
-          : this.app.kapi.play();
+        if (app.kapi.isPlaying()) {
+          app.kapi.pause();
+        } else {
+          app.kapi.play();
+        }
       } else if (evt.keyCode === 84) { // "T" key
-        this.app.view.rekapiControls.fadeToggle();
+        app.view.rekapiControls.fadeToggle();
       }
     }
 

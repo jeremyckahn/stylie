@@ -1,9 +1,9 @@
-define(function () {
+define(['src/app'], function (app) {
   return Backbone.Model.extend({
 
     'initialize': function (attrs, opts) {
       _.extend(this, opts);
-      subscribe(this.app.constant.KEYFRAME_UPDATED,
+      subscribe(app.constant.KEYFRAME_UPDATED,
           _.bind(this.updateActor, this));
     }
 
@@ -24,19 +24,19 @@ define(function () {
       // TODO: This should not have to be in a conditional.  The relationship
       // between the keyframe Models and the Views that render them needs to be
       // rethought.
-      if (this.app.canvasView) {
-        this.app.canvasView.backgroundView.update();
+      if (app.canvasView) {
+        app.canvasView.backgroundView.update();
       }
 
       var timeToModify = this.get('percent') === 0
           ? 0
-          : this.app.config.animationDuration;
+          : app.config.animationDuration;
 
-      if (this.app.config.currentActor) {
-        this.app.config.currentActor.modifyKeyframe(
+      if (app.config.currentActor) {
+        app.config.currentActor.modifyKeyframe(
             timeToModify, this.getCSS());
         if (!opt_isUpdatePrevented) {
-          this.app.kapi.update();
+          app.kapi.update();
         }
       }
     }
@@ -47,7 +47,7 @@ define(function () {
           ['translateX(', this.get('x')
             ,'px) translateY(', this.get('y')
             ,'px) rotate(', this.get('r')
-            ,this.app.config.isCenteredToPath
+            ,app.config.isCenteredToPath
               ? 'deg) translate(-50%, -50%)'
               : 'deg)'
             ].join('')

@@ -1,17 +1,15 @@
-define(['src/model/keyframe', 'src/ui/keyframe'],
-    function (KeyframeModel, KeyframeView) {
+define(['src/app', 'src/model/keyframe', 'src/ui/keyframe'],
+    function (app, KeyframeModel, KeyframeView) {
 
   return Backbone.Collection.extend({
 
     'model': KeyframeModel
 
     ,'initialize': function (models, opts) {
-      var app = this.app = opts.app;
 
       this.on('add', function (model) {
         new KeyframeView({
-            'app': app
-            ,'model': model
+            'model': model
           });
       });
     }

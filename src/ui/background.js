@@ -1,4 +1,4 @@
-define(function () {
+define(['src/app'], function (app) {
   return Backbone.View.extend({
 
     'initialize': function (opts) {
@@ -37,9 +37,9 @@ define(function () {
         ,'y': easeY
       };
       var i, point;
-      for (i = 0; i <= this.app.constant.RENDER_GRANULARITY; i++) {
+      for (i = 0; i <= app.constant.RENDER_GRANULARITY; i++) {
         point = Tweenable.interpolate(
-            from, to, (1 / this.app.constant.RENDER_GRANULARITY) * i, easing);
+            from, to, (1 / app.constant.RENDER_GRANULARITY) * i, easing);
         points.push(point);
       }
 
@@ -48,13 +48,13 @@ define(function () {
 
     ,'generatePathPrerender': function (
           x1, y1, x2, y2, easeX, easeY, useDimColor) {
-      this.app.config.prerenderedPath = document.createElement('canvas');
-      this.app.config.prerenderedPath.width =
-          this.app.canvasView.$canvasBG.width();
-      this.app.config.prerenderedPath.height =
-          this.app.canvasView.$canvasBG.height();
-      var ctx = this.app.config.prerenderedPath.ctx =
-          this.app.config.prerenderedPath.getContext('2d');
+      app.config.prerenderedPath = document.createElement('canvas');
+      app.config.prerenderedPath.width =
+          app.canvasView.$canvasBG.width();
+      app.config.prerenderedPath.height =
+          app.canvasView.$canvasBG.height();
+      var ctx = app.config.prerenderedPath.ctx =
+          app.config.prerenderedPath.getContext('2d');
       var points = this.generatePathPoints.apply(this, arguments);
 
       var previousPoint;
@@ -79,16 +79,16 @@ define(function () {
     }
 
     ,'update': function (useDimColor) {
-      var fromCoords = this.app.collection.keyframes.first().getAttrs();
-      var toCoords = this.app.collection.keyframes.last().getAttrs();
+      var fromCoords = app.collection.keyframes.first().getAttrs();
+      var toCoords = app.collection.keyframes.last().getAttrs();
       this.generatePathPrerender(fromCoords.x, fromCoords.y,
-          toCoords.x, toCoords.y, this.app.config.selects.x.$el.val(),
-          this.app.config.selects.y.$el.val(), useDimColor);
+          toCoords.x, toCoords.y, app.config.selects.x.$el.val(),
+          app.config.selects.y.$el.val(), useDimColor);
 
-      if (this.app.config.prerenderedPath) {
+      if (app.config.prerenderedPath) {
         this.$el[0].width = this.$el.width();
-        if (this.app.config.isPathShowing) {
-          this.context.drawImage(this.app.config.prerenderedPath, 0, 0);
+        if (app.config.isPathShowing) {
+          this.context.drawImage(app.config.prerenderedPath, 0, 0);
         }
       }
     }
