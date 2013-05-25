@@ -50,9 +50,9 @@ define(['src/app'], function (app) {
           x1, y1, x2, y2, easeX, easeY, useDimColor) {
       app.config.prerenderedPath = document.createElement('canvas');
       app.config.prerenderedPath.width =
-          app.canvasView.$canvasBG.width();
+          app.view.canvas.$canvasBG.width();
       app.config.prerenderedPath.height =
-          app.canvasView.$canvasBG.height();
+          app.view.canvas.$canvasBG.height();
       var ctx = app.config.prerenderedPath.ctx =
           app.config.prerenderedPath.getContext('2d');
       var points = this.generatePathPoints.apply(this, arguments);

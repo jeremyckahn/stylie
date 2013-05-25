@@ -81,7 +81,7 @@ define(['src/app'], function (app) {
     }
 
     ,'dimPathLine': function () {
-      app.canvasView.backgroundView.update(true);
+      app.view.canvas.backgroundView.update(true);
     }
 
     ,'startRotating': function (startingX, startingY) {

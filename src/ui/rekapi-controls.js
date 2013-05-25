@@ -6,7 +6,7 @@ define(['src/app'], function (app) {
       _.extend(this, opts);
 
       this.scrubber = new RekapiScrubber(
-          app.kapi, app.canvasView.$canvasBG[0]);
+          app.kapi, app.view.canvas.$canvasBG[0]);
 
       this.$el = this.scrubber.$container;
     }

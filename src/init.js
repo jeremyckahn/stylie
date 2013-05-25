@@ -139,15 +139,14 @@ require([
     });
   });
 
-  // TODO: This has the wrong name and namespace.
-  app.canvasView = new CanvasView({
+  app.view.canvas = new CanvasView({
     '$el': $('#rekapi-canvas')
     ,'$canvasBG': $('#tween-path')
   });
 
   app.view.rekapiControls = new RekapiControlsView();
 
-  app.canvasView.backgroundView.update();
+  app.view.canvas.backgroundView.update();
 
   if (!app.constant.QUERY_STRING.debug) {
     app.kapi.play();
@@ -159,7 +158,7 @@ require([
     ,'onChange': function (evt, checked) {
       app.config.isPathShowing = !!checked;
       app.kapi.update();
-      app.canvasView.backgroundView.update();
+      app.view.canvas.backgroundView.update();
     }
   });
 

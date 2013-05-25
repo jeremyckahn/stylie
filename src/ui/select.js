@@ -31,7 +31,7 @@ define(['src/app'], function (app) {
       app.config.currentActor.modifyKeyframe(
           app.config.animationDuration, {},
           { 'transform': getNewEasingString(app) });
-      app.canvasView.backgroundView.update();
+      app.view.canvas.backgroundView.update();
       app.kapi.update();
     }
 

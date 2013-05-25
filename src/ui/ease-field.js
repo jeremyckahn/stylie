@@ -25,7 +25,7 @@ define(['src/app', 'src/ui/auto-update-textfield'],
             + ' = function (x) {return ' + val + '}');
         this.$el.data('lastvalidfn', val);
         this.$el.removeClass('error');
-        app.canvasView.backgroundView.update();
+        app.view.canvas.backgroundView.update();
         app.kapi.update();
       } catch (ex) {
         eval('Tweenable.prototype.formula.' + easename

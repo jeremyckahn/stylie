@@ -24,8 +24,8 @@ define(['src/app'], function (app) {
       // TODO: This should not have to be in a conditional.  The relationship
       // between the keyframe Models and the Views that render them needs to be
       // rethought.
-      if (app.canvasView) {
-        app.canvasView.backgroundView.update();
+      if (app.view.canvas) {
+        app.view.canvas.backgroundView.update();
       }
 
       var timeToModify = this.get('percent') === 0
