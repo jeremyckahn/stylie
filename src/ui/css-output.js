@@ -35,7 +35,7 @@ define(['src/app'], function (app) {
     ,'renderCSS': function () {
       var cssOutput = app.kapi.toCSS({
         'vendors': getPrefixList(app)
-        ,'name': app.view.cssNameFieldView.$el.val()
+        ,'name': app.view.cssNameField.$el.val()
         ,'iterations': app.config.animationIteration.val()
         ,'isCentered': app.config.isCenteredToPath
       });

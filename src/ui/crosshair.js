@@ -56,7 +56,7 @@ define(['src/app'], function (app) {
 
     ,'dragEnd': function (evt, ui) {
       this.updateModel();
-      app.view.cssOutputView.renderCSS();
+      app.view.cssOutput.renderCSS();
       publish(app.constant.UPDATE_CSS_OUTPUT);
     }
 

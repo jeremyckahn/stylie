@@ -20,7 +20,7 @@ define(['src/app'], function (app) {
         this.$el.addClass('shift-down');
 
       } else if (evt.keyCode === 67) { // "C" key
-        app.view.controlPaneView.toggle();
+        app.view.controlPane.toggle();
 
       } else if (evt.keyCode === 72) { // "H" key
         app.view.helpModal.toggle();

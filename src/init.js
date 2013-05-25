@@ -25,6 +25,8 @@ require([
 
       ,KeyframeCollection) {
 
+  'use strict';
+
   var $win = $(window);
 
   // CONSTANTS
@@ -78,7 +80,7 @@ require([
     })
   };
 
-  app.view.hotkeyHandlerView = new HotkeyHandlerView({
+  app.view.hotkeyHandler = new HotkeyHandlerView({
     '$el': $(document.body)
   });
 
@@ -87,7 +89,7 @@ require([
     ,'$triggerEl': $('#help-trigger')
   });
 
-  app.view.durationFieldView = new IncrementerFieldView({
+  app.view.durationField = new IncrementerFieldView({
     '$el': $('#duration')
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
@@ -98,7 +100,7 @@ require([
   });
 
   app.config.animationDuration = app.config.initialDuration =
-      +app.view.durationFieldView.$el.val();
+      +app.view.durationField.$el.val();
 
   app.config.animationIteration = $('#iterations');
 
@@ -123,7 +125,7 @@ require([
     '$el': $('#crosshairs')
   });
 
-  app.collection.keyframes = new KeyframeCollection([]);
+  app.collection.keyframes = new KeyframeCollection();
 
   var winWidth = $win.width();
 
@@ -152,7 +154,7 @@ require([
     app.kapi.play();
   }
 
-  app.view.showPathView = new CheckboxView({
+  app.view.showPath = new CheckboxView({
     '$el': $('#show-path')
     ,'callHandlerOnInit': true
     ,'onChange': function (evt, checked) {
@@ -162,25 +164,25 @@ require([
     }
   });
 
-  app.view.controlPaneView = new PaneView({
+  app.view.controlPane = new PaneView({
     '$el': $('#control-pane')
   });
 
-  app.view.controlPaneTabsView = new TabsView({
+  app.view.controlPaneTabs = new TabsView({
     '$el': $('#control-pane')
   });
 
-  app.view.cssOutputView = new CSSOutputView({
+  app.view.cssOutput = new CSSOutputView({
     '$el': $('#css-output textarea')
-    ,'$trigger': app.view.controlPaneTabsView.$el
+    ,'$trigger': app.view.controlPaneTabs.$el
         .find('[data-target="css-output"]')
   });
 
   subscribe(app.constant.UPDATE_CSS_OUTPUT, function () {
-    app.view.cssOutputView.renderCSS();
+    app.view.cssOutput.renderCSS();
   });
 
-  app.view.cssNameFieldView = new AutoUpdateTextFieldView({
+  app.view.cssNameField = new AutoUpdateTextFieldView({
     '$el': $('#css-name')
     ,'onKeyup': function (val) {
       app.config.className = val;
@@ -188,7 +190,7 @@ require([
     }
   });
 
-  app.view.mozCheckboxView = new CheckboxView({
+  app.view.mozCheckbox = new CheckboxView({
     '$el': $('#moz-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.moz = checked;
@@ -196,7 +198,7 @@ require([
     }
   });
 
-  app.view.msCheckboxView = new CheckboxView({
+  app.view.msCheckbox = new CheckboxView({
     '$el': $('#ms-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.ms = checked;
@@ -204,7 +206,7 @@ require([
     }
   });
 
-  app.view.oCheckboxView = new CheckboxView({
+  app.view.oCheckbox = new CheckboxView({
     '$el': $('#o-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.o = checked;
@@ -212,7 +214,7 @@ require([
     }
   });
 
-  app.view.webkitCheckboxView = new CheckboxView({
+  app.view.webkitCheckbox = new CheckboxView({
     '$el': $('#webkit-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.webkit = checked;
@@ -220,7 +222,7 @@ require([
     }
   });
 
-  app.view.w3CheckboxView = new CheckboxView({
+  app.view.w3Checkbox = new CheckboxView({
     '$el': $('#w3-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.w3 = checked;
@@ -228,11 +230,11 @@ require([
     }
   });
 
-  app.view.htmlInputView = new HTMLInputView({
+  app.view.htmlInput = new HTMLInputView({
     '$el': $('#html-input textarea')
   });
 
-  app.view.centerToPathView = new CheckboxView({
+  app.view.centerToPathCheckbox = new CheckboxView({
     '$el': $('#center-to-path')
     ,'callHandlerOnInit': true
     ,'onChange': function (evt, checked) {
@@ -240,7 +242,7 @@ require([
       var tranformOrigin = app.config.isCenteredToPath
         ? '0 0'
         : '';
-      app.view.htmlInputView.$renderTarget.css(
+      app.view.htmlInput.$renderTarget.css(
         'transform-origin', tranformOrigin);
       publish(app.constant.KEYFRAME_UPDATED, [true]);
       app.kapi.update();
