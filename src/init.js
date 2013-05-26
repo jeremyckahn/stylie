@@ -31,13 +31,6 @@ require([
 
   var $win = $(window);
 
-  // CONFIG
-  app.config.activeClasses.moz = false;
-  app.config.activeClasses.ms = false;
-  app.config.activeClasses.o = false;
-  app.config.activeClasses.webkit = false;
-  app.config.activeClasses.w3 = true;
-
   constant.QUERY_STRING = util.getQueryParams();
 
 

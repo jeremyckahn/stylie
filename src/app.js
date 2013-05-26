@@ -1,7 +1,13 @@
 define(function () {
   return {
     'config': {
-        'activeClasses': {}
+        'activeClasses': {
+          'moz': false
+          ,'ms': false
+          ,'o': false
+          ,'webkit': false
+          ,'w3': true
+        }
       }
     ,'constant': {}
     ,'util': {}
