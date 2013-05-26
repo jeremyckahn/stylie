@@ -102,7 +102,7 @@ require([
   app.config.animationDuration = app.config.initialDuration =
       +app.view.durationField.$el.val();
 
-  app.config.animationIteration = $('#iterations');
+  app.$el.animationIteration = $('#iterations');
 
   app.config.easeFields = [];
   $('.ease').each(function (i, el) {

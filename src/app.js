@@ -4,9 +4,9 @@ define(function () {
         'activeClasses': {}
       }
     ,'constant': {}
-    ,'events': {}
     ,'util': {}
     ,'view': {}
+    ,'$el': {}
     ,'collection': {}
   };
 });
