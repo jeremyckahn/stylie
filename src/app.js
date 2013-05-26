@@ -9,9 +9,14 @@ define(function () {
           ,'w3': true
         }
       }
-    ,'constant': {}
-    ,'view': {}
-    ,'$el': {}
+
+    // Contains Collections
     ,'collection': {}
+
+    // Contains Views
+    ,'view': {}
+
+    // Contains jQuery objects
+    ,'$el': {}
   };
 });

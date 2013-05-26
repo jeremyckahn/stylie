@@ -49,19 +49,17 @@ require([
     ,'width': $win.width()
   });
 
-  app.config.selects = {
-    'x': new SelectView({
-      '$el': $('#x-easing')
-    })
+  app.view.selectX = new SelectView({
+    '$el': $('#x-easing')
+  });
 
-    ,'y': new SelectView({
-      '$el': $('#y-easing')
-    })
+  app.view.selectY = new SelectView({
+    '$el': $('#y-easing')
+  });
 
-    ,'r': new SelectView({
-      '$el': $('#r-easing')
-    })
-  };
+  app.view.selectR = new SelectView({
+    '$el': $('#r-easing')
+  });
 
   app.view.hotkeyHandler = new HotkeyHandlerView({
     '$el': $(document.body)
@@ -87,13 +85,13 @@ require([
 
   app.$el.animationIteration = $('#iterations');
 
-  app.config.easeFields = [];
+  //app.views.easeFields = [];
   $('.ease').each(function (i, el) {
-    var easeFieldView = new EaseFieldView({
+    app.view['easeField' + i] = new EaseFieldView({
       '$el': $(el)
     });
 
-    app.config.easeFields.push(easeFieldView);
+    //app.views.easeFields.push(easeFieldView);
   });
 
 

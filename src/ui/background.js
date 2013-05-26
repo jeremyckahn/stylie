@@ -82,8 +82,8 @@ define(['src/app', 'src/constants'], function (app, constant) {
       var fromCoords = app.collection.keyframes.first().getAttrs();
       var toCoords = app.collection.keyframes.last().getAttrs();
       this.generatePathPrerender(fromCoords.x, fromCoords.y,
-          toCoords.x, toCoords.y, app.config.selects.x.$el.val(),
-          app.config.selects.y.$el.val(), useDimColor);
+          toCoords.x, toCoords.y, app.view.selectX.$el.val(),
+          app.view.selectY.$el.val(), useDimColor);
 
       if (app.config.prerenderedPath) {
         this.$el[0].width = this.$el.width();

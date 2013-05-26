@@ -1,9 +1,9 @@
 define(['src/app'], function (app) {
 
   function getNewEasingString (app) {
-    var xEasing = app.config.selects.x.$el.val();
-    var yEasing = app.config.selects.y.$el.val();
-    var rEasing = app.config.selects.r.$el.val();
+    var xEasing = app.view.selectX.$el.val();
+    var yEasing = app.view.selectY.$el.val();
+    var rEasing = app.view.selectR.$el.val();
     return [xEasing, yEasing, rEasing].join(' ');
   }
 
