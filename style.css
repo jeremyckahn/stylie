@@ -111,7 +111,6 @@ table {
 header {
   font-family: helvetica, sans-serif;
   height: 66px;
-  padding: 0 6px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -636,3 +635,22 @@ canvas {
     .modal th[colspan="2"] {
       padding-bottom: 12px;
     }
+
+#top-level-alert {
+  background: #a8a8a8;
+  border-radius: 4px;
+  display: none;
+  height: 46px;
+  padding: 4px;
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  width: 345px;
+}
+
+  #top-level-alert p {
+    color: #fff;
+    line-height: 1.2em;
+    margin: 0;
+    text-shadow: #555 0 0 1px;
+  }

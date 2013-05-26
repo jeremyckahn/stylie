@@ -9,7 +9,7 @@ require([
     ,'src/ui/ease-field', 'src/ui/crosshairs' ,'src/ui/canvas', 'src/ui/pane'
     ,'src/ui/tabs', 'src/ui/css-output' ,'src/ui/html-input'
     ,'src/ui/keyframe-forms', 'src/ui/incrementer-field', 'src/ui/modal'
-    ,'src/ui/hotkey-handler', 'src/ui/rekapi-controls'
+    ,'src/ui/hotkey-handler', 'src/ui/rekapi-controls', 'src/ui/alert'
 
     // Collections
     ,'src/collection/keyframes'
@@ -23,7 +23,7 @@ require([
       ,EaseFieldView, CrosshairsView, CanvasView, PaneView
       ,TabsView, CSSOutputView, HTMLInputView
       ,KeyframeFormsView, IncrementerFieldView, ModalView
-      ,HotkeyHandlerView, RekapiControlsView
+      ,HotkeyHandlerView, RekapiControlsView, AlertView
 
       ,KeyframeCollection) {
 
@@ -228,6 +228,10 @@ require([
       publish(constant.KEYFRAME_UPDATED, [true]);
       app.kapi.update();
     }
+  });
+
+  app.view.topLevelAlert = new AlertView({
+    '$el': $('#top-level-alert')
   });
 
   $(window).trigger('resize');

@@ -6,5 +6,7 @@ define(function () {
     ,'UPDATE_CSS_OUTPUT': 'updateCSSOutput'
     ,'TOGGLE_FADE_SPEED': 200
     ,'INITIAL_KEYFRAMES': 2
+    ,'ALERT_ERROR': 'error-alert'
+    ,'ALERT_TIMEOUT': 6000
   };
 });

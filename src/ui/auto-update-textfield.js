@@ -25,9 +25,9 @@ define(function () {
     ,'onKeydown': function (evt) {
       var which = evt.which;
 
-      if (which == 38 && this.onArrowUp) { // up
+      if (+which === 38 && this.onArrowUp) { // up
         this.onArrowUp();
-      } else if (which == 40 && this.onArrowDown) { // down
+      } else if (+which === 40 && this.onArrowDown) { // down
         this.onArrowDown();
       }
     }

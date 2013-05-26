@@ -4,9 +4,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
 
   return Backbone.View.extend({
 
-    'events': { }
-
-    ,'initialize': function (opts) {
+    'initialize': function (opts) {
       _.extend(this, opts);
 
       this.$el
