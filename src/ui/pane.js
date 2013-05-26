@@ -1,4 +1,4 @@
-define(['src/app'], function (app) {
+define(['src/app', 'src/constants'], function (app, constant) {
 
   var $win = $(window);
 
@@ -54,7 +54,7 @@ define(['src/app'], function (app) {
     }
 
     ,'toggle': function () {
-      this.$el.fadeToggle(app.constant.TOGGLE_FADE_SPEED);
+      this.$el.fadeToggle(constant.TOGGLE_FADE_SPEED);
     }
 
   });

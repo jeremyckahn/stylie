@@ -1,4 +1,4 @@
-define(['src/app'], function (app) {
+define(['src/app', 'src/constants'], function (app, constant) {
 
   var $win = $(window);
 
@@ -38,7 +38,7 @@ define(['src/app'], function (app) {
     }
 
     ,'show': function () {
-      this.$el.fadeIn(app.constant.TOGGLE_FADE_SPEED);
+      this.$el.fadeIn(constant.TOGGLE_FADE_SPEED);
       $win
         .on('keydown', this._windowKeyhandler)
         .on('click', this._windowClickhandler);
@@ -46,7 +46,7 @@ define(['src/app'], function (app) {
 
 
     ,'hide': function () {
-      this.$el.fadeOut(app.constant.TOGGLE_FADE_SPEED);
+      this.$el.fadeOut(constant.TOGGLE_FADE_SPEED);
       $win
         .off('keydown', this._windowKeyhandler)
         .off('click', this._windowClickhandler);

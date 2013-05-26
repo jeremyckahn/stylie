@@ -1,4 +1,4 @@
-define(['src/app'], function (app) {
+define(['src/app', 'src/constants'], function (app, constant) {
 
   var $win = $(window);
 
@@ -57,7 +57,7 @@ define(['src/app'], function (app) {
     ,'dragEnd': function (evt, ui) {
       this.updateModel();
       app.view.cssOutput.renderCSS();
-      publish(app.constant.UPDATE_CSS_OUTPUT);
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'render': function () {
@@ -75,7 +75,7 @@ define(['src/app'], function (app) {
         ,'y': pxTo(this.$el.css('top'))
         ,'r': app.util.getRotation(this.$el)
       });
-      publish(app.constant.KEYFRAME_UPDATED);
+      publish(constant.KEYFRAME_UPDATED);
       app.collection.keyframes.updateModelKeyframeViews();
       app.kapi.update();
     }

@@ -1,4 +1,4 @@
-define(['src/app'], function (app) {
+define(['src/app', 'src/constants'], function (app, constant) {
   return Backbone.View.extend({
 
     'initialize': function (opts) {
@@ -37,9 +37,9 @@ define(['src/app'], function (app) {
         ,'y': easeY
       };
       var i, point;
-      for (i = 0; i <= app.constant.RENDER_GRANULARITY; i++) {
+      for (i = 0; i <= constant.RENDER_GRANULARITY; i++) {
         point = Tweenable.interpolate(
-            from, to, (1 / app.constant.RENDER_GRANULARITY) * i, easing);
+            from, to, (1 / constant.RENDER_GRANULARITY) * i, easing);
         points.push(point);
       }
 

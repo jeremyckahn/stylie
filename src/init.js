@@ -1,6 +1,7 @@
 require([
     // Misc
     'src/app'
+    ,'src/constants'
     ,'src/utils'
 
     // Views
@@ -15,6 +16,7 @@ require([
 
     ], function (
       app
+      ,constant
       ,utils
 
       ,CheckboxView, SelectView, AutoUpdateTextFieldView
@@ -29,17 +31,6 @@ require([
 
   var $win = $(window);
 
-  // CONSTANTS
-  _.extend(app.constant, {
-    'PRERENDER_GRANULARITY': 150
-    ,'RENDER_GRANULARITY': 100
-    ,'KEYFRAME_UPDATED': 'keyframeUpdated'
-    ,'UPDATE_CSS_OUTPUT': 'updateCSSOutput'
-    ,'TOGGLE_FADE_SPEED': 200
-    ,'INITIAL_KEYFRAMES': 2
-  });
-
-
   // CONFIG
   app.config.activeClasses.moz = false;
   app.config.activeClasses.ms = false;
@@ -47,7 +38,7 @@ require([
   app.config.activeClasses.webkit = false;
   app.config.activeClasses.w3 = true;
   utils.init(app);
-  app.constant.QUERY_STRING = app.util.getQueryParams();
+  constant.QUERY_STRING = app.util.getQueryParams();
 
 
   // Doing horrifying hacks here to prevent the variable names from getting
@@ -150,7 +141,7 @@ require([
 
   app.view.canvas.backgroundView.update();
 
-  if (!app.constant.QUERY_STRING.debug) {
+  if (!constant.QUERY_STRING.debug) {
     app.kapi.play();
   }
 
@@ -178,7 +169,7 @@ require([
         .find('[data-target="css-output"]')
   });
 
-  subscribe(app.constant.UPDATE_CSS_OUTPUT, function () {
+  subscribe(constant.UPDATE_CSS_OUTPUT, function () {
     app.view.cssOutput.renderCSS();
   });
 
@@ -186,7 +177,7 @@ require([
     '$el': $('#css-name')
     ,'onKeyup': function (val) {
       app.config.className = val;
-      publish(app.constant.UPDATE_CSS_OUTPUT);
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -194,7 +185,7 @@ require([
     '$el': $('#moz-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.moz = checked;
-      publish(app.constant.UPDATE_CSS_OUTPUT);
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -202,7 +193,7 @@ require([
     '$el': $('#ms-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.ms = checked;
-      publish(app.constant.UPDATE_CSS_OUTPUT);
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -210,7 +201,7 @@ require([
     '$el': $('#o-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.o = checked;
-      publish(app.constant.UPDATE_CSS_OUTPUT);
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -218,7 +209,7 @@ require([
     '$el': $('#webkit-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.webkit = checked;
-      publish(app.constant.UPDATE_CSS_OUTPUT);
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -226,7 +217,7 @@ require([
     '$el': $('#w3-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.w3 = checked;
-      publish(app.constant.UPDATE_CSS_OUTPUT);
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -244,14 +235,14 @@ require([
         : '';
       app.view.htmlInput.$renderTarget.css(
         'transform-origin', tranformOrigin);
-      publish(app.constant.KEYFRAME_UPDATED, [true]);
+      publish(constant.KEYFRAME_UPDATED, [true]);
       app.kapi.update();
     }
   });
 
   $(window).trigger('resize');
 
-  if (app.constant.QUERY_STRING.debug) {
+  if (constant.QUERY_STRING.debug) {
     window.app = app;
   }
 

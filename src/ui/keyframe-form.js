@@ -1,5 +1,5 @@
-define(['src/app', 'src/ui/incrementer-field'],
-    function (app, IncrementerFieldView) {
+define(['src/app', 'src/constants', 'src/ui/incrementer-field'],
+    function (app, constant, IncrementerFieldView) {
 
   function incrementerGeneratorHelper ($el) {
     return new IncrementerFieldView({
@@ -7,7 +7,7 @@ define(['src/app', 'src/ui/incrementer-field'],
 
       ,'onValReenter': _.bind(function (val) {
         this.model.set($el.data('keyframeattr'), +val);
-        publish(app.constant.KEYFRAME_UPDATED);
+        publish(constant.KEYFRAME_UPDATED);
         app.collection.keyframes.updateModelCrosshairViews();
         app.kapi.update();
       }, this)

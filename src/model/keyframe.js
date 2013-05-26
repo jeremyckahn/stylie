@@ -1,9 +1,9 @@
-define(['src/app'], function (app) {
+define(['src/app', 'src/constants'], function (app, constant) {
   return Backbone.Model.extend({
 
     'initialize': function (attrs, opts) {
       _.extend(this, opts);
-      subscribe(app.constant.KEYFRAME_UPDATED,
+      subscribe(constant.KEYFRAME_UPDATED,
           _.bind(this.updateActor, this));
     }
 

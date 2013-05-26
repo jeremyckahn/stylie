@@ -1,4 +1,4 @@
-define(['src/app'], function (app) {
+define(['src/app', 'src/constants'], function (app, constant) {
 
   return Backbone.View.extend({
 
@@ -12,7 +12,7 @@ define(['src/app'], function (app) {
     }
 
     ,'fadeToggle': function () {
-      this.$el.fadeToggle(app.constant.TOGGLE_FADE_SPEED);
+      this.$el.fadeToggle(constant.TOGGLE_FADE_SPEED);
     }
 
   });
