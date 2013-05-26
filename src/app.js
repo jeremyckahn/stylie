@@ -10,7 +10,6 @@ define(function () {
         }
       }
     ,'constant': {}
-    ,'util': {}
     ,'view': {}
     ,'$el': {}
     ,'collection': {}

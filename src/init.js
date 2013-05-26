@@ -31,8 +31,7 @@ require([
 
   var $win = $(window);
 
-  constant.QUERY_STRING = util.getQueryParams();
-
+  app.config.queryString = util.getQueryParams();
 
   // Doing horrifying hacks here to prevent the variable names from getting
   // mangled by the compiler.
@@ -134,7 +133,7 @@ require([
 
   app.view.canvas.backgroundView.update();
 
-  if (!constant.QUERY_STRING.debug) {
+  if (!app.config.queryString.debug) {
     app.kapi.play();
   }
 
@@ -235,7 +234,7 @@ require([
 
   $(window).trigger('resize');
 
-  if (constant.QUERY_STRING.debug) {
+  if (app.config.queryString.debug) {
     window.app = app;
   }
 
