@@ -17,7 +17,7 @@ require([
     ], function (
       app
       ,constant
-      ,utils
+      ,util
 
       ,CheckboxView, SelectView, AutoUpdateTextFieldView
       ,EaseFieldView, CrosshairsView, CanvasView, PaneView
@@ -37,8 +37,8 @@ require([
   app.config.activeClasses.o = false;
   app.config.activeClasses.webkit = false;
   app.config.activeClasses.w3 = true;
-  utils.init(app);
-  constant.QUERY_STRING = app.util.getQueryParams();
+
+  constant.QUERY_STRING = util.getQueryParams();
 
 
   // Doing horrifying hacks here to prevent the variable names from getting
@@ -85,7 +85,7 @@ require([
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
         var validVal = Math.abs(val);
-        app.util.moveLastKeyframe(app.config.currentActor, validVal);
+        util.moveLastKeyframe(app.config.currentActor, validVal);
       }
     }
   });

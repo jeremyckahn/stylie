@@ -1,4 +1,5 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define(['src/app', 'src/constants', 'src/utils'],
+    function (app, constant, util) {
 
   var $win = $(window);
 
@@ -69,11 +70,11 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'updateModel': function () {
-      var pxTo = app.util.pxToNumber;
+      var pxTo = util.pxToNumber;
       this.model.set({
         'x': pxTo(this.$el.css('left'))
         ,'y': pxTo(this.$el.css('top'))
-        ,'r': app.util.getRotation(this.$el)
+        ,'r': util.getRotation(this.$el)
       });
       publish(constant.KEYFRAME_UPDATED);
       app.collection.keyframes.updateModelKeyframeViews();
@@ -116,7 +117,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
       var deltaX = currentX - this._previousRotationDragX;
       var deltaY = currentY - this._previousRotationDragY;
       var totalDelta = deltaX + deltaY;
-      var currentRotation = app.util.getRotation(this.$el);
+      var currentRotation = util.getRotation(this.$el);
       var newRotation = currentRotation + totalDelta;
       this.$el.css('transform', 'rotate(' + newRotation + 'deg)');
     }

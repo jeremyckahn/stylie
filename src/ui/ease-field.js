@@ -1,5 +1,5 @@
-define(['src/app', 'src/ui/auto-update-textfield'],
-    function (app, AutoUpdateTextFieldView) {
+define(['src/app', 'src/utils', 'src/ui/auto-update-textfield'],
+    function (app, util, AutoUpdateTextFieldView) {
 
   return AutoUpdateTextFieldView.extend({
 
@@ -7,7 +7,7 @@ define(['src/app', 'src/ui/auto-update-textfield'],
       AutoUpdateTextFieldView.prototype.initialize.apply(this, arguments);
       var easename = this.$el.data('easename');
       var fn = Tweenable.prototype.formula[easename];
-      var fnString = app.util.getFormulaFromEasingFunc(fn);
+      var fnString = util.getFormulaFromEasingFunc(fn);
       this.$el.val(fnString);
       this.$el.data('lastvalidfn', fnString);
     }
