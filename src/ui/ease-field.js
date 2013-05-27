@@ -24,9 +24,7 @@ define(
       } catch (ex) {
         this.evalEasingFormula(this.$el.data('lastvalidfn'));
         this.$el.addClass('error');
-        publish(constant.ALERT_ERROR,
-            ['You input an invalid JavaScript snippet. ' +
-            'Please correct the code and try again.']);
+        publish(constant.ALERT_ERROR, [ex]);
       }
     }
 
