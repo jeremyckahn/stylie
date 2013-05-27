@@ -33,20 +33,16 @@ require([
 
   app.config.queryString = util.getQueryParams();
 
-  // Doing horrifying hacks here to prevent the variable names from getting
-  // mangled by the compiler.
-  var customEase1FnString = ['Tweenable.prototype.formula.customEase1 = ',
-      'function (x) {return Math.pow(x, 4);}'].join('');
-  eval(customEase1FnString);
-
-  var customEase2FnString = ['Tweenable.prototype.formula.customEase2 = ',
-    'function (x) {return Math.pow(x, 0.25);}'].join('');
-  eval(customEase2FnString);
-
   app.kapi = new Kapi({
     'context': document.getElementById('rekapi-canvas')
     ,'height': $win.height()
     ,'width': $win.width()
+  });
+
+  $('.ease').each(function (i, el) {
+    app.view['easeField' + i] = new EaseFieldView({
+      '$el': $(el)
+    });
   });
 
   app.view.selectX = new SelectView({
@@ -84,16 +80,6 @@ require([
       +app.view.durationField.$el.val();
 
   app.$el.animationIteration = $('#iterations');
-
-  //app.views.easeFields = [];
-  $('.ease').each(function (i, el) {
-    app.view['easeField' + i] = new EaseFieldView({
-      '$el': $(el)
-    });
-
-    //app.views.easeFields.push(easeFieldView);
-  });
-
 
   var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
   var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
