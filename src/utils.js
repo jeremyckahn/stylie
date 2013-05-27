@@ -25,8 +25,8 @@ define(['src/app'], function (app) {
 
     ,'getRotation': function ($el) {
       // Need to read the style attribute here, not the CSS transform property.
-      // $.fn.css returns the transform info in matrix format, which is harder to
-      // work with.
+      // $.fn.css returns the transform info in matrix format, which is harder
+      // to work with.
       return parseFloat($el.attr('style').match(/rotate\((-*\d+)deg\)/)[1]);
     }
 
@@ -42,13 +42,6 @@ define(['src/app'], function (app) {
       });
 
       app.config.animationDuration = toMillisecond;
-    }
-
-    ,'getFormulaFromEasingFunc': function (fn) {
-      var fnString = fn.toString().replace('\n', ''); // An effin' string
-      var deprefixed = fnString.replace(/.*return\s*/g, '');
-      var desuffixed = deprefixed.replace(/\}|;\s*\}$/g, '');
-      return desuffixed;
     }
 
   };

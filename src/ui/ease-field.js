@@ -6,16 +6,17 @@ define(
 
     'initialize': function (opts) {
       AutoUpdateTextFieldView.prototype.initialize.apply(this, arguments);
-      this.evalEasingFormula(this.$el.val());
-      var easename = this.$el.data('easename');
-      var fn = Tweenable.prototype.formula[easename];
-      var fnString = util.getFormulaFromEasingFunc(fn);
-      this.$el.data('lastvalidfn', fnString);
+      var elVal = this.$el.val();
+      this.evalEasingFormula(elVal);
+      this.$el.data('lastvalidfn', elVal);
     }
 
     ,'onValReenter': function (val) {
       try {
+        // This line might throw an error, in which case the rest of the lines
+        // in this try do not run.
         this.evalEasingFormula(val);
+
         this.$el.data('lastvalidfn', val);
         this.$el.removeClass('error');
         app.view.canvas.backgroundView.update();
