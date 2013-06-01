@@ -71,9 +71,13 @@ require([
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
         var validVal = Math.abs(val);
-        util.moveLastKeyframe(app.config.currentActor, validVal);
+        app.collection.keyframes.last().moveKeyframe(validVal);
       }
     }
+  });
+
+  subscribe(constant.ANIMATION_LENGTH_CHANGED, function () {
+    app.config.animationDuration = app.kapi.animationLength();
   });
 
   app.config.animationDuration = app.config.initialDuration =
@@ -97,14 +101,14 @@ require([
   var winWidth = $win.width();
 
   // Create the initial keyframes.
-  _.each([0, 100], function (percent, i) {
+  _.each([0, app.config.animationDuration], function (ms, i) {
     app.collection.keyframes.add({
       'x': i
         ? winWidth - (winWidth / (i + 1))
         : 40 // TODO: Should this be a constant?
       ,'y': crosshairStartingY
       ,'r': 0
-      ,'percent': percent
+      ,'ms': ms
     });
   });
 
@@ -211,7 +215,7 @@ require([
         : '';
       app.view.htmlInput.$renderTarget.css(
         'transform-origin', tranformOrigin);
-      publish(constant.KEYFRAME_UPDATED, [true]);
+      publish(constant.ACTOR_ORIGIN_CHANGED, [true]);
       app.kapi.update();
     }
   });

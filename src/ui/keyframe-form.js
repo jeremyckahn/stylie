@@ -7,7 +7,7 @@ define(['src/app', 'src/constants', 'src/ui/incrementer-field'],
 
       ,'onValReenter': _.bind(function (val) {
         this.model.set($el.data('keyframeattr'), +val);
-        publish(constant.KEYFRAME_UPDATED);
+        publish(constant.PATH_CHANGED);
         app.collection.keyframes.updateModelCrosshairViews();
         app.kapi.update();
       }, this)
@@ -18,6 +18,7 @@ define(['src/app', 'src/constants', 'src/ui/incrementer-field'],
 
     'events': {}
 
+    // TODO: Move this out of the View and make it private.
     ,'KEYFRAME_TEMPLATE': [
       '<li class="keyframe">'
         ,'<h3></h3>'
@@ -40,6 +41,7 @@ define(['src/app', 'src/constants', 'src/ui/incrementer-field'],
       _.extend(this, opts);
       this.$el = $(this.KEYFRAME_TEMPLATE);
       this.model.keyframeForm = this;
+      this.model.on('change', _.bind(this.render, this));
       this.initDOMReferences();
       this.initIncrementers();
       this.render();
@@ -61,7 +63,7 @@ define(['src/app', 'src/constants', 'src/ui/incrementer-field'],
     }
 
     ,'render': function () {
-      this.header.html(this.model.get('percent') + '%');
+      this.header.text(this.model.get('ms'));
       if (this.model.get('x') !== parseFloat(this.inputX.val())) {
         this.inputX.val(this.model.get('x'));
       }

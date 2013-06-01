@@ -3,8 +3,12 @@ define(['src/app', 'src/constants'], function (app, constant) {
 
     'initialize': function (attrs, opts) {
       _.extend(this, opts);
-      subscribe(constant.KEYFRAME_UPDATED,
-          _.bind(this.updateActor, this));
+
+      // TODO: This message subscription and event binding should be
+      // consolidated into one operation.
+      subscribe(constant.ACTOR_ORIGIN_CHANGED,
+          _.bind(this.modifyKeyframe, this));
+      this.on('change', _.bind(this.modifyKeyframe, this));
     }
 
     ,'validate': function (attrs) {
@@ -20,25 +24,20 @@ define(['src/app', 'src/constants'], function (app, constant) {
       }
     }
 
-    ,'updateActor': function (opt_isUpdatePrevented) {
-      // TODO: This should not have to be in a conditional.  The relationship
-      // between the keyframe Models and the Views that render them needs to be
-      // rethought.
-      if (app.view.canvas) {
-        app.view.canvas.backgroundView.update();
+    ,'modifyKeyframe': function (opt_preventKapiUpdate) {
+      app.config.currentActor.modifyKeyframe(this.get('ms'), this.getCSS());
+      if (!opt_preventKapiUpdate) {
+        app.kapi.update();
       }
+    }
 
-      var timeToModify = this.get('percent') === 0
-          ? 0
-          : app.config.animationDuration;
+    ,'moveKeyframe': function (to) {
+      app.config.currentActor.moveKeyframe(this.get('ms'), to);
+      this.set('ms', to);
 
-      if (app.config.currentActor) {
-        app.config.currentActor.modifyKeyframe(
-            timeToModify, this.getCSS());
-        if (!opt_isUpdatePrevented) {
-          app.kapi.update();
-        }
-      }
+      // TODO: Maybe check to see if this is the last keyframe in the
+      // collection before publishing?
+      publish(constant.ANIMATION_LENGTH_CHANGED);
     }
 
     ,'getCSS': function () {

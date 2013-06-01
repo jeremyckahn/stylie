@@ -3,16 +3,7 @@ define(['src/app', 'src/constants', 'src/utils'],
 
   var $win = $(window);
 
-  var CROSSHAIR_TEMPLATE = [
-    '<div class="crosshair {{extraClass}}" data-pos="{{position}}" data-percent="{{percent}}">'
-      ,'<div class="dashmark horiz"></div>'
-      ,'<div class="dashmark vert"></div>'
-      ,'<div class="rotation-arm">'
-        ,'<div class="rotation-handle">'
-      ,'</div>'
-    ,'</div>'].join('');
-
-  var CrosshairView = Backbone.View.extend({
+  return Backbone.View.extend({
 
     'events': {
       'mousedown .rotation-arm': 'onClickRotationArm'
@@ -27,9 +18,8 @@ define(['src/app', 'src/constants', 'src/utils'],
       });
 
       this.$el.css('transform', 'rotate(0deg)');
-
+      this.model.on('change', _.bind(this.render, this));
       this._isRotating = false;
-      this.model.set('percent', +this.$el.data('percent'));
       this.model.crosshairView = this;
       this.render();
     }
@@ -76,7 +66,7 @@ define(['src/app', 'src/constants', 'src/utils'],
         ,'y': pxTo(this.$el.css('top'))
         ,'r': util.getRotation(this.$el)
       });
-      publish(constant.KEYFRAME_UPDATED);
+      publish(constant.PATH_CHANGED);
       app.collection.keyframes.updateModelKeyframeViews();
       app.kapi.update();
     }
@@ -123,15 +113,5 @@ define(['src/app', 'src/constants', 'src/utils'],
     }
 
   });
-
-  CrosshairView.generateHtml = function (extraClass, position, percent) {
-    return Mustache.render(CROSSHAIR_TEMPLATE, {
-      'extraClass': extraClass
-      ,'position': position
-      ,'percent': percent
-    });
-  };
-
-  return CrosshairView;
 
 });

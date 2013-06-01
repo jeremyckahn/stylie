@@ -30,20 +30,6 @@ define(['src/app'], function (app) {
       return parseFloat($el.attr('style').match(/rotate\((-*\d+)deg\)/)[1]);
     }
 
-    ,'moveLastKeyframe': function (actor, toMillisecond) {
-      toMillisecond = +toMillisecond;
-      var trackNames = actor.getTrackNames();
-      var lastFrameIndex = actor.getTrackLength(trackNames[0]) - 1;
-
-      _.each(trackNames, function (trackName) {
-        actor.modifyKeyframeProperty(trackName, lastFrameIndex, {
-            'millisecond': toMillisecond
-          });
-      });
-
-      app.config.animationDuration = toMillisecond;
-    }
-
   };
 
 });

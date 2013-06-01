@@ -8,6 +8,9 @@ define(['src/app', 'src/constants'], function (app, constant) {
         'height': opts.height
         ,'width': opts.width
       });
+
+      subscribe(constant.PATH_CHANGED,
+          _.bind(this.update, this));
     }
 
     ,'resize': function (dims) {

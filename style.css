@@ -438,6 +438,12 @@ canvas {
     margin-top: 12px;
   }
 
+  #keyframe-controls h3:after {
+    color: #aaa;
+    content: 'ms';
+    margin-left: 2px;
+  }
+
 #rekapi-canvas {
   height: 400px;
   left: 0;
