@@ -1,8 +1,7 @@
 var requirejs = require('requirejs');
 var fs = require('fs');
 var exec = require('child_process').exec;
-var jsp = require("uglify-js").parser;
-var pro = require("uglify-js").uglify;
+var UglifyJS = require("uglify-js");
 
 var config = {
   baseUrl: './',
@@ -35,9 +34,14 @@ fs.readFile('dev.html', function(err,data){
     fs.readFile(config.libOut, function (err, data) {
       var libCode = data.toString();
 
-      var ast = jsp.parse(libCode); // parse code and get the initial AST
-      ast = pro.ast_squeeze(ast); // get an AST with compression optimizations
-      var compiledCode = pro.gen_code(ast); // compressed code here
+      var ast = UglifyJS.parse(libCode); // parse code and get the initial AST
+      ast.figure_out_scope();
+      var compressor = UglifyJS.Compressor();
+      var compressed_ast = ast.transform(compressor);
+      compressed_ast.figure_out_scope();
+      compressed_ast.compute_char_frequency();
+      compressed_ast.mangle_names();
+      var compiledCode = compressed_ast.print_to_string();
       fs.writeFile(config.libOut, compiledCode, function () {
         console.log('Built the lib code.');
       });

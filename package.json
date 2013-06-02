@@ -1,0 +1,12 @@
+{
+  "name": "Stylie",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jeremyckahn/stylie",
+  "author": "Jeremy Kahn <jeremyckahn@gmail.com>",
+  "description": "A CSS3 keyframe generator",
+  "devDependencies": {
+    "requirejs": "~2.1.6",
+    "uglify-js": "~2.3.6"
+  },
+  "license": "MIT"
+}
