@@ -16,7 +16,7 @@ define(function () {
     }
 
     ,'_onChange': function (evt) {
-      this.onChange.call(this, evt, this.$el.attr('checked') === 'checked');
+      this.onChange.call(this, evt, this.$el.is(':checked'));
     }
 
   });
