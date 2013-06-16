@@ -120,8 +120,6 @@ require([
 
   app.view.rekapiControls = new RekapiControlsView();
 
-  app.view.canvas.backgroundView.update();
-
   if (!app.config.queryString.debug) {
     app.kapi.play();
   }
