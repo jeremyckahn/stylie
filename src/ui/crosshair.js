@@ -67,7 +67,7 @@ define(['src/app', 'src/constants', 'src/utils'],
         ,'r': util.getRotation(this.$el)
       });
       publish(constant.PATH_CHANGED);
-      app.collection.keyframes.updateModelKeyframeViews();
+      app.collection.actors.getCurrent().updateKeyframeFormViews();
       app.kapi.update();
     }
 

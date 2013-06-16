@@ -28,7 +28,7 @@ define(['src/app'], function (app) {
     }
 
     ,'onChange': function (evt) {
-      app.config.currentActor.modifyKeyframe(
+      app.collection.actors.getCurrent().modifyKeyframe(
           app.config.animationDuration, {},
           { 'transform': getNewEasingString(app) });
       app.view.canvas.backgroundView.update();

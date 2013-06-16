@@ -82,8 +82,9 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'update': function (useDimColor) {
-      var fromCoords = app.collection.keyframes.first().getAttrs();
-      var toCoords = app.collection.keyframes.last().getAttrs();
+      var firstActor = app.collection.actors.getCurrent();
+      var fromCoords = firstActor.getAttrsForKeyframe(0);
+      var toCoords = firstActor.getAttrsForKeyframe(1);
       this.generatePathPrerender(fromCoords.x, fromCoords.y,
           toCoords.x, toCoords.y, app.view.selectX.$el.val(),
           app.view.selectY.$el.val(), useDimColor);

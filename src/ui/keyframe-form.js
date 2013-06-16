@@ -8,7 +8,7 @@ define(['src/app', 'src/constants', 'src/ui/incrementer-field'],
       ,'onValReenter': _.bind(function (val) {
         this.model.set($el.data('keyframeattr'), +val);
         publish(constant.PATH_CHANGED);
-        app.collection.keyframes.updateModelCrosshairViews();
+        app.collection.actors.getCurrent(0).updateKeyframeCrosshairViews();
         app.kapi.update();
       }, this)
     });
@@ -63,7 +63,7 @@ define(['src/app', 'src/constants', 'src/ui/incrementer-field'],
     }
 
     ,'render': function () {
-      this.header.text(this.model.get('ms'));
+      this.header.text(this.model.get('millisecond'));
       if (this.model.get('x') !== parseFloat(this.inputX.val())) {
         this.inputX.val(this.model.get('x'));
       }

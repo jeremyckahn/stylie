@@ -25,15 +25,19 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'modifyKeyframe': function (opt_preventKapiUpdate) {
-      app.config.currentActor.modifyKeyframe(this.get('ms'), this.getCSS());
+      app.collection.actors.getCurrent().modifyKeyframe(
+          this.get('millisecond'), this.getCSS());
+
       if (!opt_preventKapiUpdate) {
         app.kapi.update();
       }
     }
 
     ,'moveKeyframe': function (to) {
-      app.config.currentActor.moveKeyframe(this.get('ms'), to);
-      this.set('ms', to);
+      app.collection.actors.getCurrent().moveKeyframe(
+          this.get('millisecond'), to);
+
+      this.set('millisecond', to);
 
       // TODO: Maybe check to see if this is the last keyframe in the
       // collection before publishing?

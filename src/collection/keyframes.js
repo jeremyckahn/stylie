@@ -14,12 +14,12 @@ define(['src/app', 'src/model/keyframe', 'src/ui/keyframe'],
       });
     }
 
-    ,'updateModelKeyframeViews': function () {
+    ,'updateModelFormViews': function () {
       if (!this.models[0].keyframeForm) {
         return;
       }
 
-      _.each(this.models, function (model) {
+      this.each(function (model) {
         model.keyframeForm.render();
       });
     }
@@ -29,7 +29,7 @@ define(['src/app', 'src/model/keyframe', 'src/ui/keyframe'],
         return;
       }
 
-      _.each(this.models, function (model) {
+      this.each(function (model) {
         model.crosshairView.render();
       });
     }

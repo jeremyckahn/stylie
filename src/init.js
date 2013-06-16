@@ -12,7 +12,7 @@ require([
     ,'src/ui/hotkey-handler', 'src/ui/rekapi-controls', 'src/ui/alert'
 
     // Collections
-    ,'src/collection/keyframes'
+    ,'src/collection/actors'
 
     ], function (
       app
@@ -25,7 +25,9 @@ require([
       ,KeyframeFormsView, IncrementerFieldView, ModalView
       ,HotkeyHandlerView, RekapiControlsView, AlertView
 
-      ,KeyframeCollection) {
+      ,ActorCollection
+
+      ) {
 
   'use strict';
 
@@ -38,6 +40,14 @@ require([
     ,'height': $win.height()
     ,'width': $win.width()
   });
+
+  app.collection.actors = new ActorCollection();
+  subscribe(constant.ACTOR_ADDED,
+      _.bind(app.collection.actors.syncFromAppKapi, app.collection.actors));
+
+  var domActor = new Kapi.DOMActor($('#rekapi-canvas').children()[0]);
+  app.kapi.addActor(domActor);
+  publish(constant.ACTOR_ADDED);
 
   $('.ease').each(function (i, el) {
     app.view['easeField' + i] = new EaseFieldView({
@@ -71,7 +81,7 @@ require([
     ,'onValReenter': function (val) {
       if (!isNaN(val)) {
         var validVal = Math.abs(val);
-        app.collection.keyframes.last().moveKeyframe(validVal);
+        app.collection.actors.getCurrent().moveLastKeyframe(validVal);
       }
     }
   });
@@ -96,20 +106,18 @@ require([
     '$el': $('#crosshairs')
   });
 
-  app.collection.keyframes = new KeyframeCollection();
-
   var winWidth = $win.width();
+  var currentActor = app.collection.actors.getCurrent();
 
   // Create the initial keyframes.
-  _.each([0, app.config.animationDuration], function (ms, i) {
-    app.collection.keyframes.add({
+  _.each([0, app.config.animationDuration], function (millisecond, i) {
+    currentActor.keyframe(millisecond, {
       'x': i
         ? winWidth - (winWidth / (i + 1))
         : 40 // TODO: Should this be a constant?
       ,'y': crosshairStartingY
       ,'r': 0
-      ,'ms': ms
-    });
+    }, 'linear linear');
   });
 
   app.view.canvas = new CanvasView({

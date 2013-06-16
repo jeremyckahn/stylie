@@ -1,7 +1,7 @@
 define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
 
   var CROSSHAIR_TEMPLATE = [
-    '<div class="crosshair {{extraClass}}" data-pos="{{position}}" data-ms="{{ms}}">'
+    '<div class="crosshair {{extraClass}}" data-pos="{{position}}" data-millisecond="{{ms}}">'
       ,'<div class="dashmark horiz"></div>'
       ,'<div class="dashmark vert"></div>'
       ,'<div class="rotation-arm">'
@@ -9,11 +9,11 @@ define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
       ,'</div>'
     ,'</div>'].join('');
 
-  function generateCrosshairHtml (extraClass, position, ms) {
+  function generateCrosshairHtml (extraClass, position, millisecond) {
     return Mustache.render(CROSSHAIR_TEMPLATE, {
       'extraClass': extraClass
       ,'position': position
-      ,'ms': ms
+      ,'millisecond': millisecond
     });
   }
 
@@ -24,11 +24,11 @@ define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
     }
 
     ,'addCrosshairView': function (model) {
-      var keyframeCount = app.collection.keyframes.length;
+      var keyframeCount = app.collection.actors.getCurrent().getLength();
 
       var $el = keyframeCount % 2
-          ? $(generateCrosshairHtml('from', 'from', model.get('ms')))
-          : $(generateCrosshairHtml('to', 'to', model.get('ms')));
+          ? $(generateCrosshairHtml('from', 'from', model.get('millisecond')))
+          : $(generateCrosshairHtml('to', 'to', model.get('millisecond')));
 
       this.$el.append($el);
 
