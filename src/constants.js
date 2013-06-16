@@ -7,7 +7,6 @@ define(function () {
     ,'UPDATE_CSS_OUTPUT': 'update-css-output'
     ,'ANIMATION_LENGTH_CHANGED': 'animation-length-changed'
     ,'ALERT_ERROR': 'error-alert'
-    ,'ACTOR_ADDED': 'actor-added'
 
     ,'RENDER_GRANULARITY': 100
     ,'TOGGLE_FADE_SPEED': 200

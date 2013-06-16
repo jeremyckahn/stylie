@@ -35,20 +35,6 @@ require([
 
   app.config.queryString = util.getQueryParams();
 
-  app.kapi = new Kapi({
-    'context': document.getElementById('rekapi-canvas')
-    ,'height': $win.height()
-    ,'width': $win.width()
-  });
-
-  app.collection.actors = new ActorCollection();
-  subscribe(constant.ACTOR_ADDED,
-      _.bind(app.collection.actors.syncFromAppKapi, app.collection.actors));
-
-  var domActor = new Kapi.DOMActor($('#rekapi-canvas').children()[0]);
-  app.kapi.addActor(domActor);
-  publish(constant.ACTOR_ADDED);
-
   $('.ease').each(function (i, el) {
     app.view['easeField' + i] = new EaseFieldView({
       '$el': $(el)
@@ -106,12 +92,25 @@ require([
     '$el': $('#crosshairs')
   });
 
+  app.kapi = new Kapi({
+    'context': document.getElementById('rekapi-canvas')
+    ,'height': $win.height()
+    ,'width': $win.width()
+  });
+
+  app.collection.actors = new ActorCollection();
+  app.kapi.on('addActor',
+      _.bind(app.collection.actors.syncFromAppKapi, app.collection.actors));
+
+  var domActor = new Kapi.DOMActor($('#rekapi-canvas').children()[0]);
+  app.kapi.addActor(domActor);
+
   var winWidth = $win.width();
-  var currentActor = app.collection.actors.getCurrent();
+  var currentActorModel = app.collection.actors.getCurrent();
 
   // Create the initial keyframes.
   _.each([0, app.config.animationDuration], function (millisecond, i) {
-    currentActor.keyframe(millisecond, {
+    currentActorModel.keyframe(millisecond, {
       'x': i
         ? winWidth - (winWidth / (i + 1))
         : 40 // TODO: Should this be a constant?
