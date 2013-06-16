@@ -29,7 +29,7 @@ define(['src/app'], function (app) {
 
     ,'onChange': function (evt) {
       app.collection.actors.getCurrent().modifyKeyframe(
-          app.config.animationDuration, {},
+          app.kapi.animationLength(), {},
           { 'transform': getNewEasingString(app) });
       app.view.canvas.backgroundView.update();
       app.kapi.update();

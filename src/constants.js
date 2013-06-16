@@ -8,6 +8,7 @@ define(function () {
     ,'ANIMATION_LENGTH_CHANGED': 'animation-length-changed'
     ,'ALERT_ERROR': 'error-alert'
 
+    ,'INITIAL_ANIMATION_DURATION': 2000
     ,'RENDER_GRANULARITY': 100
     ,'TOGGLE_FADE_SPEED': 200
     ,'INITIAL_KEYFRAMES': 2

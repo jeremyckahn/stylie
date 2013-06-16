@@ -72,13 +72,7 @@ require([
     }
   });
 
-  subscribe(constant.ANIMATION_LENGTH_CHANGED, function () {
-    app.config.animationDuration = app.kapi.animationLength();
-  });
-
-  app.config.animationDuration = app.config.initialDuration =
-      +app.view.durationField.$el.val();
-
+  app.view.durationField.$el.val(constant.INITIAL_ANIMATION_DURATION);
   app.$el.animationIteration = $('#iterations');
 
   var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
@@ -109,7 +103,7 @@ require([
   var currentActorModel = app.collection.actors.getCurrent();
 
   // Create the initial keyframes.
-  _.each([0, app.config.animationDuration], function (millisecond, i) {
+  _.each([0, constant.INITIAL_ANIMATION_DURATION], function (millisecond, i) {
     currentActorModel.keyframe(millisecond, {
       'x': i
         ? winWidth - (winWidth / (i + 1))
