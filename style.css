@@ -462,7 +462,7 @@ canvas {
     border: solid 1px #333;
     font-size: 1em;
     margin-left: 8px;
-    width: 200px;
+    width: 190px;
   }
 
   .mac.webkit #control-pane select {
