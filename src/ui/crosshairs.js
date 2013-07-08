@@ -1,7 +1,7 @@
 define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
 
   var CROSSHAIR_TEMPLATE = [
-    '<div class="crosshair {{extraClass}}" data-pos="{{position}}" data-millisecond="{{ms}}">'
+    '<div class="crosshair">'
       ,'<div class="dashmark horiz"></div>'
       ,'<div class="dashmark vert"></div>'
       ,'<div class="rotation-arm">'
@@ -9,34 +9,33 @@ define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
       ,'</div>'
     ,'</div>'].join('');
 
-  function generateCrosshairHtml (extraClass, position, millisecond) {
-    return Mustache.render(CROSSHAIR_TEMPLATE, {
-      'extraClass': extraClass
-      ,'position': position
-      ,'millisecond': millisecond
-    });
-  }
-
   return Backbone.View.extend({
 
     'initialize': function (opts) {
       _.extend(this, opts);
+      this.crosshairViews = {};
     }
 
     ,'addCrosshairView': function (model) {
       var keyframeCount = app.collection.actors.getCurrent().getLength();
-
-      var $el = keyframeCount % 2
-          ? $(generateCrosshairHtml('from', 'from', model.get('millisecond')))
-          : $(generateCrosshairHtml('to', 'to', model.get('millisecond')));
-
+      var $el = $(Mustache.render(CROSSHAIR_TEMPLATE));
       this.$el.append($el);
 
-      var crosshairView = new CrosshairView({
+      this.crosshairViews[model.cid] = new CrosshairView({
         '$el': $el
         ,'model': model
+        ,'owner': this
       });
     }
+
+    ,'reorderCrosshairViews': function () {
+      this.$el.children().detach();
+      var crosshairViews = this.model.getCrosshairViews();
+      _.each(crosshairViews, function (crosshairView) {
+        this.$el.append(crosshairView.$el);
+      }, this);
+    }
+
 
   });
 });

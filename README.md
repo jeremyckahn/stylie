@@ -4,7 +4,7 @@ Stylie is a fun tool for easily creating CSS 3 animations.  You can configure
 your animation graphically, tweak it, grab the generated CSS and go!
 
 __[Watch this screencast for a quick
-tutorial.](http://www.youtube.com/watch?v=ENTymVsjVo4)__
+tutorial.](http://www.youtube.com/watch?v=dv_W1eXj9_8)__
 
 ## The Stylie Workflow
 
@@ -18,29 +18,34 @@ some text in there for starters:
 <h1>Hello there!</h1>
 ````
 
-The preview updates automatically.  Next, you'll want to change the beginning
-and ending positions of the animation.  Just click and drag the crosshairs to
-your liking.  When your cursor is not focused on a text input, you can hold the
-Shift key to make rotation handles appear on the crosshairs.  Click and drag
-the handles to modify the starting and ending rotation positions.
+The preview updates automatically. Next, you'll want to change the beginning
+and ending positions of the animation. Just click and drag the crosshairs to
+your liking. When your cursor is not focused on a text input, you can hold the
+Shift key to make rotation handles appear on the crosshairs. Click and drag the
+handles to modify the starting and ending rotation positions.
 
-If you want to tweak the crosshairs with more granularity, open the "Keyframes"
-tab and input specific values.  "R" means "rotation."
+You can add, remove and edit keyframes.  This is done in the "Keyframes" tab.
+When you first open Stylie, you are presented with the default keyframes.
+Keyframe 0 cannot be moved and has no easing properties associated with it, but
+all of the other keyframes do.  To add a new keyframe, click the "Add a
+Keyframe" button in the upper right portion of the tab.  You can add as many
+keyframes as you'd like.  You can also reorder keyframes by clicking their
+millisecond value and pressing the Enter key.
+
+You can tweak individual keyframe properties by pressing the "up" and "down"
+arrow keys when focusing on a property's text input.  You can change individual
+properties' easing formula by selecting it from the dropdown next to each text
+input.  To remove a keyframe, click the "X" in the upper right corner of a
+keyframe.
 
 ### Motion control
 
-You can have fine-grained control over your animation.  Click the "Tween" tab
-in the control panel to see the properties of the tween.  For number fields
-such as "duration," you can type in the value or just press the up or down
-arrow keys to tweak it.
 
-You can test out different easing formulae by selecting them from the
-dropdowns. You can control the easing formulae for each property of the
-animation.  The preview updates automatically.  You can also specify a custom
-easing formula if you don't like the provided ones.  Simply input your formula
-into the "custom easing" fields.  What you put into these fields must be valid
-JavaScript.  Once you have inputted your custom formula, you can select
-"customEase1" or "customEase2" from the dropdowns.
+In addition to the standard easing formulae, you can define your own custom
+formula in the "Motion" tab.  Simply input your formula into the "Custom
+easing" fields. What you put into these fields must be valid JavaScript. Once
+you have inputted your custom formula, you can select "customEase1" or
+"customEase2" from a property's easing dropdown.
 
 ### Playback control
 

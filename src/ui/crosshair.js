@@ -12,7 +12,7 @@ define(['src/app', 'src/constants', 'src/utils'],
     ,'initialize': function (opts) {
       _.extend(this, opts);
       this.$el.dragon({
-        'within': this.$el.parent()
+        'within': this.owner.$el.parent()
         ,'dragStart': _.bind(this.dragStart, this)
         ,'dragEnd': _.bind(this.dragEnd, this)
       });
@@ -110,6 +110,11 @@ define(['src/app', 'src/constants', 'src/utils'],
       var currentRotation = util.getRotation(this.$el);
       var newRotation = currentRotation + totalDelta;
       this.$el.css('transform', 'rotate(' + newRotation + 'deg)');
+    }
+
+    ,'tearDown': function () {
+      this.remove();
+      util.deleteAllProperties(this);
     }
 
   });

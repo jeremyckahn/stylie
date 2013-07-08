@@ -18,43 +18,37 @@
         <p>&nbsp;</p>
       </div>
     </header>
-    <div id="crosshairs">
+    <div id="scaffolding-area">
       <canvas id="tween-path"></canvas>
       <div id="rekapi-canvas">
         <div class="rekapi-actor">
           <img src="img/circle.png" alt="A test image of a circle">
         </div>
       </div>
+      <div id="crosshairs"></div>
     </div>
     <div id="control-pane">
       <ul class="tabs">
-        <li data-target="tween-controls"><a href="#">Tween</a></li>
         <li data-target="keyframe-controls"><a href="#">Keyframes</a></li>
+        <li data-target="motion-controls"><a href="#">Motion</a></li>
         <li data-target="css-output"><a href="#">CSS</a></li>
         <li data-target="html-input"><a href="#">HTML</a></li>
       </ul>
       <ul class="tabs-contents">
-        <li id="tween-controls">
-          <p>
-            Adjust the properties of the tween.
-          </p>
+        <li id="keyframe-controls">
+          <div class="pinned-button-array">
+            <label class="add">
+              <span>Add a keyframe</span>
+              <button class="icon icon-plus">&nbsp;</button>
+            </label>
+          </div>
+          <div class="controls-wrapper">
+            <ul class="controls">
+            </ul>
+          </div>
+        </li>
+        <li id="motion-controls">
           <ul class="controls">
-            <li>
-              <label class="ease-label" for="x-easing">X:</label>
-              <select id="x-easing" data-axis="x"></select>
-            </li>
-            <li>
-              <label class="ease-label" for="y-easing">Y:</label>
-              <select id="y-easing" data-axis="y"></select>
-            </li>
-            <li>
-              <label class="ease-label" for="r-easing">R:</label>
-              <select id="r-easing" data-axis="r"></select>
-            </li>
-            <li>
-              <label for="duration">Duration:</label>
-              <input id="duration" class="full-width" type="text" value="">
-            </li>
             <li>
               <label for="iterations">Iterations (preview is always infinite):</label>
               <input id="iterations" class="full-width" type="text" value="infinite">
@@ -75,13 +69,6 @@
               <input id="center-to-path" type="checkbox" checked="checked">
               <label for="center-to-path">Center to path</label>
             </li>
-          </ul>
-        </li>
-        <li id="keyframe-controls">
-          <p>
-            Manually adjust the coordinates of the keyframes.  Type new values in or press the &quot;up&quot; or &quot;down&quot; arrow keys when focused on the inputs.
-          </p>
-          <ul class="controls">
           </ul>
         </li>
         <li id="css-output">
@@ -150,16 +137,21 @@
       <div class="modal-content">
         <h2>CSS animation made easy!</h2>
         <p>Stylie is a fun tool for easily creating CSS 3 animations. You can configure your animation graphically, tweak it, grab the generated CSS and go!</p>
-        <p><a href="http://www.youtube.com/watch?v=ENTymVsjVo4" target="_blank">Watch this screencast for a quick tutorial.</a></p>
+        <p><a href="http://www.youtube.com/watch?v=dv_W1eXj9_8" target="_blank">Watch this screencast for a quick tutorial.</a></p>
         <h3>The Stylie Workflow</h3>
         <p>When you first open the app, you will see a little ball moving from left to right. You probably don't want to animate an image of a ball, so click the &quot;HTML&quot; tab in the control panel on the right. This textarea contains the HTML that is being animated. You can put whatever you want in here, but let's stick some text in there for starters:</p>
         <pre>&lt;h1&gt;Hello there!&lt;/h1&gt;</pre>
         <p>The preview updates automatically. Next, you&#x27;ll want to change the beginning and ending positions of the animation. Just click and drag the crosshairs to your liking. When your cursor is not focused on a text input, you can hold the Shift key to make rotation handles appear on the crosshairs. Click and drag the handles to modify the starting and ending rotation positions.</p>
-        <img src="img/shift_example.png" alt="An screenshot of Stylie while the rotation handles are shown">
-        <p>If you want to tweak the crosshairs with more granularity, open the &quot;Keyframes&quot; tab and input specific values. &quot;R&quot; means &quot;rotation.&quot;</p>
+        <img src="img/shift_example.png" alt="A screenshot of Stylie while the rotation handles are shown">
+        <h3>Keyframe editing</h3>
+        <p>You can add, remove and edit keyframes.  This is done in the &quot;Keyframes&quot; tab.  When you first open Stylie, you are presented with the default keyframes.  Keyframe 0 cannot be moved and has no easing properties associated with it, but all of the other keyframes do.  To add a new keyframe, click the &quot;Add a Keyframe&quot; button in the upper right portion of the tab.</p>
+        <img src="img/keyframes_tab.png" alt="A screenshot of the Keyframes tab.">
+        <p>You can add as many keyframes as you'd like.  You can also reorder keyframes by clicking their millisecond value and pressing the Enter key.</p>
+        <img src="img/keyframe_editing.png" alt="A screenshot of keyframes being edited.">
+        <p>You can tweak individual keyframe properties by pressing the &quot;up&quot; and &quot;down&quot; arrow keys when focusing on a property's text input.  You can change individual properties' easing formula by selecting it from the dropdown next to each text input.  To remove a keyframe, click the &quot;X&quot; in the upper right corner of a keyframe.</p>
         <h3>Motion control</h3>
-        <p>You can have fine-grained control over your animation. Click the &quot;Tween&quot; tab in the control panel to see the properties of the tween. For number fields such as &quot;duration,&quot; you can type in the value or just press the up or down arrow keys to tweak it.</p>
-        <p>You can test out different easing formulae by selecting them from the dropdowns. You can control the easing formulae for each property of the animation. The preview updates automatically. You can also specify a custom easing formula if you don&#x27;t like the provided ones. Simply input your formula into the &quot;custom easing&quot; fields. What you put into these fields must be valid JavaScript. Once you have inputted your custom formula, you can select &quot;customEase1&quot; or &quot;customEase2&quot; from the dropdowns.</p>
+        <p>In addition to the standard easing formulae, you can define your own custom formula in the &quot;Motion&quot; tab.  Simply input your formula into the &quot;Custom easing&quot; fields. What you put into these fields must be valid JavaScript. Once you have inputted your custom formula, you can select &quot;customEase1&quot; or &quot;customEase2&quot; from a property's easing dropdown.</p>
+        <p>Also in this tab, you can change various display properties of the animation.</p>
         <h3>Playback control</h3>
         <p>You&#x27;ll notice a playhead in the bottom left of the screen. This is fully interactive; you can can play, pause and stop the animation. You can also click and drag the playhead and zip to any part of the timeline.</p>
         <h3>Generating your CSS</h3>
@@ -173,6 +165,10 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>K</td>
+              <td>Add a new Keyframe</td>
+            </tr>
             <tr>
               <td>C</td>
               <td>Toggle the Control Pane</td>

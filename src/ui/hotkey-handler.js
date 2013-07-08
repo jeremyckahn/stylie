@@ -33,6 +33,9 @@ define(['src/app'], function (app) {
         }
       } else if (evt.keyCode === 84) { // "T" key
         app.view.rekapiControls.fadeToggle();
+      } else if (evt.keyCode === 75) { // "K" key
+        app.collection.actors.getCurrent()
+          .appendNewKeyframeWithDefaultProperties();
       }
     }
 

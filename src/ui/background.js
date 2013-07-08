@@ -9,8 +9,9 @@ define(['src/app', 'src/constants'], function (app, constant) {
         ,'width': opts.width
       });
 
-      subscribe(constant.PATH_CHANGED,
-          _.bind(this.update, this));
+      var boundUpdate = _.bind(this.update, this);
+      subscribe(constant.PATH_CHANGED, boundUpdate);
+      subscribe(constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
     }
 
     ,'resize': function (dims) {
@@ -25,7 +26,31 @@ define(['src/app', 'src/constants'], function (app, constant) {
       }, this);
     }
 
-    ,'generatePathPoints': function (x1, y1, x2, y2, easeX, easeY) {
+    ,'generatePathPoints': function () {
+      var currentActorModel = app.collection.actors.getCurrent();
+      var keyframeLength = currentActorModel.getLength();
+      var points = [];
+
+      var i;
+      for (i = 1; i < keyframeLength; ++i) {
+        var fromKeyframe = currentActorModel.getAttrsForKeyframe(i - 1);
+        var toKeyframe = currentActorModel.getAttrsForKeyframe(i);
+        var x1 = fromKeyframe.x;
+        var y1 = fromKeyframe.y;
+        var x2 = toKeyframe.x;
+        var y2 = toKeyframe.y;
+        var easings = currentActorModel.getEasingsForKeyframe(i);
+        var easeX = easings.x;
+        var easeY = easings.y;
+
+        points = points.concat(
+            this.generatePathSegment(x1, x2, y1, y2, easeX, easeY));
+      }
+
+      return points;
+    }
+
+    ,'generatePathSegment': function (x1, x2, y1, y2, easeX, easeY) {
       var points = [];
       var from = {
           'x': x1
@@ -39,18 +64,17 @@ define(['src/app', 'src/constants'], function (app, constant) {
         'x': easeX
         ,'y': easeY
       };
-      var i, point;
-      for (i = 0; i <= constant.RENDER_GRANULARITY; i++) {
+      var j, point;
+      for (j = 0; j <= constant.RENDER_GRANULARITY; j++) {
         point = Tweenable.interpolate(
-            from, to, (1 / constant.RENDER_GRANULARITY) * i, easing);
+            from, to, (1 / constant.RENDER_GRANULARITY) * j, easing);
         points.push(point);
       }
 
       return points;
     }
 
-    ,'generatePathPrerender': function (
-          x1, y1, x2, y2, easeX, easeY, useDimColor) {
+    ,'generatePathPrerender': function (useDimColor) {
       app.config.prerenderedPath = document.createElement('canvas');
       app.config.prerenderedPath.width =
           app.view.canvas.$canvasBG.width();
@@ -82,18 +106,11 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'update': function (useDimColor) {
-      var firstActor = app.collection.actors.getCurrent();
-      var fromCoords = firstActor.getAttrsForKeyframe(0);
-      var toCoords = firstActor.getAttrsForKeyframe(1);
-      this.generatePathPrerender(fromCoords.x, fromCoords.y,
-          toCoords.x, toCoords.y, app.view.selectX.$el.val(),
-          app.view.selectY.$el.val(), useDimColor);
+      this.generatePathPrerender(useDimColor);
 
-      if (app.config.prerenderedPath) {
-        this.$el[0].width = this.$el.width();
-        if (app.config.isPathShowing) {
-          this.context.drawImage(app.config.prerenderedPath, 0, 0);
-        }
+      this.$el[0].width = this.$el.width();
+      if (app.config.isPathShowing) {
+        this.context.drawImage(app.config.prerenderedPath, 0, 0);
       }
     }
 

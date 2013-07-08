@@ -2,7 +2,11 @@ define(['src/app'], function (app) {
 
   return {
 
-    'pxToNumber': function (px) {
+    'noop': function () {
+      // NOOP!
+    }
+
+    ,'pxToNumber': function (px) {
       return parseInt(px, 10);
     }
 
@@ -28,6 +32,12 @@ define(['src/app'], function (app) {
       // $.fn.css returns the transform info in matrix format, which is harder
       // to work with.
       return parseFloat($el.attr('style').match(/rotate\((-*\d+)deg\)/)[1]);
+    }
+
+    ,'deleteAllProperties': function (obj) {
+      _.each(obj, function (value, key) {
+        delete obj[key];
+      });
     }
 
   };

@@ -22,6 +22,10 @@ define(['src/ui/auto-update-textfield'],
       this.tweakVal(-this.increment);
     }
 
+    ,'tearDown': function () {
+      AutoUpdateTextFieldView.prototype.tearDown.call(this);
+    }
+
   });
 
 });

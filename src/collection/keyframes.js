@@ -1,26 +1,29 @@
-define(['src/app', 'src/model/keyframe', 'src/ui/keyframe'],
-    function (app, KeyframeModel, KeyframeView) {
+define(['src/app', 'src/model/keyframe'], function (app, KeyframeModel) {
 
   return Backbone.Collection.extend({
 
     'model': KeyframeModel
 
     ,'initialize': function (models, opts) {
+      _.extend(this, opts);
 
-      this.on('add', function (model) {
-        new KeyframeView({
-            'model': model
-          });
-      });
+      this.on('add', _.bind(function (model) {
+        this.owner.crosshairsView.addCrosshairView(model);
+        this.owner.keyframeFormsView.addKeyframeView(model);
+      }, this));
+    }
+
+    ,'comparator': function (keyframeModel) {
+      return keyframeModel.get('millisecond');
     }
 
     ,'updateModelFormViews': function () {
-      if (!this.models[0].keyframeForm) {
+      if (!this.models[0].keyframeFormView) {
         return;
       }
 
       this.each(function (model) {
-        model.keyframeForm.render();
+        model.keyframeFormView.render();
       });
     }
 
@@ -32,6 +35,10 @@ define(['src/app', 'src/model/keyframe', 'src/ui/keyframe'],
       this.each(function (model) {
         model.crosshairView.render();
       });
+    }
+
+    ,'removeKeyframe': function (millisecond) {
+      this.remove(this.findWhere({'millisecond': millisecond}));
     }
 
   });

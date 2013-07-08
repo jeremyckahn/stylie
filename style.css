@@ -47,7 +47,11 @@ textarea:focus {
   background: #585858;
 }
 
-ul.controls li {
+ul.controls {
+  clear: both;
+}
+
+ul.controls > li {
   display: block;
   font-size: 1.1em;
   padding: 6px 0;
@@ -67,7 +71,7 @@ table {
     padding-bottom: 8px;
   }
 
-  tr td:nth-child(1) {
+  tr td:first-child {
     font-weight: bold;
     padding-right: 40px;
   }
@@ -274,7 +278,7 @@ canvas {
   float: left;
 }
 
-#crosshairs {
+#scaffolding-area {
   background: url(img/ui/bg_grid.png);
   float: left;
   margin: 0 auto;
@@ -282,11 +286,11 @@ canvas {
   position: relative;
 }
 
-  #crosshairs canvas {
+  #scaffolding-area canvas {
     float: left;
   }
 
-  #crosshairs .crosshair {
+  #scaffolding-area .crosshair {
     cursor: move;
     height: 40px;
     margin: -20px;
@@ -295,29 +299,14 @@ canvas {
     width: 40px;
   }
 
-  .crosshair.from {
-    left: 25px;
-  }
-
-  .crosshair.to {
-    left: 435px;
-  }
-
     .crosshair .dashmark {
+      background: #0c0;
       height: 2px;
       left: 0;
       position: absolute;
       top: 0;
       width: 2px;
     }
-
-      .from .dashmark {
-        background: #0c0;
-      }
-
-      .to .dashmark {
-        background: #f00;
-      }
 
     .crosshair .dashmark.horiz {
       top: 19px;
@@ -360,12 +349,104 @@ canvas {
     color: #fff;
   }
 
+    #control-pane .millisecond-input {
+      width: 65px;
+    }
+
   #control-pane label {
     padding-right: 2px;
   }
 
-    #control-pane .keyframe label {
+    #control-pane .keyframe:first-child div {
+      display: inline;
+    }
+
+    #control-pane .keyframe:first-child span {
+      float:none;
+    }
+
+    #control-pane .keyframe:first-child label {
       padding-right: 14px;
+    }
+
+    #control-pane .keyframe div {
+      clear: both;
+      margin-bottom: 12px;
+    }
+
+    #control-pane .keyframe h3 {
+      cursor: pointer;
+    }
+
+    #control-pane .keyframe:first-child h3 {
+      cursor: auto;
+    }
+
+    #control-pane .keyframe:nth-child(2) .pinned-button-array {
+      display: none;
+    }
+
+    #control-pane .keyframe .pinned-button-array {
+      float: right;
+      margin: -28px 0 12px 0;
+      position: relative;
+    }
+
+    #control-pane .keyframe div:last-child {
+      margin-bottom: 0;
+    }
+
+    #control-pane .keyframe span {
+      line-height: 28px;
+      padding-right: 0;
+      width: 20px;
+    }
+
+    #control-pane .keyframe .pinned-button-array button,
+    #control-pane .keyframe .pinned-button-array span {
+      line-height: 23px;
+    }
+
+    #control-pane .keyframe .property-field span {
+      display: inline-block;
+    }
+
+  #control-pane .pinned-button-array {
+    margin-bottom: -12px;
+    overflow: hidden;
+  }
+
+    #control-pane .pinned-button-array label {
+      float: right;
+    }
+
+    #control-pane .pinned-button-array label,
+    #control-pane .pinned-button-array button {
+      color: #aaa;
+    }
+
+    #control-pane .pinned-button-array span {
+      padding-right: 34px;
+      position: relative;
+      visibility: hidden;
+    }
+
+    #control-pane .pinned-button-array:hover span {
+      visibility: visible;
+    }
+
+    #control-pane .pinned-button-array label:active,
+    #control-pane .pinned-button-array button:active {
+      color: #ddd;
+    }
+
+    #control-pane .pinned-button-array  button {
+      background: none;
+      border: none;
+      padding: 0;
+      position: absolute;
+      right: 6px;
+      top: 0;
     }
 
   #control-pane span {
@@ -384,7 +465,8 @@ canvas {
     border: solid 1px #333;
     color: #fff;
     font-size: 1em;
-    width: 170px;
+    margin-left: 8px;
+    width: 200px;
   }
 
   #control-pane hr {
@@ -422,16 +504,33 @@ canvas {
   }
 
   #control-pane input.quarter-width {
-    width: 50px;
+    width: 44px;
   }
 
-#tween-controls {
+#motion-controls {
   float: left;
   padding: 0;
 }
 
-  #tween-controls input.error {
+  #motion-controls input.error {
     background: #f55;
+  }
+
+#keyframe-controls {
+  margin-top: 26px;
+  overflow: visible;
+}
+
+  #keyframe-controls > .pinned-button-array {
+    position: absolute;
+    right: -10px;
+    top: -26px;
+    width: 100%;
+  }
+
+  #keyframe-controls .controls-wrapper {
+    max-height: 400px;
+    overflow: auto;
   }
 
   #keyframe-controls hr {
@@ -442,6 +541,10 @@ canvas {
     color: #aaa;
     content: 'ms';
     margin-left: 2px;
+  }
+
+  #keyframe-controls ul.controls > li:first-child {
+    padding-top: 0;
   }
 
 #rekapi-canvas {
@@ -546,6 +649,7 @@ canvas {
 }
 
   .tabs-contents > li {
+    position: relative;
     width: 300px;
   }
 
@@ -611,6 +715,10 @@ canvas {
     font-size: 1.1em;
   }
 
+  .modal img {
+    display: block;
+    margin: 0 auto;
+  }
 
   .modal a,
   .modal a:active,
