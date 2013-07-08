@@ -35,6 +35,19 @@ require([
 
   app.config.queryString = util.getQueryParams();
 
+  // The styling of the <select>s only works in WebKit under OS X.  Do some
+  // user agent sniffing and add some top-level classes.
+  //
+  // TODO: Find a better way to do this that doesn't involve user agent
+  // sniffing...
+  if (navigator.userAgent.match(/Macintosh/)) {
+    $(document.body).addClass('mac');
+  }
+
+  if (navigator.userAgent.match(/WebKit/)) {
+    $(document.body).addClass('webkit');
+  }
+
   $('.ease').each(function (i, el) {
     app.view['easeField' + i] = new EaseFieldView({
       '$el': $(el)
