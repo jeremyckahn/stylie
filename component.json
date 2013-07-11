@@ -1,6 +1,6 @@
 {
   "name": "Stylie",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./index.html",
   "dependencies": {
     "shifty": "0.8.6",

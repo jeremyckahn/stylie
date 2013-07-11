@@ -101,6 +101,7 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       this.keyframeCollection.add(modelProperties, { 'owner': this });
       var keyframeProperties = this.keyframeCollection.last().getCSS();
       this.get('actor').keyframe(millisecond, keyframeProperties, opt_easing);
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'modifyKeyframe': function (
