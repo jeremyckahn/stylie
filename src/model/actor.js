@@ -68,6 +68,7 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       this.keyframeCollection.sort();
       this.keyframeFormsView.reorderKeyframeFormViews();
       this.crosshairsView.reorderCrosshairViews();
+      app.kapi.update();
       publish(constant.KEYFRAME_ORDER_CHANGED);
     }
 
