@@ -9,7 +9,7 @@ require([
     ,'src/ui/auto-update-textfield', 'src/ui/canvas', 'src/ui/pane'
     ,'src/ui/tabs', 'src/ui/css-output', 'src/ui/html-input'
     ,'src/ui/incrementer-field', 'src/ui/modal', 'src/ui/hotkey-handler'
-    ,'src/ui/rekapi-controls', 'src/ui/alert'
+    ,'src/ui/rekapi-controls', 'src/ui/alert', 'src/ui/granularity-slider'
 
     // Collections
     ,'src/collection/actors'
@@ -23,7 +23,7 @@ require([
       ,AutoUpdateTextFieldView, CanvasView, PaneView
       ,TabsView, CSSOutputView, HTMLInputView
       ,IncrementerFieldView, ModalView, HotkeyHandlerView
-      ,RekapiControlsView, AlertView
+      ,RekapiControlsView, AlertView, GranularitySliderView
 
       ,ActorCollection
 
@@ -128,6 +128,10 @@ require([
     '$el': $('#css-output textarea')
     ,'$trigger': app.view.controlPaneTabs.$el
         .find('[data-target="css-output"]')
+  });
+
+  app.view.granularitySlider = new GranularitySliderView({
+    '$el': $('.quality-slider.granularity .slider')
   });
 
   subscribe(constant.UPDATE_CSS_OUTPUT, function () {

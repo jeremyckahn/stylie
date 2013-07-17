@@ -38,6 +38,7 @@ define(['src/app'], function (app) {
         ,'name': app.view.cssNameField.$el.val()
         ,'iterations': app.$el.animationIteration.val()
         ,'isCentered': app.config.isCenteredToPath
+        ,'granularity': app.view.granularitySlider.getGranularity()
       });
       this.$el.val(cssOutput);
     }

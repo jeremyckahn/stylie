@@ -19,7 +19,7 @@ ul li {
 }
 
 textarea {
-  height: 188px;
+  height: 140px;
   resize: none;
 }
 
@@ -176,7 +176,7 @@ h3 {
   margin: 6px 0;
 }
 
-.dragon-slider {
+.rekapi-scrubber .dragon-slider {
   width: 380px !important;
 }
 
@@ -503,6 +503,48 @@ canvas {
   #control-pane textarea {
     width: 292px;
   }
+
+  #control-pane .quality-slider {
+    overflow: auto;
+    padding-top: 12px;
+  }
+
+    #control-pane .quality-slider label {
+      font-size: 13px;
+    }
+
+    #control-pane .quality-slider label:nth-child(1) {
+      float: left;
+    }
+
+    #control-pane .quality-slider label:nth-child(2) {
+      float: right;
+    }
+
+    #control-pane .quality-slider .dragon-slider {
+      background: none;
+      border: solid 1px #fff;
+      height: 13px;
+      margin: 26px auto 0;
+      width: 290px !important;
+    }
+
+    #control-pane .quality-slider .dragon-slider button {
+      background: #fff;
+      height: 14px;
+      width: 14px;
+
+      /* Overrides styles from Rekapi Controls.
+       *
+       * TODO: These style should not need to be overridden, the selectors in
+       * Rekapi Controls are not scoped properly.
+       */
+      -moz-box-shadow: none;
+      -ms-box-shadow: none;
+      -o-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
 
   #control-pane input.quarter-width {
     width: 44px;
