@@ -195,13 +195,13 @@ define([
       this.renderHeader();
 
       if (this.model.get('x') !== parseFloat(this.$inputX.val())) {
-        this.$inputX.val(this.model.get('x'));
+        this.incrementerViewX.$el.val(this.model.get('x'));
       }
       if (this.model.get('y') !== parseFloat(this.$inputY.val())) {
-        this.$inputY.val(this.model.get('y'));
+        this.incrementerViewY.$el.val(this.model.get('y'));
       }
       if (this.model.get('r') !== parseFloat(this.$inputR.val())) {
-        this.$inputR.val(this.model.get('r'));
+        this.incrementerViewR.$el.val(this.model.get('r'));
       }
     }
 
