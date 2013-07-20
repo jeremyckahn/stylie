@@ -26,6 +26,7 @@ define(['src/app'], function (app) {
     ,'initialize': function (opts) {
       _.extend(this, opts);
       this.$trigger.on('click', _.bind(this.onTriggerClick, this));
+      this.$actorEl = $('#rekapi-canvas .rekapi-actor');
     }
 
     ,'onTriggerClick': function (evt) {
@@ -33,14 +34,21 @@ define(['src/app'], function (app) {
     }
 
     ,'renderCSS': function () {
+      var cssClassName = app.view.cssNameField.$el.val();
+
       var cssOutput = app.kapi.toCSS({
         'vendors': getPrefixList(app)
-        ,'name': app.view.cssNameField.$el.val()
+        ,'name': cssClassName
         ,'iterations': app.$el.animationIteration.val()
         ,'isCentered': app.config.isCenteredToPath
         ,'granularity': app.view.granularitySlider.getGranularity()
       });
+
       this.$el.val(cssOutput);
+
+      // Kapi#toCSS automatically adds the custom class name to the DOM
+      // element, but that's not desirable here.
+      this.$actorEl.removeClass(cssClassName);
     }
 
   });
