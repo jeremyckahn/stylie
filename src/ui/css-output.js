@@ -41,7 +41,7 @@ define(['src/app'], function (app) {
         ,'name': cssClassName
         ,'iterations': app.$el.animationIteration.val()
         ,'isCentered': app.config.isCenteredToPath
-        ,'granularity': app.view.granularitySlider.getGranularity()
+        ,'fps': app.view.fpsSlider.getFPS()
       });
 
       this.$el.val(cssOutput);

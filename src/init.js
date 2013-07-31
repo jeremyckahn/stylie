@@ -9,7 +9,7 @@ require([
     ,'src/ui/auto-update-textfield', 'src/ui/canvas', 'src/ui/pane'
     ,'src/ui/tabs', 'src/ui/css-output', 'src/ui/html-input'
     ,'src/ui/incrementer-field', 'src/ui/modal', 'src/ui/hotkey-handler'
-    ,'src/ui/rekapi-controls', 'src/ui/alert', 'src/ui/granularity-slider'
+    ,'src/ui/rekapi-controls', 'src/ui/alert', 'src/ui/fps-slider'
 
     // Collections
     ,'src/collection/actors'
@@ -23,7 +23,7 @@ require([
       ,AutoUpdateTextFieldView, CanvasView, PaneView
       ,TabsView, CSSOutputView, HTMLInputView
       ,IncrementerFieldView, ModalView, HotkeyHandlerView
-      ,RekapiControlsView, AlertView, GranularitySliderView
+      ,RekapiControlsView, AlertView, FPSSliderView
 
       ,ActorCollection
 
@@ -130,8 +130,8 @@ require([
         .find('[data-target="css-output"]')
   });
 
-  app.view.granularitySlider = new GranularitySliderView({
-    '$el': $('.quality-slider.granularity .slider')
+  app.view.fpsSlider = new FPSSliderView({
+    '$el': $('.quality-slider.fps .slider')
   });
 
   subscribe(constant.UPDATE_CSS_OUTPUT, function () {
