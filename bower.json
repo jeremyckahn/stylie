@@ -15,7 +15,6 @@
     "minpubsub": ""
   },
   "resolutions": {
-    "jquery": "~2.0.2",
-    "underscore": "~1.5.1"
+    "jquery": "~2.0.2"
   }
 }
