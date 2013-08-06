@@ -62,8 +62,8 @@ define(['src/app', 'src/constants'], function (app, constant) {
     ,'getCSS': function () {
       return {
         'transform':
-          ['translateX(', this.get('x')
-            ,'px) translateY(', this.get('y')
+          ['translate(', this.get('x')
+            ,'px, ', this.get('y')
             ,'px) rotate(', this.get('r')
             ,app.config.isCenteredToPath
               ? 'deg) translate(-50%, -50%)'

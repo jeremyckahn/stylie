@@ -45,10 +45,6 @@ define(['src/app'], function (app) {
       });
 
       this.$el.val(cssOutput);
-
-      // Kapi#toCSS automatically adds the custom class name to the DOM
-      // element, but that's not desirable here.
-      this.$actorEl.removeClass(cssClassName);
     }
 
   });
