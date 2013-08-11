@@ -4,7 +4,7 @@
   "main": "./index.html",
   "dependencies": {
     "shifty": "0.8.6",
-    "rekapi": "0.15.13",
+    "rekapi": "0.15.14",
     "rekapi-controls": "~0.3.10",
     "backbone": "~1.0.0",
     "underscore": "~1.5.1",
