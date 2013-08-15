@@ -89,7 +89,7 @@ require([
     currentActorModel.keyframe(millisecond, {
       'x': i
         ? winWidth - (winWidth / (i + 1))
-        : 40 // TODO: Should this be a constant?
+        : 60 // TODO: Should this be a constant?
       ,'y': crosshairStartingY
       ,'rX': 0
       ,'rY': 0

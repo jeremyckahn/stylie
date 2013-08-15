@@ -21,8 +21,9 @@ some text in there for starters:
 The preview updates automatically. Next, you'll want to change the beginning
 and ending positions of the animation. Just click and drag the crosshairs to
 your liking. When your cursor is not focused on a text input, you can hold the
-Shift key to make rotation handles appear on the crosshairs. Click and drag the
-handles to modify the starting and ending rotation positions.
+Shift key to make rotation Cubelets appear over the crosshairs. Click and drag
+the Cubelets to modify the the X and Y rotation axes, and drag the extended
+rotation arm to modify the Z axis rotation.
 
 You can add, remove and edit keyframes.  This is done in the "Keyframes" tab.
 When you first open Stylie, you are presented with the default keyframes.
