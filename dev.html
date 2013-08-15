@@ -146,12 +146,12 @@
         <h3>The Stylie Workflow</h3>
         <p>When you first open the app, you will see a little ball moving from left to right. You probably don't want to animate an image of a ball, so click the &quot;HTML&quot; tab in the control panel on the right. This textarea contains the HTML that is being animated. You can put whatever you want in here, but let's stick some text in there for starters:</p>
         <pre>&lt;h1&gt;Hello there!&lt;/h1&gt;</pre>
-        <p>The preview updates automatically. Next, you&#x27;ll want to change the beginning and ending positions of the animation. Just click and drag the crosshairs to your liking. When your cursor is not focused on a text input, you can hold the Shift key to make rotation handles appear on the crosshairs. Click and drag the handles to modify the starting and ending rotation positions.</p>
-        <img src="img/shift_example.png" alt="A screenshot of Stylie while the rotation handles are shown">
+        <p>The preview updates automatically. Next, you&#x27;ll want to change the beginning and ending positions of the animation. Just click and drag the crosshairs to your liking. When your cursor is not focused on a text input, you can hold the Shift key to make rotation Cubelets appear over the crosshairs. Click and drag the Cubelets to modify the the X and Y rotation axes, and drag the extended rotation arm to modify the Z axis rotation.</p>
+        <img src="img/shift_example.png" alt="A screenshot of Stylie while the rotation Cubelets are shown">
         <h3>Keyframe editing</h3>
         <p>You can add, remove and edit keyframes.  This is done in the &quot;Keyframes&quot; tab.  When you first open Stylie, you are presented with the default keyframes.  Keyframe 0 cannot be moved and has no easing properties associated with it, but all of the other keyframes do.  To add a new keyframe, click the &quot;Add a Keyframe&quot; button in the upper right portion of the tab.</p>
         <img src="img/keyframes_tab.png" alt="A screenshot of the Keyframes tab.">
-        <p>You can add as many keyframes as you'd like.  You can also reorder keyframes by clicking their millisecond value and pressing the Enter key.</p>
+        <p>RX, RY and RZ refer to the three rotation axes.  You can add as many keyframes as you'd like.  You can also reorder keyframes by clicking their millisecond value and pressing the Enter key.</p>
         <img src="img/keyframe_editing.png" alt="A screenshot of keyframes being edited.">
         <p>You can tweak individual keyframe properties by pressing the &quot;up&quot; and &quot;down&quot; arrow keys when focusing on a property's text input.  You can change individual properties' easing formula by selecting it from the dropdown next to each text input.  To remove a keyframe, click the &quot;X&quot; in the upper right corner of a keyframe.</p>
         <h3>Motion control</h3>
@@ -192,7 +192,7 @@
             </tr>
             <tr>
               <td>Shift <em>(hold)</em></td>
-              <td>Show keyframe rotation handles</td>
+              <td>Show keyframe rotation Cubelets</td>
             </tr>
           </tbody>
         </table>
@@ -205,6 +205,7 @@
   <script src="bower_components/jquery/jquery.js"></script>
   <script src="bower_components/jquery-dragon/src/jquery.dragon.js"></script>
   <script src="bower_components/jquery-dragon/src/jquery.dragon-slider.js"></script>
+  <script src="bower_components/jquery-cubelet/dist/jquery.cubelet.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
   <script src="bower_components/backbone/backbone.js"></script>
   <script src="bower_components/mustache/mustache.js"></script>

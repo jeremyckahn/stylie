@@ -1,6 +1,6 @@
 {
   "name": "Stylie",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "main": "./index.html",
   "dependencies": {
     "shifty": "0.8.6",
@@ -11,6 +11,7 @@
     "requirejs": "~2.1.6",
     "jquery": "~2.0.2",
     "jquery-dragon": "~0.1.4",
+    "jquery-cubelet": "~0.0.1",
     "mustache": "~0.7.2",
     "minpubsub": ""
   },

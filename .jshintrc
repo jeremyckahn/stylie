@@ -11,7 +11,8 @@
     "define": true,
     "publish": true,
     "require": true,
-    "subscribe": true
+    "subscribe": true,
+    "unsubscribe": true
   },
 
   "asi": false,

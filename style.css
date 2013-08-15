@@ -290,13 +290,16 @@ canvas {
     float: left;
   }
 
+  #scaffolding-area .crosshair-container {
+    height: 40px;
+    width: 40px;
+  }
+
   #scaffolding-area .crosshair {
     cursor: move;
-    height: 40px;
     margin: -20px;
     position: absolute;
     top: 180px;
-    width: 40px;
   }
 
     .crosshair .dashmark {
@@ -318,27 +321,11 @@ canvas {
       left: 19px;
     }
 
-    .shift-down .crosshair .rotation-arm {
-      cursor: ew-resize;
-      bottom: 50%;
-      background: #fff;
-      border-left: dotted #000 2px;
-      left: 50%;
+    .crosshair .rotation-control {
+      left: 20px;
       position: absolute;
-      height: 100px;
-      width: 0;
+      top: 20px;
     }
-
-      .shift-down .crosshair .rotation-handle {
-        background: #444;
-        border: solid #000 2px;
-        border-radius: 50%;
-        height: 10px;
-        left: -8px;
-        position: absolute;
-        right: 8%;
-        width: 10px;
-      }
 
 #control-pane {
   color: #fefefe;
@@ -358,7 +345,12 @@ canvas {
   }
 
     #control-pane .keyframe:first-child div {
-      display: inline;
+      clear: none;
+      float: left;
+    }
+
+    #control-pane .keyframe:first-child :nth-child(5) {
+      clear: left;
     }
 
     #control-pane .keyframe:first-child span {
@@ -372,6 +364,10 @@ canvas {
     #control-pane .keyframe div {
       clear: both;
       margin-bottom: 12px;
+    }
+
+    #control-pane .keyframe {
+      clear: left;
     }
 
     #control-pane .keyframe h3 {
@@ -399,7 +395,7 @@ canvas {
     #control-pane .keyframe span {
       line-height: 28px;
       padding-right: 0;
-      width: 20px;
+      width: 26px;
     }
 
     #control-pane .keyframe .pinned-button-array button,
@@ -547,7 +543,7 @@ canvas {
     }
 
   #control-pane input.quarter-width {
-    width: 44px;
+    width: 38px;
   }
 
 #motion-controls {

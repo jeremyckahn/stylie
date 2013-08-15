@@ -64,7 +64,9 @@ define(['src/app', 'src/constants'], function (app, constant) {
         'transform':
           ['translate(', this.get('x')
             ,'px, ', this.get('y')
-            ,'px) rotate(', this.get('r')
+            ,'px) rotateX(', this.get('rX')
+            ,'deg) rotateY(', this.get('rY')
+            ,'deg) rotateZ(', this.get('rZ')
             ,app.config.isCenteredToPath
               ? 'deg) translate(-50%, -50%)'
               : 'deg)'
@@ -76,7 +78,9 @@ define(['src/app', 'src/constants'], function (app, constant) {
       return {
         'x': this.get('x')
         ,'y': this.get('y')
-        ,'r': this.get('r')
+        ,'rX': this.get('rX')
+        ,'rY': this.get('rY')
+        ,'rZ': this.get('rZ')
       };
     }
 

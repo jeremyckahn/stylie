@@ -84,8 +84,10 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       this.keyframe(newKeyframeMillisecond, {
         'x': lastKeyframeAttrs.x + constant.NEW_KEYFRAME_X_OFFSET
         ,'y': lastKeyframeAttrs.y
-        ,'r': 0
-      }, 'linear linear linear');
+      ,'rX': 0
+      ,'rY': 0
+      ,'rZ': 0
+      }, 'linear');
 
       app.view.canvas.backgroundView.update();
     }

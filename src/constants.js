@@ -8,6 +8,8 @@ define(function () {
     ,'ANIMATION_LENGTH_CHANGED': 'animation-length-changed'
     ,'ALERT_ERROR': 'error-alert'
     ,'KEYFRAME_ORDER_CHANGED': 'keyframe-order-changed'
+    ,'ROTATION_MODE_START': 'rotation-mode-start'
+    ,'ROTATION_MODE_STOP': 'rotation-mode-stop'
 
     ,'INITIAL_ANIMATION_DURATION': 2000
     ,'RENDER_GRANULARITY': 100

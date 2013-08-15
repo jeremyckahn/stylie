@@ -27,13 +27,6 @@ define(['src/app'], function (app) {
       return params;
     }
 
-    ,'getRotation': function ($el) {
-      // Need to read the style attribute here, not the CSS transform property.
-      // $.fn.css returns the transform info in matrix format, which is harder
-      // to work with.
-      return parseFloat($el.attr('style').match(/rotate\((-*\d+)deg\)/)[1]);
-    }
-
     ,'deleteAllProperties': function (obj) {
       _.each(obj, function (value, key) {
         delete obj[key];

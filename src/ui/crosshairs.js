@@ -2,11 +2,11 @@ define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
 
   var CROSSHAIR_TEMPLATE = [
     '<div class="crosshair">'
-      ,'<div class="dashmark horiz"></div>'
-      ,'<div class="dashmark vert"></div>'
-      ,'<div class="rotation-arm">'
-        ,'<div class="rotation-handle">'
+      ,'<div class="crosshair-container">'
+        ,'<div class="dashmark horiz"></div>'
+        ,'<div class="dashmark vert"></div>'
       ,'</div>'
+      ,'<div class="rotation-control"></div>'
     ,'</div>'].join('');
 
   return Backbone.View.extend({

@@ -91,7 +91,7 @@ define([
         this.$pinnedButtonArray.append($template);
       }
 
-      _.each(['x', 'y', 'r'], function (property) {
+      _.each(['x', 'y', 'rX', 'rY', 'rZ'], function (property) {
         var template = Mustache.render(KEYFRAME_PROPERTY_TEMPLATE, {
           'property': property
           ,'propertyLabel': property.toUpperCase()
@@ -116,7 +116,7 @@ define([
     }
 
     ,'initIncrementers': function () {
-      _.each([this.$inputX, this.$inputY, this.$inputR], function ($el) {
+      _.each([this.$inputX, this.$inputY, this.$inputRX, this.$inputRY, this.$inputRZ], function ($el) {
         var $input = $el.find('input');
         var keyframeAttr = $input.data('keyframeattr');
         this['incrementerView' + keyframeAttr.toUpperCase()] =
@@ -194,14 +194,23 @@ define([
     ,'render': function () {
       this.renderHeader();
 
+      // Yikes!
+      //
+      // TODO: Make this less repetitive.
       if (this.model.get('x') !== parseFloat(this.$inputX.val())) {
         this.incrementerViewX.$el.val(this.model.get('x'));
       }
       if (this.model.get('y') !== parseFloat(this.$inputY.val())) {
         this.incrementerViewY.$el.val(this.model.get('y'));
       }
-      if (this.model.get('r') !== parseFloat(this.$inputR.val())) {
-        this.incrementerViewR.$el.val(this.model.get('r'));
+      if (this.model.get('rX') !== parseFloat(this.$inputRX.val())) {
+        this.incrementerViewRX.$el.val(this.model.get('rX'));
+      }
+      if (this.model.get('rY') !== parseFloat(this.$inputRY.val())) {
+        this.incrementerViewRY.$el.val(this.model.get('rY'));
+      }
+      if (this.model.get('rZ') !== parseFloat(this.$inputRZ.val())) {
+        this.incrementerViewRZ.$el.val(this.model.get('rZ'));
       }
     }
 
@@ -212,8 +221,11 @@ define([
     ,'updateEasingString': function () {
       var xEasing = this.easeSelectViewX.$el.val();
       var yEasing = this.easeSelectViewY.$el.val();
-      var rEasing = this.easeSelectViewR.$el.val();
-      var newEasingString = [xEasing, yEasing, rEasing].join(' ');
+      var rXEasing = this.easeSelectViewRX.$el.val();
+      var rYEasing = this.easeSelectViewRY.$el.val();
+      var rZEasing = this.easeSelectViewRZ.$el.val();
+      var newEasingString = [
+          xEasing, yEasing, rXEasing, rYEasing, rZEasing].join(' ');
 
       this.model.setEasingString(newEasingString);
 
@@ -251,7 +263,7 @@ define([
     }
 
     ,'tearDown': function () {
-      _.each(['X', 'Y', 'R'], function (axis) {
+      _.each(['X', 'Y', 'RX', 'RY', 'RZ'], function (axis) {
         this['easeSelectView' + axis].tearDown();
         this['incrementerView' + axis].tearDown();
         this['$input' + axis].remove();

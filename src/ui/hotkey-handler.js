@@ -1,4 +1,4 @@
-define(['src/app'], function (app) {
+define(['src/app', 'src/constants'], function (app, constant) {
 
   return Backbone.View.extend({
 
@@ -18,6 +18,7 @@ define(['src/app'], function (app) {
 
       } else if (evt.shiftKey) {
         this.$el.addClass('shift-down');
+        publish(constant.ROTATION_MODE_START);
 
       } else if (evt.keyCode === 67) { // "C" key
         app.view.controlPane.toggle();
@@ -41,6 +42,7 @@ define(['src/app'], function (app) {
 
     ,'onKeyup': function (evt) {
       this.$el.removeClass('shift-down');
+      publish(constant.ROTATION_MODE_STOP);
     }
 
   });

@@ -6,7 +6,7 @@ define(['src/app', 'src/constants', 'src/utils'],
   return Backbone.View.extend({
 
     'events': {
-      'mousedown .rotation-arm': 'onClickRotationArm'
+      'mousedown .rotation-control': 'onMousedownRotationControl'
     }
 
     ,'initialize': function (opts) {
@@ -17,28 +17,40 @@ define(['src/app', 'src/constants', 'src/utils'],
         ,'dragEnd': _.bind(this.dragEnd, this)
       });
 
-      this.$el.css('transform', 'rotate(0deg)');
+      this._$crosshairContainer = this.$el.find('.crosshair-container');
+      this._$cubelet = this.$el.find('.rotation-control');
+      this._$cubelet
+        .hide()
+        .cubeletInit()
+        .cubeletApplyRotationToElement(this._$crosshairContainer);
+
+      this._$cubelet.on('change', _.bind(this.onCubeletChange, this));
+
+      this._rotationModeStartHandle = subscribe(
+          constant.ROTATION_MODE_START, _.bind(this.onRotationModeStart, this));
+      this._rotationModeStopHandle = subscribe(
+          constant.ROTATION_MODE_STOP, _.bind(this.onRotationModeStop, this));
+
       this.model.on('change', _.bind(this.render, this));
-      this._isRotating = false;
       this.model.crosshairView = this;
       this.render();
     }
 
-    ,'onClickRotationArm': function (evt) {
-      this.startRotating(evt.clientX, evt.clientY);
+    ,'onMousedownRotationControl': function (evt) {
       evt.stopPropagation();
     }
 
-    ,'onMouseupRotatorArm': function (evt) {
-      this.stopRotating();
+    ,'onRotationModeStart': function () {
+      this._$cubelet.show();
     }
 
-    ,'onMouseMoveRotator': function (evt) {
-      this.rotateForDragDelta(evt.clientX, evt.clientY);
+    ,'onRotationModeStop': function () {
+      this._$cubelet.hide();
     }
 
-    ,'onKeyupRotator': function (evt) {
-      this.stopRotating();
+    ,'onCubeletChange': function () {
+      this.updateModel();
+      this._$cubelet.cubeletApplyRotationToElement(this._$crosshairContainer);
     }
 
     ,'dragStart': function (evt, ui) {
@@ -55,16 +67,25 @@ define(['src/app', 'src/constants', 'src/utils'],
       this.$el.css({
         'left': this.model.get('x') + 'px'
         ,'top': this.model.get('y') + 'px'
-        ,'transform': 'rotate(' + this.model.get('r') + 'deg)'
       });
+      var rotationCoords = this._$cubelet.cubeletGetCoords();
+      this._$cubelet.cubeletSetCoords({
+        'x': this.model.get('rX')
+        ,'y': this.model.get('rY')
+        ,'z': this.model.get('rZ')
+      });
+      this._$cubelet.cubeletApplyRotationToElement(this._$crosshairContainer);
     }
 
     ,'updateModel': function () {
+      var rotationCoords = this._$cubelet.cubeletGetCoords();
       var pxTo = util.pxToNumber;
       this.model.set({
         'x': pxTo(this.$el.css('left'))
         ,'y': pxTo(this.$el.css('top'))
-        ,'r': util.getRotation(this.$el)
+        ,'rX': rotationCoords.x
+        ,'rY': rotationCoords.y
+        ,'rZ': rotationCoords.z
       });
       publish(constant.PATH_CHANGED);
       app.collection.actors.getCurrent().updateKeyframeFormViews();
@@ -75,45 +96,12 @@ define(['src/app', 'src/constants', 'src/utils'],
       app.view.canvas.backgroundView.update(true);
     }
 
-    ,'startRotating': function (startingX, startingY) {
-      this._previousRotationDragX = 0;
-      this._previousRotationDragY = 0;
-      this._currentRotationDragX = startingX;
-      this._currentRotationDragY = startingY;
-      this._mouseupHandler = _.bind(this.onMouseupRotatorArm, this);
-      this._mousemoveHandler = _.bind(this.onMouseMoveRotator, this);
-      this._keyupHandler = _.bind(this.onKeyupRotator, this);
-      this._isRotating = true;
-      $win
-        .on('mouseup', this._mouseupHandler)
-        .on('mousemove', this._mousemoveHandler)
-        .on('keyup', this._keyupHandler);
-    }
-
-    ,'stopRotating': function () {
-      this._isRotating = false;
-      this.updateModel();
-      $win
-        .off('mouseup', this._mouseupHandler)
-        .off('mousemove', this._mousemoveHandler)
-        .off('keyup', this._keyupHandler);
-    }
-
-    ,'rotateForDragDelta': function (currentX, currentY) {
-      this._previousRotationDragX = this._currentRotationDragX;
-      this._previousRotationDragY = this._currentRotationDragY;
-      this._currentRotationDragX = currentX;
-      this._currentRotationDragY = currentY;
-      var deltaX = currentX - this._previousRotationDragX;
-      var deltaY = currentY - this._previousRotationDragY;
-      var totalDelta = deltaX + deltaY;
-      var currentRotation = util.getRotation(this.$el);
-      var newRotation = currentRotation + totalDelta;
-      this.$el.css('transform', 'rotate(' + newRotation + 'deg)');
-    }
-
     ,'tearDown': function () {
+      this._$crosshairContainer.remove();
+      this._$cubelet.remove();
       this.remove();
+      unsubscribe(this._rotationModeStartHandle);
+      unsubscribe(this._rotationModeStopHandle);
       util.deleteAllProperties(this);
     }
 
