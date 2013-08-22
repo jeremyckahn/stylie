@@ -18,6 +18,26 @@ ul li {
   list-style-type: none;
 }
 
+ul.bulleted {
+  padding-left: 30px;
+}
+
+ul.bulleted .nested ul {
+  padding-left: 18px;
+}
+
+  ul.bulleted .nested {
+    list-style-type: none;
+  }
+
+    ul.bulleted .nested li {
+      list-style-type: circle;
+    }
+
+ul.bulleted li {
+  list-style-type: disc;
+}
+
 textarea {
   height: 140px;
   resize: none;
