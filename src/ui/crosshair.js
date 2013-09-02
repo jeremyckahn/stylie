@@ -46,6 +46,7 @@ define(['src/app', 'src/constants', 'src/utils'],
 
     ,'onRotationModeStop': function () {
       this._$cubelet.hide();
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'onCubeletChange': function () {
@@ -59,7 +60,6 @@ define(['src/app', 'src/constants', 'src/utils'],
 
     ,'dragEnd': function (evt, ui) {
       this.updateModel();
-      app.view.cssOutput.renderCSS();
       publish(constant.UPDATE_CSS_OUTPUT);
     }
 

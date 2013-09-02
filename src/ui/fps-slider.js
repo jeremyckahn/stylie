@@ -20,7 +20,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'onSliderDrag': function (val) {
-      app.view.cssOutput.renderCSS();
+      publish(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'getFPS': function () {
