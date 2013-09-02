@@ -36,7 +36,13 @@ fs.readFile('dev.html', function(err,data){
 
       var ast = UglifyJS.parse(libCode); // parse code and get the initial AST
       ast.figure_out_scope();
-      var compressor = UglifyJS.Compressor();
+      var compressor = UglifyJS.Compressor({
+        global_defs: {
+          SHIFTY_DEBUG: false,
+          SHIFTY_DEBUG_NOW: false,
+          KAPI_DEBUG: false
+        }
+      });
       var compressed_ast = ast.transform(compressor);
       compressed_ast.figure_out_scope();
       compressed_ast.compute_char_frequency();

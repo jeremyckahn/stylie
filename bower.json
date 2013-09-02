@@ -1,10 +1,10 @@
 {
   "name": "Stylie",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "./index.html",
   "dependencies": {
-    "shifty": "0.8.6",
-    "rekapi": "0.15.14",
+    "shifty": "0.10.2",
+    "rekapi": "0.15.16",
     "rekapi-controls": "~0.3.10",
     "backbone": "~1.0.0",
     "underscore": "~1.5.1",
@@ -16,6 +16,7 @@
     "minpubsub": ""
   },
   "resolutions": {
-    "jquery": "~2.0.2"
+    "jquery": "~2.0.2",
+    "shifty": "~0.10.2"
   }
 }
