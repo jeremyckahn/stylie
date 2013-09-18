@@ -41,12 +41,11 @@ keyframe.
 
 ### Motion control
 
-
 In addition to the standard easing formulae, you can define your own custom
-formula in the "Motion" tab.  Simply input your formula into the "Custom
-easing" fields. What you put into these fields must be valid JavaScript. Once
-you have inputted your custom formula, you can select "customEase1" or
-"customEase2" from a property's easing dropdown.
+easing curves in the "Motion" tab. To do this, select or create a
+"customEasing" from the dropdown and drag the circular handles. You can also
+type in the coordinates for the control points. Once you have defined your
+custom curve, you can select it from any property's easing dropdown.
 
 ### Playback control
 

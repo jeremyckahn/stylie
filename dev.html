@@ -54,12 +54,36 @@
               <input id="iterations" class="full-width" type="text" value="infinite">
             </li>
             <li>
-              <label for="custom-1">Custom easing 1:</label>
-              <input id="custom-1" class="ease full-width" type="text" data-easename="customEase1" value="Math.pow(x, 4)">
-            </li>
-            <li>
-              <label for="custom-2">Custom easing 2:</label>
-              <input id="custom-2" class="ease full-width" type="text" data-easename="customEase2" value="Math.pow(x, 0.25)">
+              <div id="custom-ease">
+                <label>Custom easings:</label>
+                <select class="custom-ease-select"></select>
+                <button class="icon icon-plus" title="Add a new custom easing formula">&nbsp;</button>
+                <div class="bezierizer"></div>
+                <div class="property-field">
+                  <label>
+                    <span>x1:</span>
+                    <input type="text" class="quarter-width bezier-point x1" data-point="x1" value="0">
+                  </label>
+                </div>
+                <div class="property-field">
+                  <label>
+                    <span>y1:</span>
+                    <input type="text" class="quarter-width bezier-point y1" data-point="y1" value="0">
+                  </label>
+                </div>
+                <div class="property-field">
+                  <label>
+                    <span>x2:</span>
+                    <input type="text" class="quarter-width bezier-point x2" data-point="x2" value="0">
+                  </label>
+                </div>
+                <div class="property-field">
+                  <label>
+                    <span>y2:</span>
+                    <input type="text" class="quarter-width bezier-point y2" data-point="y2" value="0">
+                  </label>
+                </div>
+              </div>
             </li>
             <li>
               <input id="show-path" type="checkbox" checked="checked">
@@ -155,8 +179,8 @@
         <img src="img/keyframe_editing.png" alt="A screenshot of keyframes being edited.">
         <p>You can tweak individual keyframe properties by pressing the &quot;up&quot; and &quot;down&quot; arrow keys when focusing on a property's text input.  You can change individual properties' easing formula by selecting it from the dropdown next to each text input.  To remove a keyframe, click the &quot;X&quot; in the upper right corner of a keyframe.</p>
         <h3>Motion control</h3>
-        <p>In addition to the standard easing formulae, you can define your own custom formula in the &quot;Motion&quot; tab.  Simply input your formula into the &quot;Custom easing&quot; fields. What you put into these fields must be valid JavaScript. Once you have inputted your custom formula, you can select &quot;customEase1&quot; or &quot;customEase2&quot; from a property's easing dropdown.</p>
-        <p>Also in this tab, you can change various display properties of the animation.</p>
+        <p>In addition to the standard easing formulae, you can define your own custom easing curves in the &quot;Motion&quot; tab.  To do this, select or create a "customEasing" from the dropdown and drag the circular handles.  You can also type in the coordinates for the control points.  Once you have defined your custom curve, you can select it from any property's easing dropdown.</p>
+        <img src="img/bezier_editing.png" alt="A screenshot of a bezier curve being edited.">
         <h3>Playback control</h3>
         <p>You&#x27;ll notice a playhead in the bottom left of the screen. This is fully interactive; you can can play, pause and stop the animation. You can also click and drag the playhead and zip to any part of the timeline.</p>
         <h3>Generating your CSS</h3>
@@ -217,7 +241,7 @@
           <li><a href="http://jeremyckahn.github.io/shifty/" target="_blank">Shifty</a></li>
         </ul>
         <h3>Author</h3>
-        <p>Stylie is built and maintained by <a href="http://jeremyckahn.com/" target="_blank">Jeremy Kahn</a>.  He's a nice guy and you can find him on <a href="https://twitter.com/jeremyckahn" target="_blank">Twitter</a> and <a href="https://github.com/jeremyckahn" target="_blank">Github</a>.</p>
+        <p>Stylie is built and maintained by <a href="http://jeremyckahn.com/" target="_blank">Jeremy Kahn</a>.  He's a nice guy and you can find him on <a href="https://twitter.com/jeremyckahn" target="_blank">Twitter</a> and <a href="https://github.com/jeremyckahn" target="_blank">Github</a>.  Stylie's beautiful blue theme was designed by the talented <a href="http://www.jonvictorino.com/" target="_blank">Jon Victorino</a>.
       </div>
     </div>
   </div>
@@ -233,6 +257,7 @@
   <script src="bower_components/rekapi/dist/rekapi.js"></script>
   <script src="bower_components/minpubsub/minpubsub.src.js"></script>
   <script src="bower_components/rekapi-controls/dist/rekapi-controls.js"></script>
+  <script src="bower_components/bezierizer/dist/bezierizer.js"></script>
   <script src="bower_components/requirejs/require.js"></script>
   <script src="src/init.js"></script>
   <!-- /scripts -->

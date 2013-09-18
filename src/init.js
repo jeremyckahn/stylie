@@ -5,11 +5,11 @@ require([
     ,'src/utils'
 
     // Views
-    ,'src/ui/checkbox', 'src/ui/ease-select', 'src/ui/ease-field'
+    ,'src/ui/checkbox', 'src/ui/ease-select', 'src/ui/fps-slider'
     ,'src/ui/auto-update-textfield', 'src/ui/canvas', 'src/ui/pane'
     ,'src/ui/tabs', 'src/ui/css-output', 'src/ui/html-input'
-    ,'src/ui/incrementer-field', 'src/ui/modal', 'src/ui/hotkey-handler'
-    ,'src/ui/rekapi-controls', 'src/ui/alert', 'src/ui/fps-slider'
+    ,'src/ui/custom-ease', 'src/ui/modal', 'src/ui/hotkey-handler'
+    ,'src/ui/rekapi-controls', 'src/ui/alert'
 
     // Collections
     ,'src/collection/actors'
@@ -19,11 +19,11 @@ require([
       ,constant
       ,util
 
-      ,CheckboxView, EaseSelectView, EaseFieldView
+      ,CheckboxView, EaseSelectView, FPSSliderView
       ,AutoUpdateTextFieldView, CanvasView, PaneView
       ,TabsView, CSSOutputView, HTMLInputView
-      ,IncrementerFieldView, ModalView, HotkeyHandlerView
-      ,RekapiControlsView, AlertView, FPSSliderView
+      ,CustomEaseView, ModalView, HotkeyHandlerView
+      ,RekapiControlsView, AlertView
 
       ,ActorCollection
 
@@ -47,12 +47,6 @@ require([
   if (navigator.userAgent.match(/WebKit/)) {
     $(document.body).addClass('webkit');
   }
-
-  $('.ease').each(function (i, el) {
-    app.view['easeField' + i] = new EaseFieldView({
-      '$el': $(el)
-    });
-  });
 
   app.view.hotkeyHandler = new HotkeyHandlerView({
     '$el': $(document.body)
@@ -205,6 +199,10 @@ require([
       publish(constant.ACTOR_ORIGIN_CHANGED, [true]);
       app.kapi.update();
     }
+  });
+
+  app.view.customEaseView = new CustomEaseView({
+    '$el': $('#custom-ease')
   });
 
   app.view.topLevelAlert = new AlertView({

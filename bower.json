@@ -1,22 +1,23 @@
 {
   "name": "Stylie",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "main": "./index.html",
   "dependencies": {
-    "shifty": "0.11.0",
+    "shifty": "0.12.0",
     "rekapi": "0.16.0",
     "rekapi-controls": "~0.3.10",
     "backbone": "~1.0.0",
     "underscore": "~1.5.1",
     "requirejs": "~2.1.6",
     "jquery": "~2.0.2",
-    "jquery-dragon": "~0.1.4",
+    "jquery-dragon": "~0.1.6",
     "jquery-cubelet": "~0.0.1",
+    "bezierizer": "~0.0.2",
     "mustache": "~0.7.2",
     "minpubsub": ""
   },
   "resolutions": {
     "jquery": "~2.0.2",
-    "shifty": "~0.10.2"
+    "shifty": "0.12.0"
   }
 }

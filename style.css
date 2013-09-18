@@ -1,3 +1,47 @@
+/* Bezierizer styles
+ */
+.bezierizer-container {
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.bezierizer-canvas-container {
+  height: 280px;
+  position: relative;
+  width: 280px;
+}
+
+  .bezierizer-canvas-container canvas {
+    background: #555;
+    height: 280px;
+    width: 280px;
+  }
+
+  .bezierizer-canvas-container .bezierizer-handle-container {
+    height: 300px;
+    left: -10px;
+    overflow: hidden;
+    position: absolute;
+    top: -10px;
+    width: 300px;
+  }
+
+    .bezierizer-canvas-container .bezierizer-handle {
+      background: #999;
+      border-radius: 12px;
+      border: solid 4px #333;
+      height: 24px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 24px;
+    }
+
+    .bezierizer-canvas-container .bezierizer-handle:focus {
+      outline: none;
+    }
+/* /Bezierizer styles */
+
 body {
   margin: 0;
   overflow: hidden;
@@ -72,6 +116,7 @@ ul.controls {
 }
 
 ul.controls > li {
+  clear: both;
   display: block;
   font-size: 1.1em;
   padding: 6px 0;
@@ -566,6 +611,10 @@ canvas {
   padding: 0;
 }
 
+  #motion-controls .controls > li {
+    overflow: hidden;
+  }
+
   #motion-controls input.error {
     background: #f55;
   }
@@ -821,4 +870,35 @@ canvas {
     line-height: 1.2em;
     margin: 0;
     text-shadow: #555 0 0 1px;
+  }
+
+#custom-ease {
+
+}
+
+  #custom-ease .property-field {
+    float: left;
+  }
+
+  #custom-ease .property-field input.quarter-width {
+    width: 30px;
+  }
+
+  #custom-ease .property-field span {
+    padding: 0 0 0 8px;
+  }
+
+  #custom-ease select {
+    margin-right: 6px;
+  }
+
+  #custom-ease .icon {
+    background: none;
+    border: none;
+    color: #aaa;
+    margin: 0 2px;
+    outline: none;
+    padding: 0;
+    /* position: absolute fixes weirdness in Firefox. */
+    position: absolute;
   }
