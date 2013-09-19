@@ -29,8 +29,8 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'onWindowClick': function (evt) {
-      if (!$.contains(this.$el[0], evt.srcElement)
-          && this.$el[0] !== evt.srcElement) {
+      var target = evt.target;
+      if (!$.contains(this.$el[0], target) && this.$el[0] !== target) {
         this.hide();
       }
     }
