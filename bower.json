@@ -1,11 +1,11 @@
 {
   "name": "Stylie",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "./index.html",
   "dependencies": {
     "shifty": "0.12.0",
     "rekapi": "0.16.0",
-    "rekapi-controls": "~0.3.10",
+    "rekapi-controls": "~0.3.11",
     "backbone": "~1.0.0",
     "underscore": "~1.5.1",
     "requirejs": "~2.1.6",
