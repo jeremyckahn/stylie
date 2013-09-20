@@ -82,7 +82,7 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
           lastKeyframeMillisecond + constant.NEW_KEYFRAME_MILLISECOND_OFFSET;
 
       this.keyframe(newKeyframeMillisecond, {
-        'x': lastKeyframeAttrs.x + constant.NEW_KEYFRAME_X_OFFSET
+        'x': this.getNewKeyframeX(lastKeyframeAttrs.x)
         ,'y': lastKeyframeAttrs.y
       ,'rX': 0
       ,'rY': 0
@@ -90,6 +90,13 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       }, 'linear');
 
       app.view.canvas.backgroundView.update();
+    }
+
+    ,'getNewKeyframeX': function (lastKeyframeX) {
+      var newKeyframeX = lastKeyframeX + constant.NEW_KEYFRAME_X_OFFSET;
+      var $crosshairEl = this.crosshairsView.$el.find('.crosshair');
+      var maxX = $crosshairEl.parent().width() - ($crosshairEl.width() / 2);
+      return Math.min(newKeyframeX, maxX);
     }
 
     // Kapi encapsulation methods
