@@ -32,6 +32,7 @@ require([
   'use strict';
 
   var $win = $(window);
+  var $body = $(document.body);
 
   app.config.queryString = util.getQueryParams();
 
@@ -41,11 +42,15 @@ require([
   // TODO: Find a better way to do this that doesn't involve user agent
   // sniffing...
   if (navigator.userAgent.match(/Macintosh/)) {
-    $(document.body).addClass('mac');
+    $body.addClass('mac');
   }
 
   if (navigator.userAgent.match(/WebKit/)) {
-    $(document.body).addClass('webkit');
+    $body.addClass('webkit');
+  }
+
+  if (navigator.userAgent.match(/iphone/i)) {
+    $body.addClass('iphone');
   }
 
   app.view.hotkeyHandler = new HotkeyHandlerView({
