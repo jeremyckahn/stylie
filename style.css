@@ -155,6 +155,20 @@ table {
   border-radius: 10px;
 }
 
+#incompatible-browser-message {
+  display: none;
+}
+
+  .iphone #incompatible-browser-message {
+    display: block;
+  }
+
+.iphone #help-trigger,
+.iphone .pane,
+.iphone .rekapi-scrubber-wrapper {
+  display: none;
+}
+
 #fork-me-link {
   left: 0px;
   position: absolute;
