@@ -1,11 +1,17 @@
 define(['src/ui/auto-update-textfield'],
     function (AutoUpdateTextFieldView) {
 
+  var $win = $(window);
   var FLOATING_POINT_PRECISION = 6;
 
   return AutoUpdateTextFieldView.extend({
 
-    'increment': 10
+    'events': _.extend({
+      'mousewheel': 'onMousewheel'
+      ,'focus': 'onFocus'
+    }, AutoUpdateTextFieldView.prototype.events)
+
+    ,'increment': 10
 
     ,'initialize': function (opts) {
       AutoUpdateTextFieldView.prototype.initialize.call(this, opts);
@@ -22,12 +28,36 @@ define(['src/ui/auto-update-textfield'],
       this.$el.trigger('keyup');
     }
 
+    /**
+     * @param {jQuery.Event} evt
+     * @param {number} delta
+     * @param {number} deltaX
+     * @param {number} deltaY
+     */
+    ,'onMousewheel': function (evt, delta, deltaX, deltaY) {
+      this.tweakVal(-deltaY);
+    }
+
     ,'onArrowUp': function () {
       this.tweakVal(this.increment);
     }
 
     ,'onArrowDown': function () {
       this.tweakVal(-this.increment);
+    }
+
+    ,'onFocus': function () {
+      this.mousewheelHandler = _.bind(this.onMousewheel, this);
+      $win.on('mousewheel', this.mousewheelHandler);
+    }
+
+    ,'onBlur': function () {
+      AutoUpdateTextFieldView.prototype.onBlur.apply(this, arguments);
+
+      if (this.mousewheelHandler) {
+        $win.off('mousewheel', this.mousewheelHandler);
+        this.mousewheelHandler = null;
+      }
     }
 
     ,'tearDown': function () {
