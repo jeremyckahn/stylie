@@ -5,11 +5,20 @@ require([
     ,'src/utils'
 
     // Views
-    ,'src/ui/checkbox', 'src/ui/ease-select', 'src/ui/fps-slider'
-    ,'src/ui/auto-update-textfield', 'src/ui/canvas', 'src/ui/pane'
-    ,'src/ui/tabs', 'src/ui/css-output', 'src/ui/html-input'
-    ,'src/ui/custom-ease', 'src/ui/modal', 'src/ui/hotkey-handler'
-    ,'src/ui/rekapi-controls', 'src/ui/alert'
+    ,'src/ui/checkbox'
+    ,'src/ui/ease-select'
+    ,'src/ui/fps-slider'
+    ,'src/ui/auto-update-textfield'
+    ,'src/ui/canvas'
+    ,'src/ui/pane'
+    ,'src/ui/tabs'
+    ,'src/ui/css-output'
+    ,'src/ui/html-input'
+    ,'src/ui/custom-ease'
+    ,'src/ui/modal'
+    ,'src/ui/hotkey-handler'
+    ,'src/ui/rekapi-controls'
+    ,'src/ui/alert'
 
     // Collections
     ,'src/collection/actors'
@@ -19,11 +28,20 @@ require([
       ,constant
       ,util
 
-      ,CheckboxView, EaseSelectView, FPSSliderView
-      ,AutoUpdateTextFieldView, CanvasView, PaneView
-      ,TabsView, CSSOutputView, HTMLInputView
-      ,CustomEaseView, ModalView, HotkeyHandlerView
-      ,RekapiControlsView, AlertView
+      ,CheckboxView
+      ,EaseSelectView
+      ,FPSSliderView
+      ,AutoUpdateTextFieldView
+      ,CanvasView
+      ,PaneView
+      ,TabsView
+      ,CSSOutputView
+      ,HTMLInputView
+      ,CustomEaseView
+      ,ModalView
+      ,HotkeyHandlerView
+      ,RekapiControlsView
+      ,AlertView
 
       ,ActorCollection
 

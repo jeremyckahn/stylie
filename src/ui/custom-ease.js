@@ -75,7 +75,7 @@ define([
       $option
         .val(easingName)
         .text(easingName);
-      $('#control-pane select').append($option);
+      $('#control-pane select.easing').append($option);
       this._$easingSelect.val(easingName);
       this._bezierizer.setHandlePositions(this._defaultBezierizerPoints);
       this._curvePoints[easingName] = this._bezierizer.getHandlePositions();

@@ -523,6 +523,11 @@ canvas {
     padding-right: 12px;
   }
 
+  #control-pane .vendors span {
+    font-size: 0.85em;
+    padding-right: 0;
+  }
+
   #control-pane .ease-label {
     display: inline-block;
     width: 20px;
@@ -778,6 +783,10 @@ canvas {
     float: left;
     padding-bottom: 0;
     width: 50%;
+  }
+
+  ul.controls .checkboxes.vendors li {
+    width: 33%;
   }
 
 #html-input {

@@ -1,6 +1,6 @@
 {
   "name": "Stylie",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "homepage": "https://github.com/jeremyckahn/stylie",
   "author": "Jeremy Kahn <jeremyckahn@gmail.com>",
   "description": "A CSS3 keyframe generator",

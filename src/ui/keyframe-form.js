@@ -54,7 +54,7 @@ define([
     ].join('');
 
   var EASE_SELECT_TEMPLATE = [
-      '<select class="{{property}}-easing" data-axis="{{property}}"></select>'
+      '<select class="easing {{property}}-easing" data-axis="{{property}}"></select>'
     ].join('');
 
   var MILLISECOND_INPUT_TEMPLATE = [
