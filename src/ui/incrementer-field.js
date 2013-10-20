@@ -35,6 +35,7 @@ define(['src/ui/auto-update-textfield'],
      * @param {number} deltaY
      */
     ,'onMousewheel': function (evt, delta, deltaX, deltaY) {
+      evt.preventDefault();
       this.tweakVal(-deltaY);
     }
 
