@@ -14,6 +14,19 @@ define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
     'initialize': function (opts) {
       _.extend(this, opts);
       this.crosshairViews = {};
+      this.listenTo(this.model, 'change', _.bind(this.render, this));
+    }
+
+    ,'render': function () {
+      this.$el.children().detach();
+
+      var orderedViews = _.sortBy(this.crosshairViews, function (crosshairView) {
+        return crosshairView.model.get('millisecond');
+      });
+
+      _.each(orderedViews, function (crosshairView) {
+        this.$el.append(crosshairView.$el);
+      }, this);
     }
 
     ,'addCrosshairView': function (model) {
@@ -26,16 +39,11 @@ define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
         ,'model': model
         ,'owner': this
       });
-    }
 
-    ,'reorderCrosshairViews': function () {
-      this.$el.children().detach();
-      var crosshairViews = this.model.getCrosshairViews();
-      _.each(crosshairViews, function (crosshairView) {
-        this.$el.append(crosshairView.$el);
-      }, this);
+      this.listenTo(model, 'destroy', _.bind(function () {
+        delete this.crosshairViews[model.cid];
+      }, this));
     }
-
 
   });
 });

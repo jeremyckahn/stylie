@@ -33,6 +33,7 @@
         <li data-target="motion-controls"><a href="#">Motion</a></li>
         <li data-target="css-output"><a href="#">CSS</a></li>
         <li data-target="html-input"><a href="#">HTML</a></li>
+        <li data-target="misc-controls"><a href="#" class="icon icon-wrench"></a></li>
       </ul>
       <ul class="tabs-contents">
         <li id="keyframe-controls">
@@ -159,6 +160,27 @@
             Customize the HTML that you want to animate.  The preview is updated as you type.
           </p>
           <textarea></textarea>
+        </li>
+        <li id="misc-controls">
+          <ul class="controls">
+            <li>
+              <form id="save-controls" action="#">
+                <h3>
+                  <label for="animation-name">Name this animation:</label>
+                </h3>
+                <button id="animation-save" class="field-button">Save</button>
+                <input id="animation-name" type="text" class="three-quarters" value="My animation">
+              </form>
+            </li>
+            <li id="load-controls">
+              <h3>
+                <label for="animation-loader">Load an animation:</label>
+              </h3>
+              <button id="animation-load" class="field-button">Load</button>
+              <select id="animation-loader" class="three-quarters"></select>
+              <button class="icon icon-remove inline-action" title="Delete this animation">&nbsp;</button>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

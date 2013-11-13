@@ -44,19 +44,25 @@ define(['src/app', 'src/constants'], function (app, constant) {
       publish(constant.ANIMATION_LENGTH_CHANGED);
     }
 
-    ,'removeKeyframe': function () {
-      this.keyframeFormView.tearDown();
-      delete this.keyframeFormView;
-
-      this.crosshairView.tearDown();
-      delete this.crosshairView;
-
-      this.owner.removeKeyframe(this.get('millisecond'));
+    ,'destroy': function () {
+      this.trigger('destroy');
     }
 
     ,'setEasingString': function (newEasingString) {
+      this.get('easing', newEasingString);
       this.owner.modifyKeyframe(
           this.get('millisecond'), {}, { 'transform': newEasingString });
+    }
+
+    ,'getEasingObject': function () {
+      var easingChunks = this.get('easing').split(' ');
+      return {
+        'x': easingChunks[0]
+        ,'y': easingChunks[1]
+        ,'rX': easingChunks[2]
+        ,'rY': easingChunks[3]
+        ,'rZ': easingChunks[4]
+      };
     }
 
     ,'getCSS': function () {

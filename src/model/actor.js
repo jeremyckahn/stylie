@@ -33,14 +33,6 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       return +this.keyframeCollection.at(index).get('millisecond');
     }
 
-    ,'getKeyframeFormViews': function () {
-      return _.pluck(this.keyframeCollection.models, 'keyframeFormView');
-    }
-
-    ,'getCrosshairViews': function () {
-      return _.pluck(this.keyframeCollection.models, 'crosshairView');
-    }
-
     // TODO: It's really odd that the Actor Model knows about keyframe easings,
     // but the Keyframe Model does not.  This logic should be done in the Actor
     // Model.
@@ -56,18 +48,13 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       };
     }
 
-    ,'updateKeyframeFormViews': function () {
-      this.keyframeCollection.updateModelFormViews();
-    }
-
-    ,'updateKeyframeCrosshairViews': function () {
-      this.keyframeCollection.updateModelCrosshairViews();
+    ,'updateKeyframes': function () {
+      this.keyframeCollection.trigger('change');
     }
 
     ,'refreshKeyframeOrder': function () {
       this.keyframeCollection.sort();
-      this.keyframeFormsView.reorderKeyframeFormViews();
-      this.crosshairsView.reorderCrosshairViews();
+      this.trigger('change');
       app.kapi.update();
       publish(constant.KEYFRAME_ORDER_CHANGED);
     }
@@ -99,6 +86,13 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       return Math.min(newKeyframeX, maxX);
     }
 
+    ,'removeAllKeyframes': function () {
+      var copiedList = this.keyframeCollection.models.slice(0);
+      _.each(copiedList, function (keyframeModel) {
+        keyframeModel.destroy();
+      });
+    }
+
     // Kapi encapsulation methods
 
     /**
@@ -107,8 +101,11 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
      * @param {string|Object} opt_easing
      */
     ,'keyframe': function (millisecond, properties, opt_easing) {
-      var modelProperties = _.extend({'millisecond': millisecond}, properties);
-      this.keyframeCollection.add(modelProperties, { 'owner': this });
+      var modelProperties = _.extend({
+        'millisecond': millisecond
+        ,'easing': opt_easing
+      }, properties);
+      this.keyframeCollection.add(modelProperties, {'owner': this});
       var keyframeProperties = this.keyframeCollection.last().getCSS();
       this.get('actor').keyframe(millisecond, keyframeProperties, opt_easing);
       publish(constant.UPDATE_CSS_OUTPUT);
@@ -134,6 +131,31 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       this.keyframeCollection.removeKeyframe(millisecond);
       this.get('actor').removeKeyframe(millisecond);
       publish(constant.PATH_CHANGED);
+    }
+
+    ,'importTimeline': function (actorData) {
+      _.each(actorData.propertyTracks, function (propertyTrack) {
+        _.each(propertyTrack, function (property) {
+          var transformObject = this.parseTranformString(property.value);
+          this.keyframe(
+              property.millisecond, transformObject, property.easing);
+        }, this);
+      }, this);
+
+      app.kapi.update();
+      publish(constant.PATH_CHANGED);
+    }
+
+    ,'parseTranformString': function (transformString) {
+      var chunks = transformString.match(/(-|\d|\.)+/g);
+
+      return {
+        'x': +chunks[0]
+        ,'y': +chunks[1]
+        ,'rX': +chunks[2]
+        ,'rY': +chunks[3]
+        ,'rZ': +chunks[4]
+      };
     }
 
   });

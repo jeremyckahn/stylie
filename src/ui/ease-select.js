@@ -15,6 +15,8 @@ define(['src/app', 'src/utils'], function (app, util) {
         option.html(name);
         this.$el.append(option);
       }, this);
+
+      this.$el.val(this.owner.model.getEasingObject()[this.$el.data().axis]);
     }
 
     ,'onChange': function (evt) {

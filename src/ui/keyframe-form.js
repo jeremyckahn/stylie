@@ -23,7 +23,7 @@ define([
         this.model.set($el.data('keyframeattr'), +val);
         publish(constant.PATH_CHANGED);
         // TODO: Should access actor through the owner model
-        app.collection.actors.getCurrent(0).updateKeyframeCrosshairViews();
+        app.collection.actors.getCurrent(0).updateKeyframes();
         app.kapi.update();
       }, this)
     });
@@ -77,8 +77,8 @@ define([
       this.$el = $(KEYFRAME_TEMPLATE);
       this.initDOMReferences();
       this.buildDOM();
-      this.model.keyframeFormView = this;
       this.model.on('change', _.bind(this.render, this));
+      this.model.on('destroy', _.bind(this.tearDown, this));
       this.initIncrementers();
       this.render();
     }
@@ -257,19 +257,21 @@ define([
         .focus();
     }
 
-    // Kicks off a series of events that involves calling tearDown
     ,'removeKeyframe': function () {
-      this.model.removeKeyframe();
+      this.model.destroy();
     }
 
     ,'tearDown': function () {
-      _.each(['X', 'Y', 'RX', 'RY', 'RZ'], function (axis) {
-        this['easeSelectView' + axis].tearDown();
-        this['incrementerView' + axis].tearDown();
-        this['$input' + axis].remove();
-      }, this);
+      if (this.model.get('millisecond') > 0) {
+        _.each(['X', 'Y', 'RX', 'RY', 'RZ'], function (axis) {
+          this['easeSelectView' + axis].tearDown();
+          this['incrementerView' + axis].tearDown();
+          this['$input' + axis].remove();
+        }, this);
 
-      this.millisecondIncrementer.tearDown();
+        this.millisecondIncrementer.tearDown();
+      }
+
       this.$header.remove();
       this.$pinnedButtonArray.remove();
       this.remove();

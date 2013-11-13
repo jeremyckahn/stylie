@@ -10,6 +10,7 @@ define(function () {
     ,'KEYFRAME_ORDER_CHANGED': 'keyframe-order-changed'
     ,'ROTATION_MODE_START': 'rotation-mode-start'
     ,'ROTATION_MODE_STOP': 'rotation-mode-stop'
+    ,'ANIMATION_SAVED': 'animation-saved'
 
     ,'INITIAL_ANIMATION_DURATION': 2000
     ,'RENDER_GRANULARITY': 100

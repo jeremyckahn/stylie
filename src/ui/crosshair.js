@@ -32,7 +32,7 @@ define(['src/app', 'src/constants', 'src/utils'],
           constant.ROTATION_MODE_STOP, _.bind(this.onRotationModeStop, this));
 
       this.model.on('change', _.bind(this.render, this));
-      this.model.crosshairView = this;
+      this.model.on('destroy', _.bind(this.tearDown, this));
       this.render();
     }
 
@@ -88,7 +88,7 @@ define(['src/app', 'src/constants', 'src/utils'],
         ,'rZ': rotationCoords.z
       });
       publish(constant.PATH_CHANGED);
-      app.collection.actors.getCurrent().updateKeyframeFormViews();
+      this.model.trigger('change');
       app.kapi.update();
     }
 

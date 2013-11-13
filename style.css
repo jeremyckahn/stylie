@@ -6,24 +6,24 @@
 }
 
 .bezierizer-canvas-container {
-  height: 280px;
+  height: 310px;
   position: relative;
-  width: 280px;
+  width: 310px;
 }
 
   .bezierizer-canvas-container canvas {
     background: #555;
-    height: 280px;
-    width: 280px;
+    height: 310px;
+    width: 310px;
   }
 
   .bezierizer-canvas-container .bezierizer-handle-container {
-    height: 300px;
+    height: 330px;
     left: -10px;
     overflow: hidden;
     position: absolute;
     top: -10px;
-    width: 300px;
+    width: 330px;
   }
 
     .bezierizer-canvas-container .bezierizer-handle {
@@ -340,8 +340,25 @@ button {
   cursor: pointer;
 }
 
-button#play,
-button#pause {
+button.field-button {
+  background: #222;
+  border-radius: 2px;
+  border: solid 1px #888;
+  color: #ddd;
+  font-size: 0.8em;
+  margin: 0 6px 0 4px;
+  padding: 5px 12px;
+}
+
+button.inline-action {
+  left: 6px;
+  position: relative;
+  top: 2px;
+}
+
+button.field-button:active {
+  background: #333;
+  color: #fff;
 }
 
 canvas {
@@ -490,9 +507,21 @@ canvas {
       float: right;
     }
 
+    #control-pane button.icon {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
     #control-pane .pinned-button-array label,
-    #control-pane .pinned-button-array button {
+    #control-pane .pinned-button-array button,
+    #control-pane button.icon {
       color: #aaa;
+    }
+
+    #control-pane .pinned-button-array label:active,
+    #control-pane button.icon:active {
+      color: #ddd;
     }
 
     #control-pane .pinned-button-array span {
@@ -505,15 +534,7 @@ canvas {
       visibility: visible;
     }
 
-    #control-pane .pinned-button-array label:active,
-    #control-pane .pinned-button-array button:active {
-      color: #ddd;
-    }
-
-    #control-pane .pinned-button-array  button {
-      background: none;
-      border: none;
-      padding: 0;
+    #control-pane .pinned-button-array button {
       position: absolute;
       right: 6px;
       top: 0;
@@ -537,7 +558,7 @@ canvas {
     border: solid 1px #333;
     font-size: 1em;
     margin-left: 8px;
-    width: 190px;
+    width: 215px;
   }
 
   .mac.webkit #control-pane select {
@@ -563,7 +584,6 @@ canvas {
   }
 
   #control-pane input.three-quarters {
-    display: block;
     margin-top: 6px;
     width: 200px;
   }
@@ -572,11 +592,11 @@ canvas {
   #control-pane input.full-width {
     display: block;
     margin-top: 6px;
-    width: 288px;
+    width: 320px;
   }
 
   #control-pane textarea {
-    width: 292px;
+    width: 325px;
   }
 
   #control-pane .quality-slider {
@@ -601,7 +621,7 @@ canvas {
       border: solid 1px #fff;
       height: 13px;
       margin: 26px auto 0;
-      width: 290px !important;
+      width: 330px !important;
     }
 
     #control-pane .quality-slider .dragon-slider button {
@@ -622,7 +642,7 @@ canvas {
     }
 
   #control-pane input.quarter-width {
-    width: 38px;
+    width: 45px;
   }
 
 #motion-controls {
@@ -758,10 +778,6 @@ canvas {
     margin-left: 6px;
   }
 
-  .tabs li:last-child {
-    margin-right: 0;
-  }
-
   .tabs li a {
     padding: 0px 4px;
   }
@@ -772,7 +788,7 @@ canvas {
 
   .tabs-contents > li {
     position: relative;
-    width: 300px;
+    width: 335px;
   }
 
 .checkboxes {
@@ -795,6 +811,14 @@ canvas {
 
   #html-input textarea {
     margin-top: 18px;
+  }
+
+#misc-controls {
+
+}
+
+  #load-controls select {
+    margin-left: 0;
   }
 
 .modal {
@@ -904,7 +928,7 @@ canvas {
   }
 
   #custom-ease .property-field input.quarter-width {
-    width: 30px;
+    width: 36px;
   }
 
   #custom-ease .property-field span {

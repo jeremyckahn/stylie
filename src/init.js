@@ -19,6 +19,11 @@ require([
     ,'src/ui/hotkey-handler'
     ,'src/ui/rekapi-controls'
     ,'src/ui/alert'
+    ,'src/ui/save'
+    ,'src/ui/load'
+
+    // Models
+    ,'src/model/animation'
 
     // Collections
     ,'src/collection/actors'
@@ -42,6 +47,10 @@ require([
       ,HotkeyHandlerView
       ,RekapiControlsView
       ,AlertView
+      ,SaveView
+      ,LoadView
+
+      ,AnimationModel
 
       ,ActorCollection
 
@@ -111,7 +120,7 @@ require([
       ,'rX': 0
       ,'rY': 0
       ,'rZ': 0
-    }, 'linear');
+    }, 'linear linear linear linear linear');
   });
 
   app.view.canvas = new CanvasView({
@@ -228,8 +237,20 @@ require([
     '$el': $('#custom-ease')
   });
 
-  app.view.topLevelAlert = new AlertView({
+  app.view.topLevelAlertView = new AlertView({
     '$el': $('#top-level-alert')
+  });
+
+  var animationModel = new AnimationModel();
+
+  app.view.saveView = new SaveView({
+    '$el': $('#save-controls')
+    ,'model': animationModel
+  });
+
+  app.view.loadView = new LoadView({
+    '$el': $('#load-controls')
+    ,'model': animationModel
   });
 
   $(window).trigger('resize');

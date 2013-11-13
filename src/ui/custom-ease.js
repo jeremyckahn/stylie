@@ -10,7 +10,7 @@ define([
   return Backbone.View.extend({
 
     'events': {
-      'click .icon-plus': 'addEasing'
+      'click .icon-plus': 'onClickPlusIcon'
       ,'change .bezierizer': 'onBezierizerChange'
       ,'change .custom-ease-select': 'onCurveSelectChange'
     }
@@ -22,10 +22,11 @@ define([
       this._$bezierizer = this.$el.find('.bezierizer');
       this._bezierizer = new Bezierizer(this._$bezierizer[0]);
       this._defaultBezierizerPoints = this._bezierizer.getHandlePositions();
+      var bezierizerPoints = this._defaultBezierizerPoints;
       this._curvePoints = {};
-      var bezierizerPoints = this._bezierizer.getHandlePositions();
+      this._$bezierizerPointInputs = this.$el.find('.bezier-point');
 
-      this.$el.find('.bezier-point').each(_.bind(function (i, el) {
+      this._$bezierizerPointInputs.each(_.bind(function (i, el) {
         var $el = $(el);
         var point = $el.data('point');
         $el.val(bezierizerPoints[point]);
@@ -37,7 +38,7 @@ define([
         });
       }, this));
 
-      this.addEasing();
+      this.addEasing('customEasing1', bezierizerPoints);
       this.updateCurrentBezierCurve();
     }
 
@@ -65,21 +66,58 @@ define([
           ,'x2': storedCurvePoints.x2
           ,'y2': storedCurvePoints.y2
         });
+      this.updateControlPointFields();
+    }
+
+    ,'onClickPlusIcon': function () {
+      var easingName =
+          'customEasing' + (this._$easingSelect.children().length + 1);
+      this.addEasing(easingName, this._defaultBezierizerPoints);
     }
 
 
-    ,'addEasing': function () {
-      var easingName =
-          'customEasing' + (this._$easingSelect.children().length + 1);
+    ,'addEasing': function (easingName, bezierizerPoints) {
       var $option = $(document.createElement('option'));
       $option
         .val(easingName)
         .text(easingName);
       $('#control-pane select.easing').append($option);
       this._$easingSelect.val(easingName);
-      this._bezierizer.setHandlePositions(this._defaultBezierizerPoints);
+      this._bezierizer.setHandlePositions(bezierizerPoints);
       this._curvePoints[easingName] = this._bezierizer.getHandlePositions();
       this.updateCurrentBezierCurve();
+      this.updateControlPointFields();
+    }
+
+
+    ,'removeEasing': function (easingName) {
+      Tweenable.unsetBezierFunction(easingName);
+
+      $('#control-pane select.easing option').each(function (i, el) {
+        // No need to jQuery-ify the <option>, this _should_ work
+        // cross-browser.
+        if (el.value === easingName) {
+          el.remove();
+        }
+      });
+    }
+
+
+    ,'removeAllEasings': function () {
+      _.each(Tweenable.prototype.formula, function (fn, fnName) {
+        if (fnName.match(/customEasing/)) {
+          this.removeEasing(fnName);
+        }
+      }, this);
+
+      var bezierizerPoints = this._defaultBezierizerPoints;
+      this._bezierizer.setHandlePositions(bezierizerPoints);
+
+      this._$bezierizerPointInputs.each(_.bind(function (i, el) {
+        var $el = $(el);
+        var point = $el.data('point');
+        $el.val(bezierizerPoints[point]);
+      }, this));
     }
 
 
@@ -98,7 +136,7 @@ define([
       }
 
       publish(constant.PATH_CHANGED);
-      app.collection.actors.getCurrent().updateKeyframeFormViews();
+      app.collection.actors.getCurrent().updateKeyframes();
     }
 
 
