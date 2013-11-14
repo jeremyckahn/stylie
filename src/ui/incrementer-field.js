@@ -50,11 +50,15 @@ define(['src/ui/auto-update-textfield'],
     ,'onFocus': function () {
       this.mousewheelHandler = _.bind(this.onMousewheel, this);
       $win.on('mousewheel', this.mousewheelHandler);
+      $win.one('click', _.bind(this.freeMousewheel, this));
     }
 
     ,'onBlur': function () {
       AutoUpdateTextFieldView.prototype.onBlur.apply(this, arguments);
+      this.freeMousewheel();
+    }
 
+    ,'freeMousewheel': function () {
       if (this.mousewheelHandler) {
         $win.off('mousewheel', this.mousewheelHandler);
         this.mousewheelHandler = null;

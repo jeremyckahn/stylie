@@ -138,6 +138,7 @@ define([
           // creating null pointers that jQuery is not expecting in
           // jQuery#remove.
           ,'onEnterDown': _.bind(function () {
+             this.millisecondIncrementer.freeMousewheel();
              this.millisecondIncrementer.$el.trigger('blur');
           }, this)
         });
