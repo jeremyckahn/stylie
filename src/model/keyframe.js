@@ -6,9 +6,10 @@ define(['src/app', 'src/constants'], function (app, constant) {
 
       // TODO: This message subscription and event binding should be
       // consolidated into one operation.
-      subscribe(constant.ACTOR_ORIGIN_CHANGED,
-          _.bind(this.modifyKeyframe, this));
-      this.on('change', _.bind(this.modifyKeyframe, this));
+      this._boundModifyKeyframeHandler = _.bind(this.modifyKeyframe, this);
+      subscribe(
+          constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
+      this.on('change', this._boundModifyKeyframeHandler);
     }
 
     ,'validate': function (attrs) {
@@ -45,6 +46,9 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'destroy': function () {
+      unsubscribe(
+          constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
+      this.off('change', this._boundModifyKeyframeHandler);
       this.trigger('destroy');
     }
 
