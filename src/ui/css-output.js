@@ -36,6 +36,14 @@ define(['src/app'], function (app) {
     ,'renderCSS': function () {
       var cssClassName = app.view.cssNameField.$el.val();
 
+      var keyframeCollection =
+          app.collection.actors.getCurrent().keyframeCollection;
+      var firstKeyframe = keyframeCollection.first();
+      var offsets = this.isOutputOrientedToFirstKeyframe()
+          ? {'x': -firstKeyframe.get('x'), 'y': -firstKeyframe.get('y')}
+          : {'x': 0, 'y': 0};
+      keyframeCollection.offsetKeyframes(offsets);
+
       var cssOutput = app.kapi.toCSS({
         'vendors': getPrefixList(app)
         ,'name': cssClassName
@@ -44,8 +52,20 @@ define(['src/app'], function (app) {
         ,'fps': app.view.fpsSlider.getFPS()
       });
 
+      // Reverse the offset
+      _.each(offsets, function (offsetValue, offsetName) {
+        offsets[offsetName] = -offsetValue;
+      });
+      keyframeCollection.offsetKeyframes(offsets);
+
       this.$el.val(cssOutput);
     }
 
+    /**
+     * @return {boolean}
+     */
+    ,'isOutputOrientedToFirstKeyframe': function () {
+      return app.view.orientationView.getOrientation() === 'first-keyframe';
+    }
   });
 });

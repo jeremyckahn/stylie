@@ -21,6 +21,7 @@ require([
     ,'src/ui/alert'
     ,'src/ui/save'
     ,'src/ui/load'
+    ,'src/ui/orientation-controls'
 
     // Models
     ,'src/model/animation'
@@ -49,6 +50,7 @@ require([
       ,AlertView
       ,SaveView
       ,LoadView
+      ,OrientationControlsView
 
       ,AnimationModel
 
@@ -251,6 +253,10 @@ require([
   app.view.loadView = new LoadView({
     '$el': $('#load-controls')
     ,'model': animationModel
+  });
+
+  app.view.orientationView = new OrientationControlsView({
+    '$el': $('#orientation-controls')
   });
 
   $(window).trigger('resize');

@@ -28,5 +28,19 @@ define(['src/app', 'src/model/keyframe'], function (app, KeyframeModel) {
       model.owner.removeKeyframe(model.get('millisecond'));
     }
 
+    /**
+     * @param {Object} offsets The properties to offset as keys, and the amount
+     * by which to offset them as values.
+     */
+    ,'offsetKeyframes': function (offsets) {
+      this.each(function (keyframeModel) {
+        _.each(offsets, function (offsetAmount, offsetName) {
+          keyframeModel.set(
+            offsetName, keyframeModel.get(offsetName) + offsetAmount);
+          keyframeModel.modifyKeyframe();
+        }, this);
+      });
+    }
+
   });
 });
