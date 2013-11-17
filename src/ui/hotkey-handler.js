@@ -9,6 +9,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
 
     ,'initialize': function (opts) {
       _.extend(this, opts);
+      this._isShiftHeldDown = false;
     }
 
     ,'onKeydown': function (evt) {
@@ -18,6 +19,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
 
       } else if (evt.shiftKey) {
         this.$el.addClass('shift-down');
+        this._isShiftHeldDown = true;
         publish(constant.ROTATION_MODE_START);
 
       } else if (evt.keyCode === 67) { // "C" key
@@ -41,8 +43,11 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'onKeyup': function (evt) {
-      this.$el.removeClass('shift-down');
-      publish(constant.ROTATION_MODE_STOP);
+      if (this._isShiftHeldDown) {
+        this._isShiftHeldDown = false;
+        this.$el.removeClass('shift-down');
+        publish(constant.ROTATION_MODE_STOP);
+      }
     }
 
   });

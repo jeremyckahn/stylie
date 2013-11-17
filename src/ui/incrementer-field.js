@@ -25,7 +25,7 @@ define(['src/ui/auto-update-textfield'],
       var precisionRestrictedNumber = +(
           parsedNumber + tweakAmount).toPrecision(FLOATING_POINT_PRECISION);
       this.$el.val(precisionRestrictedNumber);
-      this.$el.trigger('keyup');
+      this.onValReenter(precisionRestrictedNumber);
     }
 
     /**
