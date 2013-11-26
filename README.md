@@ -62,6 +62,13 @@ specific needs, such as the name of the CSS class on the DOM element to be
 animated, and which browser vendors you want to support.  More complex
 animations will generate very verbose CSS, so be aware of that.
 
+### Saving your animation
+
+You can save your animation to [HTML5 Local
+Storage](http://www.html5rocks.com/en/features/storage).  To do this, open the
+wrench menu and type in the name of your animation.  You can also recall saved
+animations from this menu.
+
 ## Developing Stylie
 
 _Note: The whole build process is sort of crazy, and it doesn't follow any
