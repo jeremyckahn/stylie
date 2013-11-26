@@ -1,4 +1,22 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define([
+
+  'underscore'
+  ,'backbone'
+  ,'minpubsub'
+
+  ,'src/app'
+  ,'src/constants'
+
+], function (
+
+  _
+  ,Backbone
+  ,MinPubSub
+
+  ,app
+  ,constant
+
+) {
 
   return Backbone.View.extend({
 
@@ -20,7 +38,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
       } else if (evt.shiftKey) {
         this.$el.addClass('shift-down');
         this._isShiftHeldDown = true;
-        publish(constant.ROTATION_MODE_START);
+        MinPubSub.publish(constant.ROTATION_MODE_START);
 
       } else if (evt.keyCode === 67) { // "C" key
         app.view.controlPane.toggle();
@@ -46,7 +64,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
       if (this._isShiftHeldDown) {
         this._isShiftHeldDown = false;
         this.$el.removeClass('shift-down');
-        publish(constant.ROTATION_MODE_STOP);
+        MinPubSub.publish(constant.ROTATION_MODE_STOP);
       }
     }
 

@@ -1,4 +1,24 @@
-define(['src/app', 'src/ui/crosshair'], function (app, CrosshairView) {
+define([
+
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+  ,'mustache'
+
+  ,'src/app'
+  ,'src/ui/crosshair'
+
+], function (
+
+  $
+  ,_
+  ,Backbone
+  ,Mustache
+
+  ,app
+  ,CrosshairView
+
+) {
 
   var CROSSHAIR_TEMPLATE = [
     '<div class="crosshair">'

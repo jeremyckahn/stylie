@@ -1,5 +1,24 @@
-define(['src/app', 'src/constants', 'src/ui/background'],
-    function (app, constant, BackgroundView) {
+define([
+
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+
+  ,'src/app'
+  ,'src/constants'
+  ,'src/ui/background'
+
+], function (
+
+  $
+  ,_
+  ,Backbone
+
+  ,app
+  ,constant
+  ,BackgroundView
+
+) {
 
   var $win = $(window);
 

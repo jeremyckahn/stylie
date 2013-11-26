@@ -1,8 +1,30 @@
-define(['src/app', 'src/constants', 'src/collection/keyframes'
-    ,'src/ui/keyframe-forms', 'src/ui/crosshairs'],
+define([
 
-    function (app, constant, KeyframeCollection
-      ,KeyframeFormsView, CrosshairsView) {
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+  ,'minpubsub'
+
+  ,'src/app'
+  ,'src/constants'
+  ,'src/collection/keyframes'
+  ,'src/ui/keyframe-forms'
+  ,'src/ui/crosshairs'
+
+], function (
+
+  $
+  ,_
+  ,Backbone
+  ,MinPubSub
+
+  ,app
+  ,constant
+  ,KeyframeCollection
+  ,KeyframeFormsView
+  ,CrosshairsView
+
+) {
 
   return Backbone.Model.extend({
 
@@ -56,7 +78,7 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       this.keyframeCollection.sort();
       this.trigger('change');
       app.kapi.update();
-      publish(constant.KEYFRAME_ORDER_CHANGED);
+      MinPubSub.publish(constant.KEYFRAME_ORDER_CHANGED);
     }
 
     ,'appendNewKeyframeWithDefaultProperties': function () {
@@ -108,7 +130,7 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       this.keyframeCollection.add(modelProperties, {'owner': this});
       var keyframeProperties = this.keyframeCollection.last().getCSS();
       this.get('actor').keyframe(millisecond, keyframeProperties, opt_easing);
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'modifyKeyframe': function (
@@ -130,7 +152,7 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
     ,'removeKeyframe': function (millisecond) {
       this.keyframeCollection.removeKeyframe(millisecond);
       this.get('actor').removeKeyframe(millisecond);
-      publish(constant.PATH_CHANGED);
+      MinPubSub.publish(constant.PATH_CHANGED);
     }
 
     ,'importTimeline': function (actorData) {
@@ -143,7 +165,7 @@ define(['src/app', 'src/constants', 'src/collection/keyframes'
       }, this);
 
       app.kapi.update();
-      publish(constant.PATH_CHANGED);
+      MinPubSub.publish(constant.PATH_CHANGED);
     }
 
     ,'parseTranformString': function (transformString) {

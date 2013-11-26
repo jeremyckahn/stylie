@@ -1,4 +1,22 @@
-define(['src/app', 'src/utils'], function (app, util) {
+define([
+
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+
+  ,'src/app'
+  ,'src/utils'
+
+], function (
+
+  $
+  ,_
+  ,Backbone
+
+  ,app
+  ,util
+
+) {
   return Backbone.View.extend({
 
     'events': {

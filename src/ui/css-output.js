@@ -1,4 +1,20 @@
-define(['src/app'], function (app) {
+define([
+
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+
+  ,'src/app'
+
+], function (
+
+  $
+  ,_
+  ,Backbone
+
+  ,app
+
+) {
 
   var checkboxToVendorMap = {
     'moz': 'mozilla'

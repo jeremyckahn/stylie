@@ -1,4 +1,24 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define([
+
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+  ,'minpubsub'
+
+  ,'src/app'
+  ,'src/constants'
+
+], function (
+
+  $
+  ,_
+  ,Backbone
+  ,MinPubSub
+
+  ,app
+  ,constant
+
+) {
 
   return Backbone.View.extend({
 
@@ -12,7 +32,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
       this.$animationSelect = this.$el.find('select');
       this.refreshAnimationList();
 
-      subscribe(constant.ANIMATION_SAVED,
+      MinPubSub.subscribe(constant.ANIMATION_SAVED,
         _.bind(this.refreshAnimationList, this));
     }
 
@@ -42,7 +62,8 @@ define(['src/app', 'src/constants'], function (app, constant) {
       var val = this.$animationSelect.val();
 
       if (!val) {
-        publish(constant.ALERT_ERROR, ['Please specify an animation to load.']);
+        MinPubSub.publish(
+            constant.ALERT_ERROR, ['Please specify an animation to load.']);
         return;
       }
 

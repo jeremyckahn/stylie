@@ -1,19 +1,32 @@
 define([
-    'src/app'
-    ,'src/constants'
-    ,'src/utils'
-    ,'src/ui/incrementer-field'
-    ,'src/ui/ease-select'
 
-  ], function (
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+  ,'mustache'
+  ,'minpubsub'
 
-    app
-    ,constant
-    ,util
-    ,IncrementerFieldView
-    ,EaseSelectView
+  ,'src/app'
+  ,'src/constants'
+  ,'src/utils'
+  ,'src/ui/incrementer-field'
+  ,'src/ui/ease-select'
 
-  ) {
+], function (
+
+  $
+  ,_
+  ,Backbone
+  ,Mustache
+  ,MinPubSub
+
+  ,app
+  ,constant
+  ,util
+  ,IncrementerFieldView
+  ,EaseSelectView
+
+) {
 
   function incrementerGeneratorHelper ($el) {
     return new IncrementerFieldView({
@@ -21,7 +34,7 @@ define([
 
       ,'onValReenter': _.bind(function (val) {
         this.model.set($el.data('keyframeattr'), +val);
-        publish(constant.PATH_CHANGED);
+        MinPubSub.publish(constant.PATH_CHANGED);
         // TODO: Should access actor through the owner model
         app.collection.actors.getCurrent(0).updateKeyframes();
         app.kapi.update();
@@ -179,7 +192,7 @@ define([
 
       if (this.model.owner.hasKeyframeAt(millisecond)) {
         if (millisecond !== this.model.get('millisecond')) {
-          publish(constant.ALERT_ERROR, [
+          MinPubSub.publish(constant.ALERT_ERROR, [
               'There is already a keyframe at millisecond '
               + millisecond + '.']);
         }

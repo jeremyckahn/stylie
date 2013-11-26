@@ -1,5 +1,22 @@
-define(['src/app', 'src/constants', 'src/ui/keyframe-form'],
-    function (app, constant, KeyframeFormView) {
+define([
+
+  'underscore'
+  ,'backbone'
+
+  ,'src/app'
+  ,'src/constants'
+  ,'src/ui/keyframe-form'
+
+], function (
+
+  _
+  ,Backbone
+
+  ,app
+  ,constant
+  ,KeyframeFormView
+
+) {
 
   return Backbone.View.extend({
 

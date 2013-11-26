@@ -1,4 +1,20 @@
-define(['src/app'], function (app) {
+define([
+
+  'underscore'
+  ,'backbone'
+  ,'shifty'
+
+  ,'src/app'
+
+], function (
+
+  _
+  ,Backbone
+  ,Tweenable
+
+  ,app
+
+) {
   return Backbone.Model.extend({
 
     'initialize': function (attrs, opts) {

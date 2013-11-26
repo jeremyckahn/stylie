@@ -1,4 +1,22 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define([
+
+  'underscore'
+  ,'backbone'
+  ,'minpubsub'
+
+  ,'src/app'
+  ,'src/constants'
+
+], function (
+
+  _
+  ,Backbone
+  ,MinPubSub
+
+  ,app
+  ,constant
+
+) {
 
   return Backbone.View.extend({
 
@@ -20,7 +38,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
     }
 
     ,'onSliderDrag': function (val) {
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'getFPS': function () {

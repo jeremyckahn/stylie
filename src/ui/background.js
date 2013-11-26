@@ -1,4 +1,24 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define([
+
+  'underscore'
+  ,'backbone'
+  ,'shifty'
+  ,'minpubsub'
+
+  ,'src/app'
+  ,'src/constants'
+
+], function (
+
+  _
+  ,Backbone
+  ,Tweenable
+  ,MinPubSub
+
+  ,app
+  ,constant
+
+) {
   return Backbone.View.extend({
 
     'initialize': function (opts) {
@@ -10,8 +30,8 @@ define(['src/app', 'src/constants'], function (app, constant) {
       });
 
       var boundUpdate = _.bind(this.update, this);
-      subscribe(constant.PATH_CHANGED, boundUpdate);
-      subscribe(constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
+      MinPubSub.subscribe(constant.PATH_CHANGED, boundUpdate);
+      MinPubSub.subscribe(constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
     }
 
     ,'resize': function (dims) {

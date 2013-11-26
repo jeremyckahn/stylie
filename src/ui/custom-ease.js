@@ -1,11 +1,30 @@
 define([
-    'src/app', 'src/constants', 'src/ui/incrementer-field'
 
-    ], function (
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+  ,'shifty'
+  ,'bezierizer'
+  ,'minpubsub'
 
-    app, constant, IncrementerFieldView
+  ,'src/app'
+  ,'src/constants'
+  ,'src/ui/incrementer-field'
 
-    ) {
+], function (
+
+  $
+  ,_
+  ,Backbone
+  ,Tweenable
+  ,Bezierizer
+  ,MinPubSub
+
+  ,app
+  ,constant
+  ,IncrementerFieldView
+
+) {
 
   return Backbone.View.extend({
 
@@ -135,7 +154,7 @@ define([
         kapi.update();
       }
 
-      publish(constant.PATH_CHANGED);
+      MinPubSub.publish(constant.PATH_CHANGED);
       app.collection.actors.getCurrent().updateKeyframes();
     }
 

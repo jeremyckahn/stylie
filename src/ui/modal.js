@@ -1,4 +1,22 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define([
+
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+
+  ,'src/app'
+  ,'src/constants'
+
+], function (
+
+  $
+  ,_
+  ,Backbone
+
+  ,app
+  ,constant
+
+) {
 
   var $win = $(window);
 

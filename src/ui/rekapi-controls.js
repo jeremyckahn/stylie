@@ -1,4 +1,22 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define([
+
+  'underscore'
+  ,'backbone'
+  ,'rekapi-scrubber'
+
+  ,'src/app'
+  ,'src/constants'
+
+], function (
+
+  _
+  ,Backbone
+  ,RekapiScrubber
+
+  ,app
+  ,constant
+
+) {
 
   return Backbone.View.extend({
 

@@ -1,62 +1,134 @@
+require.config({
+  baseUrl: './'
+  ,shim: {
+    underscore: {
+      exports: '_'
+    }
+    ,backbone: {
+      deps: [
+        'underscore'
+        ,'jquery'
+      ]
+      ,exports: 'Backbone'
+    }
+    ,'jquery-mousewheel': {
+      deps: [
+        'jquery'
+      ]
+    }
+    ,'jquery-dragon': {
+      deps: [
+        'jquery'
+      ]
+    }
+    ,'jquery-dragon-slider': {
+      deps: [
+        'jquery'
+        ,'jquery-dragon'
+      ]
+    }
+    ,'jquery-cubelet': {
+      deps: [
+        'jquery'
+      ]
+    }
+  },
+  paths: {
+    jquery: 'bower_components/jquery/jquery'
+    ,'jquery-mousewheel': 'bower_components/jquery-mousewheel/jquery.mousewheel'
+    ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
+    ,'jquery-dragon-slider': 'bower_components/jquery-dragon/src/jquery.dragon-slider'
+    ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
+    ,backbone: 'bower_components/backbone/backbone'
+    ,underscore: 'bower_components/underscore/underscore'
+    ,shifty: 'bower_components/shifty/dist/shifty'
+    ,rekapi: 'bower_components/rekapi/dist/rekapi'
+    ,'rekapi-scrubber': 'bower_components/rekapi-controls/src/rekapi-scrubber'
+    ,mustache: 'bower_components/mustache/mustache'
+    ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
+    ,minpubsub: 'bower_components/minpubsub/minpubsub.src'
+  }
+});
+
 require([
-    // Misc
-    'src/app'
-    ,'src/constants'
-    ,'src/utils'
+  'jquery'
+  ,'underscore'
+  ,'shifty'
+  ,'rekapi'
+  ,'minpubsub'
 
-    // Views
-    ,'src/ui/checkbox'
-    ,'src/ui/ease-select'
-    ,'src/ui/fps-slider'
-    ,'src/ui/auto-update-textfield'
-    ,'src/ui/canvas'
-    ,'src/ui/pane'
-    ,'src/ui/tabs'
-    ,'src/ui/css-output'
-    ,'src/ui/html-input'
-    ,'src/ui/custom-ease'
-    ,'src/ui/modal'
-    ,'src/ui/hotkey-handler'
-    ,'src/ui/rekapi-controls'
-    ,'src/ui/alert'
-    ,'src/ui/save'
-    ,'src/ui/load'
-    ,'src/ui/orientation-controls'
+  // Misc
+  ,'src/app'
+  ,'src/constants'
+  ,'src/utils'
 
-    // Models
-    ,'src/model/animation'
+  // Views
+  ,'src/ui/checkbox'
+  ,'src/ui/ease-select'
+  ,'src/ui/fps-slider'
+  ,'src/ui/auto-update-textfield'
+  ,'src/ui/canvas'
+  ,'src/ui/pane'
+  ,'src/ui/tabs'
+  ,'src/ui/css-output'
+  ,'src/ui/html-input'
+  ,'src/ui/custom-ease'
+  ,'src/ui/modal'
+  ,'src/ui/hotkey-handler'
+  ,'src/ui/rekapi-controls'
+  ,'src/ui/alert'
+  ,'src/ui/save'
+  ,'src/ui/load'
+  ,'src/ui/orientation-controls'
 
-    // Collections
-    ,'src/collection/actors'
+  // Models
+  ,'src/model/animation'
 
-    ], function (
-      app
-      ,constant
-      ,util
+  // Collections
+  ,'src/collection/actors'
 
-      ,CheckboxView
-      ,EaseSelectView
-      ,FPSSliderView
-      ,AutoUpdateTextFieldView
-      ,CanvasView
-      ,PaneView
-      ,TabsView
-      ,CSSOutputView
-      ,HTMLInputView
-      ,CustomEaseView
-      ,ModalView
-      ,HotkeyHandlerView
-      ,RekapiControlsView
-      ,AlertView
-      ,SaveView
-      ,LoadView
-      ,OrientationControlsView
+  // jQuery plugins that get loaded but not actually used as AMD modules.
+  // These don't have a matching callback parameter.
+  ,'jquery-mousewheel'
+  ,'jquery-dragon'
+  ,'jquery-dragon-slider'
+  ,'jquery-cubelet'
 
-      ,AnimationModel
+], function (
 
-      ,ActorCollection
+  $
+  ,_
+  ,Tweenable
+  ,Kapi
+  ,MinPubSub
 
-      ) {
+  ,app
+  ,constant
+  ,util
+
+  ,CheckboxView
+  ,EaseSelectView
+  ,FPSSliderView
+  ,AutoUpdateTextFieldView
+  ,CanvasView
+  ,PaneView
+  ,TabsView
+  ,CSSOutputView
+  ,HTMLInputView
+  ,CustomEaseView
+  ,ModalView
+  ,HotkeyHandlerView
+  ,RekapiControlsView
+  ,AlertView
+  ,SaveView
+  ,LoadView
+  ,OrientationControlsView
+
+  ,AnimationModel
+
+  ,ActorCollection
+
+) {
 
   'use strict';
 
@@ -164,7 +236,7 @@ require([
     '$el': $('.quality-slider.fps .slider')
   });
 
-  subscribe(constant.UPDATE_CSS_OUTPUT, function () {
+  MinPubSub.subscribe(constant.UPDATE_CSS_OUTPUT, function () {
     app.view.cssOutput.renderCSS();
   });
 
@@ -172,7 +244,7 @@ require([
     '$el': $('#css-name')
     ,'onKeyup': function (val) {
       app.config.className = val;
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -180,7 +252,7 @@ require([
     '$el': $('#moz-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.moz = checked;
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -188,7 +260,7 @@ require([
     '$el': $('#ms-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.ms = checked;
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -196,7 +268,7 @@ require([
     '$el': $('#o-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.o = checked;
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -204,7 +276,7 @@ require([
     '$el': $('#webkit-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.webkit = checked;
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -212,7 +284,7 @@ require([
     '$el': $('#w3-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.w3 = checked;
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -230,7 +302,7 @@ require([
         : '';
       app.view.htmlInput.$renderTarget.css(
         'transform-origin', tranformOrigin);
-      publish(constant.ACTOR_ORIGIN_CHANGED, [true]);
+      MinPubSub.publish(constant.ACTOR_ORIGIN_CHANGED, [true]);
       app.kapi.update();
     }
   });

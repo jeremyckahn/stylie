@@ -1,5 +1,22 @@
-define(['src/app', 'src/constants', 'src/model/actor'],
-    function (app, constant, ActorModel) {
+define([
+
+  'underscore'
+  ,'backbone'
+
+  ,'src/app'
+  ,'src/constants'
+  ,'src/model/actor'
+
+], function (
+
+  _
+  ,Backbone
+
+  ,app
+  ,constant
+  ,ActorModel
+
+) {
 
   return Backbone.Collection.extend({
 

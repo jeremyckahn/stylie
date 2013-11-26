@@ -1,4 +1,14 @@
-define(function () {
+define([
+
+  'underscore'
+  ,'backbone'
+
+], function (
+
+  _
+  ,Backbone
+
+) {
 
   return Backbone.View.extend({
 

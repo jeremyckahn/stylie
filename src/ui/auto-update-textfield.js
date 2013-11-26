@@ -1,4 +1,18 @@
-define(['src/utils'], function (util) {
+define([
+
+  'underscore'
+  ,'backbone'
+
+  ,'src/utils'
+
+], function (
+
+  _
+  ,Backbone
+
+  ,util
+
+) {
 
   return Backbone.View.extend({
 

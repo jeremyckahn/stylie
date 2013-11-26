@@ -1,4 +1,20 @@
-define(['src/app', 'src/model/keyframe'], function (app, KeyframeModel) {
+define([
+
+  'underscore'
+  ,'backbone'
+
+  ,'src/app'
+  ,'src/model/keyframe'
+
+], function (
+
+  _
+  ,Backbone
+
+  ,app
+  ,KeyframeModel
+
+) {
 
   return Backbone.Collection.extend({
 

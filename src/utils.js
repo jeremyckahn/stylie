@@ -1,4 +1,16 @@
-define(['src/app'], function (app) {
+define([
+
+  'underscore'
+
+  ,'src/app'
+
+], function (
+
+  _
+
+  ,app
+
+) {
 
   return {
 

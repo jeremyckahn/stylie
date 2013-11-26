@@ -1,5 +1,26 @@
-define(['src/app', 'src/constants', 'src/utils'],
-    function (app, constant, util) {
+define([
+
+  'jquery'
+  ,'underscore'
+  ,'backbone'
+  ,'minpubsub'
+
+  ,'src/app'
+  ,'src/constants'
+  ,'src/utils'
+
+], function (
+
+  $
+  ,_
+  ,Backbone
+  ,MinPubSub
+
+  ,app
+  ,constant
+  ,util
+
+) {
 
   var $win = $(window);
 
@@ -26,9 +47,9 @@ define(['src/app', 'src/constants', 'src/utils'],
 
       this._$cubelet.on('change', _.bind(this.onCubeletChange, this));
 
-      this._rotationModeStartHandle = subscribe(
+      this._rotationModeStartHandle = MinPubSub.subscribe(
           constant.ROTATION_MODE_START, _.bind(this.onRotationModeStart, this));
-      this._rotationModeStopHandle = subscribe(
+      this._rotationModeStopHandle = MinPubSub.subscribe(
           constant.ROTATION_MODE_STOP, _.bind(this.onRotationModeStop, this));
 
       this.model.on('change', _.bind(this.render, this));
@@ -46,7 +67,7 @@ define(['src/app', 'src/constants', 'src/utils'],
 
     ,'onRotationModeStop': function () {
       this._$cubelet.hide();
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'onCubeletChange': function () {
@@ -60,7 +81,7 @@ define(['src/app', 'src/constants', 'src/utils'],
 
     ,'dragEnd': function (evt, ui) {
       this.updateModel();
-      publish(constant.UPDATE_CSS_OUTPUT);
+      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'render': function () {
@@ -87,7 +108,7 @@ define(['src/app', 'src/constants', 'src/utils'],
         ,'rY': rotationCoords.y
         ,'rZ': rotationCoords.z
       });
-      publish(constant.PATH_CHANGED);
+      MinPubSub.publish(constant.PATH_CHANGED);
       this.model.trigger('change');
       app.kapi.update();
     }
@@ -100,8 +121,8 @@ define(['src/app', 'src/constants', 'src/utils'],
       this._$crosshairContainer.remove();
       this._$cubelet.remove();
       this.remove();
-      unsubscribe(this._rotationModeStartHandle);
-      unsubscribe(this._rotationModeStopHandle);
+      MinPubSub.unsubscribe(this._rotationModeStartHandle);
+      MinPubSub.unsubscribe(this._rotationModeStopHandle);
       util.deleteAllProperties(this);
     }
 

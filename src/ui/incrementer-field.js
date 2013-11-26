@@ -1,5 +1,18 @@
-define(['src/ui/auto-update-textfield'],
-    function (AutoUpdateTextFieldView) {
+define([
+
+  'jquery'
+  ,'underscore'
+
+  ,'src/ui/auto-update-textfield'
+
+], function (
+
+  $
+  ,_
+
+  ,AutoUpdateTextFieldView
+
+) {
 
   var $win = $(window);
   var FLOATING_POINT_PRECISION = 6;

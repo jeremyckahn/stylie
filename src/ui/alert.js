@@ -1,4 +1,22 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define([
+
+  'underscore'
+  ,'backbone'
+  ,'minpubsub'
+
+  ,'src/app'
+  ,'src/constants'
+
+], function (
+
+  _
+  ,Backbone
+  ,MinPubSub
+
+  ,app
+  ,constant
+
+) {
 
   return Backbone.View.extend({
 
@@ -12,7 +30,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
       _.extend(this, opts);
       this.fadeOutTimeout_ = 0;
       this.$contentEl_ = this.$el.find('p');
-      subscribe(constant.ALERT_ERROR, _.bind(this.show, this));
+      MinPubSub.subscribe(constant.ALERT_ERROR, _.bind(this.show, this));
     }
 
     ,'show': function (alertMessage) {

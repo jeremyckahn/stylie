@@ -1,4 +1,22 @@
-define(['src/app', 'src/constants'], function (app, constant) {
+define([
+
+  'underscore'
+  ,'backbone'
+  ,'minpubsub'
+
+  ,'src/app'
+  ,'src/constants'
+
+], function (
+
+  _
+  ,Backbone
+  ,MinPubSub
+
+  ,app
+  ,constant
+
+) {
 
   return Backbone.View.extend({
 
@@ -24,7 +42,7 @@ define(['src/app', 'src/constants'], function (app, constant) {
     ,'saveAnimation': function () {
       var animationName = this.$nameField.val();
       this.model.save(animationName);
-      publish(constant.ANIMATION_SAVED, [animationName]);
+      MinPubSub.publish(constant.ANIMATION_SAVED, [animationName]);
     }
 
     ,'setInputValue': function (value) {

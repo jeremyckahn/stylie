@@ -1,21 +1,8 @@
 {
-
   "globals": {
-    "$": true,
-    "Backbone": true,
-    "Kapi": true,
-    "Mustache": true,
-    "RekapiScrubber": true,
-    "Tweenable": true,
-    "Bezierizer": true,
-    "_": true,
     "define": true,
-    "publish": true,
-    "require": true,
-    "subscribe": true,
-    "unsubscribe": true
+    "require": true
   },
-
   "asi": false,
   "boss": true,
   "browser": true,

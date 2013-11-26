@@ -1,22 +1,27 @@
+/* global console:true, process:true */
 var requirejs = require('requirejs');
 var fs = require('fs');
-var exec = require('child_process').exec;
-var UglifyJS = require("uglify-js");
+var sh = require('execSync');
 
-var config = {
-  baseUrl: './',
-  name: 'src/init',
+requirejs.optimize({
+  name: 'bower_components/requirejs/require',
   out: 'bin/app.js',
-  libOut: 'bin/libs.js'
-};
+  preserveLicenseComments: false
+}, function (buildResponse) {
+  console.log('Minified Require.js.');
 
-// Compress app code
-requirejs.optimize(config, function (buildResponse) {
-  //buildResponse is just a text output of the modules
-  //included. Load the built file for the contents.
-  //Use config.out to get the optimized file contents.
-  var contents = fs.readFileSync(config.out, 'utf8');
-  console.log('Built the app code.');
+  // Compress app code
+  requirejs.optimize({
+    name: 'src/init',
+    out: 'bin/_app.js',
+    baseUrl: './',
+    preserveLicenseComments: false,
+    mainConfigFile: 'src/init.js'
+  }, function (buildResponse) {
+    console.log('Built the app code.');
+    sh.run('cat bin/_app.js >> bin/app.js');
+    sh.run('rm bin/_app.js');
+  });
 });
 
 fs.readFile('dev.html', function(err,data){
@@ -26,41 +31,11 @@ fs.readFile('dev.html', function(err,data){
   }
 
   var html = data.toString();
-
-  // Compress lib code
-  var libs = html.match(/bower_components\/.*.js/g);
-  var command = 'cat ' + libs.join(' ') + ' > ' + config.libOut;
-  exec(command, function (error, stdout, stderr) {
-    fs.readFile(config.libOut, function (err, data) {
-      var libCode = data.toString();
-
-      var ast = UglifyJS.parse(libCode); // parse code and get the initial AST
-      ast.figure_out_scope();
-      var compressor = UglifyJS.Compressor({
-        global_defs: {
-          SHIFTY_DEBUG: false,
-          SHIFTY_DEBUG_NOW: false,
-          KAPI_DEBUG: false
-        }
-      });
-      var compressed_ast = ast.transform(compressor);
-      compressed_ast.figure_out_scope();
-      compressed_ast.compute_char_frequency();
-      compressed_ast.mangle_names();
-      var compiledCode = compressed_ast.print_to_string();
-      fs.writeFile(config.libOut, compiledCode, function () {
-        console.log('Built the lib code.');
-      });
-    })
-  }); // /lib code
-
-
   var optimizedHtml = html
     .replace(/\n/g, '')
     .replace(/>\s*</g, '><')
     .replace(/<!-- scripts -->.*<!-- \/scripts -->/,
-      ['<script src="' + config.libOut + '"></script>',
-      '<script src="' + 'bin/app.js' + '"></script>'].join(''));
+      '<script src="bin/app.js"></script>');
 
   fs.writeFile('index.html', optimizedHtml, function () {
     console.log('Generated index.html.');
