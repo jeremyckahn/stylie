@@ -99,7 +99,7 @@ require([
   $
   ,_
   ,Tweenable
-  ,Kapi
+  ,Rekapi
   ,MinPubSub
 
   ,app
@@ -168,18 +168,19 @@ require([
   var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
   var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
 
-  app.kapi = new Kapi({
-    'context': document.getElementById('rekapi-canvas')
-    ,'height': $win.height()
-    ,'width': $win.width()
-  });
+  var $rekapiCanvas = $('#rekapi-canvas');
+  app.rekapi = new Rekapi($rekapiCanvas[0]);
+  $rekapiCanvas
+    .height($win.height())
+    .width($win.width());
 
   app.collection.actors = new ActorCollection();
-  app.kapi.on('addActor',
-      _.bind(app.collection.actors.syncFromAppKapi, app.collection.actors));
+  app.rekapi.on('addActor',
+      _.bind(app.collection.actors.syncFromAppRekapi, app.collection.actors));
 
-  var domActor = new Kapi.DOMActor($('#rekapi-canvas').children()[0]);
-  app.kapi.addActor(domActor);
+  app.rekapi.addActor({
+    context: $('#rekapi-canvas').children()[0]
+  });
 
   var winWidth = $win.width();
   var currentActorModel = app.collection.actors.getCurrent();
@@ -205,7 +206,7 @@ require([
   app.view.rekapiControls = new RekapiControlsView();
 
   if (!app.config.queryString.debug) {
-    app.kapi.play();
+    app.rekapi.play();
   }
 
   app.view.showPath = new CheckboxView({
@@ -213,7 +214,7 @@ require([
     ,'callHandlerOnInit': true
     ,'onChange': function (evt, checked) {
       app.config.isPathShowing = !!checked;
-      app.kapi.update();
+      app.rekapi.update();
       app.view.canvas.backgroundView.update();
     }
   });
@@ -303,7 +304,7 @@ require([
       app.view.htmlInput.$renderTarget.css(
         'transform-origin', tranformOrigin);
       MinPubSub.publish(constant.ACTOR_ORIGIN_CHANGED, [true]);
-      app.kapi.update();
+      app.rekapi.update();
     }
   });
 

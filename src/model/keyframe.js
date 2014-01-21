@@ -43,12 +43,12 @@ define([
       }
     }
 
-    ,'modifyKeyframe': function (opt_preventKapiUpdate) {
+    ,'modifyKeyframe': function (opt_preventRekapiUpdate) {
       app.collection.actors.getCurrent().modifyKeyframe(
           this.get('millisecond'), this.getCSS());
 
-      if (!opt_preventKapiUpdate) {
-        app.kapi.update();
+      if (!opt_preventRekapiUpdate) {
+        app.rekapi.update();
       }
     }
 

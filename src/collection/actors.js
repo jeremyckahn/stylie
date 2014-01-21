@@ -27,10 +27,10 @@ define([
     }
 
     // This is pretty slow, don't call it too often.
-    ,'syncFromAppKapi': function () {
+    ,'syncFromAppRekapi': function () {
       this.reset();
 
-      _.each(app.kapi.getAllActors(), function (actor) {
+      _.each(app.rekapi.getAllActors(), function (actor) {
         this.add(new this.model({'actor': actor}));
       }, this);
     }

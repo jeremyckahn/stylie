@@ -37,7 +37,7 @@ define([
         MinPubSub.publish(constant.PATH_CHANGED);
         // TODO: Should access actor through the owner model
         app.collection.actors.getCurrent(0).updateKeyframes();
-        app.kapi.update();
+        app.rekapi.update();
       }, this)
     });
   }
@@ -246,7 +246,7 @@ define([
       // TODO: These function calls are too specific and assume that there will
       // only ever be one actor.
       app.view.canvas.backgroundView.update();
-      app.kapi.update();
+      app.rekapi.update();
     }
 
     ,'validateMillisecond': function (millisecond) {

@@ -110,7 +110,7 @@ define([
       });
       MinPubSub.publish(constant.PATH_CHANGED);
       this.model.trigger('change');
-      app.kapi.update();
+      app.rekapi.update();
     }
 
     ,'dimPathLine': function () {

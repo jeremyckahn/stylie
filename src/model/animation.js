@@ -69,7 +69,7 @@ define([
 
     ,'getCurrentState': function () {
       return {
-        'kapi': app.kapi.exportTimeline()
+        'rekapi': app.rekapi.exportTimeline()
         ,'curves': this.getCurrentCurves()
         ,'html': this.getCurrentHtml()
         ,'metadataVersion': 1
@@ -112,7 +112,13 @@ define([
       });
 
       var currentActorModel = app.collection.actors.getCurrent();
-      currentActorModel.importTimeline(state.kapi.actors[0]);
+
+      // Compatibility check for Rekapi pre-1.0.0
+      if (state.kapi) {
+        currentActorModel.importTimeline(state.kapi.actors[0]);
+      } else {
+        currentActorModel.importTimeline(state.rekapi.actors[0]);
+      }
     }
 
   });

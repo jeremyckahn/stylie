@@ -24,7 +24,7 @@ define([
       _.extend(this, opts);
 
       this.scrubber = new RekapiScrubber(
-          app.kapi, app.view.canvas.$canvasBG[0]);
+          app.rekapi, app.view.canvas.$canvasBG[0]);
 
       this.$el = this.scrubber.$container;
     }

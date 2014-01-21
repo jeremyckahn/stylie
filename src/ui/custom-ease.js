@@ -149,9 +149,9 @@ define([
           handlePositions.x1, handlePositions.y1,
           handlePositions.x2, handlePositions.y2);
 
-      var kapi = app.kapi;
-      if (!kapi.isPlaying()) {
-        kapi.update();
+      var rekapi = app.rekapi;
+      if (!rekapi.isPlaying()) {
+        rekapi.update();
       }
 
       MinPubSub.publish(constant.PATH_CHANGED);

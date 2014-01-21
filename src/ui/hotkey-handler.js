@@ -47,10 +47,10 @@ define([
         app.view.helpModal.toggle();
 
       } else if (evt.keyCode === 32) { // Space bar
-        if (app.kapi.isPlaying()) {
-          app.kapi.pause();
+        if (app.rekapi.isPlaying()) {
+          app.rekapi.pause();
         } else {
-          app.kapi.play();
+          app.rekapi.play();
         }
       } else if (evt.keyCode === 84) { // "T" key
         app.view.rekapiControls.fadeToggle();

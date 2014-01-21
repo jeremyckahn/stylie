@@ -77,7 +77,7 @@ define([
     ,'refreshKeyframeOrder': function () {
       this.keyframeCollection.sort();
       this.trigger('change');
-      app.kapi.update();
+      app.rekapi.update();
       MinPubSub.publish(constant.KEYFRAME_ORDER_CHANGED);
     }
 
@@ -115,7 +115,7 @@ define([
       });
     }
 
-    // Kapi encapsulation methods
+    // Rekapi encapsulation methods
 
     /**
      * @param {number} millisecond
@@ -164,7 +164,7 @@ define([
         }, this);
       }, this);
 
-      app.kapi.update();
+      app.rekapi.update();
       MinPubSub.publish(constant.PATH_CHANGED);
     }
 

@@ -60,7 +60,7 @@ define([
           : {'x': 0, 'y': 0};
       keyframeCollection.offsetKeyframes(offsets);
 
-      var cssOutput = app.kapi.toCSS({
+      var cssOutput = app.rekapi.renderer.toString({
         'vendors': getPrefixList(app)
         ,'name': cssClassName
         ,'iterations': app.$el.animationIteration.val()

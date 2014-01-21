@@ -49,6 +49,8 @@ define([
     ,'generatePathPoints': function () {
       var currentActorModel = app.collection.actors.getCurrent();
       var keyframeLength = currentActorModel.getLength();
+      var transformKeyframeProperties =
+          currentActorModel.get('actor').getPropertiesInTrack('transform');
       var points = [];
 
       var i;
@@ -59,7 +61,8 @@ define([
         var y1 = fromKeyframe.y;
         var x2 = toKeyframe.x;
         var y2 = toKeyframe.y;
-        var easings = currentActorModel.getEasingsForKeyframe(i);
+        var easings = currentActorModel.getEasingsForKeyframe(
+            transformKeyframeProperties[i].millisecond);
         var easeX = easings.x;
         var easeY = easings.y;
 
