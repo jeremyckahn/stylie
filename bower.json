@@ -4,7 +4,7 @@
   "main": "./index.html",
   "dependencies": {
     "shifty": "1.0.0",
-    "rekapi": "1.0.0",
+    "rekapi": "1.0.3",
     "rekapi-controls": "0.4.0",
     "backbone": "~1.0.0",
     "underscore": "~1.5.2",
@@ -20,7 +20,6 @@
   "resolutions": {
     "jquery": "~2.0.2",
     "shifty": "1.0.0",
-    "jquery-dragon": "~0.2.0",
-    "rekapi-controls": "0.4.0"
+    "jquery-dragon": "~0.2.0"
   }
 }
