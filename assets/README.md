@@ -4,6 +4,7 @@ __Note:__ Assets and this README were contributed by [Jon Victorino](http://jonv
 
 Logo is Pacifico and is available [here](http://www.google.com/webfonts/specimen/Pacifico)
 
+  * Logo color: #3b67b1
   * Logo font size: 36 pt
   * Body font size: 13 pt
   * Small fonts: 11 pt
