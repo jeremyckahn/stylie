@@ -82,9 +82,15 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('compile', function () {
-    var sh = require('execSync');
-    sh.run('node build.js');
-    console.log('Ran build.js');
+    var exec = require('child_process').exec;
+    var done = this.async();
+    exec('node build.js', function (error, stdout, stderr) {
+      if (error) {
+        console.log('Error: ' + stderr);
+      }
+
+      done();
+    });
   });
 
   grunt.registerTask('createDefaultTemplate', function () {

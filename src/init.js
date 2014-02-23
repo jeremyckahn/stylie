@@ -170,9 +170,6 @@ require([
 
   var $rekapiCanvas = $('#rekapi-canvas');
   app.rekapi = new Rekapi($rekapiCanvas[0]);
-  $rekapiCanvas
-    .height($win.height())
-    .width($win.width());
 
   app.collection.actors = new ActorCollection();
   app.rekapi.on('addActor',

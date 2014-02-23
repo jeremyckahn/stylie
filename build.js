@@ -1,7 +1,7 @@
 /* global console:true, process:true */
 var requirejs = require('requirejs');
 var fs = require('fs');
-var sh = require('execSync');
+var exec = require('child_process').exec;
 
 requirejs.optimize({
   name: 'bower_components/requirejs/require',
@@ -19,8 +19,14 @@ requirejs.optimize({
     mainConfigFile: 'src/init.js'
   }, function (buildResponse) {
     console.log('Built the app code.');
-    sh.run('cat bin/_app.js >> bin/app.js');
-    sh.run('rm bin/_app.js');
+    exec('cat bin/_app.js >> bin/app.js && rm bin/_app.js',
+        function (error, stdout, stderr) {
+      if (error) {
+        console.log('Error: ' + stderr);
+      } else {
+        console.log('No errors, all done!');
+      }
+    });
   });
 });
 

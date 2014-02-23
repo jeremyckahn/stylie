@@ -690,10 +690,11 @@ canvas {
   }
 
 #rekapi-canvas {
-  height: 400px;
+  bottom: 0;
   left: 0;
+  position: absolute;
+  right: 0;
   top: 0;
-  width: 500px;
 }
 
   #rekapi-canvas .rekapi-actor {
@@ -730,7 +731,7 @@ canvas {
 }
 
 .rekapi-scrubber-wrapper {
-  bottom: 85px;
+  bottom: 20px;
   left: 20px;
   position: absolute;
 }
