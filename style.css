@@ -734,6 +734,7 @@ canvas {
   bottom: 20px;
   left: 20px;
   position: absolute;
+  z-index: 100;
 }
 
 .tabs {
