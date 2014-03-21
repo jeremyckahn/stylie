@@ -1,13 +1,15 @@
 {
   "name": "Stylie",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "homepage": "https://github.com/jeremyckahn/stylie",
-  "authors": ["Jeremy Kahn <jeremyckahn@gmail.com>"],
+  "authors": [
+    "Jeremy Kahn <jeremyckahn@gmail.com>"
+  ],
   "description": "A CSS3 keyframe generator",
   "main": "./index.html",
   "dependencies": {
-    "shifty": "1.0.0",
-    "rekapi": "1.0.3",
+    "shifty": "1.0.1",
+    "rekapi": "1.0.7",
     "rekapi-controls": "0.4.0",
     "backbone": "~1.0.0",
     "underscore": "~1.5.2",
@@ -22,7 +24,7 @@
   },
   "resolutions": {
     "jquery": "~2.0.2",
-    "shifty": "1.0.0",
-    "jquery-dragon": "0.3.1"
+    "jquery-dragon": "0.3.1",
+    "shifty": "1.0.1"
   }
 }
