@@ -9,7 +9,7 @@
   "main": "./index.html",
   "dependencies": {
     "shifty": "1.0.1",
-    "rekapi": "1.0.7",
+    "rekapi": "1.1.0",
     "rekapi-controls": "0.4.0",
     "backbone": "~1.0.0",
     "underscore": "~1.5.2",
