@@ -1,5 +1,4 @@
-/* global console:true, process:true */
-'use strict';
+/* global console:true, process:true, module:true */
 var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 9000;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
@@ -15,6 +14,8 @@ var mountFolder = function (connect, dir) {
 // templateFramework: 'lodash'
 
 module.exports = function (grunt) {
+  'use strict';
+
   // show elapsed time at the end
   require('time-grunt')(grunt);
   // load all grunt tasks
@@ -78,6 +79,16 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= grunt.app %>/src/{,*/}*.js'
       ]
+    },
+    bump: {
+      options: {
+        files: ['package.json', 'bower.json'],
+        commit: false,
+        createTag: false,
+        tagName: '%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: false
+      }
     }
   });
 

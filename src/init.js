@@ -51,11 +51,15 @@ require.config({
 });
 
 require([
+  // Libraries
   'jquery'
   ,'underscore'
   ,'shifty'
   ,'rekapi'
   ,'minpubsub'
+
+  // Extensions
+  ,'bower_components/jck-library-extensions/src/backbone/tabs'
 
   // Misc
   ,'src/app'
@@ -69,7 +73,6 @@ require([
   ,'src/ui/auto-update-textfield'
   ,'src/ui/canvas'
   ,'src/ui/pane'
-  ,'src/ui/tabs'
   ,'src/ui/css-output'
   ,'src/ui/html-input'
   ,'src/ui/custom-ease'
@@ -102,6 +105,8 @@ require([
   ,Rekapi
   ,MinPubSub
 
+  ,TabsView
+
   ,app
   ,constant
   ,util
@@ -112,7 +117,6 @@ require([
   ,AutoUpdateTextFieldView
   ,CanvasView
   ,PaneView
-  ,TabsView
   ,CSSOutputView
   ,HTMLInputView
   ,CustomEaseView
@@ -221,7 +225,7 @@ require([
   });
 
   app.view.controlPaneTabs = new TabsView({
-    '$el': $('#control-pane')
+    'el': document.querySelector('#control-pane')
   });
 
   app.view.cssOutput = new CSSOutputView({
