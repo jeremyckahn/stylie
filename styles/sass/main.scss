@@ -1,3 +1,5 @@
+$IMAGE_DIR: '../../img';
+
 /* Bezierizer styles
  */
 .bezierizer-container {
@@ -370,7 +372,7 @@ canvas {
 }
 
 #scaffolding-area {
-  background: url(img/ui/bg_grid.png);
+  background: url(#{$IMAGE_DIR}/ui/bg_grid.png);
   float: left;
   margin: 0 auto;
   overflow: hidden;
@@ -555,15 +557,12 @@ canvas {
   }
 
   #control-pane select {
+    background: #666;
     border: solid 1px #333;
+    color: #fff;
     font-size: 1em;
     margin-left: 8px;
     width: 215px;
-  }
-
-  .mac.webkit #control-pane select {
-    background: -webkit-linear-gradient(top,  rgba(34,34,34,1) 0%,rgba(40,52,59,1) 100%); /* Chrome10+,Safari5.1+ */
-    color: #fff;
   }
 
   #control-pane hr {

@@ -43,6 +43,10 @@ module.exports = function (grunt) {
           '<%= grunt.app %>/*.css',
           '<%= grunt.app %>/src/{,*/}*.js'
         ]
+      },
+      compass: {
+        files: ['<%= grunt.app %>/styles/sass/{,*/}*.{scss,sass}'],
+        tasks: ['compass']
       }
     },
     connect: {
@@ -64,11 +68,11 @@ module.exports = function (grunt) {
     },
     open: {
       server: {
-        path: 'http://localhost:<%= connect.options.port %>'
+        path: 'http://localhost:<%= connect.options.port %>/dev.html'
       }
     },
     clean: {
-      dist: ['<%= grunt.dist %>/*']
+      dist: ['<%= grunt.dist %>/*', '<%= grunt.app %>styles/css']
     },
     jshint: {
       options: {
@@ -89,6 +93,24 @@ module.exports = function (grunt) {
         tagMessage: 'Version %VERSION%',
         push: false
       }
+    },
+    compass: {
+      options: {
+        sassDir: '<%= grunt.app %>/styles/sass',
+        cssDir: '<%= grunt.app %>/styles/css',
+        imagesDir: '<%= grunt.app %>/img'
+      },
+      dist: {
+        options: {
+          environment: 'production'
+        }
+      },
+      server: {
+        options: {
+          debugInfo: true,
+          environment: 'development'
+        }
+      }
     }
   });
 
@@ -108,13 +130,21 @@ module.exports = function (grunt) {
     grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
   });
 
-  grunt.registerTask('server', function (target) {
+  grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+      return grunt.task.run([
+        'clean:dist',
+        'build',
+        'compass:dist',
+        'open',
+        'connect:dist:keepalive'
+      ]);
     }
 
     grunt.task.run([
+      'clean:dist',
       'connect:livereload',
+      'compass:server',
       'open',
       'watch'
     ]);
@@ -122,6 +152,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'compass:dist',
     'compile'
   ]);
 
