@@ -1,0 +1,22 @@
+@import '../../bower_components/bezierizer/src/bezierizer.style';
+
+.bezierizer-container {
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.bezierizer-canvas-container {
+  height: 310px;
+  width: 310px;
+}
+
+  .bezierizer-canvas-container canvas {
+    height: 310px;
+    width: 310px;
+  }
+
+  .bezierizer-canvas-container .bezierizer-handle-container {
+    height: 330px;
+    overflow: hidden;
+    width: 330px;
+  }

@@ -1,50 +1,7 @@
-@import '../../bower_components/jck-library-extensions/src/backbone/sass/tabs.scss';
+@import '../../bower_components/jck-library-extensions/src/backbone/sass/tabs';
+@import 'bezierizer';
 
 $IMAGE_DIR: '../../img';
-
-/* Bezierizer styles
- */
-.bezierizer-container {
-  border-radius: 2px;
-  padding: 10px;
-}
-
-.bezierizer-canvas-container {
-  height: 310px;
-  position: relative;
-  width: 310px;
-}
-
-  .bezierizer-canvas-container canvas {
-    background: #555;
-    height: 310px;
-    width: 310px;
-  }
-
-  .bezierizer-canvas-container .bezierizer-handle-container {
-    height: 330px;
-    left: -10px;
-    overflow: hidden;
-    position: absolute;
-    top: -10px;
-    width: 330px;
-  }
-
-    .bezierizer-canvas-container .bezierizer-handle {
-      background: #999;
-      border-radius: 12px;
-      border: solid 4px #333;
-      height: 24px;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 24px;
-    }
-
-    .bezierizer-canvas-container .bezierizer-handle:focus {
-      outline: none;
-    }
-/* /Bezierizer styles */
 
 body {
   margin: 0;
