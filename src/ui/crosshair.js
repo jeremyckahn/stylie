@@ -3,7 +3,6 @@ define([
   'jquery'
   ,'underscore'
   ,'backbone'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -14,7 +13,6 @@ define([
   $
   ,_
   ,Backbone
-  ,MinPubSub
 
   ,app
   ,constant
@@ -47,9 +45,9 @@ define([
 
       this._$cubelet.on('change', _.bind(this.onCubeletChange, this));
 
-      this._rotationModeStartHandle = MinPubSub.subscribe(
+      this._rotationModeStartHandle = Backbone.on(
           constant.ROTATION_MODE_START, _.bind(this.onRotationModeStart, this));
-      this._rotationModeStopHandle = MinPubSub.subscribe(
+      this._rotationModeStopHandle = Backbone.on(
           constant.ROTATION_MODE_STOP, _.bind(this.onRotationModeStop, this));
 
       this.model.on('change', _.bind(this.render, this));
@@ -67,7 +65,7 @@ define([
 
     ,'onRotationModeStop': function () {
       this._$cubelet.hide();
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'onCubeletChange': function () {
@@ -81,7 +79,7 @@ define([
 
     ,'dragEnd': function (evt, ui) {
       this.updateModel();
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'render': function () {
@@ -108,7 +106,7 @@ define([
         ,'rY': rotationCoords.y
         ,'rZ': rotationCoords.z
       });
-      MinPubSub.publish(constant.PATH_CHANGED);
+      Backbone.trigger(constant.PATH_CHANGED);
       this.model.trigger('change');
       app.rekapi.update();
     }
@@ -121,8 +119,8 @@ define([
       this._$crosshairContainer.remove();
       this._$cubelet.remove();
       this.remove();
-      MinPubSub.unsubscribe(this._rotationModeStartHandle);
-      MinPubSub.unsubscribe(this._rotationModeStopHandle);
+      Backbone.off(this._rotationModeStartHandle);
+      Backbone.off(this._rotationModeStopHandle);
       util.deleteAllProperties(this);
     }
 

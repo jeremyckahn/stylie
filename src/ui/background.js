@@ -3,7 +3,6 @@ define([
   'underscore'
   ,'backbone'
   ,'shifty'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -13,7 +12,6 @@ define([
   _
   ,Backbone
   ,Tweenable
-  ,MinPubSub
 
   ,app
   ,constant
@@ -30,8 +28,8 @@ define([
       });
 
       var boundUpdate = _.bind(this.update, this);
-      MinPubSub.subscribe(constant.PATH_CHANGED, boundUpdate);
-      MinPubSub.subscribe(constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
+      Backbone.on(constant.PATH_CHANGED, boundUpdate);
+      Backbone.on(constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
     }
 
     ,'resize': function (dims) {

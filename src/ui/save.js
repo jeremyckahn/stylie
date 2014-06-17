@@ -2,7 +2,6 @@ define([
 
   'underscore'
   ,'backbone'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -11,7 +10,6 @@ define([
 
   _
   ,Backbone
-  ,MinPubSub
 
   ,app
   ,constant
@@ -42,7 +40,7 @@ define([
     ,'saveAnimation': function () {
       var animationName = this.$nameField.val();
       this.model.save(animationName);
-      MinPubSub.publish(constant.ANIMATION_SAVED, [animationName]);
+      Backbone.trigger(constant.ANIMATION_SAVED, animationName);
     }
 
     ,'setInputValue': function (value) {

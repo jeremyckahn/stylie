@@ -2,7 +2,6 @@ define([
 
   'underscore'
   ,'backbone'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -11,7 +10,6 @@ define([
 
   _
   ,Backbone
-  ,MinPubSub
 
   ,app
   ,constant
@@ -38,7 +36,7 @@ define([
     }
 
     ,'onSliderDrag': function (val) {
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'getFPS': function () {

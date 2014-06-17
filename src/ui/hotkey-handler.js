@@ -2,7 +2,6 @@ define([
 
   'underscore'
   ,'backbone'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -11,7 +10,6 @@ define([
 
   _
   ,Backbone
-  ,MinPubSub
 
   ,app
   ,constant
@@ -38,7 +36,7 @@ define([
       } else if (evt.shiftKey) {
         this.$el.addClass('shift-down');
         this._isShiftHeldDown = true;
-        MinPubSub.publish(constant.ROTATION_MODE_START);
+        Backbone.trigger(constant.ROTATION_MODE_START);
 
       } else if (evt.keyCode === 67) { // "C" key
         app.view.controlPane.toggle();
@@ -64,7 +62,7 @@ define([
       if (this._isShiftHeldDown) {
         this._isShiftHeldDown = false;
         this.$el.removeClass('shift-down');
-        MinPubSub.publish(constant.ROTATION_MODE_STOP);
+        Backbone.trigger(constant.ROTATION_MODE_STOP);
       }
     }
 

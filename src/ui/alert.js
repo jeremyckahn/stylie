@@ -2,7 +2,6 @@ define([
 
   'underscore'
   ,'backbone'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -11,7 +10,6 @@ define([
 
   _
   ,Backbone
-  ,MinPubSub
 
   ,app
   ,constant
@@ -30,7 +28,7 @@ define([
       _.extend(this, opts);
       this.fadeOutTimeout_ = 0;
       this.$contentEl_ = this.$el.find('p');
-      MinPubSub.subscribe(constant.ALERT_ERROR, _.bind(this.show, this));
+      Backbone.on(constant.ALERT_ERROR, _.bind(this.show, this));
     }
 
     ,'show': function (alertMessage) {

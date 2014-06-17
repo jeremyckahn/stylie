@@ -5,7 +5,6 @@ define([
   ,'backbone'
   ,'shifty'
   ,'bezierizer'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -18,7 +17,6 @@ define([
   ,Backbone
   ,Tweenable
   ,Bezierizer
-  ,MinPubSub
 
   ,app
   ,constant
@@ -154,7 +152,7 @@ define([
         rekapi.update();
       }
 
-      MinPubSub.publish(constant.PATH_CHANGED);
+      Backbone.trigger(constant.PATH_CHANGED);
       app.collection.actors.getCurrent().updateKeyframes();
     }
 

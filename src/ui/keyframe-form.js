@@ -4,7 +4,6 @@ define([
   ,'underscore'
   ,'backbone'
   ,'mustache'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -18,7 +17,6 @@ define([
   ,_
   ,Backbone
   ,Mustache
-  ,MinPubSub
 
   ,app
   ,constant
@@ -34,7 +32,7 @@ define([
 
       ,'onValReenter': _.bind(function (val) {
         this.model.set($el.data('keyframeattr'), +val);
-        MinPubSub.publish(constant.PATH_CHANGED);
+        Backbone.trigger(constant.PATH_CHANGED);
         // TODO: Should access actor through the owner model
         app.collection.actors.getCurrent(0).updateKeyframes();
         app.rekapi.update();
@@ -192,9 +190,9 @@ define([
 
       if (this.model.owner.hasKeyframeAt(millisecond)) {
         if (millisecond !== this.model.get('millisecond')) {
-          MinPubSub.publish(constant.ALERT_ERROR, [
+          Backbone.trigger(constant.ALERT_ERROR,
               'There is already a keyframe at millisecond '
-              + millisecond + '.']);
+              + millisecond + '.');
         }
       } else {
         this.model.moveKeyframe(millisecond);

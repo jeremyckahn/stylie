@@ -3,7 +3,6 @@ define([
   'jquery'
   ,'underscore'
   ,'backbone'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -16,7 +15,6 @@ define([
   $
   ,_
   ,Backbone
-  ,MinPubSub
 
   ,app
   ,constant
@@ -78,7 +76,7 @@ define([
       this.keyframeCollection.sort();
       this.trigger('change');
       app.rekapi.update();
-      MinPubSub.publish(constant.KEYFRAME_ORDER_CHANGED);
+      Backbone.trigger(constant.KEYFRAME_ORDER_CHANGED);
     }
 
     ,'appendNewKeyframeWithDefaultProperties': function () {
@@ -130,7 +128,7 @@ define([
       this.keyframeCollection.add(modelProperties, {'owner': this});
       var keyframeProperties = this.keyframeCollection.last().getCSS();
       this.get('actor').keyframe(millisecond, keyframeProperties, opt_easing);
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'modifyKeyframe': function (
@@ -152,7 +150,7 @@ define([
     ,'removeKeyframe': function (millisecond) {
       this.keyframeCollection.removeKeyframe(millisecond);
       this.get('actor').removeKeyframe(millisecond);
-      MinPubSub.publish(constant.PATH_CHANGED);
+      Backbone.trigger(constant.PATH_CHANGED);
     }
 
     ,'importTimeline': function (actorData) {
@@ -165,7 +163,7 @@ define([
       }, this);
 
       app.rekapi.update();
-      MinPubSub.publish(constant.PATH_CHANGED);
+      Backbone.trigger(constant.PATH_CHANGED);
     }
 
     ,'parseTranformString': function (transformString) {

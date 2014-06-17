@@ -3,7 +3,6 @@ define([
   'jquery'
   ,'underscore'
   ,'backbone'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -13,7 +12,6 @@ define([
   $
   ,_
   ,Backbone
-  ,MinPubSub
 
   ,app
   ,constant
@@ -32,7 +30,7 @@ define([
       this.$animationSelect = this.$el.find('select');
       this.refreshAnimationList();
 
-      MinPubSub.subscribe(constant.ANIMATION_SAVED,
+      Backbone.on(constant.ANIMATION_SAVED,
         _.bind(this.refreshAnimationList, this));
     }
 
@@ -62,8 +60,8 @@ define([
       var val = this.$animationSelect.val();
 
       if (!val) {
-        MinPubSub.publish(
-            constant.ALERT_ERROR, ['Please specify an animation to load.']);
+        Backbone.trigger(
+            constant.ALERT_ERROR, 'Please specify an animation to load.');
         return;
       }
 

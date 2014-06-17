@@ -2,7 +2,6 @@ define([
 
   'underscore'
   ,'backbone'
-  ,'minpubsub'
 
   ,'src/app'
   ,'src/constants'
@@ -11,7 +10,6 @@ define([
 
   _
   ,Backbone
-  ,MinPubSub
 
   ,app
   ,constant
@@ -25,7 +23,7 @@ define([
       // TODO: This message subscription and event binding should be
       // consolidated into one operation.
       this._boundModifyKeyframeHandler = _.bind(this.modifyKeyframe, this);
-      MinPubSub.subscribe(
+      Backbone.on(
           constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
       this.on('change', this._boundModifyKeyframeHandler);
     }
@@ -60,11 +58,11 @@ define([
 
       // TODO: Maybe check to see if this is the last keyframe in the
       // collection before publishing?
-      MinPubSub.publish(constant.ANIMATION_LENGTH_CHANGED);
+      Backbone.trigger(constant.ANIMATION_LENGTH_CHANGED);
     }
 
     ,'destroy': function () {
-      MinPubSub.unsubscribe(
+      Backbone.off(
           constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
       this.off('change', this._boundModifyKeyframeHandler);
       this.trigger('destroy');

@@ -46,7 +46,6 @@ require.config({
     ,'rekapi-scrubber': 'bower_components/rekapi-controls/src/rekapi-scrubber'
     ,mustache: 'bower_components/mustache/mustache'
     ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
-    ,minpubsub: 'bower_components/minpubsub/minpubsub.src'
   }
 });
 
@@ -54,9 +53,9 @@ require([
   // Libraries
   'jquery'
   ,'underscore'
+  ,'backbone'
   ,'shifty'
   ,'rekapi'
-  ,'minpubsub'
 
   // Extensions
   ,'bower_components/jck-library-extensions/src/backbone/tabs'
@@ -101,9 +100,9 @@ require([
 
   $
   ,_
+  ,Backbone
   ,Tweenable
   ,Rekapi
-  ,MinPubSub
 
   ,TabsView
 
@@ -238,7 +237,7 @@ require([
     '$el': $('.quality-slider.fps .slider')
   });
 
-  MinPubSub.subscribe(constant.UPDATE_CSS_OUTPUT, function () {
+  Backbone.on(constant.UPDATE_CSS_OUTPUT, function () {
     app.view.cssOutput.renderCSS();
   });
 
@@ -246,7 +245,7 @@ require([
     '$el': $('#css-name')
     ,'onKeyup': function (val) {
       app.config.className = val;
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -254,7 +253,7 @@ require([
     '$el': $('#moz-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.moz = checked;
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -262,7 +261,7 @@ require([
     '$el': $('#ms-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.ms = checked;
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -270,7 +269,7 @@ require([
     '$el': $('#o-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.o = checked;
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -278,7 +277,7 @@ require([
     '$el': $('#webkit-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.webkit = checked;
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -286,7 +285,7 @@ require([
     '$el': $('#w3-toggle')
     ,'onChange': function (evt, checked) {
       app.config.activeClasses.w3 = checked;
-      MinPubSub.publish(constant.UPDATE_CSS_OUTPUT);
+      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     }
   });
 
@@ -304,7 +303,7 @@ require([
         : '';
       app.view.htmlInput.$renderTarget.css(
         'transform-origin', tranformOrigin);
-      MinPubSub.publish(constant.ACTOR_ORIGIN_CHANGED, [true]);
+      Backbone.trigger(constant.ACTOR_ORIGIN_CHANGED, true);
       app.rekapi.update();
     }
   });
