@@ -58,7 +58,8 @@ require([
   ,'rekapi'
 
   // Extensions
-  ,'bower_components/jck-library-extensions/src/backbone/tabs'
+  ,'bower_components/jck-library-extensions/src/backbone/tabs/tabs'
+  ,'bower_components/jck-library-extensions/src/backbone/pane/pane'
 
   // Misc
   ,'src/app'
@@ -71,7 +72,6 @@ require([
   ,'src/ui/fps-slider'
   ,'src/ui/auto-update-textfield'
   ,'src/ui/canvas'
-  ,'src/ui/pane'
   ,'src/ui/css-output'
   ,'src/ui/html-input'
   ,'src/ui/custom-ease'
@@ -105,6 +105,7 @@ require([
   ,Rekapi
 
   ,TabsView
+  ,PaneView
 
   ,app
   ,constant
@@ -115,7 +116,6 @@ require([
   ,FPSSliderView
   ,AutoUpdateTextFieldView
   ,CanvasView
-  ,PaneView
   ,CSSOutputView
   ,HTMLInputView
   ,CustomEaseView

@@ -1,4 +1,5 @@
-@import '../../bower_components/jck-library-extensions/src/backbone/sass/tabs';
+@import '../../bower_components/jck-library-extensions/src/backbone/tabs/tabs';
+@import '../../bower_components/jck-library-extensions/src/backbone/pane/pane';
 @import 'bezierizer';
 
 $IMAGE_DIR: '../../img';
@@ -658,26 +659,6 @@ canvas {
   #rekapi-canvas .rekapi-actor {
     line-height: 0;
     position: absolute;
-  }
-
-.pane {
-  background: rgb(255,255,255);
-  border: solid 1px #000;
-  margin: 20px;
-  position: absolute;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-
-  .pane .pane-handle {
-    background: #1a1a1a;
-    cursor: move;
-    height: 28px;
-  }
-
-  .pane .pane-content {
-    background: #353535;
   }
 
 .float-wrap {
