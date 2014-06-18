@@ -220,7 +220,7 @@ require([
   });
 
   app.view.controlPane = new PaneView({
-    '$el': $('#control-pane')
+    'el': document.getElementById('control-pane')
   });
 
   app.view.controlPaneTabs = new TabsView({
