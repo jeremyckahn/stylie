@@ -60,6 +60,7 @@ require([
   // Extensions
   ,'bower_components/jck-library-extensions/src/backbone/tabs/tabs'
   ,'bower_components/jck-library-extensions/src/backbone/pane/pane'
+  ,'bower_components/jck-library-extensions/src/backbone/alert/alert'
 
   // Misc
   ,'src/app'
@@ -78,7 +79,6 @@ require([
   ,'src/ui/modal'
   ,'src/ui/hotkey-handler'
   ,'src/ui/rekapi-controls'
-  ,'src/ui/alert'
   ,'src/ui/save'
   ,'src/ui/load'
   ,'src/ui/orientation-controls'
@@ -106,6 +106,7 @@ require([
 
   ,TabsView
   ,PaneView
+  ,AlertView
 
   ,app
   ,constant
@@ -122,7 +123,6 @@ require([
   ,ModalView
   ,HotkeyHandlerView
   ,RekapiControlsView
-  ,AlertView
   ,SaveView
   ,LoadView
   ,OrientationControlsView
@@ -313,8 +313,11 @@ require([
   });
 
   app.view.topLevelAlertView = new AlertView({
-    '$el': $('#top-level-alert')
+    'el': document.getElementById('top-level-alert')
   });
+  var topLevelAlertView = app.view.topLevelAlertView;
+  Backbone.on(constant.ALERT_ERROR,
+      _.bind(topLevelAlertView.show, topLevelAlertView));
 
   var animationModel = new AnimationModel();
 
