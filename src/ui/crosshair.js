@@ -121,7 +121,7 @@ define([
       this.remove();
       Backbone.off(this._rotationModeStartHandle);
       Backbone.off(this._rotationModeStopHandle);
-      util.deleteAllProperties(this);
+      _.empty(this);
     }
 
   });

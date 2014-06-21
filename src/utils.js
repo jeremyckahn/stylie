@@ -38,13 +38,6 @@ define([
 
       return params;
     }
-
-    ,'deleteAllProperties': function (obj) {
-      _.each(obj, function (value, key) {
-        delete obj[key];
-      });
-    }
-
   };
 
 });

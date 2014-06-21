@@ -41,6 +41,8 @@ require.config({
     ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
     ,backbone: 'bower_components/backbone/backbone'
     ,underscore: 'bower_components/underscore/underscore'
+    ,'underscore.jck':
+        'bower_components/jck-library-extensions/src/underscore/underscore.jck'
     ,shifty: 'bower_components/shifty/dist/shifty'
     ,rekapi: 'bower_components/rekapi/dist/rekapi'
     ,'rekapi-scrubber': 'bower_components/rekapi-controls/src/rekapi-scrubber'
@@ -95,6 +97,9 @@ require([
   ,'jquery-dragon'
   ,'jquery-dragon-slider'
   ,'jquery-cubelet'
+
+  // Doesn't return anything
+  ,'underscore.jck'
 
 ], function (
 

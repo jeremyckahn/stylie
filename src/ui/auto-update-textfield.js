@@ -47,7 +47,7 @@ define([
 
     ,'tearDown': function () {
       this.remove();
-      util.deleteAllProperties(this);
+      _.empty(this);
     }
 
     ,'onEscapeDown': function (evt) {

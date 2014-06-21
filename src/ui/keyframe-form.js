@@ -287,7 +287,7 @@ define([
       this.$header.remove();
       this.$pinnedButtonArray.remove();
       this.remove();
-      util.deleteAllProperties(this);
+      _.empty(this);
     }
 
   });
