@@ -48,11 +48,14 @@ define([
         var point = $el.data('point');
         $el.val(bezierizerPoints[point]);
 
-        this['incrementer' + point.toUpperCase()] = new IncrementerFieldView({
-          '$el': $el
-          ,'increment': 0.1
-          ,'onValReenter': _.bind(this.onControlPointValReenter, this, point)
+        var incrementerFieldView = new IncrementerFieldView({
+          'el': el
         });
+        incrementerFieldView.increment = 0.1;
+        incrementerFieldView.onValReenter =
+            _.bind(this.onControlPointValReenter, this, point);
+
+        this['incrementer' + point.toUpperCase()] = incrementerFieldView;
       }, this));
 
       this.addEasing('customEasing1', bezierizerPoints);

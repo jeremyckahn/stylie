@@ -15,6 +15,7 @@
   "latedef": true,
   "laxbreak": true,
   "laxcomma": true,
+  "maxlen": 80,
   "newcap": true,
   "noarg": true,
   "nomen": false,

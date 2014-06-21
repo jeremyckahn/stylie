@@ -3,7 +3,7 @@ define([
   'jquery'
   ,'underscore'
 
-  ,'src/ui/auto-update-textfield'
+  ,'auto-update-textfield'
 
 ], function (
 

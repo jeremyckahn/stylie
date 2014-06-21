@@ -37,7 +37,8 @@ require.config({
     jquery: 'bower_components/jquery/jquery'
     ,'jquery-mousewheel': 'bower_components/jquery-mousewheel/jquery.mousewheel'
     ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
-    ,'jquery-dragon-slider': 'bower_components/jquery-dragon/src/jquery.dragon-slider'
+    ,'jquery-dragon-slider':
+        'bower_components/jquery-dragon/src/jquery.dragon-slider'
     ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
     ,backbone: 'bower_components/backbone/backbone'
     ,underscore: 'bower_components/underscore/underscore'
@@ -48,6 +49,14 @@ require.config({
     ,'rekapi-scrubber': 'bower_components/rekapi-controls/src/rekapi-scrubber'
     ,mustache: 'bower_components/mustache/mustache'
     ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
+
+    // jck-extensions
+    ,'auto-update-textfield':
+    /* jshint maxlen: 120 */
+        'bower_components/jck-library-extensions/src/backbone/auto-update-textfield/auto-update-textfield'
+    ,'tabs': 'bower_components/jck-library-extensions/src/backbone/tabs/tabs'
+    ,'pane': 'bower_components/jck-library-extensions/src/backbone/pane/pane'
+    ,'alert': 'bower_components/jck-library-extensions/src/backbone/alert/alert'
   }
 });
 
@@ -60,9 +69,10 @@ require([
   ,'rekapi'
 
   // Extensions
-  ,'bower_components/jck-library-extensions/src/backbone/tabs/tabs'
-  ,'bower_components/jck-library-extensions/src/backbone/pane/pane'
-  ,'bower_components/jck-library-extensions/src/backbone/alert/alert'
+  ,'tabs'
+  ,'pane'
+  ,'alert'
+  ,'auto-update-textfield'
 
   // Misc
   ,'src/app'
@@ -73,7 +83,6 @@ require([
   ,'src/ui/checkbox'
   ,'src/ui/ease-select'
   ,'src/ui/fps-slider'
-  ,'src/ui/auto-update-textfield'
   ,'src/ui/canvas'
   ,'src/ui/css-output'
   ,'src/ui/html-input'
@@ -112,6 +121,7 @@ require([
   ,TabsView
   ,PaneView
   ,AlertView
+  ,AutoUpdateTextFieldView
 
   ,app
   ,constant
@@ -120,7 +130,6 @@ require([
   ,CheckboxView
   ,EaseSelectView
   ,FPSSliderView
-  ,AutoUpdateTextFieldView
   ,CanvasView
   ,CSSOutputView
   ,HTMLInputView
@@ -246,13 +255,19 @@ require([
     app.view.cssOutput.renderCSS();
   });
 
-  app.view.cssNameField = new AutoUpdateTextFieldView({
-    '$el': $('#css-name')
-    ,'onKeyup': function (val) {
-      app.config.className = val;
-      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
-    }
+  var autoUpdateTextFieldView = new AutoUpdateTextFieldView({
+    'el': document.getElementById('css-name')
   });
+
+  autoUpdateTextFieldView.onKeyup = function (val) {
+    app.config.className = val;
+    Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+  };
+
+  // onKeyup is being overridden, so re-bind the delegated listeners.
+  autoUpdateTextFieldView.delegateEvents();
+
+  app.view.cssNameField = autoUpdateTextFieldView;
 
   app.view.mozCheckbox = new CheckboxView({
     '$el': $('#moz-toggle')

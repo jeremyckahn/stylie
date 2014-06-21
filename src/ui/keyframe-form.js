@@ -27,17 +27,19 @@ define([
 ) {
 
   function incrementerGeneratorHelper ($el) {
-    return new IncrementerFieldView({
-      '$el': $el
-
-      ,'onValReenter': _.bind(function (val) {
-        this.model.set($el.data('keyframeattr'), +val);
-        Backbone.trigger(constant.PATH_CHANGED);
-        // TODO: Should access actor through the owner model
-        app.collection.actors.getCurrent(0).updateKeyframes();
-        app.rekapi.update();
-      }, this)
+    var incrementerFieldView = new IncrementerFieldView({
+      'el': $el[0]
     });
+
+    incrementerFieldView.onValReenter = _.bind(function (val) {
+      this.model.set($el.data('keyframeattr'), +val);
+      Backbone.trigger(constant.PATH_CHANGED);
+      // TODO: Should access actor through the owner model
+      app.collection.actors.getCurrent(0).updateKeyframes();
+      app.rekapi.update();
+    }, this);
+
+    return incrementerFieldView;
   }
 
   var KEYFRAME_TEMPLATE = [
@@ -48,6 +50,7 @@ define([
       ,'</li>'
     ].join('');
 
+  /* jshint maxlen: 300 */
   var KEYFRAME_PROPERTY_TEMPLATE = [
       '<div class="property-field">'
         ,'<label>'
@@ -64,6 +67,7 @@ define([
       ,'</label>'
     ].join('');
 
+  /* jshint maxlen: 100 */
   var EASE_SELECT_TEMPLATE = [
       '<select class="easing {{property}}-easing" data-axis="{{property}}"></select>'
     ].join('');
@@ -127,7 +131,12 @@ define([
     }
 
     ,'initIncrementers': function () {
-      _.each([this.$inputX, this.$inputY, this.$inputRX, this.$inputRY, this.$inputRZ], function ($el) {
+      _.each([
+          this.$inputX,
+          this.$inputY,
+          this.$inputRX,
+          this.$inputRY,
+          this.$inputRZ], function ($el) {
         var $input = $el.find('input');
         var keyframeAttr = $input.data('keyframeattr');
         this['incrementerView' + keyframeAttr.toUpperCase()] =
@@ -139,20 +148,24 @@ define([
           'value': this.model.get('millisecond')
         });
 
-        this.millisecondIncrementer = new IncrementerFieldView({
-          '$el': $(template)
-          ,'onBlur': _.bind(this.onMillisecondIncrementerBlur, this)
-
-          // Defer to the blur event handler for all code paths that call
-          // onMillisecondIncrementerBlur.  It's a browser-level event and
-          // inserts its handler into the JavaScript thread synchronously,
-          // creating null pointers that jQuery is not expecting in
-          // jQuery#remove.
-          ,'onEnterDown': _.bind(function () {
-             this.millisecondIncrementer.freeMousewheel();
-             this.millisecondIncrementer.$el.trigger('blur');
-          }, this)
+        var millisecondIncrementer = new IncrementerFieldView({
+          'el': $(template)[0]
         });
+
+        millisecondIncrementer.onBlur =
+            _.bind(this.onMillisecondIncrementerBlur, this);
+
+        // Defer to the blur event handler for all code paths that call
+        // onMillisecondIncrementerBlur.  It's a browser-level event and
+        // inserts its handler into the JavaScript thread synchronously,
+        // creating null pointers that jQuery is not expecting in
+        // jQuery#remove.
+        millisecondIncrementer.onEnterDown = _.bind(function () {
+           this.millisecondIncrementer.freeMousewheel();
+           this.millisecondIncrementer.$el.trigger('blur');
+        }, this);
+
+        this.millisecondIncrementer = millisecondIncrementer;
       }
     }
 
