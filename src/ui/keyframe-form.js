@@ -162,11 +162,13 @@ define([
         // inserts its handler into the JavaScript thread synchronously,
         // creating null pointers that jQuery is not expecting in
         // jQuery#remove.
-        millisecondIncrementer.onEnterDown = _.bind(function () {
-           this.millisecondIncrementer.freeMousewheel();
-           this.millisecondIncrementer.$el.trigger('blur');
-        }, this);
+        millisecondIncrementer.onEnterDown = function (evt) {
+          evt.preventDefault();
+          millisecondIncrementer.freeMousewheel();
+          millisecondIncrementer.$el.trigger('blur');
+        };
 
+        millisecondIncrementer.delegateEvents();
         this.millisecondIncrementer = millisecondIncrementer;
       }
     }
