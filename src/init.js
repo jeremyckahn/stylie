@@ -51,9 +51,11 @@ require.config({
     ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
 
     // jck-extensions
-    ,'auto-update-textfield':
     /* jshint maxlen: 120 */
+    ,'auto-update-textfield':
         'bower_components/jck-library-extensions/src/backbone/auto-update-textfield/auto-update-textfield'
+    ,'incrementer-field':
+        'bower_components/jck-library-extensions/src/backbone/incrementer-field/incrementer-field'
     ,'tabs': 'bower_components/jck-library-extensions/src/backbone/tabs/tabs'
     ,'pane': 'bower_components/jck-library-extensions/src/backbone/pane/pane'
     ,'alert': 'bower_components/jck-library-extensions/src/backbone/alert/alert'

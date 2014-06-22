@@ -6,9 +6,10 @@ define([
   ,'shifty'
   ,'bezierizer'
 
+  ,'incrementer-field'
+
   ,'src/app'
   ,'src/constants'
-  ,'src/ui/incrementer-field'
 
 ], function (
 
@@ -18,9 +19,10 @@ define([
   ,Tweenable
   ,Bezierizer
 
+  ,IncrementerFieldView
+
   ,app
   ,constant
-  ,IncrementerFieldView
 
 ) {
 

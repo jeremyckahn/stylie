@@ -5,10 +5,11 @@ define([
   ,'backbone'
   ,'mustache'
 
+  ,'incrementer-field'
+
   ,'src/app'
   ,'src/constants'
   ,'src/utils'
-  ,'src/ui/incrementer-field'
   ,'src/ui/ease-select'
 
 ], function (
@@ -18,10 +19,11 @@ define([
   ,Backbone
   ,Mustache
 
+  ,IncrementerFieldView
+
   ,app
   ,constant
   ,util
-  ,IncrementerFieldView
   ,EaseSelectView
 
 ) {
