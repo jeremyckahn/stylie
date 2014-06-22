@@ -31,6 +31,7 @@ define([
     }
 
     ,'tweakVal': function (tweakAmount) {
+      /* jshint maxlen: 150 */
       // Have to do weird number munging here to prevent IEEE 754 floating
       // point issues:
       // http://stackoverflow.com/questions/8503157/ieee-754-floating-point-arithmetic-rounding-error-in-c-sharp-and-javascript

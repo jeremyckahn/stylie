@@ -40,7 +40,8 @@ define([
     ,'render': function () {
       this.$el.children().detach();
 
-      var orderedViews = _.sortBy(this.crosshairViews, function (crosshairView) {
+      var orderedViews = _.sortBy(this.crosshairViews,
+          function (crosshairView) {
         return crosshairView.model.get('millisecond');
       });
 
