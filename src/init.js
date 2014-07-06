@@ -59,6 +59,7 @@ require.config({
     ,'tabs': 'bower_components/jck-library-extensions/src/backbone/tabs/tabs'
     ,'pane': 'bower_components/jck-library-extensions/src/backbone/pane/pane'
     ,'alert': 'bower_components/jck-library-extensions/src/backbone/alert/alert'
+    ,'modal': 'bower_components/jck-library-extensions/src/backbone/modal/modal'
   }
 });
 
@@ -75,6 +76,7 @@ require([
   ,'pane'
   ,'alert'
   ,'auto-update-textfield'
+  ,'modal'
 
   // Misc
   ,'src/app'
@@ -89,7 +91,6 @@ require([
   ,'src/ui/css-output'
   ,'src/ui/html-input'
   ,'src/ui/custom-ease'
-  ,'src/ui/modal'
   ,'src/ui/hotkey-handler'
   ,'src/ui/rekapi-controls'
   ,'src/ui/save'
@@ -124,6 +125,7 @@ require([
   ,PaneView
   ,AlertView
   ,AutoUpdateTextFieldView
+  ,ModalView
 
   ,app
   ,constant
@@ -136,7 +138,6 @@ require([
   ,CSSOutputView
   ,HTMLInputView
   ,CustomEaseView
-  ,ModalView
   ,HotkeyHandlerView
   ,RekapiControlsView
   ,SaveView
@@ -178,7 +179,7 @@ require([
   });
 
   app.view.helpModal = new ModalView({
-    '$el': $('#help-contents')
+    'el': document.getElementById('help-contents')
     ,'$triggerEl': $('#help-trigger')
   });
 

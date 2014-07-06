@@ -1,6 +1,7 @@
 @import '../../bower_components/jck-library-extensions/src/backbone/tabs/tabs';
 @import '../../bower_components/jck-library-extensions/src/backbone/pane/pane';
 @import '../../bower_components/jck-library-extensions/src/backbone/alert/alert';
+@import '../../bower_components/jck-library-extensions/src/backbone/modal/modal';
 @import 'bezierizer';
 
 $IMAGE_DIR: '../../img';
@@ -706,85 +707,6 @@ canvas {
   #load-controls select {
     margin-left: 0;
   }
-
-.modal {
-  border-radius: 6px;
-  height: 70%;
-  margin: 0% 8% 13%;
-  padding: 2%;
-  position: fixed;
-  opacity: .97;
-  overflow: hidden;
-  top: 15%;
-  width: 80%;
-
-  background: -moz-linear-gradient(top,  #f4f4f4 0%, #dbdbdb 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f4f4f4), color-stop(100%,#dbdbdb)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #f4f4f4 0%,#dbdbdb 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #f4f4f4 0%,#dbdbdb 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #f4f4f4 0%,#dbdbdb 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #f4f4f4 0%,#dbdbdb 100%); /* W3C */
-
-  -moz-box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-  -ms-box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-  -o-box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-  box-shadow: 0 0 12px rgba(0, 0, 0, .21);
-}
-
-  .modal h2,
-  .modal h3 {
-    margin: 1em 0;
-  }
-
-  .modal h2 {
-    font-size: 3.2em;
-  }
-
-  .modal h3 {
-    font-size: 2em;
-    font-weight: normal;
-  }
-
-  .modal p {
-    color: #666;
-    font-size: 1.1em;
-  }
-
-  .modal img {
-    display: block;
-    margin: 0 auto;
-  }
-
-  .modal a,
-  .modal a:active,
-  .modal a:link,
-  .modal a:visited {
-    color: rgb(0,82,255);
-  }
-
-  .modal a:hover {
-    color: rgb(0,31,255);
-  }
-
-  .modal .modal-content {
-    height: 100%;
-    overflow: auto;
-    padding-right: 12px;
-  }
-
-  .modal table {
-    font-size: 1.3em;
-    margin: 30px auto 14px;
-  }
-
-    .modal table em {
-      font-weight: normal;
-    }
-
-    .modal th[colspan="2"] {
-      padding-bottom: 12px;
-    }
 
 #custom-ease {
 
