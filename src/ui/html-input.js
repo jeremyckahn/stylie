@@ -4,7 +4,6 @@ define([
   ,'underscore'
   ,'backbone'
 
-  ,'src/app'
   ,'src/utils'
 
 ], function (
@@ -13,7 +12,6 @@ define([
   ,_
   ,Backbone
 
-  ,app
   ,util
 
 ) {

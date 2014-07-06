@@ -4,8 +4,6 @@ define([
   ,'underscore'
   ,'backbone'
 
-  ,'src/app'
-  ,'src/constants'
   ,'src/ui/background'
 
 ], function (
@@ -14,8 +12,6 @@ define([
   ,_
   ,Backbone
 
-  ,app
-  ,constant
   ,BackgroundView
 
 ) {

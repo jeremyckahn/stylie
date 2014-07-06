@@ -3,8 +3,6 @@ define([
   'underscore'
   ,'backbone'
 
-  ,'src/app'
-  ,'src/constants'
   ,'src/ui/keyframe-form'
 
 ], function (
@@ -12,8 +10,6 @@ define([
   _
   ,Backbone
 
-  ,app
-  ,constant
   ,KeyframeFormView
 
 ) {

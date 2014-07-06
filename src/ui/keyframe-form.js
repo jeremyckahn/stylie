@@ -9,7 +9,6 @@ define([
 
   ,'src/app'
   ,'src/constants'
-  ,'src/utils'
   ,'src/ui/ease-select'
 
 ], function (
@@ -23,7 +22,6 @@ define([
 
   ,app
   ,constant
-  ,util
   ,EaseSelectView
 
 ) {

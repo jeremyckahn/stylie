@@ -5,18 +5,12 @@ define([
   ,'backbone'
   ,'shifty'
 
-  ,'src/app'
-  ,'src/utils'
-
 ], function (
 
   $
   ,_
   ,Backbone
   ,Tweenable
-
-  ,app
-  ,util
 
   ) {
   return Backbone.View.extend({

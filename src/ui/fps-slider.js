@@ -3,7 +3,6 @@ define([
   'underscore'
   ,'backbone'
 
-  ,'src/app'
   ,'src/constants'
 
 ], function (
@@ -11,7 +10,6 @@ define([
   _
   ,Backbone
 
-  ,app
   ,constant
 
 ) {
