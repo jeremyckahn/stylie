@@ -3,7 +3,7 @@ define([
   'underscore'
   ,'backbone'
 
-  ,'src/ui/keyframe-form'
+  ,'src/view/keyframe-form'
 
 ], function (
 

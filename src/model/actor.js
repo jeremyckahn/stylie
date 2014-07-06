@@ -7,8 +7,8 @@ define([
   ,'src/app'
   ,'src/constants'
   ,'src/collection/keyframes'
-  ,'src/ui/keyframe-forms'
-  ,'src/ui/crosshairs'
+  ,'src/view/keyframe-forms'
+  ,'src/view/crosshairs'
 
 ], function (
 

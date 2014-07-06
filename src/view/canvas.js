@@ -4,7 +4,7 @@ define([
   ,'underscore'
   ,'backbone'
 
-  ,'src/ui/background'
+  ,'src/view/background'
 
 ], function (
 

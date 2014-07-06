@@ -9,7 +9,7 @@ define([
 
   ,'src/app'
   ,'src/constants'
-  ,'src/ui/ease-select'
+  ,'src/view/ease-select'
 
 ], function (
 

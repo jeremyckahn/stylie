@@ -6,7 +6,7 @@ define([
   ,'mustache'
 
   ,'src/app'
-  ,'src/ui/crosshair'
+  ,'src/view/crosshair'
 
 ], function (
 
