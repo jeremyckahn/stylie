@@ -22,6 +22,10 @@ define([
 
     'model': ActorModel
 
+    ,'initialize': function () {
+      app.rekapi.on('addActor', _.bind(this.syncFromAppRekapi, this));
+    }
+
     ,'getCurrent': function () {
       return this.at(0);
     }

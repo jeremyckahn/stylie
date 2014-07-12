@@ -5,6 +5,7 @@ define([
   ,'backbone'
 
   ,'src/app'
+  ,'src/constants'
 
 ], function (
 
@@ -13,6 +14,7 @@ define([
   ,Backbone
 
   ,app
+  ,constant
 
 ) {
 
@@ -43,6 +45,8 @@ define([
       _.extend(this, opts);
       this.$trigger.on('click', _.bind(this.onTriggerClick, this));
       this.$actorEl = $('#rekapi-canvas .rekapi-actor');
+
+      Backbone.on(constant.UPDATE_CSS_OUTPUT, _.bind(this.renderCSS, this));
     }
 
     ,'onTriggerClick': function (evt) {

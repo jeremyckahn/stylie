@@ -86,50 +86,44 @@ define([
   function Stylie () {
     app.config.queryString = util.getQueryParams();
 
-    // The styling of the <select>s only works in WebKit under OS X.  Do some
-    // user agent sniffing and add some top-level classes.
-    //
-    // TODO: Find a better way to do this that doesn't involve user agent
-    // sniffing...
-    if (navigator.userAgent.match(/Macintosh/)) {
-      $body.addClass('mac');
-    }
-
-    if (navigator.userAgent.match(/WebKit/)) {
-      $body.addClass('webkit');
-    }
-
     if (navigator.userAgent.match(/iphone/i)) {
       $body.addClass('iphone');
     }
 
-    app.view.hotkeyHandler = new HotkeyHandlerView({
-      '$el': $(document.body)
-    });
+    app.rekapi = new Rekapi(document.getElementById('rekapi-canvas'));
 
-    app.view.helpModal = new ModalView({
-      'el': document.getElementById('help-contents')
-      ,'$triggerEl': $('#help-trigger')
-    });
-
-    app.$el.animationIteration = $('#iterations');
-
-    var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
-    var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
-
-    var $rekapiCanvas = $('#rekapi-canvas');
-    app.rekapi = new Rekapi($rekapiCanvas[0]);
+    if (!app.config.queryString.debug) {
+      app.rekapi.play();
+    }
 
     app.collection.actors = new ActorCollection();
-    app.rekapi.on('addActor',
-        _.bind(app.collection.actors.syncFromAppRekapi, app.collection.actors));
 
+    this.animationModel = new AnimationModel();
+
+    this.initActors();
+    this.initGlobalDOMReferences();
+    this.initViews();
+
+    $(window).trigger('resize');
+
+    if (app.config.queryString.debug) {
+      window.app = app;
+    }
+  }
+
+  Stylie.prototype.initGlobalDOMReferences = function () {
+    app.$el.animationIteration = $('#iterations');
+  };
+
+  Stylie.prototype.initActors = function () {
     app.rekapi.addActor({
       context: $('#rekapi-canvas').children()[0]
     });
 
     var winWidth = $win.width();
     var currentActorModel = app.collection.actors.getCurrent();
+    var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
+    var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
 
     // Create the initial keyframes.
     _.each([0, constant.INITIAL_ANIMATION_DURATION], function (millisecond, i) {
@@ -143,23 +137,34 @@ define([
         ,'rZ': 0
       }, 'linear linear linear linear linear');
     });
+  };
+
+  Stylie.prototype.initViews = function () {
+    app.view.hotkeyHandler = new HotkeyHandlerView({
+      '$el': $(document.body)
+    });
+
+    app.view.helpModal = new ModalView({
+      'el': document.getElementById('help-contents')
+      ,'$triggerEl': $('#help-trigger')
+    });
+
+    var $canvasBG = $('#tween-path');
+
+    app.view.rekapiControls = new RekapiControlsView({
+      '$canvasBG': $canvasBG
+    });
 
     app.view.canvas = new CanvasView({
       '$el': $('#rekapi-canvas')
-      ,'$canvasBG': $('#tween-path')
+      ,'$canvasBG': $canvasBG
     });
-
-    app.view.rekapiControls = new RekapiControlsView();
-
-    if (!app.config.queryString.debug) {
-      app.rekapi.play();
-    }
 
     app.view.showPath = new CheckboxView({
       '$el': $('#show-path')
       ,'callHandlerOnInit': true
-      ,'onChange': function (evt, checked) {
-        app.config.isPathShowing = !!checked;
+      ,'onChange': function (evt, isChecked) {
+        app.config.isPathShowing = !!isChecked;
         app.rekapi.update();
         app.view.canvas.backgroundView.update();
       }
@@ -183,10 +188,6 @@ define([
       '$el': $('.quality-slider.fps .slider')
     });
 
-    Backbone.on(constant.UPDATE_CSS_OUTPUT, function () {
-      app.view.cssOutput.renderCSS();
-    });
-
     var autoUpdateTextFieldView = new AutoUpdateTextFieldView({
       'el': document.getElementById('css-name')
     });
@@ -201,45 +202,15 @@ define([
 
     app.view.cssNameField = autoUpdateTextFieldView;
 
-    app.view.mozCheckbox = new CheckboxView({
-      '$el': $('#moz-toggle')
-      ,'onChange': function (evt, checked) {
-        app.config.activeClasses.moz = checked;
-        Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
-      }
-    });
-
-    app.view.msCheckbox = new CheckboxView({
-      '$el': $('#ms-toggle')
-      ,'onChange': function (evt, checked) {
-        app.config.activeClasses.ms = checked;
-        Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
-      }
-    });
-
-    app.view.oCheckbox = new CheckboxView({
-      '$el': $('#o-toggle')
-      ,'onChange': function (evt, checked) {
-        app.config.activeClasses.o = checked;
-        Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
-      }
-    });
-
-    app.view.webkitCheckbox = new CheckboxView({
-      '$el': $('#webkit-toggle')
-      ,'onChange': function (evt, checked) {
-        app.config.activeClasses.webkit = checked;
-        Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
-      }
-    });
-
-    app.view.w3Checkbox = new CheckboxView({
-      '$el': $('#w3-toggle')
-      ,'onChange': function (evt, checked) {
-        app.config.activeClasses.w3 = checked;
-        Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
-      }
-    });
+    ['moz', 'ms', 'o', 'webkit', 'w3'].forEach(function (prefix) {
+      app.view[prefix + 'Checkbox'] = new CheckboxView({
+        '$el': $('#' + prefix + '-toggle')
+        ,'onChange': function (evt, isChecked) {
+          app.config.activeClasses[prefix] = isChecked;
+          Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+        }
+      });
+    }, this);
 
     app.view.htmlInput = new HTMLInputView({
       '$el': $('#html-input textarea')
@@ -248,8 +219,8 @@ define([
     app.view.centerToPathCheckbox = new CheckboxView({
       '$el': $('#center-to-path')
       ,'callHandlerOnInit': true
-      ,'onChange': function (evt, checked) {
-        app.config.isCenteredToPath = !!checked;
+      ,'onChange': function (evt, isChecked) {
+        app.config.isCenteredToPath = !!isChecked;
         var tranformOrigin = app.config.isCenteredToPath
           ? '0 0'
           : '';
@@ -267,32 +238,25 @@ define([
     app.view.topLevelAlertView = new AlertView({
       'el': document.getElementById('top-level-alert')
     });
+
     var topLevelAlertView = app.view.topLevelAlertView;
     Backbone.on(constant.ALERT_ERROR,
         _.bind(topLevelAlertView.show, topLevelAlertView));
 
-    var animationModel = new AnimationModel();
-
     app.view.saveView = new SaveView({
       '$el': $('#save-controls')
-      ,'model': animationModel
+      ,'model': this.animationModel
     });
 
     app.view.loadView = new LoadView({
       '$el': $('#load-controls')
-      ,'model': animationModel
+      ,'model': this.animationModel
     });
 
     app.view.orientationView = new OrientationControlsView({
       '$el': $('#orientation-controls')
     });
-
-    $(window).trigger('resize');
-
-    if (app.config.queryString.debug) {
-      window.app = app;
-    }
-  }
+  };
 
   return Stylie;
 });

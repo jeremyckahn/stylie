@@ -20,13 +20,15 @@ define([
 
   return Backbone.View.extend({
 
+    /**
+     * @param {Object} opts
+     *   @param {jQuery} $canvasBG
+     */
     'initialize': function (opts) {
-      _.extend(this, opts);
-
-      this.scrubber = new RekapiScrubber(
-          app.rekapi, app.view.canvas.$canvasBG[0]);
-
+      this.$canvasBG = opts.$canvasBG;
+      this.scrubber = new RekapiScrubber(app.rekapi, this.$canvasBG[0]);
       this.$el = this.scrubber.$container;
+      this.el = this.scrubber.$container[0];
     }
 
     ,'fadeToggle': function () {
