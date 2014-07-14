@@ -4,7 +4,6 @@ define([
   ,'backbone'
   ,'shifty'
 
-  ,'src/app'
   ,'src/constants'
 
 ], function (
@@ -13,14 +12,19 @@ define([
   ,Backbone
   ,Tweenable
 
-  ,app
   ,constant
 
 ) {
   return Backbone.View.extend({
 
+    /**
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     *   @param {number} height
+     *   @param {number} width
+     */
     'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this.context = this.$el[0].getContext('2d');
       this.resize({
         'height': opts.height
@@ -45,7 +49,7 @@ define([
     }
 
     ,'generatePathPoints': function () {
-      var currentActorModel = app.collection.actors.getCurrent();
+      var currentActorModel = this.stylie.collection.actors.getCurrent();
       var keyframeLength = currentActorModel.getLength();
       var transformKeyframeProperties =
           currentActorModel.get('actor').getPropertiesInTrack('transform');
@@ -96,13 +100,14 @@ define([
     }
 
     ,'generatePathPrerender': function (useDimColor) {
-      app.config.prerenderedPath = document.createElement('canvas');
-      app.config.prerenderedPath.width =
-          app.view.canvas.$canvasBG.width();
-      app.config.prerenderedPath.height =
-          app.view.canvas.$canvasBG.height();
-      var ctx = app.config.prerenderedPath.ctx =
-          app.config.prerenderedPath.getContext('2d');
+      var stylie = this.stylie;
+      stylie.config.prerenderedPath = document.createElement('canvas');
+      stylie.config.prerenderedPath.width =
+          stylie.view.canvas.$canvasBG.width();
+      stylie.config.prerenderedPath.height =
+          stylie.view.canvas.$canvasBG.height();
+      var ctx = stylie.config.prerenderedPath.ctx =
+          stylie.config.prerenderedPath.getContext('2d');
       var points = this.generatePathPoints.apply(this, arguments);
 
       var previousPoint;
@@ -130,8 +135,8 @@ define([
       this.generatePathPrerender(useDimColor);
 
       this.$el[0].width = this.$el.width();
-      if (app.config.isPathShowing) {
-        this.context.drawImage(app.config.prerenderedPath, 0, 0);
+      if (this.stylie.config.isPathShowing) {
+        this.context.drawImage(this.stylie.config.prerenderedPath, 0, 0);
       }
     }
 

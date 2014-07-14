@@ -3,7 +3,6 @@ define([
   'underscore'
   ,'backbone'
 
-  ,'src/app'
   ,'src/model/keyframe'
 
 ], function (
@@ -11,7 +10,6 @@ define([
   _
   ,Backbone
 
-  ,app
   ,KeyframeModel
 
 ) {
@@ -20,8 +18,14 @@ define([
 
     'model': KeyframeModel
 
+    /**
+     * @param {Array.<Object>} models
+     * @param {Object} opts
+     *   @param {ActorModel} owner
+     */
     ,'initialize': function (models, opts) {
-      _.extend(this, opts);
+      this.owner = opts.owner;
+      this.stylie = this.owner.stylie;
 
       this.on('add', _.bind(this.onAdd, this));
     }

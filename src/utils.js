@@ -2,13 +2,9 @@ define([
 
   'underscore'
 
-  ,'src/app'
-
 ], function (
 
   _
-
-  ,app
 
 ) {
 

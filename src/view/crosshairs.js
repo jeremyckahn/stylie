@@ -5,7 +5,6 @@ define([
   ,'backbone'
   ,'mustache'
 
-  ,'src/app'
   ,'src/view/crosshair'
 
 ], function (
@@ -15,7 +14,6 @@ define([
   ,Backbone
   ,Mustache
 
-  ,app
   ,CrosshairView
 
 ) {
@@ -31,8 +29,12 @@ define([
 
   return Backbone.View.extend({
 
+    /**
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     */
     'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this.crosshairViews = {};
       this.listenTo(this.model, 'change', _.bind(this.render, this));
     }
@@ -51,12 +53,14 @@ define([
     }
 
     ,'addCrosshairView': function (model) {
-      var keyframeCount = app.collection.actors.getCurrent().getLength();
+      var keyframeCount =
+        this.stylie.collection.actors.getCurrent().getLength();
       var $el = $(Mustache.render(CROSSHAIR_TEMPLATE));
       this.$el.append($el);
 
       this.crosshairViews[model.cid] = new CrosshairView({
-        '$el': $el
+        'stylie': this.stylie
+        ,'el': $el[0]
         ,'model': model
         ,'owner': this
       });

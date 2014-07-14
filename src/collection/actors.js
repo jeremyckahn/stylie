@@ -3,7 +3,6 @@ define([
   'underscore'
   ,'backbone'
 
-  ,'src/app'
   ,'src/constants'
   ,'src/model/actor'
 
@@ -12,7 +11,6 @@ define([
   _
   ,Backbone
 
-  ,app
   ,constant
   ,ActorModel
 
@@ -22,8 +20,14 @@ define([
 
     'model': ActorModel
 
-    ,'initialize': function () {
-      app.rekapi.on('addActor', _.bind(this.syncFromAppRekapi, this));
+    /**
+     * @param {Array.<Object>} models
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     */
+    ,'initialize': function (models, opts) {
+      this.stylie = opts.stylie;
+      this.stylie.rekapi.on('addActor', _.bind(this.syncFromAppRekapi, this));
     }
 
     ,'getCurrent': function () {
@@ -34,8 +38,8 @@ define([
     ,'syncFromAppRekapi': function () {
       this.reset();
 
-      _.each(app.rekapi.getAllActors(), function (actor) {
-        this.add(new this.model({'actor': actor}));
+      _.each(this.stylie.rekapi.getAllActors(), function (actor) {
+        this.add(new this.model({'actor': actor}, { stylie: this.stylie }));
       }, this);
     }
 

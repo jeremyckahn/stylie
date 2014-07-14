@@ -7,7 +7,6 @@ define([
 
   ,'incrementer-field'
 
-  ,'src/app'
   ,'src/constants'
   ,'src/view/ease-select'
 
@@ -20,7 +19,6 @@ define([
 
   ,IncrementerFieldView
 
-  ,app
   ,constant
   ,EaseSelectView
 
@@ -35,8 +33,8 @@ define([
       this.model.set($el.data('keyframeattr'), +val);
       Backbone.trigger(constant.PATH_CHANGED);
       // TODO: Should access actor through the owner model
-      app.collection.actors.getCurrent(0).updateKeyframes();
-      app.rekapi.update();
+      this.stylie.collection.actors.getCurrent(0).updateKeyframes();
+      this.stylie.rekapi.update();
     }, this);
 
     return incrementerFieldView;
@@ -83,8 +81,15 @@ define([
       ,'click .remove button': 'removeKeyframe'
     }
 
+    /**
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     *   @param {ActorModel} owner
+     *   @param {KeyframeModel} model
+     */
     ,'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
+      this.owner = opts.owner;
 
       this.isEditingMillisecond = false;
       this.canEditMillisecond = !this.isFirstKeyfame();
@@ -258,8 +263,8 @@ define([
 
       // TODO: These function calls are too specific and assume that there will
       // only ever be one actor.
-      app.view.canvas.backgroundView.update();
-      app.rekapi.update();
+      this.stylie.view.canvas.backgroundView.update();
+      this.stylie.rekapi.update();
     }
 
     ,'validateMillisecond': function (millisecond) {

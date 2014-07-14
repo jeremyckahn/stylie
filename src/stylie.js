@@ -15,7 +15,6 @@ define([
   ,'modal'
 
   // Misc
-  ,'src/app'
   ,'src/constants'
   ,'src/utils'
 
@@ -53,7 +52,6 @@ define([
   ,AutoUpdateTextFieldView
   ,ModalView
 
-  ,app
   ,constant
   ,util
 
@@ -84,21 +82,32 @@ define([
    * @constructor
    */
   function Stylie () {
-    app.config.queryString = util.getQueryParams();
+    this.config = {
+      'activeClasses': {
+        'moz': false
+        ,'ms': false
+        ,'o': false
+        ,'webkit': false
+        ,'w3': true
+      }
+    };
+    this.collection = {};
+    this.view = {};
+
+    this.config.queryString = util.getQueryParams();
 
     if (navigator.userAgent.match(/iphone/i)) {
       $body.addClass('iphone');
     }
 
-    app.rekapi = new Rekapi(document.getElementById('rekapi-canvas'));
+    this.rekapi = new Rekapi(document.getElementById('rekapi-canvas'));
 
-    if (!app.config.queryString.debug) {
-      app.rekapi.play();
+    if (!this.config.queryString.debug) {
+      this.rekapi.play();
     }
 
-    app.collection.actors = new ActorCollection();
-
-    this.animationModel = new AnimationModel();
+    this.collection.actors = new ActorCollection([], { stylie: this });
+    this.animationModel = new AnimationModel({}, { stylie: this });
 
     this.initActors();
     this.initGlobalDOMReferences();
@@ -106,22 +115,20 @@ define([
 
     $(window).trigger('resize');
 
-    if (app.config.queryString.debug) {
-      window.app = app;
-    }
+    window.stylie = this;
   }
 
   Stylie.prototype.initGlobalDOMReferences = function () {
-    app.$el.animationIteration = $('#iterations');
+    this.$animationIteration = $('#iterations');
   };
 
   Stylie.prototype.initActors = function () {
-    app.rekapi.addActor({
+    this.rekapi.addActor({
       context: $('#rekapi-canvas').children()[0]
     });
 
     var winWidth = $win.width();
-    var currentActorModel = app.collection.actors.getCurrent();
+    var currentActorModel = this.collection.actors.getCurrent();
     var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
     var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
 
@@ -140,51 +147,55 @@ define([
   };
 
   Stylie.prototype.initViews = function () {
-    app.view.hotkeyHandler = new HotkeyHandlerView({
-      '$el': $(document.body)
+    this.view.hotkeyHandler = new HotkeyHandlerView({
+      'stylie': this
+      ,'el': document.body
     });
 
-    app.view.helpModal = new ModalView({
+    this.view.helpModal = new ModalView({
       'el': document.getElementById('help-contents')
       ,'$triggerEl': $('#help-trigger')
     });
 
     var $canvasBG = $('#tween-path');
 
-    app.view.rekapiControls = new RekapiControlsView({
-      '$canvasBG': $canvasBG
-    });
-
-    app.view.canvas = new CanvasView({
-      '$el': $('#rekapi-canvas')
+    this.view.rekapiControls = new RekapiControlsView({
+      'stylie': this
       ,'$canvasBG': $canvasBG
     });
 
-    app.view.showPath = new CheckboxView({
-      '$el': $('#show-path')
-      ,'callHandlerOnInit': true
-      ,'onChange': function (evt, isChecked) {
-        app.config.isPathShowing = !!isChecked;
-        app.rekapi.update();
-        app.view.canvas.backgroundView.update();
-      }
+    this.view.canvas = new CanvasView({
+      'stylie': this
+      ,'el': document.getElementById('rekapi-canvas')
+      ,'$canvasBG': $canvasBG
     });
 
-    app.view.controlPane = new PaneView({
+    this.view.showPath = new CheckboxView({
+      '$el': $('#show-path')
+      ,'callHandlerOnInit': true
+      ,'onChange': _.bind(function (evt, isChecked) {
+        this.config.isPathShowing = !!isChecked;
+        this.rekapi.update();
+        this.view.canvas.backgroundView.update();
+      }, this)
+    });
+
+    this.view.controlPane = new PaneView({
       'el': document.getElementById('control-pane')
     });
 
-    app.view.controlPaneTabs = new TabsView({
+    this.view.controlPaneTabs = new TabsView({
       'el': document.querySelector('#control-pane')
     });
 
-    app.view.cssOutput = new CSSOutputView({
-      '$el': $('#css-output textarea')
-      ,'$trigger': app.view.controlPaneTabs.$el
+    this.view.cssOutput = new CSSOutputView({
+      'stylie': this
+      ,'el': document.querySelector('#css-output textarea')
+      ,'$trigger': this.view.controlPaneTabs.$el
           .find('[data-target="css-output"]')
     });
 
-    app.view.fpsSlider = new FPSSliderView({
+    this.view.fpsSlider = new FPSSliderView({
       '$el': $('.quality-slider.fps .slider')
     });
 
@@ -193,68 +204,70 @@ define([
     });
 
     autoUpdateTextFieldView.onKeyup = function (val) {
-      app.config.className = val;
+      this.config.className = val;
       Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
     };
 
     // onKeyup is being overridden, so re-bind the delegated listeners.
     autoUpdateTextFieldView.delegateEvents();
 
-    app.view.cssNameField = autoUpdateTextFieldView;
+    this.view.cssNameField = autoUpdateTextFieldView;
 
     ['moz', 'ms', 'o', 'webkit', 'w3'].forEach(function (prefix) {
-      app.view[prefix + 'Checkbox'] = new CheckboxView({
+      this.view[prefix + 'Checkbox'] = new CheckboxView({
         '$el': $('#' + prefix + '-toggle')
-        ,'onChange': function (evt, isChecked) {
-          app.config.activeClasses[prefix] = isChecked;
+        ,'onChange': _.bind(function (evt, isChecked) {
+          this.config.activeClasses[prefix] = isChecked;
           Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
-        }
+        }, this)
       });
     }, this);
 
-    app.view.htmlInput = new HTMLInputView({
+    this.view.htmlInput = new HTMLInputView({
       '$el': $('#html-input textarea')
     });
 
-    app.view.centerToPathCheckbox = new CheckboxView({
+    this.view.centerToPathCheckbox = new CheckboxView({
       '$el': $('#center-to-path')
       ,'callHandlerOnInit': true
-      ,'onChange': function (evt, isChecked) {
-        app.config.isCenteredToPath = !!isChecked;
-        var tranformOrigin = app.config.isCenteredToPath
+      ,'onChange': _.bind(function (evt, isChecked) {
+        this.config.isCenteredToPath = !!isChecked;
+        var tranformOrigin = this.config.isCenteredToPath
           ? '0 0'
           : '';
-        app.view.htmlInput.$renderTarget.css(
+        this.view.htmlInput.$renderTarget.css(
           'transform-origin', tranformOrigin);
         Backbone.trigger(constant.ACTOR_ORIGIN_CHANGED, true);
-        app.rekapi.update();
-      }
+        this.rekapi.update();
+      }, this)
     });
 
-    app.view.customEaseView = new CustomEaseView({
-      '$el': $('#custom-ease')
+    this.view.customEaseView = new CustomEaseView({
+      'stylie': this
+      ,'el': document.getElementById('custom-ease')
     });
 
-    app.view.topLevelAlertView = new AlertView({
+    this.view.topLevelAlertView = new AlertView({
       'el': document.getElementById('top-level-alert')
     });
 
-    var topLevelAlertView = app.view.topLevelAlertView;
+    var topLevelAlertView = this.view.topLevelAlertView;
     Backbone.on(constant.ALERT_ERROR,
         _.bind(topLevelAlertView.show, topLevelAlertView));
 
-    app.view.saveView = new SaveView({
-      '$el': $('#save-controls')
+    this.view.saveView = new SaveView({
+      'el': document.getElementById('save-controls')
       ,'model': this.animationModel
     });
 
-    app.view.loadView = new LoadView({
-      '$el': $('#load-controls')
+    this.view.loadView = new LoadView({
+      'stylie': this
+      ,'el': document.getElementById('load-controls')
       ,'model': this.animationModel
     });
 
-    app.view.orientationView = new OrientationControlsView({
-      '$el': $('#orientation-controls')
+    this.view.orientationView = new OrientationControlsView({
+      'el': document.getElementById('orientation-controls')
     });
   };
 

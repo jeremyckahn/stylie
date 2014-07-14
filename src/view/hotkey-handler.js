@@ -3,7 +3,6 @@ define([
   'underscore'
   ,'backbone'
 
-  ,'src/app'
   ,'src/constants'
 
 ], function (
@@ -11,7 +10,6 @@ define([
   _
   ,Backbone
 
-  ,app
   ,constant
 
 ) {
@@ -23,8 +21,12 @@ define([
       ,'keyup': 'onKeyup'
     }
 
+    /**
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     */
     ,'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this._isShiftHeldDown = false;
     }
 
@@ -39,21 +41,21 @@ define([
         Backbone.trigger(constant.ROTATION_MODE_START);
 
       } else if (evt.keyCode === 67) { // "C" key
-        app.view.controlPane.toggle();
+        this.stylie.view.controlPane.toggle();
 
       } else if (evt.keyCode === 72) { // "H" key
-        app.view.helpModal.toggle();
+        this.stylie.view.helpModal.toggle();
 
       } else if (evt.keyCode === 32) { // Space bar
-        if (app.rekapi.isPlaying()) {
-          app.rekapi.pause();
+        if (this.stylie.rekapi.isPlaying()) {
+          this.stylie.rekapi.pause();
         } else {
-          app.rekapi.play();
+          this.stylie.rekapi.play();
         }
       } else if (evt.keyCode === 84) { // "T" key
-        app.view.rekapiControls.fadeToggle();
+        this.stylie.view.rekapiControls.fadeToggle();
       } else if (evt.keyCode === 75) { // "K" key
-        app.collection.actors.getCurrent()
+        this.stylie.collection.actors.getCurrent()
           .appendNewKeyframeWithDefaultProperties();
       }
     }

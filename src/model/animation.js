@@ -4,21 +4,21 @@ define([
   ,'backbone'
   ,'shifty'
 
-  ,'src/app'
-
 ], function (
 
   _
   ,Backbone
   ,Tweenable
 
-  ,app
-
 ) {
   return Backbone.Model.extend({
 
+    /**
+     * @param {Object} attrs
+     * @param {Object} opts
+     */
     'initialize': function (attrs, opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
 
       if (typeof window.localStorage.savedAnimations === 'undefined') {
         window.localStorage.savedAnimations = JSON.stringify({});
@@ -27,11 +27,9 @@ define([
       this.readLocalStorage();
     }
 
-
     ,'readLocalStorage': function () {
       this.savedAnimations = JSON.parse(window.localStorage.savedAnimations);
     }
-
 
     ,'writeLocalStorage': function () {
       window.localStorage.savedAnimations =
@@ -49,33 +47,28 @@ define([
       this.setCurrentState(savedAnimation);
     }
 
-
     ,'save': function (animationName) {
       this.savedAnimations[animationName] = this.getCurrentState();
       this.writeLocalStorage();
     }
-
 
     ,'removeAnimation': function (animationName) {
       delete this.savedAnimations[animationName];
       this.writeLocalStorage();
     }
 
-
     ,'getAnimationList': function () {
       return _.keys(this.savedAnimations);
     }
 
-
     ,'getCurrentState': function () {
       return {
-        'rekapi': app.rekapi.exportTimeline()
+        'rekapi': this.stylie.rekapi.exportTimeline()
         ,'curves': this.getCurrentCurves()
         ,'html': this.getCurrentHtml()
         ,'metadataVersion': 1
       };
     }
-
 
     ,'getCurrentCurves': function () {
       var customCurves = [];
@@ -94,24 +87,22 @@ define([
       return customCurves;
     }
 
-
     ,'getCurrentHtml': function () {
-      return app.view.htmlInput.$el.val();
+      return this.stylie.view.htmlInput.$el.val();
     }
 
-
     ,'setCurrentState': function (state) {
-      app.collection.actors.getCurrent().removeAllKeyframes();
-      app.view.customEaseView.removeAllEasings();
+      this.stylie.collection.actors.getCurrent().removeAllKeyframes();
+      this.stylie.view.customEaseView.removeAllEasings();
 
-      app.view.htmlInput.$el.html(state.html);
-      app.view.htmlInput.renderToDOM();
+      this.stylie.view.htmlInput.$el.val(state.html);
+      this.stylie.view.htmlInput.renderToDOM();
 
       _.each(state.curves, function (curve) {
-        app.view.customEaseView.addEasing(curve.name, curve);
-      });
+        this.stylie.view.customEaseView.addEasing(curve.name, curve);
+      }, this);
 
-      var currentActorModel = app.collection.actors.getCurrent();
+      var currentActorModel = this.stylie.collection.actors.getCurrent();
 
       // Compatibility check for Rekapi pre-1.0.0
       if (state.kapi) {

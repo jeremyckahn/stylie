@@ -4,7 +4,6 @@ define([
   ,'underscore'
   ,'backbone'
 
-  ,'src/app'
   ,'src/constants'
 
 ], function (
@@ -13,7 +12,6 @@ define([
   ,_
   ,Backbone
 
-  ,app
   ,constant
 
 ) {
@@ -25,8 +23,14 @@ define([
       ,'click #animation-load': 'loadAnimation'
     }
 
+    /**
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     *   @param {AnimationModel} model
+     *   @param {Element} el
+     */
     ,'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this.$animationSelect = this.$el.find('select');
       this.refreshAnimationList();
 
@@ -66,7 +70,7 @@ define([
       }
 
       this.model.load(val);
-      app.view.saveView.setInputValue(val);
+      this.stylie.view.saveView.setInputValue(val);
     }
 
   });

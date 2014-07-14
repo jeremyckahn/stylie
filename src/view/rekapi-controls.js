@@ -4,7 +4,6 @@ define([
   ,'backbone'
   ,'rekapi-scrubber'
 
-  ,'src/app'
   ,'src/constants'
 
 ], function (
@@ -13,7 +12,6 @@ define([
   ,Backbone
   ,RekapiScrubber
 
-  ,app
   ,constant
 
 ) {
@@ -22,11 +20,13 @@ define([
 
     /**
      * @param {Object} opts
+     *   @param {Stylie} stylie
      *   @param {jQuery} $canvasBG
      */
     'initialize': function (opts) {
+      this.stylie = opts.stylie;
       this.$canvasBG = opts.$canvasBG;
-      this.scrubber = new RekapiScrubber(app.rekapi, this.$canvasBG[0]);
+      this.scrubber = new RekapiScrubber(this.stylie.rekapi, this.$canvasBG[0]);
       this.$el = this.scrubber.$container;
       this.el = this.scrubber.$container[0];
     }

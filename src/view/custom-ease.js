@@ -8,7 +8,6 @@ define([
 
   ,'incrementer-field'
 
-  ,'src/app'
   ,'src/constants'
 
 ], function (
@@ -21,7 +20,6 @@ define([
 
   ,IncrementerFieldView
 
-  ,app
   ,constant
 
 ) {
@@ -35,8 +33,12 @@ define([
     }
 
 
+    /**
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     */
     ,'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this._$easingSelect = this.$el.find('.custom-ease-select');
       this._$bezierizer = this.$el.find('.bezierizer');
       this._bezierizer = new Bezierizer(this._$bezierizer[0]);
@@ -152,13 +154,13 @@ define([
           handlePositions.x1, handlePositions.y1,
           handlePositions.x2, handlePositions.y2);
 
-      var rekapi = app.rekapi;
+      var rekapi = this.stylie.rekapi;
       if (!rekapi.isPlaying()) {
         rekapi.update();
       }
 
       Backbone.trigger(constant.PATH_CHANGED);
-      app.collection.actors.getCurrent().updateKeyframes();
+      this.stylie.collection.actors.getCurrent().updateKeyframes();
     }
 
 

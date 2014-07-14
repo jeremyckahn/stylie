@@ -4,7 +4,6 @@ define([
   ,'underscore'
   ,'backbone'
 
-  ,'src/app'
   ,'src/constants'
   ,'src/collection/keyframes'
   ,'src/view/keyframe-forms'
@@ -16,7 +15,6 @@ define([
   ,_
   ,Backbone
 
-  ,app
   ,constant
   ,KeyframeCollection
   ,KeyframeFormsView
@@ -26,17 +24,24 @@ define([
 
   return Backbone.Model.extend({
 
+    /**
+     * @param {Object} attrs
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     */
     'initialize': function (attrs, opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this.keyframeCollection = new KeyframeCollection([], {'owner': this});
 
       this.keyframeFormsView = new KeyframeFormsView({
-        '$el': $('#keyframe-controls')
+        'stylie': this.stylie
+        ,'el': document.getElementById('keyframe-controls')
         ,'model': this
       });
 
       this.crosshairsView = new CrosshairsView({
-        '$el': $('#crosshairs')
+        'stylie': this.stylie
+        ,'el': document.getElementById('crosshairs')
         ,'model': this
       });
     }
@@ -75,7 +80,7 @@ define([
     ,'refreshKeyframeOrder': function () {
       this.keyframeCollection.sort();
       this.trigger('change');
-      app.rekapi.update();
+      this.stylie.rekapi.update();
       Backbone.trigger(constant.KEYFRAME_ORDER_CHANGED);
     }
 
@@ -96,7 +101,7 @@ define([
       ,'rZ': 0
       }, 'linear');
 
-      app.view.canvas.backgroundView.update();
+      this.stylie.view.canvas.backgroundView.update();
     }
 
     ,'getNewKeyframeX': function (lastKeyframeX) {
@@ -162,7 +167,7 @@ define([
         }, this);
       }, this);
 
-      app.rekapi.update();
+      this.stylie.rekapi.update();
       Backbone.trigger(constant.PATH_CHANGED);
     }
 

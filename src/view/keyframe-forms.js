@@ -20,8 +20,14 @@ define([
       'click .add button': 'createKeyframe'
     }
 
+    /**
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     *   @param {ActorModel} model
+     *   @param {Element} el
+     */
     ,'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this.keyframeForms = {};
       this.$formsList = this.$el.find('ul.controls');
       this.listenTo(this.model, 'change', _.bind(this.render, this));
@@ -41,7 +47,8 @@ define([
 
     ,'addKeyframeView': function (model) {
       var keyframeFormView = new KeyframeFormView({
-        'owner': this
+        'stylie': this.stylie
+        ,'owner': this
         ,'model': model
       });
 

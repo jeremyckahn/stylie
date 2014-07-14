@@ -3,7 +3,6 @@ define([
   'underscore'
   ,'backbone'
 
-  ,'src/app'
   ,'src/constants'
 
 ], function (
@@ -11,14 +10,18 @@ define([
   _
   ,Backbone
 
-  ,app
   ,constant
 
 ) {
   return Backbone.Model.extend({
 
+    /**
+     * @param {Object} attrs
+     * @param {ActorModel} owner
+     */
     'initialize': function (attrs, opts) {
-      _.extend(this, opts);
+      this.stylie = this.collection.stylie;
+      this.owner = opts.owner;
 
       // TODO: This message subscription and event binding should be
       // consolidated into one operation.
@@ -42,16 +45,16 @@ define([
     }
 
     ,'modifyKeyframe': function (opt_preventRekapiUpdate) {
-      app.collection.actors.getCurrent().modifyKeyframe(
+      this.stylie.collection.actors.getCurrent().modifyKeyframe(
           this.get('millisecond'), this.getCSS());
 
       if (!opt_preventRekapiUpdate) {
-        app.rekapi.update();
+        this.stylie.rekapi.update();
       }
     }
 
     ,'moveKeyframe': function (to) {
-      app.collection.actors.getCurrent().moveKeyframe(
+      this.stylie.collection.actors.getCurrent().moveKeyframe(
           this.get('millisecond'), to);
 
       this.set('millisecond', to);
@@ -93,7 +96,7 @@ define([
             ,'px) rotateX(', this.get('rX')
             ,'deg) rotateY(', this.get('rY')
             ,'deg) rotateZ(', this.get('rZ')
-            ,app.config.isCenteredToPath
+            ,this.stylie.config.isCenteredToPath
               ? 'deg) translate(-50%, -50%)'
               : 'deg)'
             ].join('')
