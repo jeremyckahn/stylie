@@ -110,17 +110,12 @@ define([
     this.animationModel = new AnimationModel({}, { stylie: this });
 
     this.initActors();
-    this.initGlobalDOMReferences();
     this.initViews();
 
     $(window).trigger('resize');
 
     window.stylie = this;
   }
-
-  Stylie.prototype.initGlobalDOMReferences = function () {
-    this.$animationIteration = $('#iterations');
-  };
 
   Stylie.prototype.initActors = function () {
     this.rekapi.addActor({
@@ -193,6 +188,7 @@ define([
       ,'el': document.querySelector('#css-output textarea')
       ,'$trigger': this.view.controlPaneTabs.$el
           .find('[data-target="css-output"]')
+      ,'$animationIteration': $('#iterations')
     });
 
     this.view.fpsSlider = new FPSSliderView({

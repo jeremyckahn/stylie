@@ -47,6 +47,7 @@ define([
     ,'initialize': function (opts) {
       this.stylie = opts.stylie;
       this.$trigger = opts.$trigger;
+      this.$animationIteration = opts.$animationIteration;
       this.$actorEl = $('#rekapi-canvas .rekapi-actor');
 
       this.$trigger.on('click', _.bind(this.onTriggerClick, this));
@@ -72,7 +73,7 @@ define([
       var cssOutput = stylie.rekapi.renderer.toString({
         'vendors': getPrefixList(stylie)
         ,'name': cssClassName
-        ,'iterations': stylie.$animationIteration.val()
+        ,'iterations': this.$animationIteration.val()
         ,'isCentered': stylie.config.isCenteredToPath
         ,'fps': stylie.view.fpsSlider.getFPS()
       });
