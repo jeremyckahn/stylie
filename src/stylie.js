@@ -195,19 +195,16 @@ define([
       '$el': $('.quality-slider.fps .slider')
     });
 
-    var autoUpdateTextFieldView = new AutoUpdateTextFieldView({
+    var cssNameField = new AutoUpdateTextFieldView({
       'el': document.getElementById('css-name')
     });
 
-    autoUpdateTextFieldView.onKeyup = function (val) {
+    cssNameField.onValReenter = _.bind(function (val) {
       this.config.className = val;
       Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
-    };
+    }, this);
 
-    // onKeyup is being overridden, so re-bind the delegated listeners.
-    autoUpdateTextFieldView.delegateEvents();
-
-    this.view.cssNameField = autoUpdateTextFieldView;
+    this.view.cssNameField = cssNameField;
 
     ['moz', 'ms', 'o', 'webkit', 'w3'].forEach(function (prefix) {
       this.view[prefix + 'Checkbox'] = new CheckboxView({
