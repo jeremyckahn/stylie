@@ -32,8 +32,8 @@ define([
       });
 
       var boundUpdate = _.bind(this.update, this);
-      Backbone.on(constant.PATH_CHANGED, boundUpdate);
-      Backbone.on(constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
+      this.stylie.on(constant.PATH_CHANGED, boundUpdate);
+      this.stylie.on(constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
     }
 
     ,'resize': function (dims) {

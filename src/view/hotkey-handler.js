@@ -38,7 +38,7 @@ define([
       } else if (evt.shiftKey) {
         this.$el.addClass('shift-down');
         this._isShiftHeldDown = true;
-        Backbone.trigger(constant.ROTATION_MODE_START);
+        this.stylie.trigger(constant.ROTATION_MODE_START);
 
       } else if (evt.keyCode === 67) { // "C" key
         this.stylie.view.controlPane.toggle();
@@ -64,7 +64,7 @@ define([
       if (this._isShiftHeldDown) {
         this._isShiftHeldDown = false;
         this.$el.removeClass('shift-down');
-        Backbone.trigger(constant.ROTATION_MODE_STOP);
+        this.stylie.trigger(constant.ROTATION_MODE_STOP);
       }
     }
 

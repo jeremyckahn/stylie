@@ -159,7 +159,7 @@ define([
         rekapi.update();
       }
 
-      Backbone.trigger(constant.PATH_CHANGED);
+      this.stylie.trigger(constant.PATH_CHANGED);
       this.stylie.collection.actors.getCurrent().updateKeyframes();
     }
 

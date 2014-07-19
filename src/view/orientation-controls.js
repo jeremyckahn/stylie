@@ -20,12 +20,15 @@ define([
       'change': 'onChange'
     }
 
+    /**
+     * @param {Stylie} stylie
+     */
     ,'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
     }
 
     ,'onChange': function () {
-      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+      this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'getOrientation': function () {

@@ -31,7 +31,7 @@ define([
 
     incrementerFieldView.onValReenter = _.bind(function (val) {
       this.model.set($el.data('keyframeattr'), +val);
-      Backbone.trigger(constant.PATH_CHANGED);
+      this.stylie.trigger(constant.PATH_CHANGED);
       // TODO: Should access actor through the owner model
       this.stylie.collection.actors.getCurrent(0).updateKeyframes();
       this.stylie.rekapi.update();
@@ -210,7 +210,7 @@ define([
 
       if (this.model.owner.hasKeyframeAt(millisecond)) {
         if (millisecond !== this.model.get('millisecond')) {
-          Backbone.trigger(constant.ALERT_ERROR,
+          this.stylie.trigger(constant.ALERT_ERROR,
               'There is already a keyframe at millisecond '
               + millisecond + '.');
         }

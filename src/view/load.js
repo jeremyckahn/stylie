@@ -34,7 +34,7 @@ define([
       this.$animationSelect = this.$el.find('select');
       this.refreshAnimationList();
 
-      Backbone.on(constant.ANIMATION_SAVED,
+      this.stylie.on(constant.ANIMATION_SAVED,
         _.bind(this.refreshAnimationList, this));
     }
 
@@ -64,7 +64,7 @@ define([
       var val = this.$animationSelect.val();
 
       if (!val) {
-        Backbone.trigger(
+        this.stylie.trigger(
             constant.ALERT_ERROR, 'Please specify an animation to load.');
         return;
       }

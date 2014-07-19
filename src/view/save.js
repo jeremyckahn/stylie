@@ -21,8 +21,11 @@ define([
       ,'submit': 'onSubmit'
     }
 
+    /**
+     * @param {Stylie} stylie
+     */
     ,'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this.$nameField = this.$el.find('input');
     }
 
@@ -38,7 +41,7 @@ define([
     ,'saveAnimation': function () {
       var animationName = this.$nameField.val();
       this.model.save(animationName);
-      Backbone.trigger(constant.ANIMATION_SAVED, animationName);
+      this.stylie.trigger(constant.ANIMATION_SAVED, animationName);
     }
 
     ,'setInputValue': function (value) {

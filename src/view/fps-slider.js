@@ -19,8 +19,11 @@ define([
     'FPS_RANGE':
         constant.MAXIMUM_CSS_OUTPUT_FPS - constant.MINIMUM_CSS_OUTPUT_FPS
 
+    /**
+     * @param {Stylie} stylie
+     */
     ,'initialize': function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
 
       this.$el.dragonSlider({
         'drag': _.bind(this.onSliderDrag, this)
@@ -34,7 +37,7 @@ define([
     }
 
     ,'onSliderDrag': function (val) {
-      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+      this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'getFPS': function () {

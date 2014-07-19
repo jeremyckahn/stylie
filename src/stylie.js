@@ -79,6 +79,7 @@ define([
   var $body = $(document.body);
 
   /**
+   * @implements {Backbone.Events}
    * @constructor
    */
   function Stylie () {
@@ -116,6 +117,8 @@ define([
 
     window.stylie = this;
   }
+
+  _.extend(Stylie.prototype, Backbone.Events);
 
   Stylie.prototype.initActors = function () {
     this.rekapi.addActor({
@@ -192,7 +195,8 @@ define([
     });
 
     this.view.fpsSlider = new FPSSliderView({
-      '$el': $('.quality-slider.fps .slider')
+      'stylie': this
+      ,'el': document.querySelector('.quality-slider.fps .slider')
     });
 
     var cssNameField = new AutoUpdateTextFieldView({
@@ -201,7 +205,7 @@ define([
 
     cssNameField.onValReenter = _.bind(function (val) {
       this.config.className = val;
-      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+      this.trigger(constant.UPDATE_CSS_OUTPUT);
     }, this);
 
     this.view.cssNameField = cssNameField;
@@ -211,7 +215,7 @@ define([
         '$el': $('#' + prefix + '-toggle')
         ,'onChange': _.bind(function (evt, isChecked) {
           this.config.activeClasses[prefix] = isChecked;
-          Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+          this.trigger(constant.UPDATE_CSS_OUTPUT);
         }, this)
       });
     }, this);
@@ -230,7 +234,7 @@ define([
           : '';
         this.view.htmlInput.$renderTarget.css(
           'transform-origin', tranformOrigin);
-        Backbone.trigger(constant.ACTOR_ORIGIN_CHANGED, true);
+        this.trigger(constant.ACTOR_ORIGIN_CHANGED, true);
         this.rekapi.update();
       }, this)
     });
@@ -245,11 +249,12 @@ define([
     });
 
     var topLevelAlertView = this.view.topLevelAlertView;
-    Backbone.on(constant.ALERT_ERROR,
+    this.on(constant.ALERT_ERROR,
         _.bind(topLevelAlertView.show, topLevelAlertView));
 
     this.view.saveView = new SaveView({
-      'el': document.getElementById('save-controls')
+      'stylie': this
+      ,'el': document.getElementById('save-controls')
       ,'model': this.animationModel
     });
 
@@ -260,7 +265,8 @@ define([
     });
 
     this.view.orientationView = new OrientationControlsView({
-      'el': document.getElementById('orientation-controls')
+      'stylie': this
+      ,'el': document.getElementById('orientation-controls')
     });
   };
 

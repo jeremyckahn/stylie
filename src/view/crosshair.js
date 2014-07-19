@@ -48,9 +48,9 @@ define([
 
       this._$cubelet.on('change', _.bind(this.onCubeletChange, this));
 
-      this.listenTo(Backbone, constant.ROTATION_MODE_START,
+      this.listenTo(this.stylie, constant.ROTATION_MODE_START,
           _.bind(this.onRotationModeStart, this));
-      this.listenTo(Backbone, constant.ROTATION_MODE_STOP,
+      this.listenTo(this.stylie, constant.ROTATION_MODE_STOP,
           _.bind(this.onRotationModeStop, this));
 
       this.model.on('change', _.bind(this.render, this));
@@ -68,7 +68,7 @@ define([
 
     ,'onRotationModeStop': function () {
       this._$cubelet.hide();
-      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+      this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'onCubeletChange': function () {
@@ -82,7 +82,7 @@ define([
 
     ,'dragEnd': function (evt, ui) {
       this.updateModel();
-      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+      this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'render': function () {
@@ -109,7 +109,7 @@ define([
         ,'rY': rotationCoords.y
         ,'rZ': rotationCoords.z
       });
-      Backbone.trigger(constant.PATH_CHANGED);
+      this.stylie.trigger(constant.PATH_CHANGED);
       this.model.trigger('change');
       this.stylie.rekapi.update();
     }

@@ -5,7 +5,6 @@ define(function () {
     'PATH_CHANGED': 'path-changed'
     ,'ACTOR_ORIGIN_CHANGED': 'actor-origin-changed'
     ,'UPDATE_CSS_OUTPUT': 'update-css-output'
-    ,'ANIMATION_LENGTH_CHANGED': 'animation-length-changed'
     ,'ALERT_ERROR': 'error-alert'
     ,'KEYFRAME_ORDER_CHANGED': 'keyframe-order-changed'
     ,'ROTATION_MODE_START': 'rotation-mode-start'

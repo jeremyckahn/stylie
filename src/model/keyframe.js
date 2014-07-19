@@ -26,7 +26,7 @@ define([
       // TODO: This message subscription and event binding should be
       // consolidated into one operation.
       this._boundModifyKeyframeHandler = _.bind(this.modifyKeyframe, this);
-      Backbone.on(
+      this.stylie.on(
           constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
       this.on('change', this._boundModifyKeyframeHandler);
     }
@@ -58,14 +58,10 @@ define([
           this.get('millisecond'), to);
 
       this.set('millisecond', to);
-
-      // TODO: Maybe check to see if this is the last keyframe in the
-      // collection before publishing?
-      Backbone.trigger(constant.ANIMATION_LENGTH_CHANGED);
     }
 
     ,'destroy': function () {
-      Backbone.off(
+      this.stylie.off(
           constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
       this.off('change', this._boundModifyKeyframeHandler);
       this.trigger('destroy');

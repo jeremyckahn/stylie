@@ -81,7 +81,7 @@ define([
       this.keyframeCollection.sort();
       this.trigger('change');
       this.stylie.rekapi.update();
-      Backbone.trigger(constant.KEYFRAME_ORDER_CHANGED);
+      this.stylie.trigger(constant.KEYFRAME_ORDER_CHANGED);
     }
 
     ,'appendNewKeyframeWithDefaultProperties': function () {
@@ -133,7 +133,7 @@ define([
       this.keyframeCollection.add(modelProperties, {'owner': this});
       var keyframeProperties = this.keyframeCollection.last().getCSS();
       this.get('actor').keyframe(millisecond, keyframeProperties, opt_easing);
-      Backbone.trigger(constant.UPDATE_CSS_OUTPUT);
+      this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
     ,'modifyKeyframe': function (
@@ -155,7 +155,7 @@ define([
     ,'removeKeyframe': function (millisecond) {
       this.keyframeCollection.removeKeyframe(millisecond);
       this.get('actor').removeKeyframe(millisecond);
-      Backbone.trigger(constant.PATH_CHANGED);
+      this.stylie.trigger(constant.PATH_CHANGED);
     }
 
     ,'importTimeline': function (actorData) {
@@ -168,7 +168,7 @@ define([
       }, this);
 
       this.stylie.rekapi.update();
-      Backbone.trigger(constant.PATH_CHANGED);
+      this.stylie.trigger(constant.PATH_CHANGED);
     }
 
     ,'parseTranformString': function (transformString) {
