@@ -48,10 +48,10 @@ define([
 
       this._$cubelet.on('change', _.bind(this.onCubeletChange, this));
 
-      this._rotationModeStartHandle = Backbone.on(
-          constant.ROTATION_MODE_START, _.bind(this.onRotationModeStart, this));
-      this._rotationModeStopHandle = Backbone.on(
-          constant.ROTATION_MODE_STOP, _.bind(this.onRotationModeStop, this));
+      this.listenTo(Backbone, constant.ROTATION_MODE_START,
+          _.bind(this.onRotationModeStart, this));
+      this.listenTo(Backbone, constant.ROTATION_MODE_STOP,
+          _.bind(this.onRotationModeStop, this));
 
       this.model.on('change', _.bind(this.render, this));
       this.model.on('destroy', _.bind(this.tearDown, this));
@@ -122,8 +122,7 @@ define([
       this._$crosshairContainer.remove();
       this._$cubelet.remove();
       this.remove();
-      Backbone.off(this._rotationModeStartHandle);
-      Backbone.off(this._rotationModeStopHandle);
+      this.stopListening();
       _.empty(this);
     }
 
