@@ -32,8 +32,8 @@ define([
       });
 
       var boundUpdate = _.bind(this.update, this);
-      this.stylie.on(constant.PATH_CHANGED, boundUpdate);
-      this.stylie.on(constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
+      this.listenTo(this.stylie, constant.PATH_CHANGED, boundUpdate);
+      this.listenTo(this.stylie, constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
     }
 
     ,'resize': function (dims) {

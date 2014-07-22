@@ -51,7 +51,8 @@ define([
       this.$actorEl = $('#rekapi-canvas .rekapi-actor');
 
       this.$trigger.on('click', _.bind(this.onTriggerClick, this));
-      this.stylie.on(constant.UPDATE_CSS_OUTPUT, _.bind(this.renderCSS, this));
+      this.listenTo(this.stylie,
+          constant.UPDATE_CSS_OUTPUT, _.bind(this.renderCSS, this));
     }
 
     ,'onTriggerClick': function (evt) {

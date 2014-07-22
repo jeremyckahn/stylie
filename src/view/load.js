@@ -34,8 +34,8 @@ define([
       this.$animationSelect = this.$el.find('select');
       this.refreshAnimationList();
 
-      this.stylie.on(constant.ANIMATION_SAVED,
-        _.bind(this.refreshAnimationList, this));
+      this.listenTo(this.stylie,
+          constant.ANIMATION_SAVED, _.bind(this.refreshAnimationList, this));
     }
 
     ,'refreshAnimationList': function (currentAnimation) {

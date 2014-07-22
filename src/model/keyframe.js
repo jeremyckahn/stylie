@@ -26,8 +26,8 @@ define([
       // TODO: This message subscription and event binding should be
       // consolidated into one operation.
       this._boundModifyKeyframeHandler = _.bind(this.modifyKeyframe, this);
-      this.stylie.on(
-          constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
+      this.listenTo(this.stylie,
+        constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
       this.on('change', this._boundModifyKeyframeHandler);
     }
 
@@ -61,8 +61,7 @@ define([
     }
 
     ,'destroy': function () {
-      this.stylie.off(
-          constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
+      this.stopListening();
       this.off('change', this._boundModifyKeyframeHandler);
       this.trigger('destroy');
     }
