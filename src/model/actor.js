@@ -22,6 +22,8 @@ define([
 
 ) {
 
+  // TODO: This model needs teardown/cleanup logic.
+
   return Backbone.Model.extend({
 
     /**
@@ -31,7 +33,12 @@ define([
      */
     'initialize': function (attrs, opts) {
       this.stylie = opts.stylie;
-      this.keyframeCollection = new KeyframeCollection([], {'owner': this});
+
+      this.keyframeCollection =
+          new KeyframeCollection([], { 'stylie': this.stylie });
+
+      this.listenTo(this.keyframeCollection,
+        'add', _.bind(this.onKeyframeCollectionAdd, this));
 
       this.keyframeFormsView = new KeyframeFormsView({
         'stylie': this.stylie
@@ -44,6 +51,14 @@ define([
         ,'el': document.getElementById('crosshairs')
         ,'model': this
       });
+    }
+
+    /**
+     * @param {KeyframeModel} model
+     */
+    ,'onKeyframeCollectionAdd': function (model) {
+      this.crosshairsView.addCrosshairView(model);
+      this.keyframeFormsView.addKeyframeView(model);
     }
 
     ,'getLength': function () {

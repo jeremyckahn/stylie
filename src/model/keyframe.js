@@ -63,6 +63,7 @@ define([
     ,'destroy': function () {
       this.stopListening();
       this.off('change', this._boundModifyKeyframeHandler);
+      this.owner.removeKeyframe(this.get('millisecond'));
       this.trigger('destroy');
     }
 

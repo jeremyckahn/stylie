@@ -21,31 +21,24 @@ define([
     /**
      * @param {Array.<Object>} models
      * @param {Object} opts
-     *   @param {ActorModel} owner
+     *   @param {Stylie} stylie
      */
     ,'initialize': function (models, opts) {
-      this.owner = opts.owner;
-      this.stylie = this.owner.stylie;
-
-      this.on('add', _.bind(this.onAdd, this));
+      this.stylie = opts.stylie;
     }
 
-    ,'comparator': function (keyframeModel) {
-      return keyframeModel.get('millisecond');
+    /**
+     * @param {KeyframeModel} model
+     */
+    ,'comparator': function (model) {
+      return model.get('millisecond');
     }
 
+    /**
+     * @param {number} millisecond
+     */
     ,'removeKeyframe': function (millisecond) {
       this.remove(this.findWhere({'millisecond': millisecond}));
-    }
-
-    ,'onAdd': function (model) {
-      this.owner.crosshairsView.addCrosshairView(model);
-      this.owner.keyframeFormsView.addKeyframeView(model);
-      this.listenTo(model, 'destroy', _.bind(this.onModelDestroy, this, model));
-    }
-
-    ,'onModelDestroy': function (model) {
-      model.owner.removeKeyframe(model.get('millisecond'));
     }
 
     /**
