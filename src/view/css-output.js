@@ -67,8 +67,8 @@ define([
           stylie.collection.actors.getCurrent().keyframeCollection;
       var firstKeyframe = keyframeCollection.first();
       var offsets = this.isOutputOrientedToFirstKeyframe()
-          ? {x: -firstKeyframe.get('x'), y: -firstKeyframe.get('y')}
-          : {x: 0, y: 0};
+          ? { x: -firstKeyframe.get('x'), y: -firstKeyframe.get('y') }
+          : { x: 0, y: 0 };
       keyframeCollection.offsetKeyframes(offsets);
 
       var cssOutput = stylie.rekapi.renderer.toString({

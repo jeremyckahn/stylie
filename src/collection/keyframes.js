@@ -38,7 +38,7 @@ define([
      * @param {number} millisecond
      */
     ,removeKeyframe: function (millisecond) {
-      this.remove(this.findWhere({millisecond: millisecond}));
+      this.remove(this.findWhere({ millisecond: millisecond }));
     }
 
     /**

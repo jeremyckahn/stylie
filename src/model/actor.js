@@ -161,7 +161,7 @@ define([
         ,easing: opt_easing
       }, properties);
 
-      this.keyframeCollection.add(modelProperties, {actorModel: this});
+      this.keyframeCollection.add(modelProperties, { actorModel: this });
       var keyframeModel =
           this.keyframeCollection.findWhere({ millisecond: millisecond });
 
