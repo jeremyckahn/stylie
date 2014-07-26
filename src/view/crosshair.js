@@ -22,7 +22,7 @@ define([
 
   return Backbone.View.extend({
 
-    'events': {
+    events: {
       'mousedown .rotation-control': 'onMousedownRotationControl'
     }
 
@@ -31,13 +31,13 @@ define([
      *   @param {Stylie} stylie
      *   @param {jQuery} $container
      */
-    ,'initialize': function (opts) {
+    ,initialize: function (opts) {
       this.stylie = opts.stylie;
       this.$container = opts.$container;
       this.$el.dragon({
-        'within': this.$container
-        ,'dragStart': _.bind(this.dragStart, this)
-        ,'dragEnd': _.bind(this.dragEnd, this)
+        within: this.$container
+        ,dragStart: _.bind(this.dragStart, this)
+        ,dragEnd: _.bind(this.dragEnd, this)
       });
 
       this._$crosshairContainer = this.$el.find('.crosshair-container');
@@ -60,67 +60,67 @@ define([
       this.render();
     }
 
-    ,'onMousedownRotationControl': function (evt) {
+    ,onMousedownRotationControl: function (evt) {
       evt.stopPropagation();
     }
 
-    ,'onRotationModeStart': function () {
+    ,onRotationModeStart: function () {
       this._$cubelet.show();
     }
 
-    ,'onRotationModeStop': function () {
+    ,onRotationModeStop: function () {
       this._$cubelet.hide();
       this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
-    ,'onCubeletChange': function () {
+    ,onCubeletChange: function () {
       this.updateModel();
       this._$cubelet.cubeletApplyRotationToElement(this._$crosshairContainer);
     }
 
-    ,'dragStart': function (evt, ui) {
+    ,dragStart: function (evt, ui) {
       this.dimPathLine();
     }
 
-    ,'dragEnd': function (evt, ui) {
+    ,dragEnd: function (evt, ui) {
       this.updateModel();
       this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
-    ,'render': function () {
+    ,render: function () {
       this.$el.css({
-        'left': this.model.get('x') + 'px'
-        ,'top': this.model.get('y') + 'px'
+        left: this.model.get('x') + 'px'
+        ,top: this.model.get('y') + 'px'
       });
       var rotationCoords = this._$cubelet.cubeletGetCoords();
       this._$cubelet.cubeletSetCoords({
-        'x': this.model.get('rX')
-        ,'y': this.model.get('rY')
-        ,'z': this.model.get('rZ')
+        x: this.model.get('rX')
+        ,y: this.model.get('rY')
+        ,z: this.model.get('rZ')
       });
       this._$cubelet.cubeletApplyRotationToElement(this._$crosshairContainer);
     }
 
-    ,'updateModel': function () {
+    ,updateModel: function () {
       var rotationCoords = this._$cubelet.cubeletGetCoords();
       var pxTo = util.pxToNumber;
       this.model.set({
-        'x': pxTo(this.$el.css('left'))
-        ,'y': pxTo(this.$el.css('top'))
-        ,'rX': rotationCoords.x
-        ,'rY': rotationCoords.y
-        ,'rZ': rotationCoords.z
+        x: pxTo(this.$el.css('left'))
+        ,y: pxTo(this.$el.css('top'))
+        ,rX: rotationCoords.x
+        ,rY: rotationCoords.y
+        ,rZ: rotationCoords.z
       });
       this.stylie.trigger(constant.PATH_CHANGED);
       this.model.trigger('change');
       this.stylie.rekapi.update();
     }
 
-    ,'dimPathLine': function () {
+    ,dimPathLine: function () {
       this.stylie.view.canvas.backgroundView.update(true);
     }
 
-    ,'tearDown': function () {
+    ,tearDown: function () {
       this._$crosshairContainer.remove();
       this._$cubelet.remove();
       this.remove();

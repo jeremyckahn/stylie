@@ -84,12 +84,12 @@ define([
    */
   function Stylie () {
     this.config = {
-      'activeClasses': {
-        'moz': false
-        ,'ms': false
-        ,'o': false
-        ,'webkit': false
-        ,'w3': true
+      activeClasses: {
+        moz: false
+        ,ms: false
+        ,o: false
+        ,webkit: false
+        ,w3: true
       }
     };
     this.collection = {};
@@ -133,45 +133,45 @@ define([
     // Create the initial keyframes.
     _.each([0, constant.INITIAL_ANIMATION_DURATION], function (millisecond, i) {
       currentActorModel.keyframe(millisecond, {
-        'x': i
+        x: i
           ? winWidth - (winWidth / (i + 1))
           : 60 // TODO: Should this be a constant?
-        ,'y': crosshairStartingY
-        ,'rX': 0
-        ,'rY': 0
-        ,'rZ': 0
+        ,y: crosshairStartingY
+        ,rX: 0
+        ,rY: 0
+        ,rZ: 0
       }, 'linear linear linear linear linear');
     });
   };
 
   Stylie.prototype.initViews = function () {
     this.view.hotkeyHandler = new HotkeyHandlerView({
-      'stylie': this
-      ,'el': document.body
+      stylie: this
+      ,el: document.body
     });
 
     this.view.helpModal = new ModalView({
-      'el': document.getElementById('help-contents')
+      el: document.getElementById('help-contents')
       ,'$triggerEl': $('#help-trigger')
     });
 
     var $canvasBG = $('#tween-path');
 
     this.view.rekapiControls = new RekapiControlsView({
-      'stylie': this
+      stylie: this
       ,'$canvasBG': $canvasBG
     });
 
     this.view.canvas = new CanvasView({
-      'stylie': this
-      ,'el': document.getElementById('rekapi-canvas')
+      stylie: this
+      ,el: document.getElementById('rekapi-canvas')
       ,'$canvasBG': $canvasBG
     });
 
     this.view.showPath = new CheckboxView({
       '$el': $('#show-path')
-      ,'callHandlerOnInit': true
-      ,'onChange': _.bind(function (evt, isChecked) {
+      ,callHandlerOnInit: true
+      ,onChange: _.bind(function (evt, isChecked) {
         this.config.isPathShowing = !!isChecked;
         this.rekapi.update();
         this.view.canvas.backgroundView.update();
@@ -179,28 +179,28 @@ define([
     });
 
     this.view.controlPane = new PaneView({
-      'el': document.getElementById('control-pane')
+      el: document.getElementById('control-pane')
     });
 
     this.view.controlPaneTabs = new TabsView({
-      'el': document.querySelector('#control-pane')
+      el: document.querySelector('#control-pane')
     });
 
     this.view.cssOutput = new CSSOutputView({
-      'stylie': this
-      ,'el': document.querySelector('#css-output textarea')
+      stylie: this
+      ,el: document.querySelector('#css-output textarea')
       ,'$trigger': this.view.controlPaneTabs.$el
           .find('[data-target="css-output"]')
       ,'$animationIteration': $('#iterations')
     });
 
     this.view.fpsSlider = new FPSSliderView({
-      'stylie': this
-      ,'el': document.querySelector('.quality-slider.fps .slider')
+      stylie: this
+      ,el: document.querySelector('.quality-slider.fps .slider')
     });
 
     var cssNameField = new AutoUpdateTextFieldView({
-      'el': document.getElementById('css-name')
+      el: document.getElementById('css-name')
     });
 
     cssNameField.onValReenter = _.bind(function (val) {
@@ -213,7 +213,7 @@ define([
     ['moz', 'ms', 'o', 'webkit', 'w3'].forEach(function (prefix) {
       this.view[prefix + 'Checkbox'] = new CheckboxView({
         '$el': $('#' + prefix + '-toggle')
-        ,'onChange': _.bind(function (evt, isChecked) {
+        ,onChange: _.bind(function (evt, isChecked) {
           this.config.activeClasses[prefix] = isChecked;
           this.trigger(constant.UPDATE_CSS_OUTPUT);
         }, this)
@@ -226,8 +226,8 @@ define([
 
     this.view.centerToPathCheckbox = new CheckboxView({
       '$el': $('#center-to-path')
-      ,'callHandlerOnInit': true
-      ,'onChange': _.bind(function (evt, isChecked) {
+      ,callHandlerOnInit: true
+      ,onChange: _.bind(function (evt, isChecked) {
         this.config.isCenteredToPath = !!isChecked;
         var tranformOrigin = this.config.isCenteredToPath
           ? '0 0'
@@ -240,12 +240,12 @@ define([
     });
 
     this.view.customEaseView = new CustomEaseView({
-      'stylie': this
-      ,'el': document.getElementById('custom-ease')
+      stylie: this
+      ,el: document.getElementById('custom-ease')
     });
 
     this.view.topLevelAlertView = new AlertView({
-      'el': document.getElementById('top-level-alert')
+      el: document.getElementById('top-level-alert')
     });
 
     var topLevelAlertView = this.view.topLevelAlertView;
@@ -253,20 +253,20 @@ define([
         _.bind(topLevelAlertView.show, topLevelAlertView));
 
     this.view.saveView = new SaveView({
-      'stylie': this
-      ,'el': document.getElementById('save-controls')
-      ,'model': this.animationModel
+      stylie: this
+      ,el: document.getElementById('save-controls')
+      ,model: this.animationModel
     });
 
     this.view.loadView = new LoadView({
-      'stylie': this
-      ,'el': document.getElementById('load-controls')
-      ,'model': this.animationModel
+      stylie: this
+      ,el: document.getElementById('load-controls')
+      ,model: this.animationModel
     });
 
     this.view.orientationView = new OrientationControlsView({
-      'stylie': this
-      ,'el': document.getElementById('orientation-controls')
+      stylie: this
+      ,el: document.getElementById('orientation-controls')
     });
   };
 

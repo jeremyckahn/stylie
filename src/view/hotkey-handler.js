@@ -16,21 +16,21 @@ define([
 
   return Backbone.View.extend({
 
-    'events': {
-      'keydown': 'onKeydown'
-      ,'keyup': 'onKeyup'
+    events: {
+      keydown: 'onKeydown'
+      ,keyup: 'onKeyup'
     }
 
     /**
      * @param {Object} opts
      *   @param {Stylie} stylie
      */
-    ,'initialize': function (opts) {
+    ,initialize: function (opts) {
       this.stylie = opts.stylie;
       this._isShiftHeldDown = false;
     }
 
-    ,'onKeydown': function (evt) {
+    ,onKeydown: function (evt) {
       // Effectively checks that no element was focused.
       if (evt.target !== this.$el[0]) {
         return;
@@ -60,7 +60,7 @@ define([
       }
     }
 
-    ,'onKeyup': function (evt) {
+    ,onKeyup: function (evt) {
       if (this._isShiftHeldDown) {
         this._isShiftHeldDown = false;
         this.$el.removeClass('shift-down');

@@ -26,7 +26,7 @@ define([
 
   function incrementerGeneratorHelper ($el) {
     var incrementerFieldView = new IncrementerFieldView({
-      'el': $el[0]
+      el: $el[0]
     });
 
     incrementerFieldView.onValReenter = _.bind(function (val) {
@@ -76,7 +76,7 @@ define([
 
   return Backbone.View.extend({
 
-    'events': {
+    events: {
       'click h3': 'editMillisecond'
       ,'click .remove button': 'removeKeyframe'
     }
@@ -86,7 +86,7 @@ define([
      *   @param {Stylie} stylie
      *   @param {KeyframeModel} model
      */
-    ,'initialize': function (opts) {
+    ,initialize: function (opts) {
       this.stylie = opts.stylie;
 
       this.isEditingMillisecond = false;
@@ -101,7 +101,7 @@ define([
       this.render();
     }
 
-    ,'buildDOM': function () {
+    ,buildDOM: function () {
       var isFirstKeyfame = this.isFirstKeyfame();
 
       if (this.isRemovable()) {
@@ -111,9 +111,9 @@ define([
 
       _.each(['x', 'y', 'rX', 'rY', 'rZ'], function (property) {
         var template = Mustache.render(KEYFRAME_PROPERTY_TEMPLATE, {
-          'property': property
-          ,'propertyLabel': property.toUpperCase()
-          ,'value': this.model.get(property)
+          property: property
+          ,propertyLabel: property.toUpperCase()
+          ,value: this.model.get(property)
         });
 
         var $template = $(template);
@@ -128,12 +128,12 @@ define([
       }, this);
     }
 
-    ,'initDOMReferences': function () {
+    ,initDOMReferences: function () {
       this.$header = this.$el.find('h3');
       this.$pinnedButtonArray = this.$el.find('.pinned-button-array');
     }
 
-    ,'initIncrementers': function () {
+    ,initIncrementers: function () {
       _.each([
           this.$inputX,
           this.$inputY,
@@ -148,11 +148,11 @@ define([
 
       if (!this.isFirstKeyfame()) {
         var template = Mustache.render(MILLISECOND_INPUT_TEMPLATE, {
-          'value': this.model.get('millisecond')
+          value: this.model.get('millisecond')
         });
 
         var millisecondIncrementer = new IncrementerFieldView({
-          'el': $(template)[0]
+          el: $(template)[0]
         });
 
         millisecondIncrementer.onBlur =
@@ -174,16 +174,16 @@ define([
       }
     }
 
-    ,'initEaseSelect': function (propertyName, previousSibling) {
+    ,initEaseSelect: function (propertyName, previousSibling) {
       var viewName = 'easeSelectView' + propertyName.toUpperCase();
       var inputName = 'input'  + propertyName.toUpperCase();
       var template = Mustache.render(EASE_SELECT_TEMPLATE, {
-          'property': propertyName
+          property: propertyName
         });
 
       var view = this[viewName] = new EaseSelectView({
-        'el': $(template)[0]
-        ,'model': this.model
+        el: $(template)[0]
+        ,model: this.model
       });
 
       this.listenTo(view, 'change', _.bind(this.updateEasingString, this));
@@ -191,19 +191,19 @@ define([
       return view;
     }
 
-    ,'getKeyframeIndex': function () {
+    ,getKeyframeIndex: function () {
       return this.model.collection.indexOf(this.model);
     }
 
-    ,'isFirstKeyfame': function () {
+    ,isFirstKeyfame: function () {
       return this.getKeyframeIndex() === 0;
     }
 
-    ,'isRemovable': function () {
+    ,isRemovable: function () {
       return this.getKeyframeIndex() > 0;
     }
 
-    ,'onMillisecondIncrementerBlur': function (evt) {
+    ,onMillisecondIncrementerBlur: function (evt) {
       this.millisecondIncrementer.$el.detach();
       var millisecond = this.validateMillisecond(
           this.millisecondIncrementer.$el.val());
@@ -213,7 +213,7 @@ define([
       this.isEditingMillisecond = false;
     }
 
-    ,'render': function () {
+    ,render: function () {
       this.renderHeader();
 
       // Yikes!
@@ -236,11 +236,11 @@ define([
       }
     }
 
-    ,'renderHeader': function () {
+    ,renderHeader: function () {
       this.$header.text(this.model.get('millisecond'));
     }
 
-    ,'updateEasingString': function () {
+    ,updateEasingString: function () {
       var xEasing = this.easeSelectViewX.$el.val();
       var yEasing = this.easeSelectViewY.$el.val();
       var rXEasing = this.easeSelectViewRX.$el.val();
@@ -257,13 +257,13 @@ define([
       this.stylie.rekapi.update();
     }
 
-    ,'validateMillisecond': function (millisecond) {
+    ,validateMillisecond: function (millisecond) {
       return isNaN(millisecond)
         ? 0
         : Math.abs(+millisecond);
     }
 
-    ,'editMillisecond': function () {
+    ,editMillisecond: function () {
       if (this.isEditingMillisecond || !this.canEditMillisecond) {
         return;
       }
@@ -279,11 +279,11 @@ define([
         .focus();
     }
 
-    ,'removeKeyframe': function () {
+    ,removeKeyframe: function () {
       this.model.destroy();
     }
 
-    ,'tearDown': function () {
+    ,tearDown: function () {
       if (this.model.get('millisecond') > 0) {
         _.each(['X', 'Y', 'RX', 'RY', 'RZ'], function (axis) {
           this['easeSelectView' + axis].tearDown();

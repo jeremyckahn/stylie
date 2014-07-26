@@ -23,7 +23,7 @@ define([
      *   @param {Stylie} stylie
      *   @param {jQuery} $canvasBG
      */
-    'initialize': function (opts) {
+    initialize: function (opts) {
       this.stylie = opts.stylie;
       this.$canvasBG = opts.$canvasBG;
       this.scrubber = new RekapiScrubber(this.stylie.rekapi, this.$canvasBG[0]);
@@ -31,7 +31,7 @@ define([
       this.el = this.scrubber.$container[0];
     }
 
-    ,'fadeToggle': function () {
+    ,fadeToggle: function () {
       this.$el.fadeToggle(constant.TOGGLE_FADE_SPEED);
     }
 

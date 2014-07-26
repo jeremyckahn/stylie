@@ -16,7 +16,7 @@ define([
 
   return Backbone.View.extend({
 
-    'events': {
+    events: {
       'click .add button': 'createKeyframe'
     }
 
@@ -26,14 +26,14 @@ define([
      *   @param {ActorModel} model
      *   @param {Element} el
      */
-    ,'initialize': function (opts) {
+    ,initialize: function (opts) {
       this.stylie = opts.stylie;
       this.keyframeForms = {};
       this.$formsList = this.$el.find('ul.controls');
       this.listenTo(this.model, 'change', _.bind(this.render, this));
     }
 
-    ,'render': function () {
+    ,render: function () {
       this.$formsList.children().detach();
 
       var orderedViews = _.sortBy(this.keyframeForms, function (keyframeForm) {
@@ -45,10 +45,10 @@ define([
       }, this);
     }
 
-    ,'addKeyframeView': function (model) {
+    ,addKeyframeView: function (model) {
       var keyframeFormView = new KeyframeFormView({
-        'stylie': this.stylie
-        ,'model': model
+        stylie: this.stylie
+        ,model: model
       });
 
       // NOTE: This is more than an alias; the number must be stored in this
@@ -64,7 +64,7 @@ define([
       this.$formsList.append(keyframeFormView.$el);
     }
 
-    ,'createKeyframe': function (evt) {
+    ,createKeyframe: function (evt) {
       this.model.appendNewKeyframeWithDefaultProperties();
     }
 

@@ -16,35 +16,35 @@ define([
 
   return Backbone.View.extend({
 
-    'events': {
+    events: {
       'click button': 'onSaveClick'
-      ,'submit': 'onSubmit'
+      ,submit: 'onSubmit'
     }
 
     /**
      * @param {Stylie} stylie
      */
-    ,'initialize': function (opts) {
+    ,initialize: function (opts) {
       this.stylie = opts.stylie;
       this.$nameField = this.$el.find('input');
     }
 
-    ,'onSaveClick': function () {
+    ,onSaveClick: function () {
       this.saveAnimation();
     }
 
-    ,'onSubmit': function (evt) {
+    ,onSubmit: function (evt) {
       evt.preventDefault();
       this.saveAnimation();
     }
 
-    ,'saveAnimation': function () {
+    ,saveAnimation: function () {
       var animationName = this.$nameField.val();
       this.model.save(animationName);
       this.stylie.trigger(constant.ANIMATION_SAVED, animationName);
     }
 
-    ,'setInputValue': function (value) {
+    ,setInputValue: function (value) {
       this.$nameField.val(value);
     }
 

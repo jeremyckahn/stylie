@@ -17,7 +17,7 @@ define([
      * @param {Object} attrs
      * @param {Object} opts
      */
-    'initialize': function (attrs, opts) {
+    initialize: function (attrs, opts) {
       this.stylie = opts.stylie;
 
       if (typeof window.localStorage.savedAnimations === 'undefined') {
@@ -27,17 +27,17 @@ define([
       this.readLocalStorage();
     }
 
-    ,'readLocalStorage': function () {
+    ,readLocalStorage: function () {
       this.savedAnimations = JSON.parse(window.localStorage.savedAnimations);
     }
 
-    ,'writeLocalStorage': function () {
+    ,writeLocalStorage: function () {
       window.localStorage.savedAnimations =
         JSON.stringify(this.savedAnimations);
     }
 
 
-    ,'load': function (animationName) {
+    ,load: function (animationName) {
       var savedAnimation = this.savedAnimations[animationName];
 
       if (!savedAnimation) {
@@ -47,39 +47,39 @@ define([
       this.setCurrentState(savedAnimation);
     }
 
-    ,'save': function (animationName) {
+    ,save: function (animationName) {
       this.savedAnimations[animationName] = this.getCurrentState();
       this.writeLocalStorage();
     }
 
-    ,'removeAnimation': function (animationName) {
+    ,removeAnimation: function (animationName) {
       delete this.savedAnimations[animationName];
       this.writeLocalStorage();
     }
 
-    ,'getAnimationList': function () {
+    ,getAnimationList: function () {
       return _.keys(this.savedAnimations);
     }
 
-    ,'getCurrentState': function () {
+    ,getCurrentState: function () {
       return {
-        'rekapi': this.stylie.rekapi.exportTimeline()
-        ,'curves': this.getCurrentCurves()
-        ,'html': this.getCurrentHtml()
-        ,'metadataVersion': 1
+        rekapi: this.stylie.rekapi.exportTimeline()
+        ,curves: this.getCurrentCurves()
+        ,html: this.getCurrentHtml()
+        ,metadataVersion: 1
       };
     }
 
-    ,'getCurrentCurves': function () {
+    ,getCurrentCurves: function () {
       var customCurves = [];
       _.each(Tweenable.prototype.formula, function (easingFn, easingName) {
         if (easingName.match(/customEasing\d+/)) {
           customCurves.push({
-            'name': easingName
-            ,'x1': easingFn.x1
-            ,'y1': easingFn.y1
-            ,'x2': easingFn.x2
-            ,'y2': easingFn.y2
+            name: easingName
+            ,x1: easingFn.x1
+            ,y1: easingFn.y1
+            ,x2: easingFn.x2
+            ,y2: easingFn.y2
           });
         }
       });
@@ -87,11 +87,11 @@ define([
       return customCurves;
     }
 
-    ,'getCurrentHtml': function () {
+    ,getCurrentHtml: function () {
       return this.stylie.view.htmlInput.$el.val();
     }
 
-    ,'setCurrentState': function (state) {
+    ,setCurrentState: function (state) {
       this.stylie.collection.actors.getCurrent().removeAllKeyframes();
       this.stylie.view.customEaseView.removeAllEasings();
 

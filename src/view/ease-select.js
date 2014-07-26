@@ -15,14 +15,14 @@ define([
   ) {
   return Backbone.View.extend({
 
-    'events': {
-      'change': 'onChange'
+    events: {
+      change: 'onChange'
     }
 
-    ,'initialize': function () {
+    ,initialize: function () {
       _.each(Tweenable.prototype.formula, function (formula, name) {
         var option = $(document.createElement('option'), {
-            'value': name
+            value: name
           });
 
         option.html(name);
@@ -32,13 +32,13 @@ define([
       this.$el.val(this.model.getEasingObject()[this.$el.data().axis]);
     }
 
-    ,'onChange': function (evt) {
+    ,onChange: function (evt) {
       // The change event on the DOM isn't recognized by Backbone, so
       // daisy-chain a Backbone.Events event here.
       this.trigger('change');
     }
 
-    ,'tearDown': function () {
+    ,tearDown: function () {
       this.remove();
       _.empty(this);
     }

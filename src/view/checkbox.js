@@ -12,11 +12,11 @@ define([
 
   return Backbone.View.extend({
 
-    'events': {
-      'change': '_onChange'
+    events: {
+      change: '_onChange'
     }
 
-    ,'initialize': function (opts) {
+    ,initialize: function (opts) {
       _.extend(this, opts);
 
       if (opts.callHandlerOnInit) {
@@ -25,7 +25,7 @@ define([
       }
     }
 
-    ,'_onChange': function (evt) {
+    ,_onChange: function (evt) {
       this.onChange.call(this, evt, this.$el.is(':checked'));
     }
 

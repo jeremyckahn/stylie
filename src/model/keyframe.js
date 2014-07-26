@@ -19,7 +19,7 @@ define([
      * @param {Object} attrs
      * @param {ActorModel} actorModel
      */
-    'initialize': function (attrs, opts) {
+    initialize: function (attrs, opts) {
       this.stylie = this.collection.stylie;
       this.actorModel = opts.actorModel;
 
@@ -31,7 +31,7 @@ define([
       this.on('change', this._boundModifyKeyframeHandler);
     }
 
-    ,'validate': function (attrs) {
+    ,validate: function (attrs) {
       var foundNaN = false;
       _.each(attrs, function (attr) {
         if (typeof attr !== 'number') {
@@ -44,7 +44,7 @@ define([
       }
     }
 
-    ,'modifyKeyframe': function () {
+    ,modifyKeyframe: function () {
       this.stylie.collection.actors.getCurrent().modifyKeyframe(
           this.attributes.millisecond, this.getCSS(),
           { transform: this.attributes.easing });
@@ -55,7 +55,7 @@ define([
      * themselves, only actor models (this is how the Rekapi API works).
      * @param {number} toMillisecond
      */
-    ,'moveKeyframe': function (toMillisecond) {
+    ,moveKeyframe: function (toMillisecond) {
       if (this.actorModel.hasKeyframeAt(toMillisecond)) {
         if (toMillisecond !== this.get('millisecond')) {
           this.stylie.trigger(constant.ALERT_ERROR,
@@ -73,24 +73,24 @@ define([
       this.collection.sort();
     }
 
-    ,'destroy': function () {
+    ,destroy: function () {
       this.trigger('destroy');
       this.stopListening();
       this.off();
     }
 
-    ,'getEasingObject': function () {
+    ,getEasingObject: function () {
       var easingChunks = this.get('easing').split(' ');
       return {
-        'x': easingChunks[0]
-        ,'y': easingChunks[1]
-        ,'rX': easingChunks[2]
-        ,'rY': easingChunks[3]
-        ,'rZ': easingChunks[4]
+        x: easingChunks[0]
+        ,y: easingChunks[1]
+        ,rX: easingChunks[2]
+        ,rY: easingChunks[3]
+        ,rZ: easingChunks[4]
       };
     }
 
-    ,'getCSS': function () {
+    ,getCSS: function () {
       var attributes = this.attributes;
 
       return KeyframeModel.createCSSRuleObject(
@@ -102,13 +102,13 @@ define([
           ,this.stylie.config.isCenteredToPath);
     }
 
-    ,'getAttrs': function () {
+    ,getAttrs: function () {
       return {
-        'x': this.get('x')
-        ,'y': this.get('y')
-        ,'rX': this.get('rX')
-        ,'rY': this.get('rY')
-        ,'rZ': this.get('rZ')
+        x: this.get('x')
+        ,y: this.get('y')
+        ,rX: this.get('rX')
+        ,rY: this.get('rY')
+        ,rZ: this.get('rZ')
       };
     }
   }, {
@@ -121,9 +121,9 @@ define([
      * @param {number} rZ
      * @param {boolean} isCentered
      */
-    'createCSSRuleObject': function (x, y, rX, rY, rZ, isCentered) {
+    createCSSRuleObject: function (x, y, rX, rY, rZ, isCentered) {
       return {
-        'transform':
+        transform:
           ['translate(', x ,'px, ', y
             ,'px) rotateX(', rX
             ,'deg) rotateY(', rY

@@ -23,12 +23,12 @@ define([
      *   @param {number} height
      *   @param {number} width
      */
-    'initialize': function (opts) {
+    initialize: function (opts) {
       this.stylie = opts.stylie;
       this.context = this.$el[0].getContext('2d');
       this.resize({
-        'height': opts.height
-        ,'width': opts.width
+        height: opts.height
+        ,width: opts.width
       });
 
       var boundUpdate = _.bind(this.update, this);
@@ -36,7 +36,7 @@ define([
       this.listenTo(this.stylie, constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
     }
 
-    ,'resize': function (dims) {
+    ,resize: function (dims) {
       _.each(['height', 'width'], function (dim) {
         if (dim in dims) {
           var tweakObj = {};
@@ -48,7 +48,7 @@ define([
       }, this);
     }
 
-    ,'generatePathPoints': function () {
+    ,generatePathPoints: function () {
       var currentActorModel = this.stylie.collection.actors.getCurrent();
       var keyframeLength = currentActorModel.getLength();
       var transformKeyframeProperties =
@@ -75,19 +75,19 @@ define([
       return points;
     }
 
-    ,'generatePathSegment': function (x1, x2, y1, y2, easeX, easeY) {
+    ,generatePathSegment: function (x1, x2, y1, y2, easeX, easeY) {
       var points = [];
       var from = {
-          'x': x1
-          ,'y': y1
+          x: x1
+          ,y: y1
         };
       var to = {
-          'x': x2
-          ,'y': y2
+          x: x2
+          ,y: y2
         };
       var easing = {
-        'x': easeX
-        ,'y': easeY
+        x: easeX
+        ,y: easeY
       };
       var j, point;
       for (j = 0; j <= constant.RENDER_GRANULARITY; j++) {
@@ -99,7 +99,7 @@ define([
       return points;
     }
 
-    ,'generatePathPrerender': function (useDimColor) {
+    ,generatePathPrerender: function (useDimColor) {
       var stylie = this.stylie;
       stylie.config.prerenderedPath = document.createElement('canvas');
       stylie.config.prerenderedPath.width =
@@ -131,7 +131,7 @@ define([
       ctx.closePath();
     }
 
-    ,'update': function (useDimColor) {
+    ,update: function (useDimColor) {
       this.generatePathPrerender(useDimColor);
 
       this.$el[0].width = this.$el.width();

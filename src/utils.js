@@ -10,19 +10,19 @@ define([
 
   return {
 
-    'noop': function () {
+    noop: function () {
       // NOOP!
     }
 
-    ,'pxToNumber': function (px) {
+    ,pxToNumber: function (px) {
       return parseInt(px, 10);
     }
 
-    ,'trimString': function (str) {
+    ,trimString: function (str) {
       return str.replace(/^\s*|\s*$/g, '');
     }
 
-    ,'getQueryParams': function () {
+    ,getQueryParams: function () {
       var queryString = window.location.search.slice(1);
       var pairs = queryString.split('&');
       var params = {};

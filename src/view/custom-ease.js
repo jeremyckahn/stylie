@@ -26,7 +26,7 @@ define([
 
   return Backbone.View.extend({
 
-    'events': {
+    events: {
       'click .icon-plus': 'onClickPlusIcon'
       ,'change .bezierizer': 'onBezierizerChange'
       ,'change .custom-ease-select': 'onCurveSelectChange'
@@ -37,7 +37,7 @@ define([
      * @param {Object} opts
      *   @param {Stylie} stylie
      */
-    ,'initialize': function (opts) {
+    ,initialize: function (opts) {
       this.stylie = opts.stylie;
       this._$easingSelect = this.$el.find('.custom-ease-select');
       this._$bezierizer = this.$el.find('.bezierizer');
@@ -53,7 +53,7 @@ define([
         $el.val(bezierizerPoints[point]);
 
         var incrementerFieldView = new IncrementerFieldView({
-          'el': el
+          el: el
         });
         incrementerFieldView.increment = 0.1;
         incrementerFieldView.onValReenter =
@@ -67,7 +67,7 @@ define([
     }
 
 
-    ,'onControlPointValReenter': function (point, val) {
+    ,onControlPointValReenter: function (point, val) {
       var handlePositions = {};
       handlePositions[point] = val;
       this._bezierizer.setHandlePositions(handlePositions);
@@ -75,32 +75,32 @@ define([
     }
 
 
-    ,'onBezierizerChange': function (evt) {
+    ,onBezierizerChange: function (evt) {
       this.updateCurrentBezierCurve();
       this.updateControlPointFields();
     }
 
 
-    ,'onCurveSelectChange': function (evt) {
+    ,onCurveSelectChange: function (evt) {
       var currentEasing = this._$easingSelect.val();
       var storedCurvePoints = this._curvePoints[currentEasing];
       this._bezierizer.setHandlePositions({
-           'x1': storedCurvePoints.x1
-          ,'y1': storedCurvePoints.y1
-          ,'x2': storedCurvePoints.x2
-          ,'y2': storedCurvePoints.y2
+           x1: storedCurvePoints.x1
+          ,y1: storedCurvePoints.y1
+          ,x2: storedCurvePoints.x2
+          ,y2: storedCurvePoints.y2
         });
       this.updateControlPointFields();
     }
 
-    ,'onClickPlusIcon': function () {
+    ,onClickPlusIcon: function () {
       var easingName =
           'customEasing' + (this._$easingSelect.children().length + 1);
       this.addEasing(easingName, this._defaultBezierizerPoints);
     }
 
 
-    ,'addEasing': function (easingName, bezierizerPoints) {
+    ,addEasing: function (easingName, bezierizerPoints) {
       var $option = $(document.createElement('option'));
       $option
         .val(easingName)
@@ -114,7 +114,7 @@ define([
     }
 
 
-    ,'removeEasing': function (easingName) {
+    ,removeEasing: function (easingName) {
       Tweenable.unsetBezierFunction(easingName);
 
       $('#control-pane select.easing option').each(function (i, el) {
@@ -127,7 +127,7 @@ define([
     }
 
 
-    ,'removeAllEasings': function () {
+    ,removeAllEasings: function () {
       _.each(Tweenable.prototype.formula, function (fn, fnName) {
         if (fnName.match(/customEasing/)) {
           this.removeEasing(fnName);
@@ -145,7 +145,7 @@ define([
     }
 
 
-    ,'updateCurrentBezierCurve': function () {
+    ,updateCurrentBezierCurve: function () {
       var currentEasing = this._$easingSelect.val();
       var handlePositions = this._bezierizer.getHandlePositions();
       this._curvePoints[currentEasing] = handlePositions;
@@ -164,7 +164,7 @@ define([
     }
 
 
-    ,'updateControlPointFields': function () {
+    ,updateControlPointFields: function () {
       var handlePositions = this._bezierizer.getHandlePositions();
 
       _.each(['x1', 'y1', 'x2', 'y2'], function (point) {
