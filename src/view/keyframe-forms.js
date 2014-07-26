@@ -48,7 +48,6 @@ define([
     ,'addKeyframeView': function (model) {
       var keyframeFormView = new KeyframeFormView({
         'stylie': this.stylie
-        ,'owner': this
         ,'model': model
       });
 

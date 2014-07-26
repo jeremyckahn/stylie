@@ -6,6 +6,7 @@ define([
 
   ,'src/constants'
   ,'src/collection/keyframes'
+  ,'src/model/keyframe'
   ,'src/view/keyframe-forms'
   ,'src/view/crosshairs'
 
@@ -17,6 +18,7 @@ define([
 
   ,constant
   ,KeyframeCollection
+  ,KeyframeModel
   ,KeyframeFormsView
   ,CrosshairsView
 
@@ -36,6 +38,10 @@ define([
 
       this.keyframeCollection =
           new KeyframeCollection([], { 'stylie': this.stylie });
+
+      this.listenTo(
+          this.keyframeCollection, 'sort',
+          _.bind(this.onKeyframeCollectionSort, this));
 
       this.listenTo(this.keyframeCollection,
         'add', _.bind(this.onKeyframeCollectionAdd, this));
@@ -92,8 +98,7 @@ define([
       this.keyframeCollection.trigger('change');
     }
 
-    ,'refreshKeyframeOrder': function () {
-      this.keyframeCollection.sort();
+    ,'onKeyframeCollectionSort': function () {
       this.trigger('change');
       this.stylie.rekapi.update();
       this.stylie.trigger(constant.KEYFRAME_ORDER_CHANGED);
@@ -141,16 +146,38 @@ define([
      * @param {string|Object} opt_easing
      */
     ,'keyframe': function (millisecond, properties, opt_easing) {
+      var transformRule = KeyframeModel.createCSSRuleObject(
+          properties.x
+          ,properties.y
+          ,properties.rX
+          ,properties.rY
+          ,properties.rZ
+          ,this.stylie.config.isCenteredToPath);
+
+      this.attributes.actor.keyframe(millisecond, transformRule, opt_easing);
+
       var modelProperties = _.extend({
         'millisecond': millisecond
         ,'easing': opt_easing
       }, properties);
-      this.keyframeCollection.add(modelProperties, {'owner': this});
-      var keyframeProperties = this.keyframeCollection.last().getCSS();
-      this.get('actor').keyframe(millisecond, keyframeProperties, opt_easing);
+
+      this.keyframeCollection.add(modelProperties, {'actorModel': this});
+      var keyframeModel =
+          this.keyframeCollection.findWhere({ 'millisecond': millisecond });
+
+      this.listenTo(keyframeModel, 'destroy', _.bind(function () {
+        this.removeKeyframe(
+            keyframeModel.attributes.millisecond, keyframeModel);
+      }, this));
+
       this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
+    /**
+     * @param {number} millisecond
+     * @param {Object} stateModification
+     * @param {Object=} opt_easingModification
+     */
     ,'modifyKeyframe': function (
         millisecond, stateModification, opt_easingModification) {
       var actor = this.get('actor');
@@ -163,11 +190,16 @@ define([
     }
 
     ,'moveKeyframe': function (from, to) {
-      var actor = this.get('actor');
+      var actor = this.attributes.actor;
       return actor.moveKeyframe.apply(actor, arguments);
     }
 
-    ,'removeKeyframe': function (millisecond) {
+    /**
+     * @param {number} millisecond
+     * @param {KeyframeModel} keyframeModel
+     */
+    ,'removeKeyframe': function (millisecond, keyframeModel) {
+      this.stopListening(keyframeModel);
       this.keyframeCollection.removeKeyframe(millisecond);
       this.get('actor').removeKeyframe(millisecond);
       this.stylie.trigger(constant.PATH_CHANGED);

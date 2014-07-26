@@ -29,12 +29,13 @@ define([
     /**
      * @param {Object} opts
      *   @param {Stylie} stylie
+     *   @param {jQuery} $container
      */
     ,'initialize': function (opts) {
       this.stylie = opts.stylie;
-      this.owner = opts.owner;
+      this.$container = opts.$container;
       this.$el.dragon({
-        'within': this.owner.$el.parent()
+        'within': this.$container
         ,'dragStart': _.bind(this.dragStart, this)
         ,'dragEnd': _.bind(this.dragEnd, this)
       });
@@ -53,8 +54,9 @@ define([
       this.listenTo(this.stylie, constant.ROTATION_MODE_STOP,
           _.bind(this.onRotationModeStop, this));
 
-      this.model.on('change', _.bind(this.render, this));
-      this.model.on('destroy', _.bind(this.tearDown, this));
+      this.listenTo(this.model, 'change', _.bind(this.render, this));
+      this.listenTo(this.model, 'destroy', _.bind(this.tearDown, this));
+
       this.render();
     }
 

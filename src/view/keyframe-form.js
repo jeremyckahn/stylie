@@ -32,7 +32,7 @@ define([
     incrementerFieldView.onValReenter = _.bind(function (val) {
       this.model.set($el.data('keyframeattr'), +val);
       this.stylie.trigger(constant.PATH_CHANGED);
-      // TODO: Should access actor through the owner model
+      // TODO: Should access actor through the model
       this.stylie.collection.actors.getCurrent(0).updateKeyframes();
       this.stylie.rekapi.update();
     }, this);
@@ -84,12 +84,10 @@ define([
     /**
      * @param {Object} opts
      *   @param {Stylie} stylie
-     *   @param {ActorModel} owner
      *   @param {KeyframeModel} model
      */
     ,'initialize': function (opts) {
       this.stylie = opts.stylie;
-      this.owner = opts.owner;
 
       this.isEditingMillisecond = false;
       this.canEditMillisecond = !this.isFirstKeyfame();
@@ -97,8 +95,8 @@ define([
       this.$el = $(KEYFRAME_TEMPLATE);
       this.initDOMReferences();
       this.buildDOM();
-      this.model.on('change', _.bind(this.render, this));
-      this.model.on('destroy', _.bind(this.tearDown, this));
+      this.listenTo(this.model, 'change', _.bind(this.render, this));
+      this.listenTo(this.model, 'destroy', _.bind(this.tearDown, this));
       this.initIncrementers();
       this.render();
     }
@@ -184,9 +182,11 @@ define([
         });
 
       var view = this[viewName] = new EaseSelectView({
-        '$el': $(template)
-        ,'owner': this
+        'el': $(template)[0]
+        ,'model': this.model
       });
+
+      this.listenTo(view, 'change', _.bind(this.updateEasingString, this));
 
       return view;
     }
@@ -208,17 +208,7 @@ define([
       var millisecond = this.validateMillisecond(
           this.millisecondIncrementer.$el.val());
 
-      if (this.model.owner.hasKeyframeAt(millisecond)) {
-        if (millisecond !== this.model.get('millisecond')) {
-          this.stylie.trigger(constant.ALERT_ERROR,
-              'There is already a keyframe at millisecond '
-              + millisecond + '.');
-        }
-      } else {
-        this.model.moveKeyframe(millisecond);
-        this.owner.model.refreshKeyframeOrder();
-      }
-
+      this.model.moveKeyframe(millisecond);
       this.renderHeader();
       this.isEditingMillisecond = false;
     }
@@ -259,7 +249,7 @@ define([
       var newEasingString = [
           xEasing, yEasing, rXEasing, rYEasing, rZEasing].join(' ');
 
-      this.model.setEasingString(newEasingString);
+      this.model.set('easing', newEasingString);
 
       // TODO: These function calls are too specific and assume that there will
       // only ever be one actor.

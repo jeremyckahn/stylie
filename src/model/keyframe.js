@@ -13,15 +13,15 @@ define([
   ,constant
 
 ) {
-  return Backbone.Model.extend({
+  var KeyframeModel = Backbone.Model.extend({
 
     /**
      * @param {Object} attrs
-     * @param {ActorModel} owner
+     * @param {ActorModel} actorModel
      */
     'initialize': function (attrs, opts) {
       this.stylie = this.collection.stylie;
-      this.owner = opts.owner;
+      this.actorModel = opts.actorModel;
 
       // TODO: This message subscription and event binding should be
       // consolidated into one operation.
@@ -44,33 +44,39 @@ define([
       }
     }
 
-    ,'modifyKeyframe': function (opt_preventRekapiUpdate) {
+    ,'modifyKeyframe': function () {
       this.stylie.collection.actors.getCurrent().modifyKeyframe(
-          this.get('millisecond'), this.getCSS());
-
-      if (!opt_preventRekapiUpdate) {
-        this.stylie.rekapi.update();
-      }
+          this.attributes.millisecond, this.getCSS(),
+          { transform: this.attributes.easing });
     }
 
-    ,'moveKeyframe': function (to) {
-      this.stylie.collection.actors.getCurrent().moveKeyframe(
-          this.get('millisecond'), to);
+    /**
+     * TODO: Move this to model/actor.js.  Keyframe models should not move
+     * themselves, only actor models (this is how the Rekapi API works).
+     * @param {number} toMillisecond
+     */
+    ,'moveKeyframe': function (toMillisecond) {
+      if (this.actorModel.hasKeyframeAt(toMillisecond)) {
+        if (toMillisecond !== this.get('millisecond')) {
+          this.stylie.trigger(constant.ALERT_ERROR,
+              'There is already a keyframe at millisecond '
+              + toMillisecond + '.');
+        }
 
-      this.set('millisecond', to);
+        return;
+      }
+
+      this.stylie.collection.actors.getCurrent().moveKeyframe(
+          this.get('millisecond'), toMillisecond);
+
+      this.set('millisecond', toMillisecond);
+      this.collection.sort();
     }
 
     ,'destroy': function () {
-      this.stopListening();
-      this.off('change', this._boundModifyKeyframeHandler);
-      this.owner.removeKeyframe(this.get('millisecond'));
       this.trigger('destroy');
-    }
-
-    ,'setEasingString': function (newEasingString) {
-      this.get('easing', newEasingString);
-      this.owner.modifyKeyframe(
-          this.get('millisecond'), {}, { 'transform': newEasingString });
+      this.stopListening();
+      this.off();
     }
 
     ,'getEasingObject': function () {
@@ -85,18 +91,15 @@ define([
     }
 
     ,'getCSS': function () {
-      return {
-        'transform':
-          ['translate(', this.get('x')
-            ,'px, ', this.get('y')
-            ,'px) rotateX(', this.get('rX')
-            ,'deg) rotateY(', this.get('rY')
-            ,'deg) rotateZ(', this.get('rZ')
-            ,this.stylie.config.isCenteredToPath
-              ? 'deg) translate(-50%, -50%)'
-              : 'deg)'
-            ].join('')
-      };
+      var attributes = this.attributes;
+
+      return KeyframeModel.createCSSRuleObject(
+          attributes.x
+          ,attributes.y
+          ,attributes.rX
+          ,attributes.rY
+          ,attributes.rZ
+          ,this.stylie.config.isCenteredToPath);
     }
 
     ,'getAttrs': function () {
@@ -108,6 +111,30 @@ define([
         ,'rZ': this.get('rZ')
       };
     }
+  }, {
 
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} rX
+     * @param {number} rY
+     * @param {number} rZ
+     * @param {boolean} isCentered
+     */
+    'createCSSRuleObject': function (x, y, rX, rY, rZ, isCentered) {
+      return {
+        'transform':
+          ['translate(', x ,'px, ', y
+            ,'px) rotateX(', rX
+            ,'deg) rotateY(', rY
+            ,'deg) rotateZ(', rZ
+            ,isCentered
+              ? 'deg) translate(-50%, -50%)'
+              : 'deg)'
+            ].join('')
+      };
+    }
   });
+
+  return KeyframeModel;
 });

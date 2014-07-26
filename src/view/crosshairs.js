@@ -62,7 +62,7 @@ define([
         'stylie': this.stylie
         ,'el': $el[0]
         ,'model': model
-        ,'owner': this
+        ,'$container': this.$el.parent()
       });
 
       this.listenTo(model, 'destroy', _.bind(function () {
