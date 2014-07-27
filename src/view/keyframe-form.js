@@ -216,24 +216,14 @@ define([
     ,render: function () {
       this.renderHeader();
 
-      // Yikes!
-      //
-      // TODO: Make this less repetitive.
-      if (this.model.get('x') !== parseFloat(this.$inputX.val())) {
-        this.incrementerViewX.$el.val(this.model.get('x'));
-      }
-      if (this.model.get('y') !== parseFloat(this.$inputY.val())) {
-        this.incrementerViewY.$el.val(this.model.get('y'));
-      }
-      if (this.model.get('rX') !== parseFloat(this.$inputRX.val())) {
-        this.incrementerViewRX.$el.val(this.model.get('rX'));
-      }
-      if (this.model.get('rY') !== parseFloat(this.$inputRY.val())) {
-        this.incrementerViewRY.$el.val(this.model.get('rY'));
-      }
-      if (this.model.get('rZ') !== parseFloat(this.$inputRZ.val())) {
-        this.incrementerViewRZ.$el.val(this.model.get('rZ'));
-      }
+      ['x', 'y', 'rX', 'rY', 'rZ'].forEach(function (axis) {
+        var upperAxis = axis.toUpperCase();
+        var axisValue = this.model.get(axis);
+
+        if (axisValue !== parseFloat(this['$input' + upperAxis].val())) {
+          this['incrementerView' + upperAxis].$el.val(axisValue);
+        }
+      }, this);
     }
 
     ,renderHeader: function () {
