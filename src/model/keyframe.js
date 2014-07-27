@@ -51,26 +51,10 @@ define([
     }
 
     /**
-     * TODO: Move this to model/actor.js.  Keyframe models should not move
-     * themselves, only actor models (this is how the Rekapi API works).
      * @param {number} toMillisecond
      */
-    ,moveKeyframe: function (toMillisecond) {
-      if (this.actorModel.hasKeyframeAt(toMillisecond)) {
-        if (toMillisecond !== this.get('millisecond')) {
-          this.stylie.trigger(constant.ALERT_ERROR,
-              'There is already a keyframe at millisecond '
-              + toMillisecond + '.');
-        }
-
-        return;
-      }
-
-      this.stylie.actorCollection.getCurrent().moveKeyframe(
-          this.get('millisecond'), toMillisecond);
-
-      this.set('millisecond', toMillisecond);
-      this.collection.sort();
+    ,moveTo: function (toMillisecond) {
+      this.actorModel.moveKeyframe(this.attributes.millisecond, toMillisecond);
     }
 
     ,destroy: function () {

@@ -208,7 +208,7 @@ define([
       var millisecond = this.validateMillisecond(
           this.millisecondIncrementer.$el.val());
 
-      this.model.moveKeyframe(millisecond);
+      this.model.moveTo(millisecond);
       this.renderHeader();
       this.isEditingMillisecond = false;
     }

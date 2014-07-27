@@ -184,12 +184,34 @@ define([
       actor.modifyKeyframe.apply(actor, arguments);
     }
 
+    /**
+     * @param {number} millisecond
+     */
     ,hasKeyframeAt: function (millisecond) {
       var actor = this.get('actor');
       return actor.hasKeyframeAt.apply(actor, arguments);
     }
 
+    /**
+     * @param {number} from
+     * @param {number} to
+     */
     ,moveKeyframe: function (from, to) {
+      if (this.hasKeyframeAt(to)) {
+        if (from !== to) {
+          this.stylie.trigger(constant.ALERT_ERROR,
+              'There is already a keyframe at millisecond ' + to + '.');
+        }
+
+        return;
+      }
+
+      var keyframeModel =
+          this.keyframeCollection.findWhere({ millisecond: from });
+
+      keyframeModel.set('millisecond', to);
+      this.keyframeCollection.sort();
+
       var actor = this.attributes.actor;
       return actor.moveKeyframe.apply(actor, arguments);
     }
