@@ -25,10 +25,10 @@ define([
 
       // TODO: This message subscription and event binding should be
       // consolidated into one operation.
-      var updateInternally = _.bind(this.updateInternally, this);
+      var updateRawKeyframe = _.bind(this.updateRawKeyframe, this);
       this.listenTo(
-        this.actorModel, 'change:isCenteredToPath', updateInternally);
-      this.on('change', updateInternally);
+        this.actorModel, 'change:isCenteredToPath', updateRawKeyframe);
+      this.on('change', updateRawKeyframe);
     }
 
     ,validate: function (attrs) {
@@ -44,8 +44,8 @@ define([
       }
     }
 
-    ,updateInternally: function () {
-      this.actorModel.modifyKeyframe(
+    ,updateRawKeyframe: function () {
+      this.actorModel.get('actor').modifyKeyframe(
           this.attributes.millisecond, this.getCSS(),
           { transform: this.attributes.easing });
     }

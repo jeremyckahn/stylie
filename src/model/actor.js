@@ -171,17 +171,6 @@ define([
 
     /**
      * @param {number} millisecond
-     * @param {Object} stateModification
-     * @param {Object=} opt_easingModification
-     */
-    ,modifyKeyframe: function (
-        millisecond, stateModification, opt_easingModification) {
-      var actor = this.get('actor');
-      actor.modifyKeyframe.apply(actor, arguments);
-    }
-
-    /**
-     * @param {number} millisecond
      */
     ,hasKeyframeAt: function (millisecond) {
       var actor = this.get('actor');
