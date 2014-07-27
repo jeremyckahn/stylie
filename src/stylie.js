@@ -152,24 +152,24 @@ define([
 
     this.view.helpModal = new ModalView({
       el: document.getElementById('help-contents')
-      ,'$triggerEl': $('#help-trigger')
+      ,$triggerEl: $('#help-trigger')
     });
 
     var $canvasBG = $('#tween-path');
 
     this.view.rekapiControls = new RekapiControlsView({
       stylie: this
-      ,'$canvasBG': $canvasBG
+      ,$canvasBG: $canvasBG
     });
 
     this.view.canvas = new CanvasView({
       stylie: this
       ,el: document.getElementById('rekapi-canvas')
-      ,'$canvasBG': $canvasBG
+      ,$canvasBG: $canvasBG
     });
 
     this.view.showPath = new CheckboxView({
-      '$el': $('#show-path')
+      $el: $('#show-path')
       ,callHandlerOnInit: true
       ,onChange: _.bind(function (evt, isChecked) {
         this.config.isPathShowing = !!isChecked;
@@ -189,9 +189,9 @@ define([
     this.view.cssOutput = new CSSOutputView({
       stylie: this
       ,el: document.querySelector('#css-output textarea')
-      ,'$trigger': this.view.controlPaneTabs.$el
+      ,$trigger: this.view.controlPaneTabs.$el
           .find('[data-target="css-output"]')
-      ,'$animationIteration': $('#iterations')
+      ,$animationIteration: $('#iterations')
     });
 
     this.view.fpsSlider = new FPSSliderView({
@@ -212,7 +212,7 @@ define([
 
     ['moz', 'ms', 'o', 'webkit', 'w3'].forEach(function (prefix) {
       this.view[prefix + 'Checkbox'] = new CheckboxView({
-        '$el': $('#' + prefix + '-toggle')
+        $el: $('#' + prefix + '-toggle')
         ,onChange: _.bind(function (evt, isChecked) {
           this.config.activeClasses[prefix] = isChecked;
           this.trigger(constant.UPDATE_CSS_OUTPUT);
@@ -221,11 +221,11 @@ define([
     }, this);
 
     this.view.htmlInput = new HTMLInputView({
-      '$el': $('#html-input textarea')
+      $el: $('#html-input textarea')
     });
 
     this.view.centerToPathCheckbox = new CheckboxView({
-      '$el': $('#center-to-path')
+      $el: $('#center-to-path')
       ,callHandlerOnInit: true
       ,onChange: _.bind(function (evt, isChecked) {
         this.config.isCenteredToPath = !!isChecked;
