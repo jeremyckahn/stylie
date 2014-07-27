@@ -3,7 +3,6 @@ define(function () {
 
     // publish/subscribe message names
     PATH_CHANGED: 'path-changed'
-    ,ACTOR_ORIGIN_CHANGED: 'actor-origin-changed'
     ,UPDATE_CSS_OUTPUT: 'update-css-output'
     ,ALERT_ERROR: 'error-alert'
     ,KEYFRAME_ORDER_CHANGED: 'keyframe-order-changed'

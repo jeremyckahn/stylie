@@ -63,8 +63,8 @@ define([
       var stylie = this.stylie;
       var cssClassName = stylie.view.cssNameField.$el.val();
 
-      var keyframeCollection =
-          stylie.actorCollection.getCurrent().keyframeCollection;
+      var currentActor = stylie.actorCollection.getCurrent();
+      var keyframeCollection = currentActor.keyframeCollection;
       var firstKeyframe = keyframeCollection.first();
       var offsets = this.isOutputOrientedToFirstKeyframe()
           ? { x: -firstKeyframe.get('x'), y: -firstKeyframe.get('y') }
@@ -75,7 +75,7 @@ define([
         vendors: getPrefixList(stylie)
         ,name: cssClassName
         ,iterations: this.$animationIteration.val()
-        ,isCentered: stylie.config.isCenteredToPath
+        ,isCentered: currentActor.get('isCenteredToPath')
         ,fps: stylie.view.fpsSlider.getFPS()
       });
 

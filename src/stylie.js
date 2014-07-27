@@ -228,13 +228,13 @@ define([
       $el: $('#center-to-path')
       ,callHandlerOnInit: true
       ,onChange: _.bind(function (evt, isChecked) {
-        this.config.isCenteredToPath = !!isChecked;
-        var tranformOrigin = this.config.isCenteredToPath
-          ? '0 0'
-          : '';
+        var isCenteredToPath = !!isChecked;
+        var tranformOrigin = isCenteredToPath ? '0 0' : '';
+
         this.view.htmlInput.$renderTarget.css(
           'transform-origin', tranformOrigin);
-        this.trigger(constant.ACTOR_ORIGIN_CHANGED, true);
+        this.actorCollection.getCurrent().set(
+          'isCenteredToPath', isCenteredToPath);
         this.rekapi.update();
       }, this)
     });

@@ -152,7 +152,7 @@ define([
           ,properties.rX
           ,properties.rY
           ,properties.rZ
-          ,this.stylie.config.isCenteredToPath);
+          ,this.attributes.isCenteredToPath);
 
       this.attributes.actor.keyframe(millisecond, transformRule, opt_easing);
 

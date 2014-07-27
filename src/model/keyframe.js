@@ -25,10 +25,10 @@ define([
 
       // TODO: This message subscription and event binding should be
       // consolidated into one operation.
-      this._boundModifyKeyframeHandler = _.bind(this.modifyKeyframe, this);
-      this.listenTo(this.stylie,
-        constant.ACTOR_ORIGIN_CHANGED, this._boundModifyKeyframeHandler);
-      this.on('change', this._boundModifyKeyframeHandler);
+      var updateInternally = _.bind(this.updateInternally, this);
+      this.listenTo(
+        this.actorModel, 'change:isCenteredToPath', updateInternally);
+      this.on('change', updateInternally);
     }
 
     ,validate: function (attrs) {
@@ -44,8 +44,8 @@ define([
       }
     }
 
-    ,modifyKeyframe: function () {
-      this.stylie.actorCollection.getCurrent().modifyKeyframe(
+    ,updateInternally: function () {
+      this.actorModel.modifyKeyframe(
           this.attributes.millisecond, this.getCSS(),
           { transform: this.attributes.easing });
     }
@@ -83,7 +83,7 @@ define([
           ,attributes.rX
           ,attributes.rY
           ,attributes.rZ
-          ,this.stylie.config.isCenteredToPath);
+          ,this.actorModel.get('isCenteredToPath'));
     }
 
     ,getAttrs: function () {

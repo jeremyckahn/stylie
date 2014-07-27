@@ -50,7 +50,6 @@ define([
         _.each(offsets, function (offsetAmount, offsetName) {
           keyframeModel.set(
             offsetName, keyframeModel.get(offsetName) + offsetAmount);
-          keyframeModel.modifyKeyframe();
         }, this);
       });
     }
