@@ -239,32 +239,32 @@ define([
       }, this)
     });
 
-    this.view.customEaseView = new CustomEaseView({
+    this.view.customEase = new CustomEaseView({
       stylie: this
       ,el: document.getElementById('custom-ease')
     });
 
-    this.view.topLevelAlertView = new AlertView({
+    this.view.topLevelAlert = new AlertView({
       el: document.getElementById('top-level-alert')
     });
 
-    var topLevelAlertView = this.view.topLevelAlertView;
+    var topLevelAlert = this.view.topLevelAlert;
     this.on(constant.ALERT_ERROR,
-        _.bind(topLevelAlertView.show, topLevelAlertView));
+        _.bind(topLevelAlert.show, topLevelAlert));
 
-    this.view.saveView = new SaveView({
+    this.view.save = new SaveView({
       stylie: this
       ,el: document.getElementById('save-controls')
       ,model: this.animationModel
     });
 
-    this.view.loadView = new LoadView({
+    this.view.load = new LoadView({
       stylie: this
       ,el: document.getElementById('load-controls')
       ,model: this.animationModel
     });
 
-    this.view.orientationView = new OrientationControlsView({
+    this.view.orientation = new OrientationControlsView({
       stylie: this
       ,el: document.getElementById('orientation-controls')
     });

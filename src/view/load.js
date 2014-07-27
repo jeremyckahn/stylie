@@ -70,7 +70,7 @@ define([
       }
 
       this.model.load(val);
-      this.stylie.view.saveView.setInputValue(val);
+      this.stylie.view.save.setInputValue(val);
     }
 
   });

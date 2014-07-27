@@ -93,13 +93,13 @@ define([
 
     ,setCurrentState: function (state) {
       this.stylie.actorCollection.getCurrent().removeAllKeyframes();
-      this.stylie.view.customEaseView.removeAllEasings();
+      this.stylie.view.customEase.removeAllEasings();
 
       this.stylie.view.htmlInput.$el.val(state.html);
       this.stylie.view.htmlInput.renderToDOM();
 
       _.each(state.curves, function (curve) {
-        this.stylie.view.customEaseView.addEasing(curve.name, curve);
+        this.stylie.view.customEase.addEasing(curve.name, curve);
       }, this);
 
       var currentActorModel = this.stylie.actorCollection.getCurrent();

@@ -92,7 +92,7 @@ define([
      * @return {boolean}
      */
     ,isOutputOrientedToFirstKeyframe: function () {
-      return this.stylie.view.orientationView.getOrientation()
+      return this.stylie.view.orientation.getOrientation()
         === 'first-keyframe';
     }
   });
