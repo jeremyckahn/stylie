@@ -32,7 +32,6 @@ define([
     incrementerFieldView.onValReenter = _.bind(function (val) {
       this.model.set($el.data('keyframeattr'), +val);
       this.stylie.trigger(constant.PATH_CHANGED);
-      this.model.actorModel.updateKeyframes();
     }, this);
 
     return incrementerFieldView;

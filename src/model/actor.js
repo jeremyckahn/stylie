@@ -94,10 +94,6 @@ define([
       };
     }
 
-    ,updateKeyframes: function () {
-      this.keyframeCollection.trigger('change');
-    }
-
     ,onKeyframeCollectionSort: function () {
       this.trigger('change');
       this.stylie.rekapi.update();
