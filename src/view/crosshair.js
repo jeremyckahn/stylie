@@ -55,7 +55,7 @@ define([
           _.bind(this.onRotationModeStop, this));
 
       this.listenTo(this.model, 'change', _.bind(this.render, this));
-      this.listenTo(this.model, 'destroy', _.bind(this.tearDown, this));
+      this.listenTo(this.model, 'destroy', _.bind(this.teardown, this));
 
       this.render();
     }
@@ -120,7 +120,7 @@ define([
       this.stylie.view.canvas.backgroundView.update(true);
     }
 
-    ,tearDown: function () {
+    ,teardown: function () {
       this._$crosshairContainer.remove();
       this._$cubelet.remove();
       this.remove();

@@ -96,7 +96,7 @@ define([
       this.initDOMReferences();
       this.buildDOM();
       this.listenTo(this.model, 'change', _.bind(this.render, this));
-      this.listenTo(this.model, 'destroy', _.bind(this.tearDown, this));
+      this.listenTo(this.model, 'destroy', _.bind(this.teardown, this));
       this.initIncrementers();
       this.render();
     }
@@ -283,15 +283,15 @@ define([
       this.model.destroy();
     }
 
-    ,tearDown: function () {
+    ,teardown: function () {
       if (this.model.get('millisecond') > 0) {
         _.each(['X', 'Y', 'RX', 'RY', 'RZ'], function (axis) {
-          this['easeSelectView' + axis].tearDown();
-          this['incrementerView' + axis].tearDown();
+          this['easeSelectView' + axis].teardown();
+          this['incrementerView' + axis].teardown();
           this['$input' + axis].remove();
         }, this);
 
-        this.millisecondIncrementer.tearDown();
+        this.millisecondIncrementer.teardown();
       }
 
       this.$header.remove();

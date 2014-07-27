@@ -20,7 +20,7 @@
     "jquery-cubelet": "~0.0.1",
     "bezierizer": "~0.0.4",
     "mustache": "~0.7.2",
-    "jck-library-extensions": "~0.0.8"
+    "jck-library-extensions": "~0.0.9"
   },
   "resolutions": {
     "jquery": "~2.0.2",
