@@ -96,7 +96,6 @@ define([
 
     ,onKeyframeCollectionSort: function () {
       this.trigger('change');
-      this.stylie.rekapi.update();
       this.stylie.trigger(constant.KEYFRAME_ORDER_CHANGED);
     }
 
@@ -160,6 +159,10 @@ define([
       this.keyframeCollection.add(modelProperties, { actorModel: this });
       var keyframeModel =
           this.keyframeCollection.findWhere({ millisecond: millisecond });
+
+      this.listenTo(keyframeModel, 'change', _.bind(function () {
+        this.trigger('change');
+      }, this));
 
       this.listenTo(keyframeModel, 'destroy', _.bind(function () {
         this.removeKeyframe(

@@ -113,7 +113,6 @@ define([
       });
       this.stylie.trigger(constant.PATH_CHANGED);
       this.model.trigger('change');
-      this.stylie.rekapi.update();
     }
 
     ,dimPathLine: function () {

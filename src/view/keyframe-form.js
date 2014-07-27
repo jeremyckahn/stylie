@@ -237,11 +237,7 @@ define([
           xEasing, yEasing, rXEasing, rYEasing, rZEasing].join(' ');
 
       this.model.set('easing', newEasingString);
-
-      // TODO: These function calls are too specific and assume that there will
-      // only ever be one actor.
       this.stylie.view.canvas.backgroundView.update();
-      this.stylie.rekapi.update();
     }
 
     ,validateMillisecond: function (millisecond) {

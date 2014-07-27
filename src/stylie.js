@@ -142,6 +142,10 @@ define([
         ,rZ: 0
       }, 'linear linear linear linear linear');
     });
+
+    this.listenTo(currentActorModel, 'change', _.bind(function () {
+      this.rekapi.update();
+    }, this));
   };
 
   Stylie.prototype.initViews = function () {
@@ -173,7 +177,6 @@ define([
       ,callHandlerOnInit: true
       ,onChange: _.bind(function (evt, isChecked) {
         this.config.isPathShowing = !!isChecked;
-        this.rekapi.update();
         this.view.canvas.backgroundView.update();
       }, this)
     });
@@ -235,7 +238,6 @@ define([
           'transform-origin', tranformOrigin);
         this.actorCollection.getCurrent().set(
           'isCenteredToPath', isCenteredToPath);
-        this.rekapi.update();
       }, this)
     });
 
