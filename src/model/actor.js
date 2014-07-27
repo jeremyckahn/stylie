@@ -206,14 +206,14 @@ define([
         return;
       }
 
+      var actor = this.attributes.actor;
+      actor.moveKeyframe.apply(actor, arguments);
+
       var keyframeModel =
           this.keyframeCollection.findWhere({ millisecond: from });
 
       keyframeModel.set('millisecond', to);
       this.keyframeCollection.sort();
-
-      var actor = this.attributes.actor;
-      return actor.moveKeyframe.apply(actor, arguments);
     }
 
     /**
