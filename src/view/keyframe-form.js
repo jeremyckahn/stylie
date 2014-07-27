@@ -32,9 +32,7 @@ define([
     incrementerFieldView.onValReenter = _.bind(function (val) {
       this.model.set($el.data('keyframeattr'), +val);
       this.stylie.trigger(constant.PATH_CHANGED);
-      // TODO: Should access actor through the model
-      this.stylie.actorCollection.getCurrent(0).updateKeyframes();
-      this.stylie.rekapi.update();
+      this.model.actorModel.updateKeyframes();
     }, this);
 
     return incrementerFieldView;
