@@ -45,7 +45,7 @@ define([
     }
 
     ,modifyKeyframe: function () {
-      this.stylie.collection.actors.getCurrent().modifyKeyframe(
+      this.stylie.actorCollection.getCurrent().modifyKeyframe(
           this.attributes.millisecond, this.getCSS(),
           { transform: this.attributes.easing });
     }
@@ -66,7 +66,7 @@ define([
         return;
       }
 
-      this.stylie.collection.actors.getCurrent().moveKeyframe(
+      this.stylie.actorCollection.getCurrent().moveKeyframe(
           this.get('millisecond'), toMillisecond);
 
       this.set('millisecond', toMillisecond);

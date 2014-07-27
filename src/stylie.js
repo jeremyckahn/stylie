@@ -92,7 +92,7 @@ define([
         ,w3: true
       }
     };
-    this.collection = {};
+
     this.view = {};
 
     this.config.queryString = util.getQueryParams();
@@ -107,7 +107,7 @@ define([
       this.rekapi.play();
     }
 
-    this.collection.actors = new ActorCollection([], { stylie: this });
+    this.actorCollection = new ActorCollection([], { stylie: this });
     this.animationModel = new AnimationModel({}, { stylie: this });
 
     this.initActors();
@@ -126,7 +126,7 @@ define([
     });
 
     var winWidth = $win.width();
-    var currentActorModel = this.collection.actors.getCurrent();
+    var currentActorModel = this.actorCollection.getCurrent();
     var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
     var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
 

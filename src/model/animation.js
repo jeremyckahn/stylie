@@ -92,7 +92,7 @@ define([
     }
 
     ,setCurrentState: function (state) {
-      this.stylie.collection.actors.getCurrent().removeAllKeyframes();
+      this.stylie.actorCollection.getCurrent().removeAllKeyframes();
       this.stylie.view.customEaseView.removeAllEasings();
 
       this.stylie.view.htmlInput.$el.val(state.html);
@@ -102,7 +102,7 @@ define([
         this.stylie.view.customEaseView.addEasing(curve.name, curve);
       }, this);
 
-      var currentActorModel = this.stylie.collection.actors.getCurrent();
+      var currentActorModel = this.stylie.actorCollection.getCurrent();
 
       // Compatibility check for Rekapi pre-1.0.0
       if (state.kapi) {

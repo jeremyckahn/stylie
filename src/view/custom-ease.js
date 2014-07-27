@@ -160,7 +160,7 @@ define([
       }
 
       this.stylie.trigger(constant.PATH_CHANGED);
-      this.stylie.collection.actors.getCurrent().updateKeyframes();
+      this.stylie.actorCollection.getCurrent().updateKeyframes();
     }
 
 

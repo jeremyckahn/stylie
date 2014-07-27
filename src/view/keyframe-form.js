@@ -33,7 +33,7 @@ define([
       this.model.set($el.data('keyframeattr'), +val);
       this.stylie.trigger(constant.PATH_CHANGED);
       // TODO: Should access actor through the model
-      this.stylie.collection.actors.getCurrent(0).updateKeyframes();
+      this.stylie.actorCollection.getCurrent(0).updateKeyframes();
       this.stylie.rekapi.update();
     }, this);
 

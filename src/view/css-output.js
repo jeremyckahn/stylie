@@ -64,7 +64,7 @@ define([
       var cssClassName = stylie.view.cssNameField.$el.val();
 
       var keyframeCollection =
-          stylie.collection.actors.getCurrent().keyframeCollection;
+          stylie.actorCollection.getCurrent().keyframeCollection;
       var firstKeyframe = keyframeCollection.first();
       var offsets = this.isOutputOrientedToFirstKeyframe()
           ? { x: -firstKeyframe.get('x'), y: -firstKeyframe.get('y') }

@@ -55,7 +55,7 @@ define([
       } else if (evt.keyCode === 84) { // "T" key
         this.stylie.view.rekapiControls.fadeToggle();
       } else if (evt.keyCode === 75) { // "K" key
-        this.stylie.collection.actors.getCurrent()
+        this.stylie.actorCollection.getCurrent()
           .appendNewKeyframeWithDefaultProperties();
       }
     }

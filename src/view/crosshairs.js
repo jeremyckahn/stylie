@@ -54,7 +54,7 @@ define([
 
     ,addCrosshairView: function (model) {
       var keyframeCount =
-        this.stylie.collection.actors.getCurrent().getLength();
+        this.stylie.actorCollection.getCurrent().getLength();
       var $el = $(Mustache.render(CROSSHAIR_TEMPLATE));
       this.$el.append($el);
 

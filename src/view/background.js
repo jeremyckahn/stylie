@@ -49,7 +49,7 @@ define([
     }
 
     ,generatePathPoints: function () {
-      var currentActorModel = this.stylie.collection.actors.getCurrent();
+      var currentActorModel = this.stylie.actorCollection.getCurrent();
       var keyframeLength = currentActorModel.getLength();
       var transformKeyframeProperties =
           currentActorModel.get('actor').getPropertiesInTrack('transform');
