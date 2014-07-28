@@ -79,21 +79,6 @@ define([
       return +this.keyframeCollection.at(index).get('millisecond');
     }
 
-    // TODO: It's really odd that the Actor Model knows about keyframe easings,
-    // but the Keyframe Model does not.  This logic should be done in the Actor
-    // Model.
-    ,getEasingsForKeyframe: function (index) {
-      var keyframeProperty =
-          this.get('actor').getKeyframeProperty('transform', index);
-      var easingChunks = keyframeProperty.easing.split(' ');
-
-      return {
-        x: easingChunks[0]
-        ,y: easingChunks[1]
-        ,r: easingChunks[2]
-      };
-    }
-
     ,onKeyframeCollectionSort: function () {
       this.trigger('change');
       this.stylie.trigger(constant.KEYFRAME_ORDER_CHANGED);

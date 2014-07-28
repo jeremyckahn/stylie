@@ -63,8 +63,8 @@ define([
         var y1 = fromKeyframe.y;
         var x2 = toKeyframe.x;
         var y2 = toKeyframe.y;
-        var easings = currentActorModel.getEasingsForKeyframe(
-            transformKeyframeProperties[i].millisecond);
+        var easings =
+          currentActorModel.keyframeCollection.at(i).getEasings();
         var easeX = easings.x;
         var easeY = easings.y;
 

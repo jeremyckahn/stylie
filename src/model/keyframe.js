@@ -95,6 +95,21 @@ define([
         ,rZ: this.get('rZ')
       };
     }
+
+    /**
+     * @return {{x: number, y: number, rX: number, rY: number, rZ: number}}
+     */
+    ,getEasings: function () {
+      var easingChunks = this.attributes.easing.split(' ');
+
+      return {
+        x: easingChunks[0]
+        ,y: easingChunks[1]
+        ,rX: easingChunks[2]
+        ,rY: easingChunks[3]
+        ,rZ: easingChunks[4]
+      };
+    }
   }, {
 
     /**
