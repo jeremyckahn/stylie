@@ -19,6 +19,7 @@ define([
 ) {
 
   var $win = $(window);
+  var $body = $(document.body);
 
   return Backbone.View.extend({
 
@@ -65,11 +66,18 @@ define([
     }
 
     ,onRotationModeStart: function () {
-      this._$cubelet.show();
+      this.$el.dragonDisable();
+      this._$cubelet
+        .show()
+        .cubeletShow();
     }
 
     ,onRotationModeStop: function () {
-      this._$cubelet.hide();
+      this.$el.dragonEnable();
+      this._$cubelet
+        .hide()
+        .cubeletHide();
+
       this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
 
@@ -79,10 +87,12 @@ define([
     }
 
     ,dragStart: function (evt, ui) {
+      $body.addClass('is-dragging-crosshair');
       this.dimPathLine();
     }
 
     ,dragEnd: function (evt, ui) {
+      $body.removeClass('is-dragging-crosshair');
       this.updateModel();
       this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
     }
@@ -94,7 +104,8 @@ define([
       });
       var rotationCoords = this._$cubelet.cubeletGetCoords();
       this._$cubelet.cubeletSetCoords({
-        x: this.model.get('rX')
+        scale: this.model.get('scale')
+        ,x: this.model.get('rX')
         ,y: this.model.get('rY')
         ,z: this.model.get('rZ')
       });
@@ -107,12 +118,12 @@ define([
       this.model.set({
         x: pxTo(this.$el.css('left'))
         ,y: pxTo(this.$el.css('top'))
+        ,scale: rotationCoords.scale
         ,rX: rotationCoords.x
         ,rY: rotationCoords.y
         ,rZ: rotationCoords.z
       });
       this.stylie.trigger(constant.PATH_CHANGED);
-      this.model.trigger('change');
     }
 
     ,dimPathLine: function () {

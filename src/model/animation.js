@@ -66,7 +66,7 @@ define([
         rekapi: this.stylie.rekapi.exportTimeline()
         ,curves: this.getCurrentCurves()
         ,html: this.getCurrentHtml()
-        ,metadataVersion: 1
+        ,metadataVersion: 2
       };
     }
 
@@ -105,11 +105,27 @@ define([
       var currentActorModel = this.stylie.actorCollection.getCurrent();
 
       // Compatibility check for Rekapi pre-1.0.0
+      var actor;
       if (state.kapi) {
-        currentActorModel.importTimeline(state.kapi.actors[0]);
+        actor = state.kapi.actors[0];
       } else {
-        currentActorModel.importTimeline(state.rekapi.actors[0]);
+        actor = state.rekapi.actors[0];
       }
+
+      // Adjust for animations that were saved before scale support was added.
+      actor.propertyTracks.transform.forEach(function (keyframeObject) {
+        var hasScale = !!keyframeObject.value.match(/scale/);
+
+        if (!hasScale) {
+          keyframeObject.value =
+            keyframeObject.value.replace('rotateX', 'scale(1) rotateX');
+          var easings = keyframeObject.easing.split(' ');
+          easings.splice(1, 0, 'linear');
+          keyframeObject.easing = easings.join(' ');
+        }
+      });
+
+      currentActorModel.importTimeline(actor);
     }
 
   });

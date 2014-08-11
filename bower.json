@@ -1,6 +1,6 @@
 {
   "name": "Stylie",
-  "version": "0.4.18",
+  "version": "0.5.0",
   "homepage": "https://github.com/jeremyckahn/stylie",
   "authors": [
     "Jeremy Kahn <jeremyckahn@gmail.com>"
@@ -16,8 +16,8 @@
     "requirejs": "~2.1.6",
     "jquery": "~2.0.2",
     "jquery-mousewheel": "~3.1.4",
-    "jquery-dragon": "0.3.1",
-    "jquery-cubelet": "~0.0.1",
+    "jquery-dragon": "0.4.0",
+    "jquery-cubelet": "~0.1.0",
     "bezierizer": "~0.0.4",
     "mustache": "~0.7.2",
     "jck-library-extensions": "~0.0.9"

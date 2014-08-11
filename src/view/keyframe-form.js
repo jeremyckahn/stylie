@@ -106,10 +106,13 @@ define([
         this.$pinnedButtonArray.append($template);
       }
 
-      _.each(['x', 'y', 'rX', 'rY', 'rZ'], function (property) {
+      _.each(['x', 'y', 'scale', 'rX', 'rY', 'rZ'], function (property) {
+        // TODO: This is ugly!  Make it not ugly!
+        var propertyLabel = property === 'scale' ? 'S' : property.toUpperCase();
+
         var template = Mustache.render(KEYFRAME_PROPERTY_TEMPLATE, {
           property: property
-          ,propertyLabel: property.toUpperCase()
+          ,propertyLabel: propertyLabel
           ,value: this.model.get(property)
         });
 
@@ -134,6 +137,7 @@ define([
       _.each([
           this.$inputX,
           this.$inputY,
+          this.$inputSCALE,
           this.$inputRX,
           this.$inputRY,
           this.$inputRZ], function ($el) {
@@ -142,6 +146,8 @@ define([
         this['incrementerView' + keyframeAttr.toUpperCase()] =
             incrementerGeneratorHelper.call(this, $input);
       }, this);
+
+      this.incrementerViewSCALE.increment = 0.1;
 
       if (!this.isFirstKeyfame()) {
         var template = Mustache.render(MILLISECOND_INPUT_TEMPLATE, {
@@ -213,7 +219,7 @@ define([
     ,render: function () {
       this.renderHeader();
 
-      ['x', 'y', 'rX', 'rY', 'rZ'].forEach(function (axis) {
+      ['x', 'y', 'scale', 'rX', 'rY', 'rZ'].forEach(function (axis) {
         var upperAxis = axis.toUpperCase();
         var axisValue = this.model.get(axis);
 
@@ -230,11 +236,12 @@ define([
     ,updateEasingString: function () {
       var xEasing = this.easeSelectViewX.$el.val();
       var yEasing = this.easeSelectViewY.$el.val();
+      var scaleEasing = this.easeSelectViewSCALE.$el.val();
       var rXEasing = this.easeSelectViewRX.$el.val();
       var rYEasing = this.easeSelectViewRY.$el.val();
       var rZEasing = this.easeSelectViewRZ.$el.val();
       var newEasingString = [
-          xEasing, yEasing, rXEasing, rYEasing, rZEasing].join(' ');
+          xEasing, yEasing, scaleEasing, rXEasing, rYEasing, rZEasing].join(' ');
 
       this.model.set('easing', newEasingString);
       this.stylie.view.canvas.backgroundView.update();
@@ -268,7 +275,7 @@ define([
 
     ,teardown: function () {
       if (this.model.get('millisecond') > 0) {
-        _.each(['X', 'Y', 'RX', 'RY', 'RZ'], function (axis) {
+        _.each(['X', 'Y', 'SCALE', 'RX', 'RY', 'RZ'], function (axis) {
           this['easeSelectView' + axis].teardown();
           this['incrementerView' + axis].teardown();
           this['$input' + axis].remove();

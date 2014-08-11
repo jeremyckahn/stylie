@@ -96,9 +96,10 @@ define([
       this.keyframe(newKeyframeMillisecond, {
         x: this.getNewKeyframeX(lastKeyframeAttrs.x)
         ,y: lastKeyframeAttrs.y
-      ,rX: 0
-      ,rY: 0
-      ,rZ: 0
+        ,scale: 1
+        ,rX: 0
+        ,rY: 0
+        ,rZ: 0
       }, 'linear');
 
       this.stylie.view.canvas.backgroundView.update();
@@ -129,6 +130,7 @@ define([
       var transformRule = KeyframeModel.createCSSRuleObject(
           properties.x
           ,properties.y
+          ,properties.scale
           ,properties.rX
           ,properties.rY
           ,properties.rZ
@@ -219,9 +221,10 @@ define([
       return {
         x: +chunks[0]
         ,y: +chunks[1]
-        ,rX: +chunks[2]
-        ,rY: +chunks[3]
-        ,rZ: +chunks[4]
+        ,scale: +chunks[2]
+        ,rX: +chunks[3]
+        ,rY: +chunks[4]
+        ,rZ: +chunks[5]
       };
     }
 

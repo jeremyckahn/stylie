@@ -199,26 +199,24 @@
     <div id="help-contents" class="hid modal">
       <div class="modal-content">
         <h2>CSS animation made easy!</h2>
-        <p>Stylie is a fun tool for easily creating CSS 3 animations. You can configure your animation graphically, tweak it, grab the generated CSS and go!</p>
+        <p>Stylie is a fun tool for easily creating CSS 3 animations. Quickly design your animation graphically, grab the generated CSS and go!</p>
         <p><a href="http://www.youtube.com/watch?v=mGd305iboSo" target="_blank">Watch this screencast for a quick tutorial.</a></p>
         <h3>The Stylie Workflow</h3>
-        <p>When you first open the app, you will see a little ball moving from left to right. You probably don't want to animate an image of a ball, so click the &quot;HTML&quot; tab in the control panel on the right. This textarea contains the HTML that is being animated. You can put whatever you want in here, but let's stick some text in there for starters:</p>
-        <pre>&lt;h1&gt;Hello there!&lt;/h1&gt;</pre>
-        <p>The preview updates automatically. Next, you&#x27;ll want to change the beginning and ending positions of the animation. Just click and drag the crosshairs to your liking. When your cursor is not focused on a text input, you can hold the Shift key to make rotation Cubelets appear over the crosshairs. Click and drag the Cubelets to modify the the X and Y rotation axes, and drag the extended rotation arm to modify the Z axis rotation.</p>
+        <p>When you first open the app, you will see a little ball moving from left to right. To change the beginning and ending positions of the animation, just click and drag the crosshairs to your liking. When your cursor is not focused on a text input, you can hold the Shift key to make rotation Cubelets appear over the crosshairs. Click and drag the Cubelets to modify the the X and Y rotation axes, and drag the extended rotation arm to modify the Z axis rotation.  Additionally, you can scroll your mousewheel while hovering over a Cubelet to modify the scale of the element.</p>
         <img src="img/shift_example.png" alt="A screenshot of Stylie while the rotation Cubelets are shown">
         <h3>Keyframe editing</h3>
         <p>You can add, remove and edit keyframes.  This is done in the &quot;Keyframes&quot; tab.  When you first open Stylie, you are presented with the default keyframes.  Keyframe 0 cannot be moved and has no easing properties associated with it, but all of the other keyframes do.  To add a new keyframe, click the &quot;Add a Keyframe&quot; button in the upper right portion of the tab.</p>
         <img src="img/keyframes_tab.png" alt="A screenshot of the Keyframes tab.">
-        <p>RX, RY and RZ refer to the three rotation axes.  You can add as many keyframes as you'd like.  You can also reorder keyframes by clicking their millisecond value and pressing the Enter key.</p>
+        <p>RX, RY and RZ refer to the three rotation axes, and S refers to the scale value.  You can add as many keyframes as you'd like.  You can also reorder keyframes by clicking their millisecond value and pressing the Enter key.</p>
         <img src="img/keyframe_editing.png" alt="A screenshot of keyframes being edited.">
-        <p>You can tweak individual keyframe properties by pressing the &quot;up&quot; and &quot;down&quot; arrow keys when focusing on a property's text input.  You can change individual properties' easing formula by selecting it from the dropdown next to each text input.  To remove a keyframe, click the &quot;X&quot; in the upper right corner of a keyframe.</p>
+        <p>You can tweak individual keyframe properties by pressing the &quot;up&quot; and &quot;down&quot; arrow keys when focusing on a property's text input.  You can change individual properties' easing curve by selecting it from the dropdown next to each text input.  To remove a keyframe, click the &quot;X&quot; in the upper right corner of its form field.</p>
         <h3>Motion control</h3>
-        <p>In addition to the standard easing formulae, you can define your own custom easing curves in the &quot;Motion&quot; tab.  To do this, select or create a "customEasing" from the dropdown and drag the circular handles.  You can also type in the coordinates for the control points.  Once you have defined your custom curve, you can select it from any property's easing dropdown.</p>
+        <p>In addition to the standard easing curves, you can define your own custom curves in the &quot;Motion&quot; tab.  To do this, select or create a "customEasing" from the dropdown and drag the circular handles.  You can also type in the coordinates for the control points.  Once you have defined your custom curve, you can select it from any property's easing dropdown.</p>
         <img src="img/bezier_editing.png" alt="A screenshot of a bezier curve being edited.">
         <h3>Playback control</h3>
-        <p>You&#x27;ll notice a playhead in the bottom left of the screen. This is fully interactive; you can can play, pause and stop the animation. You can also click and drag the playhead and zip to any part of the timeline.</p>
+        <p>There is a scrubber in the bottom left of the screen. This is fully interactive; you can can play, pause and stop the animation. You can also click and drag the scrubber and zip to any part of the timeline.</p>
         <h3>Generating your CSS</h3>
-        <p>Once you&#x27;ve configured the animation to your liking, it is time to generate the CSS to be used in your web page. Click on the &quot;CSS&quot; tab in the control panel to see the ready-to-use CSS. You can configure the generated CSS for your specific needs, such as the name of the CSS class on the DOM element to be animated, and which browser vendors you want to support. More complex animations will generate very verbose CSS, so be aware of that.</p>
+        <p>Once you&#x27;ve tweaked the animation to your liking, it is time to generate the CSS to be used in your web page. Click on the &quot;CSS&quot; tab in the control panel to see the ready-to-use CSS. You can tweak the generated CSS for your specific needs, such as the name of the CSS class on the DOM element to be animated, and which browser vendors you want to support. Stylie will optimize simpler animations, but more complex animations will generate very verbose CSS, so be aware of that. You can control the size of the generated CSS for complex animations with the slider below the CSS text box.</p>
         <h3>Saving your animation</h3>
         <p>You can save your animation to <a href="http://www.html5rocks.com/en/features/storage" target="_blank">HTML5 Local Storage</a>.  To do this, open the wrench menu and type in the name of your animation.  You can also recall saved animations from this menu.</p>
         <img src="img/save_load.png" alt="A screenshot of the save/load pane.">
@@ -262,6 +260,8 @@
         <h3>How it's made</h3>
         <p>Stylie is built with some very useful open source libraries:</p>
         <ul class="bulleted">
+          <li><a href="http://rekapi.com/" target="_blank">Rekapi</a></li>
+          <li><a href="http://jeremyckahn.github.io/shifty/" target="_blank">Shifty</a></li>
           <li><a href="http://jquery.com/" target="_blank">jQuery</a></li>
           <li class="nested">
             <ul>
@@ -273,8 +273,6 @@
           <li><a href="http://underscorejs.org/" target="_blank">Underscore</a></li>
           <li><a href="http://requirejs.org/" target="_blank">RequireJS</a></li>
           <li><a href="https://github.com/janl/mustache.js/" target="_blank">mustache.js</a></li>
-          <li><a href="http://rekapi.com/" target="_blank">Rekapi</a></li>
-          <li><a href="http://jeremyckahn.github.io/shifty/" target="_blank">Shifty</a></li>
         </ul>
         <p>Font icons are courtesy of:</p>
         <ul class="bulleted">

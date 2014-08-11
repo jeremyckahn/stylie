@@ -1,13 +1,15 @@
 define([
 
-  'underscore'
+  'jquery'
+  ,'underscore'
   ,'backbone'
 
   ,'src/constants'
 
 ], function (
 
-  _
+  $
+  ,_
   ,Backbone
 
   ,constant
@@ -36,10 +38,11 @@ define([
         return;
 
       } else if (evt.shiftKey) {
-        this.$el.addClass('shift-down');
-        this._isShiftHeldDown = true;
-        this.stylie.trigger(constant.ROTATION_MODE_START);
-
+        if (!this.$el.hasClass('is-dragging-crosshair')) {
+          this.$el.addClass('shift-down');
+          this._isShiftHeldDown = true;
+          this.stylie.trigger(constant.ROTATION_MODE_START);
+        }
       } else if (evt.keyCode === 67) { // "C" key
         this.stylie.view.controlPane.toggle();
 

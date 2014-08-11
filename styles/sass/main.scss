@@ -350,6 +350,10 @@ canvas {
     width: 40px;
   }
 
+    .shift-down .crosshair-container {
+      display: none;
+    }
+
   #scaffolding-area .crosshair {
     cursor: move;
     margin: -20px;
@@ -404,7 +408,7 @@ canvas {
       float: left;
     }
 
-    #control-pane .keyframe:first-child :nth-child(5) {
+    #control-pane .keyframe:first-child :nth-child(6) {
       clear: left;
     }
 

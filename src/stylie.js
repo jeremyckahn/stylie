@@ -137,6 +137,7 @@ define([
           ? winWidth - (winWidth / (i + 1))
           : 60 // TODO: Should this be a constant?
         ,y: crosshairStartingY
+        ,scale: 1
         ,rX: 0
         ,rY: 0
         ,rZ: 0

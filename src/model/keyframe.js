@@ -68,9 +68,10 @@ define([
       return {
         x: easingChunks[0]
         ,y: easingChunks[1]
-        ,rX: easingChunks[2]
-        ,rY: easingChunks[3]
-        ,rZ: easingChunks[4]
+        ,scale: easingChunks[2]
+        ,rX: easingChunks[3]
+        ,rY: easingChunks[4]
+        ,rZ: easingChunks[5]
       };
     }
 
@@ -80,6 +81,7 @@ define([
       return KeyframeModel.createCSSRuleObject(
           attributes.x
           ,attributes.y
+          ,attributes.scale
           ,attributes.rX
           ,attributes.rY
           ,attributes.rZ
@@ -90,6 +92,7 @@ define([
       return {
         x: this.get('x')
         ,y: this.get('y')
+        ,scale: this.get('scale')
         ,rX: this.get('rX')
         ,rY: this.get('rY')
         ,rZ: this.get('rZ')
@@ -105,9 +108,10 @@ define([
       return {
         x: easingChunks[0]
         ,y: easingChunks[1]
-        ,rX: easingChunks[2]
-        ,rY: easingChunks[3]
-        ,rZ: easingChunks[4]
+        ,scale: easingChunks[2]
+        ,rX: easingChunks[3]
+        ,rY: easingChunks[4]
+        ,rZ: easingChunks[5]
       };
     }
   }, {
@@ -115,16 +119,19 @@ define([
     /**
      * @param {number} x
      * @param {number} y
+     * @param {number} scale
      * @param {number} rX
      * @param {number} rY
      * @param {number} rZ
      * @param {boolean} isCentered
      */
-    createCSSRuleObject: function (x, y, rX, rY, rZ, isCentered) {
+    createCSSRuleObject: function (x, y, scale, rX, rY, rZ, isCentered) {
       return {
         transform:
-          ['translate(', x ,'px, ', y
-            ,'px) rotateX(', rX
+          [
+            'translate(', x ,'px, ', y
+            ,'px) scale(', scale, ')'
+            ,' rotateX(', rX
             ,'deg) rotateY(', rY
             ,'deg) rotateZ(', rZ
             ,isCentered
