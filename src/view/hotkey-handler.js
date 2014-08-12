@@ -33,6 +33,8 @@ define([
     }
 
     ,onKeydown: function (evt) {
+      var keyCode = evt.keyCode;
+
       // Effectively checks that no element was focused.
       if (evt.target !== this.$el[0]) {
         return;
@@ -43,23 +45,25 @@ define([
           this._isShiftHeldDown = true;
           this.stylie.trigger(constant.ROTATION_MODE_START);
         }
-      } else if (evt.keyCode === 67) { // "C" key
+      } else if (keyCode === 67) { // "C" key
         this.stylie.view.controlPane.toggle();
 
-      } else if (evt.keyCode === 72) { // "H" key
+      } else if (keyCode === 72) { // "H" key
         this.stylie.view.helpModal.toggle();
 
-      } else if (evt.keyCode === 32) { // Space bar
+      } else if (keyCode === 32) { // Space bar
         if (this.stylie.rekapi.isPlaying()) {
           this.stylie.rekapi.pause();
         } else {
           this.stylie.rekapi.play();
         }
-      } else if (evt.keyCode === 84) { // "T" key
+      } else if (keyCode === 84) { // "T" key
         this.stylie.view.rekapiControls.fadeToggle();
-      } else if (evt.keyCode === 75) { // "K" key
+      } else if (keyCode === 75) { // "K" key
         this.stylie.actorCollection.getCurrent()
           .appendNewKeyframeWithDefaultProperties();
+      } else if (keyCode === 80) { // "P" key
+        this.stylie.view.showPath.$el.click();
       }
     }
 

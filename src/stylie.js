@@ -177,8 +177,7 @@ define([
       $el: $('#show-path')
       ,callHandlerOnInit: true
       ,onChange: _.bind(function (evt, isChecked) {
-        this.config.isPathShowing = !!isChecked;
-        this.view.canvas.backgroundView.update();
+        this.trigger(constant.TOGGLE_PATH_AND_CROSSHAIRS, !!isChecked);
       }, this)
     });
 

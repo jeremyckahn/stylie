@@ -3,6 +3,7 @@ define(function () {
 
     // publish/subscribe message names
     PATH_CHANGED: 'path-changed'
+    ,TOGGLE_PATH_AND_CROSSHAIRS: 'toggle-path-and-crosshairs'
     ,UPDATE_CSS_OUTPUT: 'update-css-output'
     ,ALERT_ERROR: 'error-alert'
     ,KEYFRAME_ORDER_CHANGED: 'keyframe-order-changed'

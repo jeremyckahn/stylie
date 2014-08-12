@@ -25,6 +25,7 @@ define([
      */
     initialize: function (opts) {
       this.stylie = opts.stylie;
+      this._isShowing = true;
       this.context = this.$el[0].getContext('2d');
       this.resize({
         height: opts.height
@@ -34,6 +35,8 @@ define([
       var boundUpdate = _.bind(this.update, this);
       this.listenTo(this.stylie, constant.PATH_CHANGED, boundUpdate);
       this.listenTo(this.stylie, constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
+      this.listenTo(this.stylie, constant.TOGGLE_PATH_AND_CROSSHAIRS,
+          _.bind(this.showOrHidePath, this));
     }
 
     ,resize: function (dims) {
@@ -135,9 +138,17 @@ define([
       this.generatePathPrerender(useDimColor);
 
       this.$el[0].width = this.$el.width();
-      if (this.stylie.config.isPathShowing) {
+      if (this._isShowing) {
         this.context.drawImage(this.stylie.config.prerenderedPath, 0, 0);
       }
+    }
+
+    /**
+     * @param {boolean} isShowing
+     */
+    ,showOrHidePath: function (isShowing) {
+      this._isShowing = isShowing;
+      this.update();
     }
 
   });

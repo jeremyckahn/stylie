@@ -5,6 +5,7 @@ define([
   ,'backbone'
   ,'mustache'
 
+  ,'src/constants'
   ,'src/view/crosshair'
 
 ], function (
@@ -14,6 +15,7 @@ define([
   ,Backbone
   ,Mustache
 
+  ,constant
   ,CrosshairView
 
 ) {
@@ -35,8 +37,11 @@ define([
      */
     initialize: function (opts) {
       this.stylie = opts.stylie;
+      this._isShowing = true;
       this.crosshairViews = {};
       this.listenTo(this.model, 'change', _.bind(this.render, this));
+      this.listenTo(this.stylie, constant.TOGGLE_PATH_AND_CROSSHAIRS,
+          _.bind(this.showOrHideCrosshairs, this));
     }
 
     ,render: function () {
@@ -68,6 +73,18 @@ define([
       this.listenTo(model, 'destroy', _.bind(function () {
         delete this.crosshairViews[model.cid];
       }, this));
+    }
+
+    /**
+     * @param {boolean} isShowing
+     */
+    ,showOrHideCrosshairs: function (isShowing) {
+      this._isShowing = isShowing;
+      if (isShowing) {
+        this.$el.removeClass('hidden');
+      } else {
+        this.$el.addClass('hidden');
+      }
     }
 
   });
