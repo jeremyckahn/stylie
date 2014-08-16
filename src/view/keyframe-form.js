@@ -148,6 +148,7 @@ define([
       }, this);
 
       this.incrementerViewSCALE.increment = 0.1;
+      this.incrementerViewSCALE.mousewheelIncrement = 0.1;
 
       if (!this.isFirstKeyfame()) {
         var template = Mustache.render(MILLISECOND_INPUT_TEMPLATE, {

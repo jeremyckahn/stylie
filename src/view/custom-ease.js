@@ -55,7 +55,8 @@ define([
         var incrementerFieldView = new IncrementerFieldView({
           el: el
         });
-        incrementerFieldView.increment = 0.1;
+        incrementerFieldView.increment = 0.01;
+        incrementerFieldView.mousewheelIncrement = 0.01;
         incrementerFieldView.onValReenter =
             _.bind(this.onControlPointValReenter, this, point);
 
