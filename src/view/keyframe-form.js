@@ -30,7 +30,7 @@ define([
     });
 
     incrementerFieldView.onValReenter = _.bind(function (val) {
-      this.model.set($el.data('keyframeattr'), +val);
+      this.model.set($el.data('keyframeattr'), +val || 0);
       this.stylie.trigger(constant.PATH_CHANGED);
     }, this);
 
@@ -223,9 +223,12 @@ define([
       ['x', 'y', 'scale', 'rX', 'rY', 'rZ'].forEach(function (axis) {
         var upperAxis = axis.toUpperCase();
         var axisValue = this.model.get(axis);
+        var incrementerView = this['incrementerView' + upperAxis];
 
-        if (axisValue !== parseFloat(this['$input' + upperAxis].val())) {
-          this['incrementerView' + upperAxis].$el.val(axisValue);
+        if (axisValue !== parseFloat(this['$input' + upperAxis].val()) &&
+          incrementerView.$el[0] !== document.activeElement) {
+
+          incrementerView.$el.val(axisValue);
         }
       }, this);
     }
