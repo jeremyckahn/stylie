@@ -248,7 +248,7 @@ define([
           xEasing, yEasing, scaleEasing, rXEasing, rYEasing, rZEasing].join(' ');
 
       this.model.set('easing', newEasingString);
-      this.stylie.view.canvas.backgroundView.update();
+      this.stylie.trigger(constant.PATH_CHANGED);
     }
 
     ,validateMillisecond: function (millisecond) {

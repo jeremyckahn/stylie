@@ -37,8 +37,9 @@ define([
       this.$container = opts.$container;
       this.$el.dragon({
         within: this.$container
-        ,dragStart: _.bind(this.dragStart, this)
-        ,dragEnd: _.bind(this.dragEnd, this)
+        ,dragStart: _.bind(this.onDragStart, this)
+        ,dragEnd: _.bind(this.onDragEnd, this)
+        ,drag: _.bind(this.onDrag, this)
       });
 
       this._$crosshairContainer = this.$el.find('.crosshair-container');
@@ -86,12 +87,15 @@ define([
       this._$cubelet.cubeletApplyRotationToElement(this._$crosshairContainer);
     }
 
-    ,dragStart: function (evt, ui) {
+    ,onDragStart: function (evt, ui) {
       $body.addClass('is-dragging-crosshair');
-      this.dimPathLine();
     }
 
-    ,dragEnd: function (evt, ui) {
+    ,onDrag: function () {
+      this.updateModel();
+    }
+
+    ,onDragEnd: function (evt, ui) {
       $body.removeClass('is-dragging-crosshair');
       this.updateModel();
       this.stylie.trigger(constant.UPDATE_CSS_OUTPUT);
@@ -124,10 +128,6 @@ define([
         ,rZ: rotationCoords.z
       });
       this.stylie.trigger(constant.PATH_CHANGED);
-    }
-
-    ,dimPathLine: function () {
-      this.stylie.view.canvas.backgroundView.update(true);
     }
 
     ,teardown: function () {

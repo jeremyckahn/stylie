@@ -21,12 +21,11 @@ define([
     /**
      * @param {Object} opts
      *   @param {Stylie} stylie
-     *   @param {jQuery} $canvasBG
      */
     initialize: function (opts) {
       this.stylie = opts.stylie;
-      this.$canvasBG = opts.$canvasBG;
-      this.scrubber = new RekapiScrubber(this.stylie.rekapi, this.$canvasBG[0]);
+      this.scrubber =
+          new RekapiScrubber(this.stylie.rekapi, this.stylie.rekapi.context);
       this.$el = this.scrubber.$container;
       this.el = this.scrubber.$container[0];
     }

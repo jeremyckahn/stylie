@@ -101,8 +101,6 @@ define([
         ,rY: 0
         ,rZ: 0
       }, 'linear');
-
-      this.stylie.view.canvas.backgroundView.update();
     }
 
     ,getNewKeyframeX: function (lastKeyframeX) {

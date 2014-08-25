@@ -22,7 +22,7 @@ define([
   ,'src/view/checkbox'
   ,'src/view/ease-select'
   ,'src/view/fps-slider'
-  ,'src/view/canvas'
+  ,'src/view/background'
   ,'src/view/css-output'
   ,'src/view/html-input'
   ,'src/view/custom-ease'
@@ -58,7 +58,7 @@ define([
   ,CheckboxView
   ,EaseSelectView
   ,FPSSliderView
-  ,CanvasView
+  ,BackgroundView
   ,CSSOutputView
   ,HTMLInputView
   ,CustomEaseView
@@ -101,7 +101,8 @@ define([
       $body.addClass('iphone');
     }
 
-    this.rekapi = new Rekapi(document.getElementById('rekapi-canvas'));
+    this.rekapi = new Rekapi(document.getElementById('preview-area'));
+    this.$rekapiContext = $(this.rekapi.context);
 
     if (!this.config.queryString.debug) {
       this.rekapi.play();
@@ -122,7 +123,7 @@ define([
 
   Stylie.prototype.initActors = function () {
     this.rekapi.addActor({
-      context: $('#rekapi-canvas').children()[0]
+      context: $('#preview-area').children()[0]
     });
 
     var winWidth = $win.width();
@@ -160,17 +161,16 @@ define([
       ,$triggerEl: $('#help-trigger')
     });
 
-    var $canvasBG = $('#tween-path');
-
     this.view.rekapiControls = new RekapiControlsView({
       stylie: this
-      ,$canvasBG: $canvasBG
     });
 
-    this.view.canvas = new CanvasView({
+    this.view.background = new BackgroundView({
       stylie: this
-      ,el: document.getElementById('rekapi-canvas')
-      ,$canvasBG: $canvasBG
+      ,el: $('#tween-path')[0]
+      ,$header: $('header')
+      ,height: $win.height()
+      ,width: $win.width()
     });
 
     this.view.showPath = new CheckboxView({

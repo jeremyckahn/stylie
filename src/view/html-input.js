@@ -23,7 +23,7 @@ define([
 
     ,initialize: function (opts) {
       _.extend(this, opts);
-      this.$renderTarget = $('#rekapi-canvas .rekapi-actor');
+      this.$renderTarget = $('#preview-area .rekapi-actor');
       this.initialValue = this.readFromDOM();
       this.$el.html(this.initialValue);
     }

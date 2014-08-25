@@ -1,6 +1,7 @@
 define([
 
-  'underscore'
+  'jquery'
+  ,'underscore'
   ,'backbone'
   ,'shifty'
 
@@ -8,39 +9,60 @@ define([
 
 ], function (
 
-  _
+  $
+  ,_
   ,Backbone
   ,Tweenable
 
   ,constant
 
 ) {
+
+  var $win = $(window);
+  var prerenderBuffer = document.createElement('canvas');
+
   return Backbone.View.extend({
 
     /**
      * @param {Object} opts
      *   @param {Stylie} stylie
+     *   @param {jQuery} $header
      *   @param {number} height
      *   @param {number} width
      */
     initialize: function (opts) {
       this.stylie = opts.stylie;
+      this.$header = opts.$header;
       this._isShowing = true;
       this.context = this.$el[0].getContext('2d');
-      this.resize({
-        height: opts.height
-        ,width: opts.width
-      });
+      this.resize(opts.width, opts.height);
 
-      var boundUpdate = _.bind(this.update, this);
-      this.listenTo(this.stylie, constant.PATH_CHANGED, boundUpdate);
-      this.listenTo(this.stylie, constant.KEYFRAME_ORDER_CHANGED, boundUpdate);
+      var boundRender = _.bind(this.render, this);
+      this.listenTo(this.stylie, constant.PATH_CHANGED, boundRender);
+      this.listenTo(this.stylie, constant.KEYFRAME_ORDER_CHANGED, boundRender);
       this.listenTo(this.stylie, constant.TOGGLE_PATH_AND_CROSSHAIRS,
           _.bind(this.showOrHidePath, this));
+
+      $win.on('resize', _.bind(this.onWindowResize, this));
     }
 
-    ,resize: function (dims) {
-      _.each(['height', 'width'], function (dim) {
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,onWindowResize: function (evt) {
+      var height = $win.height() - this.$header.outerHeight();
+      var width = $win.width();
+      this.resize(width, height);
+    }
+
+    /**
+     * @param {number} width
+     * @param {number} height
+     */
+    ,resize: function (width, height) {
+      var dims = { width: width, height: height };
+
+      _.each(['width', 'height'], function (dim) {
         if (dim in dims) {
           var tweakObj = {};
           tweakObj[dim] = dims[dim];
@@ -49,6 +71,8 @@ define([
             .attr(tweakObj);
         }
       }, this);
+
+      this.render();
     }
 
     ,generatePathPoints: function () {
@@ -102,15 +126,11 @@ define([
       return points;
     }
 
-    ,generatePathPrerender: function (useDimColor) {
+    ,generatePathPrerender: function () {
       var stylie = this.stylie;
-      stylie.config.prerenderedPath = document.createElement('canvas');
-      stylie.config.prerenderedPath.width =
-          stylie.view.canvas.$canvasBG.width();
-      stylie.config.prerenderedPath.height =
-          stylie.view.canvas.$canvasBG.height();
-      var ctx = stylie.config.prerenderedPath.ctx =
-          stylie.config.prerenderedPath.getContext('2d');
+      prerenderBuffer.width = this.$el.width();
+      prerenderBuffer.height = this.$el.height();
+      var ctx = prerenderBuffer.ctx = prerenderBuffer.getContext('2d');
       var points = this.generatePathPoints.apply(this, arguments);
 
       var previousPoint;
@@ -125,21 +145,18 @@ define([
         previousPoint = point;
       });
       ctx.lineWidth = 1;
-      // TODO: These need to be constants!
-      var strokeColor = useDimColor
-          ? 'rgba(255,176,0,.5)'
-          : 'rgb(255,176,0)';
+      var strokeColor = 'rgb(255,176,0)';
       ctx.strokeStyle = strokeColor;
       ctx.stroke();
       ctx.closePath();
     }
 
-    ,update: function (useDimColor) {
-      this.generatePathPrerender(useDimColor);
+    ,render: function () {
+      this.generatePathPrerender();
 
       this.$el[0].width = this.$el.width();
       if (this._isShowing) {
-        this.context.drawImage(this.stylie.config.prerenderedPath, 0, 0);
+        this.context.drawImage(prerenderBuffer, 0, 0);
       }
     }
 
@@ -148,7 +165,7 @@ define([
      */
     ,showOrHidePath: function (isShowing) {
       this._isShowing = isShowing;
-      this.update();
+      this.render();
     }
 
   });

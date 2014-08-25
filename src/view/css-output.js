@@ -48,7 +48,7 @@ define([
       this.stylie = opts.stylie;
       this.$trigger = opts.$trigger;
       this.$animationIteration = opts.$animationIteration;
-      this.$actorEl = $('#rekapi-canvas .rekapi-actor');
+      this.$actorEl = $('#preview-area .rekapi-actor');
 
       this.$trigger.on('click', _.bind(this.onTriggerClick, this));
       this.listenTo(this.stylie,
