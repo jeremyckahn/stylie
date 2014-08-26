@@ -21,15 +21,17 @@ define([
 
     ,initialize: function () {
       _.each(Tweenable.prototype.formula, function (formula, name) {
-        var option = $(document.createElement('option'), {
-            value: name
-          });
+        var $option = $(document.createElement('option'), {
+          value: name
+        });
 
-        option.html(name);
-        this.$el.append(option);
+        $option.html(name);
+        this.$el.append($option);
       }, this);
 
-      this.$el.val(this.model.getEasingObject()[this.$el.data().axis]);
+      var initialEasing =
+          this.model.getEasingObject()[this.$el.data().axis] || 'linear';
+      this.$el.val(initialEasing);
     }
 
     ,onChange: function (evt) {

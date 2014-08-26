@@ -182,8 +182,8 @@ define([
       var viewName = 'easeSelectView' + propertyName.toUpperCase();
       var inputName = 'input'  + propertyName.toUpperCase();
       var template = Mustache.render(EASE_SELECT_TEMPLATE, {
-          property: propertyName
-        });
+        property: propertyName
+      });
 
       var view = this[viewName] = new EaseSelectView({
         el: $(template)[0]
