@@ -1,73 +1,33 @@
 # Stylie - A CSS 3 animation tool
 
-Stylie is a fun tool for easily creating CSS 3 animations.  You can configure
-your animation graphically, tweak it, grab the generated CSS and go!
+Stylie is a fun tool for easily creating CSS 3 animations. Quickly design your
+animation graphically, grab the generated CSS and go!  To learn how to use the
+app, either run it locally (see below) or go to
+http://jeremyckahn.github.io/stylie/ and click the "?" icon in the header for a
+manual.
 
-__[Watch this screencast for a quick
-tutorial.](http://www.youtube.com/watch?v=mGd305iboSo)__
+## Install locally
 
-## The Stylie Workflow
+Requirements:
 
-When you first open the app, you will see a little ball moving from left to
-right.  You probably don't want to animate an image of a ball, so click the
-"HTML" tab in the control panel on the right.  This textarea contains the HTML
-that is being animated.  You can put whatever you want in here, but let's stick
-some text in there for starters:
+* Node[NodeJS](http://nodejs.org/)/NPM,
+* [Bower](http://bower.io/) (version 1.0 or above)
+* [Grunt](http://gruntjs.com/)
+* [Sass](http://sass-lang.com/) and [Compass](http://compass-style.org/)
 
-````html
-<h1>Hello there!</h1>
+Clone this repo and install the dependencies:
+
+````
+npm install && bower install
 ````
 
-The preview updates automatically. Next, you'll want to change the beginning
-and ending positions of the animation. Just click and drag the crosshairs to
-your liking. When your cursor is not focused on a text input, you can hold the
-Shift key to make rotation Cubelets appear over the crosshairs. Click and drag
-the Cubelets to modify the the X and Y rotation axes, and drag the extended
-rotation arm to modify the Z axis rotation.
+To run the app:
 
-You can add, remove and edit keyframes.  This is done in the "Keyframes" tab.
-When you first open Stylie, you are presented with the default keyframes.
-Keyframe 0 cannot be moved and has no easing properties associated with it, but
-all of the other keyframes do.  To add a new keyframe, click the "Add a
-Keyframe" button in the upper right portion of the tab.  You can add as many
-keyframes as you'd like.  You can also reorder keyframes by clicking their
-millisecond value and pressing the Enter key.
+````
+grunt serve
+````
 
-You can tweak individual keyframe properties by pressing the "up" and "down"
-arrow keys when focusing on a property's text input.  You can change individual
-properties' easing formula by selecting it from the dropdown next to each text
-input.  To remove a keyframe, click the "X" in the upper right corner of a
-keyframe.
-
-### Motion control
-
-In addition to the standard easing formulae, you can define your own custom
-easing curves in the "Motion" tab. To do this, select or create a
-"customEasing" from the dropdown and drag the circular handles. You can also
-type in the coordinates for the control points. Once you have defined your
-custom curve, you can select it from any property's easing dropdown.
-
-### Playback control
-
-You'll notice a play head in the bottom left of the screen.  This is fully
-interactive; you can can play, pause and stop the animation.  You can also
-click and drag the play head and zip to any part of the timeline.
-
-### Generating your CSS
-
-Once you've configured the animation to your liking, it is time to generate the
-CSS to be used in your web page.  Click on the "CSS" tab in the control panel
-to see the ready-to-use CSS.  You can configure the generated CSS for your
-specific needs, such as the name of the CSS class on the DOM element to be
-animated, and which browser vendors you want to support.  More complex
-animations will generate very verbose CSS, so be aware of that.
-
-### Saving your animation
-
-You can save your animation to [HTML5 Local
-Storage](http://www.html5rocks.com/en/features/storage).  To do this, open the
-wrench menu and type in the name of your animation.  You can also recall saved
-animations from this menu.
+You can now access Stylie from http://localhost:9000.
 
 ## Developing Stylie
 
@@ -75,33 +35,23 @@ _Note: The whole build process is sort of crazy, and it doesn't follow any
 patterns in particular.  The current setup is engineered around a project goal
 to just be able open the top-level `index.html` file and start using the app.
 It's also designed around running statically as a [Github
-pages](http://pages.github.com/) site.  Also, I'm not great at NodeJS.  If you
-have an idea on how to engineer the build system in a cleaner way, please do
-make a Pull Request or make a suggestion on the [issue
-tracker](https://github.com/jeremyckahn/stylie/issues)._
+pages](http://pages.github.com/) site.  If you have an idea on how to engineer
+the build system in a cleaner way, please make a Pull Request or a suggestion
+on the [issue tracker](https://github.com/jeremyckahn/stylie/issues)._
 
 Stylie is open source, so you are welcome to make changes.  If you do, you'll
 want to use `dev.html`, not `index.html`.  The latter is generated by the build
 process.
 
-Building Stylie requires [NodeJS](http://nodejs.org/),
-[Grunt](http://gruntjs.com/), and [Bower](http://bower.io/) (version 1.0 or
-above).  Once those are installed, run this BASH command to download the
-dependencies:
-
-````
-# npm is installed as part of the standard Node distribution
-npm install; bower install
-````
-
-Once the development dependencies are installed, you can compile the code with:
+You can build the project with:
 
 ````
 grunt build
 ````
 
-Ta-da!  The JavaScript binary and `index.html` will be generated.  Aside from
-the JavaScript, `dev.html` and `index.html` share all of the same asset files.
+Ta-da!  The JavaScript binary (`bin/app.js`), CSS, and `index.html` will be
+generated.  Aside from the JavaScript, `dev.html` and `index.html` share all of
+the same asset files.
 
 ## Contributors
 
