@@ -1,6 +1,6 @@
 {
   "name": "Stylie",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "homepage": "https://github.com/jeremyckahn/stylie",
   "authors": [
     "Jeremy Kahn <jeremyckahn@gmail.com>"
@@ -20,11 +20,10 @@
     "jquery-cubelet": "~0.1.0",
     "bezierizer": "~0.0.4",
     "mustache": "~0.7.2",
-    "jck-library-extensions": "~0.0.11"
+    "jck-library-extensions": "~0.0.11",
+    "keydrown": "~1.1.0"
   },
   "resolutions": {
-    "jquery": "~2.0.2",
-    "jquery-dragon": "0.3.1",
-    "shifty": "1.0.1"
+    "jquery": "~2.0.2"
   }
 }

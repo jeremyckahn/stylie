@@ -47,6 +47,7 @@ require.config({
     ,shifty: 'bower_components/shifty/dist/shifty'
     ,rekapi: 'bower_components/rekapi/dist/rekapi'
     ,'rekapi-scrubber': 'bower_components/rekapi-controls/src/rekapi-scrubber'
+    ,keydrown: 'bower_components/keydrown/dist/keydrown'
     ,mustache: 'bower_components/mustache/mustache'
     ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
 

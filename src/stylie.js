@@ -15,6 +15,7 @@ define([
   ,'modal'
 
   // Misc
+  ,'src/keybindings'
   ,'src/constants'
   ,'src/utils'
 
@@ -26,7 +27,6 @@ define([
   ,'src/view/css-output'
   ,'src/view/html-input'
   ,'src/view/custom-ease'
-  ,'src/view/hotkey-handler'
   ,'src/view/rekapi-controls'
   ,'src/view/save'
   ,'src/view/load'
@@ -52,6 +52,7 @@ define([
   ,AutoUpdateTextFieldView
   ,ModalView
 
+  ,Keybindings
   ,constant
   ,util
 
@@ -62,7 +63,6 @@ define([
   ,CSSOutputView
   ,HTMLInputView
   ,CustomEaseView
-  ,HotkeyHandlerView
   ,RekapiControlsView
   ,SaveView
   ,LoadView
@@ -151,10 +151,7 @@ define([
   };
 
   Stylie.prototype.initViews = function () {
-    this.view.hotkeyHandler = new HotkeyHandlerView({
-      stylie: this
-      ,el: document.body
-    });
+    this.keybindings = new Keybindings(this);
 
     this.view.helpModal = new ModalView({
       el: document.getElementById('help-contents')
