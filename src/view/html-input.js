@@ -19,10 +19,16 @@ define([
 
     events: {
       keyup: 'onKeyup'
+      ,change: 'onChange'
     }
 
+    /**
+     * @param {Object} opts
+     *   @param {Stylie} stylie
+     *   @param {Element} el
+     */
     ,initialize: function (opts) {
-      _.extend(this, opts);
+      this.stylie = opts.stylie;
       this.$renderTarget = $('#preview-area .rekapi-actor');
       this.initialValue = this.readFromDOM();
       this.$el.html(this.initialValue);
@@ -41,6 +47,14 @@ define([
       this.$renderTarget.html(renderVal);
     }
 
+    ,onChange: function () {
+      this.stylie.saveTransientAnimation();
+    }
+
+    ,resetToDefault: function () {
+      this.$el.val(this.initialValue);
+      this.$renderTarget.html(this.initialValue);
+    }
   });
 });
 

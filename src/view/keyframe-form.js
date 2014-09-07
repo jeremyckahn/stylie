@@ -280,12 +280,17 @@ define([
     ,teardown: function () {
       if (this.model.get('millisecond') > 0) {
         _.each(['X', 'Y', 'SCALE', 'RX', 'RY', 'RZ'], function (axis) {
-          this['easeSelectView' + axis].teardown();
+          if (!this.isFirstKeyfame()) {
+            this['easeSelectView' + axis].teardown();
+          }
+
           this['incrementerView' + axis].teardown();
           this['$input' + axis].remove();
         }, this);
 
-        this.millisecondIncrementer.teardown();
+        if (!this.isFirstKeyfame()) {
+          this.millisecondIncrementer.teardown();
+        }
       }
 
       this.$header.remove();

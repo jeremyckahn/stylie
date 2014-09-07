@@ -92,8 +92,7 @@ define([
     }
 
     ,setCurrentState: function (state) {
-      this.stylie.actorCollection.getCurrent().removeAllKeyframes();
-      this.stylie.view.customEase.removeAllEasings();
+      this.stylie.clearCurrentState();
 
       this.stylie.view.htmlInput.$el.val(state.html);
       this.stylie.view.htmlInput.renderToDOM();

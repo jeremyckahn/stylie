@@ -155,6 +155,11 @@ table {
   text-align: center;
 }
 
+button.center {
+  display: block;
+  margin: 0 auto;
+}
+
 .hid {
   display: none;
 }
@@ -316,6 +321,10 @@ button.field-button {
   font-size: 0.8em;
   margin: 0 6px 0 4px;
   padding: 5px 12px;
+}
+
+button.field-button.center {
+  margin: 0 auto;
 }
 
 button.inline-action {
@@ -708,12 +717,16 @@ canvas {
     margin-top: 18px;
   }
 
-#misc-controls {
+#management-console {
 
 }
 
-  #load-controls select {
+  .load-controls select {
     margin-left: 0;
+  }
+
+  #management-console .misc-buttons {
+    padding-top: 16px;
   }
 
 #custom-ease {

@@ -28,9 +28,8 @@ define([
   ,'src/view/html-input'
   ,'src/view/custom-ease'
   ,'src/view/rekapi-controls'
-  ,'src/view/save'
-  ,'src/view/load'
   ,'src/view/orientation-controls'
+  ,'src/view/management-console'
 
   // Models
   ,'src/model/animation'
@@ -64,9 +63,8 @@ define([
   ,HTMLInputView
   ,CustomEaseView
   ,RekapiControlsView
-  ,SaveView
-  ,LoadView
   ,OrientationControlsView
+  ,ManagementConsoleView
 
   ,AnimationModel
 
@@ -111,8 +109,26 @@ define([
     this.actorCollection = new ActorCollection([], { stylie: this });
     this.animationModel = new AnimationModel({}, { stylie: this });
 
-    this.initActors();
+    this.rekapi.addActor({
+      context: $('#preview-area').children()[0]
+    });
+
     this.initViews();
+
+    var currentActorModel = this.actorCollection.getCurrent();
+    this.listenTo(currentActorModel, 'change', _.bind(function () {
+      this.rekapi.update();
+    }, this));
+
+    if (window.localStorage.transientAnimation) {
+      this.animationModel.setCurrentState(
+          JSON.parse(window.localStorage.transientAnimation));
+    } else {
+      this.createDefaultState();
+    }
+
+    this.on(constant.PATH_CHANGED,
+        _.bind(this.saveTransientAnimation, this));
 
     $(window).trigger('resize');
 
@@ -121,11 +137,7 @@ define([
 
   _.extend(Stylie.prototype, Backbone.Events);
 
-  Stylie.prototype.initActors = function () {
-    this.rekapi.addActor({
-      context: $('#preview-area').children()[0]
-    });
-
+  Stylie.prototype.createDefaultState = function () {
     var winWidth = $win.width();
     var currentActorModel = this.actorCollection.getCurrent();
     var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
@@ -143,11 +155,11 @@ define([
         ,rY: 0
         ,rZ: 0
       }, 'linear linear linear linear linear');
+
     });
 
-    this.listenTo(currentActorModel, 'change', _.bind(function () {
-      this.rekapi.update();
-    }, this));
+    this.view.customEase.setUpDefaultEasings();
+    this.view.htmlInput.resetToDefault();
   };
 
   Stylie.prototype.initViews = function () {
@@ -221,7 +233,8 @@ define([
     }, this);
 
     this.view.htmlInput = new HTMLInputView({
-      $el: $('#html-input textarea')
+      stylie: this
+      ,el: $('#html-input textarea')[0]
     });
 
     this.view.centerToPathCheckbox = new CheckboxView({
@@ -251,15 +264,9 @@ define([
     this.on(constant.ALERT_ERROR,
         _.bind(topLevelAlert.show, topLevelAlert));
 
-    this.view.save = new SaveView({
+    this.view.managementConsole = new ManagementConsoleView({
       stylie: this
-      ,el: document.getElementById('save-controls')
-      ,model: this.animationModel
-    });
-
-    this.view.load = new LoadView({
-      stylie: this
-      ,el: document.getElementById('load-controls')
+      ,el: document.getElementById('management-console')
       ,model: this.animationModel
     });
 
@@ -268,6 +275,16 @@ define([
       ,el: document.getElementById('orientation-controls')
     });
   };
+
+  Stylie.prototype.clearCurrentState = function () {
+    this.actorCollection.getCurrent().removeAllKeyframes();
+    this.view.customEase.removeAllEasings();
+  };
+
+  Stylie.prototype.saveTransientAnimation = _.throttle(function () {
+    window.localStorage.transientAnimation =
+      JSON.stringify(this.animationModel.getCurrentState());
+  }, constant.TRANSIENT_SAVE_THROTTLE_MS);
 
   return Stylie;
 });

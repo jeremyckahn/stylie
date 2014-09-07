@@ -32,7 +32,6 @@ define([
       ,'change .custom-ease-select': 'onCurveSelectChange'
     }
 
-
     /**
      * @param {Object} opts
      *   @param {Stylie} stylie
@@ -62,11 +61,12 @@ define([
 
         this['incrementer' + point.toUpperCase()] = incrementerFieldView;
       }, this));
-
-      this.addEasing('customEasing1', bezierizerPoints);
-      this.updateCurrentBezierCurve();
     }
 
+    ,setUpDefaultEasings: function () {
+      this.addEasing('customEasing1', this._defaultBezierizerPoints);
+      this.updateCurrentBezierCurve();
+    }
 
     ,onControlPointValReenter: function (point, val) {
       var handlePositions = {};
@@ -75,12 +75,10 @@ define([
       this.updateCurrentBezierCurve();
     }
 
-
     ,onBezierizerChange: function (evt) {
       this.updateCurrentBezierCurve();
       this.updateControlPointFields();
     }
-
 
     ,onCurveSelectChange: function (evt) {
       var currentEasing = this._$easingSelect.val();
@@ -100,7 +98,6 @@ define([
       this.addEasing(easingName, this._defaultBezierizerPoints);
     }
 
-
     ,addEasing: function (easingName, bezierizerPoints) {
       var $option = $(document.createElement('option'));
       $option
@@ -114,7 +111,6 @@ define([
       this.updateControlPointFields();
     }
 
-
     ,removeEasing: function (easingName) {
       Tweenable.unsetBezierFunction(easingName);
 
@@ -126,7 +122,6 @@ define([
         }
       });
     }
-
 
     ,removeAllEasings: function () {
       _.each(Tweenable.prototype.formula, function (fn, fnName) {
@@ -145,7 +140,6 @@ define([
       }, this));
     }
 
-
     ,updateCurrentBezierCurve: function () {
       var currentEasing = this._$easingSelect.val();
       var handlePositions = this._bezierizer.getHandlePositions();
@@ -162,7 +156,6 @@ define([
 
       this.stylie.trigger(constant.PATH_CHANGED);
     }
-
 
     ,updateControlPointFields: function () {
       var handlePositions = this._bezierizer.getHandlePositions();

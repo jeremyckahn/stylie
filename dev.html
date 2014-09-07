@@ -32,7 +32,7 @@
         <li data-target="motion-controls"><a href="#">Motion</a></li>
         <li data-target="css-output"><a href="#">CSS</a></li>
         <li data-target="html-input"><a href="#">HTML</a></li>
-        <li data-target="misc-controls"><a href="#" class="icon icon-wrench"></a></li>
+        <li data-target="management-console"><a href="#" class="icon icon-wrench"></a></li>
       </ul>
       <ul class="tabs-contents">
         <li id="keyframe-controls">
@@ -173,10 +173,10 @@
           </p>
           <textarea></textarea>
         </li>
-        <li id="misc-controls">
+        <li id="management-console">
           <ul class="controls">
             <li>
-              <form id="save-controls" action="#">
+              <form class="save-controls" action="#">
                 <h3>
                   <label for="animation-name">Name this animation:</label>
                 </h3>
@@ -184,13 +184,16 @@
                 <input id="animation-name" type="text" class="three-quarters" value="My animation">
               </form>
             </li>
-            <li id="load-controls">
+            <li class="load-controls">
               <h3>
                 <label for="animation-loader">Load an animation:</label>
               </h3>
-              <button id="animation-load" class="field-button">Load</button>
+              <button class="field-button animation-load">Load</button>
               <select id="animation-loader" class="three-quarters"></select>
               <button class="icon icon-remove inline-action" title="Delete this animation">&nbsp;</button>
+            </li>
+            <li class="misc-buttons">
+              <button class="field-button center create-new-animation">Create new animation</button>
             </li>
           </ul>
         </li>
@@ -218,7 +221,7 @@
         <h3>Generating your CSS</h3>
         <p>Once you&#x27;ve tweaked the animation to your liking, it is time to generate the CSS to be used in your web page. Click on the &quot;CSS&quot; tab in the control panel to see the ready-to-use CSS. You can tweak the generated CSS for your specific needs, such as the name of the CSS class on the DOM element to be animated, and which browser vendors you want to support. Stylie will optimize simpler animations, but more complex animations will generate very verbose CSS, so be aware of that. You can control the size of the generated CSS for complex animations with the slider below the CSS text box.</p>
         <h3>Saving your animation</h3>
-        <p>You can save your animation to <a href="http://www.html5rocks.com/en/features/storage" target="_blank">HTML5 Local Storage</a>.  To do this, open the wrench menu and type in the name of your animation.  You can also recall saved animations from this menu.</p>
+        <p>You can save your animation to <a href="http://www.html5rocks.com/en/features/storage" target="_blank">HTML5 Local Storage</a>.  To do this, open the wrench menu and type in the name of your animation.  You can also recall saved animations from this menu.  Additionally, you can erase the current animation and start from scratch.</p>
         <img src="img/save_load.png" alt="A screenshot of the save/load pane.">
         <h3>Key bindings</h3>
         <p>Stylie has a few keyboard-activated features:</p>
