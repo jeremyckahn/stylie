@@ -369,7 +369,7 @@ canvas {
 
   #scaffolding-area .crosshair {
     cursor: move;
-    margin: -27px;
+    margin: -26px;
     position: absolute;
     top: 180px;
   }
@@ -384,13 +384,13 @@ canvas {
     }
 
     .crosshair .dashmark.horiz {
-      top: 25px;
+      top: 24px;
       width: 100%;
     }
 
     .crosshair .dashmark.vert {
       height: 100%;
-      left: 25px;
+      left: 24px;
     }
 
     .crosshair .rotation-control {
