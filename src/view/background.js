@@ -102,6 +102,14 @@ define([
       return points;
     }
 
+    /**
+     * @param {number} x1
+     * @param {number} x2
+     * @param {number} y1
+     * @param {number} y2
+     * @param {string} easeX
+     * @param {string} easeY
+     */
     ,generatePathSegment: function (x1, x2, y1, y2, easeX, easeY) {
       var points = [];
       var from = {
@@ -144,7 +152,7 @@ define([
 
         previousPoint = point;
       });
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 4;
       var strokeColor = 'rgb(255,176,0)';
       ctx.strokeStyle = strokeColor;
       ctx.stroke();

@@ -359,8 +359,8 @@ canvas {
   }
 
   #scaffolding-area .crosshair-container {
-    height: 40px;
-    width: 40px;
+    height: 52px;
+    width: 52px;
   }
 
     .shift-down .crosshair-container {
@@ -369,28 +369,28 @@ canvas {
 
   #scaffolding-area .crosshair {
     cursor: move;
-    margin: -20px;
+    margin: -27px;
     position: absolute;
     top: 180px;
   }
 
     .crosshair .dashmark {
       background: #0c0;
-      height: 2px;
+      height: 4px;
       left: 0;
       position: absolute;
       top: 0;
-      width: 2px;
+      width: 4px;
     }
 
     .crosshair .dashmark.horiz {
-      top: 19px;
+      top: 25px;
       width: 100%;
     }
 
     .crosshair .dashmark.vert {
       height: 100%;
-      left: 19px;
+      left: 25px;
     }
 
     .crosshair .rotation-control {

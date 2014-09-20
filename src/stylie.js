@@ -140,8 +140,7 @@ define([
   Stylie.prototype.createDefaultState = function () {
     var winWidth = $win.width();
     var currentActorModel = this.actorCollection.getCurrent();
-    var halfCrossHairHeight = $('#crosshairs .crosshair:first').height() / 2;
-    var crosshairStartingY = ($win.height() / 2) - halfCrossHairHeight;
+    var crosshairStartingY = $win.height() / 2;
 
     // Create the initial keyframes.
     _.each([0, constant.INITIAL_ANIMATION_DURATION], function (millisecond, i) {
