@@ -48,7 +48,7 @@ define([
   /* jshint maxlen: 300 */
   var KEYFRAME_PROPERTY_TEMPLATE = [
       '<div class="property-field">'
-        ,'<label>'
+        ,'<label title="{{title}}">'
           ,'<span>{{propertyLabel}}:</span>'
           ,'<input class="quarter-width keyframe-attr-{{property}}" type="text" data-keyframeattr="{{property}}" value="{{value}}">'
         ,'</label>'
@@ -62,9 +62,9 @@ define([
       ,'</label>'
     ].join('');
 
-  /* jshint maxlen: 100 */
+  /* jshint maxlen: 120 */
   var EASE_SELECT_TEMPLATE = [
-      '<select class="easing {{property}}-easing" data-axis="{{property}}"></select>'
+      '<select class="easing {{property}}-easing" data-axis="{{property}}" title="Easing curve"></select>'
     ].join('');
 
   var MILLISECOND_INPUT_TEMPLATE = [
@@ -106,24 +106,32 @@ define([
         this.$pinnedButtonArray.append($template);
       }
 
-      _.each(['x', 'y', 'scale', 'rX', 'rY', 'rZ'], function (property) {
+      _.each([
+           { name: 'x',     label: 'X',  title: 'X axis' }
+          ,{ name: 'y',     label: 'Y',  title: 'Y axis' }
+          ,{ name: 'scale', label: 'S',  title: 'Scale' }
+          ,{ name: 'rX',    label: 'rX', title: 'Rotation (X axis)' }
+          ,{ name: 'rY',    label: 'rY', title: 'Rotation (Y axis)' }
+          ,{ name: 'rZ',    label: 'rZ', title: 'Rotation (Z axis)' }
+        ], function (property) {
         // TODO: This is ugly!  Make it not ugly!
-        var propertyLabel = property === 'scale' ? 'S' : property.toUpperCase();
+        //var propertyLabel = property === 'scale' ? 'S' : property.toUpperCase();
 
         var template = Mustache.render(KEYFRAME_PROPERTY_TEMPLATE, {
-          property: property
-          ,propertyLabel: propertyLabel
-          ,value: this.model.get(property)
+          property: property.name
+          ,propertyLabel: property.label
+          ,title: property.title
+          ,value: this.model.get(property.name)
         });
 
         var $template = $(template);
 
         if (!isFirstKeyfame) {
-          var easeSelectView = this.initEaseSelect(property);
+          var easeSelectView = this.initEaseSelect(property.name);
           $template.append(easeSelectView.$el);
         }
 
-        this['$input' + property.toUpperCase()] = $template;
+        this['$input_' + property.name] = $template;
         this.$el.append($template);
       }, this);
     }
@@ -135,20 +143,20 @@ define([
 
     ,initIncrementers: function () {
       _.each([
-          this.$inputX,
-          this.$inputY,
-          this.$inputSCALE,
-          this.$inputRX,
-          this.$inputRY,
-          this.$inputRZ], function ($el) {
+          this.$input_x,
+          this.$input_y,
+          this.$input_scale,
+          this.$input_rX,
+          this.$input_rY,
+          this.$input_rZ], function ($el) {
         var $input = $el.find('input');
         var keyframeAttr = $input.data('keyframeattr');
-        this['incrementerView' + keyframeAttr.toUpperCase()] =
+        this['incrementerView_' + keyframeAttr] =
             incrementerGeneratorHelper.call(this, $input);
       }, this);
 
-      this.incrementerViewSCALE.increment = 0.1;
-      this.incrementerViewSCALE.mousewheelIncrement = 0.1;
+      this.incrementerView_scale.increment = 0.1;
+      this.incrementerView_scale.mousewheelIncrement = 0.1;
 
       if (!this.isFirstKeyfame()) {
         var template = Mustache.render(MILLISECOND_INPUT_TEMPLATE, {
@@ -179,7 +187,7 @@ define([
     }
 
     ,initEaseSelect: function (propertyName, previousSibling) {
-      var viewName = 'easeSelectView' + propertyName.toUpperCase();
+      var viewName = 'easeSelectView_' + propertyName;
       var inputName = 'input'  + propertyName.toUpperCase();
       var template = Mustache.render(EASE_SELECT_TEMPLATE, {
         property: propertyName
@@ -221,11 +229,10 @@ define([
       this.renderHeader();
 
       ['x', 'y', 'scale', 'rX', 'rY', 'rZ'].forEach(function (axis) {
-        var upperAxis = axis.toUpperCase();
         var axisValue = this.model.get(axis);
-        var incrementerView = this['incrementerView' + upperAxis];
+        var incrementerView = this['incrementerView_' + axis];
 
-        if (axisValue !== parseFloat(this['$input' + upperAxis].val()) &&
+        if (axisValue !== parseFloat(this['$input_' + axis].val()) &&
           incrementerView.$el[0] !== document.activeElement) {
 
           incrementerView.$el.val(axisValue);
@@ -238,12 +245,12 @@ define([
     }
 
     ,updateEasingString: function () {
-      var xEasing = this.easeSelectViewX.$el.val();
-      var yEasing = this.easeSelectViewY.$el.val();
-      var scaleEasing = this.easeSelectViewSCALE.$el.val();
-      var rXEasing = this.easeSelectViewRX.$el.val();
-      var rYEasing = this.easeSelectViewRY.$el.val();
-      var rZEasing = this.easeSelectViewRZ.$el.val();
+      var xEasing = this.easeSelectView_x.$el.val();
+      var yEasing = this.easeSelectView_y.$el.val();
+      var scaleEasing = this.easeSelectView_scale.$el.val();
+      var rXEasing = this.easeSelectView_rX.$el.val();
+      var rYEasing = this.easeSelectView_rY.$el.val();
+      var rZEasing = this.easeSelectView_rZ.$el.val();
       var newEasingString = [
           xEasing, yEasing, scaleEasing, rXEasing, rYEasing, rZEasing].join(' ');
 
@@ -279,13 +286,13 @@ define([
 
     ,teardown: function () {
       if (this.model.get('millisecond') > 0) {
-        _.each(['X', 'Y', 'SCALE', 'RX', 'RY', 'RZ'], function (axis) {
+        _.each(['x', 'y', 'scale', 'rX', 'rY', 'rZ'], function (axis) {
           if (!this.isFirstKeyfame()) {
-            this['easeSelectView' + axis].teardown();
+            this['easeSelectView_' + axis].teardown();
           }
 
-          this['incrementerView' + axis].teardown();
-          this['$input' + axis].remove();
+          this['incrementerView_' + axis].teardown();
+          this['$input_' + axis].remove();
         }, this);
 
         if (!this.isFirstKeyfame()) {
