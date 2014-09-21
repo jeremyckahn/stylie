@@ -1,6 +1,6 @@
 {
   "name": "Stylie",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "homepage": "https://github.com/jeremyckahn/stylie",
   "authors": [
     "Jeremy Kahn <jeremyckahn@gmail.com>"
@@ -21,7 +21,7 @@
     "bezierizer": "~0.0.4",
     "mustache": "~0.7.2",
     "jck-library-extensions": "~0.0.13",
-    "keydrown": "~1.1.1"
+    "keydrown": "~1.1.2"
   },
   "resolutions": {
     "jquery": "~2.0.2"
