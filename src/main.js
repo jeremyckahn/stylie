@@ -41,7 +41,7 @@ require.config({
         'bower_components/jquery-dragon/src/jquery.dragon-slider'
     ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
     ,backbone: 'bower_components/backbone/backbone'
-    ,underscore: 'bower_components/underscore/underscore'
+    ,underscore: 'bower_components/lodash/dist/lodash'
     ,'underscore.jck':
         'bower_components/jck-library-extensions/src/underscore/underscore.jck'
     ,shifty: 'bower_components/shifty/dist/shifty'
