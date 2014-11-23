@@ -1,5 +1,7 @@
-*.swp
-.DS_Store
-.sass-cache
 node_modules
-bower_components
+dist
+test/temp
+.sass-cache
+app/bower_components
+.tmp
+.DS_Store

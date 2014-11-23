@@ -1,26 +1,27 @@
 {
   "globals": {
-    "define": true,
-    "require": true
+    "require": true,
+    "define": true
   },
-  "asi": false,
-  "boss": true,
+  "node": true,
   "browser": true,
+  "esnext": true,
+  "bitwise": true,
+  "camelcase": true,
   "curly": true,
   "eqeqeq": true,
-  "evil": true,
-  "eqnull": true,
   "immed": true,
-  "lastsemic": true,
   "latedef": true,
-  "laxbreak": true,
   "laxcomma": true,
   "maxlen": 80,
   "newcap": true,
   "noarg": true,
-  "nomen": false,
-  "plusplus": false,
-  "sub": true,
+  "quotmark": "single",
+  "regexp": true,
   "undef": true,
-  "white": false
+  "unused": true,
+  "strict": true,
+  "trailing": true,
+  "smarttabs": true,
+  "jquery": true
 }
