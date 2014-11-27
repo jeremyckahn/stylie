@@ -25,6 +25,9 @@ require.config({
     ,location: 'scripts'
     ,main: 'stylie'
   }, {
+    name: 'lateralus.component.tabs'
+    ,location: 'bower_components/lateralus-components/tabs'
+  }, {
     name: 'stylie.component.container'
     ,location: 'scripts/components/container'
   }, {

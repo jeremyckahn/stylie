@@ -4,11 +4,15 @@ define([
 
   ,'text!./template.mustache'
 
+  ,'lateralus.component.tabs'
+
 ], function (
 
   Lateralus
 
   ,template
+
+  ,TabsComponent
 
 ) {
   'use strict';
@@ -21,6 +25,11 @@ define([
      */
     ,initialize: function () {
       this._super('initialize', arguments);
+
+      this.addSubview(TabsComponent.View, {
+        $tabsContainer: this.$tabsContainer,
+        $tabsContentContainer: this.$tabsContentContainer
+      });
     }
   });
 
