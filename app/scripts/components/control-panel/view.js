@@ -5,6 +5,7 @@ define([
   ,'text!./template.mustache'
 
   ,'lateralus.component.tabs'
+  ,'stylie.component.keyframes-panel'
 
 ], function (
 
@@ -13,6 +14,7 @@ define([
   ,template
 
   ,TabsComponent
+  ,KeyframePanelComponent
 
 ) {
   'use strict';
@@ -29,6 +31,10 @@ define([
       this.addSubview(TabsComponent.View, {
         $tabsContainer: this.$tabsContainer,
         $tabsContentContainer: this.$tabsContentContainer
+      });
+
+      this.addComponent(KeyframePanelComponent, {
+        el: this.$keyframesPanel[0]
       });
     }
   });

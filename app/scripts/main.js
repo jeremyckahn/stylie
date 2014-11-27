@@ -33,6 +33,9 @@ require.config({
   }, {
     name: 'stylie.component.control-panel'
     ,location: 'scripts/components/control-panel'
+  }, {
+    name: 'stylie.component.keyframes-panel'
+    ,location: 'scripts/components/keyframes-panel'
   }]
 });
 
