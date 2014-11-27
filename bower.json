@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap-sass-official": "~3.2.0",
     "modernizr": "~2.7.1",
-    "lateralus": "~0.0.1"
+    "lateralus": "~0.0.1",
+    "lateralus-components": "~0.0.2"
   }
 }

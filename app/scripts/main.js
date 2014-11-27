@@ -27,6 +27,9 @@ require.config({
   }, {
     name: 'stylie.component.container'
     ,location: 'scripts/components/container'
+  }, {
+    name: 'stylie.component.control-panel'
+    ,location: 'scripts/components/control-panel'
   }]
 });
 

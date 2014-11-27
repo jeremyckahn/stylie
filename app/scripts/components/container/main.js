@@ -5,12 +5,16 @@ define([
   ,'./view'
   ,'text!./template.mustache'
 
+  ,'stylie.component.control-panel'
+
 ], function (
 
   Lateralus
 
   ,View
   ,template
+
+  ,ControlPanelComponent
 
 ) {
   'use strict';
@@ -19,6 +23,12 @@ define([
     name: 'container'
     ,View: View
     ,template: template
+
+    ,initialize: function () {
+      this.controlPanelComponent = this.addComponent(ControlPanelComponent, {
+        el: this.view.$controlPanel[0]
+      });
+    }
   });
 
   return ContainerComponent;
