@@ -12,6 +12,8 @@ require.config({
   ,paths: {
     text: 'bower_components/requirejs-text/text'
     ,jquery: 'bower_components/jquery/dist/jquery'
+    ,shifty: 'bower_components/shifty/dist/shifty'
+    ,rekapi: 'bower_components/rekapi/dist/rekapi'
     ,backbone: 'bower_components/backbone/backbone'
     ,underscore: 'bower_components/lodash/dist/lodash'
     ,mustache: 'bower_components/mustache/mustache'
@@ -27,6 +29,9 @@ require.config({
   }, {
     name: 'lateralus.component.tabs'
     ,location: 'bower_components/lateralus-components/tabs'
+  }, {
+    name: 'stylie.component.rekapi'
+    ,location: 'scripts/components/rekapi'
   }, {
     name: 'stylie.component.container'
     ,location: 'scripts/components/container'
