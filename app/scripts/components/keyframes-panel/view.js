@@ -4,11 +4,15 @@ define([
 
   ,'text!./template.mustache'
 
+  ,'stylie.component.keyframe-form'
+
 ], function (
 
   Lateralus
 
   ,template
+
+  ,KeyframeFormComponent
 
 ) {
   'use strict';
@@ -25,10 +29,22 @@ define([
      */
     ,initialize: function () {
       this._super('initialize', arguments);
+      this.listenFor(
+        'keyframePropertyAdded', this.onKeyframePropertyAdded.bind(this));
     }
 
     ,onClickAddKeyframe: function () {
       this.emit('requestNewKeyframe');
+    }
+
+    /**
+     * @param {Backbone.Model} keyframePropertyModel
+     */
+    ,onKeyframePropertyAdded: function (keyframePropertyModel) {
+      var keyframeFormComponent = this.addComponent(KeyframeFormComponent);
+      this.$keyframesList.append(keyframeFormComponent.view.el, {
+        model: keyframePropertyModel
+      });
     }
   });
 

@@ -1,6 +1,7 @@
 define([
 
   'underscore'
+  ,'backbone'
   ,'lateralus'
 
   ,'text!./templates/transform-string.mustache'
@@ -13,6 +14,7 @@ define([
 ], function (
 
   _
+  ,Backbone
   ,Lateralus
 
   ,transformStringTemplate
@@ -42,9 +44,8 @@ define([
       this.rekapiActor = this.rekapi.addActor();
       this.addNewKeyframe(0);
 
-      this.listenTo(
-        this.lateralus
-        ,'requestNewKeyframe'
+      this.listenFor(
+        'requestNewKeyframe'
         ,this.onRequestNewKeyframe.bind(this)
       );
     }
@@ -98,6 +99,23 @@ define([
       var newKeyframeProperty =
         this.rekapiActor.getKeyframeProperty('transform', millisecond);
       newKeyframeProperty.rawTransformData = rawTransformData;
+
+      this.emit(
+        'keyframePropertyAdded'
+        ,this.getModelFromKeyframeProperty(newKeyframeProperty)
+      );
+    }
+
+    /**
+     * @param {Rekapi.KeyframeProperty} keyframeProperty
+     * @return {Backbone.Model}
+     */
+    ,getModelFromKeyframeProperty: function (keyframeProperty) {
+      return new Backbone.Model({
+        id: keyframeProperty.id
+        ,value: keyframeProperty.value
+        ,easing: keyframeProperty.easing
+      });
     }
   });
 
