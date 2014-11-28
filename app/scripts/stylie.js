@@ -25,6 +25,8 @@ define([
 
     this.rekapiComponent = this.addComponent(RekapiComponent);
     this.containerComponent = this.addComponent(ContainerComponent);
+
+    this.rekapiComponent.addNewKeyframe(0);
   });
 
   return Stylie;

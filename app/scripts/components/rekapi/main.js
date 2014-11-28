@@ -1,12 +1,10 @@
 define([
 
   'underscore'
-  ,'backbone'
   ,'lateralus'
 
-  ,'text!./templates/transform-string.mustache'
+  ,'./collections/keyframe-property'
 
-  ,'mustache'
   ,'rekapi'
 
   ,'../../constant'
@@ -14,12 +12,10 @@ define([
 ], function (
 
   _
-  ,Backbone
   ,Lateralus
 
-  ,transformStringTemplate
+  ,KeyframePropertyCollection
 
-  ,Mustache
   ,Rekapi
 
   ,constant
@@ -27,22 +23,13 @@ define([
 ) {
   'use strict';
 
-  var INITIAL_TRANSFORM = {
-    x: 0
-    ,y: 0
-    ,scale: 1
-    ,rotationX: 0
-    ,rotationY: 0
-    ,rotationZ: 0
-  };
-
   var RekapiComponent = Lateralus.Component.extend({
     name: 'rekapi'
 
     ,initialize: function () {
       this.rekapi = new Rekapi();
       this.rekapiActor = this.rekapi.addActor();
-      this.addNewKeyframe(0);
+      this.transformPropertyCollection = new KeyframePropertyCollection();
 
       this.listenFor(
         'requestNewKeyframe'
@@ -55,23 +42,6 @@ define([
     }
 
     /**
-     * @param {Object} transformObject
-     * @param {number} transformObject.x
-     * @param {number} transformObject.y
-     * @param {number} transformObject.scale
-     * @param {number} transformObject.rotationX
-     * @param {number} transformObject.rotationY
-     * @param {number} transformObject.rotationZ
-     * @param {boolean} [transformObject.isCentered]
-     * @return {string}
-     */
-    ,getFormattedTransformString: function (transformObject) {
-      return Mustache.render(
-        // Strip out any newlines
-        transformStringTemplate.replace(/\n/g,''), transformObject);
-    }
-
-    /**
      * @param {number} [opt_millisecond] Where on the timeline to place the new
      * keyframe.
      */
@@ -80,42 +50,21 @@ define([
         this.rekapi.getAnimationLength() + constant.NEW_KEYFRAME_MS_INCREASE :
         opt_millisecond;
 
-      var transformProperties =
-        this.rekapiActor.getPropertiesInTrack('transform');
+      var transformComponents;
 
-      var rawTransformData;
-
-      if (transformProperties) {
-        rawTransformData = _.last(transformProperties).rawTransformData;
-        rawTransformData.x += constant.NEW_KEYFRAME_X_INCREASE;
-      } else {
-        rawTransformData = INITIAL_TRANSFORM;
+      if (this.transformPropertyCollection.length) {
+        transformComponents = this.transformPropertyCollection.last().toJSON();
+        transformComponents.x += constant.NEW_KEYFRAME_X_INCREASE;
       }
 
+      var keyframePropertyModel =
+        this.transformPropertyCollection.add(transformComponents || {});
+
       this.rekapiActor.keyframe(millisecond, {
-        transform: this.getFormattedTransformString(rawTransformData)
+        transform: keyframePropertyModel.toString()
       });
 
-      var newKeyframeProperty =
-        this.rekapiActor.getKeyframeProperty('transform', millisecond);
-      newKeyframeProperty.rawTransformData = rawTransformData;
-
-      this.emit(
-        'keyframePropertyAdded'
-        ,this.getModelFromKeyframeProperty(newKeyframeProperty)
-      );
-    }
-
-    /**
-     * @param {Rekapi.KeyframeProperty} keyframeProperty
-     * @return {Backbone.Model}
-     */
-    ,getModelFromKeyframeProperty: function (keyframeProperty) {
-      return new Backbone.Model({
-        id: keyframeProperty.id
-        ,value: keyframeProperty.value
-        ,easing: keyframeProperty.easing
-      });
+      this.emit('keyframePropertyAdded', keyframePropertyModel);
     }
   });
 
