@@ -1,6 +1,7 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
@@ -8,7 +9,8 @@ define([
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
 
   ,template
 
@@ -29,8 +31,12 @@ define([
      */
     ,initialize: function () {
       this._super('initialize', arguments);
+      this.keyframeFormComponents = [];
+
       this.listenFor(
         'keyframePropertyAdded', this.onKeyframePropertyAdded.bind(this));
+      this.listenFor(
+        'confirmNewKeyframeOrder', this.onConfirmNewKeyframeOrder.bind(this));
     }
 
     ,onClickAddKeyframe: function () {
@@ -45,7 +51,24 @@ define([
         model: keyframePropertyModel
       });
 
+      this.keyframeFormComponents.push(keyframeFormComponent);
       this.$keyframesList.append(keyframeFormComponent.view.el);
+    }
+
+    /**
+     * @param {KeyframePropertyCollection} collection
+     */
+    ,onConfirmNewKeyframeOrder: function (collection) {
+      this.$keyframesList.children().detach();
+
+      collection.each(function (model) {
+        var keyframeFormComponent = _.find(this.keyframeFormComponents,
+            function (keyframeFormComponent) {
+          return keyframeFormComponent.view.model === model;
+        });
+
+        this.$keyframesList.append(keyframeFormComponent.view.el);
+      }, this);
     }
   });
 

@@ -35,10 +35,19 @@ define([
         'requestNewKeyframe'
         ,this.onRequestNewKeyframe.bind(this)
       );
+
+      this.listenFor(
+        'millisecondEditingEnd'
+        ,this.onMillisecondEditingEnd.bind(this)
+      );
     }
 
     ,onRequestNewKeyframe: function () {
       this.addNewKeyframe();
+    }
+
+    ,onMillisecondEditingEnd: function () {
+      this.emit('confirmNewKeyframeOrder', this.transformPropertyCollection);
     }
 
     ,addNewKeyframe: function () {

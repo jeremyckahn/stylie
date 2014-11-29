@@ -121,6 +121,7 @@ define([
     ,onBlurMillisecondInput: function () {
       this.saveMillisecondToModel();
       this.disableMillisecondEditing();
+      this.emit('millisecondEditingEnd');
     }
 
     ,getTemplateRenderData: function () {

@@ -60,8 +60,12 @@ define([
         return isNaN(attributes[numberProperty]);
       });
 
-      if (attributes.millisecond < 0 &&
-          !_.contains(invalidFields, 'millisecond')) {
+      if ((
+            attributes.millisecond < 1 &&
+            !_.contains(invalidFields, 'millisecond')
+            ) ||
+            this.collection.findWhere({ millisecond: attributes.millisecond})
+          ) {
         invalidFields.push('millisecond');
       }
 
