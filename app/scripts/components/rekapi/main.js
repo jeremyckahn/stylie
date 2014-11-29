@@ -50,15 +50,17 @@ define([
         this.rekapi.getAnimationLength() + constant.NEW_KEYFRAME_MS_INCREASE :
         opt_millisecond;
 
-      var transformComponents;
+      var keyframePropertyAttributes;
 
       if (this.transformPropertyCollection.length) {
-        transformComponents = this.transformPropertyCollection.last().toJSON();
-        transformComponents.x += constant.NEW_KEYFRAME_X_INCREASE;
+        keyframePropertyAttributes =
+          this.transformPropertyCollection.last().toJSON();
+        keyframePropertyAttributes.x += constant.NEW_KEYFRAME_X_INCREASE;
+        keyframePropertyAttributes.millisecond = millisecond;
       }
 
       var keyframePropertyModel =
-        this.transformPropertyCollection.add(transformComponents || {});
+        this.transformPropertyCollection.add(keyframePropertyAttributes || {});
 
       this.rekapiActor.keyframe(millisecond, {
         transform: keyframePropertyModel.toString()

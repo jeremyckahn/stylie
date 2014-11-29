@@ -1,8 +1,17 @@
 <form action="">
   {{#properties}}
-  <label>
-    <span>{{displayName}}</span>
-    <input type="text" name="{{name}}" value="{{value}}">
-  </label>
+  <div class="property">
+    <label title="{{name}}">
+      <span>{{displayName}}</span>
+      <input type="text" name="{{name}}" value="{{value}}">
+    </label>
+    {{#canChangeEasingCurve}}
+    <select class="curve">
+      {{#curves}}
+      <option>{{.}}</option>
+      {{/curves}}
+    </select>
+    {{/canChangeEasingCurve}}
+  </div>
   {{/properties}}
 </form>

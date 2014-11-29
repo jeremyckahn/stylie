@@ -2,6 +2,7 @@ define([
 
   'underscore'
   ,'lateralus'
+  ,'shifty'
 
   ,'text!./template.mustache'
 
@@ -9,6 +10,7 @@ define([
 
   _
   ,Lateralus
+  ,Tweenable
 
   ,template
 
@@ -49,6 +51,9 @@ define([
               ,displayName: propertyObject.displayName
             };
           })
+        ,curves: Object.keys(Tweenable.prototype.formula)
+
+        ,canChangeEasingCurve: this.model.get('millisecond') !== 0
       });
     }
   });

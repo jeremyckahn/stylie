@@ -17,7 +17,8 @@ define([
 
   var KeyframePropertyModel = Backbone.Model.extend({
     defaults: {
-      x: 0
+      millisecond: 0
+      ,x: 0
       ,y: 0
       ,scale: 1
       ,rotationX: 0
