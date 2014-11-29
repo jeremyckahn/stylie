@@ -1,8 +1,8 @@
-<fieldset>
+<form action="">
   {{#properties}}
   <label>
-    <span>{{name}}</span>
-    <input type="text" value="{{value}}">
+    <span>{{displayName}}</span>
+    <input type="text" name="{{name}}" value="{{value}}">
   </label>
   {{/properties}}
-</fieldset>
+</form>

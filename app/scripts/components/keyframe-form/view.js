@@ -15,6 +15,15 @@ define([
 ) {
   'use strict';
 
+  var PROPERTY_RENDER_LIST = [
+      { name: 'x', displayName: 'x' }
+      ,{ name: 'y', displayName: 'y' }
+      ,{ name: 'scale', displayName: 's' }
+      ,{ name: 'rotationX', displayName: 'rX' }
+      ,{ name: 'rotationY', displayName: 'rY' }
+      ,{ name: 'rotationZ', displayName: 'rZ' }
+    ];
+
   var KeyframeFormComponentView = Lateralus.Component.View.extend({
     template: template
 
@@ -31,15 +40,14 @@ define([
       var renderData = this._super('getTemplateRenderData', arguments);
 
       return _.extend({
-        properties: [
-            'x'
-            ,'y'
-            ,'scale'
-            ,'rotationX'
-            ,'rotationY'
-            ,'rotationZ'
-          ].map(function (field) {
-            return { name: field, value: renderData[field] };
+        properties: PROPERTY_RENDER_LIST.map(function (propertyObject) {
+            var name = propertyObject.name;
+
+            return {
+              name: name
+              ,value: renderData[name]
+              ,displayName: propertyObject.displayName
+            };
           })
       });
     }
