@@ -31,6 +31,10 @@ define([
 
     ,tagName: 'li'
 
+    ,events: {
+      'change .curve': 'onChangeCurve'
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
@@ -47,6 +51,15 @@ define([
           $select.val(this.model.get('easing_' + name));
         }
       }, this);
+    }
+
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,onChangeCurve: function (evt) {
+      var $target = $(evt.target);
+      var property = $target.data('property');
+      this.model.set('easing_' + property, $target.val());
     }
 
     ,getTemplateRenderData: function () {
