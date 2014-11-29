@@ -1,12 +1,14 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
 
   ,template
 
@@ -23,6 +25,23 @@ define([
      */
     ,initialize: function () {
       this._super('initialize', arguments);
+    }
+
+    ,getTemplateRenderData: function () {
+      var renderData = this._super('getTemplateRenderData', arguments);
+
+      return _.extend({
+        properties: [
+            'x'
+            ,'y'
+            ,'scale'
+            ,'rotationX'
+            ,'rotationY'
+            ,'rotationZ'
+          ].map(function (field) {
+            return { name: field, value: renderData[field] };
+          })
+      });
     }
   });
 

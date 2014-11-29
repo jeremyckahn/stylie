@@ -41,10 +41,11 @@ define([
      * @param {Backbone.Model} keyframePropertyModel
      */
     ,onKeyframePropertyAdded: function (keyframePropertyModel) {
-      var keyframeFormComponent = this.addComponent(KeyframeFormComponent);
-      this.$keyframesList.append(keyframeFormComponent.view.el, {
+      var keyframeFormComponent = this.addComponent(KeyframeFormComponent, {
         model: keyframePropertyModel
       });
+
+      this.$keyframesList.append(keyframeFormComponent.view.el);
     }
   });
 
