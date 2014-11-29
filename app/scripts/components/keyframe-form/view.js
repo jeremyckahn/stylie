@@ -26,6 +26,8 @@ define([
       ,{ name: 'rotationZ', displayName: 'rZ' }
     ];
 
+  var INVALID_CLASS = 'invalid';
+
   var KeyframeFormComponentView = Lateralus.Component.View.extend({
     template: template
 
@@ -42,6 +44,8 @@ define([
     ,initialize: function () {
       this._super('initialize', arguments);
 
+      this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
+
       // Select the correct easing curve for each property, according to
       // this.model
       PROPERTY_RENDER_LIST.forEach(function (propertyObject) {
@@ -55,6 +59,18 @@ define([
     }
 
     /**
+     * @param {KeyframePropertyModel} model
+     * @param {Error} error
+     */
+    ,onModelInvalid: function (model, error) {
+      var invalidFields = JSON.parse(error.message.split('|')[1]);
+
+      invalidFields.forEach(function (invalidField) {
+        this['$' + invalidField].addClass(INVALID_CLASS);
+      }, this);
+    }
+
+    /**
      * @param {jQuery.Event} evt
      */
     ,onChangeCurve: function (evt) {
@@ -63,13 +79,16 @@ define([
       this.model.set('easing_' + property, $target.val());
     }
 
-    /**
-     * @param {jQuery.Event} evt
-     */
-    ,onKeyupTextInput: function (evt) {
-      var $target = $(evt.target);
-      var property = $target.attr('name');
-      this.model.set(property, +$target.val());
+    ,onKeyupTextInput: function () {
+      var setObject = {};
+
+      PROPERTY_RENDER_LIST.forEach(function (propertyObject) {
+        var $propertyField = this['$' + propertyObject.name];
+        $propertyField.removeClass(INVALID_CLASS);
+        setObject[propertyObject.name] = +$propertyField.val();
+      }, this);
+
+      this.model.set(setObject, { validate: true });
     }
 
     ,getTemplateRenderData: function () {

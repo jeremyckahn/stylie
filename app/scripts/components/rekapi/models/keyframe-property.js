@@ -1,19 +1,31 @@
 define([
 
-  'backbone'
+  'underscore'
+  ,'backbone'
   ,'mustache'
 
   ,'text!../templates/transform-string.mustache'
 
 ], function (
 
-  Backbone
+  _
+  ,Backbone
   ,Mustache
 
   ,transformStringTemplate
 
 ) {
   'use strict';
+
+  var NUMBER_PROPERTIES = [
+    'millisecond'
+    ,'x'
+    ,'y'
+    ,'scale'
+    ,'rotationX'
+    ,'rotationY'
+    ,'rotationZ'
+  ];
 
   var KeyframePropertyModel = Backbone.Model.extend({
     defaults: {
@@ -36,6 +48,23 @@ define([
       return Mustache.render(
         // Strip out any newlines
         transformStringTemplate.replace(/\n/g,''), this.toJSON());
+    }
+
+    /**
+     * @param {Object} attributes
+     * @return {Error=}
+     */
+    ,validate: function (attributes) {
+      var invalidFields = _.filter(NUMBER_PROPERTIES,
+          function (numberProperty) {
+        return isNaN(attributes[numberProperty]);
+      });
+
+      if (invalidFields.length) {
+        return new Error(
+          'Invalid KeyframePropertyModel values|' +
+          JSON.stringify(invalidFields));
+      }
     }
   });
 

@@ -3,7 +3,12 @@
   <div class="property">
     <label title="{{name}}">
       <span>{{displayName}}</span>
-      <input type="text" name="{{name}}" value="{{value}}">
+      <input
+        type="text"
+        class="${{name}}"
+        name="{{name}}"
+        value="{{value}}"
+      >
     </label>
     {{#canChangeEasingCurve}}
     <select
