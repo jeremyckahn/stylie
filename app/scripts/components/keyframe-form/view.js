@@ -36,6 +36,17 @@ define([
      */
     ,initialize: function () {
       this._super('initialize', arguments);
+
+      // Select the correct easing curve for each property, according to
+      // this.model
+      PROPERTY_RENDER_LIST.forEach(function (propertyObject) {
+        var name = propertyObject.name;
+        var $select = this['$' + name + 'Select'];
+
+        if ($select) {
+          $select.val(this.model.get('easing_' + name));
+        }
+      }, this);
     }
 
     ,getTemplateRenderData: function () {

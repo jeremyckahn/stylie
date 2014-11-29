@@ -6,7 +6,7 @@
       <input type="text" name="{{name}}" value="{{value}}">
     </label>
     {{#canChangeEasingCurve}}
-    <select class="curve">
+    <select class="${{name}}Select curve" title="Easing curve">
       {{#curves}}
       <option>{{.}}</option>
       {{/curves}}

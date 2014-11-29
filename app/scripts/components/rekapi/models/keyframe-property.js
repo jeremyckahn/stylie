@@ -24,6 +24,12 @@ define([
       ,rotationX: 0
       ,rotationY: 0
       ,rotationZ: 0
+      ,easing_x: 'linear'
+      ,easing_y: 'linear'
+      ,easing_scale: 'linear'
+      ,easing_rotationX: 'linear'
+      ,easing_rotationY: 'linear'
+      ,easing_rotationZ: 'linear'
     }
 
     ,toString: function () {
