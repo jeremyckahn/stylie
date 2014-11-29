@@ -41,22 +41,19 @@ define([
       this.addNewKeyframe();
     }
 
-    /**
-     * @param {number} [opt_millisecond] Where on the timeline to place the new
-     * keyframe.
-     */
-    ,addNewKeyframe: function (opt_millisecond) {
-      var millisecond = typeof opt_millisecond === 'undefined' ?
-        this.rekapi.getAnimationLength() + constant.NEW_KEYFRAME_MS_INCREASE :
-        opt_millisecond;
-
+    ,addNewKeyframe: function () {
       var keyframePropertyAttributes;
+      var millisecond = 0;
 
       if (this.transformPropertyCollection.length) {
         keyframePropertyAttributes =
           this.transformPropertyCollection.last().toJSON();
+
         keyframePropertyAttributes.x += constant.NEW_KEYFRAME_X_INCREASE;
-        keyframePropertyAttributes.millisecond = millisecond;
+        keyframePropertyAttributes.millisecond +=
+          constant.NEW_KEYFRAME_MS_INCREASE;
+
+        millisecond = keyframePropertyAttributes.millisecond;
       }
 
       var keyframePropertyModel =
