@@ -1,4 +1,16 @@
 <form action="">
+  <label class="$millisecondInputContainer millisecond-input-container">
+    <span class="$millisecondDisplay millisecond-display">
+      {{millisecond}}
+    </span>
+    <input
+      type="text"
+      name="millisecond"
+      class="$millisecond millisecond"
+      value="{{millisecond}}"
+    >
+    <span>ms</span>
+  </label>
   {{#properties}}
   <div class="property">
     <label title="{{name}}">

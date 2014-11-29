@@ -2,3 +2,16 @@
 
   .invalid
     background: #ff8
+
+  .millisecond-input-container
+    cursor: pointer
+
+    input.millisecond
+      display: none
+
+    &.editing
+      .millisecond-display
+        display: none
+
+      input.millisecond
+        display: inline

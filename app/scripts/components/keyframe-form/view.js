@@ -27,6 +27,7 @@ define([
     ];
 
   var INVALID_CLASS = 'invalid';
+  var EDITING_CLASS = 'editing';
 
   var KeyframeFormComponentView = Lateralus.Component.View.extend({
     template: template
@@ -36,6 +37,9 @@ define([
     ,events: {
       'change .curve': 'onChangeCurve'
       ,'keyup input[type=text]': 'onKeyupTextInput'
+      ,'click .millisecond-input-container': 'onClickMillisecondInputContainer'
+      ,'keydown input.millisecond': 'onKeydownMillisecondInput'
+      ,'blur input.millisecond': 'onBlurMillisecondInput'
     }
 
     /**
@@ -82,7 +86,9 @@ define([
     ,onKeyupTextInput: function () {
       var setObject = {};
 
-      PROPERTY_RENDER_LIST.forEach(function (propertyObject) {
+      var propertyList = PROPERTY_RENDER_LIST.concat([{ name: 'millisecond' }]);
+
+      propertyList.forEach(function (propertyObject) {
         var $propertyField = this['$' + propertyObject.name];
         $propertyField.removeClass(INVALID_CLASS);
         setObject[propertyObject.name] = +$propertyField.val();
@@ -91,10 +97,35 @@ define([
       this.model.set(setObject, { validate: true });
     }
 
+    ,onClickMillisecondInputContainer: function () {
+      if (this.$millisecondInputContainer.hasClass(EDITING_CLASS)) {
+        return;
+      }
+
+      this.$millisecond.removeClass(EDITING_CLASS);
+      this.enableMillisecondEditing();
+    }
+
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,onKeydownMillisecondInput: function (evt) {
+      if (evt.keyCode !== 13) { // enter
+        return;
+      }
+
+      this.$millisecond.blur();
+    }
+
+    ,onBlurMillisecondInput: function () {
+      this.saveMillisecondToModel();
+      this.disableMillisecondEditing();
+    }
+
     ,getTemplateRenderData: function () {
       var renderData = this._super('getTemplateRenderData', arguments);
 
-      return _.extend({
+      return _.extend(renderData, {
         properties: PROPERTY_RENDER_LIST.map(function (propertyObject) {
             var name = propertyObject.name;
 
@@ -108,6 +139,27 @@ define([
 
         ,canChangeEasingCurve: this.model.get('millisecond') !== 0
       });
+    }
+
+    ,enableMillisecondEditing: function () {
+      this.$millisecondInputContainer.addClass(EDITING_CLASS);
+    }
+
+    ,disableMillisecondEditing: function () {
+      this.$millisecondInputContainer.removeClass(EDITING_CLASS);
+    }
+
+    ,saveMillisecondToModel: function () {
+      this.$millisecond.removeClass(INVALID_CLASS);
+      this.model.set(
+        'millisecond'
+        ,+this.$millisecond.val()
+        ,{ validate: true }
+      );
+
+      var validatedMillisecond = this.model.get('millisecond');
+      this.$millisecond.val(validatedMillisecond);
+      this.$millisecondDisplay.text(validatedMillisecond);
     }
   });
 
