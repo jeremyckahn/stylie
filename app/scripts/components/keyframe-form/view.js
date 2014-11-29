@@ -33,6 +33,7 @@ define([
 
     ,events: {
       'change .curve': 'onChangeCurve'
+      ,'keyup input[type=text]': 'onKeyupTextInput'
     }
 
     /**
@@ -60,6 +61,15 @@ define([
       var $target = $(evt.target);
       var property = $target.data('property');
       this.model.set('easing_' + property, $target.val());
+    }
+
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,onKeyupTextInput: function (evt) {
+      var $target = $(evt.target);
+      var property = $target.attr('name');
+      this.model.set(property, +$target.val());
     }
 
     ,getTemplateRenderData: function () {
