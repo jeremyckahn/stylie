@@ -60,6 +60,11 @@ define([
         return isNaN(attributes[numberProperty]);
       });
 
+      if (attributes.millisecond < 0 &&
+          !_.contains(invalidFields, 'millisecond')) {
+        invalidFields.push('millisecond');
+      }
+
       if (invalidFields.length) {
         return new Error(
           'Invalid KeyframePropertyModel values|' +

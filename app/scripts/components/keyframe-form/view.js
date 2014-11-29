@@ -98,7 +98,8 @@ define([
     }
 
     ,onClickMillisecondInputContainer: function () {
-      if (this.$millisecondInputContainer.hasClass(EDITING_CLASS)) {
+      if (this.model.get('millisecond') === 0 ||
+          this.$millisecondInputContainer.hasClass(EDITING_CLASS)) {
         return;
       }
 
