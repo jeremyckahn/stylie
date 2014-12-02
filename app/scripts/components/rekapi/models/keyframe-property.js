@@ -60,12 +60,22 @@ define([
         return isNaN(attributes[numberProperty]);
       });
 
-      if ((
-            attributes.millisecond < 1 &&
-            !_.contains(invalidFields, 'millisecond')
-            ) ||
-            this.collection.findWhere({ millisecond: attributes.millisecond})
-          ) {
+      var millisecond = attributes.millisecond;
+
+      if (
+        // If the millisecond is changing
+        this.attributes.millisecond !== millisecond &&
+
+        // And millisecond is not already invalid
+        !_.contains(invalidFields, 'millisecond') &&
+
+        // And the keyframe already exists or is negative
+        (
+          this.collection.findWhere({ millisecond: millisecond }) ||
+          millisecond < 0
+        )
+
+      ) {
         invalidFields.push('millisecond');
       }
 

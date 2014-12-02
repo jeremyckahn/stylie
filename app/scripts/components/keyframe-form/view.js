@@ -36,7 +36,7 @@ define([
 
     ,events: {
       'change .curve': 'onChangeCurve'
-      ,'keyup input[type=text]': 'onKeyupTextInput'
+      ,'change input[type=number]': 'onChangeNumberInput'
       ,'click .millisecond-input-container': 'onClickMillisecondInputContainer'
       ,'keydown input.millisecond': 'onKeydownMillisecondInput'
       ,'blur input.millisecond': 'onBlurMillisecondInput'
@@ -83,7 +83,7 @@ define([
       this.model.set('easing_' + property, $target.val());
     }
 
-    ,onKeyupTextInput: function () {
+    ,onChangeNumberInput: function () {
       var setObject = {};
 
       var propertyList = PROPERTY_RENDER_LIST.concat([{ name: 'millisecond' }]);
@@ -149,10 +149,10 @@ define([
 
     ,disableMillisecondEditing: function () {
       this.$millisecondInputContainer.removeClass(EDITING_CLASS);
+      this.$millisecond.removeClass(INVALID_CLASS);
     }
 
     ,saveMillisecondToModel: function () {
-      this.$millisecond.removeClass(INVALID_CLASS);
       this.model.set(
         'millisecond'
         ,+this.$millisecond.val()
