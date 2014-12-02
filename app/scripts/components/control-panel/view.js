@@ -6,6 +6,7 @@ define([
 
   ,'lateralus.component.tabs'
   ,'stylie.component.keyframes-panel'
+  ,'stylie.component.motion-panel'
 
 ], function (
 
@@ -15,6 +16,7 @@ define([
 
   ,TabsComponent
   ,KeyframePanelComponent
+  ,MotionPanelComponent
 
 ) {
   'use strict';
@@ -34,7 +36,11 @@ define([
       });
 
       this.addComponent(KeyframePanelComponent, {
-        el: this.$keyframesPanel[0]
+        el: this.$keyframesPanel
+      });
+
+      this.addComponent(MotionPanelComponent, {
+        el: this.$motionPanel
       });
     }
   });

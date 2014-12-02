@@ -26,7 +26,7 @@ define([
 
     ,initialize: function () {
       this.controlPanelComponent = this.addComponent(ControlPanelComponent, {
-        el: this.view.$controlPanel[0]
+        el: this.view.$controlPanel
       });
     }
   });

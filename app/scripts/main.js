@@ -44,6 +44,9 @@ require.config({
   }, {
     name: 'stylie.component.keyframe-form'
     ,location: 'scripts/components/keyframe-form'
+  }, {
+    name: 'stylie.component.motion-panel'
+    ,location: 'scripts/components/motion-panel'
   }]
 });
 
