@@ -8,15 +8,20 @@ require.config({
       deps: ['jquery']
       ,exports: 'jquery'
     }
+    ,'jquery-dragon': {
+      deps: ['jquery']
+    }
   }
   ,paths: {
     text: 'bower_components/requirejs-text/text'
-    ,jquery: 'bower_components/jquery/dist/jquery'
+    ,jquery: 'bower_components/jquery/jquery'
+    ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
     ,shifty: 'bower_components/shifty/dist/shifty'
     ,rekapi: 'bower_components/rekapi/dist/rekapi'
     ,backbone: 'bower_components/backbone/backbone'
     ,underscore: 'bower_components/lodash/dist/lodash'
     ,mustache: 'bower_components/mustache/mustache'
+    ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
   }
   ,packages: [{
     name: 'lateralus'
@@ -53,6 +58,8 @@ require.config({
 require([
 
   'stylie'
+
+  ,'jquery-dragon'
 
 ], function (
 

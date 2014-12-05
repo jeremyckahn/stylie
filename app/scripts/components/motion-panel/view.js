@@ -1,14 +1,20 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
+  ,'bezierizer'
+
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
 
   ,template
+
+  ,Bezierizer
 
 ) {
   'use strict';
@@ -21,6 +27,12 @@ define([
      */
     ,initialize: function () {
       this._super('initialize', arguments);
+
+      _.defer(this.initBezierizer.bind(this));
+    }
+
+    ,initBezierizer: function () {
+      this.bezierizer = new Bezierizer(this.$bezierizer[0]);
     }
   });
 
