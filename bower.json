@@ -7,8 +7,8 @@
     "lateralus": "~0.0.1",
     "lateralus-components": "~0.0.2",
     "rekapi": "~1.4.3",
-    "bezierizer": "~0.0.4",
-    "jquery-dragon": "~0.4.0"
+    "bezierizer": "~0.0.5",
+    "jquery-dragon": "~0.4.1"
   },
   "resolutions": {
     "jquery": "~2.0.2",

@@ -8,9 +8,6 @@ require.config({
       deps: ['jquery']
       ,exports: 'jquery'
     }
-    ,'jquery-dragon': {
-      deps: ['jquery']
-    }
   }
   ,paths: {
     text: 'bower_components/requirejs-text/text'
@@ -58,8 +55,6 @@ require.config({
 require([
 
   'stylie'
-
-  ,'jquery-dragon'
 
 ], function (
 
