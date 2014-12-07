@@ -19,6 +19,8 @@ define([
 ) {
   'use strict';
 
+  var HANDLE_NAME_LIST = ['x1', 'y1', 'x2', 'y2'];
+
   var BezierizerComponentView = Lateralus.Component.View.extend({
     template: template
 
@@ -27,6 +29,7 @@ define([
      */
     ,initialize: function () {
       this._super('initialize', arguments);
+      this.listenTo(this.model, 'change', this.onModelChange.bind(this));
 
       _.defer(this.initBezierizer.bind(this));
     }
@@ -37,16 +40,30 @@ define([
     }
 
     ,onBezierizerChange: function () {
+      this.model.set(this.bezierizer.getHandlePositions());
+    }
+
+    ,onModelChange: function () {
+      this.syncUIToModel();
     }
 
     ,getTemplateRenderData: function () {
       var renderData = this._super('getTemplateRenderData', arguments);
 
       _.extend(renderData, {
-        handleNames: ['x1', 'y1', 'x2', 'y2']
+        handleNames: HANDLE_NAME_LIST
       });
 
       return renderData;
+    }
+
+    ,syncUIToModel: function () {
+      HANDLE_NAME_LIST.forEach(function (handleName) {
+        var handleValue = this.model.get(handleName);
+        this['$' + handleName].val(handleValue);
+      }, this);
+
+      this.bezierizer.setHandlePositions(this.model.toJSON());
     }
   });
 

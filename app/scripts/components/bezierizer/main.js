@@ -3,6 +3,7 @@ define([
   'lateralus'
 
   ,'./view'
+  ,'./model'
   ,'text!./template.mustache'
 
 ], function (
@@ -10,6 +11,7 @@ define([
   Lateralus
 
   ,View
+  ,Model
   ,template
 
 ) {
@@ -18,6 +20,7 @@ define([
   var BezierizerComponent = Lateralus.Component.extend({
     name: 'bezierizer'
     ,View: View
+    ,Model: Model
     ,template: template
   });
 
