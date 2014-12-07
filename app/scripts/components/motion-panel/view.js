@@ -33,6 +33,20 @@ define([
 
     ,initBezierizer: function () {
       this.bezierizer = new Bezierizer(this.$bezierizer[0]);
+      this.bezierizer.$el.on('change', this.onBezierizerChange.bind(this));
+    }
+
+    ,onBezierizerChange: function () {
+    }
+
+    ,getTemplateRenderData: function () {
+      var renderData = this._super('getTemplateRenderData', arguments);
+
+      _.extend(renderData, {
+        handleNames: ['x1', 'y1', 'x2', 'y2']
+      });
+
+      return renderData;
     }
   });
 
