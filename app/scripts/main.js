@@ -49,6 +49,9 @@ require.config({
   }, {
     name: 'stylie.component.motion-panel'
     ,location: 'scripts/components/motion-panel'
+  }, {
+    name: 'stylie.component.bezierizer'
+    ,location: 'scripts/components/bezierizer'
   }]
 });
 
