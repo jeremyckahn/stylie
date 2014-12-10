@@ -1,15 +1,15 @@
 define([
 
-  'backbone'
+  'lateralus'
 
 ], function (
 
-  Backbone
+  Lateralus
 
 ) {
   'use strict';
 
-  var BezierizerModel = Backbone.Model.extend({
+  var BezierizerModel = Lateralus.Component.Model.extend({
     defaults: {
       x1: 0.25
       ,y1: 0.5
