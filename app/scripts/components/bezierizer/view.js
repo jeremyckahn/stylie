@@ -24,19 +24,25 @@ define([
   var BezierizerComponentView = Lateralus.Component.View.extend({
     template: template
 
+    ,events: {
+      'change input[type=number]': 'onChangeNumberInputs'
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
       this._super('initialize', arguments);
       this.listenTo(this.model, 'change', this.onModelChange.bind(this));
+      this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
 
-      _.defer(this.initBezierizer.bind(this));
+      _.defer(this.deferredInitialize.bind(this));
     }
 
-    ,initBezierizer: function () {
+    ,deferredInitialize: function () {
       this.bezierizer = new Bezierizer(this.$bezierizerControl[0]);
       this.bezierizer.$el.on('change', this.onBezierizerChange.bind(this));
+      this.syncUIToModel();
     }
 
     ,onBezierizerChange: function () {
@@ -45,6 +51,21 @@ define([
 
     ,onModelChange: function () {
       this.syncUIToModel();
+    }
+
+    ,onModelInvalid: function () {
+      this.lateralus.warn(this.model.validationError);
+      this.syncUIToModel();
+    }
+
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,onChangeNumberInputs: function (evt) {
+      var target = evt.target;
+      var $el = $(target);
+      var handleName = $el.data('handleName');
+      this.model.set(handleName, target.valueAsNumber, { validate: true });
     }
 
     ,getTemplateRenderData: function () {
