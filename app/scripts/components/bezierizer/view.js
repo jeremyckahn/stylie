@@ -40,7 +40,7 @@ define([
     }
 
     ,onBezierizerChange: function () {
-      this.model.set(this.bezierizer.getHandlePositions());
+      this.model.set(this.getHandlePositions());
     }
 
     ,onModelChange: function () {
@@ -55,6 +55,17 @@ define([
       });
 
       return renderData;
+    }
+
+    /**
+     * @return {{ x1: number, y1: number, x2: number, y2: number }} All values
+     * are constrained to a fixed precision of 2.
+     */
+    ,getHandlePositions: function () {
+      return _.each(this.bezierizer.getHandlePositions()
+          ,function (value, handleName, handleObj) {
+        handleObj[handleName] = +value.toFixed(2);
+      });
     }
 
     ,syncUIToModel: function () {
