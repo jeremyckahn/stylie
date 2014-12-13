@@ -25,7 +25,8 @@ define([
     template: template
 
     ,events: {
-      'change input[type=number]': 'onChangeNumberInputs'
+      'change input[type=number]': 'onChangeNumberInput'
+      ,'mousewheel input[type=number]': 'onMousewheelNumberInput'
     }
 
     /**
@@ -61,11 +62,29 @@ define([
     /**
      * @param {jQuery.Event} evt
      */
-    ,onChangeNumberInputs: function (evt) {
+    ,onChangeNumberInput: function (evt) {
       var target = evt.target;
-      var $el = $(target);
-      var handleName = $el.data('handleName');
-      this.model.set(handleName, target.valueAsNumber, { validate: true });
+      this.syncModelToNumberInput(target);
+    }
+
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,onMousewheelNumberInput: function (evt) {
+      var target = evt.target;
+
+      if (document.activeElement === target) {
+        this.syncModelToNumberInput(target);
+      }
+    }
+
+    /**
+     * @param {HTMLInputElement} numberInput
+     */
+    ,syncModelToNumberInput: function (numberInput) {
+      var $numberInput = $(numberInput);
+      var handleName = $numberInput.data('handleName');
+      this.model.set(handleName, numberInput.valueAsNumber, { validate: true });
     }
 
     ,getTemplateRenderData: function () {

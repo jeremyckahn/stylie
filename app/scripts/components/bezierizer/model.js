@@ -9,7 +9,7 @@ define([
 ) {
   'use strict';
 
-  var BezierizerModel = Lateralus.Component.Model.extend({
+  var BezierizerComponentModel = Lateralus.Component.Model.extend({
     defaults: {
       x1: 0.25
       ,y1: 0.5
@@ -32,5 +32,5 @@ define([
     }
   });
 
-  return BezierizerModel;
+  return BezierizerComponentModel;
 });
