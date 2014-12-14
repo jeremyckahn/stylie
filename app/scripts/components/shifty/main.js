@@ -35,7 +35,7 @@ define([
         ,0.6
       );
 
-      this.emit('tweenableCurveCreated');
+      this.emit('tweenableCurveCreated', newCurveName);
     }
   });
 

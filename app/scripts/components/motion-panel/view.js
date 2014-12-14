@@ -1,6 +1,8 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
+  ,'shifty'
 
   ,'text!./template.mustache'
 
@@ -8,7 +10,9 @@ define([
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
+  ,Tweenable
 
   ,template
 
@@ -36,6 +40,16 @@ define([
 
     ,onClickAddCurve: function () {
       this.emit('userRequestedNewCurve');
+    }
+
+    /**
+     * @param {string} curveName
+     */
+    ,selectCurve: function (curveName) {
+      this.$curveSelector.val(curveName);
+      var curveFn = Tweenable.prototype.formula[curveName];
+      this.component.bezierizerComponent.model.set(
+          _.pick(curveFn, 'x1', 'y1', 'x2', 'y2'));
     }
   });
 

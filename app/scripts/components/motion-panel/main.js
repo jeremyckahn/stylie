@@ -25,9 +25,21 @@ define([
     ,template: template
 
     ,initialize: function () {
-      this.addComponent(BezierizerComponent, {
+      this.bezierizerComponent = this.addComponent(BezierizerComponent, {
         el: this.view.$bezierizer
       });
+
+      this.listenFor(
+        'tweenableCurveCreated'
+        ,this.onTweenableCurveCreated.bind(this)
+      );
+    }
+
+    /**
+     * @param {string} curveName
+     */
+    ,onTweenableCurveCreated: function (curveName) {
+      this.view.selectCurve(curveName);
     }
   });
 
