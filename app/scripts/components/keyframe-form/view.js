@@ -2,17 +2,19 @@ define([
 
   'underscore'
   ,'lateralus'
-  ,'shifty'
 
   ,'text!./template.mustache'
+
+  ,'stylie.component.curve-selector'
 
 ], function (
 
   _
   ,Lateralus
-  ,Tweenable
 
   ,template
+
+  ,CurveSelectorComponent
 
 ) {
   'use strict';
@@ -57,6 +59,10 @@ define([
         var $select = this['$' + name + 'Select'];
 
         if ($select) {
+          this.addSubview(CurveSelectorComponent.View, {
+            el: $select
+          });
+
           $select.val(this.model.get('easing_' + name));
         }
       }, this);
@@ -137,7 +143,6 @@ define([
               ,displayName: propertyObject.displayName
             };
           })
-        ,curves: Object.keys(Tweenable.prototype.formula)
 
         ,canChangeEasingCurve: this.model.get('millisecond') !== 0
       });
