@@ -2,6 +2,7 @@ define([
 
   'lateralus'
 
+  ,'stylie.component.shifty'
   ,'stylie.component.rekapi'
   ,'stylie.component.container'
 
@@ -9,6 +10,7 @@ define([
 
   Lateralus
 
+  ,ShiftyComponent
   ,RekapiComponent
   ,ContainerComponent
 
@@ -23,6 +25,7 @@ define([
   var Stylie = Lateralus.beget(function () {
     Lateralus.apply(this, arguments);
 
+    this.shiftyComponent = this.addComponent(ShiftyComponent);
     this.rekapiComponent = this.addComponent(RekapiComponent);
     this.containerComponent = this.addComponent(ContainerComponent);
 

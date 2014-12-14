@@ -32,6 +32,9 @@ require.config({
     name: 'lateralus.component.tabs'
     ,location: 'bower_components/lateralus-components/tabs'
   }, {
+    name: 'stylie.component.shifty'
+    ,location: 'scripts/components/shifty'
+  }, {
     name: 'stylie.component.rekapi'
     ,location: 'scripts/components/rekapi'
   }, {

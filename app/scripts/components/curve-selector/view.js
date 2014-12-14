@@ -25,6 +25,20 @@ define([
      */
     ,initialize: function () {
       this._super('initialize', arguments);
+      this.listenFor(
+        'tweenableCurveCreated'
+        ,this.onTweenableCurveCreated.bind(this)
+      );
+    }
+
+    ,onTweenableCurveCreated: function () {
+      this.render();
+    }
+
+    ,render: function () {
+      var currentValue = this.$el.val();
+      this.renderTemplate();
+      this.$el.val(currentValue);
     }
 
     ,getTemplateRenderData: function () {
