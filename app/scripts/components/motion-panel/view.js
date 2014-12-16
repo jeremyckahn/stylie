@@ -35,6 +35,7 @@ define([
       this._super('initialize', arguments);
       this.addSubview(CurveSelectorComponent.View, {
         el: this.$curveSelector
+        ,onlyShowCustomCurves: true
       });
     }
 

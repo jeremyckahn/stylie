@@ -3,10 +3,14 @@ define([
   'lateralus'
   ,'shifty'
 
+  ,'../../constant'
+
 ], function (
 
   Lateralus
   ,Tweenable
+
+  ,constant
 
 ) {
   'use strict';
@@ -26,7 +30,8 @@ define([
     }
 
     ,createNewCurve: function () {
-      var newCurveName = 'customCurve' + (++this.customCurveCount);
+      var newCurveName =
+        constant.CUSTOM_CURVE_PREFIX + (++this.customCurveCount);
       Tweenable.setBezierFunction(
         newCurveName
         ,0.25

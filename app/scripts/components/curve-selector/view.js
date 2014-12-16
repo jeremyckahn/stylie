@@ -6,6 +6,8 @@ define([
 
   ,'text!./template.mustache'
 
+  ,'../../constant'
+
 ], function (
 
   _
@@ -13,6 +15,8 @@ define([
   ,Tweenable
 
   ,template
+
+  ,constant
 
 ) {
   'use strict';
@@ -22,6 +26,7 @@ define([
 
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
+     * @param {boolean=} [options.onlyShowCustomCurves]
      */
     ,initialize: function () {
       this._super('initialize', arguments);
@@ -45,10 +50,21 @@ define([
       var renderData = this._super('getTemplateRenderData', arguments);
 
       _.extend(renderData, {
-        curves: Object.keys(Tweenable.prototype.formula)
+        curves: this.getCurveList()
       });
 
       return renderData;
+    }
+
+    /**
+     * @param {Array.<string>}
+     */
+    ,getCurveList: function () {
+      var fullList = Object.keys(Tweenable.prototype.formula);
+      return this.onlyShowCustomCurves ?
+        fullList.filter(function (curve) {
+          return curve.match(constant.CUSTOM_CURVE_PREFIX);
+        }) : fullList;
     }
   });
 
