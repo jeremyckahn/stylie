@@ -26,10 +26,10 @@ define([
     }
 
     ,onUserRequestedNewCurve: function () {
-      this.createNewCurve();
+      this.addNewCurve();
     }
 
-    ,createNewCurve: function () {
+    ,addNewCurve: function () {
       var newCurveName =
         constant.CUSTOM_CURVE_PREFIX + (++this.customCurveCount);
       Tweenable.setBezierFunction(

@@ -29,7 +29,7 @@ define([
     this.rekapiComponent = this.addComponent(RekapiComponent);
     this.containerComponent = this.addComponent(ContainerComponent);
 
-    this.shiftyComponent.createNewCurve();
+    this.shiftyComponent.addNewCurve();
     this.rekapiComponent.addNewKeyframe();
   });
 
