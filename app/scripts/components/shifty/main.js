@@ -37,7 +37,7 @@ define([
         ,0.25
         ,0.5
         ,0.75
-        ,0.6
+        ,0.5
       );
 
       this.emit('tweenableCurveCreated', newCurveName);
