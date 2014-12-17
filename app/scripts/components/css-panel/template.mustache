@@ -1,0 +1,14 @@
+<p>Customize the generated CSS.</p>
+<label class="row">
+  <span>Class name</span>
+  <input class="$className" type="text" value="stylie">
+</label>
+<fieldset>
+  <p>Vendors</p>
+  {{#vendors}}
+  <label>
+    <input class="${{id}}Checkbox" type="checkbox" data-vendor="{{id}}">
+    <span>{{label}}</span>
+  </label>
+  {{/vendors}}
+</fieldset>

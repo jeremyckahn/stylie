@@ -47,11 +47,14 @@ require.config({
     name: 'stylie.component.keyframes-panel'
     ,location: 'scripts/components/keyframes-panel'
   }, {
-    name: 'stylie.component.keyframe-form'
-    ,location: 'scripts/components/keyframe-form'
-  }, {
     name: 'stylie.component.motion-panel'
     ,location: 'scripts/components/motion-panel'
+  }, {
+    name: 'stylie.component.css-panel'
+    ,location: 'scripts/components/css-panel'
+  }, {
+    name: 'stylie.component.keyframe-form'
+    ,location: 'scripts/components/keyframe-form'
   }, {
     name: 'stylie.component.bezierizer'
     ,location: 'scripts/components/bezierizer'
