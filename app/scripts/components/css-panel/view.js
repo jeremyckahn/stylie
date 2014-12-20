@@ -33,6 +33,9 @@ define([
       this._super('initialize', arguments);
 
       this.$w3Checkbox.prop('checked', true);
+
+      this.listenFor('timelineModified', this.onTimelineModified.bind(this));
+      this.listenFor('tabShown', this.onTabShown.bind(this));
     }
 
     ,getTemplateRenderData: function () {
@@ -43,6 +46,26 @@ define([
       });
 
       return renderData;
+    }
+
+    ,onTimelineModified: function () {
+      if (this.$el.is(':visible')) {
+        this.renderCss();
+      }
+    }
+
+    /**
+     * @param {jQuery} $shownContent
+     */
+    ,onTabShown: function ($shownContent) {
+      if ($shownContent.is(this.$el)) {
+        this.renderCss();
+      }
+    }
+
+    ,renderCss: function () {
+      var css = this.lateralus.rekapiComponent.getCssString();
+      this.$generatedCss.val(css);
     }
   });
 

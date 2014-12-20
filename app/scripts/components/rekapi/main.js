@@ -27,9 +27,13 @@ define([
     name: 'rekapi'
 
     ,initialize: function () {
-      this.rekapi = new Rekapi();
+      this.rekapi = new Rekapi(document.body);
       this.rekapiActor = this.rekapi.addActor();
       this.transformPropertyCollection = new KeyframePropertyCollection();
+
+      this.rekapi.on('timelineModified', function () {
+        this.emit('timelineModified');
+      }.bind(this));
 
       this.listenFor(
         'requestNewKeyframe'
@@ -78,6 +82,15 @@ define([
       keyframePropertyModel.bindToRawKeyframeProperty(keyframeProperty);
 
       this.emit('keyframePropertyAdded', keyframePropertyModel);
+    }
+
+    /**
+     * @param {Object} opts Gets passed to Rekapi.DOMRenderer#toString.
+     * @return {string}
+     */
+    ,getCssString: function (opts) {
+      var renderer = this.rekapi.renderer;
+      return renderer.toString.apply(renderer, opts);
     }
   });
 
