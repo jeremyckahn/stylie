@@ -69,8 +69,13 @@ define([
         this.transformPropertyCollection.add(keyframePropertyAttributes || {});
 
       this.rekapiActor.keyframe(millisecond, {
-        transform: keyframePropertyModel.toString()
+        transform: keyframePropertyModel.getValue()
       });
+
+      var keyframeProperty =
+        this.rekapiActor.getKeyframeProperty('transform', millisecond);
+
+      keyframePropertyModel.bindToRawKeyframeProperty(keyframeProperty);
 
       this.emit('keyframePropertyAdded', keyframePropertyModel);
     }

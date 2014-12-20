@@ -44,10 +44,39 @@ define([
       ,easing_rotationZ: 'linear'
     }
 
-    ,toString: function () {
+    ,initialize: function () {
+      this.keyframeProperty = null;
+
+      this.on('change', this.onChange.bind(this));
+    }
+
+    ,onChange: function () {
+      this.updateRawKeyframeProperty();
+    }
+
+    /**
+     * @return {string}
+     */
+    ,getValue: function () {
       return Mustache.render(
         // Strip out any newlines
         transformStringTemplate.replace(/\n/g,''), this.toJSON());
+    }
+
+    /**
+     * @return {string}
+     */
+    ,getEasing: function () {
+      var attributes = this.attributes;
+
+      return [
+        attributes.easing_x
+        ,attributes.easing_y
+        ,attributes.easing_scale
+        ,attributes.easing_rotationX
+        ,attributes.easing_rotationY
+        ,attributes.easing_rotationZ
+      ].join(' ');
     }
 
     /**
@@ -84,6 +113,26 @@ define([
           'Invalid KeyframePropertyModel values|' +
           JSON.stringify(invalidFields));
       }
+    }
+
+    /**
+     * @param {Rekapi.KeyframeProperty} keyframeProperty
+     */
+    ,bindToRawKeyframeProperty: function (keyframeProperty) {
+      this.keyframeProperty = keyframeProperty;
+    }
+
+    ,updateRawKeyframeProperty: function () {
+      // It is necessary to go through actor.modifyKeyframe here so that the
+      // timelineModified Rekapi event fires.
+      //
+      // TODO: In Rekapi, make it so that KeyframeProperty#modifyWith can fire
+      // this event.
+      this.keyframeProperty.actor.modifyKeyframe(this.attributes.millisecond, {
+        transform: this.getValue()
+      }, {
+        transform: this.getEasing()
+      });
     }
   });
 
