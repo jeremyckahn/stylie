@@ -89,8 +89,7 @@ define([
      * @return {string}
      */
     ,getCssString: function (opts) {
-      var renderer = this.rekapi.renderer;
-      return renderer.toString.apply(renderer, opts);
+      return this.rekapi.renderer.toString(opts);
     }
   });
 

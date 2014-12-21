@@ -16,9 +16,9 @@ define([
   'use strict';
 
   var VENDORS = [
-    { id: 'moz', label: 'Mozilla' }
-    ,{ id: 'ms', label: 'Microsoft' }
-    ,{ id: 'o', label: 'Opera' }
+    { id: 'mozilla', label: 'Mozilla' }
+    ,{ id: 'microsoft', label: 'Microsoft' }
+    ,{ id: 'opera', label: 'Opera' }
     ,{ id: 'webkit', label: 'WebKit' }
     ,{ id: 'w3', label: 'W3C' }
   ];
@@ -64,8 +64,30 @@ define([
     }
 
     ,renderCss: function () {
-      var css = this.lateralus.rekapiComponent.getCssString();
+      var cssOpts = {
+        fps: +this.$cssSizeOutput.val()
+        ,vendors: this.getSelectedVendorList()
+      };
+
+      var css = this.lateralus.rekapiComponent.getCssString(cssOpts);
       this.$generatedCss.val(css);
+    }
+
+    /**
+     * @return {Array.<string>}
+     */
+    ,getSelectedVendorList: function () {
+      var accumulator = [];
+
+      VENDORS.forEach(function (vendor) {
+        var id = vendor.id;
+
+        if (this['$' + id + 'Checkbox'].is(':checked')) {
+          accumulator.push(id);
+        }
+      }, this);
+
+      return accumulator;
     }
   });
 
