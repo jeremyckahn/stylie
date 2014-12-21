@@ -1,13 +1,13 @@
 <p>Customize the generated CSS.</p>
 <label class="row">
   <span>Class name</span>
-  <input class="$className" type="text" value="stylie">
+  <input class="$className update-on-keyup" type="text" value="stylie">
 </label>
 <fieldset>
   <p>Vendors</p>
   {{#vendors}}
   <label>
-    <input class="${{id}}Checkbox" type="checkbox" data-vendor="{{id}}">
+    <input class="${{id}}Checkbox update-on-change" type="checkbox" data-vendor="{{id}}">
     <span>{{label}}</span>
   </label>
   {{/vendors}}
@@ -36,5 +36,5 @@
   <span class="high">
     Higher quality
   </span>
-  <input type="range" class="$cssSizeOutput" min="0" max="60">
+  <input type="range" class="$cssSizeOutput update-on-change" min="0" max="60">
 </div>

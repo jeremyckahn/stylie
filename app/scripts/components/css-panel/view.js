@@ -28,6 +28,8 @@ define([
 
     ,events: {
       'submit form': 'onSubmitForm'
+      ,'keyup .update-on-keyup': 'onKeyupAutoUpdate'
+      ,'change .update-on-change': 'onChangeAutoUpdate'
     }
 
     /**
@@ -57,6 +59,14 @@ define([
      */
     ,onSubmitForm: function (evt) {
       evt.preventDefault();
+    }
+
+    ,onKeyupAutoUpdate: function () {
+      this.renderCss();
+    }
+
+    ,onChangeAutoUpdate: function () {
+      this.renderCss();
     }
 
     ,onTimelineModified: function () {
