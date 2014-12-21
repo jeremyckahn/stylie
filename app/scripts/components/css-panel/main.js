@@ -19,6 +19,17 @@ define([
     name: 'css-panel'
     ,View: View
     ,template: template
+
+    /**
+     * @return {{
+     *   name: string,
+     *   fps: number,
+     *   vendors: Array.<string>
+     * }}
+     */
+    ,toJSON: function () {
+      return this.view.toJSON();
+    }
   });
 
   return CssPanelComponent;

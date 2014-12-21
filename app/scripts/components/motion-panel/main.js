@@ -41,6 +41,16 @@ define([
     ,onTweenableCurveCreated: function (curveName) {
       this.view.selectCurve(curveName);
     }
+
+    /**
+     * @return {{
+     *   isCentered: boolean,
+     *   iterations: boolean|undefined
+     * }}
+     */
+    ,toJSON: function () {
+      return this.view.toJSON();
+    }
   });
 
   return MotionPanelComponent;

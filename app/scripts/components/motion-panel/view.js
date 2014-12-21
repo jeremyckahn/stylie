@@ -52,6 +52,27 @@ define([
       this.component.bezierizerComponent.model.set(
           _.pick(curveFn, 'x1', 'y1', 'x2', 'y2'));
     }
+
+    /**
+     * @return {boolean|undefined}
+     */
+    ,getIterations: function () {
+      var iterationValue = +this.$iterations.val();
+      return isNaN(iterationValue) ? undefined : iterationValue;
+    }
+
+    /**
+     * @return {{
+     *   isCentered: boolean,
+     *   iterations: boolean|undefined
+     * }}
+     */
+    ,toJSON: function () {
+      return {
+        isCentered: this.$centerToPath.is(':checked')
+        ,iterations: this.getIterations()
+      };
+    }
   });
 
   return MotionPanelComponentView;

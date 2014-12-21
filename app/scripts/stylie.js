@@ -33,5 +33,18 @@ define([
     this.rekapiComponent.addNewKeyframe();
   });
 
+  /**
+   * @return {{
+   *   name: string,
+   *   fps: number,
+   *   vendors: Array.<string>,
+   *   isCentered: boolean,
+   *   iterations: boolean|undefined
+   * }}
+   */
+  Stylie.prototype.getCssConfigObject = function () {
+    return this.containerComponent.controlPanelComponent.getCssConfigObject();
+  };
+
   return Stylie;
 });

@@ -12,8 +12,8 @@
   </label>
   {{/vendors}}
 </fieldset>
-<fieldset>
-  <div class="row">
+<form class="$orientationForm" action="">
+  <fieldset class="row">
     <p>Orient generated CSS to:</p>
     <label>
       <input type="radio" name="orientation" value="first-keyframe" checked>
@@ -23,8 +23,8 @@
       <input type="radio" name="orientation" value="top-left">
       <span>Top-left of container</span>
     </label>
-  </div>
-</fieldset>
+  </fieldset>
+</form>
 <label class="row">
   <span>Generated CSS</span>
   <textarea class="$generatedCss"></textarea>

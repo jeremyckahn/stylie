@@ -26,6 +26,10 @@ define([
   var CssPanelComponentView = Lateralus.Component.View.extend({
     template: template
 
+    ,events: {
+      'submit form': 'onSubmitForm'
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
@@ -48,6 +52,13 @@ define([
       return renderData;
     }
 
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,onSubmitForm: function (evt) {
+      evt.preventDefault();
+    }
+
     ,onTimelineModified: function () {
       if (this.$el.is(':visible')) {
         this.renderCss();
@@ -64,10 +75,7 @@ define([
     }
 
     ,renderCss: function () {
-      var cssOpts = {
-        fps: +this.$cssSizeOutput.val()
-        ,vendors: this.getSelectedVendorList()
-      };
+      var cssOpts = this.lateralus.getCssConfigObject();
 
       var css = this.lateralus.rekapiComponent.getCssString(cssOpts);
       this.$generatedCss.val(css);
@@ -88,6 +96,21 @@ define([
       }, this);
 
       return accumulator;
+    }
+
+    /**
+     * @return {{
+     *   name: string,
+     *   fps: number,
+     *   vendors: Array.<string>
+     * }}
+     */
+    ,toJSON: function () {
+      return {
+        name: this.$className.val()
+        ,fps: +this.$cssSizeOutput.val()
+        ,vendors: this.getSelectedVendorList()
+      };
     }
   });
 

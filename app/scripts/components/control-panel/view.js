@@ -5,9 +5,6 @@ define([
   ,'text!./template.mustache'
 
   ,'lateralus.component.tabs'
-  ,'stylie.component.keyframes-panel'
-  ,'stylie.component.motion-panel'
-  ,'stylie.component.css-panel'
 
 ], function (
 
@@ -16,9 +13,6 @@ define([
   ,template
 
   ,TabsComponent
-  ,KeyframePanelComponent
-  ,MotionPanelComponent
-  ,CssPanelComponent
 
 ) {
   'use strict';
@@ -41,18 +35,6 @@ define([
 
       this.selectTabFromLocalStorage();
       this.listenTo(this.tabsComponent, 'tabShown', this.onTabShown.bind(this));
-
-      this.addComponent(KeyframePanelComponent, {
-        el: this.$keyframesPanel
-      });
-
-      this.addComponent(MotionPanelComponent, {
-        el: this.$motionPanel
-      });
-
-      this.addComponent(CssPanelComponent, {
-        el: this.$cssPanel
-      });
     }
 
     /**
