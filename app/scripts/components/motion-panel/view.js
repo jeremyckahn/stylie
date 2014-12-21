@@ -26,6 +26,7 @@ define([
 
     ,events: {
       'click .add-curve': 'onClickAddCurve'
+      ,'change .center-to-path': 'onChangeCenterToPath'
     }
 
     /**
@@ -41,6 +42,10 @@ define([
 
     ,onClickAddCurve: function () {
       this.emit('userRequestedNewCurve');
+    }
+
+    ,onChangeCenterToPath: function () {
+      this.emit('updateCenteringSetting', this.$centerToPath.is(':checked'));
     }
 
     /**

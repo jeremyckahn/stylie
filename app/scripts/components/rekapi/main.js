@@ -44,6 +44,11 @@ define([
         'millisecondEditingEnd'
         ,this.onMillisecondEditingEnd.bind(this)
       );
+
+      this.listenFor(
+        'updateCenteringSetting'
+        ,this.onUpdateCenteringSetting.bind(this)
+      );
     }
 
     ,onRequestNewKeyframe: function () {
@@ -54,8 +59,17 @@ define([
       this.emit('confirmNewKeyframeOrder', this.transformPropertyCollection);
     }
 
+    /**
+     * @param {boolean} isCentered
+     */
+    ,onUpdateCenteringSetting: function (isCentered) {
+      // TODO: This really belongs in collections/keyframe-property.js, but
+      // that currently has no reference to the central Lateralus instance.
+      this.transformPropertyCollection.setCenteringRules(isCentered);
+    }
+
     ,addNewKeyframe: function () {
-      var keyframePropertyAttributes;
+      var keyframePropertyAttributes = {};
       var millisecond = 0;
 
       if (this.transformPropertyCollection.length) {
@@ -68,6 +82,9 @@ define([
 
         millisecond = keyframePropertyAttributes.millisecond;
       }
+
+      keyframePropertyAttributes.isCentered =
+        this.lateralus.getCssConfigObject().isCentered;
 
       var keyframePropertyModel =
         this.transformPropertyCollection.add(keyframePropertyAttributes || {});

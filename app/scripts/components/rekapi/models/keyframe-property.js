@@ -42,6 +42,7 @@ define([
       ,easing_rotationX: 'linear'
       ,easing_rotationY: 'linear'
       ,easing_rotationZ: 'linear'
+      ,isCentered: false
     }
 
     ,initialize: function () {

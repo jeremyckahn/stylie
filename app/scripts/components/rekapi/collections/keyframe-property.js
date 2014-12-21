@@ -30,6 +30,13 @@ define([
         this.sort();
       }
     }
+
+    /**
+     * @param {boolean} isCentered
+     */
+    ,setCenteringRules: function (isCentered) {
+      this.invoke('set', 'isCentered', isCentered);
+    }
   });
 
   return KeyframePropertyCollection;
