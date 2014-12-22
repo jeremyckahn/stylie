@@ -27,13 +27,13 @@ define([
     name: 'rekapi'
 
     ,initialize: function () {
+      this.isGeneratingCss = false;
       this.rekapi = new Rekapi(document.body);
       this.rekapiActor = this.rekapi.addActor();
       this.transformPropertyCollection = new KeyframePropertyCollection();
 
-      this.rekapi.on('timelineModified', function () {
-        this.emit('timelineModified');
-      }.bind(this));
+      this.rekapi.on(
+        'timelineModified', this.onRekapiTimelineModified.bind(this));
 
       this.listenFor(
         'requestNewKeyframe'
@@ -49,6 +49,13 @@ define([
         'updateCenteringSetting'
         ,this.onUpdateCenteringSetting.bind(this)
       );
+    }
+
+    ,onRekapiTimelineModified: function () {
+      // Prevent infinite loops caused by offset adjustment logic.
+      if (!this.isGeneratingCss) {
+        this.emit('timelineModified');
+      }
     }
 
     ,onRequestNewKeyframe: function () {
@@ -118,7 +125,43 @@ define([
      * @return {string}
      */
     ,getCssString: function (opts) {
-      return this.rekapi.renderer.toString(opts);
+      var rekapi = this.rekapi;
+      var options = { silent: true };
+      var firstKeyframeJson, offset;
+
+      this.isGeneratingCss = true;
+
+      if (this.lateralus.cssOrientation === 'first-keyframe') {
+        firstKeyframeJson =
+          this.transformPropertyCollection.first().toJSON();
+
+        offset = {
+          x: firstKeyframeJson.x
+          ,y: firstKeyframeJson.y
+        };
+
+        this.transformPropertyCollection.each(function (model) {
+          ['x', 'y'].forEach(function (property) {
+            model.set(
+              property, model.get(property) - offset[property], options);
+            model.updateRawKeyframeProperty();
+          }, this);
+        });
+      }
+
+      var cssString = rekapi.renderer.toString(opts);
+
+      if (this.lateralus.cssOrientation === 'first-keyframe') {
+        this.transformPropertyCollection.each(function (model) {
+          ['x', 'y'].forEach(function (property) {
+            model.set(
+              property, model.get(property) + offset[property], options);
+            model.updateRawKeyframeProperty();
+          }, this);
+        });
+      }
+
+      return cssString;
     }
   });
 

@@ -25,6 +25,8 @@ define([
   var Stylie = Lateralus.beget(function () {
     Lateralus.apply(this, arguments);
 
+    this.cssOrientation = 'first-keyframe';
+
     this.shiftyComponent = this.addComponent(ShiftyComponent);
     this.rekapiComponent = this.addComponent(RekapiComponent);
     this.containerComponent = this.addComponent(ContainerComponent);
@@ -33,7 +35,17 @@ define([
     this.rekapiComponent.addNewKeyframe({
       state: { x: 200, y: 200 }
     });
+
+    this.on(
+      'userSelectedOrientation', this.onUserSelectedOrientation.bind(this));
   });
+
+  /**
+   * @param {string} orientation "first-keyframe" or "top-left".
+   */
+  Stylie.prototype.onUserSelectedOrientation = function (orientation) {
+    this.cssOrientation = orientation;
+  };
 
   /**
    * @return {{

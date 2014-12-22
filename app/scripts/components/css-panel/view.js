@@ -30,6 +30,7 @@ define([
       'submit form': 'onSubmitForm'
       ,'keyup .update-on-keyup': 'onKeyupAutoUpdate'
       ,'change .update-on-change': 'onChangeAutoUpdate'
+      ,'change .orientation-form': 'onChangeOrientationForm'
     }
 
     /**
@@ -42,6 +43,8 @@ define([
 
       this.listenFor('timelineModified', this.onTimelineModified.bind(this));
       this.listenFor('tabShown', this.onTabShown.bind(this));
+
+      _.defer(this.renderCss.bind(this));
     }
 
     ,getTemplateRenderData: function () {
@@ -66,6 +69,16 @@ define([
     }
 
     ,onChangeAutoUpdate: function () {
+      this.renderCss();
+    }
+
+    ,onChangeOrientationForm: function () {
+      var selectedOrientation = _.findWhere(
+          this.$orientationForm.serializeArray()
+          ,{ name: 'orientation' }
+        ).value;
+
+      this.emit('userSelectedOrientation', selectedOrientation);
       this.renderCss();
     }
 

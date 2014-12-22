@@ -152,6 +152,10 @@ define([
     }
 
     ,updateRawKeyframeProperty: function () {
+      if (!this.keyframeProperty) {
+        return;
+      }
+
       // It is necessary to go through actor.modifyKeyframe here so that the
       // timelineModified Rekapi event fires.
       //
