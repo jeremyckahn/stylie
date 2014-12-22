@@ -30,7 +30,9 @@ define([
     this.containerComponent = this.addComponent(ContainerComponent);
 
     this.shiftyComponent.addNewCurve();
-    this.rekapiComponent.addNewKeyframe();
+    this.rekapiComponent.addNewKeyframe({
+      state: { x: 200, y: 200 }
+    });
   });
 
   /**

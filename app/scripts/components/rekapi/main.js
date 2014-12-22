@@ -68,11 +68,23 @@ define([
       this.transformPropertyCollection.setCenteringRules(isCentered);
     }
 
-    ,addNewKeyframe: function () {
-      var keyframePropertyAttributes = {};
-      var millisecond = 0;
+    /**
+     * @param {Object} [opt_options]
+     * @param {number} [opt_options.millisecond]
+     * @param {Object} [opt_options.state]
+     * @param {Object} [opt_options.easing]
+     */
+    ,addNewKeyframe: function (opt_options) {
+      var options = opt_options || {};
+      var keyframePropertyAttributes = options.state || {};
 
-      if (this.transformPropertyCollection.length) {
+      if (options.easing) {
+        _.extend(keyframePropertyAttributes, { easing: options.easing });
+      }
+
+      var millisecond = options.millisecond || 0;
+
+      if (this.transformPropertyCollection.length && !opt_options) {
         keyframePropertyAttributes =
           this.transformPropertyCollection.last().toJSON();
 

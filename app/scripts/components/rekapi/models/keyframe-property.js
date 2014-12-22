@@ -45,14 +45,42 @@ define([
       ,isCentered: false
     }
 
-    ,initialize: function () {
+    ,initialize: function (attributes) {
       this.keyframeProperty = null;
+
+      if (attributes.easing) {
+        this.setEasingFromString(attributes.easing);
+        this.unset('easing', { silent: true });
+      }
 
       this.on('change', this.onChange.bind(this));
     }
 
     ,onChange: function () {
       this.updateRawKeyframeProperty();
+    }
+
+    /**
+     * @param {string} easingString A Rekapi-style, space-delimited list of
+     * easing curves.
+     */
+    ,setEasingFromString: function (easingString) {
+      var easingStringChunks = easingString.split(' ');
+
+      [
+       'easing_x'
+      ,'easing_y'
+      ,'easing_scale'
+      ,'easing_rotationX'
+      ,'easing_rotationY'
+      ,'easing_rotationZ'
+        ].forEach(function (property, i) {
+          var easingChunk = easingStringChunks[i];
+
+          if (easingChunk) {
+            this.attributes[property] = easingChunk;
+          }
+        }, this);
     }
 
     /**
