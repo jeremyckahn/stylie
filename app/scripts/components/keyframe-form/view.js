@@ -48,7 +48,7 @@ define([
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments);
+      this._super('initialize', arguments, KeyframeFormComponentView);
 
       this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
 
@@ -131,7 +131,8 @@ define([
     }
 
     ,getTemplateRenderData: function () {
-      var renderData = this._super('getTemplateRenderData', arguments);
+      var renderData = this._super(
+        'getTemplateRenderData', arguments, KeyframeFormComponentView);
 
       return _.extend(renderData, {
         properties: PROPERTY_RENDER_LIST.map(function (propertyObject) {

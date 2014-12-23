@@ -37,7 +37,7 @@ define([
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments);
+      this._super('initialize', arguments, CssPanelComponentView);
 
       this.$w3Checkbox.prop('checked', true);
 
@@ -48,7 +48,8 @@ define([
     }
 
     ,getTemplateRenderData: function () {
-      var renderData = this._super('getTemplateRenderData', arguments);
+      var renderData = this._super(
+        'getTemplateRenderData', arguments, CssPanelComponentView);
 
       _.extend(renderData, {
         vendors: VENDORS

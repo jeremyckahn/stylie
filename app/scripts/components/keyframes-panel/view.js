@@ -30,7 +30,7 @@ define([
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments);
+      this._super('initialize', arguments, KeyframesPanelComponentView);
       this.keyframeFormComponents = [];
 
       this.listenFor(

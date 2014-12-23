@@ -29,7 +29,7 @@ define([
      * @param {boolean=} [options.onlyShowCustomCurves]
      */
     ,initialize: function () {
-      this._super('initialize', arguments);
+      this._super('initialize', arguments, CurveSelectorComponentView);
       this.listenFor(
         'tweenableCurveCreated'
         ,this.onTweenableCurveCreated.bind(this)
@@ -47,7 +47,8 @@ define([
     }
 
     ,getTemplateRenderData: function () {
-      var renderData = this._super('getTemplateRenderData', arguments);
+      var renderData = this._super(
+        'getTemplateRenderData', arguments, CurveSelectorComponentView);
 
       _.extend(renderData, {
         curves: this.getCurveList()

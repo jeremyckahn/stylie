@@ -26,7 +26,7 @@ define([
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments);
+      this._super('initialize', arguments, ControlPanelComponentView);
 
       this.tabsComponent = this.addSubview(TabsComponent.View, {
         $tabsContainer: this.$tabsContainer,
