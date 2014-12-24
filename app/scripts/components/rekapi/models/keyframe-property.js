@@ -161,16 +161,24 @@ define([
         return;
       }
 
+      var millisecond = this.attributes.millisecond;
+      var keyframeProperty = this.keyframeProperty;
+      var actor = keyframeProperty.actor;
+
       // It is necessary to go through actor.modifyKeyframe here so that the
       // timelineModified Rekapi event fires.
       //
       // TODO: In Rekapi, make it so that KeyframeProperty#modifyWith can fire
       // this event.
-      this.keyframeProperty.actor.modifyKeyframe(this.attributes.millisecond, {
+      actor.modifyKeyframe(millisecond, {
         transform: this.getValue()
       }, {
         transform: this.getEasing()
       });
+
+      if (millisecond !== keyframeProperty.millisecond) {
+        actor.moveKeyframe(keyframeProperty.millisecond, millisecond);
+      }
     }
   });
 
