@@ -42,6 +42,8 @@ define([
       ,'click .millisecond-input-container': 'onClickMillisecondInputContainer'
       ,'keydown input.millisecond': 'onKeydownMillisecondInput'
       ,'blur input.millisecond': 'onBlurMillisecondInput'
+      ,'click .delete': 'onClickDelete'
+      ,'submit form': 'onSubmitForm'
     }
 
     /**
@@ -51,6 +53,7 @@ define([
       this._super('initialize', arguments, KeyframeFormComponentView);
 
       this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
+      this.listenTo(this.model, 'destroy', this.onModelDestroy.bind(this));
 
       // Select the correct easing curve for each property, according to
       // this.model
@@ -78,6 +81,10 @@ define([
       invalidFields.forEach(function (invalidField) {
         this['$' + invalidField].addClass(INVALID_CLASS);
       }, this);
+    }
+
+    ,onModelDestroy: function () {
+      this.remove();
     }
 
     /**
@@ -130,9 +137,24 @@ define([
       this.emit('millisecondEditingEnd');
     }
 
+    ,onClickDelete: function () {
+      // Defer the destroy call to the next thread so that the "submit" event
+      // is properly caught and handled by this view.
+      _.defer(this.model.destroy.bind(this.model));
+    }
+
+    /**
+     * @param {jQuery.Event} evt
+     */
+    ,onSubmitForm: function (evt) {
+      evt.preventDefault();
+    }
+
     ,getTemplateRenderData: function () {
       var renderData = this._super(
         'getTemplateRenderData', arguments, KeyframeFormComponentView);
+
+      var isFirstKeyframe = this.model.get('millisecond') === 0;
 
       return _.extend(renderData, {
         properties: PROPERTY_RENDER_LIST.map(function (propertyObject) {
@@ -145,7 +167,9 @@ define([
             };
           })
 
-        ,canChangeEasingCurve: this.model.get('millisecond') !== 0
+        ,canChangeEasingCurve: !isFirstKeyframe
+
+        ,canDelete: !isFirstKeyframe
       });
     }
 

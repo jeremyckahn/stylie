@@ -54,10 +54,15 @@ define([
       }
 
       this.on('change', this.onChange.bind(this));
+      this.on('destroy', this.onDestroy.bind(this));
     }
 
     ,onChange: function () {
       this.updateRawKeyframeProperty();
+    }
+
+    ,onDestroy: function () {
+      this.keyframeProperty.actor.removeKeyframe(this.attributes.millisecond);
     }
 
     /**

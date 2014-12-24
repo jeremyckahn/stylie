@@ -11,6 +11,11 @@
     >
     <span>ms</span>
   </label>
+  {{#canDelete}}
+  <button class="delete">
+    Remove keyframe
+  </button>
+  {{/canDelete}}
   {{#properties}}
   <div class="property">
     <label title="{{name}}">
