@@ -15,6 +15,9 @@ define([
 ) {
   'use strict';
 
+  var Base = Lateralus.Component.View;
+  var baseProto = Base.prototype;
+
   var VENDORS = [
     { id: 'mozilla', label: 'Mozilla' }
     ,{ id: 'microsoft', label: 'Microsoft' }
@@ -23,7 +26,7 @@ define([
     ,{ id: 'w3', label: 'W3C' }
   ];
 
-  var CssPanelComponentView = Lateralus.Component.View.extend({
+  var CssPanelComponentView = Base.extend({
     template: template
 
     ,events: {
@@ -37,7 +40,7 @@ define([
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments, CssPanelComponentView);
+      baseProto.initialize.apply(this, arguments);
 
       this.$w3Checkbox.prop('checked', true);
 
@@ -48,8 +51,7 @@ define([
     }
 
     ,getTemplateRenderData: function () {
-      var renderData = this._super(
-        'getTemplateRenderData', arguments, CssPanelComponentView);
+      var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
 
       _.extend(renderData, {
         vendors: VENDORS

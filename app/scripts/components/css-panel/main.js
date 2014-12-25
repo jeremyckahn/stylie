@@ -15,7 +15,9 @@ define([
 ) {
   'use strict';
 
-  var CssPanelComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var CssPanelComponent = Base.extend({
     name: 'css-panel'
     ,View: View
     ,template: template

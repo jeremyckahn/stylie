@@ -19,7 +19,9 @@ define([
 ) {
   'use strict';
 
-  var MotionPanelComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var MotionPanelComponent = Base.extend({
     name: 'motion-panel'
     ,View: View
     ,template: template

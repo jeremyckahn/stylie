@@ -15,7 +15,9 @@ define([
 ) {
   'use strict';
 
-  var CurveSelectorComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var CurveSelectorComponent = Base.extend({
     name: 'curve-selector'
     ,View: View
     ,template: template

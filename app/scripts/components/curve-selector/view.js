@@ -21,7 +21,10 @@ define([
 ) {
   'use strict';
 
-  var CurveSelectorComponentView = Lateralus.Component.View.extend({
+  var Base = Lateralus.Component.View;
+  var baseProto = Base.prototype;
+
+  var CurveSelectorComponentView = Base.extend({
     template: template
 
     /**
@@ -29,7 +32,7 @@ define([
      * @param {boolean=} [options.onlyShowCustomCurves]
      */
     ,initialize: function () {
-      this._super('initialize', arguments, CurveSelectorComponentView);
+      baseProto.initialize.apply(this, arguments);
       this.listenFor(
         'tweenableCurveCreated'
         ,this.onTweenableCurveCreated.bind(this)
@@ -47,8 +50,7 @@ define([
     }
 
     ,getTemplateRenderData: function () {
-      var renderData = this._super(
-        'getTemplateRenderData', arguments, CurveSelectorComponentView);
+      var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
 
       _.extend(renderData, {
         curves: this.getCurveList()

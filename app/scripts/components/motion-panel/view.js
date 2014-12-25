@@ -21,7 +21,10 @@ define([
 ) {
   'use strict';
 
-  var MotionPanelComponentView = Lateralus.Component.View.extend({
+  var Base = Lateralus.Component.View;
+  var baseProto = Base.prototype;
+
+  var MotionPanelComponentView = Base.extend({
     template: template
 
     ,events: {
@@ -33,7 +36,7 @@ define([
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments, MotionPanelComponentView);
+      baseProto.initialize.apply(this, arguments);
       this.addSubview(CurveSelectorComponent.View, {
         el: this.$curveSelector
         ,onlyShowCustomCurves: true

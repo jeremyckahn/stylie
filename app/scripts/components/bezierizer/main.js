@@ -17,7 +17,9 @@ define([
 ) {
   'use strict';
 
-  var BezierizerComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var BezierizerComponent = Base.extend({
     name: 'bezierizer'
     ,View: View
     ,Model: Model

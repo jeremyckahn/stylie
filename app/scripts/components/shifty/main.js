@@ -15,7 +15,9 @@ define([
 ) {
   'use strict';
 
-  var ShiftyComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var ShiftyComponent = Base.extend({
     name: 'shifty'
 
     ,initialize: function () {

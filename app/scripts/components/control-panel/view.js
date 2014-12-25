@@ -17,16 +17,19 @@ define([
 ) {
   'use strict';
 
+  var Base = Lateralus.Component.View;
+  var baseProto = Base.prototype;
+
   var LOCAL_STORAGE_FOCUSED_TAB_KEY = 'stylieControlPanelSavedTabName';
 
-  var ControlPanelComponentView = Lateralus.Component.View.extend({
+  var ControlPanelComponentView = Base.extend({
     template: template
 
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments, ControlPanelComponentView);
+      baseProto.initialize.apply(this, arguments);
 
       this.tabsComponent = this.addSubview(TabsComponent.View, {
         $tabsContainer: this.$tabsContainer,

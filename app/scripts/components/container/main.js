@@ -19,7 +19,9 @@ define([
 ) {
   'use strict';
 
-  var ContainerComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var ContainerComponent = Base.extend({
     name: 'container'
     ,View: View
     ,template: template

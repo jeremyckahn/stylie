@@ -13,7 +13,9 @@ define([
 ) {
   'use strict';
 
-  var KeyframePropertyCollection = Backbone.Collection.extend({
+  var Base = Backbone.Collection;
+
+  var KeyframePropertyCollection = Base.extend({
     model: KeyframePropertyModel
 
     ,comparator: 'millisecond'

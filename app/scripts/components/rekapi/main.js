@@ -23,7 +23,9 @@ define([
 ) {
   'use strict';
 
-  var RekapiComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var RekapiComponent = Base.extend({
     name: 'rekapi'
 
     ,initialize: function () {

@@ -25,7 +25,9 @@ define([
 ) {
   'use strict';
 
-  var ControlPanelComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var ControlPanelComponent = Base.extend({
     name: 'control-panel'
     ,View: View
     ,template: template

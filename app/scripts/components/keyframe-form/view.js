@@ -19,6 +19,9 @@ define([
 ) {
   'use strict';
 
+  var Base = Lateralus.Component.View;
+  var baseProto = Base.prototype;
+
   var PROPERTY_RENDER_LIST = [
       { name: 'x', displayName: 'x' }
       ,{ name: 'y', displayName: 'y' }
@@ -31,7 +34,7 @@ define([
   var INVALID_CLASS = 'invalid';
   var EDITING_CLASS = 'editing';
 
-  var KeyframeFormComponentView = Lateralus.Component.View.extend({
+  var KeyframeFormComponentView = Base.extend({
     template: template
 
     ,tagName: 'li'
@@ -50,7 +53,7 @@ define([
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments, KeyframeFormComponentView);
+      baseProto.initialize.apply(this, arguments);
 
       this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
       this.listenTo(this.model, 'destroy', this.onModelDestroy.bind(this));
@@ -151,8 +154,7 @@ define([
     }
 
     ,getTemplateRenderData: function () {
-      var renderData = this._super(
-        'getTemplateRenderData', arguments, KeyframeFormComponentView);
+      var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
 
       var isFirstKeyframe = this.model.get('millisecond') === 0;
 

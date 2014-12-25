@@ -13,14 +13,17 @@ define([
 ) {
   'use strict';
 
-  var ContainerComponentView = Lateralus.Component.View.extend({
+  var Base = Lateralus.Component.View;
+  var baseProto = Base.prototype;
+
+  var ContainerComponentView = Base.extend({
     template: template
 
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments, ContainerComponentView);
+      baseProto.initialize.apply(this, arguments);
     }
   });
 

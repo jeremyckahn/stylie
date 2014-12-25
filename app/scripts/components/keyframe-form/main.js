@@ -15,7 +15,9 @@ define([
 ) {
   'use strict';
 
-  var KeyframeFormComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var KeyframeFormComponent = Base.extend({
     name: 'keyframe-form'
     ,View: View
     ,template: template

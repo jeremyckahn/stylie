@@ -17,6 +17,8 @@ define([
 ) {
   'use strict';
 
+  var Base = Backbone.Model;
+
   var NUMBER_PROPERTIES = [
     'millisecond'
     ,'x'
@@ -27,7 +29,7 @@ define([
     ,'rotationZ'
   ];
 
-  var KeyframePropertyModel = Backbone.Model.extend({
+  var KeyframePropertyModel = Base.extend({
     defaults: {
       millisecond: 0
       ,x: 0

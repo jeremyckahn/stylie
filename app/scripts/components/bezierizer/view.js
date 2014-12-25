@@ -19,9 +19,12 @@ define([
 ) {
   'use strict';
 
+  var Base = Lateralus.Component.View;
+  var baseProto = Base.prototype;
+
   var HANDLE_NAME_LIST = ['x1', 'y1', 'x2', 'y2'];
 
-  var BezierizerComponentView = Lateralus.Component.View.extend({
+  var BezierizerComponentView = Base.extend({
     template: template
 
     ,events: {
@@ -33,7 +36,7 @@ define([
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
-      this._super('initialize', arguments, BezierizerComponentView);
+      baseProto.initialize.apply(this, arguments);
       this.listenTo(this.model, 'change', this.onModelChange.bind(this));
       this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
 
@@ -88,8 +91,7 @@ define([
     }
 
     ,getTemplateRenderData: function () {
-      var renderData = this._super(
-        'getTemplateRenderData', arguments, BezierizerComponentView);
+      var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
 
       _.extend(renderData, {
         handleNames: HANDLE_NAME_LIST

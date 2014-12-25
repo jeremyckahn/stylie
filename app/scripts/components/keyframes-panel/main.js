@@ -15,7 +15,9 @@ define([
 ) {
   'use strict';
 
-  var KeyframesPanelComponent = Lateralus.Component.extend({
+  var Base = Lateralus.Component;
+
+  var KeyframesPanelComponent = Base.extend({
     name: 'keyframes-panel'
     ,View: View
     ,template: template
