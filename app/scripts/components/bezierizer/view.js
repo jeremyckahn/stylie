@@ -28,8 +28,25 @@ define([
     template: template
 
     ,events: {
-      'change input[type=number]': 'onChangeNumberInput'
-      ,'mousewheel input[type=number]': 'onMousewheelNumberInput'
+
+      /**
+       * @param {jQuery.Event} evt
+       */
+      'change input[type=number]': function (evt) {
+        var target = evt.target;
+        this.syncModelToNumberInput(target);
+      }
+
+      /**
+       * @param {jQuery.Event} evt
+       */
+      ,'mousewheel input[type=number]': function (evt) {
+        var target = evt.target;
+
+        if (document.activeElement === target) {
+          this.syncModelToNumberInput(target);
+        }
+      }
     }
 
     /**
@@ -60,25 +77,6 @@ define([
     ,onModelInvalid: function () {
       this.lateralus.warn(this.model.validationError);
       this.syncUIToModel();
-    }
-
-    /**
-     * @param {jQuery.Event} evt
-     */
-    ,onChangeNumberInput: function (evt) {
-      var target = evt.target;
-      this.syncModelToNumberInput(target);
-    }
-
-    /**
-     * @param {jQuery.Event} evt
-     */
-    ,onMousewheelNumberInput: function (evt) {
-      var target = evt.target;
-
-      if (document.activeElement === target) {
-        this.syncModelToNumberInput(target);
-      }
     }
 
     /**

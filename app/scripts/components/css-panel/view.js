@@ -30,10 +30,29 @@ define([
     template: template
 
     ,events: {
-      'submit form': 'onSubmitForm'
-      ,'keyup .update-on-keyup': 'onKeyupAutoUpdate'
-      ,'change .update-on-change': 'onChangeAutoUpdate'
-      ,'change .orientation-form': 'onChangeOrientationForm'
+      /**
+       * @param {jQuery.Event} evt
+       */
+      'submit form': function (evt) {
+        evt.preventDefault();
+      }
+
+      ,'keyup .update-on-keyup': function () {
+        this.renderCss();
+      }
+
+      ,'change .update-on-change': function () {
+        this.renderCss();
+      }
+
+      ,'change .orientation-form': function () {
+        var orientation = _.findWhere(
+            this.$orientationForm.serializeArray()
+            ,{ name: 'orientation' }
+          ).value;
+
+        this.setUserSelectedOrientation(orientation);
+      }
     }
 
     /**
@@ -60,31 +79,6 @@ define([
       return renderData;
     }
 
-    /**
-     * @param {jQuery.Event} evt
-     */
-    ,onSubmitForm: function (evt) {
-      evt.preventDefault();
-    }
-
-    ,onKeyupAutoUpdate: function () {
-      this.renderCss();
-    }
-
-    ,onChangeAutoUpdate: function () {
-      this.renderCss();
-    }
-
-    ,onChangeOrientationForm: function () {
-      var selectedOrientation = _.findWhere(
-          this.$orientationForm.serializeArray()
-          ,{ name: 'orientation' }
-        ).value;
-
-      this.emit('userSelectedOrientation', selectedOrientation);
-      this.renderCss();
-    }
-
     ,onTimelineModified: function () {
       if (this.$el.is(':visible')) {
         this.renderCss();
@@ -98,6 +92,14 @@ define([
       if ($shownContent.is(this.$el)) {
         this.renderCss();
       }
+    }
+
+    /**
+     * @param {string} orientation "first-keyframe" or "top-left"
+     */
+    ,setUserSelectedOrientation: function (orientation) {
+      this.emit('userSelectedOrientation', orientation);
+      this.renderCss();
     }
 
     ,renderCss: function () {
