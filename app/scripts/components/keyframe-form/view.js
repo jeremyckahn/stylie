@@ -40,13 +40,49 @@ define([
     ,tagName: 'li'
 
     ,events: {
-      'change .curve': 'onChangeCurve'
-      ,'change input[type=number]': 'onChangeNumberInput'
-      ,'click .millisecond-input-container': 'onClickMillisecondInputContainer'
-      ,'keydown input.millisecond': 'onKeydownMillisecondInput'
-      ,'blur input.millisecond': 'onBlurMillisecondInput'
-      ,'click .delete': 'onClickDelete'
-      ,'submit form': 'onSubmitForm'
+      /**
+       * @param {jQuery.Event} evt
+       */
+      'change .curve': function (evt) {
+        var $target = $(evt.target);
+        var property = $target.data('property');
+        this.model.set('easing_' + property, $target.val());
+      }
+
+      ,'change input[type=number]': function () {
+        this.updateModelFromForm();
+      }
+
+      ,'click .millisecond-input-container': function () {
+        this.enableMillisecondEditing();
+      }
+
+      ,'keydown input.millisecond': function (evt) {
+        if (evt.keyCode !== 13) { // enter
+          return;
+        }
+
+        this.$millisecond.blur();
+      }
+
+      ,'blur input.millisecond': function () {
+        this.saveMillisecondToModel();
+        this.disableMillisecondEditing();
+        this.emit('millisecondEditingEnd');
+      }
+
+      ,'click .delete': function () {
+        // Defer the destroy call to the next thread so that the "submit" event
+        // is properly caught and handled by this view.
+        _.defer(this.model.destroy.bind(this.model));
+      }
+
+      /**
+       * @param {jQuery.Event} evt
+       */
+      ,'submit form': function (evt) {
+        evt.preventDefault();
+      }
     }
 
     /**
@@ -90,19 +126,11 @@ define([
       this.remove();
     }
 
-    /**
-     * @param {jQuery.Event} evt
-     */
-    ,onChangeCurve: function (evt) {
-      var $target = $(evt.target);
-      var property = $target.data('property');
-      this.model.set('easing_' + property, $target.val());
-    }
-
-    ,onChangeNumberInput: function () {
+    ,updateModelFromForm: function () {
       var setObject = {};
 
-      var propertyList = PROPERTY_RENDER_LIST.concat([{ name: 'millisecond' }]);
+      var propertyList =
+        PROPERTY_RENDER_LIST.concat([{ name: 'millisecond' }]);
 
       propertyList.forEach(function (propertyObject) {
         var $propertyField = this['$' + propertyObject.name];
@@ -111,46 +139,6 @@ define([
       }, this);
 
       this.model.set(setObject, { validate: true });
-    }
-
-    ,onClickMillisecondInputContainer: function () {
-      if (this.model.get('millisecond') === 0 ||
-          this.$millisecondInputContainer.hasClass(EDITING_CLASS)) {
-        return;
-      }
-
-      this.$millisecond.removeClass(EDITING_CLASS);
-      this.enableMillisecondEditing();
-    }
-
-    /**
-     * @param {jQuery.Event} evt
-     */
-    ,onKeydownMillisecondInput: function (evt) {
-      if (evt.keyCode !== 13) { // enter
-        return;
-      }
-
-      this.$millisecond.blur();
-    }
-
-    ,onBlurMillisecondInput: function () {
-      this.saveMillisecondToModel();
-      this.disableMillisecondEditing();
-      this.emit('millisecondEditingEnd');
-    }
-
-    ,onClickDelete: function () {
-      // Defer the destroy call to the next thread so that the "submit" event
-      // is properly caught and handled by this view.
-      _.defer(this.model.destroy.bind(this.model));
-    }
-
-    /**
-     * @param {jQuery.Event} evt
-     */
-    ,onSubmitForm: function (evt) {
-      evt.preventDefault();
     }
 
     ,getTemplateRenderData: function () {
@@ -176,6 +164,11 @@ define([
     }
 
     ,enableMillisecondEditing: function () {
+      if (this.model.get('millisecond') === 0 ||
+          this.$millisecondInputContainer.hasClass(EDITING_CLASS)) {
+        return;
+      }
+
       this.$millisecondInputContainer.addClass(EDITING_CLASS);
     }
 
