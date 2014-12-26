@@ -1,34 +1,45 @@
 @import 'app/styles/variables.sass'
 
 .control-panel-view
-  background: $control-pane-background-color
-  color: $label-color
+  background: $control-panel-background-color
+  color: $control-panel-external-label-color
   width: 360px
 
   ul
     padding: 0
 
   .tabs-container
-    background: $control-pane-frame-background-color
+    background: $control-panel-frame-background-color
     list-style-type: none
     overflow: auto
 
     .tab
-      border-radius: 2px 2px 0 0
+      border-radius: $border-radius $border-radius 0 0
       float: left
       margin: 0 4px
 
       a:link, a:active, a:hover, a:visited
-        color: $label-color
+        color: $control-panel-external-label-color
         display: block
         font-weight: bold
         padding: $tab-padding
         text-decoration: none
 
     .tab-show
-      background: $control-pane-background-color
-      border: solid $tab-border-width $control-pane-border-color
-      border-bottom-color: $control-pane-background-color
+      background: $control-panel-background-color
+      border: solid $tab-border-width $control-panel-border-color
+      border-bottom-color: $control-panel-background-color
 
       a:link, a:active, a:hover, a:visited
         padding: $tab-padding - $tab-border-width
+
+  button
+    color: $control-panel-external-label-color
+    background: $control-panel-button-background
+    border: solid 1px $control-panel-button-border-color
+    border-radius: $border-radius
+    font-size: 0.8em
+    padding: 5px 12px
+
+    &:active
+      background: $control-panel-background-color
