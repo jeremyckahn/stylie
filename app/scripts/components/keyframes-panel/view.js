@@ -26,7 +26,9 @@ define([
     template: template
 
     ,events: {
-      'click .add-keyframe': 'onClickAddKeyframe'
+      'click .add-keyframe': function () {
+        this.emit('requestNewKeyframe');
+      }
     }
 
     /**
@@ -40,10 +42,6 @@ define([
         'keyframePropertyAdded', this.onKeyframePropertyAdded.bind(this));
       this.listenFor(
         'confirmNewKeyframeOrder', this.onConfirmNewKeyframeOrder.bind(this));
-    }
-
-    ,onClickAddKeyframe: function () {
-      this.emit('requestNewKeyframe');
     }
 
     /**

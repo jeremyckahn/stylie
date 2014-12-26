@@ -28,8 +28,13 @@ define([
     template: template
 
     ,events: {
-      'click .add-curve': 'onClickAddCurve'
-      ,'change .center-to-path': 'onChangeCenterToPath'
+      'click .add-curve': function () {
+        this.emit('userRequestedNewCurve');
+      }
+
+      ,'change .center-to-path': function () {
+        this.emit('updateCenteringSetting', this.$centerToPath.is(':checked'));
+      }
     }
 
     /**
@@ -41,14 +46,6 @@ define([
         el: this.$curveSelector
         ,onlyShowCustomCurves: true
       });
-    }
-
-    ,onClickAddCurve: function () {
-      this.emit('userRequestedNewCurve');
-    }
-
-    ,onChangeCenterToPath: function () {
-      this.emit('updateCenteringSetting', this.$centerToPath.is(':checked'));
     }
 
     /**
