@@ -1,19 +1,34 @@
 @import 'app/styles/variables.sass'
 
 .control-panel-view
-  background: $control-pane-background
+  background: $control-pane-background-color
   color: $label-color
   width: 360px
 
+  ul
+    padding: 0
+
   .tabs-container
-    background: $control-pane-frame-background
+    background: $control-pane-frame-background-color
     list-style-type: none
+    overflow: auto
 
     .tab
-      display: inline
+      border-radius: 2px 2px 0 0
+      float: left
+      margin: 0 4px
 
       a:link, a:active, a:hover, a:visited
         color: $label-color
+        display: block
         font-weight: bold
+        padding: $tab-padding
         text-decoration: none
 
+    .tab-show
+      background: $control-pane-background-color
+      border: solid $tab-border-width $control-pane-border-color
+      border-bottom-color: $control-pane-background-color
+
+      a:link, a:active, a:hover, a:visited
+        padding: $tab-padding - $tab-border-width
