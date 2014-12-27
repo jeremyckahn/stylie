@@ -43,3 +43,19 @@
 
     &:active
       background: $control-panel-background-color
+
+  .btn-hidden-label-wrapper
+
+    span
+      opacity: 0
+      transition: opacity $label-hide-show-duration
+
+    &:hover span
+      opacity: 1
+
+    button
+      background: none
+      border: none
+      font-size: 1.2em
+      position: relative
+      top: .2em
