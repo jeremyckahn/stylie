@@ -6,6 +6,7 @@
   width: 360px
 
   ul
+    margin: 0
     padding: 0
 
   .tabs-container
@@ -47,10 +48,13 @@
   .btn-hidden-label-wrapper
 
     span
+      left: .3em
       opacity: 0
-      transition: opacity $label-hide-show-duration
+      position: relative
+      transition: all $label-hide-show-duration
 
     &:hover span
+      left: 0
       opacity: 1
 
     button
