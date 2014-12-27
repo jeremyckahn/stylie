@@ -12,9 +12,10 @@
     <span>ms</span>
   </label>
   {{#canDelete}}
-  <button class="delete">
-    Remove keyframe
-  </button>
+  <label class="btn-hidden-label-wrapper delete-wrapper">
+    <span>Remove keyframe</span>
+    <button class="glyphicon glyphicon-remove delete"></button>
+  </label>
   {{/canDelete}}
   {{#properties}}
   <div class="property">
