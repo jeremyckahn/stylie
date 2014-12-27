@@ -1,12 +1,27 @@
+@import 'app/styles/variables.sass'
+
 .keyframe-form-view
   padding-top: 2em
+  overflow: auto
   position: relative
 
   .invalid
     background: #ff8
 
-  &:first-child .millisecond-input-container
-    cursor: auto
+  &:first-child
+
+    .millisecond-input-container
+      cursor: auto
+
+    .property
+      float: left
+      width: 30%
+
+      input
+
+        &[type="text"],
+        &[type="number"]
+          width: 4em
 
   .millisecond-input-container
     cursor: pointer
@@ -21,7 +36,24 @@
       input.millisecond
         display: inline
 
+  .millisecond-input-container
+    display: block
+
+    .unit-label
+      color: $control-panel-unit-label-color
+
   .delete-wrapper
     position: absolute
     right: 0
     top: 0
+
+  .property
+    margin-top: 1em
+
+    span
+      float: left
+      line-height: 1.5em
+      width: 1.8em
+
+      &:after
+        content: ":"
