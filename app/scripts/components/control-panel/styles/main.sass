@@ -49,7 +49,12 @@
       background: $control-panel-background-color
 
     &.glyphicon
+      background: none
+      border: none
       color: $control-panel-icon-color
+      font-size: 1.2em
+      position: relative
+      top: .2em
 
   .btn-hidden-label-wrapper
 
@@ -64,13 +69,6 @@
       left: 0
       opacity: 1
 
-    button
-      background: none
-      border: none
-      font-size: 1.2em
-      position: relative
-      top: .2em
-
   input
 
     &[type="text"],
@@ -79,7 +77,7 @@
       border: none
       border-radius: $border-radius
       color: $control-panel-input-color
-      padding: 4px
+      padding: $input-padding
 
       &.invalid
         background: $control-panel-invalid-input-background
@@ -95,3 +93,15 @@
     font-size: 1.2em
     margin-left: 8px
     width: 12em
+
+  .row
+
+    span
+      display: block
+      padding-bottom: 0.8em
+
+      &:after
+        content: ':'
+
+    input.wide
+      width: calc(100% - (#{$input-padding * 2}))

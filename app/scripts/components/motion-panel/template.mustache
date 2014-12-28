@@ -1,15 +1,15 @@
 <label class="row" title="Preview is always &quot;infinite&quot;">
   <span>Iterations</span>
-  <input class="$iterations" type="text" value="infinite">
+  <input class="$iterations wide" type="text" value="infinite">
 </label>
-<label>
+<label class="row">
   <span>Custom easing curves</span>
   <select
     class="$curveSelector"
     title="Easing curve to modify"
   ></select>
+  <button class="glyphicon glyphicon-plus add-curve" title="Add a new custom easing curve"></button>
 </label>
-<button class="add-curve">Add new curve</button>
 <div class="$bezierizer"></div>
 <label class="row">
   <input class="$showPath" type="checkbox" checked>
