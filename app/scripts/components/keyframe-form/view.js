@@ -60,7 +60,10 @@ define([
         // triggering a blur or change event on the number input itself.
         if (evt.keyCode === 13 ||  // enter
             evt.keyCode === 27 ) { // escape
-          $(evt.target).blur();
+          var $target = $(evt.target);
+          $target
+            .blur()
+            .change();
         }
       }
 
@@ -150,7 +153,11 @@ define([
       propertyList.forEach(function (propertyObject) {
         var $propertyField = this['$' + propertyObject.name];
         $propertyField.removeClass(INVALID_CLASS);
-        setObject[propertyObject.name] = +$propertyField.val();
+
+        var input = $propertyField[0];
+
+        setObject[propertyObject.name] =
+          input.validity.valid ? input.valueAsNumber : NaN;
       }, this);
 
       this.model.set(setObject, { validate: true });
