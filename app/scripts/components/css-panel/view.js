@@ -98,7 +98,7 @@ define([
      * @param {string} orientation "first-keyframe" or "top-left"
      */
     ,setUserSelectedOrientation: function (orientation) {
-      this.emit('userSelectedOrientation', orientation);
+      this.lateralus.model.set('cssOrientation', orientation);
       this.renderCss();
     }
 

@@ -133,7 +133,7 @@ define([
 
       this.isGeneratingCss = true;
 
-      if (this.lateralus.cssOrientation === 'first-keyframe') {
+      if (this.lateralus.model.get('cssOrientation') === 'first-keyframe') {
         firstKeyframeJson =
           this.transformPropertyCollection.first().toJSON();
 
@@ -153,7 +153,7 @@ define([
 
       var cssString = rekapi.renderer.toString(opts);
 
-      if (this.lateralus.cssOrientation === 'first-keyframe') {
+      if (this.lateralus.model.get('cssOrientation') === 'first-keyframe') {
         this.transformPropertyCollection.each(function (model) {
           ['x', 'y'].forEach(function (property) {
             model.set(
