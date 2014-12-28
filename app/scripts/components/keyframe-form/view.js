@@ -49,6 +49,21 @@ define([
         this.model.set('easing_' + property, $target.val());
       }
 
+      /**
+       * @param {jQuery.Event} evt
+       */
+      ,'keydown input[type=number]': function (evt) {
+
+        // Force these keys to blur the input.  Escape *should* blur a number
+        // input (but doesn't by default for whatever reason), and Enter seems
+        // to trigger a click on the "delete keyframe" button (????) instead of
+        // triggering a blur or change event on the number input itself.
+        if (evt.keyCode === 13 ||  // enter
+            evt.keyCode === 27 ) { // escape
+          $(evt.target).blur();
+        }
+      }
+
       ,'change input[type=number]': function () {
         this.updateModelFromForm();
       }
