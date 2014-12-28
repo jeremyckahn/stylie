@@ -35,7 +35,7 @@
         padding: $tab-padding - $tab-border-width
 
   .tab-content
-    padding: 1em
+    padding: $input-spacing
 
   button
     color: $control-panel-external-label-color
@@ -105,3 +105,12 @@
 
     input.wide
       width: calc(100% - (#{$input-padding * 2}))
+
+    &.checkbox-wrapper
+      font-size: 1.2em
+
+      span
+        display: inline
+
+        &:after
+          content: ''

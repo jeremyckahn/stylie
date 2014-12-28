@@ -1,7 +1,9 @@
 <div class="$bezierizerControl"></div>
-{{#handleNames}}
-<label>
-  <span>{{.}}:</span>
-  <input type="number" class="${{.}}" data-handle-name="{{.}}" value="0" step="0.01">
-</label>
-{{/handleNames}}
+<div class="row handles">
+  {{#handleNames}}
+  <label>
+    <span>{{.}}</span>
+    <input type="number" class="${{.}}" data-handle-name="{{.}}" value="0" step="0.01">
+  </label>
+  {{/handleNames}}
+</div>
