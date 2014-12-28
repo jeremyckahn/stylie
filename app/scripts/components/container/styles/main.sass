@@ -1,3 +1,5 @@
+@import 'app/styles/variables.sass'
+
 .container-view
   font-family: Helvetica, Arial, serif
   font-size: 13px
@@ -7,3 +9,15 @@
 
   .row
     display: block
+
+  ::-webkit-scrollbar
+    width: 10px
+
+  ::-webkit-scrollbar-thumb
+    background: $control-panel-scrollbar-color
+    border-radius: 10px
+
+  ::-webkit-scrollbar-track
+    border: solid 1px $control-panel-scrollbar-color
+    border-radius: 10px
+
