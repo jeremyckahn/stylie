@@ -35,6 +35,10 @@ define([
       ,'change .center-to-path': function () {
         this.emit('updateCenteringSetting', this.$centerToPath.is(':checked'));
       }
+
+      ,'change .curve-selector': function () {
+        this.selectCurve(this.$curveSelector.val());
+      }
     }
 
     /**
@@ -54,8 +58,9 @@ define([
     ,selectCurve: function (curveName) {
       this.$curveSelector.val(curveName);
       var curveFn = Tweenable.prototype.formula[curveName];
-      this.component.bezierizerComponent.model.set(
-          _.pick(curveFn, 'x1', 'y1', 'x2', 'y2'));
+      var modelProps = _.pick(curveFn, 'x1', 'y1', 'x2', 'y2');
+      modelProps.name = curveName;
+      this.component.bezierizerComponent.model.set(modelProps);
     }
 
     /**

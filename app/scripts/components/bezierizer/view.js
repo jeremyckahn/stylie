@@ -54,15 +54,17 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
-      this.listenTo(this.model, 'change', this.onModelChange.bind(this));
-      this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
-
       _.defer(this.deferredInitialize.bind(this));
     }
 
     ,deferredInitialize: function () {
+      // The bulk of initialization logic for this View needs to be deferred
+      // because Bezierizer reads styles from the DOM which are only available
+      // after the DOM has been built and rendered.
       this.bezierizer = new Bezierizer(this.$bezierizerControl[0]);
       this.bezierizer.$el.on('change', this.onBezierizerChange.bind(this));
+      this.listenTo(this.model, 'change', this.onModelChange.bind(this));
+      this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
       this.syncUIToModel();
     }
 
