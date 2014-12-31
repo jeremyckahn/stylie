@@ -9,7 +9,9 @@
 
 .control-panel-view
   background: $control-panel-background-color
+  border-radius: $border-radius * 2
   color: $control-panel-external-label-color
+  overflow: hidden
   width: 360px
 
   ul
@@ -18,8 +20,10 @@
 
   .tabs-container
     background: $control-panel-frame-background-color
+    cursor: move
     list-style-type: none
     overflow: auto
+    padding-top: 2em
 
     .tab
       border-radius: $border-radius $border-radius 0 0

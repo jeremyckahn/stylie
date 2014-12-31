@@ -38,6 +38,11 @@ define([
 
       this.selectTabFromLocalStorage();
       this.listenTo(this.tabsComponent, 'tabShown', this.onTabShown.bind(this));
+
+      this.$el.dragon({
+        handle: this.$tabsContainer
+        ,within: this.$el.parent()
+      });
     }
 
     /**
