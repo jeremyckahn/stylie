@@ -19,31 +19,33 @@
   label
     cursor: pointer
 
-  input[type=range]
-    background: none
-    border: none
-    border-radius: 1em
-    cursor: ew-resize
-    width: 100%
-    -moz-appearance: none
-    -webkit-appearance: none
+  input
 
-  input[type=range]::-webkit-slider-runnable-track
-    +range-track
-    -webkit-appearance: none
+    &[type=range]
+      background: none
+      border: none
+      border-radius: 1em
+      cursor: ew-resize
+      width: 100%
+      -moz-appearance: none
+      -webkit-appearance: none
 
-  input[type=range]::-webkit-slider-thumb
-    +range-thumb
-    -webkit-appearance: none
+    &[type=range]::-webkit-slider-runnable-track
+      +range-track
+      -webkit-appearance: none
 
-  input[type=range]::-moz-range-track
-    +range-track
-    height: 1em
-    -moz-appearance: none
+    &[type=range]::-webkit-slider-thumb
+      +range-thumb
+      -webkit-appearance: none
 
-  input[type=range]::-moz-range-thumb
-    +range-thumb
-    -moz-appearance: none
+    &[type=range]::-moz-range-track
+      +range-track
+      height: 1em
+      -moz-appearance: none
+
+    &[type=range]::-moz-range-thumb
+      +range-thumb
+      -moz-appearance: none
 
   label[title]
     cursor: help
