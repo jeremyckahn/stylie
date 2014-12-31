@@ -44,6 +44,9 @@
   .tab-content
     padding: $input-spacing
 
+    > .row:last-child
+      padding-bottom: 0
+
   button
     color: $control-panel-external-label-color
     background: $control-panel-button-background
@@ -92,7 +95,7 @@
 
     span
       color: $control-panel-icon-color
-      left: .3em
+      left: $control-panel-hidden-label-animated-nudge-offset
       opacity: 0
       position: relative
       transition: all $label-hide-show-duration

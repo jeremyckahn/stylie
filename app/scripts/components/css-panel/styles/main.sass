@@ -24,3 +24,25 @@
 
   .range-container
     padding: 1em 0 2em
+    position: relative
+
+    &:before,
+    &:after
+      opacity: 0
+      position: absolute
+      top: 4.5em
+      transition: all $label-hide-show-duration
+
+    &:hover
+
+      &:before,
+      &:after
+        opacity: 1
+
+    &:before
+      content: 'Smaller output'
+      left: 0
+
+    &:after
+      content: 'Higher quality'
+      right: 0

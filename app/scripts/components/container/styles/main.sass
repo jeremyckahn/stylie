@@ -21,6 +21,7 @@
 
   input[type=range]
     background: none
+    border: none
     border-radius: 1em
     cursor: ew-resize
     width: 100%
@@ -51,13 +52,15 @@
     display: block
     padding-bottom: $input-spacing
 
-  ::-webkit-scrollbar
-    width: 10px
+  .scrollable
 
-  ::-webkit-scrollbar-thumb
-    background: $control-panel-scrollbar-color
-    border-radius: 10px
+    &::-webkit-scrollbar
+      width: 10px
 
-  ::-webkit-scrollbar-track
-    border: solid 1px $control-panel-scrollbar-color
-    border-radius: 10px
+    &::-webkit-scrollbar-thumb
+      background: $control-panel-scrollbar-color
+      border-radius: 10px
+
+    &::-webkit-scrollbar-track
+      border: solid 1px $control-panel-scrollbar-color
+      border-radius: 10px
