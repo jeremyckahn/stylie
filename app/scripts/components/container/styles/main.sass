@@ -8,7 +8,44 @@
     cursor: pointer
 
   input[type=range]
+    background: none
+    border-radius: 1em
     cursor: ew-resize
+    width: 100%
+    -moz-appearance: none
+    -webkit-appearance: none
+
+  input[type=range]::-webkit-slider-runnable-track
+    background: none
+    border-radius: 1em
+    border: solid 1px $control-panel-range-slide-color
+    -webkit-appearance: none
+
+  input[type=range]::-webkit-slider-thumb
+    background: $control-panel-range-slide-color
+    border: none
+    border-radius: 1em
+    height: 1em
+    width: 1em
+    -webkit-appearance: none
+
+  input[type=range]::-moz-range-track
+    background: none
+    border-radius: 1em
+    border: solid 1px $control-panel-range-slide-color
+    height: 1em
+    -moz-appearance: none
+
+  input[type=range]::-moz-range-thumb
+    background: $control-panel-range-slide-color
+    border: none
+    border-radius: 1em
+    height: 1em
+    width: 1em
+    -moz-appearance: none
+
+  label[title]
+    cursor: help
 
   .row
     display: block
@@ -24,4 +61,3 @@
   ::-webkit-scrollbar-track
     border: solid 1px $control-panel-scrollbar-color
     border-radius: 10px
-
