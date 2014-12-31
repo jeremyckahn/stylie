@@ -1,10 +1,9 @@
-<p>Customize the generated CSS.</p>
 <label class="row">
   <span>Class name</span>
-  <input class="$className update-on-keyup" type="text" value="stylie">
+  <input class="$className wide update-on-keyup" type="text" value="stylie">
 </label>
-<fieldset>
-  <p>Vendors</p>
+<fieldset class="vendors">
+  <p>Vendors:</p>
   {{#vendors}}
   <label>
     <input class="${{id}}Checkbox update-on-change" type="checkbox" data-vendor="{{id}}">
@@ -13,7 +12,7 @@
   {{/vendors}}
 </fieldset>
 <form class="$orientationForm orientation-form" action="">
-  <fieldset class="row">
+  <fieldset>
     <p>Orient generated CSS to:</p>
     <label>
       <input type="radio" name="orientation" value="first-keyframe" checked>
@@ -25,16 +24,18 @@
     </label>
   </fieldset>
 </form>
+<fieldset class="row range-container">
+  <label title="Drag to the left to generate a smaller CSS output.  Drag to the right to improve animation quality.">
+    <span>Output size</span>
+    <input
+      type="range"
+      class="$cssSizeOutput wide update-on-change"
+      min="0"
+      max="60"
+    >
+  </label>
+</fieldset>
 <label class="row">
   <span>Generated CSS</span>
   <textarea class="$generatedCss"></textarea>
 </label>
-<div class="range-container">
-  <span class="low">
-    Smaller output
-  </span>
-  <span class="high">
-    Higher quality
-  </span>
-  <input type="range" class="$cssSizeOutput update-on-change" min="0" max="60">
-</div>

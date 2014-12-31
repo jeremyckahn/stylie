@@ -1,5 +1,12 @@
 @import 'app/styles/variables.sass'
 
+@mixin text-based-input
+  background: $control-panel-input-background-color
+  border: none
+  border-radius: $border-radius
+  color: $control-panel-input-color
+  padding: $input-padding
+
 .control-panel-view
   background: $control-panel-background-color
   color: $control-panel-external-label-color
@@ -56,6 +63,31 @@
       position: relative
       top: .2em
 
+  input
+
+    &[type="text"],
+    &[type="number"]
+      +text-based-input
+
+      &.invalid
+        background: $control-panel-invalid-input-background
+        color: $control-panel-invalid-input-color
+
+    &[type="number"]
+      width: 3.5em
+
+  textarea
+    +text-based-input
+    resize: none
+
+  select
+    background: $control-panel-input-background-color
+    border: solid 1px $control-panel-input-background-color
+    color: $control-panel-input-color
+    font-size: 1.2em
+    margin-left: 8px
+    width: 12em
+
   .btn-hidden-label-wrapper
 
     span
@@ -69,31 +101,6 @@
       left: 0
       opacity: 1
 
-  input
-
-    &[type="text"],
-    &[type="number"]
-      background: $control-panel-input-background-color
-      border: none
-      border-radius: $border-radius
-      color: $control-panel-input-color
-      padding: $input-padding
-
-      &.invalid
-        background: $control-panel-invalid-input-background
-        color: $control-panel-invalid-input-color
-
-    &[type="number"]
-      width: 3.5em
-
-  select
-    background: $control-panel-input-background-color
-    border: solid 1px $control-panel-input-background-color
-    color: $control-panel-input-color
-    font-size: 1.2em
-    margin-left: 8px
-    width: 12em
-
   .row
 
     span
@@ -104,7 +111,7 @@
         content: ':'
 
     input.wide
-      width: calc(100% - (#{$input-padding * 2}))
+      width: $control-panel-input-full-width
 
     &.checkbox-wrapper
       font-size: 1.2em
