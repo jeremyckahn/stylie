@@ -1,5 +1,17 @@
 @import 'app/styles/variables.sass'
 
+@mixin range-track
+  background: none
+  border-radius: 1em
+  border: solid 1px $control-panel-range-slide-color
+
+@mixin range-thumb
+  background: $control-panel-range-slide-color
+  border: none
+  border-radius: 1em
+  height: 1em
+  width: 1em
+
 .container-view
   font-family: Helvetica, Arial, serif
   font-size: 13px
@@ -16,32 +28,20 @@
     -webkit-appearance: none
 
   input[type=range]::-webkit-slider-runnable-track
-    background: none
-    border-radius: 1em
-    border: solid 1px $control-panel-range-slide-color
+    +range-track
     -webkit-appearance: none
 
   input[type=range]::-webkit-slider-thumb
-    background: $control-panel-range-slide-color
-    border: none
-    border-radius: 1em
-    height: 1em
-    width: 1em
+    +range-thumb
     -webkit-appearance: none
 
   input[type=range]::-moz-range-track
-    background: none
-    border-radius: 1em
-    border: solid 1px $control-panel-range-slide-color
+    +range-track
     height: 1em
     -moz-appearance: none
 
   input[type=range]::-moz-range-thumb
-    background: $control-panel-range-slide-color
-    border: none
-    border-radius: 1em
-    height: 1em
-    width: 1em
+    +range-thumb
     -moz-appearance: none
 
   label[title]
