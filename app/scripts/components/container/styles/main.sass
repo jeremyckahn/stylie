@@ -47,6 +47,13 @@
       +range-thumb
       -moz-appearance: none
 
+    &[type=checkbox]
+      transform: rotate(180deg)
+      transition: all $checkbox-toggle-duration
+
+      &:checked
+        transform: rotate(0deg)
+
   label[title]
     cursor: help
 
