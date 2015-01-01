@@ -6,6 +6,7 @@ define([
   ,'text!./template.mustache'
 
   ,'stylie.component.control-panel'
+  ,'stylie.component.preview'
 
 ], function (
 
@@ -15,6 +16,7 @@ define([
   ,template
 
   ,ControlPanelComponent
+  ,PreviewComponent
 
 ) {
   'use strict';
@@ -29,6 +31,10 @@ define([
     ,initialize: function () {
       this.controlPanelComponent = this.addComponent(ControlPanelComponent, {
         el: this.view.$controlPanel
+      });
+
+      this.previewComponent = this.addComponent(PreviewComponent, {
+        el: this.view.$preview
       });
     }
   });

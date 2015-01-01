@@ -61,6 +61,9 @@ require.config({
   }, {
     name: 'stylie.component.curve-selector'
     ,location: 'scripts/components/curve-selector'
+  }, {
+    name: 'stylie.component.preview'
+    ,location: 'scripts/components/preview'
   }]
 });
 
