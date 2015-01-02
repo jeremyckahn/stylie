@@ -30,11 +30,11 @@ define([
 
     ,initialize: function () {
       this.controlPanelComponent = this.addComponent(ControlPanelComponent, {
-        el: this.view.$controlPanel
+        el: this.view.$controlPanel[0]
       });
 
       this.previewComponent = this.addComponent(PreviewComponent, {
-        el: this.view.$preview
+        el: this.view.$preview[0]
       });
     }
   });

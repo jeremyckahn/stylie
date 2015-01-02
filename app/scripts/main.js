@@ -38,6 +38,9 @@ require.config({
     name: 'stylie.component.rekapi'
     ,location: 'scripts/components/rekapi'
   }, {
+    name: 'stylie.component.hidable'
+    ,location: 'scripts/components/hidable'
+  }, {
     name: 'stylie.component.container'
     ,location: 'scripts/components/container'
   }, {

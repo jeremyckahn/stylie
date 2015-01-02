@@ -5,6 +5,7 @@ define([
   ,'text!./template.mustache'
 
   ,'lateralus.component.tabs'
+  ,'stylie.component.hidable'
 
 ], function (
 
@@ -13,6 +14,8 @@ define([
   ,template
 
   ,TabsComponent
+
+  ,HidableComponent
 
 ) {
   'use strict';
@@ -34,6 +37,10 @@ define([
       this.tabsComponent = this.addSubview(TabsComponent.View, {
         $tabsContainer: this.$tabsContainer,
         $tabsContentContainer: this.$tabsContentContainer
+      });
+
+      this.hidableView = this.addSubview(HidableComponent.View, {
+        el: this.el
       });
 
       this.selectTabFromLocalStorage();
