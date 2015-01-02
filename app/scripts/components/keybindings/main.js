@@ -1,17 +1,27 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
   ,'keydrown'
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
   ,kd
 
 ) {
   'use strict';
 
   var Base = Lateralus.Component;
+
+  // If the user is focused on any of these types of elements, global
+  // keybinding handlers are blocked.
+  var INPUT_ELEMENTS = [
+    'select'
+    ,'input'
+    ,'textarea'
+  ];
 
   var KeybindingsComponent = Base.extend({
     name: 'keybindings'
@@ -29,7 +39,9 @@ define([
      * @param {string} eventName
      */
     ,requestEvent: function (eventName) {
-      if (document.activeElement !== document.body) {
+      var activeNodeName = document.activeElement.nodeName.toLowerCase();
+
+      if (_.contains(INPUT_ELEMENTS, activeNodeName)) {
         return;
       }
 
