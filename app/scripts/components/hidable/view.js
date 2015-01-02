@@ -38,17 +38,20 @@ define([
         return;
       }
 
+
       this.actor
         .removeAllKeyframes()
         .keyframe(0, {
           scale: 1
+          ,opacity: 1
         }).keyframe(constant.HIDABLE_VIEW_TRANSITION_DURATION, {
           scale: 0
+          ,opacity: 0
           ,'function': function () {
             this.$el.css('display', 'none');
             this.isHidden = true;
           }.bind(this)
-        }, 'swingFrom');
+        }, 'easeInBack');
 
       this.actor.rekapi.play(1);
     }
@@ -64,8 +67,10 @@ define([
         .removeAllKeyframes()
         .keyframe(0, {
           scale: 0
+          ,opacity: 0
         }).keyframe(constant.HIDABLE_VIEW_TRANSITION_DURATION, {
           scale: 1
+          ,opacity: 1
           ,'function': function () {
             this.isHidden = false;
           }.bind(this)
