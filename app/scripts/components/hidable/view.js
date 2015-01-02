@@ -34,6 +34,10 @@ define([
     }
 
     ,hide: function () {
+      if (this.actor.rekapi.isPlaying()) {
+        return;
+      }
+
       this.actor
         .removeAllKeyframes()
         .keyframe(0, {
@@ -41,6 +45,7 @@ define([
         }).keyframe(constant.HIDABLE_VIEW_TRANSITION_DURATION, {
           scale: 0
           ,'function': function () {
+            this.$el.css('display', 'none');
             this.isHidden = true;
           }.bind(this)
         }, 'swingFrom');
@@ -49,6 +54,12 @@ define([
     }
 
     ,show: function () {
+      if (this.actor.rekapi.isPlaying()) {
+        return;
+      }
+
+      this.$el.css('display', '');
+
       this.actor
         .removeAllKeyframes()
         .keyframe(0, {
