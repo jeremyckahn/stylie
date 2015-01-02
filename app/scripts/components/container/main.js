@@ -5,6 +5,7 @@ define([
   ,'./view'
   ,'text!./template.mustache'
 
+  ,'stylie.component.keybindings'
   ,'stylie.component.control-panel'
   ,'stylie.component.preview'
 
@@ -15,6 +16,7 @@ define([
   ,View
   ,template
 
+  ,KeybindingsComponent
   ,ControlPanelComponent
   ,PreviewComponent
 
@@ -29,6 +31,8 @@ define([
     ,template: template
 
     ,initialize: function () {
+      this.keybindingsComponent = this.addComponent(KeybindingsComponent);
+
       this.controlPanelComponent = this.addComponent(ControlPanelComponent, {
         el: this.view.$controlPanel[0]
       });

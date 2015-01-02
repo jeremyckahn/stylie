@@ -32,6 +32,12 @@ define([
     ,View: View
     ,template: template
 
+    ,lateralusEvents: {
+      userRequestToggleControlPanel: function () {
+        this.view.hidableView.toggle();
+      }
+    }
+
     ,initialize: function () {
       this.addComponent(KeyframePanelComponent, {
         el: this.view.$keyframesPanel

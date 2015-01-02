@@ -15,6 +15,7 @@ require.config({
     ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
     ,shifty: 'bower_components/shifty/dist/shifty'
     ,rekapi: 'bower_components/rekapi/dist/rekapi'
+    ,keydrown: 'bower_components/keydrown/dist/keydrown'
     ,backbone: 'bower_components/backbone/backbone'
     ,underscore: 'bower_components/lodash/dist/lodash'
     ,mustache: 'bower_components/mustache/mustache'
@@ -37,6 +38,9 @@ require.config({
   }, {
     name: 'stylie.component.rekapi'
     ,location: 'scripts/components/rekapi'
+  }, {
+    name: 'stylie.component.keybindings'
+    ,location: 'scripts/components/keybindings'
   }, {
     name: 'stylie.component.hidable'
     ,location: 'scripts/components/hidable'
