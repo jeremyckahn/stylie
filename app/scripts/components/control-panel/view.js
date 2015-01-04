@@ -33,6 +33,12 @@ define([
   var ControlPanelComponentView = Base.extend({
     template: template
 
+    ,events: {
+      dragEnd: function () {
+        this.orientToRight();
+      }
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
@@ -75,6 +81,24 @@ define([
       this.$el.css({
         top: constant.CONTROL_PANEL_PADDING_FROM_CORNER
         ,left: left
+      });
+    }
+
+    /**
+     * Orient the control panel (which is absolutely positioned) to the right
+     * of the parent, rather than the left (which is how $.dragon works).  This
+     * prevents the control panel from falling off the screen if the user makes
+     * their browser window smaller.
+     */
+    ,orientToRight: function () {
+      var left = this.$el.offset().left;
+      var width = this.$el.outerWidth(true);
+      var parentWidth = this.$el.parent().width();
+      var right = parentWidth - left - width;
+
+      this.$el.css({
+        left: ''
+        ,right: right
       });
     }
 
