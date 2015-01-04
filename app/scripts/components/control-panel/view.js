@@ -1,21 +1,26 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
   ,'lateralus.component.tabs'
   ,'stylie.component.hidable'
 
+  ,'../../constant'
+
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
 
   ,template
 
   ,TabsComponent
-
   ,HidableComponent
+
+  ,constant
 
 ) {
   'use strict';
@@ -50,6 +55,8 @@ define([
         handle: this.$tabsContainer
         ,within: this.$el.parent()
       });
+
+      _.defer(this.setInitialPlacement.bind(this));
     }
 
     /**
@@ -57,6 +64,18 @@ define([
      */
     ,onTabShown: function ($shownTab) {
       this.storeSelectedTabName($shownTab.data('tabName'));
+    }
+
+    ,setInitialPlacement: function () {
+      var width = this.$el.outerWidth(true);
+      var parentWidth = this.$el.parent().width();
+      var left = (
+        parentWidth - width - constant.CONTROL_PANEL_PADDING_FROM_CORNER);
+
+      this.$el.css({
+        top: constant.CONTROL_PANEL_PADDING_FROM_CORNER
+        ,left: left
+      });
     }
 
     /**
