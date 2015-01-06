@@ -6,6 +6,8 @@ define([
   ,'./view'
   ,'text!./template.mustache'
 
+  ,'stylie.component.crosshair-container'
+
 ], function (
 
   Lateralus
@@ -13,6 +15,8 @@ define([
   ,Model
   ,View
   ,template
+
+  ,CrosshairContainerComponent
 
 ) {
   'use strict';
@@ -24,6 +28,12 @@ define([
     ,Model: Model
     ,View: View
     ,template: template
+
+    ,initialize: function () {
+      this.addComponent(CrosshairContainerComponent, {
+        el: this.view.$crosshairContainer.el
+      });
+    }
   });
 
   return PreviewComponent;
