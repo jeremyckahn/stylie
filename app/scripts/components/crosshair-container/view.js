@@ -4,11 +4,15 @@ define([
 
   ,'text!./template.mustache'
 
+  ,'stylie.component.crosshair'
+
 ], function (
 
   Lateralus
 
   ,template
+
+  ,CrosshairComponent
 
 ) {
   'use strict';
@@ -24,6 +28,20 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+    }
+
+    /**
+     * @param {KeyframePropertyModel} keyframePropertyModel
+     */
+    ,addCrosshair: function (keyframePropertyModel) {
+      var crosshairEl = document.createElement('div');
+
+      var crosshairComponent = this.addComponent(CrosshairComponent, {
+        el: crosshairEl
+        ,model: keyframePropertyModel
+      });
+
+      crosshairComponent.view.$el.appendTo(this.$el);
     }
   });
 

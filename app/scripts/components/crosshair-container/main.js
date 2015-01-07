@@ -24,6 +24,16 @@ define([
     ,Model: Model
     ,View: View
     ,template: template
+
+    ,lateralusEvents: {
+      /**
+       * @param {KeyframePropertyModel} keyframePropertyModel
+       */
+      keyframePropertyAdded: function (keyframePropertyModel) {
+        this.view.addCrosshair(keyframePropertyModel);
+      }
+    }
+
   });
 
   return CrosshairContainerComponent;

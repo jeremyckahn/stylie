@@ -31,7 +31,7 @@ define([
 
     ,initialize: function () {
       this.addComponent(CrosshairContainerComponent, {
-        el: this.view.$crosshairContainer.el
+        el: this.view.$crosshairContainer[0]
       });
     }
   });
