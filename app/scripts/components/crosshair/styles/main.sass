@@ -1,31 +1,37 @@
+@import 'app/styles/variables.sass'
+
+$half-crosshair-box-size: $crosshair-box-size / 2
+$half-crosshair-dashmark-width: $crosshair-dashmark-width / 2
+$offset-center-point: $half-crosshair-box-size - $half-crosshair-dashmark-width
+
 .crosshair-view
-  height: 52px
-  width: 52px
+  height: $crosshair-box-size
+  width: $crosshair-box-size
 
   .shift-down &
     display: none
 
   .dashmark-container
     cursor: move
-    margin: -26px
+    margin: -$half-crosshair-box-size
 
     .dashmark
       background: #0c0
-      height: 4px
+      height: $crosshair-dashmark-width
       left: 0
       position: absolute
       top: 0
-      width: 4px
+      width: $crosshair-dashmark-width
 
       &.horiz
-        top: 24px
+        top: $offset-center-point
         width: 100%
 
       &.vert
         height: 100%
-        left: 24px
+        left: $offset-center-point
 
     .rotation-control
-      left: 25px
+      left: $half-crosshair-box-size - 1px
       position: absolute
-      top: 25px
+      top: $half-crosshair-box-size - 1px
