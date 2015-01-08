@@ -1,12 +1,14 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
 
   ,template
 
@@ -24,6 +26,13 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+      _.defer(this.deferredInitialize.bind(this));
+    }
+
+    ,deferredInitialize: function () {
+      this.$el.dragon({
+        within: this.$el.parent()
+      });
     }
   });
 
