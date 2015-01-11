@@ -65,8 +65,10 @@ define([
 
       this.listenFor('timelineModified', this.onTimelineModified.bind(this));
       this.listenFor('tabShown', this.onTabShown.bind(this));
+    }
 
-      _.defer(this.renderCss.bind(this));
+    ,deferredInitialize: function () {
+      this.renderCss();
     }
 
     ,getTemplateRenderData: function () {

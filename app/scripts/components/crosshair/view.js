@@ -26,7 +26,6 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
-      _.defer(this.deferredInitialize.bind(this));
     }
 
     ,deferredInitialize: function () {

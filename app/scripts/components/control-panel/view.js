@@ -61,18 +61,9 @@ define([
         handle: this.$tabsContainer
         ,within: this.$el.parent()
       });
-
-      _.defer(this.setInitialPlacement.bind(this));
     }
 
-    /**
-     * @param {jQuery} $shownTab
-     */
-    ,onTabShown: function ($shownTab) {
-      this.storeSelectedTabName($shownTab.data('tabName'));
-    }
-
-    ,setInitialPlacement: function () {
+    ,deferredInitialize: function () {
       var width = this.$el.outerWidth(true);
       var parentWidth = this.$el.parent().width();
       var left = (
@@ -82,6 +73,13 @@ define([
         top: constant.CONTROL_PANEL_PADDING_FROM_CORNER
         ,left: left
       });
+    }
+
+    /**
+     * @param {jQuery} $shownTab
+     */
+    ,onTabShown: function ($shownTab) {
+      this.storeSelectedTabName($shownTab.data('tabName'));
     }
 
     /**
