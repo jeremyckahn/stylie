@@ -104,11 +104,13 @@ define([
     }
 
     /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
+     * @param {Object} options See http://backbonejs.org/#View-constructor
+     * @param {KeyframePropertyModel} options.model
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
 
+      this.listenTo(this.model, 'change', this.onModelChange.bind(this));
       this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
       this.listenTo(this.model, 'destroy', this.onModelDestroy.bind(this));
 
@@ -126,6 +128,17 @@ define([
           $select.val(this.model.get('easing_' + name));
         }
       }, this);
+    }
+
+    /**
+     * @param {KeyframePropertyModel} model
+     * @param {Object} options
+     * @param {boolean} options.changedByFormView
+     */
+    ,onModelChange: function (model, options) {
+      if (!options.changedByFormView) {
+        this.render();
+      }
     }
 
     /**
@@ -160,7 +173,10 @@ define([
           input.validity.valid ? input.valueAsNumber : NaN;
       }, this);
 
-      this.model.set(setObject, { validate: true });
+      this.model.set(setObject, {
+        validate: true
+        ,changedByFormView: true
+      });
     }
 
     ,getTemplateRenderData: function () {
@@ -183,6 +199,13 @@ define([
 
         ,canDelete: !isFirstKeyframe
       });
+    }
+
+    ,render: function () {
+      PROPERTY_RENDER_LIST.forEach(function (propertyObject) {
+        var propertyName = propertyObject.name;
+        this['$' + propertyName].val(this.model.get(propertyName));
+      }, this);
     }
 
     ,enableMillisecondEditing: function () {
