@@ -34,6 +34,11 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
       this.listenTo(this.model, 'change', this.onModelChange.bind(this));
+
+      // The element must be hidden upon initial render to prevent a brief
+      // flash of it being in the wrong position.  It is shown after being
+      // positioned in deferredInitialize.
+      this.$el.css('display', 'none');
     }
 
     ,deferredInitialize: function () {
@@ -42,6 +47,7 @@ define([
       });
 
       this.render();
+      this.$el.css('display', '');
     }
 
     /**
