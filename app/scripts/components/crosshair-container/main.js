@@ -32,6 +32,14 @@ define([
       keyframePropertyAdded: function (keyframePropertyModel) {
         this.view.addCrosshair(keyframePropertyModel);
       }
+
+      ,userRequestStartRotationEditMode: function () {
+        this.view.setRotationModeEnablement(true);
+      }
+
+      ,userRequestEndRotationEditMode: function () {
+        this.view.setRotationModeEnablement(false);
+      }
     }
 
   });

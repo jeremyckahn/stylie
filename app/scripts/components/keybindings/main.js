@@ -33,6 +33,10 @@ define([
 
       kd.C.press(
         this.requestEvent.bind(this, 'userRequestToggleControlPanel'));
+      kd.SHIFT.press(
+        this.requestEvent.bind(this, 'userRequestStartRotationEditMode'));
+      kd.SHIFT.up(
+        this.requestEvent.bind(this, 'userRequestEndRotationEditMode'));
     }
 
     /**

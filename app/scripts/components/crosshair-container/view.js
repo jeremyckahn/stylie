@@ -43,6 +43,13 @@ define([
 
       crosshairComponent.view.$el.appendTo(this.$el);
     }
+
+    /**
+     * @param {boolean} enabled
+     */
+    ,setRotationModeEnablement: function (enabled) {
+      this.$el[enabled ? 'addClass' : 'removeClass']('rotation-mode');
+    }
   });
 
   return CrosshairContainerComponentView;
