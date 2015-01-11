@@ -62,10 +62,25 @@ define([
     }
 
     ,render: function () {
+      var get = this.model.get.bind(this.model);
+
       this.$el.css({
-        top: this.model.get('y')
-        ,left: this.model.get('x')
+        top: get('y')
+        ,left: get('x')
+        ,transform: this.getRotationTransformStringFromModel()
       });
+    }
+
+    /**
+     * @return {string}
+     */
+    ,getRotationTransformStringFromModel: function () {
+      var get = this.model.get.bind(this.model);
+
+      return 'rotateX(' + get('rotationX') +
+          'deg) rotateY(' + get('rotationY') +
+          'deg) rotateZ(' + get('rotationZ') +
+          'deg) scale(' + get('scale') + ')';
     }
 
     ,setUiStateToModel: function () {
