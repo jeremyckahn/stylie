@@ -9,7 +9,8 @@
     "rekapi": "~1.4.3",
     "bezierizer": "~0.0.5",
     "jquery-dragon": "~0.4.4",
-    "keydrown": "~1.1.3"
+    "keydrown": "~1.1.3",
+    "jquery-cubelet": "~0.1.0"
   },
   "resolutions": {
     "jquery": "~2.0.2",

@@ -13,6 +13,7 @@ require.config({
     text: 'bower_components/requirejs-text/text'
     ,jquery: 'bower_components/jquery/jquery'
     ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
+    ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
     ,shifty: 'bower_components/shifty/dist/shifty'
     ,rekapi: 'bower_components/rekapi/dist/rekapi'
     ,keydrown: 'bower_components/keydrown/dist/keydrown'
