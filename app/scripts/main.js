@@ -3,15 +3,10 @@
 
 require.config({
   baseUrl: '/'
-  ,shim: {
-    bootstrap: {
-      deps: ['jquery']
-      ,exports: 'jquery'
-    }
-  }
   ,paths: {
     text: 'bower_components/requirejs-text/text'
     ,jquery: 'bower_components/jquery/jquery'
+    ,'jquery-mousewheel': 'bower_components/jquery-mousewheel/jquery.mousewheel'
     ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
     ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
     ,shifty: 'bower_components/shifty/dist/shifty'

@@ -5,7 +5,8 @@ define([
 
   ,'text!./template.mustache'
 
-  // Doesn't return anything
+  // These don't return anything
+  ,'jquery-mousewheel'
   ,'jquery-cubelet'
 
 ], function (
@@ -26,6 +27,10 @@ define([
 
     ,events: {
       drag: function () {
+        this.setUiStateToModel();
+      }
+
+      ,'change .rotation-control': function () {
         this.setUiStateToModel();
       }
     }
@@ -69,31 +74,41 @@ define([
     }
 
     ,render: function () {
-      var get = this.model.get.bind(this.model);
+      var json = this.model.toJSON();
 
       this.$el.css({
-        top: get('y')
-        ,left: get('x')
+        top: json.y
+        ,left: json.x
         ,transform: this.getRotationTransformStringFromModel()
       });
+
+      this.$rotationControl.cubeletSetCoords(
+        _.pick(json, 'rotationX', 'rotationY', 'rotationZ', 'scale')
+      );
     }
 
     /**
      * @return {string}
      */
     ,getRotationTransformStringFromModel: function () {
-      var get = this.model.get.bind(this.model);
+      var json = this.model.toJSON();
 
-      return 'rotateX(' + get('rotationX') +
-          'deg) rotateY(' + get('rotationY') +
-          'deg) rotateZ(' + get('rotationZ') +
-          'deg) scale(' + get('scale') + ')';
+      return 'rotateX(' + json.rotationX +
+          'deg) rotateY(' + json.rotationY +
+          'deg) rotateZ(' + json.rotationZ +
+          'deg) scale(' + json.scale + ')';
     }
 
     ,setUiStateToModel: function () {
+      var cubeletCoords = this.$rotationControl.cubeletGetCoords();
+
       this.model.set({
         x: parseInt(this.$el.css('left'))
         ,y: parseInt(this.$el.css('top'))
+        ,rotationX: cubeletCoords.x
+        ,rotationY: cubeletCoords.y
+        ,rotationZ: cubeletCoords.z
+        ,scale: cubeletCoords.scale
       }, {
         changedByCrosshairView: true
       });
