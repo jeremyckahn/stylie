@@ -38,6 +38,9 @@ define([
       baseProto.initialize.apply(this, arguments);
       this.listenTo(this.model, 'change', this.onModelChange.bind(this));
 
+      this.$rotationControl
+        .cubeletInit()
+        .cubeletHide();
 
       // The element must be hidden upon initial render to prevent a brief
       // flash of it being in the wrong position.  It is shown after being
@@ -94,6 +97,16 @@ define([
       }, {
         changedByCrosshairView: true
       });
+    }
+
+    ,startRotationEditMode: function () {
+      this.$el.dragonDisable();
+      this.$rotationControl.cubeletShow();
+    }
+
+    ,endRotationEditMode: function () {
+      this.$el.dragonEnable();
+      this.$rotationControl.cubeletHide();
     }
   });
 

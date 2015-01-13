@@ -21,6 +21,16 @@ define([
     name: 'crosshair'
     ,View: View
     ,template: template
+
+    ,lateralusEvents: {
+      userRequestStartRotationEditMode: function () {
+        this.view.startRotationEditMode();
+      }
+
+      ,userRequestEndRotationEditMode: function () {
+        this.view.endRotationEditMode();
+      }
+    }
   });
 
   return CrosshairComponent;
