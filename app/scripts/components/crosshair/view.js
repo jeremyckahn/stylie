@@ -32,6 +32,7 @@ define([
 
       ,'change .rotation-control': function () {
         this.setUiStateToModel();
+        this.render();
       }
     }
 
@@ -79,8 +80,10 @@ define([
       this.$el.css({
         top: json.y
         ,left: json.x
-        ,transform: this.getRotationTransformStringFromModel()
       });
+
+      this.$dashmarkContainer.css(
+        'transform', this.getRotationTransformStringFromModel());
 
       this.$rotationControl.cubeletSetCoords({
         x: json.rotationX
