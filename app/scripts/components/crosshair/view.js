@@ -82,9 +82,12 @@ define([
         ,transform: this.getRotationTransformStringFromModel()
       });
 
-      this.$rotationControl.cubeletSetCoords(
-        _.pick(json, 'rotationX', 'rotationY', 'rotationZ', 'scale')
-      );
+      this.$rotationControl.cubeletSetCoords({
+        x: json.rotationX
+        ,y: json.rotationY
+        ,z: json.rotationZ
+        ,scale: json.scale
+      });
     }
 
     /**
