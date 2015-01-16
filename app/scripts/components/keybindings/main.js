@@ -23,6 +23,16 @@ define([
     ,'textarea'
   ];
 
+  var PRESS_EVENT_KEY_MAP = {
+    C: 'userRequestToggleControlPanel'
+    ,K: 'userRequestNewKeyframe'
+    ,SHIFT: 'userRequestStartRotationEditMode'
+  };
+
+  var UP_EVENT_KEY_MAP = {
+    SHIFT: 'userRequestEndRotationEditMode'
+  };
+
   var KeybindingsComponent = Base.extend({
     name: 'keybindings'
 
@@ -31,14 +41,19 @@ define([
         kd.tick();
       });
 
-      kd.C.press(
-        this.requestEvent.bind(this, 'userRequestToggleControlPanel'));
-      kd.K.press(
-        this.requestEvent.bind(this, 'userRequestNewKeyframe'));
-      kd.SHIFT.press(
-        this.requestEvent.bind(this, 'userRequestStartRotationEditMode'));
-      kd.SHIFT.up(
-        this.requestEvent.bind(this, 'userRequestEndRotationEditMode'));
+      this.bindEventMapToKeyEvent('press', PRESS_EVENT_KEY_MAP);
+      this.bindEventMapToKeyEvent('up', UP_EVENT_KEY_MAP);
+    }
+
+    /**
+     * @param {string} keyEventName
+     * @param {Object.<string>} map
+     */
+    ,bindEventMapToKeyEvent: function (keyEventName, map) {
+      _.each(map, function (stylieEventName, keyName) {
+        kd[keyName][keyEventName](
+          this.requestEvent.bind(this, stylieEventName));
+      }, this);
     }
 
     /**
