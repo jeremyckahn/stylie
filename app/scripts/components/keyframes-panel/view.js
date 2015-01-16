@@ -27,7 +27,7 @@ define([
 
     ,events: {
       'click .add-keyframe': function () {
-        this.emit('requestNewKeyframe');
+        this.emit('userRequestNewKeyframe');
       }
     }
 

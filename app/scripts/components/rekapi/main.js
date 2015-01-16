@@ -38,7 +38,7 @@ define([
         'timelineModified', this.onRekapiTimelineModified.bind(this));
 
       this.listenFor(
-        'requestNewKeyframe'
+        'userRequestNewKeyframe'
         ,this.onRequestNewKeyframe.bind(this)
       );
 

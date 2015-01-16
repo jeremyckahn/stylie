@@ -33,6 +33,8 @@ define([
 
       kd.C.press(
         this.requestEvent.bind(this, 'userRequestToggleControlPanel'));
+      kd.K.press(
+        this.requestEvent.bind(this, 'userRequestNewKeyframe'));
       kd.SHIFT.press(
         this.requestEvent.bind(this, 'userRequestStartRotationEditMode'));
       kd.SHIFT.up(
