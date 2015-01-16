@@ -163,6 +163,8 @@ define([
         });
       }
 
+      this.isGeneratingCss = false;
+
       return cssString;
     }
   });
