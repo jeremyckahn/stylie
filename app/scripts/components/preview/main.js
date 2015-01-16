@@ -6,6 +6,7 @@ define([
   ,'./view'
   ,'text!./template.mustache'
 
+  ,'stylie.component.animation-path'
   ,'stylie.component.crosshair-container'
 
 ], function (
@@ -16,6 +17,7 @@ define([
   ,View
   ,template
 
+  ,AnimationPathComponent
   ,CrosshairContainerComponent
 
 ) {
@@ -30,6 +32,10 @@ define([
     ,template: template
 
     ,initialize: function () {
+      this.addComponent(AnimationPathComponent, {
+        el: this.view.$animationPath[0]
+      });
+
       this.addComponent(CrosshairContainerComponent, {
         el: this.view.$crosshairContainer[0]
       });

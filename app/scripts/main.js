@@ -68,6 +68,9 @@ require.config({
     name: 'stylie.component.preview'
     ,location: 'scripts/components/preview'
   }, {
+    name: 'stylie.component.animation-path'
+    ,location: 'scripts/components/animation-path'
+  }, {
     name: 'stylie.component.crosshair-container'
     ,location: 'scripts/components/crosshair-container'
   }, {

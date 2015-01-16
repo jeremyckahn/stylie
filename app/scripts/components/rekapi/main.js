@@ -56,7 +56,7 @@ define([
     ,onRekapiTimelineModified: function () {
       // Prevent infinite loops caused by offset adjustment logic.
       if (!this.isGeneratingCss) {
-        this.emit('timelineModified');
+        this.emit('timelineModified', this.rekapi);
       }
     }
 
