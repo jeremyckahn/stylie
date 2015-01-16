@@ -35,9 +35,21 @@ define([
 
     this.shiftyComponent.addNewCurve();
     this.rekapiComponent.addNewKeyframe({
-      state: { x: 200, y: 200 }
+      state: this.getInitialKeyframeState()
     });
   });
+
+  var fn = Stylie.prototype;
+
+  /**
+   * @return {Object}
+   */
+  fn.getInitialKeyframeState = function () {
+    return {
+      x: 50
+      ,y: this.containerComponent.view.$el.height() / 2
+    };
+  };
 
   /**
    * @return {{
@@ -48,7 +60,7 @@ define([
    *   iterations: boolean|undefined
    * }}
    */
-  Stylie.prototype.getCssConfigObject = function () {
+  fn.getCssConfigObject = function () {
     return this.containerComponent.controlPanelComponent.getCssConfigObject();
   };
 
