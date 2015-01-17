@@ -83,8 +83,9 @@ define([
 
     ,setupActor: function () {
       var newActor = this.rekapi.addActor();
-      this.rekapiActor = new ActorModel({}, {
-        actor: newActor
+      this.actorModel = new ActorModel({}, {
+        rekapiComponent: this
+        ,actor: newActor
       });
     }
 
@@ -121,12 +122,12 @@ define([
       var keyframePropertyModel =
         this.transformPropertyCollection.add(keyframePropertyAttributes || {});
 
-      this.rekapiActor.keyframe(millisecond, {
+      this.actorModel.keyframe(millisecond, {
         transform: keyframePropertyModel.getValue()
       });
 
       var keyframeProperty =
-        this.rekapiActor.getKeyframeProperty('transform', millisecond);
+        this.actorModel.getKeyframeProperty('transform', millisecond);
 
       keyframePropertyModel.bindToRawKeyframeProperty(keyframeProperty);
 

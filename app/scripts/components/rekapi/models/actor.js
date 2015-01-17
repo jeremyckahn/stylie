@@ -23,9 +23,11 @@ define([
     /**
      * @param {Object} attributes
      * @param {Object} options
+     *   @param {RekapiComponent} rekapiComponent
      *   @param {RekapiActor} actor
      */
     ,initialize: function (attributes, options) {
+      this.rekapiComponent = options.rekapiComponent;
       this.actor = options.actor;
     }
   });
