@@ -34,7 +34,7 @@ define([
     this.containerComponent = this.addComponent(ContainerComponent);
 
     this.shiftyComponent.addNewCurve();
-    this.rekapiComponent.addNewKeyframe({
+    this.rekapiComponent.actorModel.addNewKeyframe({
       state: this.getInitialKeyframeState()
     });
   });
