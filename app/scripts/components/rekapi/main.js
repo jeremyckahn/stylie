@@ -32,6 +32,25 @@ define([
   var RekapiComponent = Base.extend({
     name: 'rekapi'
 
+    ,lateralusEvents: {
+      userRequestNewKeyframe: function () {
+        this.addNewKeyframe();
+      }
+
+      ,millisecondEditingEnd: function () {
+        this.emit('confirmNewKeyframeOrder', this.transformPropertyCollection);
+      }
+
+      /**
+       * @param {boolean} isCentered
+       */
+      ,updateCenteringSetting: function (isCentered) {
+        // TODO: This really belongs in collections/keyframe-property.js, but
+        // that currently has no reference to the central Lateralus instance.
+        this.transformPropertyCollection.setCenteringRules(isCentered);
+      }
+    }
+
     ,initialize: function () {
       this.isGeneratingCss = false;
       this.rekapi = new Rekapi(document.body);
@@ -40,21 +59,6 @@ define([
 
       this.rekapi.on(
         'timelineModified', this.onRekapiTimelineModified.bind(this));
-
-      this.listenFor(
-        'userRequestNewKeyframe'
-        ,this.onRequestNewKeyframe.bind(this)
-      );
-
-      this.listenFor(
-        'millisecondEditingEnd'
-        ,this.onMillisecondEditingEnd.bind(this)
-      );
-
-      this.listenFor(
-        'updateCenteringSetting'
-        ,this.onUpdateCenteringSetting.bind(this)
-      );
     }
 
     ,onRekapiTimelineModified: function () {
@@ -62,23 +66,6 @@ define([
       if (!this.isGeneratingCss) {
         this.emit('timelineModified', this);
       }
-    }
-
-    ,onRequestNewKeyframe: function () {
-      this.addNewKeyframe();
-    }
-
-    ,onMillisecondEditingEnd: function () {
-      this.emit('confirmNewKeyframeOrder', this.transformPropertyCollection);
-    }
-
-    /**
-     * @param {boolean} isCentered
-     */
-    ,onUpdateCenteringSetting: function (isCentered) {
-      // TODO: This really belongs in collections/keyframe-property.js, but
-      // that currently has no reference to the central Lateralus instance.
-      this.transformPropertyCollection.setCenteringRules(isCentered);
     }
 
     ,setupActor: function () {
