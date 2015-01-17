@@ -71,7 +71,7 @@ define([
 
     ,setupActor: function () {
       var newActor = this.rekapi.addActor();
-      this.actorModel = new ActorModel({}, {
+      this.actorModel = this.initModel(ActorModel, {}, {
         rekapiComponent: this
         ,actor: newActor
       });

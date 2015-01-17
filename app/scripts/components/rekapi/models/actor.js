@@ -1,19 +1,19 @@
 define([
 
   'underscore'
-  ,'backbone'
+  ,'lateralus'
   ,'rekapi'
 
 ], function (
 
   _
-  ,Backbone
+  ,Lateralus
   ,Rekapi
 
 ) {
   'use strict';
 
-  var Base = Backbone.Model;
+  var Base = Lateralus.Component.Model;
 
 
   var ActorModel = Base.extend({
