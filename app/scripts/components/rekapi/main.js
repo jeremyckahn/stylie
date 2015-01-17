@@ -3,6 +3,8 @@ define([
   'underscore'
   ,'lateralus'
 
+  ,'./models/actor'
+
   ,'./collections/keyframe-property'
 
   ,'rekapi'
@@ -13,6 +15,8 @@ define([
 
   _
   ,Lateralus
+
+  ,ActorModel
 
   ,KeyframePropertyCollection
 
@@ -31,7 +35,7 @@ define([
     ,initialize: function () {
       this.isGeneratingCss = false;
       this.rekapi = new Rekapi(document.body);
-      this.rekapiActor = this.rekapi.addActor();
+      this.setupActor();
       this.transformPropertyCollection = new KeyframePropertyCollection();
 
       this.rekapi.on(
@@ -56,7 +60,7 @@ define([
     ,onRekapiTimelineModified: function () {
       // Prevent infinite loops caused by offset adjustment logic.
       if (!this.isGeneratingCss) {
-        this.emit('timelineModified', this.rekapi);
+        this.emit('timelineModified', this);
       }
     }
 
@@ -75,6 +79,13 @@ define([
       // TODO: This really belongs in collections/keyframe-property.js, but
       // that currently has no reference to the central Lateralus instance.
       this.transformPropertyCollection.setCenteringRules(isCentered);
+    }
+
+    ,setupActor: function () {
+      var newActor = this.rekapi.addActor();
+      this.rekapiActor = new ActorModel({}, {
+        actor: newActor
+      });
     }
 
     /**

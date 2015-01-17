@@ -1,0 +1,44 @@
+define([
+
+  'underscore'
+  ,'backbone'
+  ,'rekapi'
+
+], function (
+
+  _
+  ,Backbone
+  ,Rekapi
+
+) {
+  'use strict';
+
+  var Base = Backbone.Model;
+
+
+  var ActorModel = Base.extend({
+    defaults: {
+    }
+
+    /**
+     * @param {Object} attributes
+     * @param {Object} options
+     *   @param {RekapiActor} actor
+     */
+    ,initialize: function (attributes, options) {
+      this.actor = options.actor;
+    }
+  });
+
+  // Proxy all Rekapi.Actor.prototype methods through ActorModel.
+  _.each(Rekapi.Actor.prototype, function (fn, fnName) {
+    var proxiedFn = function () {
+      fn.apply(this.actor, arguments);
+    };
+
+    proxiedFn.displayName = 'proxied-' + fnName;
+    ActorModel.prototype[fnName] = proxiedFn;
+  });
+
+  return ActorModel;
+});
