@@ -55,7 +55,8 @@ define([
       this.isGeneratingCss = false;
       this.rekapi = new Rekapi(document.body);
       this.setupActor();
-      this.transformPropertyCollection = new KeyframePropertyCollection();
+      this.transformPropertyCollection =
+        this.initCollection(KeyframePropertyCollection);
 
       this.rekapi.on(
         'timelineModified', this.onRekapiTimelineModified.bind(this));

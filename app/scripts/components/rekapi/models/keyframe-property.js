@@ -1,7 +1,7 @@
 define([
 
   'underscore'
-  ,'backbone'
+  ,'lateralus'
   ,'mustache'
 
   ,'text!../templates/transform-string.mustache'
@@ -9,7 +9,7 @@ define([
 ], function (
 
   _
-  ,Backbone
+  ,Lateralus
   ,Mustache
 
   ,transformStringTemplate
@@ -17,7 +17,7 @@ define([
 ) {
   'use strict';
 
-  var Base = Backbone.Model;
+  var Base = Lateralus.Component.Model;
 
   var NUMBER_PROPERTIES = [
     'millisecond'

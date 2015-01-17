@@ -1,19 +1,19 @@
 define([
 
-  'backbone'
+  'lateralus'
 
   ,'../models/keyframe-property'
 
 ], function (
 
-  Backbone
+  Lateralus
 
   ,KeyframePropertyModel
 
 ) {
   'use strict';
 
-  var Base = Backbone.Collection;
+  var Base = Lateralus.Component.Collection;
 
   var KeyframePropertyCollection = Base.extend({
     model: KeyframePropertyModel
