@@ -27,10 +27,10 @@ define([
 
     ,lateralusEvents: {
       /**
-       * @param {Rekapi} rekapi
+       * @param {RekapiComponent} rekapiComponent
        */
-      timelineModified: function (rekapi) {
-        this.view.updatePath(rekapi);
+      timelineModified: function (rekapiComponent) {
+        this.view.updatePath(rekapiComponent);
       }
     }
   });
