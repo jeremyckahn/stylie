@@ -24,6 +24,7 @@ define([
   var Base = Lateralus.Component.View;
   var baseProto = Base.prototype;
   var prerenderBuffer = document.createElement('canvas');
+  var $win = $(window);
 
   var AnimationPathComponentView = Base.extend({
     template: template
@@ -34,11 +35,18 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
       this.context = this.$el[0].getContext('2d');
+      $win.on('resize', _.bind(this.onWindowResize, this));
     }
 
     ,deferredInitialize: function () {
       var $parent = this.$el.parent();
       this.resize($parent.width(), $parent.height());
+    }
+
+    ,onWindowResize: function () {
+      var height = $win.height();
+      var width = $win.width();
+      this.resize(width, height);
     }
 
     /**
