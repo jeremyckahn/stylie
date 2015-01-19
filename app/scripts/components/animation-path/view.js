@@ -26,12 +26,16 @@ define([
   var prerenderBuffer = document.createElement('canvas');
   var $win = $(window);
 
+  // Aliased for speed
+  var PATH_RENDER_GRANULARITY = constant.PATH_RENDER_GRANULARITY;
+
   var AnimationPathComponentView = Base.extend({
     template: template
 
     ,lateralusEvents: {
       userRequestUpdateShowPathSetting: function () {
         this.$el.fadeToggle(constant.PATH_TOGGLE_TRANSITION_DURATION);
+        this.render();
       }
     }
 
@@ -105,9 +109,9 @@ define([
         ,y: easeY
       };
       var j, point;
-      for (j = 0; j <= constant.PATH_RENDER_GRANULARITY; j++) {
+      for (j = 0; j <= PATH_RENDER_GRANULARITY; j++) {
         point = Tweenable.interpolate(
-            from, to, (1 / constant.PATH_RENDER_GRANULARITY) * j, easing);
+            from, to, (1 / PATH_RENDER_GRANULARITY) * j, easing);
         points.push(point);
       }
 
@@ -162,19 +166,20 @@ define([
 
         previousPoint = point;
       });
-      ctx.lineWidth = 4;
-      var strokeColor = 'rgb(255,176,0)';
+      ctx.lineWidth = constant.PATH_THICKNESS;
+      var strokeColor = constant.PATH_COLOR;
       ctx.strokeStyle = strokeColor;
       ctx.stroke();
       ctx.closePath();
     }
 
     ,render: function () {
-
+      // Quick way to clear the canvas
       this.$el[0].width = this.$el.width();
-      //if (this._isShowing) {
+
+      if (this.$el.is(':visible')) {
         this.context.drawImage(prerenderBuffer, 0, 0);
-      //}
+      }
     }
   });
 
