@@ -28,6 +28,12 @@ define([
   var RekapiComponent = Base.extend({
     name: 'rekapi'
 
+    ,lateralusEvents: {
+      bezierCurveUpdated: function () {
+        this.onRekapiTimelineModified();
+      }
+    }
+
     ,initialize: function () {
       this.isGeneratingCss = false;
       this.rekapi = new Rekapi(document.body);

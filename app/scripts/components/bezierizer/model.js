@@ -51,6 +51,8 @@ define([
         ,attributes.x2
         ,attributes.y2
       );
+
+      this.emit('bezierCurveUpdated');
     }
   });
 

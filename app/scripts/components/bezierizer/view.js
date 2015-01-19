@@ -28,11 +28,14 @@ define([
     template: template
 
     ,events: {
+      'change .bezierizer-control': function () {
+        this.model.set(this.getHandlePositions());
+      }
 
       /**
        * @param {jQuery.Event} evt
        */
-      'change input[type=number]': function (evt) {
+      ,'change input[type=number]': function (evt) {
         var target = evt.target;
         this.syncModelToNumberInput(target);
       }
@@ -61,14 +64,9 @@ define([
       // because Bezierizer reads styles from the DOM which are only available
       // after the DOM has been built and rendered.
       this.bezierizer = new Bezierizer(this.$bezierizerControl[0]);
-      this.bezierizer.$el.on('change', this.onBezierizerChange.bind(this));
       this.listenTo(this.model, 'change', this.onModelChange.bind(this));
       this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
       this.syncUIToModel();
-    }
-
-    ,onBezierizerChange: function () {
-      this.model.set(this.getHandlePositions());
     }
 
     ,onModelChange: function () {
