@@ -40,7 +40,7 @@ define([
       /**
        * @param {boolean} isCentered
        */
-      ,updateCenteringSetting: function (isCentered) {
+      ,userRequestUpdateCenteringSetting: function (isCentered) {
         // TODO: This really belongs in collections/keyframe-property.js, but
         // that currently has no reference to the central Lateralus instance.
         this.transformPropertyCollection.setCenteringRules(isCentered);

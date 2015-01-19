@@ -27,13 +27,29 @@ define([
   var MotionPanelComponentView = Base.extend({
     template: template
 
+    ,lateralusEvents: {
+      userRequestUpdateCenteringSettingViaKeybinding: function () {
+        this.$showPath.click();
+      }
+    }
+
     ,events: {
       'click .add-curve': function () {
         this.emit('userRequestedNewCurve');
       }
 
+      ,'change .show-path': function () {
+        this.emit(
+          'userRequestUpdateShowPathSetting'
+          ,this.$showPath.is(':checked')
+        );
+      }
+
       ,'change .center-to-path': function () {
-        this.emit('updateCenteringSetting', this.$centerToPath.is(':checked'));
+        this.emit(
+          'userRequestUpdateCenteringSetting'
+          ,this.$centerToPath.is(':checked')
+        );
       }
 
       ,'change .curve-selector': function () {

@@ -26,6 +26,7 @@ define([
   var PRESS_EVENT_KEY_MAP = {
     C: 'userRequestToggleControlPanel'
     ,K: 'userRequestNewKeyframe'
+    ,P: 'userRequestUpdateCenteringSettingViaKeybinding'
     ,SHIFT: 'userRequestStartRotationEditMode'
   };
 

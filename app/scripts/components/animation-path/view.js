@@ -29,6 +29,12 @@ define([
   var AnimationPathComponentView = Base.extend({
     template: template
 
+    ,lateralusEvents: {
+      userRequestUpdateShowPathSetting: function () {
+        this.$el.fadeToggle(constant.PATH_TOGGLE_TRANSITION_DURATION);
+      }
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
