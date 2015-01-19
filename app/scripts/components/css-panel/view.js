@@ -29,6 +29,23 @@ define([
   var CssPanelComponentView = Base.extend({
     template: template
 
+    ,lateralusEvents: {
+      timelineModified: function () {
+        if (this.$el.is(':visible')) {
+          this.renderCss();
+        }
+      }
+
+      /**
+       * @param {jQuery} $shownContent
+       */
+      ,tabShown: function ($shownContent) {
+        if ($shownContent.is(this.$el)) {
+          this.renderCss();
+        }
+      }
+    }
+
     ,events: {
       /**
        * @param {jQuery.Event} evt
@@ -62,9 +79,6 @@ define([
       baseProto.initialize.apply(this, arguments);
 
       this.$w3Checkbox.prop('checked', true);
-
-      this.listenFor('timelineModified', this.onTimelineModified.bind(this));
-      this.listenFor('tabShown', this.onTabShown.bind(this));
     }
 
     ,deferredInitialize: function () {
@@ -79,21 +93,6 @@ define([
       });
 
       return renderData;
-    }
-
-    ,onTimelineModified: function () {
-      if (this.$el.is(':visible')) {
-        this.renderCss();
-      }
-    }
-
-    /**
-     * @param {jQuery} $shownContent
-     */
-    ,onTabShown: function ($shownContent) {
-      if ($shownContent.is(this.$el)) {
-        this.renderCss();
-      }
     }
 
     /**
