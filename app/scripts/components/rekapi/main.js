@@ -37,11 +37,20 @@ define([
     ,initialize: function () {
       this.rekapi = new Rekapi(document.body);
       this.setupActor();
+
+      this.rekapi.on(
+        'playStateChange'
+        ,this.onRekapiPlayStateChanged.bind(this)
+      );
     }
 
     ,onRekapiTimelineModified: function () {
       this.rekapi.update();
       this.emit('timelineModified', this);
+    }
+
+    ,onRekapiPlayStateChanged: function () {
+      this.emit('rekapiPlayStateChange', this.rekapi.isPlaying());
     }
 
     ,setupActor: function () {

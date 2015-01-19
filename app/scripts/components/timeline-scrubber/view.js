@@ -19,11 +19,33 @@ define([
   var TimelineScrubberComponentView = Base.extend({
     template: template
 
+    ,lateralusEvents: {
+      /**
+       * @param {boolean} isPlaying
+       */
+      rekapiPlayStateChange: function (isPlaying) {
+        this.syncToRekapiPlayState(isPlaying);
+      }
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+    }
+
+    /**
+     * @param {boolean} isPlaying
+     */
+    ,syncToRekapiPlayState: function (isPlaying) {
+      if (isPlaying) {
+        this.$play.addClass('hide');
+        this.$pause.removeClass('hide');
+      } else {
+        this.$play.removeClass('hide');
+        this.$pause.addClass('hide');
+      }
     }
   });
 
