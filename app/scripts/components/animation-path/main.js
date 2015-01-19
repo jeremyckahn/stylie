@@ -24,15 +24,6 @@ define([
     ,Model: Model
     ,View: View
     ,template: template
-
-    ,lateralusEvents: {
-      /**
-       * @param {RekapiComponent} rekapiComponent
-       */
-      timelineModified: function (rekapiComponent) {
-        this.view.updatePath(rekapiComponent);
-      }
-    }
   });
 
   return AnimationPathComponent;

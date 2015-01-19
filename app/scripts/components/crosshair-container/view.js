@@ -31,6 +31,21 @@ define([
       userRequestUpdateShowPathSetting: function () {
         this.$el.fadeToggle(constant.PATH_TOGGLE_TRANSITION_DURATION);
       }
+
+      /**
+       * @param {KeyframePropertyModel} keyframePropertyModel
+       */
+      ,keyframePropertyAdded: function (keyframePropertyModel) {
+        this.addCrosshair(keyframePropertyModel);
+      }
+
+      ,userRequestStartRotationEditMode: function () {
+        this.setRotationModeEnablement(true);
+      }
+
+      ,userRequestEndRotationEditMode: function () {
+        this.setRotationModeEnablement(false);
+      }
     }
 
     /**

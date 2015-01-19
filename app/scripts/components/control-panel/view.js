@@ -33,6 +33,12 @@ define([
   var ControlPanelComponentView = Base.extend({
     template: template
 
+    ,lateralusEvents: {
+      userRequestToggleControlPanel: function () {
+        this.hidableView.toggle();
+      }
+    }
+
     ,events: {
       dragEnd: function () {
         this.orientToRight();

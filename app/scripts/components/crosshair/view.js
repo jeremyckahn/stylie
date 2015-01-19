@@ -25,6 +25,16 @@ define([
   var CrosshairComponentView = Base.extend({
     template: template
 
+    ,lateralusEvents: {
+      userRequestStartRotationEditMode: function () {
+        this.startRotationEditMode();
+      }
+
+      ,userRequestEndRotationEditMode: function () {
+        this.endRotationEditMode();
+      }
+    }
+
     ,events: {
       drag: function () {
         this.setUiStateToModel();

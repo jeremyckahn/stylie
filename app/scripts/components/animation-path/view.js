@@ -37,6 +37,13 @@ define([
         this.$el.fadeToggle(constant.PATH_TOGGLE_TRANSITION_DURATION);
         this.render();
       }
+
+      /**
+       * @param {RekapiComponent} rekapiComponent
+       */
+      ,timelineModified: function (rekapiComponent) {
+        this.updatePath(rekapiComponent);
+      }
     }
 
     /**
