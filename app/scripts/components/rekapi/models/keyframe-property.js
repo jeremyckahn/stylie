@@ -56,19 +56,16 @@ define([
       }
 
       this.on('change', this.onChange.bind(this));
-      this.on('destroy', this.onDestroy.bind(this));
+      this.on('remove', this.onRemove.bind(this));
     }
 
     ,onChange: function () {
       this.updateRawKeyframeProperty();
     }
 
-    ,onDestroy: function () {
-      // Explicitly remove the Model from the Collection a bit early here so
-      // that other code responding to the 'destroy' event will read accurate
-      // information from the Collection.
-      this.collection.remove(this);
+    ,onRemove: function () {
       this.keyframeProperty.actor.removeKeyframe(this.attributes.millisecond);
+      this.destroy();
     }
 
     /**

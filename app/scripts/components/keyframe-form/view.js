@@ -90,9 +90,12 @@ define([
       }
 
       ,'click .delete': function () {
-        // Defer the destroy call to the next thread so that the "submit" event
+        var model = this.model;
+        var collection = model.collection;
+
+        // Defer the remove call to the next thread so that the "submit" event
         // is properly caught and handled by this view.
-        _.defer(this.model.destroy.bind(this.model));
+        _.defer(collection.remove.bind(collection, model));
       }
 
       /**
