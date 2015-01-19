@@ -3,10 +3,10 @@
 @mixin range-track
   background: none
   border-radius: 1em
-  border: solid 1px $control-panel-range-slide-color
+  border: solid 1px $chrome-range-slide-color
 
 @mixin range-thumb
-  background: $control-panel-range-slide-color
+  background: $chrome-range-slide-color
   border: none
   border-radius: 1em
   height: 1em
@@ -52,9 +52,9 @@
         transform: rotate(0deg)
 
   button
-    color: $control-panel-external-label-color
-    background: $control-panel-button-background
-    border: solid 1px $control-panel-button-border-color
+    color: $chrome-external-label-color
+    background: $chrome-button-background
+    border: solid 1px $chrome-button-border-color
     border-radius: $border-radius
     font-size: 0.8em
     padding: 5px 12px
@@ -65,7 +65,7 @@
     &.glyphicon
       background: none
       border: none
-      color: $control-panel-icon-color
+      color: $chrome-icon-color
       font-size: 1.2em
       position: relative
 
@@ -90,9 +90,9 @@
       width: 10px
 
     &::-webkit-scrollbar-thumb
-      background: $control-panel-scrollbar-color
+      background: $chrome-scrollbar-color
       border-radius: 10px
 
     &::-webkit-scrollbar-track
-      border: solid 1px $control-panel-scrollbar-color
+      border: solid 1px $chrome-scrollbar-color
       border-radius: 10px
