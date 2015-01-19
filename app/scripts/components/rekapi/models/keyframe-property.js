@@ -64,6 +64,10 @@ define([
     }
 
     ,onDestroy: function () {
+      // Explicitly remove the Model from the Collection a bit early here so
+      // that other code responding to the 'destroy' event will read accurate
+      // information from the Collection.
+      this.collection.remove(this);
       this.keyframeProperty.actor.removeKeyframe(this.attributes.millisecond);
     }
 

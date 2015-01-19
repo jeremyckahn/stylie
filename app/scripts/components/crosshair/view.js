@@ -43,6 +43,7 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
       this.listenTo(this.model, 'change', this.onModelChange.bind(this));
+      this.listenTo(this.model, 'destroy', this.onModelDestroy.bind(this));
 
       this.$rotationControl
         .cubeletInit()
@@ -72,6 +73,10 @@ define([
       if (!options.changedByCrosshairView) {
         this.render();
       }
+    }
+
+    ,onModelDestroy: function () {
+      this.component.dispose();
     }
 
     ,render: function () {
