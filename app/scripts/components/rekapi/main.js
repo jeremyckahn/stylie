@@ -40,6 +40,7 @@ define([
     }
 
     ,onRekapiTimelineModified: function () {
+      this.rekapi.update();
       this.emit('timelineModified', this);
     }
 
