@@ -79,6 +79,9 @@ require.config({
   }, {
     name: 'stylie.component.actor-container'
     ,location: 'scripts/components/actor-container'
+  }, {
+    name: 'stylie.component.timeline-scrubber'
+    ,location: 'scripts/components/timeline-scrubber'
   }]
 });
 

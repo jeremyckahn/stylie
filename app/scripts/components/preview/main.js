@@ -9,6 +9,7 @@ define([
   ,'stylie.component.animation-path'
   ,'stylie.component.crosshair-container'
   ,'stylie.component.actor-container'
+  ,'stylie.component.timeline-scrubber'
 
 ], function (
 
@@ -21,6 +22,7 @@ define([
   ,AnimationPathComponent
   ,CrosshairContainerComponent
   ,ActorContainerComponent
+  ,TimelineScrubberComponent
 
 ) {
   'use strict';
@@ -44,6 +46,10 @@ define([
 
       this.addComponent(ActorContainerComponent, {
         el: this.view.$actorContainer[0]
+      });
+
+      this.addComponent(TimelineScrubberComponent, {
+        el: this.view.$timelineScrubber[0]
       });
     }
   });
