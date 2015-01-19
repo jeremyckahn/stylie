@@ -47,7 +47,7 @@ define([
       state: this.getInitialKeyframeState()
     });
     actorModel.addNewKeyframe();
-    this.rekapiComponent.rekapi.play(1);
+    this.rekapiComponent.rekapi.play();
   };
 
   /**

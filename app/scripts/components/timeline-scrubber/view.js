@@ -28,6 +28,20 @@ define([
       }
     }
 
+    ,events: {
+      'click .play': function () {
+        this.emit('userRequestPlay');
+      }
+
+      ,'click .pause': function () {
+        this.emit('userRequestPause');
+      }
+
+      ,'click .stop': function () {
+        this.emit('userRequestStop');
+      }
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */

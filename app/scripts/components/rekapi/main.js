@@ -32,6 +32,19 @@ define([
       bezierCurveUpdated: function () {
         this.onRekapiTimelineModified();
       }
+
+      ,userRequestPlay: function () {
+        this.rekapi.play();
+      }
+
+      ,userRequestPause: function () {
+        this.rekapi.pause();
+      }
+
+      ,userRequestStop: function () {
+        this.rekapi.stop();
+        this.rekapi.update(0);
+      }
     }
 
     ,initialize: function () {
