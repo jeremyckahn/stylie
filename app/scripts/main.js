@@ -76,6 +76,9 @@ require.config({
   }, {
     name: 'stylie.component.crosshair'
     ,location: 'scripts/components/crosshair'
+  }, {
+    name: 'stylie.component.actor-container'
+    ,location: 'scripts/components/actor-container'
   }]
 });
 

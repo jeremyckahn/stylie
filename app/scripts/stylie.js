@@ -47,6 +47,7 @@ define([
       state: this.getInitialKeyframeState()
     });
     actorModel.addNewKeyframe();
+    this.rekapiComponent.rekapi.play(5)
   };
 
   /**
@@ -70,6 +71,13 @@ define([
    */
   fn.getCssConfigObject = function () {
     return this.containerComponent.controlPanelComponent.getCssConfigObject();
+  };
+
+  /**
+   * @return {ActorModel}
+   */
+  fn.getCurrentActorModel = function () {
+    return this.rekapiComponent.actorModel;
   };
 
   return Stylie;

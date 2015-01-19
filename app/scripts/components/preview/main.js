@@ -8,6 +8,7 @@ define([
 
   ,'stylie.component.animation-path'
   ,'stylie.component.crosshair-container'
+  ,'stylie.component.actor-container'
 
 ], function (
 
@@ -19,6 +20,7 @@ define([
 
   ,AnimationPathComponent
   ,CrosshairContainerComponent
+  ,ActorContainerComponent
 
 ) {
   'use strict';
@@ -38,6 +40,10 @@ define([
 
       this.addComponent(CrosshairContainerComponent, {
         el: this.view.$crosshairContainer[0]
+      });
+
+      this.addComponent(ActorContainerComponent, {
+        el: this.view.$actorContainer[0]
       });
     }
   });
