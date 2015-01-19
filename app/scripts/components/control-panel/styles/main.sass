@@ -8,7 +8,7 @@
   padding: $input-padding
 
 .control-panel-view
-  background: $control-panel-background-color
+  background: $chrome-background-color
   border-radius: $border-radius * 2
   color: $control-panel-external-label-color
   overflow: hidden
@@ -39,9 +39,9 @@
         text-decoration: none
 
     .tab-show
-      background: $control-panel-background-color
+      background: $chrome-background-color
       border: solid $tab-border-width $control-panel-border-color
-      border-bottom-color: $control-panel-background-color
+      border-bottom-color: $chrome-background-color
 
       a:link, a:active, a:hover, a:visited
         padding: $tab-padding - $tab-border-width
@@ -53,22 +53,8 @@
       padding-bottom: 0
 
   button
-    color: $control-panel-external-label-color
-    background: $control-panel-button-background
-    border: solid 1px $control-panel-button-border-color
-    border-radius: $border-radius
-    font-size: 0.8em
-    padding: 5px 12px
-
-    &:active
-      background: $control-panel-background-color
 
     &.glyphicon
-      background: none
-      border: none
-      color: $control-panel-icon-color
-      font-size: 1.2em
-      position: relative
       top: .2em
 
   input

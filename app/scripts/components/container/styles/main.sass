@@ -51,6 +51,24 @@
       &:checked
         transform: rotate(0deg)
 
+  button
+    color: $control-panel-external-label-color
+    background: $control-panel-button-background
+    border: solid 1px $control-panel-button-border-color
+    border-radius: $border-radius
+    font-size: 0.8em
+    padding: 5px 12px
+
+    &:active
+      background: $chrome-background-color
+
+    &.glyphicon
+      background: none
+      border: none
+      color: $control-panel-icon-color
+      font-size: 1.2em
+      position: relative
+
   label[title]
     cursor: help
 
