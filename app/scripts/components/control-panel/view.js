@@ -73,6 +73,8 @@ define([
         top: constant.CONTROL_PANEL_PADDING_FROM_CORNER
         ,left: left
       });
+
+      this.orientToRight();
     }
 
     /**

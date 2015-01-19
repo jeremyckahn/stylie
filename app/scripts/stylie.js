@@ -1,6 +1,7 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
 
   ,'stylie.component.shifty'
   ,'stylie.component.rekapi'
@@ -8,7 +9,8 @@ define([
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
 
   ,ShiftyComponent
   ,RekapiComponent
@@ -34,12 +36,18 @@ define([
     this.containerComponent = this.addComponent(ContainerComponent);
 
     this.shiftyComponent.addNewCurve();
-    this.rekapiComponent.actorModel.addNewKeyframe({
-      state: this.getInitialKeyframeState()
-    });
+    _.defer(this.deferredInitialize.bind(this));
   });
 
   var fn = Stylie.prototype;
+
+  fn.deferredInitialize = function () {
+    var actorModel = this.rekapiComponent.actorModel;
+    actorModel.addNewKeyframe({
+      state: this.getInitialKeyframeState()
+    });
+    actorModel.addNewKeyframe();
+  };
 
   /**
    * @return {Object}

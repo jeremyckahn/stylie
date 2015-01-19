@@ -106,9 +106,17 @@ define([
       this.emit('keyframePropertyAdded', keyframePropertyModel);
     }
 
+    /**
+     * @return {{x: number, y: number}}
+     */
     ,getFirstKeyframeOffset: function () {
-      var firstKeyframeJson =
-        this.transformPropertyCollection.first().toJSON();
+      var firstKeyframe = this.transformPropertyCollection.first();
+
+      if (!firstKeyframe) {
+        return { x: 0, y: 0 };
+      }
+
+      var firstKeyframeJson = firstKeyframe.toJSON();
 
       return {
         x: firstKeyframeJson.x
