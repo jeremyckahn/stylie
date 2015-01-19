@@ -55,6 +55,11 @@ define([
         'playStateChange'
         ,this.onRekapiPlayStateChanged.bind(this)
       );
+
+      this.rekapi.on(
+        'afterUpdate'
+        ,this.onRekapiAfterUpdate.bind(this)
+      );
     }
 
     ,onRekapiTimelineModified: function () {
@@ -64,6 +69,10 @@ define([
 
     ,onRekapiPlayStateChanged: function () {
       this.emit('rekapiPlayStateChange', this.rekapi.isPlaying());
+    }
+
+    ,onRekapiAfterUpdate: function () {
+      this.emit('animationHasUpdated', this);
     }
 
     ,setupActor: function () {

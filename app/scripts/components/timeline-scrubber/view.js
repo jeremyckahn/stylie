@@ -26,6 +26,20 @@ define([
       rekapiPlayStateChange: function (isPlaying) {
         this.syncToRekapiPlayState(isPlaying);
       }
+
+      /**
+       * @param {RekapiComponent} rekapiComponent
+       */
+      ,timelineModified: function (rekapiComponent) {
+        this.syncScrubberToRekapi(rekapiComponent);
+      }
+
+      /**
+       * @param {RekapiComponent} rekapiComponent
+       */
+      ,animationHasUpdated: function (rekapiComponent) {
+        this.syncScrubberToRekapi(rekapiComponent);
+      }
     }
 
     ,events: {
@@ -60,6 +74,17 @@ define([
         this.$play.removeClass('hide');
         this.$pause.addClass('hide');
       }
+    }
+
+    /**
+     * @param {RekapiComponent} rekapiComponent
+     */
+    ,syncScrubberToRekapi: function (rekapiComponent) {
+      var rekapi = rekapiComponent.rekapi;
+      var animationLength = rekapi.getAnimationLength();
+      this.$scrubber
+        .attr('max', animationLength)
+        .val(rekapi.getLastPositionUpdated() * animationLength);
     }
   });
 
