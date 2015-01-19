@@ -76,10 +76,12 @@ define([
 
     ,render: function () {
       var json = this.model.toJSON();
+      var halfBoxSize = this.$el.height() / 2;
 
+      // Orient to the center of the crosshair, not the top-left
       this.$el.css({
-        top: json.y
-        ,left: json.x
+        top: json.y - halfBoxSize
+        ,left: json.x - halfBoxSize
       });
 
       this.$dashmarkContainer.css(
@@ -107,10 +109,13 @@ define([
 
     ,setUiStateToModel: function () {
       var cubeletCoords = this.$rotationControl.cubeletGetCoords();
+      var halfBoxSize = this.$el.height() / 2;
 
       this.model.set({
-        x: parseInt(this.$el.css('left'))
-        ,y: parseInt(this.$el.css('top'))
+        // Orient to the center of the crosshair, not the top-left
+        x: parseInt(this.$el.css('left')) + halfBoxSize
+        ,y: parseInt(this.$el.css('top')) + halfBoxSize
+
         ,rotationX: cubeletCoords.x
         ,rotationY: cubeletCoords.y
         ,rotationZ: cubeletCoords.z

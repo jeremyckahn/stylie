@@ -44,9 +44,7 @@ define([
     }
 
     ,onWindowResize: function () {
-      var height = $win.height();
-      var width = $win.width();
-      this.resize(width, height);
+      this.resize($win.width(), $win.height());
     }
 
     /**
