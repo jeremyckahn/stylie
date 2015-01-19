@@ -22,7 +22,7 @@ define([
   'use strict';
 
   var Base = Lateralus.Component.Model;
-  var offsetSetOperationOptions = { silent: true };
+  var silentOptionObject = { silent: true };
 
   var ActorModel = Base.extend({
     defaults: {
@@ -59,6 +59,16 @@ define([
 
       this.transformPropertyCollection =
         this.initCollection(KeyframePropertyCollection);
+
+      this.listenTo(
+        this.transformPropertyCollection
+        ,'change add remove'
+        ,this.onMutateTransformPropertyCollection.bind(this)
+      );
+    }
+
+    ,onMutateTransformPropertyCollection: function () {
+      this.trigger('change');
     }
 
     /**
@@ -70,6 +80,7 @@ define([
     ,addNewKeyframe: function (opt_options) {
       var options = opt_options || {};
       var keyframePropertyAttributes = options.state || {};
+      var transformPropertyCollection = this.transformPropertyCollection;
 
       if (options.easing) {
         _.extend(keyframePropertyAttributes, { easing: options.easing });
@@ -77,9 +88,9 @@ define([
 
       var millisecond = options.millisecond || 0;
 
-      if (this.transformPropertyCollection.length && !opt_options) {
+      if (transformPropertyCollection.length && !opt_options) {
         keyframePropertyAttributes =
-          this.transformPropertyCollection.last().toJSON();
+          transformPropertyCollection.last().toJSON();
 
         keyframePropertyAttributes.x += constant.NEW_KEYFRAME_X_INCREASE;
         keyframePropertyAttributes.millisecond +=
@@ -91,8 +102,12 @@ define([
       keyframePropertyAttributes.isCentered =
         this.lateralus.getCssConfigObject().isCentered;
 
-      var keyframePropertyModel =
-        this.transformPropertyCollection.add(keyframePropertyAttributes || {});
+      // Add the model silently here, the "add" event is fired explicitly later
+      // in this function.
+      var keyframePropertyModel = transformPropertyCollection.add(
+        keyframePropertyAttributes || {}
+        ,silentOptionObject
+      );
 
       this.keyframe(millisecond, {
         transform: keyframePropertyModel.getValue()
@@ -102,6 +117,13 @@ define([
         this.getKeyframeProperty('transform', millisecond);
 
       keyframePropertyModel.bindToRawKeyframeProperty(keyframeProperty);
+
+      // Rekapi and the Collection are now in sync, notify the listeners.
+      transformPropertyCollection.trigger(
+        'add'
+        ,keyframeProperty
+        ,transformPropertyCollection
+      );
 
       this.emit('keyframePropertyAdded', keyframePropertyModel);
     }
@@ -134,7 +156,7 @@ define([
           model.set(
             property
             ,model.get(property) - offset[property]
-            ,offsetSetOperationOptions);
+            ,silentOptionObject);
 
           model.updateRawKeyframeProperty();
         }, this);
@@ -151,7 +173,7 @@ define([
           model.set(
             property
             ,model.get(property) + offset[property]
-            ,offsetSetOperationOptions);
+            ,silentOptionObject);
 
           model.updateRawKeyframeProperty();
         }, this);

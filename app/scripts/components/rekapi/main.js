@@ -35,19 +35,12 @@ define([
     }
 
     ,initialize: function () {
-      this.isGeneratingCss = false;
       this.rekapi = new Rekapi(document.body);
       this.setupActor();
-
-      this.rekapi.on(
-        'timelineModified', this.onRekapiTimelineModified.bind(this));
     }
 
     ,onRekapiTimelineModified: function () {
-      // Prevent infinite loops caused by offset adjustment logic.
-      if (!this.isGeneratingCss) {
-        this.emit('timelineModified', this);
-      }
+      this.emit('timelineModified', this);
     }
 
     ,setupActor: function () {
@@ -56,6 +49,12 @@ define([
         rekapiComponent: this
         ,actor: newActor
       });
+
+      this.listenTo(
+        this.actorModel
+        ,'change'
+        ,this.onRekapiTimelineModified.bind(this)
+      );
     }
 
     /**
@@ -67,7 +66,6 @@ define([
       var needToAccountForOffset =
         this.lateralus.model.get('cssOrientation') === 'first-keyframe';
 
-      this.isGeneratingCss = true;
       var offset = this.actorModel.getFirstKeyframeOffset();
 
       if (needToAccountForOffset) {
@@ -79,8 +77,6 @@ define([
       if (needToAccountForOffset) {
         this.actorModel.cleanupAfterCssStringCreation(offset);
       }
-
-      this.isGeneratingCss = false;
 
       return cssString;
     }
