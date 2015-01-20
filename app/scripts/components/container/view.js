@@ -25,11 +25,7 @@ define([
        * @param {jQuery.Event} evt
        */
       'mousemove input[type=range]': function (evt) {
-        var $target = $(evt.target);
-
-        if (document.activeElement === $target[0]) {
-          $target.change();
-        }
+        $(evt.target).change();
       }
     }
 
