@@ -66,16 +66,16 @@ define([
       this.bezierizer = new Bezierizer(this.$bezierizerControl[0]);
       this.listenTo(this.model, 'change', this.onModelChange.bind(this));
       this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
-      this.syncUIToModel();
+      this.syncUiToModel();
     }
 
     ,onModelChange: function () {
-      this.syncUIToModel();
+      this.syncUiToModel();
     }
 
     ,onModelInvalid: function () {
       this.lateralus.warn(this.model.validationError);
-      this.syncUIToModel();
+      this.syncUiToModel();
     }
 
     /**
@@ -108,7 +108,7 @@ define([
       });
     }
 
-    ,syncUIToModel: function () {
+    ,syncUiToModel: function () {
       HANDLE_NAME_LIST.forEach(function (handleName) {
         var handleValue = this.model.get(handleName);
         this['$' + handleName].val(handleValue);

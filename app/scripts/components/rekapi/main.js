@@ -45,6 +45,13 @@ define([
         this.rekapi.stop();
         this.rekapi.update(0);
       }
+
+      /**
+       * @param {number} millisecond
+       */
+      ,userRequestSetPlayheadMillisecond: function (millisecond) {
+        this.rekapi.update(millisecond);
+      }
     }
 
     ,initialize: function () {

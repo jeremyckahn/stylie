@@ -54,6 +54,14 @@ define([
       ,'click .stop': function () {
         this.emit('userRequestStop');
       }
+
+      ,'click .scrubber': function () {
+        this.emit('userRequestPause');
+      }
+
+      ,'change .scrubber': function () {
+        this.syncRekapiToScrubber();
+      }
     }
 
     /**
@@ -85,6 +93,10 @@ define([
       this.$scrubber
         .attr('max', animationLength)
         .val(rekapi.getLastPositionUpdated() * animationLength);
+    }
+
+    ,syncRekapiToScrubber: function () {
+      this.emit('userRequestSetPlayheadMillisecond', this.$scrubber.val());
     }
   });
 
