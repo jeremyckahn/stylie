@@ -55,7 +55,7 @@ define([
         this.emit('userRequestStop');
       }
 
-      ,'click .scrubber': function () {
+      ,'mousedown .scrubber': function () {
         this.emit('userRequestPause');
       }
 
