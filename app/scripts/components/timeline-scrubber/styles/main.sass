@@ -1,3 +1,4 @@
+@import "compass/css3/flexbox"
 @import 'app/styles/variables.sass'
 
 .timeline-scrubber-view
@@ -7,6 +8,8 @@
   left: $timeline-scrubber-distance-from-corner
   padding: .5em 0
   position: absolute
+  +display-flex()
+  +align-items(center)
 
   button,
   input
@@ -14,5 +17,4 @@
 
   input[type=range]
     position: relative
-    top: .5em
     width: $timeline-scrubber-range-width
