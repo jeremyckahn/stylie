@@ -28,6 +28,7 @@ define([
     ,K: 'userRequestNewKeyframe'
     ,P: 'userRequestUpdateCenteringSettingViaKeybinding'
     ,SHIFT: 'userRequestStartRotationEditMode'
+    ,SPACE: 'userRequestTogglePreviewPlayback'
   };
 
   var UP_EVENT_KEY_MAP = {

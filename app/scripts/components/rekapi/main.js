@@ -52,6 +52,11 @@ define([
       ,userRequestSetPlayheadMillisecond: function (millisecond) {
         this.rekapi.update(millisecond);
       }
+
+      ,userRequestTogglePreviewPlayback: function () {
+        var rekapi = this.rekapi;
+        rekapi[rekapi.isPlaying() ? 'pause' : 'play']();
+      }
     }
 
     ,initialize: function () {
