@@ -20,6 +20,15 @@ define([
 
     ,comparator: 'millisecond'
 
+    ,lateralusEvents: {
+      /**
+       * @param {boolean} isCentered
+       */
+      userRequestUpdateCenteringSetting: function (isCentered) {
+        this.setCenteringRules(isCentered);
+      }
+    }
+
     ,initialize: function () {
       this.on('change', this.onChange, this);
     }
@@ -37,7 +46,9 @@ define([
      * @param {boolean} isCentered
      */
     ,setCenteringRules: function (isCentered) {
+      this.component.beginBulkKeyframeOperation();
       this.invoke('set', 'isCentered', isCentered);
+      this.component.endBulkKeyframeOperation();
     }
   });
 

@@ -61,6 +61,7 @@ define([
 
     ,initialize: function () {
       this.rekapi = new Rekapi(document.body);
+      this.isPerformingBulkOperation = false;
       this.setupActor();
 
       this.rekapi.on(
@@ -75,6 +76,10 @@ define([
     }
 
     ,onRekapiTimelineModified: function () {
+      if (this.isPerformingBulkOperation) {
+        return;
+      }
+
       this.rekapi.update();
       this.emit('timelineModified', this);
     }
@@ -123,6 +128,19 @@ define([
       }
 
       return cssString;
+    }
+
+    /**
+     * Prevent repeated calls to this.rekapi.update() until
+     * endBulkKeyframeOperation is called.
+     */
+    ,beginBulkKeyframeOperation: function () {
+      this.isPerformingBulkOperation = true;
+    }
+
+    ,endBulkKeyframeOperation: function () {
+      this.isPerformingBulkOperation = false;
+      this.onRekapiTimelineModified();
     }
   });
 
