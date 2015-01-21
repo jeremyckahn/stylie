@@ -7,5 +7,7 @@
     // Due to reasons that are _extremely_ unclear, Firefox does not respect
     // the +transform-origin mixin.  It needs the explicit -moz vendor prefix.
     // Thanks Firefox.
-    -moz-transform-origin: 0 0 0
-    +transform-origin(0 0 0)
+
+    &.centered
+      -moz-transform-origin: 0 0 0
+      +transform-origin(0 0 0)

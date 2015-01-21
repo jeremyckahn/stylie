@@ -19,6 +19,15 @@ define([
   var ActorContainerComponentView = Base.extend({
     template: template
 
+    ,lateralusEvents: {
+      /**
+       * @param {boolean} isCentered
+       */
+      userRequestUpdateCenteringSetting: function (isCentered) {
+        this.setCenteringClass(isCentered);
+      }
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
@@ -26,6 +35,13 @@ define([
       baseProto.initialize.apply(this, arguments);
       this.actorModel = this.lateralus.getCurrentActorModel();
       this.actorModel.actor.context = this.$actorWrapper[0];
+    }
+
+    /**
+     * @param {boolean} isCentered
+     */
+    ,setCenteringClass: function (isCentered) {
+      this.$actorWrapper[isCentered ? 'addClass' : 'removeClass']('centered');
     }
   });
 
