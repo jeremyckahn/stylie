@@ -1,12 +1,14 @@
 define([
 
-  'lateralus'
+  'backbone'
+  ,'lateralus'
 
   ,'../models/keyframe-property'
 
 ], function (
 
-  Lateralus
+  Backbone
+  ,Lateralus
 
   ,KeyframePropertyModel
 
@@ -43,12 +45,28 @@ define([
     }
 
     /**
+     * @override
+     * @param {string} methodName
+     */
+    ,invoke: function (methodName) {
+      var isSet = methodName === 'set';
+
+      if (isSet) {
+        this.component.beginBulkKeyframeOperation();
+      }
+
+      Backbone.Collection.prototype.invoke.apply(this, arguments);
+
+      if (isSet) {
+        this.component.endBulkKeyframeOperation();
+      }
+    }
+
+    /**
      * @param {boolean} isCentered
      */
     ,setCenteringRules: function (isCentered) {
-      this.component.beginBulkKeyframeOperation();
       this.invoke('set', 'isCentered', isCentered);
-      this.component.endBulkKeyframeOperation();
     }
   });
 
