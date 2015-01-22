@@ -9,6 +9,7 @@ define([
   ,'stylie.component.keyframes-panel'
   ,'stylie.component.motion-panel'
   ,'stylie.component.css-panel'
+  ,'stylie.component.html-panel'
 
 ], function (
 
@@ -21,6 +22,7 @@ define([
   ,KeyframePanelComponent
   ,MotionPanelComponent
   ,CssPanelComponent
+  ,HtmlPanelComponent
 
 ) {
   'use strict';
@@ -43,6 +45,10 @@ define([
 
       this.cssPanelComponent = this.addComponent(CssPanelComponent, {
         el: this.view.$cssPanel
+      });
+
+      this.htmlPanelComponent = this.addComponent(HtmlPanelComponent, {
+        el: this.view.$htmlPanel
       });
     }
 

@@ -56,6 +56,9 @@ require.config({
     name: 'stylie.component.css-panel'
     ,location: 'scripts/components/css-panel'
   }, {
+    name: 'stylie.component.html-panel'
+    ,location: 'scripts/components/html-panel'
+  }, {
     name: 'stylie.component.keyframe-form'
     ,location: 'scripts/components/keyframe-form'
   }, {
