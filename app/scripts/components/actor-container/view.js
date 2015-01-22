@@ -1,12 +1,14 @@
 define([
 
-  'lateralus'
+  'jquery'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
 ], function (
 
-  Lateralus
+  $
+  ,Lateralus
 
   ,template
 
@@ -26,6 +28,13 @@ define([
       userRequestUpdateCenteringSetting: function (isCentered) {
         this.setCenteringClass(isCentered);
       }
+
+      /**
+       * @param {string} newHtml
+       */
+      ,userRequestUpdateActorHtml: function (newHtml) {
+        this.$actorWrapper.html(newHtml);
+      }
     }
 
     /**
@@ -42,6 +51,13 @@ define([
      */
     ,setCenteringClass: function (isCentered) {
       this.$actorWrapper[isCentered ? 'addClass' : 'removeClass']('centered');
+    }
+
+    /**
+     * @return {string}
+     */
+    ,getActorHtml: function () {
+      return $.trim(this.$actorWrapper.html());
     }
   });
 

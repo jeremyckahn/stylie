@@ -24,6 +24,13 @@ define([
     ,Model: Model
     ,View: View
     ,template: template
+
+    /**
+     * @return {string}
+     */
+    ,getActorHtml: function () {
+      return this.view.getActorHtml();
+    }
   });
 
   return ActorContainerComponent;

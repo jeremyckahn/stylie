@@ -44,7 +44,8 @@ define([
         el: this.view.$crosshairContainer[0]
       });
 
-      this.addComponent(ActorContainerComponent, {
+      this.actorContainerComponent = this.addComponent(
+          ActorContainerComponent, {
         el: this.view.$actorContainer[0]
       });
 

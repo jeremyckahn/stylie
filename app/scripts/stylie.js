@@ -80,5 +80,16 @@ define([
     return this.rekapiComponent.actorModel;
   };
 
+  /**
+   * @return {string}
+   */
+  fn.getCurrentActorHtml = function () {
+    // TODO: Find a less byzantine way to do this.
+    return this.containerComponent
+      .previewComponent
+        .actorContainerComponent
+          .getActorHtml();
+  };
+
   return Stylie;
 });
