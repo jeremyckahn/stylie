@@ -86,8 +86,8 @@
     border: solid 1px $chrome-input-background-color
     color: $chrome-input-color
     font-size: 1.2em
-    margin-left: 8px
-    width: 14em
+    margin-left: $chrome-input-margin-left
+    width: $chrome-input-mid-width
 
   .btn-hidden-label-wrapper
 
@@ -110,6 +110,9 @@
 
       &:after
         content: ':'
+
+    input.mid
+      width: $chrome-input-mid-width
 
     input.wide
       width: $chrome-input-full-width

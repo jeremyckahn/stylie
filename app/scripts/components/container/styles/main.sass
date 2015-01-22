@@ -52,12 +52,11 @@
         transform: rotate(0deg)
 
   button
-    color: $chrome-external-label-color
     background: $chrome-button-background
-    border: solid 1px $chrome-button-border-color
     border-radius: $border-radius
-    font-size: 0.8em
-    padding: 5px 12px
+    border: solid 1px $chrome-button-border-color
+    color: $chrome-external-label-color
+    padding-top: 3px
 
     &:active
       background: $chrome-background-color
@@ -67,7 +66,16 @@
       border: none
       color: $chrome-icon-color
       font-size: 1.2em
+      padding: 5px 12px
       position: relative
+
+    &.center
+      display: block
+      margin: 0 auto
+
+    &.cta
+      font-weight: bold
+      padding: .5em .8em
 
   label[title]
     cursor: help
