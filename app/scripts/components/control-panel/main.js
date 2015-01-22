@@ -10,6 +10,7 @@ define([
   ,'stylie.component.motion-panel'
   ,'stylie.component.css-panel'
   ,'stylie.component.html-panel'
+  ,'stylie.component.management-panel'
 
 ], function (
 
@@ -23,6 +24,7 @@ define([
   ,MotionPanelComponent
   ,CssPanelComponent
   ,HtmlPanelComponent
+  ,ManagementPanelComponent
 
 ) {
   'use strict';
@@ -49,6 +51,11 @@ define([
 
       this.htmlPanelComponent = this.addComponent(HtmlPanelComponent, {
         el: this.view.$htmlPanel
+      });
+
+      this.managementPanelComponent =
+          this.addComponent(ManagementPanelComponent, {
+        el: this.view.$managementPanel
       });
     }
 

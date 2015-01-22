@@ -59,6 +59,9 @@ require.config({
     name: 'stylie.component.html-panel'
     ,location: 'scripts/components/html-panel'
   }, {
+    name: 'stylie.component.management-panel'
+    ,location: 'scripts/components/management-panel'
+  }, {
     name: 'stylie.component.keyframe-form'
     ,location: 'scripts/components/keyframe-form'
   }, {
