@@ -170,16 +170,34 @@ define([
         }, this);
       });
     }
+
+    ,removeAllKeyframes: function () {
+      var transformPropertyCollection = this.transformPropertyCollection;
+
+      // Prevent the internal Backbone.Collection operations from happening
+      // while models are being removed.
+      var safeCopy = transformPropertyCollection.models.slice();
+
+      safeCopy.forEach(
+        transformPropertyCollection.remove, transformPropertyCollection);
+    }
   });
 
+  var fn = ActorModel.prototype;
+
   // Proxy all Rekapi.Actor.prototype methods through ActorModel.
-  _.each(Rekapi.Actor.prototype, function (fn, fnName) {
+  _.each(Rekapi.Actor.prototype, function (protoFn, fnName) {
+    // Don't overwrite pre-existing prototype methods.
+    if (fn[fnName]) {
+      return;
+    }
+
     var proxiedFn = function () {
-      return fn.apply(this.actor, arguments);
+      return protoFn.apply(this.actor, arguments);
     };
 
     proxiedFn.displayName = 'proxied-' + fnName;
-    ActorModel.prototype[fnName] = proxiedFn;
+    fn[fnName] = proxiedFn;
   });
 
   return ActorModel;
