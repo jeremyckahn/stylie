@@ -69,6 +69,7 @@ define([
     }
 
     this.rekapiComponent.rekapi.play();
+    this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
     this.hasInitialized = true;
   };
 
