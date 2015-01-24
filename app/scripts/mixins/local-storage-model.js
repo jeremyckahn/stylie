@@ -10,20 +10,21 @@ define([
   var silentOptionsObject = { silent: true };
 
   localStorageMixin.initialize = function () {
-    if (this.doesLocalDataExist()) {
-      this.loadFromLocalStorage();
+    if (this.localStorageDataDoesExist()) {
+      this.localStorageLoad();
     } else {
-      this.saveToLocalStorage();
+      this.localStorageSave();
     }
 
-    this.on('change', this.onChange.bind(this));
+    this.on('change', onChange.bind(this));
   };
 
-  localStorageMixin.onChange = function () {
-    this.saveToLocalStorage();
-  };
+  // jshint validthis:true
+  function onChange () {
+    this.localStorageSave();
+  }
 
-  localStorageMixin.doesLocalDataExist = function () {
+  localStorageMixin.localStorageDataDoesExist = function () {
     /**
      * @property localStorageId
      * @type {string}
@@ -31,11 +32,11 @@ define([
     return !!localStorage[this.localStorageId];
   };
 
-  localStorageMixin.saveToLocalStorage = function () {
+  localStorageMixin.localStorageSave = function () {
      localStorage[this.localStorageId] = JSON.stringify(this.toJSON());
   };
 
-  localStorageMixin.loadFromLocalStorage = function () {
+  localStorageMixin.localStorageLoad = function () {
     this.clear(silentOptionsObject);
     this.set(JSON.parse(localStorage[this.localStorageId]));
   };
