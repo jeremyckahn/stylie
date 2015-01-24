@@ -87,9 +87,12 @@ define([
 
     ,getTemplateRenderData: function () {
       var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
+      var orientToFirstKeyframe =
+        this.lateralus.model.get('cssOrientation') === 'first-keyframe';
 
       _.extend(renderData, {
         vendors: VENDORS
+        ,orientToFirstKeyframe: orientToFirstKeyframe
       });
 
       return renderData;

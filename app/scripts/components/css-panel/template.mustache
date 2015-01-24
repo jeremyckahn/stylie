@@ -15,11 +15,11 @@
   <fieldset>
     <p>Orient generated CSS to:</p>
     <label>
-      <input type="radio" name="orientation" value="first-keyframe" checked>
+      <input type="radio" name="orientation" value="first-keyframe"{{#orientToFirstKeyframe}}checked{{/orientToFirstKeyframe}}>
       <span>First keyframe</span>
     </label>
     <label>
-      <input type="radio" name="orientation" value="top-left">
+      <input type="radio" name="orientation" value="top-left" {{^orientToFirstKeyframe}}checked{{/orientToFirstKeyframe}}>
       <span>Top-left of container</span>
     </label>
   </fieldset>
