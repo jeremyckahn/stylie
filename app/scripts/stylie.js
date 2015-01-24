@@ -73,6 +73,13 @@ define([
     userRequestSaveCurrentAnimation: function (animationName) {
       this.saveCurrentAnimationAs(animationName);
     }
+
+    /**
+     * @param {string} animationName
+     */
+    ,userRequestLoadAnimation: function (animationName) {
+      this.loadAnimation(animationName);
+    }
   };
 
   /**
@@ -128,6 +135,13 @@ define([
     this.model.trigger('change');
 
     this.emit('savedAnimationListUpdated', Object.keys(savedAnimations));
+  };
+
+  /**
+   * @param {string} animationName
+   */
+  fn.loadAnimation = function (animationName) {
+    this.rekapiComponent.loadAnimation(animationName);
   };
 
   return Stylie;

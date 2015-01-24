@@ -1,6 +1,7 @@
 define([
 
   'underscore'
+  ,'backbone'
   ,'lateralus'
   ,'rekapi'
 
@@ -11,6 +12,7 @@ define([
 ], function (
 
   _
+  ,Backbone
   ,Lateralus
   ,Rekapi
 
@@ -63,10 +65,10 @@ define([
     }
 
     /**
-     * @param {Object} [opt_options]
+     * @param {Object=} [opt_options]
      * @param {number} [opt_options.millisecond]
      * @param {Object} [opt_options.state]
-     * @param {Object} [opt_options.easing]
+     * @param {string} [opt_options.easing]
      */
     ,addNewKeyframe: function (opt_options) {
       var options = opt_options || {};
@@ -88,6 +90,8 @@ define([
           constant.NEW_KEYFRAME_MS_INCREASE;
 
         millisecond = keyframePropertyAttributes.millisecond;
+      } else {
+        keyframePropertyAttributes.millisecond = millisecond;
       }
 
       keyframePropertyAttributes.isCentered =
@@ -180,6 +184,32 @@ define([
 
       safeCopy.forEach(
         transformPropertyCollection.remove, transformPropertyCollection);
+    }
+
+    /**
+     * @override
+     */
+    ,toJSON: function () {
+      var json = Backbone.Model.prototype.toJSON.apply(this, arguments);
+
+      json.transformPropertyCollection =
+        this.transformPropertyCollection.toJSON();
+
+      return json;
+    }
+
+    /**
+     * @param {Array.<Object>} keyframes
+     */
+    ,setKeyframes: function (keyframes) {
+      this.removeAllKeyframes();
+
+      keyframes.forEach(function (keyframe) {
+        this.addNewKeyframe({
+          millisecond: keyframe.millisecond
+          ,state: _.omit(keyframe, 'millisecond')
+        });
+      }, this);
     }
   });
 

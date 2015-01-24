@@ -50,7 +50,7 @@ define([
     ,initialize: function (attributes) {
       this.keyframeProperty = null;
 
-      if (attributes.easing) {
+      if (typeof attributes.easing === 'string') {
         this.setEasingFromString(attributes.easing);
         this.unset('easing', { silent: true });
       }

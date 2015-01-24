@@ -148,8 +148,20 @@ define([
      */
     ,toJSON: function () {
       return {
-        timeline: this.rekapi.exportTimeline()
+        actorModel: this.actorModel.toJSON()
       };
+    }
+
+    /**
+     * @param {string} animationName
+     */
+    ,loadAnimation: function (animationName) {
+      this.actorModel.removeAllKeyframes();
+      var animationData =
+        this.lateralus.model.get('savedAnimations')[animationName];
+
+      this.actorModel.setKeyframes(
+        animationData.actorModel.transformPropertyCollection);
     }
   });
 

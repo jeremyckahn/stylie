@@ -34,6 +34,10 @@ define([
         this.emit('userRequestSaveCurrentAnimation', newAnimatioName);
         this.$loadSelector.val(newAnimatioName);
       }
+
+      ,'click .load button': function () {
+        this.emit('userRequestLoadAnimation', this.$loadSelector.val());
+      }
     }
 
     /**
