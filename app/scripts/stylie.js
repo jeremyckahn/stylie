@@ -80,6 +80,13 @@ define([
     ,userRequestLoadAnimation: function (animationName) {
       this.loadAnimation(animationName);
     }
+
+    /**
+     * @param {string} animationName
+     */
+    ,userRequestDeleteAnimation: function (animationName) {
+      this.deleteAnimation(animationName);
+    }
   };
 
   /**
@@ -142,6 +149,22 @@ define([
    */
   fn.loadAnimation = function (animationName) {
     this.rekapiComponent.loadAnimation(animationName);
+  };
+
+  /**
+   * @param {string} animationName
+   */
+  fn.deleteAnimation = function (animationName) {
+    var savedAnimations = this.model.get('savedAnimations');
+    this.model.set('savedAnimations', _.omit(savedAnimations, animationName));
+
+    // Force a change event to persist the animation list to localStorage.
+    this.model.trigger('change');
+
+    this.emit(
+      'savedAnimationListUpdated'
+      ,Object.keys(this.model.get('savedAnimations'))
+    );
   };
 
   return Stylie;

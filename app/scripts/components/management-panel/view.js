@@ -29,14 +29,18 @@ define([
     }
 
     ,events: {
-      'click .save button': function () {
+      'click .save': function () {
         var newAnimatioName = this.$saveInput.val();
         this.emit('userRequestSaveCurrentAnimation', newAnimatioName);
         this.$loadSelector.val(newAnimatioName);
       }
 
-      ,'click .load button': function () {
+      ,'click .load': function () {
         this.emit('userRequestLoadAnimation', this.$loadSelector.val());
+      }
+
+      ,'click .delete': function () {
+        this.emit('userRequestDeleteAnimation', this.$loadSelector.val());
       }
     }
 
