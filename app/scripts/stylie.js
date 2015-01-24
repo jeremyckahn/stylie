@@ -35,9 +35,9 @@ define([
     model.localStorageId = 'stylieData';
     model.mixin(localStorageMixin);
 
-    model.set({
-      cssOrientation: 'first-keyframe'
-    });
+    if (!model.keys().length) {
+      this.setInitialState();
+    }
 
     this.shiftyComponent = this.addComponent(ShiftyComponent);
     this.rekapiComponent = this.addComponent(RekapiComponent);
@@ -56,6 +56,12 @@ define([
     });
     actorModel.addNewKeyframe();
     this.rekapiComponent.rekapi.play();
+  };
+
+  fn.setInitialState = function () {
+    this.model.set({
+      cssOrientation: 'first-keyframe'
+    });
   };
 
   /**
