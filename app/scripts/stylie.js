@@ -62,7 +62,17 @@ define([
     this.model.set({
       cssOrientation: 'first-keyframe'
       ,focusedControlPanelTab: ''
+      ,savedAnimations: {}
     });
+  };
+
+  fn.lateralusEvents = {
+    /**
+     * @param {string} animationName
+     */
+    userRequestSaveCurrentAnimation: function (animationName) {
+      this.saveCurrentAnimationAs(animationName);
+    }
   };
 
   /**
@@ -104,6 +114,18 @@ define([
       .previewComponent
         .actorContainerComponent
           .getActorHtml();
+  };
+
+  /**
+   * @param {string} animationName
+   */
+  fn.saveCurrentAnimationAs = function (animationName) {
+    var savedAnimations = this.model.get('savedAnimations');
+    savedAnimations[animationName] = this.rekapiComponent.toJSON();
+    this.model.set('savedAnimations', savedAnimations);
+
+    // Force a change event to persist the saved animations to localStorage.
+    this.model.trigger('change');
   };
 
   return Stylie;

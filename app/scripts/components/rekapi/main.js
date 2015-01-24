@@ -142,6 +142,15 @@ define([
       this.isPerformingBulkOperation = false;
       this.onRekapiTimelineModified();
     }
+
+    /**
+     * @return {Object}
+     */
+    ,toJSON: function () {
+      return {
+        timeline: this.rekapi.exportTimeline()
+      };
+    }
   });
 
   return RekapiComponent;

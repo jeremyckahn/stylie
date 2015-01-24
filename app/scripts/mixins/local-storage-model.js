@@ -24,6 +24,9 @@ define([
     this.localStorageSave();
   }
 
+  /**
+   * @return {boolean}
+   */
   localStorageMixin.localStorageDataDoesExist = function () {
     /**
      * @property localStorageId

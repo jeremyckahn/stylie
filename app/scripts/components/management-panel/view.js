@@ -19,6 +19,12 @@ define([
   var ManagementPanelComponentView = Base.extend({
     template: template
 
+    ,events: {
+      'click .save button': function () {
+        this.emit('userRequestSaveCurrentAnimation', this.$saveInput.val());
+      }
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
