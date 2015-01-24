@@ -7,6 +7,8 @@ define([
   ,'stylie.component.rekapi'
   ,'stylie.component.container'
 
+  ,'./mixins/local-storage-model'
+
 ], function (
 
   _
@@ -15,6 +17,8 @@ define([
   ,ShiftyComponent
   ,RekapiComponent
   ,ContainerComponent
+
+  ,localStorageMixin
 
 ) {
   'use strict';
@@ -27,7 +31,11 @@ define([
   var Stylie = Lateralus.beget(function () {
     Lateralus.apply(this, arguments);
 
-    this.model.set({
+    var model = this.model;
+    model.localStorageId = 'stylieData';
+    model.mixin(localStorageMixin);
+
+    model.set({
       cssOrientation: 'first-keyframe'
     });
 
