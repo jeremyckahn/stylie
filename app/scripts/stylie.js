@@ -126,6 +126,8 @@ define([
 
     // Force a change event to persist the saved animations to localStorage.
     this.model.trigger('change');
+
+    this.emit('savedAnimationListUpdated', Object.keys(savedAnimations));
   };
 
   return Stylie;
