@@ -69,7 +69,15 @@ define([
     }
 
     this.rekapiComponent.rekapi.play();
+
+    // Necessary for keeping the UI in sync after startup.
     this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
+
+    this.emit(
+      'savedAnimationListUpdated'
+      ,this.getSavedAnimationDisplayList()
+    );
+
     this.hasInitialized = true;
   };
 
@@ -170,7 +178,13 @@ define([
     // Force a change event to persist the saved animations to localStorage.
     this.model.trigger('change');
 
-    this.emit('savedAnimationListUpdated', this.getSavedAnimationDisplayList());
+    if (animationName !== constant.TRANSIENT_ANIMATION_NAME) {
+      this.emit(
+        'savedAnimationListUpdated'
+        ,this.getSavedAnimationDisplayList()
+        ,animationName
+      );
+    }
   };
 
   /**

@@ -22,9 +22,14 @@ define([
     ,lateralusEvents: {
       /**
        * @param {Array.<string>} newList
+       * @param {string=} opt_selectedAnimation
        */
-      savedAnimationListUpdated: function (newList) {
+      savedAnimationListUpdated: function (newList, opt_selectedAnimation) {
         this.updateSavedAnimationList(newList);
+
+        if (opt_selectedAnimation) {
+          this.$loadSelector.val(opt_selectedAnimation);
+        }
       }
     }
 
