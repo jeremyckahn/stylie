@@ -87,7 +87,9 @@
     color: $chrome-input-color
     font-size: 1.2em
     margin-left: $chrome-input-margin-left
-    width: $chrome-input-mid-width
+
+    // Subtract 2em to account for extra <select> chrome.
+    width: $chrome-input-mid-width - 2em
 
   .btn-hidden-label-wrapper
 
