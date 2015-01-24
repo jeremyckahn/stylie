@@ -59,7 +59,7 @@ define([
 
       newList.forEach(function (animationName) {
         var option = document.createElement('option');
-        option.innerText = option.value = animationName;
+        option.innerHTML = option.value = animationName;
         $options.push(option);
       });
 
