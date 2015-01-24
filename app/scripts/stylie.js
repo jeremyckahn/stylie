@@ -9,6 +9,8 @@ define([
 
   ,'./mixins/local-storage-model'
 
+  ,'./constant'
+
 ], function (
 
   _
@@ -20,6 +22,8 @@ define([
 
   ,localStorageMixin
 
+  ,constant
+
 ) {
   'use strict';
 
@@ -30,6 +34,7 @@ define([
    */
   var Stylie = Lateralus.beget(function () {
     Lateralus.apply(this, arguments);
+    this.hasInitialized = false;
 
     var model = this.model;
     model.localStorageId = 'stylieData';
@@ -51,11 +56,20 @@ define([
 
   fn.deferredInitialize = function () {
     var actorModel = this.rekapiComponent.actorModel;
-    actorModel.addNewKeyframe({
-      state: this.getInitialKeyframeState()
-    });
-    actorModel.addNewKeyframe();
+    var savedAnimations = this.model.get('savedAnimations');
+    var transientAnimation = savedAnimations[constant.TRANSIENT_ANIMATION_NAME];
+
+    if (transientAnimation.actorModel.transformPropertyCollection.length) {
+      this.loadAnimation(constant.TRANSIENT_ANIMATION_NAME);
+    } else {
+      actorModel.addNewKeyframe({
+        state: this.getInitialKeyframeState()
+      });
+      actorModel.addNewKeyframe();
+    }
+
     this.rekapiComponent.rekapi.play();
+    this.hasInitialized = true;
   };
 
   fn.setInitialState = function () {
@@ -67,10 +81,16 @@ define([
   };
 
   fn.lateralusEvents = {
+    timelineModified: function () {
+      if (this.hasInitialized) {
+        this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
+      }
+    }
+
     /**
      * @param {string} animationName
      */
-    userRequestSaveCurrentAnimation: function (animationName) {
+    ,userRequestSaveCurrentAnimation: function (animationName) {
       this.saveCurrentAnimationAs(animationName);
     }
 
@@ -131,6 +151,14 @@ define([
   };
 
   /**
+   * @return {Array.<string>}
+   */
+  fn.getSavedAnimationDisplayList = function () {
+    var rawList = this.model.get('savedAnimations');
+    return Object.keys(_.omit(rawList, constant.TRANSIENT_ANIMATION_NAME));
+  };
+
+  /**
    * @param {string} animationName
    */
   fn.saveCurrentAnimationAs = function (animationName) {
@@ -141,7 +169,7 @@ define([
     // Force a change event to persist the saved animations to localStorage.
     this.model.trigger('change');
 
-    this.emit('savedAnimationListUpdated', Object.keys(savedAnimations));
+    this.emit('savedAnimationListUpdated', this.getSavedAnimationDisplayList());
   };
 
   /**
@@ -161,10 +189,7 @@ define([
     // Force a change event to persist the animation list to localStorage.
     this.model.trigger('change');
 
-    this.emit(
-      'savedAnimationListUpdated'
-      ,Object.keys(this.model.get('savedAnimations'))
-    );
+    this.emit('savedAnimationListUpdated', this.getSavedAnimationDisplayList());
   };
 
   return Stylie;

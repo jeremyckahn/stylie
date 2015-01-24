@@ -36,11 +36,19 @@ define([
       }
 
       ,'click .load': function () {
-        this.emit('userRequestLoadAnimation', this.$loadSelector.val());
+        var currentlySelectedAnimation = this.$loadSelector.val();
+
+        if (currentlySelectedAnimation) {
+          this.emit('userRequestLoadAnimation', currentlySelectedAnimation);
+        }
       }
 
       ,'click .delete': function () {
-        this.emit('userRequestDeleteAnimation', this.$loadSelector.val());
+        var currentlySelectedAnimation = this.$loadSelector.val();
+
+        if (currentlySelectedAnimation) {
+          this.emit('userRequestDeleteAnimation', currentlySelectedAnimation);
+        }
       }
     }
 

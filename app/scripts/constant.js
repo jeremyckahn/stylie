@@ -11,5 +11,6 @@ define(function () {
     ,PATH_COLOR: 'rgb(255,176,0)'
     ,PATH_THICKNESS: 4
     ,PATH_RENDER_GRANULARITY: 75
+    ,TRANSIENT_ANIMATION_NAME: '__transientAnimation'
   };
 });
