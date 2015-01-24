@@ -61,6 +61,7 @@ define([
   fn.setInitialState = function () {
     this.model.set({
       cssOrientation: 'first-keyframe'
+      ,focusedControlPanelTab: ''
     });
   };
 

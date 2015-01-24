@@ -28,8 +28,6 @@ define([
   var Base = Lateralus.Component.View;
   var baseProto = Base.prototype;
 
-  var LOCAL_STORAGE_FOCUSED_TAB_KEY = 'stylieControlPanelSavedTabName';
-
   var ControlPanelComponentView = Base.extend({
     template: template
 
@@ -87,7 +85,8 @@ define([
      * @param {jQuery} $shownTab
      */
     ,onTabShown: function ($shownTab) {
-      this.storeSelectedTabName($shownTab.data('tabName'));
+      this.lateralus.model.set(
+        'focusedControlPanelTab', $shownTab.data('tabName'));
     }
 
     /**
@@ -108,15 +107,8 @@ define([
       });
     }
 
-    /**
-     * @param {string} selectedTabName
-     */
-    ,storeSelectedTabName: function (selectedTabName) {
-      window.localStorage[LOCAL_STORAGE_FOCUSED_TAB_KEY] = selectedTabName;
-    }
-
     ,selectTabFromLocalStorage: function () {
-      var focusedTabName = window.localStorage[LOCAL_STORAGE_FOCUSED_TAB_KEY];
+      var focusedTabName = this.lateralus.model.get('focusedControlPanelTab');
 
       if (focusedTabName) {
         var $focusedTab = this.$tabsContainer.children()
