@@ -59,7 +59,7 @@ define([
     var savedAnimations = this.model.get('savedAnimations');
     var transientAnimation = savedAnimations[constant.TRANSIENT_ANIMATION_NAME];
 
-    if (transientAnimation.actorModel.transformPropertyCollection.length) {
+    if (transientAnimation) {
       this.loadAnimation(constant.TRANSIENT_ANIMATION_NAME);
     } else {
       actorModel.addNewKeyframe({
