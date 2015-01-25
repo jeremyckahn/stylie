@@ -31,6 +31,11 @@ define([
       userRequestUpdateCenteringSettingViaKeybinding: function () {
         this.$showPath.click();
       }
+
+      ,selectFirstCurve: function () {
+        var $firstCurve = this.$curveSelector.children(':first');
+        this.selectCurve($firstCurve.val());
+      }
     }
 
     ,events: {

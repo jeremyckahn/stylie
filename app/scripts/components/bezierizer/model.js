@@ -34,6 +34,8 @@ define([
         for (curve in curves) {
           this.emit('setCustomCurve', curves[curve]);
         }
+
+        this.emit('selectFirstCurve');
       }
     }
 
