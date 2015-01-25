@@ -56,8 +56,8 @@ define([
         }
       }
 
-      ,'click .create-new-animation': function () {
-        this.emit('userRequestCreateNewAnimation');
+      ,'click .reset-animation': function () {
+        this.emit('userRequestResetAnimation');
       }
     }
 

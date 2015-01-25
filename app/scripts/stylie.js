@@ -121,7 +121,7 @@ define([
       this.deleteAnimation(animationName);
     }
 
-    ,userRequestCreateNewAnimation: function () {
+    ,userRequestResetAnimation: function () {
       this.rekapiComponent.clearCurrentAnimation();
       this.createDefaultAnimation();
     }
