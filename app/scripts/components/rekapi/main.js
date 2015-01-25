@@ -160,7 +160,7 @@ define([
     /**
      * @param {string} animationName
      */
-    ,loadAnimation: function (animationName) {
+    ,fromJSON: function (animationName) {
       this.clearCurrentAnimation();
       var animationData =
         this.lateralus.model.get('savedAnimations')[animationName];

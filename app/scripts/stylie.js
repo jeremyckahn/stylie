@@ -200,7 +200,7 @@ define([
    * @param {string} animationName
    */
   fn.loadAnimation = function (animationName) {
-    this.rekapiComponent.loadAnimation(animationName);
+    this.rekapiComponent.fromJSON(animationName);
   };
 
   /**
