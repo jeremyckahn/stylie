@@ -106,6 +106,8 @@ define([
 
       this.keyframe(millisecond, {
         transform: keyframePropertyModel.getValue()
+      }, {
+        transform: keyframePropertyModel.getEasing()
       });
 
       var keyframeProperty =
@@ -202,6 +204,7 @@ define([
      * @param {Array.<Object>} keyframes
      */
     ,setKeyframes: function (keyframes) {
+      this.rekapiComponent.beginBulkKeyframeOperation();
       this.removeAllKeyframes();
 
       keyframes.forEach(function (keyframe) {
@@ -210,6 +213,8 @@ define([
           ,state: _.omit(keyframe, 'millisecond')
         });
       }, this);
+
+      this.rekapiComponent.endBulkKeyframeOperation();
     }
   });
 
