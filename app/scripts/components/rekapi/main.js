@@ -173,10 +173,10 @@ define([
       var animationData =
         this.lateralus.model.get('savedAnimations')[animationName];
 
+      this.emit('loadBezierCurves', animationData.bezierCurves);
       this.actorModel.setKeyframes(
         animationData.actorModel.transformPropertyCollection);
 
-      this.emit('loadBezierCurves', animationData.bezierCurves);
     }
 
     ,clearCurrentAnimation: function () {
