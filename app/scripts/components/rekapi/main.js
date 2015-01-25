@@ -36,6 +36,14 @@ define([
         this.saveBezierCurve(bezierComponentModel);
       }
 
+      /**
+       * @param {string} curveName
+       */
+      ,unsetBezierFunction: function (curveName) {
+        delete this.bezierCurves[curveName];
+        this.onRekapiTimelineModified();
+      }
+
       ,userRequestPlay: function () {
         this.rekapi.play();
       }

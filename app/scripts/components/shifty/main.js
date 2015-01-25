@@ -45,6 +45,9 @@ define([
           ,curveObject.y2
         );
       }
+      ,userRequestResetAnimation: function () {
+        this.resetCustomCurves();
+      }
     }
 
     ,addNewCurve: function () {
@@ -73,16 +76,46 @@ define([
       this.emit('tweenableCurveCreated', name);
     }
 
+    ,resetCustomCurves: function () {
+      var customCurveNames = this.getCustomCurveNameList();
+
+      customCurveNames.forEach(function (curveName) {
+        Tweenable.unsetBezierFunction(curveName);
+        this.emit('unsetBezierFunction', curveName);
+      }, this);
+
+      this.addNewCurve();
+    }
+
+    /**
+     * @return {Array.<string>}
+     */
+    ,getCustomCurveNameList: function () {
+      var curveNames = _.map(Tweenable.prototype.formula,
+          function (curve, curveName) {
+        return curveName;
+      });
+
+      return curveNames.filter(function (curveName) {
+        return curveName.match('^custom');
+      });
+    }
+
+    /**
+     * @return {Array.<Function>}
+     */
+    ,getCustomCurves: function () {
+      return _.filter(Tweenable.prototype.formula,
+          function (curve, curveName) {
+        return curveName.match('^custom');
+      });
+    }
+
     /**
      * @return {number}
      */
     ,getCustomCurveCount: function () {
-      var customCurves = _.filter(Tweenable.prototype.formula,
-          function (curve, curveName) {
-        return curveName.match('^custom');
-      });
-
-      return customCurves.length;
+      return this.getCustomCurves().length;
     }
   });
 

@@ -36,6 +36,18 @@ define([
         var $firstCurve = this.$curveSelector.children(':first');
         this.selectCurve($firstCurve.val());
       }
+
+      /**
+       * @param {string} curveName
+       */
+      ,unsetBezierFunction: function (curveName) {
+        var $optionToRemove = this.$curveSelector.children().filter(
+            function () {
+          return this.value === curveName;
+        });
+
+        $optionToRemove.remove();
+      }
     }
 
     ,events: {
