@@ -6,6 +6,7 @@ define([
   ,'text!./template.mustache'
 
   ,'stylie.component.keybindings'
+  ,'stylie.component.header'
   ,'stylie.component.control-panel'
   ,'stylie.component.preview'
 
@@ -17,6 +18,7 @@ define([
   ,template
 
   ,KeybindingsComponent
+  ,HeaderComponent
   ,ControlPanelComponent
   ,PreviewComponent
 
@@ -32,6 +34,10 @@ define([
 
     ,initialize: function () {
       this.keybindingsComponent = this.addComponent(KeybindingsComponent);
+
+      this.headerComponent = this.addComponent(HeaderComponent, {
+        el: this.view.$header[0]
+      });
 
       this.controlPanelComponent = this.addComponent(ControlPanelComponent, {
         el: this.view.$controlPanel[0]

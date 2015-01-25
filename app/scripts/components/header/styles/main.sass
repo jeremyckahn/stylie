@@ -1,0 +1,32 @@
+@import 'app/styles/variables.sass'
+@import 'compass/css3/images'
+@import "compass/css3/flexbox"
+
+.header-view
+  height: $header-height
+  padding-left: 4em
+  z-index: 20
+  +background-image(linear-gradient(to bottom, $header-gradient-top-color, $header-gradient-bottom-color))
+  +display-flex()
+  +align-items(center)
+
+  &.fill
+    bottom: auto
+
+  h1
+    font-weight: lighter
+    font-size: 1.4em
+    padding-left: 1.5em
+
+  a
+
+    &:active,
+    &:link,
+    &:hover,
+    &:visited
+      color: $header-link-color
+      font-weight: bold
+      text-decoration: none
+
+    &:hover,
+      color: $header-link-color-hover
