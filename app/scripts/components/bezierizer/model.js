@@ -15,6 +15,7 @@ define([
 
   var Base = Lateralus.Component.Model;
 
+  // TODO: This really should be part of a Collection, not a singleton Model.
   var BezierizerComponentModel = Base.extend({
     defaults: {
       name: ''
@@ -52,7 +53,7 @@ define([
         ,attributes.y2
       );
 
-      this.emit('bezierCurveUpdated');
+      this.emit('bezierCurveUpdated', this);
     }
   });
 

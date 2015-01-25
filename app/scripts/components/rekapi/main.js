@@ -29,8 +29,11 @@ define([
     name: 'rekapi'
 
     ,lateralusEvents: {
-      bezierCurveUpdated: function () {
-        this.onRekapiTimelineModified();
+      /**
+       * @param {BezierizerComponentModel} bezierComponentModel
+       */
+      bezierCurveUpdated: function (bezierComponentModel) {
+        this.saveBezierCurve(bezierComponentModel);
       }
 
       ,userRequestPlay: function () {
@@ -62,6 +65,7 @@ define([
     ,initialize: function () {
       this.rekapi = new Rekapi(document.body);
       this.isPerformingBulkOperation = false;
+      this.bezierCurves = {};
       this.setupActor();
 
       this.rekapi.on(
@@ -149,6 +153,7 @@ define([
     ,toJSON: function () {
       return {
         actorModel: this.actorModel.toJSON()
+        ,bezierCurves: this.bezierCurves
       };
     }
 
@@ -166,6 +171,15 @@ define([
 
     ,clearCurrentAnimation: function () {
       this.actorModel.removeAllKeyframes();
+    }
+
+    /**
+     * @param {BezierizerComponentModel} bezierComponentModel
+     */
+    ,saveBezierCurve: function (bezierComponentModel) {
+      var bezierCurveJson = bezierComponentModel.toJSON();
+      this.bezierCurves[bezierCurveJson.name] = bezierCurveJson;
+      this.onRekapiTimelineModified();
     }
   });
 
