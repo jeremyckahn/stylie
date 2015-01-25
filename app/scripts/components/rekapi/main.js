@@ -156,12 +156,16 @@ define([
      * @param {string} animationName
      */
     ,loadAnimation: function (animationName) {
-      this.actorModel.removeAllKeyframes();
+      this.clearCurrentAnimation();
       var animationData =
         this.lateralus.model.get('savedAnimations')[animationName];
 
       this.actorModel.setKeyframes(
         animationData.actorModel.transformPropertyCollection);
+    }
+
+    ,clearCurrentAnimation: function () {
+      this.actorModel.removeAllKeyframes();
     }
   });
 

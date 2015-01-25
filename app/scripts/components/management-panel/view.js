@@ -55,6 +55,10 @@ define([
           this.emit('userRequestDeleteAnimation', currentlySelectedAnimation);
         }
       }
+
+      ,'click .create-new-animation': function () {
+        this.emit('userRequestCreateNewAnimation');
+      }
     }
 
     /**

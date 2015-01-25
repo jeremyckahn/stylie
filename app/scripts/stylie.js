@@ -55,17 +55,13 @@ define([
   var fn = Stylie.prototype;
 
   fn.deferredInitialize = function () {
-    var actorModel = this.rekapiComponent.actorModel;
     var savedAnimations = this.model.get('savedAnimations');
     var transientAnimation = savedAnimations[constant.TRANSIENT_ANIMATION_NAME];
 
     if (transientAnimation) {
       this.loadAnimation(constant.TRANSIENT_ANIMATION_NAME);
     } else {
-      actorModel.addNewKeyframe({
-        state: this.getInitialKeyframeState()
-      });
-      actorModel.addNewKeyframe();
+      this.createDefaultAnimation();
     }
 
     this.rekapiComponent.rekapi.play();
@@ -79,6 +75,14 @@ define([
     );
 
     this.hasInitialized = true;
+  };
+
+  fn.createDefaultAnimation = function () {
+    var actorModel = this.rekapiComponent.actorModel;
+    actorModel.addNewKeyframe({
+      state: this.getInitialKeyframeState()
+    });
+    actorModel.addNewKeyframe();
   };
 
   fn.setInitialState = function () {
@@ -115,6 +119,11 @@ define([
      */
     ,userRequestDeleteAnimation: function (animationName) {
       this.deleteAnimation(animationName);
+    }
+
+    ,userRequestCreateNewAnimation: function () {
+      this.rekapiComponent.clearCurrentAnimation();
+      this.createDefaultAnimation();
     }
   };
 
