@@ -27,6 +27,7 @@ define([
     C: 'userRequestToggleControlPanel'
     ,K: 'userRequestNewKeyframe'
     ,P: 'userRequestUpdateCenteringSettingViaKeybinding'
+    ,T: 'userRequestToggleScrubber'
     ,SHIFT: 'userRequestStartRotationEditMode'
     ,SPACE: 'userRequestTogglePreviewPlayback'
   };

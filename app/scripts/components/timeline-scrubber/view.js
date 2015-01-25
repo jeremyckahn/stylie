@@ -4,11 +4,15 @@ define([
 
   ,'text!./template.mustache'
 
+  ,'stylie.component.hidable'
+
 ], function (
 
   Lateralus
 
   ,template
+
+  ,HidableComponent
 
 ) {
   'use strict';
@@ -40,6 +44,10 @@ define([
       ,animationHasUpdated: function (rekapiComponent) {
         this.syncScrubberToRekapi(rekapiComponent);
       }
+
+      ,userRequestToggleScrubber: function () {
+        this.hidableView.toggle();
+      }
     }
 
     ,events: {
@@ -69,6 +77,10 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+
+      this.hidableView = this.addSubview(HidableComponent.View, {
+        el: this.el
+      });
     }
 
     /**
