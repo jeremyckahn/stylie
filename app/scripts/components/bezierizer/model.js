@@ -25,6 +25,18 @@ define([
       ,y2: 0.5
     }
 
+    ,lateralusEvents: {
+      /**
+       * @param {Object} curves
+       */
+      loadBezierCurves: function (curves) {
+        var curve;
+        for (curve in curves) {
+          this.emit('setCustomCurve', curves[curve]);
+        }
+      }
+    }
+
     ,initialize: function () {
       this.on('change', this.onChange.bind(this));
     }

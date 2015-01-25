@@ -167,6 +167,8 @@ define([
 
       this.actorModel.setKeyframes(
         animationData.actorModel.transformPropertyCollection);
+
+      this.emit('loadBezierCurves', animationData.bezierCurves);
     }
 
     ,clearCurrentAnimation: function () {
