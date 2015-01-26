@@ -7,6 +7,7 @@ define([
 
   ,'stylie.component.keybindings'
   ,'stylie.component.header'
+  ,'stylie.component.help'
   ,'stylie.component.control-panel'
   ,'stylie.component.preview'
 
@@ -19,6 +20,7 @@ define([
 
   ,KeybindingsComponent
   ,HeaderComponent
+  ,HelpComponent
   ,ControlPanelComponent
   ,PreviewComponent
 
@@ -37,6 +39,10 @@ define([
 
       this.headerComponent = this.addComponent(HeaderComponent, {
         el: this.view.$header[0]
+      });
+
+      this.helpComponent = this.addComponent(HelpComponent, {
+        el: this.view.$help[0]
       });
 
       this.controlPanelComponent = this.addComponent(ControlPanelComponent, {

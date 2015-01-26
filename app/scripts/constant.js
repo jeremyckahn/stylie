@@ -12,5 +12,6 @@ define(function () {
     ,PATH_THICKNESS: 4
     ,PATH_RENDER_GRANULARITY: 75
     ,TRANSIENT_ANIMATION_NAME: '__transientAnimation'
+    ,MODAL_OPACITY: 0.95
   };
 });

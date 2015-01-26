@@ -19,6 +19,12 @@ define([
   var HeaderComponentView = Base.extend({
     template: template
 
+    ,events: {
+      'click .help': function () {
+        this.emit('userRequestShowHelpModal');
+      }
+    }
+
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */

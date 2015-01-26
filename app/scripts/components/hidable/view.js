@@ -23,10 +23,17 @@ define([
   var HidableComponentView = Base.extend({
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
+     * @param {boolean=} [options.startHidden]
+     * @param {number=} [options.targetShowOpacity]
      */
-    initialize: function () {
+    initialize: function (options) {
       baseProto.initialize.apply(this, arguments);
-      this.isHidden = false;
+      this.isHidden = !!options.startHidden;
+      this.targetShowOpacity = options.targetShowOpacity || 1;
+
+      if (this.isHidden) {
+        this.hideCallback();
+      }
 
       this.actor = (new Rekapi(this.el)).addActor({
         context: this.el
@@ -43,15 +50,15 @@ define([
         .removeAllKeyframes()
         .keyframe(0, {
           scale: 1
-          ,opacity: 1
+          ,opacity: this.targetShowOpacity
         }).keyframe(constant.HIDABLE_VIEW_TRANSITION_DURATION, {
           scale: 0
           ,opacity: 0
-          ,'function': function () {
-            this.$el.css('display', 'none');
-            this.isHidden = true;
-          }.bind(this)
-        }, 'easeInBack');
+          ,'function': this.hideCallback.bind(this)
+        }, {
+          scale: 'easeInBack'
+          ,opacity: 'easeOutQuad'
+        });
 
       this.actor.rekapi.play(1);
     }
@@ -70,13 +77,21 @@ define([
           ,opacity: 0
         }).keyframe(constant.HIDABLE_VIEW_TRANSITION_DURATION, {
           scale: 1
-          ,opacity: 1
+          ,opacity: this.targetShowOpacity
           ,'function': function () {
             this.isHidden = false;
           }.bind(this)
-        }, 'swingTo');
+        }, {
+          scale: 'swingTo'
+          ,opacity: 'easeInQuad'
+        });
 
       this.actor.rekapi.play(1);
+    }
+
+    ,hideCallback: function () {
+      this.$el.css('display', 'none');
+      this.isHidden = true;
     }
 
     ,toggle: function () {
