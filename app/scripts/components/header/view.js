@@ -21,6 +21,7 @@ define([
 
     ,events: {
       'click .help': function () {
+        this.$help.blur();
         this.emit('userRequestToggleHelpModal');
       }
     }

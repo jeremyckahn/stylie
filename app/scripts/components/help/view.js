@@ -31,6 +31,23 @@ define([
       userRequestToggleHelpModal: function () {
         this.hidableView.toggle();
       }
+
+      ,userRequestCloseModal: function () {
+        this.hidableView.hide();
+      }
+    }
+
+    ,events: {
+      /**
+       * @param {jQuery.Event} evt
+       */
+      'mousedown': function (evt) {
+        if (evt.target !== this.el) {
+          return;
+        }
+
+        this.hidableView.hide();
+      }
     }
 
     /**

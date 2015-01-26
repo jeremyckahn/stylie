@@ -29,6 +29,7 @@ define([
     ,K: 'userRequestNewKeyframe'
     ,P: 'userRequestUpdateCenteringSettingViaKeybinding'
     ,T: 'userRequestToggleScrubber'
+    ,ESC: 'userRequestCloseModal'
     ,SHIFT: 'userRequestStartRotationEditMode'
     ,SPACE: 'userRequestTogglePreviewPlayback'
   };
