@@ -64,6 +64,6 @@ was masterfully crafted by [@nrrrdcore](https://github.com/nrrrdcore).
 Stylie is distributed under a [CC BY-NC-SA
 license](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).  Don't
 worry, this license does not extend to the animations you create with Stylie,
-just application itself.  You are free to use the animations created by Stylie
-however you please.  You are encouraged to use and modify the code to suit your
-needs, as well as redistribute it noncommercially.
+just the application itself.  You are free to use the animations created by
+Stylie however you please.  You are encouraged to use and modify the code to
+suit your needs, as well as redistribute it noncommercially.
