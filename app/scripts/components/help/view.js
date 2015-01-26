@@ -28,7 +28,7 @@ define([
     template: template
 
     ,lateralusEvents: {
-      userRequestShowHelpModal: function () {
+      userRequestToggleHelpModal: function () {
         this.hidableView.toggle();
       }
     }

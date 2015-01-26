@@ -21,7 +21,7 @@ define([
 
     ,events: {
       'click .help': function () {
-        this.emit('userRequestShowHelpModal');
+        this.emit('userRequestToggleHelpModal');
       }
     }
 

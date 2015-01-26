@@ -25,6 +25,7 @@ define([
 
   var PRESS_EVENT_KEY_MAP = {
     C: 'userRequestToggleControlPanel'
+    ,H: 'userRequestToggleHelpModal'
     ,K: 'userRequestNewKeyframe'
     ,P: 'userRequestUpdateCenteringSettingViaKeybinding'
     ,T: 'userRequestToggleScrubber'
