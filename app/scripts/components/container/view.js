@@ -34,6 +34,11 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+      this.$el.addClass('loading');
+    }
+
+    ,deferredInitialize: function () {
+      this.$el.removeClass('loading');
     }
   });
 

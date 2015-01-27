@@ -17,6 +17,8 @@
   font-family: Helvetica, Arial, serif
   font-size: 13px
   overflow: hidden
+  opacity: 1
+  transition: opacity $load-fade-in-duration
 
   label
     cursor: pointer
@@ -118,3 +120,6 @@
 
     img
       width: 100%
+
+  &.loading
+    opacity: 0
