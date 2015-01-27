@@ -50,6 +50,9 @@ require.config({
     name: 'stylie.component.help'
     ,location: 'scripts/components/help'
   }, {
+    name: 'stylie.component.too-small-message'
+    ,location: 'scripts/components/too-small-message'
+  }, {
     name: 'stylie.component.control-panel'
     ,location: 'scripts/components/control-panel'
   }, {

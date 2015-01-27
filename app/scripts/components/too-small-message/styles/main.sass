@@ -1,0 +1,33 @@
+@import 'app/styles/variables.sass'
+@import 'compass/css3/images'
+
+.too-small-message-view
+  color: $modal-text-color
+  display: none
+  padding: 2em
+  z-index: 20
+  +background-image(linear-gradient(to bottom, $header-gradient-top-color, $header-gradient-bottom-color))
+
+  @media (max-width: 600px)
+    display: block
+
+  h1,
+  h2
+    color: $modal-text-standout-color
+    font-weight: lighter
+  a
+
+    &:active,
+    &:link,
+    &:hover,
+    &:visited
+      color: $modal-link-color
+      font-weight: bold
+      text-decoration: none
+
+    &:hover
+      color: $modal-link-color-hover
+
+  p
+    font-size: $modal-font-size
+    line-height: $modal-line-height
