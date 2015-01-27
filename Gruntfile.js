@@ -202,7 +202,7 @@ module.exports = function (grunt) {
             '*.{ico,txt}',
             'img/{,*/}*.{webp,gif}',
             'styles/fonts/{,*/}*.*',
-            'bower_components/sass-bootstrap/fonts/*.*'
+            'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*.*'
           ]
         }]
       }
