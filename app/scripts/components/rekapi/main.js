@@ -125,7 +125,7 @@ define([
     ,getCssString: function (opts) {
       var rekapi = this.rekapi;
       var needToAccountForOffset =
-        this.lateralus.model.get('cssOrientation') === 'first-keyframe';
+        this.lateralus.getUi('cssOrientation') === 'first-keyframe';
 
       var offset = this.actorModel.getFirstKeyframeOffset();
 

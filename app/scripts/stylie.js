@@ -87,9 +87,11 @@ define([
 
   fn.setInitialState = function () {
     this.model.set({
-      cssOrientation: 'first-keyframe'
-      ,focusedControlPanelTab: ''
-      ,savedAnimations: {}
+      savedAnimations: {}
+      ,ui: {
+        cssOrientation: 'first-keyframe'
+        ,focusedControlPanelTab: ''
+      }
     });
   };
 
@@ -214,6 +216,25 @@ define([
     this.model.trigger('change');
 
     this.emit('savedAnimationListUpdated', this.getSavedAnimationDisplayList());
+  };
+
+  /**
+   * @param {string} name
+   * @return {*}
+   */
+  fn.getUi = function (name) {
+    return this.model.get('ui')[name];
+  };
+
+  /**
+   * @param {string} name
+   * @param {*} value
+   */
+  fn.setUi = function (name, value) {
+    this.model.attributes.ui[name] = value;
+
+    // Persist app state to localStorage.
+    this.model.trigger('change');
   };
 
   return Stylie;
