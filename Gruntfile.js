@@ -105,7 +105,6 @@ module.exports = function (grunt) {
         sassDir: '<%= yeoman.app %>/styles',
         cssDir: '.tmp/styles',
         imagesDir: '<%= yeoman.app %>/img',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
         importPath: '<%= yeoman.app %>',
         relativeAssets: true
       },
@@ -195,10 +194,10 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
+          cwd: '<%= yeoman.app %>/styles/fonts',
+          dest: '<%= yeoman.dist %>/styles/fonts',
           src: [
-            'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*.*'
+            '*'
           ]
         }]
       }
