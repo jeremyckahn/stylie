@@ -213,7 +213,17 @@ module.exports = function (grunt) {
         message: 'Automated deploy commit.'
       },
       src: '**/*'
-    }
+    },
+    bump: {
+      options: {
+        files: ['package.json', 'bower.json'],
+        commit: false,
+        createTag: false,
+        tagName: '%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: false
+      }
+    },
   });
 
   grunt.registerTask('server', function (target) {
