@@ -106,8 +106,11 @@ module.exports = function (grunt) {
         cssDir: '.tmp/styles',
         imagesDir: '<%= yeoman.app %>/img',
         javascriptsDir: '<%= yeoman.app %>/scripts',
+
+        // jshint maxlen: 120
         fontsDir: '<%= yeoman.app %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/',
         fontsPath: '<%= yeoman.app %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/',
+
         importPath: '<%= yeoman.app %>',
         relativeAssets: true
       },
@@ -209,6 +212,13 @@ module.exports = function (grunt) {
       all: {
         rjsConfig: '<%= yeoman.app %>/scripts/main.js'
       }
+    },
+    'gh-pages': {
+      options: {
+        base: 'dist',
+        message: 'Automated deploy commit.'
+      },
+      src: '**/*'
     }
   });
 
@@ -243,6 +253,11 @@ module.exports = function (grunt) {
     'uglify',
     'copy:fonts',
     'usemin'
+  ]);
+
+  grunt.registerTask('deploy', [
+    'build',
+    'gh-pages'
   ]);
 
   grunt.registerTask('default', [
