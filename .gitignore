@@ -5,3 +5,4 @@ test/temp
 app/bower_components
 .tmp
 .DS_Store
+.grunt/grunt-gh-pages/gh-pages/src/
