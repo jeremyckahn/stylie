@@ -224,6 +224,16 @@ module.exports = function (grunt) {
         push: false
       }
     },
+    rev: {
+      dist: {
+        files: {
+          src: [
+            '<%= yeoman.dist %>/scripts/{,*/}*.js',
+            '<%= yeoman.dist %>/styles/{,*/}*.css'
+          ]
+        }
+      }
+    }
   });
 
   grunt.registerTask('server', function (target) {
@@ -256,6 +266,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy:fonts',
+    'rev',
     'usemin'
   ]);
 

@@ -1,6 +1,6 @@
 {
   "name": "stylie",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "CC BY-NC-SA",
   "dependencies": {},
   "devDependencies": {
@@ -25,7 +25,8 @@
     "time-grunt": "~0.2.8",
     "jshint-stylish": "~0.1.5",
     "grunt-gh-pages": "^0.9.1",
-    "grunt-bump": "0.0.17"
+    "grunt-bump": "0.0.17",
+    "grunt-rev": "^0.1.0"
   },
   "engines": {
     "node": ">=0.10.0"
