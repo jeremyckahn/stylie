@@ -1,5 +1,6 @@
 @import 'styles/variables.sass'
-@import "compass/css3/flexbox"
+@import 'compass/css3/flexbox'
+@import 'compass/css3/transform'
 
 @mixin range-track
   background: none
@@ -18,7 +19,8 @@
   font-size: 13px
   overflow: hidden
   opacity: 1
-  transition: opacity $load-fade-in-duration
+  transition-duration: $load-fade-in-duration
+  transition-property: opacity, transform, -webkit-transform, -moz-transform, -ms-transform
 
   label
     cursor: pointer
@@ -123,3 +125,4 @@
 
   &.loading
     opacity: 0
+    +transform(scale(0))
