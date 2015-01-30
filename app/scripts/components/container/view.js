@@ -27,6 +27,21 @@ define([
       'mousemove input[type=range]': function (evt) {
         $(evt.target).change();
       }
+
+      /**
+       * Force a number input "hold" to trigger a "change" event.
+       * @param {jQuery.Event} evt
+       */
+      ,'keydown input[type=number]': function (evt) {
+        $(evt.target).change();
+      }
+
+      /**
+       * @param {jQuery.Event} evt
+       */
+      ,'mousewheel input[type=number]': function (evt) {
+        $(evt.target).change();
+      }
     }
 
     /**
