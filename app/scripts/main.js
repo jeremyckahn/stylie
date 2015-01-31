@@ -5,7 +5,7 @@ require.config({
   baseUrl: '/'
   ,paths: {
     text: 'bower_components/requirejs-text/text'
-    ,jquery: 'bower_components/jquery/jquery'
+    ,jquery: 'bower_components/jquery/dist/jquery'
     ,'jquery-mousewheel': 'bower_components/jquery-mousewheel/jquery.mousewheel'
     ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
     ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
