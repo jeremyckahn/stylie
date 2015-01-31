@@ -20,7 +20,7 @@ define([
     template: template
 
     ,events: {
-      'keydown textarea': function () {
+      'keyup textarea': function () {
         this.emit('userRequestUpdateActorHtml', this.$html.val());
       }
     }
