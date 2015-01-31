@@ -34,7 +34,7 @@ define([
 
     ,lateralusEvents: {
       userRequestUpdateShowPathSetting: function () {
-        this.$el.fadeToggle(constant.PATH_TOGGLE_TRANSITION_DURATION);
+        this.$el.toggleClass('transparent');
         this.render();
       }
 

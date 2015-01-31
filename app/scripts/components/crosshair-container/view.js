@@ -6,8 +6,6 @@ define([
 
   ,'stylie.component.crosshair'
 
-  ,'../../constant'
-
 ], function (
 
   Lateralus
@@ -15,8 +13,6 @@ define([
   ,template
 
   ,CrosshairComponent
-
-  ,constant
 
 ) {
   'use strict';
@@ -29,7 +25,7 @@ define([
 
     ,lateralusEvents: {
       userRequestUpdateShowPathSetting: function () {
-        this.$el.fadeToggle(constant.PATH_TOGGLE_TRANSITION_DURATION);
+        this.$el.toggleClass('transparent');
       }
 
       /**

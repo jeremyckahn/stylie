@@ -123,6 +123,14 @@
     img
       width: 100%
 
+  .transparent
+    opacity: 0
+    pointer-events: none
+
+  .fadable
+    transition-duration: $fadable-duration
+    transition-property: opacity
+
   &.loading
     opacity: 0
     +transform(scale(0))
