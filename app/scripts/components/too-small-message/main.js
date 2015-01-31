@@ -2,7 +2,6 @@ define([
 
   'lateralus'
 
-  ,'./model'
   ,'./view'
   ,'text!./template.mustache'
 
@@ -10,7 +9,6 @@ define([
 
   Lateralus
 
-  ,Model
   ,View
   ,template
 
@@ -21,7 +19,6 @@ define([
 
   var TooSmallMessageComponent = Base.extend({
     name: 'too-small-message'
-    ,Model: Model
     ,View: View
     ,template: template
   });

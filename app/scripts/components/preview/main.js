@@ -2,7 +2,6 @@ define([
 
   'lateralus'
 
-  ,'./model'
   ,'./view'
   ,'text!./template.mustache'
 
@@ -15,7 +14,6 @@ define([
 
   Lateralus
 
-  ,Model
   ,View
   ,template
 
@@ -31,7 +29,6 @@ define([
 
   var PreviewComponent = Base.extend({
     name: 'preview'
-    ,Model: Model
     ,View: View
     ,template: template
 
