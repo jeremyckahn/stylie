@@ -1,10 +1,10 @@
 {
   "name": "stylie",
   "license": "CC BY-NC-SA",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "dependencies": {
     "bootstrap-sass-official": "~3.2.0",
-    "lateralus": "~0.2.0",
+    "lateralus": "~0.3.0",
     "lateralus-components": "~0.0.4",
     "rekapi": "~1.4.3",
     "bezierizer": "~0.1.0",
