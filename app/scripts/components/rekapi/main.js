@@ -45,7 +45,7 @@ define([
       }
 
       ,userRequestPlay: function () {
-        this.rekapi.play();
+        this.rekapi.playFromCurrent();
       }
 
       ,userRequestPause: function () {
@@ -66,7 +66,7 @@ define([
 
       ,userRequestTogglePreviewPlayback: function () {
         var rekapi = this.rekapi;
-        rekapi[rekapi.isPlaying() ? 'pause' : 'play']();
+        rekapi[rekapi.isPlaying() ? 'pause' : 'playFromCurrent']();
       }
     }
 
