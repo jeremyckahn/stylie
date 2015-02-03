@@ -243,9 +243,11 @@ module.exports = function (grunt) {
         dest: '<%= yeoman.dist %>/manifest.appcache',
         cache: {
           patterns: [
-            '<%= yeoman.dist %>/**/**'
+            '<%= yeoman.dist %>/**/**',
+            'manifest.appcache'
           ]
-        }
+        },
+        network: '*'
       }
     }
   });
