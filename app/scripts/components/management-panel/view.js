@@ -42,6 +42,7 @@ define([
 
       ,'click .load': function () {
         var currentlySelectedAnimation = this.$loadSelector.val();
+        this.$saveInput.val(currentlySelectedAnimation);
 
         if (currentlySelectedAnimation) {
           this.emit('userRequestLoadAnimation', currentlySelectedAnimation);
