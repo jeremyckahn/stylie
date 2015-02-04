@@ -34,7 +34,16 @@ define([
     }
 
     ,events: {
-      'click .save': function () {
+      /**
+       * @param {jQuery.Event} evt
+       */
+      'keydown .save-input': function (evt) {
+        if (evt.which === 13) { // enter
+          this.$saveButton.click();
+        }
+      }
+
+      ,'click .save': function () {
         var newAnimatioName = this.$saveInput.val();
         this.emit('userRequestSaveCurrentAnimation', newAnimatioName);
         this.$loadSelector.val(newAnimatioName);
