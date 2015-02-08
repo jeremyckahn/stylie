@@ -39,7 +39,7 @@ define([
 
     ,events: {
       'click .login.twitter': function () {
-        this.$twitterLabel.text('Redirecting...');
+        this.$twitterLabel.text(constant.REDIRECTING_MESSAGE);
         window.location = constant.API_URL + '/auth/twitter';
       }
     }

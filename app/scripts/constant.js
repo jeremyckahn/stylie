@@ -13,5 +13,6 @@ define(function () {
     ,TRANSIENT_ANIMATION_NAME: '__transientAnimation'
     ,MODAL_OPACITY: 0.95
     ,API_URL: 'http://localhost:6660'
+    ,REDIRECTING_MESSAGE: 'Redirecting...'
   };
 });
