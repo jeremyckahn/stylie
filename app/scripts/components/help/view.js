@@ -29,7 +29,7 @@ define([
 
     ,lateralusEvents: _.extend({
       userRequestToggleHelpModal: function () {
-        this.hidableView.toggle();
+        this.toggle();
       }
     }, baseProto.lateralusEvents)
 

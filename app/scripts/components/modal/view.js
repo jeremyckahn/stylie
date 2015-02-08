@@ -1,6 +1,7 @@
 define([
 
-  'lateralus'
+  'jquery'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
@@ -10,7 +11,8 @@ define([
 
 ], function (
 
-  Lateralus
+  $
+  ,Lateralus
 
   ,template
 
@@ -58,6 +60,17 @@ define([
         ,startHidden: true
         ,targetShowOpacity: constant.MODAL_OPACITY
       });
+    }
+
+    ,toggle: function () {
+      this.hidableView.toggle();
+      var isShowing = this.hidableView.isShowing();
+
+      if (isShowing) {
+        // Whatever triggered the modal to be shown is now in the background,
+        // so blur it.
+        $(document.activeElement).blur();
+      }
     }
   });
 

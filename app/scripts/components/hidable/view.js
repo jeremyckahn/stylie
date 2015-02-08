@@ -97,6 +97,13 @@ define([
     ,toggle: function () {
       this[this.isHidden ? 'show' : 'hide']();
     }
+
+    /**
+     * @return {boolean}
+     */
+    ,isShowing: function () {
+      return this.isHidden;
+    }
   });
 
   return HidableComponentView;
