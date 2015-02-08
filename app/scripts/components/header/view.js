@@ -24,6 +24,10 @@ define([
         this.$help.blur();
         this.emit('userRequestToggleHelpModal');
       }
+
+      ,'click .reset': function () {
+        this.emit('userRequestResetAnimation');
+      }
     }
 
     /**

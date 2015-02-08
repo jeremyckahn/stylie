@@ -36,6 +36,8 @@ define([
     Lateralus.apply(this, arguments);
     this.hasInitialized = false;
 
+    this.initHacks();
+
     var model = this.model;
     model.localStorageId = 'stylieData';
     model.mixin(localStorageMixin);
@@ -151,6 +153,15 @@ define([
     ,userRequestResetAnimation: function () {
       this.rekapiComponent.clearCurrentAnimation();
       this.createDefaultAnimation();
+    }
+  };
+
+  fn.initHacks = function () {
+    var hasSafari = navigator.userAgent.match(/safari/i);
+    var hasChrome = navigator.userAgent.match(/chrome/i);
+
+    if (hasSafari && !hasChrome) {
+      this.$el.addClass('safari');
     }
   };
 

@@ -65,10 +65,6 @@ define([
           this.emit('userRequestDeleteAnimation', currentlySelectedAnimation);
         }
       }
-
-      ,'click .reset-animation': function () {
-        this.emit('userRequestResetAnimation');
-      }
     }
 
     /**

@@ -32,7 +32,8 @@
     &:hover,
       color: $header-link-color-hover
 
-  .help
+  $button-line-height: $help-button-dimensions - ($help-button-border-width * 2)
+  button
     border: solid $help-button-border-width $help-button-color
     border-radius: 50%
     color: $help-button-color
@@ -44,9 +45,26 @@
     text-shadow: 0 1px 1px $help-button-text-shadow
     height: $help-button-dimensions
     width: $help-button-dimensions
-    line-height: $help-button-dimensions - ($help-button-border-width * 2)
+    line-height: $button-line-height
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.27), 0 0.1em 0 rgba(0,0,0,0.04), 0 0 12px rgba(0,0,0,0.21)
+
+    .safari &
+      line-height: $button-line-height - .1em
+
+    i
+      top: .15em
+
+      .safari &
+        top: 2px
+
+  .help
     +background-image(radial-gradient(50% 50%, $help-button-gradient-inner, $help-button-gradient-outer))
 
     &:active
       +background-image(radial-gradient(50% 50%, $help-button-gradient-outer, $help-button-gradient-outer))
+
+  .reset
+    +background-image(radial-gradient(50% 50%, $reset-button-gradient-inner, $reset-button-gradient-outer))
+
+    &:active
+      +background-image(radial-gradient(50% 50%, $reset-button-gradient-outer, $reset-button-gradient-outer))
