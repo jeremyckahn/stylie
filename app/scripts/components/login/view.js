@@ -5,6 +5,8 @@ define([
 
   ,'text!./template.mustache'
 
+  ,'../../constant'
+
   ,'stylie.component.modal'
 
 ], function (
@@ -13,6 +15,8 @@ define([
   ,Lateralus
 
   ,template
+
+  ,constant
 
   ,ModalComponent
 
@@ -32,6 +36,13 @@ define([
         this.toggle();
       }
     }, baseProto.lateralusEvents)
+
+    ,events: {
+      'click .login.twitter': function () {
+        this.$twitterLabel.text('Redirecting...');
+        window.location = constant.API_URL + '/auth/twitter';
+      }
+    }
 
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
