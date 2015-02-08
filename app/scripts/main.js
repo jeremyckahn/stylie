@@ -47,6 +47,9 @@ require.config({
     name: 'stylie.component.header'
     ,location: 'scripts/components/header'
   }, {
+    name: 'stylie.component.modal'
+    ,location: 'scripts/components/modal'
+  }, {
     name: 'stylie.component.help'
     ,location: 'scripts/components/help'
   }, {
