@@ -1,47 +1,6 @@
-@import 'styles/variables.sass'
-@import 'compass/css3/images'
+@import 'styles/variables'
 
 .help-view
-  color: $modal-text-color
-  position: absolute
-  z-index: 20
-
-  .modal-wrapper
-    border-radius: $help-modal-border-radius
-    bottom: $help-modal-margin
-    left: $help-modal-margin
-    position: absolute
-    right: $help-modal-margin
-    top: $header-height + $help-modal-margin
-    +background-image(linear-gradient(to bottom, $header-gradient-top-color, $header-gradient-bottom-color))
-
-  h1,
-  h2
-    color: $modal-text-standout-color
-    font-weight: lighter
-
-  h1
-    font-size: 3em
-
-  h2
-    font-size: 2em
-
-  a
-
-    &:active,
-    &:link,
-    &:hover,
-    &:visited
-      color: $modal-link-color
-      font-weight: bold
-      text-decoration: none
-
-    &:hover
-      color: $modal-link-color-hover
-
-  p
-    font-size: $modal-font-size
-    line-height: $modal-line-height
 
   img
     display: block
@@ -64,7 +23,6 @@
           font-weight: bold
           padding-right: 40px
 
-
   ul
     line-height: $modal-list-line-height
 
@@ -85,7 +43,3 @@
 
         ul
           padding-left: 1.5em
-
-  .content-wrapper
-    margin: 1.5em
-    overflow: auto

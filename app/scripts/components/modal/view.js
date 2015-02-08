@@ -51,6 +51,7 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+      this.$el.addClass('modal-view');
 
       this.hidableView = this.addSubview(HidableComponent.View, {
         el: this.el
