@@ -1,103 +1,99 @@
-<div class="modal-wrapper">
-  <div class="content-wrapper fill">
-    <h1>CSS animation made easy!</h1>
-    <p>Stylie is a fun tool for easily creating complex CSS animations. Quickly design your animation graphically, grab the generated code and go!</p>
-    <p><a href="https://www.youtube.com/watch?v=Xx-SLbCxhxI" target="_blank">Watch this screencast for a quick tutorial.</a></p>
-    <h2>The Stylie Workflow</h2>
-    <p>When you open the app, you will see a little ball moving from left to right. To change the beginning and ending positions of the animation, just click and drag the crosshairs. You can hold the Shift key to make rotation cubes appear over the crosshairs.  Click and drag these cubes to modify the the X and Y rotation axes, and drag the extended rotation handle to modify the Z axis rotation.  Additionally, you can scroll your mouse while hovering over a cube to modify the scale of the element.</p>
-    <img src="img/shift_example.png" alt="A screenshot of Stylie while the rotation Cubelets are shown">
-    <h2>Keyframe editing</h2>
-    <p>You can add, remove and edit keyframes.  This is done in the &quot;Keyframes&quot; tab.  When you first open Stylie, you are presented with the default keyframes.  Keyframe 0 cannot be moved and has no easing properties associated with it, but all of the other keyframes do.  To add a new keyframe, click the &quot;Add a Keyframe&quot; button in the upper right portion of the tab.</p>
-    <img src="img/keyframes_tab.png" alt="A screenshot of the Keyframes tab.">
-    <p>&quot;rX,&quot; &quot;rY&quot; and &quot;rZ&quot; refer to the three rotation axes, and &quot;s&quot; refers to the scale value.  You can add as many keyframes as you'd like.  You can also reorder keyframes by clicking their &quot;ms&quot; value and pressing the Enter key.</p>
-    <img src="img/keyframe_editing.png" alt="A screenshot of keyframes being edited.">
-    <p>You can tweak individual keyframe properties by pressing the &quot;up&quot; and &quot;down&quot; arrow keys when focusing on a property's text input.  You can change individual properties' easing curve by selecting it from the dropdown next to each text input.  To remove a keyframe, click the &quot;X&quot; in the upper right corner of its form field.</p>
-    <h2>Motion control</h2>
-    <p>In addition to the standard easing curves, you can define your own custom curves in the &quot;Motion&quot; tab.  To do this, select or create a "customEasing" from the dropdown and drag the circular handles.  You can also type in the coordinates for the control points.  Once you have defined your custom curve, you can select it from any property's easing dropdown.</p>
-    <img src="img/bezier_editing.png" alt="A screenshot of a bezier curve being edited.">
-    <h2>Playback control</h2>
-    <p>There is a scrubber in the bottom left of the screen. This is fully interactive; you can can play, pause and stop the animation. You can also click and drag the scrubber and zip to any part of the timeline.</p>
-    <h2>Generating your CSS</h2>
-    <p>Once you&#x27;ve tweaked the animation to your liking, it is time to generate the CSS to be used in your web page. Click on the &quot;CSS&quot; tab in the control panel to see the ready-to-use CSS. You can tweak the generated CSS for your specific needs, such as the name of the CSS class on the DOM element to be animated, and which browser vendors you want to support. Stylie will optimize simpler animations, but more complex animations will generate very verbose CSS, so be aware of that. You can control the size of the generated CSS for complex animations with the slider above the CSS text box.</p>
-    <h2>Saving your animation</h2>
-    <p>You can save your animation to <a href="http://www.html5rocks.com/en/features/storage" target="_blank">HTML5 Local Storage</a>.  To do this, open the wrench menu and type in the name of your animation.  You can also recall saved animations from this menu.  Additionally, you can erase the current animation and start from scratch.</p>
-    <img src="img/save_load.png" alt="A screenshot of the save/load pane.">
-    <h2>Key bindings</h2>
-    <p>Stylie has a few keyboard-activated features:</p>
-    <table>
-      <thead>
-        <tr>
-          <th colspan="2"><em>(When no inputs are focused)</em></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>K</td>
-          <td>Add a new Keyframe</td>
-        </tr>
-        <tr>
-          <td>C</td>
-          <td>Toggle the Control Pane</td>
-        </tr>
-        <tr>
-          <td>T</td>
-          <td>Toggle the Timeline Scrubber</td>
-        </tr>
-        <tr>
-          <td>H</td>
-          <td>Toggle this Help screen</td>
-        </tr>
-        <tr>
-          <td>P</td>
-          <td>Toggle this crosshairs and path guide</td>
-        </tr>
-        <tr>
-          <td>Space bar</td>
-          <td>Play/Pause the animation</td>
-        </tr>
-        <tr>
-          <td>Shift <em>(hold)</em></td>
-          <td>Show keyframe rotation Cubelets</td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>This tool is open source</h2>
-    <p>The code <a href="https://github.com/jeremyckahn/stylie" target="_blank">lives on Github</a>. You are free to do what you please with the code - Stylie is distributed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode" target="_blank">CC BY-NC-SA 4.0 license</a>.  Don't worry, this license does not extend to the animations you create with Stylie, just the application itself.  You are free to use the animations created by Stylie however you please.  If you would like to request a feature, please do so with the <a href="https://github.com/jeremyckahn/stylie/issues" target="_blank">project's issue tracker</a>.</p>
-    <a class="badge" href="https://codeclimate.com/github/jeremyckahn/stylie" target="_blank"><img src="https://codeclimate.com/github/jeremyckahn/stylie/badges/gpa.svg" alt="Code Climate badge"></a>
-    <h2>How it's made</h2>
-    <p>Stylie is built with some very useful open source libraries:</p>
-    <ul class="bulleted">
-      <li><a href="http://rekapi.com/" target="_blank">Rekapi</a></li>
-      <li class="nested">
-        <ul>
-          <li><a href="http://jeremyckahn.github.io/shifty/" target="_blank">Shifty</a></li>
-        </ul>
-      </li>
-      <li><a href="https://github.com/Jellyvision/lateralus" target="_blank">Lateralus</a></li>
-      <li class="nested">
-        <ul>
-          <li><a href="http://backbonejs.org/" target="_blank">Backbone</a></li>
-          <li><a href="http://lodash.com/" target="_blank">Lo-Dash</a></li>
-        </ul>
-      </li>
-      <li><a href="http://jeremyckahn.github.io/keydrown/" target="_blank">Keydrown</a></li>
-      <li><a href="http://jquery.com/" target="_blank">jQuery</a></li>
-      <li class="nested">
-        <ul>
-          <li><a href="https://github.com/jquery/jquery-mousewheel" target="_blank">jQuery Mouse Wheel</a></li>
-          <li><a href="https://github.com/jeremyckahn/dragon" target="_blank">jQuery Dragon</a></li>
-          <li><a href="https://github.com/jeremyckahn/cubelet" target="_blank">jQuery Cubelet</a></li>
-        </ul>
-      </li>
-      <li><a href="http://requirejs.org/" target="_blank">RequireJS</a></li>
-      <li><a href="https://github.com/janl/mustache.js/" target="_blank">mustache.js</a></li>
-      <li><a href="http://compass-style.org/" target="_blank">Compass</a></li>
+<h1>CSS animation made easy!</h1>
+<p>Stylie is a fun tool for easily creating complex CSS animations. Quickly design your animation graphically, grab the generated code and go!</p>
+<p><a href="https://www.youtube.com/watch?v=Xx-SLbCxhxI" target="_blank">Watch this screencast for a quick tutorial.</a></p>
+<h2>The Stylie Workflow</h2>
+<p>When you open the app, you will see a little ball moving from left to right. To change the beginning and ending positions of the animation, just click and drag the crosshairs. You can hold the Shift key to make rotation cubes appear over the crosshairs.  Click and drag these cubes to modify the the X and Y rotation axes, and drag the extended rotation handle to modify the Z axis rotation.  Additionally, you can scroll your mouse while hovering over a cube to modify the scale of the element.</p>
+<img src="img/shift_example.png" alt="A screenshot of Stylie while the rotation Cubelets are shown">
+<h2>Keyframe editing</h2>
+<p>You can add, remove and edit keyframes.  This is done in the &quot;Keyframes&quot; tab.  When you first open Stylie, you are presented with the default keyframes.  Keyframe 0 cannot be moved and has no easing properties associated with it, but all of the other keyframes do.  To add a new keyframe, click the &quot;Add a Keyframe&quot; button in the upper right portion of the tab.</p>
+<img src="img/keyframes_tab.png" alt="A screenshot of the Keyframes tab.">
+<p>&quot;rX,&quot; &quot;rY&quot; and &quot;rZ&quot; refer to the three rotation axes, and &quot;s&quot; refers to the scale value.  You can add as many keyframes as you'd like.  You can also reorder keyframes by clicking their &quot;ms&quot; value and pressing the Enter key.</p>
+<img src="img/keyframe_editing.png" alt="A screenshot of keyframes being edited.">
+<p>You can tweak individual keyframe properties by pressing the &quot;up&quot; and &quot;down&quot; arrow keys when focusing on a property's text input.  You can change individual properties' easing curve by selecting it from the dropdown next to each text input.  To remove a keyframe, click the &quot;X&quot; in the upper right corner of its form field.</p>
+<h2>Motion control</h2>
+<p>In addition to the standard easing curves, you can define your own custom curves in the &quot;Motion&quot; tab.  To do this, select or create a "customEasing" from the dropdown and drag the circular handles.  You can also type in the coordinates for the control points.  Once you have defined your custom curve, you can select it from any property's easing dropdown.</p>
+<img src="img/bezier_editing.png" alt="A screenshot of a bezier curve being edited.">
+<h2>Playback control</h2>
+<p>There is a scrubber in the bottom left of the screen. This is fully interactive; you can can play, pause and stop the animation. You can also click and drag the scrubber and zip to any part of the timeline.</p>
+<h2>Generating your CSS</h2>
+<p>Once you&#x27;ve tweaked the animation to your liking, it is time to generate the CSS to be used in your web page. Click on the &quot;CSS&quot; tab in the control panel to see the ready-to-use CSS. You can tweak the generated CSS for your specific needs, such as the name of the CSS class on the DOM element to be animated, and which browser vendors you want to support. Stylie will optimize simpler animations, but more complex animations will generate very verbose CSS, so be aware of that. You can control the size of the generated CSS for complex animations with the slider above the CSS text box.</p>
+<h2>Saving your animation</h2>
+<p>You can save your animation to <a href="http://www.html5rocks.com/en/features/storage" target="_blank">HTML5 Local Storage</a>.  To do this, open the wrench menu and type in the name of your animation.  You can also recall saved animations from this menu.  Additionally, you can erase the current animation and start from scratch.</p>
+<img src="img/save_load.png" alt="A screenshot of the save/load pane.">
+<h2>Key bindings</h2>
+<p>Stylie has a few keyboard-activated features:</p>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2"><em>(When no inputs are focused)</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>K</td>
+      <td>Add a new Keyframe</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>Toggle the Control Pane</td>
+    </tr>
+    <tr>
+      <td>T</td>
+      <td>Toggle the Timeline Scrubber</td>
+    </tr>
+    <tr>
+      <td>H</td>
+      <td>Toggle this Help screen</td>
+    </tr>
+    <tr>
+      <td>P</td>
+      <td>Toggle this crosshairs and path guide</td>
+    </tr>
+    <tr>
+      <td>Space bar</td>
+      <td>Play/Pause the animation</td>
+    </tr>
+    <tr>
+      <td>Shift <em>(hold)</em></td>
+      <td>Show keyframe rotation Cubelets</td>
+    </tr>
+  </tbody>
+</table>
+<h2>This tool is open source</h2>
+<p>The code <a href="https://github.com/jeremyckahn/stylie" target="_blank">lives on Github</a>. You are free to do what you please with the code - Stylie is distributed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode" target="_blank">CC BY-NC-SA 4.0 license</a>.  Don't worry, this license does not extend to the animations you create with Stylie, just the application itself.  You are free to use the animations created by Stylie however you please.  If you would like to request a feature, please do so with the <a href="https://github.com/jeremyckahn/stylie/issues" target="_blank">project's issue tracker</a>.</p>
+  <a class="badge" href="https://codeclimate.com/github/jeremyckahn/stylie" target="_blank"><img src="https://codeclimate.com/github/jeremyckahn/stylie/badges/gpa.svg" alt="Code Climate badge"></a>
+<h2>How it's made</h2>
+<p>Stylie is built with some very useful open source libraries:</p>
+<ul class="bulleted">
+  <li><a href="http://rekapi.com/" target="_blank">Rekapi</a></li>
+  <li class="nested">
+    <ul>
+      <li><a href="http://jeremyckahn.github.io/shifty/" target="_blank">Shifty</a></li>
     </ul>
-    <p>Font icons are courtesy of:</p>
-    <ul class="bulleted">
-      <li><a href="http://glyphicons.com/" target="_blank">Glyphicons</a></li>
+  </li>
+  <li><a href="https://github.com/Jellyvision/lateralus" target="_blank">Lateralus</a></li>
+  <li class="nested">
+    <ul>
+      <li><a href="http://backbonejs.org/" target="_blank">Backbone</a></li>
+      <li><a href="http://lodash.com/" target="_blank">Lo-Dash</a></li>
     </ul>
-    <h2>Author</h2>
-    <p>Stylie is built and maintained by <a href="http://jeremyckahn.com/" target="_blank">Jeremy Kahn</a>.  He's a nice guy and you can find him on <a href="https://twitter.com/jeremyckahn" target="_blank">Twitter</a> and <a href="https://github.com/jeremyckahn" target="_blank">Github</a>.  Stylie's beautiful blue theme was designed by the talented <a href="http://www.jonvictorino.com/" target="_blank">Jon Victorino</a>.
-  </div>
-</div>
+  </li>
+  <li><a href="http://jeremyckahn.github.io/keydrown/" target="_blank">Keydrown</a></li>
+  <li><a href="http://jquery.com/" target="_blank">jQuery</a></li>
+  <li class="nested">
+    <ul>
+      <li><a href="https://github.com/jquery/jquery-mousewheel" target="_blank">jQuery Mouse Wheel</a></li>
+      <li><a href="https://github.com/jeremyckahn/dragon" target="_blank">jQuery Dragon</a></li>
+      <li><a href="https://github.com/jeremyckahn/cubelet" target="_blank">jQuery Cubelet</a></li>
+    </ul>
+  </li>
+  <li><a href="http://requirejs.org/" target="_blank">RequireJS</a></li>
+  <li><a href="https://github.com/janl/mustache.js/" target="_blank">mustache.js</a></li>
+  <li><a href="http://compass-style.org/" target="_blank">Compass</a></li>
+</ul>
+<p>Font icons are courtesy of:</p>
+<ul class="bulleted">
+  <li><a href="http://glyphicons.com/" target="_blank">Glyphicons</a></li>
+</ul>
+<h2>Author</h2>
+<p>Stylie is built and maintained by <a href="http://jeremyckahn.com/" target="_blank">Jeremy Kahn</a>.  He's a nice guy and you can find him on <a href="https://twitter.com/jeremyckahn" target="_blank">Twitter</a> and <a href="https://github.com/jeremyckahn" target="_blank">Github</a>.  Stylie's beautiful blue theme was designed by the talented <a href="http://www.jonvictorino.com/" target="_blank">Jon Victorino</a>.

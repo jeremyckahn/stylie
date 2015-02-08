@@ -20,13 +20,17 @@ define([
     template: template
 
     ,events: {
-      'click .help': function () {
-        this.$help.blur();
-        this.emit('userRequestToggleHelpModal');
+      'click .login': function () {
+        this.emit('userRequestToggleLoginModal');
       }
 
       ,'click .reset': function () {
         this.emit('userRequestResetAnimation');
+      }
+
+      ,'click .help': function () {
+        this.$help.blur();
+        this.emit('userRequestToggleHelpModal');
       }
     }
 

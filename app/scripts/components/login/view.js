@@ -22,13 +22,13 @@ define([
   var Base = ModalComponent.View;
   var baseProto = Base.prototype;
 
-  var HelpComponentView = Base.extend({
+  var LoginComponentView = Base.extend({
     templatePartials: {
       modalContents: template
     }
 
     ,lateralusEvents: _.extend({
-      userRequestToggleHelpModal: function () {
+      userRequestToggleLoginModal: function () {
         this.hidableView.toggle();
       }
     }, baseProto.lateralusEvents)
@@ -41,5 +41,5 @@ define([
     }
   });
 
-  return HelpComponentView;
+  return LoginComponentView;
 });

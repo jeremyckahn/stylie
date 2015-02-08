@@ -7,6 +7,7 @@ define([
 
   ,'stylie.component.keybindings'
   ,'stylie.component.header'
+  ,'stylie.component.login'
   ,'stylie.component.help'
   ,'stylie.component.too-small-message'
   ,'stylie.component.control-panel'
@@ -21,6 +22,7 @@ define([
 
   ,KeybindingsComponent
   ,HeaderComponent
+  ,LoginComponent
   ,HelpComponent
   ,TooSmallMessageComponent
   ,ControlPanelComponent
@@ -41,6 +43,10 @@ define([
 
       this.headerComponent = this.addComponent(HeaderComponent, {
         el: this.view.$header[0]
+      });
+
+      this.loginComponent = this.addComponent(LoginComponent, {
+        el: this.view.$login[0]
       });
 
       this.helpComponent = this.addComponent(HelpComponent, {

@@ -62,14 +62,20 @@
     margin-top: 0.3em
     width: 85%
 
-  .help
-    +background-image(radial-gradient(50% 50%, $help-button-gradient-inner, $help-button-gradient-outer))
+  .login
+    +background-image(radial-gradient(50% 50%, $login-button-gradient-inner, $login-button-gradient-outer))
 
     &:active
-      +background-image(radial-gradient(50% 50%, $help-button-gradient-outer, $help-button-gradient-outer))
+      +background-image(radial-gradient(50% 50%, $login-button-gradient-outer, $login-button-gradient-outer))
 
   .reset
     +background-image(radial-gradient(50% 50%, $reset-button-gradient-inner, $reset-button-gradient-outer))
 
     &:active
       +background-image(radial-gradient(50% 50%, $reset-button-gradient-outer, $reset-button-gradient-outer))
+
+  .help
+    +background-image(radial-gradient(50% 50%, $help-button-gradient-inner, $help-button-gradient-outer))
+
+    &:active
+      +background-image(radial-gradient(50% 50%, $help-button-gradient-outer, $help-button-gradient-outer))
