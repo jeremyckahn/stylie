@@ -66,6 +66,10 @@ define([
 
     this.rekapiComponent.rekapi.play();
 
+    if (this.getQueryParam('pause')) {
+      this.rekapiComponent.rekapi.pause();
+    }
+
     // Necessary for keeping the UI in sync after startup.
     this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
 
@@ -75,6 +79,27 @@ define([
     );
 
     this.hasInitialized = true;
+  };
+
+  var queryParams = (function () {
+    var queryString = location.search.slice(1);
+    var stringChunks = queryString.split('&');
+
+    var accumulator = {};
+    stringChunks.forEach(function (stringChunk) {
+      var pair = stringChunk.split('=');
+      accumulator[pair[0]] = pair[1];
+    });
+
+    return accumulator;
+  })();
+
+  /**
+   * @param {string} param
+   * @return {*}
+   */
+  fn.getQueryParam = function (param) {
+    return queryParams[param];
   };
 
   fn.createDefaultAnimation = function () {
