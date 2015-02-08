@@ -37,12 +37,12 @@ define([
       }
     }, baseProto.lateralusEvents)
 
-    ,events: {
+    ,events: _.extend({
       'click .login.twitter': function () {
         this.$twitterLabel.text(constant.REDIRECTING_MESSAGE);
         window.location = constant.API_URL + '/auth/twitter';
       }
-    }
+    }, baseProto.events)
 
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
