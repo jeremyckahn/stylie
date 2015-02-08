@@ -1,3 +1,5 @@
+@import 'styles/variables'
+
 .login-view
 
   h2
@@ -14,7 +16,7 @@
     width: 215px
 
   .login
-    background: rgba(128,128,128,0.1)
+    background: $login-button-color
     border-radius: 3em
     border: none
     display: block
@@ -22,7 +24,7 @@
     padding: 0 2em
 
     &:active
-      background: rgba(128,128,128,0.15)
+      background: $login-button-active-color
 
     &:focus
       outline: none
