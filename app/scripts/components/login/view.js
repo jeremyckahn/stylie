@@ -50,6 +50,19 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
     }
+
+    /**
+     * @override
+     */
+    ,getTemplateRenderData: function () {
+      var data = baseProto.getTemplateRenderData.apply(this, arguments);
+
+      _.extend(data, {
+        username: this.lateralus.model.get('username')
+      });
+
+      return data;
+    }
   });
 
   return LoginComponentView;

@@ -9,6 +9,7 @@ require.config({
     ,'jquery-mousewheel': 'bower_components/jquery-mousewheel/jquery.mousewheel'
     ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
     ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
+    ,'cookies-js': 'bower_components/cookies-js/src/cookies'
     ,shifty: 'bower_components/shifty/dist/shifty'
     ,rekapi: 'bower_components/rekapi/dist/rekapi'
     ,keydrown: 'bower_components/keydrown/dist/keydrown'
