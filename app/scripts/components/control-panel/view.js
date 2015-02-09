@@ -96,7 +96,7 @@ define([
      * their browser window smaller.
      */
     ,orientToRight: function () {
-      var left = this.$el.offset().left;
+      var left = parseInt(this.$el.css('left'), 10);
       var width = this.$el.outerWidth(true);
       var parentWidth = this.$el.parent().width();
       var right = parentWidth - left - width;
