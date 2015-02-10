@@ -1,11 +1,17 @@
 {{#username}}
-<h2>Welcome back, {{.}}!</h2>
-<button class="large logout">Logout</button>
+<div class="logout">
+  <h2>Logged in as: <strong>{{.}}</strong></h2>
+  <button class="large">Logout</button>
+  <p>Press the button above to securely log out of your Stylie Cloud account.  Your animations will be saved for when you come back.</p>
+</div>
 {{/username}}
 {{^username}}
-<h1>Log In</h1>
-<button class="login twitter">
-  <img class="twitter-logo" src="img/twitter_logo_blue.png" alt="Twitter logo">
-  <h2 class="$twitterLabel">Via Twitter</h2>
-</button>
+<div class="login">
+  <h1>Log In</h1>
+  <button class="twitter">
+    <img class="twitter-logo" src="img/twitter_logo_blue.png" alt="Twitter logo">
+    <h2 class="$twitterLabel">Via Twitter</h2>
+  </button>
+  <p>Log in to try a <strong>free beta</strong> of Stylie Cloud, a web service for hosting animations.  Just make an animation with Stylie, paste a single line of HTML into your page, and you're done!  Tweak your animation whenever you want, and never worry about dealing with code ever again.</p>
+</div>
 {{/username}}

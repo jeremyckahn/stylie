@@ -5,6 +5,9 @@
   h2
     text-align: center
 
+  p
+    padding: 0 5em
+
   $modal-padding: 15%
   .modal-wrapper
     bottom: 10em
@@ -12,17 +15,26 @@
     top: 14em
     right: $modal-padding
 
-  .twitter-logo
-    display: block
-    margin: 2.5em auto 0
-    width: 215px
+    left: auto
+    right: auto
+    width: $login-modal-width
+    margin-left: -($login-modal-width / 2)
 
   .login
-    border-radius: 3em
-    display: block
-    margin: 0 auto
-    padding: 0 2em
+
+    button
+      border-radius: 3em
+      display: block
+      margin: 0 auto 3.5em
+      padding: 0 2em
+
+    .twitter-logo
+      display: block
+      margin: 2.5em auto 0
+      width: 215px
 
   .logout
-    display: block
-    margin: 1.4em auto 0
+
+    button
+      display: block
+      margin: 1.5em auto 1.3em
