@@ -17,7 +17,7 @@
   h1
     font-weight: lighter
     font-size: 1.4em
-    padding-left: 1.5em
+    padding-left: 0.3em
 
   a
 
@@ -41,6 +41,7 @@
     display: block
     font-size: $header-button-dimensions
     margin-left: 1em
+    margin-top: -2px
     text-align: center
     text-shadow: 0 1px 1px $header-button-text-shadow
     height: $header-button-dimensions
@@ -56,6 +57,10 @@
 
       .safari &
         top: 2px
+
+  img.logo
+    margin-top: 0.3em
+    width: 85%
 
   .help
     +background-image(radial-gradient(50% 50%, $help-button-gradient-inner, $help-button-gradient-outer))
