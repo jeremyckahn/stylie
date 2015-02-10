@@ -35,6 +35,22 @@
     font-size: $modal-font-size
     line-height: $modal-line-height
 
+  button
+    color: $modal-text-standout-color
+    background: $modal-button-color
+    border: none
+    border-radius: 0.5em
+
+    &:active
+      background: $modal-button-active-color
+
+    &:focus
+      outline: none
+
+    &.large
+      font-size: 3em
+      padding: 1em 1.5em
+
   .content-wrapper
     margin: 1.5em
     overflow: auto
