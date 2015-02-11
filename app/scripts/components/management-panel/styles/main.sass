@@ -1,4 +1,16 @@
+@import 'compass/css3/transform'
 @import 'styles/variables.sass'
+
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
 .management-panel-view
 
   label
@@ -13,3 +25,63 @@
 
   .glyphicon
     padding-left: .5em
+
+  .cloud
+    left: 6px
+    -moz-animation-name: cloud-transform-keyframes
+    -moz-animation-duration: 4500ms
+    -moz-animation-delay: 0ms
+    -moz-animation-fill-mode: forwards
+    -moz-animation-timing-function: linear
+    -moz-animation-iteration-count: infinite
+    -moz-transform-origin: 0 0
+    -webkit-animation-name: cloud-transform-keyframes
+    -webkit-animation-duration: 4500ms
+    -webkit-animation-delay: 0ms
+    -webkit-animation-fill-mode: forwards
+    -webkit-animation-timing-function: linear
+    -webkit-animation-iteration-count: infinite
+    -webkit-transform-origin: 0 0
+    animation-name: cloud-transform-keyframes
+    animation-duration: 4500ms
+    animation-delay: 0ms
+    animation-fill-mode: forwards
+    animation-timing-function: linear
+    animation-iteration-count: infinite
+    transform-origin: 0 0
+
+  @-moz-keyframes cloud-transform-keyframes
+    0%
+      -moz-transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+      -moz-animation-timing-function:  cubic-bezier(.455,.03,.515,.955)
+    44.44%
+      -moz-transform: translate(0px, -5px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+      -moz-animation-timing-function:  cubic-bezier(.455,.03,.515,.955)
+    88.89%
+      -moz-transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+    100%
+      -moz-transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+
+  @-webkit-keyframes cloud-transform-keyframes
+    0%
+      -webkit-transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+      -webkit-animation-timing-function:  cubic-bezier(.455,.03,.515,.955)
+    44.44%
+      -webkit-transform: translate(0px, -5px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+      -webkit-animation-timing-function:  cubic-bezier(.455,.03,.515,.955)
+    88.89%
+      -webkit-transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+    100%
+      -webkit-transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+
+  @keyframes cloud-transform-keyframes
+    0%
+      transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+      animation-timing-function:  cubic-bezier(.455,.03,.515,.955)
+    44.44%
+      transform: translate(0px, -5px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+      animation-timing-function:  cubic-bezier(.455,.03,.515,.955)
+    88.89%
+      transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
+    100%
+      transform: translate(0px, 0px) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translate(-50%, -50%)
