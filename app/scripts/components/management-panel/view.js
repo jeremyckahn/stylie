@@ -1,12 +1,14 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
 
   ,template
 
@@ -28,7 +30,7 @@ define([
         this.updateSavedAnimationList(newList);
 
         if (opt_selectedAnimation) {
-          this.$loadSelector.val(opt_selectedAnimation);
+          this.$loadLocalSelector.val(opt_selectedAnimation);
         }
       }
     }
@@ -39,19 +41,19 @@ define([
        */
       'keydown .save-input': function (evt) {
         if (evt.which === 13) { // enter
-          this.$saveButton.click();
+          this.$saveLocalButton.click();
         }
       }
 
       ,'click .save': function () {
-        var newAnimatioName = this.$saveInput.val();
+        var newAnimatioName = this.$saveLocalInput.val();
         this.emit('userRequestSaveCurrentAnimation', newAnimatioName);
-        this.$loadSelector.val(newAnimatioName);
+        this.$loadLocalSelector.val(newAnimatioName);
       }
 
       ,'click .load': function () {
-        var currentlySelectedAnimation = this.$loadSelector.val();
-        this.$saveInput.val(currentlySelectedAnimation);
+        var currentlySelectedAnimation = this.$loadLocalSelector.val();
+        this.$saveLocalInput.val(currentlySelectedAnimation);
 
         if (currentlySelectedAnimation) {
           this.emit('userRequestLoadAnimation', currentlySelectedAnimation);
@@ -59,7 +61,7 @@ define([
       }
 
       ,'click .delete': function () {
-        var currentlySelectedAnimation = this.$loadSelector.val();
+        var currentlySelectedAnimation = this.$loadLocalSelector.val();
 
         if (currentlySelectedAnimation) {
           this.emit('userRequestDeleteAnimation', currentlySelectedAnimation);
@@ -75,6 +77,19 @@ define([
     }
 
     /**
+     * @override
+     */
+    ,getTemplateRenderData: function () {
+      var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
+
+      _.extend(renderData, {
+        isUserLoggedIn: this.lateralus.isUserLoggedIn()
+      });
+
+      return renderData;
+    }
+
+    /**
      * @param {Array.<string>} newList
      */
     ,updateSavedAnimationList: function (newList) {
@@ -86,7 +101,7 @@ define([
         $options.push(option);
       });
 
-      this.$loadSelector
+      this.$loadLocalSelector
         .empty()
         .append($options);
     }

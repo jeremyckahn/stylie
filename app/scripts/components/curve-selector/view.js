@@ -49,6 +49,9 @@ define([
       this.$el.val(currentValue);
     }
 
+    /**
+     * @override
+     */
     ,getTemplateRenderData: function () {
       var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
 

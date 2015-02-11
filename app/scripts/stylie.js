@@ -173,6 +173,13 @@ define([
   };
 
   /**
+   * @retrn {boolean}
+   */
+  fn.isUserLoggedIn = function () {
+    return !!this.model.get('username');
+  };
+
+  /**
    * @return {Object}
    */
   fn.getInitialKeyframeState = function () {

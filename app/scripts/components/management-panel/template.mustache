@@ -1,11 +1,28 @@
+{{#isUserLoggedIn}}
+<h1>Stylie Cloud <i class="glyphicon glyphicon-cloud"></i></h1>
 <label class="row">
   <span>Name this animation</span>
-  <input type="text" class="$saveInput save-input mid" value="My animation">
-  <button class="$saveButton save">Save</button>
+  <input type="text" class="$saveCloudInput save-input mid" value="My cloud animation">
+  <button class="$saveCloudButton save-cloud">Save</button>
 </label>
 <label class="row">
   <span>Load an animation</span>
-  <select class="$loadSelector"></select>
-  <button class="load">Load</button>
-  <button class="glyphicon glyphicon-remove delete" title="Delete the selected animation."></button>
+  <select class="$loadCloudSelector"></select>
+  <button class="load-cloud">Load</button>
+  <button class="glyphicon glyphicon-remove delete-cloud" title="Delete the selected animation from the cloud."></button>
+</label>
+{{/isUserLoggedIn}}
+{{#isUserLoggedIn}}
+<h1>Local animations</h1>
+{{/isUserLoggedIn}}
+<label class="row">
+  <span>Name this animation</span>
+  <input type="text" class="$saveLocalInput save-input mid" value="My animation">
+  <button class="$saveLocalButton save-local">Save</button>
+</label>
+<label class="row">
+  <span>Load an animation</span>
+  <select class="$loadLocalSelector"></select>
+  <button class="load-local">Load</button>
+  <button class="glyphicon glyphicon-remove delete-local" title="Delete the selected animation."></button>
 </label>
