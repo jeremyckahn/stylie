@@ -45,13 +45,13 @@ define([
         }
       }
 
-      ,'click .save': function () {
+      ,'click .save-local': function () {
         var newAnimatioName = this.$saveLocalInput.val();
         this.emit('userRequestSaveCurrentAnimation', newAnimatioName);
         this.$loadLocalSelector.val(newAnimatioName);
       }
 
-      ,'click .load': function () {
+      ,'click .load-local': function () {
         var currentlySelectedAnimation = this.$loadLocalSelector.val();
         this.$saveLocalInput.val(currentlySelectedAnimation);
 
