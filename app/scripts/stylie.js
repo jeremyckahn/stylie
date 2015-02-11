@@ -48,7 +48,10 @@ define([
       this.setInitialState();
     }
 
-    this.model.set('username', Cookies.get('username'));
+    this.model.set({
+      username: Cookies.get('username')
+      ,auth_token: Cookies.get('auth_token')
+    });
 
     this.shiftyComponent = this.addComponent(ShiftyComponent);
     this.rekapiComponent = this.addComponent(RekapiComponent);
@@ -275,6 +278,36 @@ define([
 
     // Persist app state to localStorage.
     this.model.trigger('change');
+  };
+
+  fn.logout = function () {
+    $.ajax(constant.API_URL + '/auth/logout', {
+      data: {
+        token: this.model.get('auth_token')
+      }
+
+      ,success: function () {
+        this.onLogoutSuccess();
+      }.bind(this)
+
+      ,error: function (jqXhr) {
+        //TODO: Show a message to the user explaining that something went
+        //wrong.
+        this.error(jqXhr);
+      }.bind(this)
+    });
+  };
+
+  fn.onLogoutSuccess = function () {
+    Cookies.set('username', '');
+    Cookies.set('auth_token', '');
+
+    this.model.set({
+      username: ''
+      ,auth_token: ''
+    });
+
+    window.location.reload();
   };
 
   return Stylie;

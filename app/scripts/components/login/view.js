@@ -42,6 +42,10 @@ define([
         this.$twitterLabel.text(constant.REDIRECTING_MESSAGE);
         window.location = constant.API_URL + '/auth/twitter';
       }
+
+      ,'click .logout button': function () {
+        this.lateralus.logout();
+      }
     }, baseProto.events)
 
     /**
