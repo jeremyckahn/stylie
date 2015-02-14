@@ -30,7 +30,7 @@ define([
         this.updateSavedAnimationList(newList);
 
         if (opt_selectedAnimation) {
-          this.$loadLocalSelector.val(opt_selectedAnimation);
+          this.$loadSelector.val(opt_selectedAnimation);
         }
       }
     }
@@ -41,19 +41,19 @@ define([
        */
       'keydown .save-input': function (evt) {
         if (evt.which === 13) { // enter
-          this.$saveLocalButton.click();
+          this.$saveButton.click();
         }
       }
 
-      ,'click .save-local': function () {
-        var newAnimatioName = this.$saveLocalInput.val();
+      ,'click .save': function () {
+        var newAnimatioName = this.$saveInput.val();
         this.emit('userRequestSaveCurrentAnimation', newAnimatioName);
-        this.$loadLocalSelector.val(newAnimatioName);
+        this.$loadSelector.val(newAnimatioName);
       }
 
-      ,'click .load-local': function () {
-        var currentlySelectedAnimation = this.$loadLocalSelector.val();
-        this.$saveLocalInput.val(currentlySelectedAnimation);
+      ,'click .load': function () {
+        var currentlySelectedAnimation = this.$loadSelector.val();
+        this.$saveInput.val(currentlySelectedAnimation);
 
         if (currentlySelectedAnimation) {
           this.emit('userRequestLoadAnimation', currentlySelectedAnimation);
@@ -61,7 +61,7 @@ define([
       }
 
       ,'click .delete': function () {
-        var currentlySelectedAnimation = this.$loadLocalSelector.val();
+        var currentlySelectedAnimation = this.$loadSelector.val();
 
         if (currentlySelectedAnimation) {
           this.emit('userRequestDeleteAnimation', currentlySelectedAnimation);
@@ -101,7 +101,7 @@ define([
         $options.push(option);
       });
 
-      this.$loadLocalSelector
+      this.$loadSelector
         .empty()
         .append($options);
     }
