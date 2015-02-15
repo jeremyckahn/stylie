@@ -1,5 +1,7 @@
 # Stylie - A CSS 3 animation tool
 
+[![Code Climate](https://codeclimate.com/github/jeremyckahn/stylie/badges/gpa.svg)](https://codeclimate.com/github/jeremyckahn/stylie)
+
 Stylie is a fun tool for easily creating CSS 3 animations. Quickly design your
 animation graphically, grab the generated CSS and go!  To learn how to use the
 app, either run it locally (see below) or go to
