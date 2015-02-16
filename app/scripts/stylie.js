@@ -176,7 +176,7 @@ define([
    * @retrn {boolean}
    */
   fn.isUserLoggedIn = function () {
-    return !!this.model.get('username');
+    return constant.HAS_SERVER;
   };
 
   /**

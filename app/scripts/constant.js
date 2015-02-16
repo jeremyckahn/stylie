@@ -14,5 +14,6 @@ define(function () {
     ,MODAL_OPACITY: 0.95
     ,API_URL: 'http://localhost:6660'
     ,REDIRECTING_MESSAGE: 'Redirecting...'
+    ,HAS_SERVER: true
   };
 });

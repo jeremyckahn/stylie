@@ -20,11 +20,7 @@ define([
     template: template
 
     ,events: {
-      'click .login': function () {
-        this.emit('userRequestToggleLoginModal');
-      }
-
-      ,'click .reset': function () {
+      'click .reset': function () {
         this.emit('userRequestResetAnimation');
       }
 

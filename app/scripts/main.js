@@ -54,9 +54,6 @@ require.config({
     name: 'stylie.component.help'
     ,location: 'scripts/components/help'
   }, {
-    name: 'stylie.component.login'
-    ,location: 'scripts/components/login'
-  }, {
     name: 'stylie.component.too-small-message'
     ,location: 'scripts/components/too-small-message'
   }, {
