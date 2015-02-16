@@ -175,8 +175,8 @@ define([
   /**
    * @retrn {boolean}
    */
-  fn.isUserLoggedIn = function () {
-    return constant.HAS_SERVER;
+  fn.hasApi = function () {
+    return constant.HAS_API;
   };
 
   /**

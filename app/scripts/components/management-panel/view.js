@@ -83,7 +83,7 @@ define([
       var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
 
       _.extend(renderData, {
-        isUserLoggedIn: this.lateralus.isUserLoggedIn()
+        hasApi: this.lateralus.hasApi()
       });
 
       return renderData;
