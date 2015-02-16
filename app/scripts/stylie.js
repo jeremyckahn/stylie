@@ -2,7 +2,6 @@ define([
 
   'underscore'
   ,'lateralus'
-  ,'cookies-js'
 
   ,'stylie.component.shifty'
   ,'stylie.component.rekapi'
@@ -16,7 +15,6 @@ define([
 
   _
   ,Lateralus
-  ,Cookies
 
   ,ShiftyComponent
   ,RekapiComponent
@@ -47,11 +45,6 @@ define([
     if (!model.keys().length) {
       this.setInitialState();
     }
-
-    this.model.set({
-      username: Cookies.get('username')
-      ,auth_token: Cookies.get('auth_token')
-    });
 
     this.shiftyComponent = this.addComponent(ShiftyComponent);
     this.rekapiComponent = this.addComponent(RekapiComponent);
