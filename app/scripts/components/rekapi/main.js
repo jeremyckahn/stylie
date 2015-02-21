@@ -3,6 +3,8 @@ define([
   'underscore'
   ,'lateralus'
 
+  ,'text!./templates/beacon-rule.mustache'
+
   ,'./models/actor'
 
   ,'./collections/keyframe-property'
@@ -13,6 +15,8 @@ define([
 
   _
   ,Lateralus
+
+  ,beaconRuleTemplate
 
   ,ActorModel
 
@@ -134,6 +138,7 @@ define([
       }
 
       var cssString = rekapi.renderer.toString(opts);
+      cssString += beaconRuleTemplate;
 
       if (needToAccountForOffset) {
         this.actorModel.cleanupAfterCssStringCreation(offset);
