@@ -39,6 +39,35 @@ define([
 
     ,tagName: 'li'
 
+    ,modelEvents: {
+      /**
+       * @param {KeyframePropertyModel} model
+       * @param {Object} options
+       * @param {boolean} options.changedByFormView
+       */
+      change: function (model, options) {
+        if (!options.changedByFormView) {
+          this.render();
+        }
+      }
+
+      /**
+       * @param {KeyframePropertyModel} model
+       * @param {Error} error
+       */
+      ,invalid: function (model, error) {
+        var invalidFields = JSON.parse(error.message.split('|')[1]);
+
+        invalidFields.forEach(function (invalidField) {
+          this['$' + invalidField].addClass(INVALID_CLASS);
+        }, this);
+      }
+
+      ,destroy: function () {
+        this.remove();
+      }
+    }
+
     ,events: {
       /**
        * @param {jQuery.Event} evt
@@ -113,10 +142,6 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
 
-      this.listenTo(this.model, 'change', this.onModelChange.bind(this));
-      this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
-      this.listenTo(this.model, 'destroy', this.onModelDestroy.bind(this));
-
       // Select the correct easing curve for each property, according to
       // this.model
       PROPERTY_RENDER_LIST.forEach(function (propertyObject) {
@@ -131,33 +156,6 @@ define([
           $select.val(this.model.get('easing_' + name));
         }
       }, this);
-    }
-
-    /**
-     * @param {KeyframePropertyModel} model
-     * @param {Object} options
-     * @param {boolean} options.changedByFormView
-     */
-    ,onModelChange: function (model, options) {
-      if (!options.changedByFormView) {
-        this.render();
-      }
-    }
-
-    /**
-     * @param {KeyframePropertyModel} model
-     * @param {Error} error
-     */
-    ,onModelInvalid: function (model, error) {
-      var invalidFields = JSON.parse(error.message.split('|')[1]);
-
-      invalidFields.forEach(function (invalidField) {
-        this['$' + invalidField].addClass(INVALID_CLASS);
-      }, this);
-    }
-
-    ,onModelDestroy: function () {
-      this.remove();
     }
 
     ,updateModelFromForm: function () {
