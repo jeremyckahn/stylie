@@ -27,6 +27,17 @@ define([
   var BezierizerComponentView = Base.extend({
     template: template
 
+    ,modelEvents: {
+      change: function () {
+        this.syncUiToModel();
+      }
+
+      ,invalid: function () {
+        this.lateralus.warn(this.model.validationError);
+        this.syncUiToModel();
+      }
+    }
+
     ,events: {
       'change .bezierizer-control': function () {
         this.model.set(this.getHandlePositions());
@@ -57,6 +68,11 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+
+      // this.bezierizer won't be set up until deferredInitialize is complete,
+      // so stub out the API that syncUiToModel depends on to prevent extra
+      // null checks after initialization.
+      this.bezierizer = { setHandlePositions: _.noop };
     }
 
     ,deferredInitialize: function () {
@@ -64,17 +80,6 @@ define([
       // because Bezierizer reads styles from the DOM which are only available
       // after the DOM has been built and rendered.
       this.bezierizer = new Bezierizer(this.$bezierizerControl[0]);
-      this.listenTo(this.model, 'change', this.onModelChange.bind(this));
-      this.listenTo(this.model, 'invalid', this.onModelInvalid.bind(this));
-      this.syncUiToModel();
-    }
-
-    ,onModelChange: function () {
-      this.syncUiToModel();
-    }
-
-    ,onModelInvalid: function () {
-      this.lateralus.warn(this.model.validationError);
       this.syncUiToModel();
     }
 
