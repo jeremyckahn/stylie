@@ -35,6 +35,23 @@ define([
       }
     }
 
+    ,modelEvents: {
+      /**
+       * @param {KeyframePropertyModel} model
+       * @param {Object} options
+       * @param {boolean} options.changedByCrosshairView
+       */
+      change: function (model, options) {
+        if (!options.changedByCrosshairView) {
+          this.render();
+        }
+      }
+
+      ,destroy: function () {
+        this.component.dispose();
+      }
+    }
+
     ,events: {
       drag: function () {
         this.setUiStateToModel();
@@ -52,8 +69,6 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
-      this.listenTo(this.model, 'change', this.onModelChange.bind(this));
-      this.listenTo(this.model, 'destroy', this.onModelDestroy.bind(this));
 
       this.$rotationControl
         .cubeletInit()
@@ -72,21 +87,6 @@ define([
 
       this.render();
       this.$el.css('display', '');
-    }
-
-    /**
-     * @param {KeyframePropertyModel} model
-     * @param {Object} options
-     * @param {boolean} options.changedByCrosshairView
-     */
-    ,onModelChange: function (model, options) {
-      if (!options.changedByCrosshairView) {
-        this.render();
-      }
-    }
-
-    ,onModelDestroy: function () {
-      this.component.dispose();
     }
 
     ,render: function () {
