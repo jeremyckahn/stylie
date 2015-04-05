@@ -97,23 +97,13 @@ define([
     }
 
     /**
-     * @return {boolean|undefined}
-     */
-    ,getIterations: function () {
-      var iterationValue = +this.$iterations.val();
-      return isNaN(iterationValue) ? undefined : iterationValue;
-    }
-
-    /**
      * @return {{
      *   isCentered: boolean,
-     *   iterations: boolean|undefined
      * }}
      */
     ,toJSON: function () {
       return {
         isCentered: this.$centerToPath.is(':checked')
-        ,iterations: this.getIterations()
       };
     }
   });

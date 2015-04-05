@@ -65,8 +65,14 @@ require.config({
     name: 'stylie.component.motion-panel'
     ,location: 'scripts/components/motion-panel'
   }, {
-    name: 'stylie.component.css-panel'
-    ,location: 'scripts/components/css-panel'
+    name: 'stylie.component.export-panel'
+    ,location: 'scripts/components/export-panel'
+  }, {
+    name: 'stylie.component.css-export-panel'
+    ,location: 'scripts/components/css-export-panel'
+  }, {
+    name: 'stylie.component.rekapi-export-panel'
+    ,location: 'scripts/components/rekapi-export-panel'
   }, {
     name: 'stylie.component.html-panel'
     ,location: 'scripts/components/html-panel'

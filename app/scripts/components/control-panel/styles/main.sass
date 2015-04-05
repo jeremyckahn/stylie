@@ -15,6 +15,15 @@
   width: 360px
   z-index: 20
 
+  p
+    line-height: 1.4em
+
+    &:first-child
+      margin-top: 0
+
+    &:last-child
+      margin-bottom: 0
+
   ul
     margin: 0
     padding: 0
@@ -57,6 +66,18 @@
   .tab-content
     padding: $input-spacing
 
+    a
+      &:active,
+      &:hover,
+      &:link,
+      &:visited
+        color: $chrome-link-color
+        font-weight: bold
+        text-decoration: none
+
+      &:hover
+        text-decoration: underline
+
     > .row:last-child
       padding-bottom: 0
 
@@ -82,7 +103,7 @@
     +text-based-input
     font-family: Monaco, monospace
     height: 12em
-    resize: none
+    resize: vertical
     width: $chrome-input-full-width
 
   select

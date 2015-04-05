@@ -8,7 +8,7 @@ define([
 
   ,'stylie.component.keyframes-panel'
   ,'stylie.component.motion-panel'
-  ,'stylie.component.css-panel'
+  ,'stylie.component.export-panel'
   ,'stylie.component.html-panel'
   ,'stylie.component.management-panel'
 
@@ -22,7 +22,7 @@ define([
 
   ,KeyframePanelComponent
   ,MotionPanelComponent
-  ,CssPanelComponent
+  ,ExportPanelComponent
   ,HtmlPanelComponent
   ,ManagementPanelComponent
 
@@ -45,8 +45,8 @@ define([
         el: this.view.$motionPanel
       });
 
-      this.cssPanelComponent = this.addComponent(CssPanelComponent, {
-        el: this.view.$cssPanel
+      this.exportPanelComponent = this.addComponent(ExportPanelComponent, {
+        el: this.view.$exportPanel
       });
 
       this.htmlPanelComponent = this.addComponent(HtmlPanelComponent, {
@@ -70,9 +70,9 @@ define([
      */
     ,getCssConfigObject: function () {
       var motionPanelJson = this.motionPanelComponent.toJSON();
-      var cssPanelJson = this.cssPanelComponent.toJSON();
+      var exportPanelJson = this.exportPanelComponent.toJSON();
 
-      return _.extend(motionPanelJson, cssPanelJson);
+      return _.extend(motionPanelJson, exportPanelJson);
     }
   });
 

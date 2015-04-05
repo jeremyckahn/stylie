@@ -116,7 +116,7 @@ define([
     this.model.set({
       savedAnimations: {}
       ,ui: {
-        cssOrientation: 'first-keyframe'
+        exportOrientation: 'first-keyframe'
         ,focusedControlPanelTab: ''
       }
     });
@@ -191,6 +191,13 @@ define([
    */
   fn.getCssConfigObject = function () {
     return this.containerComponent.controlPanelComponent.getCssConfigObject();
+  };
+
+  /**
+   * @return {Object}
+   */
+  fn.getJsExport = function () {
+    return this.rekapiComponent.getTimelineExportObject();
   };
 
   /**

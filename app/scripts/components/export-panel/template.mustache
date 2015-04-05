@@ -1,0 +1,24 @@
+<form class="$orientationForm orientation-form" action="">
+  <fieldset>
+    <p>Orient generated animation to:</p>
+    <label>
+      <input type="radio" name="orientation" value="first-keyframe"{{#orientToFirstKeyframe}}checked{{/orientToFirstKeyframe}}>
+      <span>First keyframe</span>
+    </label>
+    <label>
+      <input type="radio" name="orientation" value="top-left" {{^orientToFirstKeyframe}}checked{{/orientToFirstKeyframe}}>
+      <span>Top-left of container</span>
+    </label>
+  </fieldset>
+</form>
+<label class="row">
+  <span>Choose an export format</span>
+  <select class="export-format-selector">
+    <option value="css">CSS</option>
+    <option value="rekapi">Rekapi</option>
+  </select>
+</label>
+<ul class="$exportTypePanels export-control-containers">
+  <li class="$cssExportPanel" data-export-type="css"></li>
+  <li class="$rekapiExportPanel hide" data-export-type="rekapi"></li>
+</ul>

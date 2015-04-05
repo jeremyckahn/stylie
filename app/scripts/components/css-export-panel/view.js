@@ -26,49 +26,26 @@ define([
     ,{ id: 'w3', label: 'W3C' }
   ];
 
-  var CssPanelComponentView = Base.extend({
+  var CssExportPanelComponentView = Base.extend({
     template: template
 
     ,lateralusEvents: {
       timelineModified: function () {
-        if (this.$el.is(':visible')) {
-          this.renderCss();
-        }
+        this.renderCssIfVisible();
       }
 
-      /**
-       * @param {jQuery} $shownContent
-       */
-      ,tabShown: function ($shownContent) {
-        if ($shownContent.is(this.$el)) {
-          this.renderCss();
-        }
+      ,requestExportRender: function () {
+        this.renderCssIfVisible();
       }
     }
 
     ,events: {
-      /**
-       * @param {jQuery.Event} evt
-       */
-      'submit form': function (evt) {
-        evt.preventDefault();
-      }
-
-      ,'keyup .update-on-keyup': function () {
+      'keyup .update-on-keyup': function () {
         this.renderCss();
       }
 
       ,'change .update-on-change': function () {
         this.renderCss();
-      }
-
-      ,'change .orientation-form': function () {
-        var orientation = _.findWhere(
-            this.$orientationForm.serializeArray()
-            ,{ name: 'orientation' }
-          ).value;
-
-        this.setUserSelectedOrientation(orientation);
       }
     }
 
@@ -85,25 +62,23 @@ define([
       this.renderCss();
     }
 
+    /**
+     * @override
+     */
     ,getTemplateRenderData: function () {
       var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
-      var orientToFirstKeyframe =
-        this.lateralus.getUi('cssOrientation') === 'first-keyframe';
 
       _.extend(renderData, {
         vendors: VENDORS
-        ,orientToFirstKeyframe: orientToFirstKeyframe
       });
 
       return renderData;
     }
 
-    /**
-     * @param {string} orientation "first-keyframe" or "top-left"
-     */
-    ,setUserSelectedOrientation: function (orientation) {
-      this.lateralus.setUi('cssOrientation', orientation);
-      this.renderCss();
+    ,renderCssIfVisible: function () {
+      if (this.$el.is(':visible')) {
+        this.renderCss();
+      }
     }
 
     ,renderCss: function () {
@@ -131,10 +106,19 @@ define([
     }
 
     /**
+     * @return {boolean|undefined}
+     */
+    ,getIterations: function () {
+      var iterationValue = +this.$iterations.val();
+      return isNaN(iterationValue) ? undefined : iterationValue;
+    }
+
+    /**
      * @return {{
      *   name: string,
      *   fps: number,
-     *   vendors: Array.<string>
+     *   vendors: Array.<string>,
+     *   iterations: boolean|undefined
      * }}
      */
     ,toJSON: function () {
@@ -142,9 +126,10 @@ define([
         name: this.$className.val()
         ,fps: +this.$cssSizeOutput.val()
         ,vendors: this.getSelectedVendorList()
+        ,iterations: this.getIterations()
       };
     }
   });
 
-  return CssPanelComponentView;
+  return CssExportPanelComponentView;
 });

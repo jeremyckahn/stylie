@@ -144,10 +144,10 @@ define([
     }
 
     /**
-     * Helper method for RekapiComponent#getCssString.
+     * Helper method for RekapiComponent#applyOrientationToExport.
      * @param {{ x: number, y: number }} offset
      */
-    ,prepareForCssStringCreation: function (offset) {
+    ,prepareForExport: function (offset) {
       this.transformPropertyCollection.each(function (model) {
         ['x', 'y'].forEach(function (property) {
           model.set(
@@ -161,10 +161,10 @@ define([
     }
 
     /**
-     * Helper method for RekapiComponent#getCssString.
+     * Helper method for RekapiComponent#applyOrientationToExport.
      * @param {{ x: number, y: number }} offset
      */
-    ,cleanupAfterCssStringCreation: function (offset) {
+    ,cleanupAfterExport: function (offset) {
       this.transformPropertyCollection.each(function (model) {
         ['x', 'y'].forEach(function (property) {
           model.set(

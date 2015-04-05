@@ -2,6 +2,10 @@
   <span>Class name</span>
   <input class="$className wide update-on-keyup" type="text" value="stylie">
 </label>
+<label class="row" title="Preview is always &quot;infinite&quot;">
+  <span>Iterations</span>
+  <input class="$iterations iterations update-on-change update-on-keyup wide" type="text" value="infinite">
+</label>
 <fieldset class="vendors">
   <p>Vendors:</p>
   {{#vendors}}
@@ -11,19 +15,6 @@
   </label>
   {{/vendors}}
 </fieldset>
-<form class="$orientationForm orientation-form" action="">
-  <fieldset>
-    <p>Orient generated CSS to:</p>
-    <label>
-      <input type="radio" name="orientation" value="first-keyframe"{{#orientToFirstKeyframe}}checked{{/orientToFirstKeyframe}}>
-      <span>First keyframe</span>
-    </label>
-    <label>
-      <input type="radio" name="orientation" value="top-left" {{^orientToFirstKeyframe}}checked{{/orientToFirstKeyframe}}>
-      <span>Top-left of container</span>
-    </label>
-  </fieldset>
-</form>
 <fieldset class="row range-container">
   <label title="Drag to the left to generate a smaller CSS output.  Drag to the right to improve animation quality.">
     <span>Output size</span>

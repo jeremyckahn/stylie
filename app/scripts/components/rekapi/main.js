@@ -127,24 +127,44 @@ define([
      * @return {string}
      */
     ,getCssString: function (opts) {
-      var rekapi = this.rekapi;
+      return this.applyOrientationToExport(function () {
+        var cssString = this.rekapi.renderer.toString(opts);
+        cssString += beaconRuleTemplate;
+
+        return cssString;
+      });
+    }
+
+    /**
+     * @return {Object}
+     */
+    ,getTimelineExportObject: function () {
+      return this.applyOrientationToExport(function () {
+        return this.rekapi.exportTimeline();
+      });
+    }
+
+    /**
+     * @param {Function} exportProcessor
+     * @return {*}
+     */
+    ,applyOrientationToExport: function (exportProcessor) {
       var needToAccountForOffset =
-        this.lateralus.getUi('cssOrientation') === 'first-keyframe';
+        this.lateralus.getUi('exportOrientation') === 'first-keyframe';
 
       var offset = this.actorModel.getFirstKeyframeOffset();
 
       if (needToAccountForOffset) {
-        this.actorModel.prepareForCssStringCreation(offset);
+        this.actorModel.prepareForExport(offset);
       }
 
-      var cssString = rekapi.renderer.toString(opts);
-      cssString += beaconRuleTemplate;
+      var exportedAnimation = exportProcessor.call(this);
 
       if (needToAccountForOffset) {
-        this.actorModel.cleanupAfterCssStringCreation(offset);
+        this.actorModel.cleanupAfterExport(offset);
       }
 
-      return cssString;
+      return exportedAnimation;
     }
 
     /**
