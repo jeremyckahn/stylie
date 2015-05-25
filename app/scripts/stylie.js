@@ -181,44 +181,6 @@ define([
   };
 
   /**
-   * @return {{
-   *   name: string,
-   *   fps: number,
-   *   vendors: Array.<string>,
-   *   isCentered: boolean,
-   *   iterations: boolean|undefined
-   * }}
-   */
-  fn.getCssConfigObject = function () {
-    return this.containerComponent.controlPanelComponent.getCssConfigObject();
-  };
-
-  /**
-   * @return {Object}
-   */
-  fn.getJsExport = function () {
-    return this.rekapiComponent.getTimelineExportObject();
-  };
-
-  /**
-   * @return {ActorModel}
-   */
-  fn.getCurrentActorModel = function () {
-    return this.rekapiComponent.actorModel;
-  };
-
-  /**
-   * @return {string}
-   */
-  fn.getCurrentActorHtml = function () {
-    // TODO: Find a less byzantine way to do this.
-    return this.containerComponent
-      .previewComponent
-        .actorContainerComponent
-          .getActorHtml();
-  };
-
-  /**
    * @return {Array.<string>}
    */
   fn.getSavedAnimationDisplayList = function () {

@@ -52,7 +52,8 @@ define([
     }
 
     ,renderJson: function () {
-      var exportString = JSON.stringify(this.lateralus.getJsExport(), null, 2);
+      var exportString =
+        JSON.stringify(this.collectOne('timelineExport'), null, 2);
       this.$generatedJs.val(exportString);
     }
   });

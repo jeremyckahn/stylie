@@ -32,6 +32,24 @@ define([
   var RekapiComponent = Base.extend({
     name: 'rekapi'
 
+    ,provide: {
+      /**
+       * @return {Object}
+       */
+      timelineExport: function () {
+        return this.applyOrientationToExport(function () {
+          return this.rekapi.exportTimeline();
+        });
+      }
+
+      /**
+       * @return {ActorModel}
+       */
+      ,currentActorModel: function () {
+        return this.actorModel;
+      }
+    }
+
     ,lateralusEvents: {
       /**
        * @param {BezierizerComponentModel} bezierComponentModel
@@ -132,15 +150,6 @@ define([
         cssString += beaconRuleTemplate;
 
         return cssString;
-      });
-    }
-
-    /**
-     * @return {Object}
-     */
-    ,getTimelineExportObject: function () {
-      return this.applyOrientationToExport(function () {
-        return this.rekapi.exportTimeline();
       });
     }
 

@@ -21,6 +21,15 @@ define([
   var ActorContainerComponentView = Base.extend({
     template: template
 
+    ,provide: {
+      /**
+       * @return {string}
+       */
+      actorHtml: function () {
+        return $.trim(this.$actorWrapper.html());
+      }
+    }
+
     ,lateralusEvents: {
       /**
        * @param {boolean} isCentered
@@ -42,7 +51,10 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
-      this.actorModel = this.lateralus.getCurrentActorModel();
+
+      // TODO: This should be emitting a context, not collecting an object and
+      // augmenting it.
+      this.actorModel = this.collectOne('currentActorModel');
       this.actorModel.actor.context = this.$actorWrapper[0];
     }
 
@@ -51,13 +63,6 @@ define([
      */
     ,setCenteringClass: function (isCentered) {
       this.$actorWrapper[isCentered ? 'addClass' : 'removeClass']('centered');
-    }
-
-    /**
-     * @return {string}
-     */
-    ,getActorHtml: function () {
-      return $.trim(this.$actorWrapper.html());
     }
   });
 

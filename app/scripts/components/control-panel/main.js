@@ -36,6 +36,24 @@ define([
     ,View: View
     ,template: template
 
+    ,provide: {
+      /**
+       * @return {{
+       *   name: string,
+       *   fps: number,
+       *   vendors: Array.<string>,
+       *   isCentered: boolean,
+       *   iterations: boolean|undefined
+       * }}
+       */
+      cssConfigObject: function () {
+        var motionPanelJson = this.motionPanelComponent.toJSON();
+        var exportPanelJson = this.exportPanelComponent.toJSON();
+
+        return _.extend(motionPanelJson, exportPanelJson);
+      }
+    }
+
     ,initialize: function () {
       this.addComponent(KeyframePanelComponent, {
         el: this.view.$keyframesPanel
@@ -57,22 +75,6 @@ define([
           this.addComponent(ManagementPanelComponent, {
         el: this.view.$managementPanel
       });
-    }
-
-    /**
-     * @return {{
-     *   name: string,
-     *   fps: number,
-     *   vendors: Array.<string>,
-     *   isCentered: boolean,
-     *   iterations: boolean|undefined
-     * }}
-     */
-    ,getCssConfigObject: function () {
-      var motionPanelJson = this.motionPanelComponent.toJSON();
-      var exportPanelJson = this.exportPanelComponent.toJSON();
-
-      return _.extend(motionPanelJson, exportPanelJson);
     }
   });
 

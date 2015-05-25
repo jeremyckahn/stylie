@@ -95,7 +95,7 @@ define([
       }
 
       keyframePropertyAttributes.isCentered =
-        this.lateralus.getCssConfigObject().isCentered;
+        this.collectOne('cssConfigObject').isCentered;
 
       // Add the model silently here, the "add" event is fired explicitly later
       // in this function.

@@ -82,7 +82,7 @@ define([
     }
 
     ,renderCss: function () {
-      var cssOpts = this.lateralus.getCssConfigObject();
+      var cssOpts = this.collectOne('cssConfigObject');
 
       var css = this.lateralus.rekapiComponent.getCssString(cssOpts);
       this.$generatedCss.val(css);

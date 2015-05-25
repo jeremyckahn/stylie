@@ -33,7 +33,7 @@ define([
     }
 
     ,deferredInitialize: function () {
-      this.$html.html(this.lateralus.getCurrentActorHtml());
+      this.$html.html(this.collectOne('actorHtml'));
     }
   });
 
