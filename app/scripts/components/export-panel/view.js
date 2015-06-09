@@ -78,7 +78,7 @@ define([
     ,getTemplateRenderData: function () {
       var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
       var orientToFirstKeyframe =
-        this.lateralus.getUi('exportOrientation') === 'first-keyframe';
+        this.lateralus.model.getUi('exportOrientation') === 'first-keyframe';
 
       _.extend(renderData, {
         orientToFirstKeyframe: orientToFirstKeyframe
@@ -91,7 +91,7 @@ define([
      * @param {string} orientation "first-keyframe" or "top-left"
      */
     ,setUserSelectedOrientation: function (orientation) {
-      this.lateralus.setUi('exportOrientation', orientation);
+      this.lateralus.model.setUi('exportOrientation', orientation);
       this.emit('requestExportRender');
     }
 

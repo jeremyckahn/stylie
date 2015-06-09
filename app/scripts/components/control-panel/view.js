@@ -85,7 +85,7 @@ define([
      * @param {jQuery} $shownTab
      */
     ,onTabShown: function ($shownTab) {
-      this.lateralus.setUi(
+      this.lateralus.model.setUi(
         'focusedControlPanelTab', $shownTab.data('tabName'));
     }
 
@@ -108,7 +108,7 @@ define([
     }
 
     ,selectTabFromLocalStorage: function () {
-      var focusedTabName = this.lateralus.getUi('focusedControlPanelTab');
+      var focusedTabName = this.lateralus.model.getUi('focusedControlPanelTab');
 
       if (focusedTabName) {
         var $focusedTab = this.$tabsContainer.children()

@@ -7,6 +7,7 @@ define([
   ,'stylie.component.rekapi'
   ,'stylie.component.container'
 
+  ,'./model'
   ,'./mixins/local-storage-model'
 
   ,'./constant'
@@ -20,6 +21,7 @@ define([
   ,RekapiComponent
   ,ContainerComponent
 
+  ,StylieModel
   ,localStorageMixin
 
   ,constant
@@ -38,20 +40,14 @@ define([
 
     this.initHacks();
 
-    var model = this.model;
-    model.localStorageId = 'stylieData';
-    model.mixin(localStorageMixin);
-
-    if (!model.keys().length) {
-      this.setInitialState();
-    }
-
     this.shiftyComponent = this.addComponent(ShiftyComponent);
     this.rekapiComponent = this.addComponent(RekapiComponent);
     this.containerComponent = this.addComponent(ContainerComponent);
 
     this.shiftyComponent.addNewCurve();
     _.defer(this.deferredInitialize.bind(this));
+  }, {
+    Model: StylieModel
   });
 
   var fn = Stylie.prototype;
@@ -110,16 +106,6 @@ define([
       state: this.getInitialKeyframeState()
     });
     actorModel.addNewKeyframe();
-  };
-
-  fn.setInitialState = function () {
-    this.model.set({
-      savedAnimations: {}
-      ,ui: {
-        exportOrientation: 'first-keyframe'
-        ,focusedControlPanelTab: ''
-      }
-    });
   };
 
   fn.lateralusEvents = {
@@ -226,25 +212,6 @@ define([
     this.model.trigger('change');
 
     this.emit('savedAnimationListUpdated', this.getSavedAnimationDisplayList());
-  };
-
-  /**
-   * @param {string} name
-   * @return {*}
-   */
-  fn.getUi = function (name) {
-    return this.model.get('ui')[name];
-  };
-
-  /**
-   * @param {string} name
-   * @param {*} value
-   */
-  fn.setUi = function (name, value) {
-    this.model.attributes.ui[name] = value;
-
-    // Persist app state to localStorage.
-    this.model.trigger('change');
   };
 
   return Stylie;

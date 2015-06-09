@@ -159,7 +159,7 @@ define([
      */
     ,applyOrientationToExport: function (exportProcessor) {
       var needToAccountForOffset =
-        this.lateralus.getUi('exportOrientation') === 'first-keyframe';
+        this.lateralus.model.getUi('exportOrientation') === 'first-keyframe';
 
       var offset = this.actorModel.getFirstKeyframeOffset();
 
