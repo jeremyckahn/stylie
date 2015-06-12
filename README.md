@@ -12,7 +12,7 @@ manual.
 
 Requirements:
 
-* Node[NodeJS](http://nodejs.org/)/NPM,
+* [NodeJS](http://nodejs.org/)/NPM,
 * [Bower](http://bower.io/) (version 1.0 or above)
 * [Grunt](http://gruntjs.com/)
 * [Sass](http://sass-lang.com/) and [Compass](http://compass-style.org/)
