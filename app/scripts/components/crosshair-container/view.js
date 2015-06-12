@@ -24,8 +24,11 @@ define([
     template: template
 
     ,lateralusEvents: {
-      userRequestUpdateShowPathSetting: function () {
-        this.$el.toggleClass('transparent');
+      /**
+       * @param {boolean} showPath
+       */
+      userRequestUpdateShowPathSetting: function (showPath) {
+        this.$el[showPath ? 'removeClass' : 'addClass']('transparent');
       }
 
       /**
@@ -49,6 +52,10 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+
+      if (!this.lateralus.model.getUi('showPath')) {
+        this.$el.addClass('transparent');
+      }
     }
 
     /**

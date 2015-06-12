@@ -33,8 +33,11 @@ define([
     template: template
 
     ,lateralusEvents: {
-      userRequestUpdateShowPathSetting: function () {
-        this.$el.toggleClass('transparent');
+      /**
+       * @param {boolean} showPath
+       */
+      userRequestUpdateShowPathSetting: function (showPath) {
+        this.$el[showPath ? 'removeClass' : 'addClass']('transparent');
         this.render();
       }
 
@@ -52,6 +55,11 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
       this.context = this.$el[0].getContext('2d');
+
+      if (!this.lateralus.model.getUi('showPath')) {
+        this.$el.addClass('transparent');
+      }
+
       $win.on('resize', _.bind(this.onWindowResize, this));
     }
 

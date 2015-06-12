@@ -1,15 +1,29 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
   ,'./mixins/local-storage-model'
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
   ,localStorageMixin
 
 ) {
   'use strict';
+
+  var INITIAL_STATE = {
+      savedAnimations: {}
+      ,ui: {
+        exportOrientation: 'first-keyframe'
+        ,focusedControlPanelTab: ''
+        ,showPath: true
+        ,centerToPath: true
+        ,cssSize: 30
+        ,selectedVendors: ['w3']
+      }
+    };
 
   var StylieModel = Lateralus.Model.extend({
     localStorageId: 'stylieData'
@@ -19,7 +33,9 @@ define([
       // directly onto StylieModel's prototype.
       this.mixin(localStorageMixin);
 
-      if (!this.keys().length) {
+      if (this.keys().length) {
+        this.retrofitUiData();
+      } else {
         this.setInitialState();
       }
     }
@@ -27,13 +43,16 @@ define([
     ,setInitialState: function () {
       // Call .set() directly instead of leveraging Backbone.Model#defaults to
       // prevent shared prototype references.
-      this.set({
-        savedAnimations: {}
-        ,ui: {
-          exportOrientation: 'first-keyframe'
-          ,focusedControlPanelTab: ''
-        }
-      });
+      this.set(INITIAL_STATE);
+    }
+
+    /**
+     * Some ui keys were added at different times in project history, so ui
+     * data must be partially, retroactively re-initialized to prevent corrupt
+     * UI state.
+     */
+    ,retrofitUiData: function () {
+      _.defaults(this.attributes.ui, INITIAL_STATE.ui);
     }
 
     /**

@@ -33,6 +33,7 @@ define([
 
     ,initialize: function () {
       this.on('change', this.onChange, this);
+      this.setCenteringRules(this.lateralus.model.getUi('centerToPath'));
     }
 
     /**

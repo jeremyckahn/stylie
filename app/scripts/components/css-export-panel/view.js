@@ -47,6 +47,33 @@ define([
       ,'change .update-on-change': function () {
         this.renderCss();
       }
+
+      /**
+       * @param {jQuery.Event} evt
+       */
+      ,'change .vendors [type=checkbox]': function (evt) {
+        var $target = $(evt.target);
+        var vendor = $target.data('vendor');
+        var selectedVendors =
+          this.lateralus.model.getUi('selectedVendors').slice();
+
+        if ($target.is(':checked')) {
+          selectedVendors.push(vendor);
+        } else {
+          selectedVendors = _.without(selectedVendors, vendor);
+        }
+
+        this.lateralus.model.setUi('selectedVendors', selectedVendors);
+      }
+
+      /**
+       * @param {jQuery.Event} evt
+       */
+      ,'change .css-size-output': function (evt) {
+        var $target = $(evt.target);
+        var val = $target.val();
+        this.lateralus.model.setUi('cssSize', val);
+      }
     }
 
     /**
@@ -55,7 +82,10 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
 
-      this.$w3Checkbox.prop('checked', true);
+      this.lateralus.model.getUi('selectedVendors').forEach(
+          function (selectedVendor) {
+        this['$' + selectedVendor + 'Checkbox'].prop('checked', true);
+      }, this);
     }
 
     ,deferredInitialize: function () {
@@ -70,7 +100,7 @@ define([
 
       _.extend(renderData, {
         vendors: VENDORS
-      });
+      }, this.lateralus.model.get('ui'));
 
       return renderData;
     }

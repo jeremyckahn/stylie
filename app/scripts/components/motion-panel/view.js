@@ -56,17 +56,15 @@ define([
       }
 
       ,'change .show-path': function () {
-        this.emit(
-          'userRequestUpdateShowPathSetting'
-          ,this.$showPath.is(':checked')
-        );
+        var showPath = this.$showPath.is(':checked');
+        this.lateralus.model.setUi('showPath', showPath);
+        this.emit('userRequestUpdateShowPathSetting', showPath);
       }
 
       ,'change .center-to-path': function () {
-        this.emit(
-          'userRequestUpdateCenteringSetting'
-          ,this.$centerToPath.is(':checked')
-        );
+        var centerToPath = this.$centerToPath.is(':checked');
+        this.lateralus.model.setUi('centerToPath', centerToPath);
+        this.emit('userRequestUpdateCenteringSetting', centerToPath);
       }
 
       ,'change .curve-selector': function () {
@@ -83,6 +81,17 @@ define([
         el: this.$curveSelector
         ,onlyShowCustomCurves: true
       });
+    }
+
+    /**
+     * @override
+     */
+    ,getTemplateRenderData: function () {
+      var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
+
+      _.extend(renderData, this.lateralus.model.get('ui'));
+
+      return renderData;
     }
 
     /**

@@ -56,6 +56,7 @@ define([
       // augmenting it.
       this.actorModel = this.collectOne('currentActorModel');
       this.actorModel.actor.context = this.$actorWrapper[0];
+      this.setCenteringClass(this.lateralus.model.getUi('centerToPath'));
     }
 
     /**
