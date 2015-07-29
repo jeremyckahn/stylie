@@ -35,7 +35,6 @@ define([
   };
 
   var UP_EVENT_KEY_MAP = {
-    SHIFT: 'userRequestEndRotationEditMode'
   };
 
   var KeybindingsComponent = Base.extend({
