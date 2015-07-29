@@ -42,6 +42,10 @@ define([
       ,'mousewheel input[type=number]': function (evt) {
         $(evt.target).change();
       }
+
+      ,'click .mode-toggles .rotation': function () {
+        this.emit('userRequestToggleRotationEditMode');
+      }
     }
 
     /**

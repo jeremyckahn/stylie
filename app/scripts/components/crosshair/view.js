@@ -26,12 +26,12 @@ define([
     template: template
 
     ,lateralusEvents: {
-      userRequestStartRotationEditMode: function () {
-        this.startRotationEditMode();
-      }
-
-      ,userRequestEndRotationEditMode: function () {
-        this.endRotationEditMode();
+      userRequestToggleRotationEditMode: function () {
+        if (this.isRotationModeEnabled) {
+          this.disableRotationEditMode();
+        } else {
+          this.enableRotationEditMode();
+        }
       }
     }
 
@@ -69,6 +69,7 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+      this.isRotationModeEnabled = false;
 
       this.$rotationControl
         .cubeletInit()
@@ -140,12 +141,14 @@ define([
       });
     }
 
-    ,startRotationEditMode: function () {
+    ,enableRotationEditMode: function () {
+      this.isRotationModeEnabled = true;
       this.$el.dragonDisable();
       this.$rotationControl.cubeletShow();
     }
 
-    ,endRotationEditMode: function () {
+    ,disableRotationEditMode: function () {
+      this.isRotationModeEnabled = false;
       this.$el.dragonEnable();
       this.$rotationControl.cubeletHide();
     }

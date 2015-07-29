@@ -28,9 +28,9 @@ define([
     ,H: 'userRequestToggleHelpModal'
     ,K: 'userRequestNewKeyframe'
     ,P: 'userRequestUpdateCenteringSettingViaKeybinding'
+    ,R: 'userRequestToggleRotationEditMode'
     ,T: 'userRequestToggleScrubber'
     ,ESC: 'userRequestCloseModal'
-    ,SHIFT: 'userRequestStartRotationEditMode'
     ,SPACE: 'userRequestTogglePreviewPlayback'
   };
 
