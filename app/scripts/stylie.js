@@ -2,6 +2,7 @@ define([
 
   'underscore'
   ,'lateralus'
+  ,'keydrown'
 
   ,'stylie.component.shifty'
   ,'stylie.component.rekapi'
@@ -16,6 +17,7 @@ define([
 
   _
   ,Lateralus
+  ,kd
 
   ,ShiftyComponent
   ,RekapiComponent
@@ -37,6 +39,8 @@ define([
   var Stylie = Lateralus.beget(function () {
     Lateralus.apply(this, arguments);
     this.hasInitialized = false;
+
+    kd.run(kd.tick);
 
     this.initHacks();
 

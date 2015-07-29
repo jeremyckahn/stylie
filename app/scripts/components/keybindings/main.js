@@ -41,9 +41,6 @@ define([
     name: 'keybindings'
 
     ,initialize: function () {
-      kd.run(function () {
-        kd.tick();
-      });
 
       this.bindEventMapToKeyEvent('press', PRESS_EVENT_KEY_MAP);
       this.bindEventMapToKeyEvent('up', UP_EVENT_KEY_MAP);
