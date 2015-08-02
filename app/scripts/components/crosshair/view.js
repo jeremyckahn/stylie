@@ -2,6 +2,7 @@ define([
 
   'underscore'
   ,'lateralus'
+  ,'keydrown'
 
   ,'text!./template.mustache'
 
@@ -13,6 +14,7 @@ define([
 
   _
   ,Lateralus
+  ,kd
 
   ,template
 
@@ -33,6 +35,32 @@ define([
           this.enableRotationEditMode();
         }
       }
+
+      /**
+       * @param {{
+       *   x: number,
+       *   y: number,
+       *   rotationX: number,
+       *   rotationY: number,
+       *   rotationZ: number,
+       *   scale: number
+       * }} diff
+       */
+      ,moveSelectedCrosshairByDiff: function (diff) {
+        if (this.isPrimarySelectedCrosshair || !this.model.get('isSelected')) {
+          return;
+        }
+
+        var attrs = this.model.toJSON();
+        this.model.set({
+          x: attrs.x + diff.x
+          ,y: attrs.y + diff.y
+          ,rotationX: attrs.rotationX + diff.rotationX
+          ,rotationY: attrs.rotationY + diff.rotationY
+          ,rotationZ: attrs.rotationZ + diff.rotationZ
+          ,scale: attrs.scale + diff.scale
+        });
+      }
     }
 
     ,modelEvents: {
@@ -47,6 +75,14 @@ define([
         }
       }
 
+      /**
+       * @param {KeyframePropertyModel} model
+       * @param {boolean} isSelected
+       */
+      ,'change:isSelected': function (model, isSelected) {
+        this.$el[isSelected ? 'addClass' : 'removeClass']('selected');
+      }
+
       ,destroy: function () {
         this.component.dispose();
       }
@@ -55,6 +91,12 @@ define([
     ,events: {
       drag: function () {
         this.setUiStateToModel();
+      }
+
+      ,click: function () {
+        if (kd.SHIFT.isDown()) {
+          this.model.set('isSelected', !this.model.get('isSelected'));
+        }
       }
 
       ,'change .rotation-control': function () {
@@ -70,6 +112,7 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
       this.isRotationModeEnabled = false;
+      this.isPrimarySelectedCrosshair = false;
 
       this.$rotationControl
         .cubeletInit()
@@ -139,6 +182,23 @@ define([
       }, {
         changedByCrosshairView: true
       });
+
+      var previousAttributes = this.model.previousAttributes();
+      var attrs = this.model.toJSON();
+      var diff = {
+        x: attrs.x - previousAttributes.x
+        ,y: attrs.y - previousAttributes.y
+        ,rotationX: attrs.rotationX - previousAttributes.rotationX
+        ,rotationY: attrs.rotationY - previousAttributes.rotationY
+        ,rotationZ: attrs.rotationZ - previousAttributes.rotationZ
+        ,scale: attrs.scale - previousAttributes.scale
+      };
+
+      if (this.model.get('isSelected')) {
+        this.isPrimarySelectedCrosshair = true;
+        this.emit('moveSelectedCrosshairByDiff', diff);
+        this.isPrimarySelectedCrosshair = false;
+      }
     }
 
     ,enableRotationEditMode: function () {

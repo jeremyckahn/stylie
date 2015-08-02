@@ -34,3 +34,55 @@ $offset-center-point: $half-crosshair-box-size - $half-crosshair-dashmark-width
     left: $half-crosshair-box-size - 1px
     position: absolute
     top: $half-crosshair-box-size - 1px
+
+  &:before
+    border-radius: 50%
+    border: solid 4px #fff
+    content: ''
+    display: block
+    height: 150%
+    left: calc(-25% - 4px)
+    opacity: .5
+    position: relative
+    top: calc(-25% - 4px)
+    visibility: hidden
+    width: 150%
+
+    -moz-transform: scale(1)
+    -moz-animation-name: selected-transform-keyframes
+    -moz-animation-duration: 3500ms
+    -moz-animation-fill-mode: forwards
+    -moz-animation-iteration-count: infinite
+    -moz-animation-timing-function: $select-loupe-curve
+    -webkit-transform: scale(1)
+    -webkit-animation-name: selected-transform-keyframes
+    -webkit-animation-duration: 3500ms
+    -webkit-animation-fill-mode: forwards
+    -webkit-animation-iteration-count: infinite
+    -webkit-animation-timing-function: $select-loupe-curve
+    transform: scale(1)
+    animation-name: selected-transform-keyframes
+    animation-duration: 3500ms
+    animation-fill-mode: forwards
+    animation-iteration-count: infinite
+    animation-timing-function: $select-loupe-curve
+
+  &.selected:before
+    visibility: visible
+
+  @-moz-keyframes selected-transform-keyframes
+    50%
+      -moz-transform: scale($select-loupe-scale)
+
+  @-webkit-keyframes selected-transform-keyframes
+    50%
+      -webkit-transform: scale($select-loupe-scale)
+
+  @keyframes selected-transform-keyframes
+    50%
+      transform: scale($select-loupe-scale)
+
+  .keyframe-selection-mode-enabled &,
+  .keyframe-selection-mode-enabled & .dashmark-container
+    // !important is necessary for overriding inline style from $.fn.dragon
+    cursor: pointer !important

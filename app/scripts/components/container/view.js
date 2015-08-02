@@ -46,6 +46,10 @@ define([
       ,'click .mode-toggles .rotation': function () {
         this.emit('userRequestToggleRotationEditMode');
       }
+
+      ,'focus input': function () {
+        this.emit('userRequestDisableKeyframeSelection');
+      }
     }
 
     /**

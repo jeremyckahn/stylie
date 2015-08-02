@@ -45,6 +45,13 @@ define([
       ,easing_rotationY: 'linear'
       ,easing_rotationZ: 'linear'
       ,isCentered: false
+      ,isSelected: false
+    }
+
+    ,lateralusEvents: {
+      userRequestDeselectAllKeyframes: function () {
+        this.set('isSelected', false);
+      }
     }
 
     ,initialize: function (attributes) {
@@ -54,6 +61,8 @@ define([
         this.setEasingFromString(attributes.easing);
         this.unset('easing', { silent: true });
       }
+
+      this._previousAttributes = _.clone(this.attributes);
 
       this.on('change', this.onChange.bind(this));
       this.on('remove', this.onRemove.bind(this));

@@ -96,6 +96,7 @@ define([
 
       keyframePropertyAttributes.isCentered =
         this.collectOne('cssConfigObject').isCentered;
+      keyframePropertyAttributes.isSelected = false;
 
       // Add the model silently here, the "add" event is fired explicitly later
       // in this function.

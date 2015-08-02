@@ -30,44 +30,49 @@ define([
     ,P: 'userRequestUpdateCenteringSettingViaKeybinding'
     ,R: 'userRequestToggleRotationEditMode'
     ,T: 'userRequestToggleScrubber'
-    ,ESC: 'userRequestCloseModal'
+    ,ESC: ['userRequestCloseModal', 'userRequestDeselectAllKeyframes']
+    ,SHIFT: 'userRequestEnableKeyframeSelection'
     ,SPACE: 'userRequestTogglePreviewPlayback'
   };
 
   var UP_EVENT_KEY_MAP = {
+    SHIFT: 'userRequestDisableKeyframeSelection'
   };
 
   var KeybindingsComponent = Base.extend({
     name: 'keybindings'
 
     ,initialize: function () {
-
-      this.bindEventMapToKeyEvent('press', PRESS_EVENT_KEY_MAP);
-      this.bindEventMapToKeyEvent('up', UP_EVENT_KEY_MAP);
+      this.bindEventMapToKeyEvents('press', PRESS_EVENT_KEY_MAP);
+      this.bindEventMapToKeyEvents('up', UP_EVENT_KEY_MAP);
     }
 
     /**
      * @param {string} keyEventName
      * @param {Object.<string>} map
      */
-    ,bindEventMapToKeyEvent: function (keyEventName, map) {
-      _.each(map, function (stylieEventName, keyName) {
+    ,bindEventMapToKeyEvents: function (keyEventName, map) {
+      _.each(map, function (stylieEventNames, keyName) {
         kd[keyName][keyEventName](
-          this.requestEvent.bind(this, stylieEventName));
+          this.requestEvent.bind(this, stylieEventNames));
       }, this);
     }
 
     /**
-     * @param {string} eventName
+     * @param {string|Array.<string>} eventNames
      */
-    ,requestEvent: function (eventName) {
+    ,requestEvent: function (eventNames) {
       var activeNodeName = document.activeElement.nodeName.toLowerCase();
 
       if (_.contains(INPUT_ELEMENTS, activeNodeName)) {
         return;
       }
 
-      this.emit(eventName);
+      eventNames = _.isArray(eventNames) ? eventNames : [eventNames];
+
+      eventNames.forEach(function (eventName) {
+        this.emit(eventName);
+      }.bind(this));
     }
   });
 

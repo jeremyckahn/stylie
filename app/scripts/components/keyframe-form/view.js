@@ -39,6 +39,12 @@ define([
 
     ,tagName: 'li'
 
+    ,lateralusEvents: {
+      disableMillisecondEditing: function () {
+        this.disableMillisecondEditing();
+      }
+    }
+
     ,modelEvents: {
       /**
        * @param {KeyframePropertyModel} model
@@ -65,6 +71,14 @@ define([
 
       ,destroy: function () {
         this.remove();
+      }
+
+      /**
+       * @param {KeyframePropertyModel} model
+       * @param {boolean} isSelected
+       */
+      ,'change:isSelected': function (model, isSelected) {
+        this.$el[isSelected ? 'addClass' : 'removeClass']('selected');
       }
     }
 
@@ -101,9 +115,21 @@ define([
       }
 
       ,'click .millisecond-input-container': function () {
+        this.emit('disableMillisecondEditing');
         this.enableMillisecondEditing();
+
+        // For whatever reason, the .focus() call only works in Firefox when
+        // delayed by 16 milliseconds.
+        //
+        // Ugh.
+        _.delay(function () {
+          this.$millisecond.focus();
+        }.bind(this), 16);
       }
 
+      /**
+       * @param {jQuery.Event} evt
+       */
       ,'keydown input.millisecond': function (evt) {
         if (evt.keyCode !== 13) { // enter
           return;
@@ -112,10 +138,16 @@ define([
         this.$millisecond.blur();
       }
 
+      ,'focus input': function () {
+        this.emit('userRequestDeselectAllKeyframes');
+        this.model.set('isSelected', true);
+      }
+
       ,'blur input.millisecond': function () {
         this.saveMillisecondToModel();
         this.disableMillisecondEditing();
         this.emit('millisecondEditingEnd');
+        this.emit('userRequestDeselectAllKeyframes');
       }
 
       ,'click .delete': function () {

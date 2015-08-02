@@ -1,9 +1,13 @@
 @import 'styles/variables.sass'
 
 .keyframe-form-view
-  padding-top: 2em
+  border-left: solid 0 $keyframe-form-selected-color
+  margin: 1em 0
   overflow: auto
+  padding-left: 0
   position: relative
+  transition-duration: $selected-form-indicator-duration
+  transition-property: padding-left, border
 
   form
     overflow: auto
@@ -46,7 +50,7 @@
   .delete-wrapper
     position: absolute
     right: 0
-    top: 1em
+    top: -0.5em
 
   .property
     margin-top: 1em
@@ -58,3 +62,8 @@
 
       &:after
         content: ":"
+
+  &.selected
+    border-left-width: 2px
+    padding-left: .8em
+
