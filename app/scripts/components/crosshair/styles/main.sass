@@ -39,13 +39,12 @@ $offset-center-point: $half-crosshair-box-size - $half-crosshair-dashmark-width
     border-radius: 50%
     border: solid 4px #fff
     content: ''
-    display: block
+    display: none
     height: 150%
     left: calc(-25% - 4px)
     opacity: .5
     position: relative
     top: calc(-25% - 4px)
-    visibility: hidden
     width: 150%
 
     -moz-transform: scale(1)
@@ -68,7 +67,7 @@ $offset-center-point: $half-crosshair-box-size - $half-crosshair-dashmark-width
     animation-timing-function: $select-loupe-curve
 
   &.selected:before
-    visibility: visible
+    display: block
 
   @-moz-keyframes selected-transform-keyframes
     50%
