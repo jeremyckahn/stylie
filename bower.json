@@ -1,7 +1,7 @@
 {
   "name": "stylie",
   "license": "CC BY-NC-SA",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "dependencies": {
     "bootstrap-sass-official": "~3.2.0",
     "lateralus": "~0.8.0",
