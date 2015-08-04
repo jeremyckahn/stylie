@@ -144,6 +144,11 @@ define([
       this.rekapiComponent.clearCurrentAnimation();
       this.createDefaultAnimation();
     }
+
+    ,userRequestToggleRotationEditMode: function () {
+      this.model.set(
+        'isRotationModeEnabled', !this.model.get('isRotationModeEnabled'));
+    }
   };
 
   fn.initHacks = function () {

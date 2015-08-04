@@ -28,11 +28,14 @@ define([
     template: template
 
     ,lateralusEvents: {
-      userRequestToggleRotationEditMode: function () {
-        if (this.isRotationModeEnabled) {
-          this.disableRotationEditMode();
-        } else {
+      /**
+       * @param {boolean} isRotationModeEnabled
+       */
+      'change:isRotationModeEnabled': function (isRotationModeEnabled) {
+        if (isRotationModeEnabled) {
           this.enableRotationEditMode();
+        } else {
+          this.disableRotationEditMode();
         }
       }
 
@@ -111,7 +114,6 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
-      this.isRotationModeEnabled = false;
       this.isPrimarySelectedCrosshair = false;
 
       this.$rotationControl
@@ -130,6 +132,11 @@ define([
       });
 
       this.render();
+
+      if (this.lateralus.model.get('isRotationModeEnabled')) {
+        this.enableRotationEditMode();
+      }
+
       this.$el.css('display', '');
     }
 
@@ -202,13 +209,11 @@ define([
     }
 
     ,enableRotationEditMode: function () {
-      this.isRotationModeEnabled = true;
       this.$el.dragonDisable();
       this.$rotationControl.cubeletShow();
     }
 
     ,disableRotationEditMode: function () {
-      this.isRotationModeEnabled = false;
       this.$el.dragonEnable();
       this.$rotationControl.cubeletHide();
     }
