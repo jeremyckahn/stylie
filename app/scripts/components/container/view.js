@@ -19,6 +19,8 @@ define([
   var ContainerComponentView = Base.extend({
     template: template
 
+    ,className: 'aenima'
+
     ,events: {
       /**
        * Force a range input "drag" to trigger a "change" event.

@@ -1,19 +1,7 @@
-@import 'styles/variables.sass'
+@import 'app/styles/variables.sass'
 @import 'compass/css3/flexbox'
 @import 'compass/css3/transform'
 @import 'compass/css3/images'
-
-@mixin range-track
-  background: none
-  border-radius: $chrome-slide-thumb-size
-  border: solid 1px $chrome-range-slide-color
-
-@mixin range-thumb
-  background: $chrome-range-slide-color
-  border: none
-  border-radius: $chrome-slide-thumb-size
-  height: $chrome-slide-thumb-size
-  width: $chrome-slide-thumb-size
 
 @mixin icon-button($inner-color, $outer-color)
   +background-image(radial-gradient(50% 50%, $inner-color, $outer-color))
@@ -22,121 +10,14 @@
     +background-image(radial-gradient(50% 50%, $outer-color, $inner-color))
 
 .container-view
-  font-family: Helvetica, Arial, serif
-  font-size: 13px
-  overflow: hidden
-  opacity: 1
-  transition-duration: $load-fade-in-duration
-  transition-property: opacity, transform, -webkit-transform, -moz-transform, -ms-transform
-
-  label
-    cursor: pointer
-
-  input
-
-    &[type=range]
-      background: none
-      border: none
-      border-radius: 1em
-      cursor: ew-resize
-      width: 100%
-      -moz-appearance: none
-      -webkit-appearance: none
-
-    &[type=range]::-webkit-slider-runnable-track
-      +range-track
-      -webkit-appearance: none
-
-    &[type=range]::-webkit-slider-thumb
-      +range-thumb
-      -webkit-appearance: none
-
-    &[type=range]::-moz-range-track
-      +range-track
-      height: 1em
-      -moz-appearance: none
-
-    &[type=range]::-moz-range-thumb
-      +range-thumb
-      -moz-appearance: none
-
-      &:checked
-        transform: rotate(0deg)
-
-  button
-    background: $chrome-button-background
-    border-radius: $border-radius
-    border: solid 1px $chrome-button-border-color
-    color: $chrome-external-label-color
-    padding-top: 3px
-
-    &:active
-      background: $chrome-background-color
-
-    &.glyphicon
-      background: none
-      border: none
-      color: $chrome-icon-color
-      font-size: 1.2em
-      padding: 5px 12px
-      position: relative
-
-    &.center
-      display: block
-      margin: 0 auto
-
-  label[title]
-    cursor: help
-
-  &,
-  .fill
-    bottom: 0
-    left: 0
-    position: absolute
-    right: 0
-    top: 0
-
-  .hide
-    display: none
-
-  .row
-    display: block
-    padding-bottom: $input-spacing
-    position: relative
-
-  .scrollable
-
-    &::-webkit-scrollbar
-      width: 10px
-
-    &::-webkit-scrollbar-thumb
-      background: $chrome-scrollbar-color
-      border-radius: 10px
-
-    &::-webkit-scrollbar-track
-      border: solid 1px $chrome-scrollbar-color
-      border-radius: 10px
-
-  .workspace
-    top: $header-height
-
-  .flex-image-wrapper
-    +flex(flex)
-
-    img
-      width: 100%
-
-  .transparent
-    opacity: 0
-    pointer-events: none
-
-  .fadable
-    transition-duration: $fadable-duration
-    transition-property: opacity
 
   &.loading
     opacity: 0
     +transform(scale(0))
+
+  // Extra specificity needed to override AEnima's .fill styles
+  &.aenima .workspace
+    top: $header-height
 
   $button-line-height: $header-button-dimensions - ($header-button-border-width * 2)
   button.icon-button

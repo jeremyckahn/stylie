@@ -36,7 +36,8 @@ module.exports = function (grunt) {
       compass: {
         files: [
           '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
-          '<%= yeoman.app %>/scripts/components/**/*.{scss,sass}'
+          '<%= yeoman.app %>/scripts/components/**/*.{scss,sass}',
+          '<%= yeoman.app %>/bower_components/aenima/**/*.{scss,sass}'
         ],
         tasks: ['compass']
       },
@@ -105,7 +106,7 @@ module.exports = function (grunt) {
         sassDir: '<%= yeoman.app %>/styles',
         cssDir: '.tmp/styles',
         imagesDir: '<%= yeoman.app %>/img',
-        importPath: '<%= yeoman.app %>',
+        importPath: './',
         relativeAssets: true
       },
       dist: {},

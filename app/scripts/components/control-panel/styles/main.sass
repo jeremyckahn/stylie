@@ -1,16 +1,16 @@
-@import 'styles/variables.sass'
+@import 'app/styles/variables.sass'
 
 @mixin text-based-input
-  background: $chrome-input-background-color
+  background: $aenima-input-background-color
   border: none
-  border-radius: $border-radius
-  color: $chrome-input-color
-  padding: $input-padding
+  border-radius: $aenima-border-radius
+  color: $aenima-input-color
+  padding: $aenima-input-padding
 
 .control-panel-view
-  background: $chrome-background-color
-  border-radius: $border-radius * 2
-  color: $chrome-external-label-color
+  background: $aenima-background-color
+  border-radius: $aenima-border-radius * 2
+  color: $aenima-external-label-color
   overflow: hidden
   width: 360px
   z-index: 20
@@ -29,19 +29,19 @@
     padding: 0
 
   .tabs-container
-    background: $chrome-frame-background-color
+    background: $aenima-frame-background-color
     cursor: move
     list-style-type: none
     overflow: auto
     padding-top: 2em
 
     .tab
-      border-radius: $border-radius $border-radius 0 0
+      border-radius: $aenima-border-radius $aenima-border-radius 0 0
       float: left
       margin: 0 4px
 
       a:link, a:active, a:hover, a:visited
-        color: $chrome-external-label-color
+        color: $aenima-external-label-color
         display: block
 
         // Necessary to prevent icons from breaking tab layout.
@@ -56,22 +56,22 @@
         top: -1px
 
     .tab-show
-      background: $chrome-background-color
-      border: solid $tab-border-width $chrome-border-color
-      border-bottom-color: $chrome-background-color
+      background: $aenima-background-color
+      border: solid $tab-border-width $aenima-border-color
+      border-bottom-color: $aenima-background-color
 
       a:link, a:active, a:hover, a:visited
         padding: $tab-padding - $tab-border-width
 
   .tab-content
-    padding: $input-spacing
+    padding: $aenima-input-spacing
 
     a
       &:active,
       &:hover,
       &:link,
       &:visited
-        color: $chrome-link-color
+        color: $aenima-link-color
         font-weight: bold
         text-decoration: none
 
@@ -93,8 +93,8 @@
       +text-based-input
 
       &.invalid
-        background: $chrome-invalid-input-background
-        color: $chrome-invalid-input-color
+        background: $aenima-invalid-input-background
+        color: $aenima-invalid-input-color
 
     &[type="number"]
       width: 3.5em
@@ -104,26 +104,26 @@
     font-family: Monaco, monospace
     height: 12em
     resize: vertical
-    width: $chrome-input-full-width
+    width: $aenima-input-full-width
 
   select
-    background: $chrome-input-background-color
-    border: solid 1px $chrome-input-background-color
-    color: $chrome-input-color
+    background: $aenima-input-background-color
+    border: solid 1px $aenima-input-background-color
+    color: $aenima-input-color
     font-size: 1.2em
-    margin-left: $chrome-input-margin-left
+    margin-left: $aenima-input-margin-left
 
-    // Subtract 2em to account for extra <select> chrome.
-    width: $chrome-input-mid-width - 2em
+    // Subtract 2em to account for extra <select> aenima.
+    width: $aenima-input-mid-width - 2em
 
   .btn-hidden-label-wrapper
 
     span
-      color: $chrome-icon-color
-      left: $chrome-hidden-label-animated-nudge-offset
+      color: $aenima-icon-color
+      left: $aenima-hidden-label-animated-nudge-offset
       opacity: 0
       position: relative
-      transition: all $label-hide-show-duration
+      transition: all $aenima-label-hide-show-duration
 
     &:hover span
       left: 0
@@ -139,10 +139,10 @@
         content: ':'
 
     input.mid
-      width: $chrome-input-mid-width
+      width: $aenima-input-mid-width
 
     input.wide
-      width: $chrome-input-full-width
+      width: $aenima-input-full-width
 
     &.checkbox-wrapper
       font-size: 1.2em

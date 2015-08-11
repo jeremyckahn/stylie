@@ -8,7 +8,7 @@ define([
 
   ,'stylie.component.keyframes-panel'
   ,'stylie.component.motion-panel'
-  ,'stylie.component.export-panel'
+  ,'aenima.component.export-panel'
   ,'stylie.component.html-panel'
   ,'stylie.component.management-panel'
 
