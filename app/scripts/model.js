@@ -34,15 +34,15 @@ define([
       // directly onto StylieModel's prototype.
       this.mixin(localStorageMixin);
 
-      // Override whatever is in localStorage for this property, it's weird to
-      // start with Rotation Mode enabled
-      this.set('isRotationModeEnabled', false);
-
       if (this.keys().length) {
         this.retrofitUiData();
       } else {
         this.setInitialState();
       }
+
+      // Override whatever is in localStorage for this property, it's weird to
+      // start with Rotation Mode enabled
+      this.set('isRotationModeEnabled', false);
     }
 
     ,setInitialState: function () {
