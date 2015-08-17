@@ -56,6 +56,9 @@ require.config({
     name: 'stylie.component.too-small-message'
     ,location: 'scripts/components/too-small-message'
   }, {
+    name: 'aenima.component.control-panel'
+    ,location: 'bower_components/aenima/components/control-panel'
+  }, {
     name: 'stylie.component.control-panel'
     ,location: 'scripts/components/control-panel'
   }, {

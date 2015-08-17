@@ -1,10 +1,11 @@
 define([
 
   'underscore'
-  ,'lateralus'
 
   ,'./view'
   ,'text!./template.mustache'
+
+  ,'aenima.component.control-panel'
 
   ,'stylie.component.keyframes-panel'
   ,'stylie.component.motion-panel'
@@ -15,10 +16,11 @@ define([
 ], function (
 
   _
-  ,Lateralus
 
   ,View
   ,template
+
+  ,AEnimaControlPanelComponent
 
   ,KeyframePanelComponent
   ,MotionPanelComponent
@@ -29,7 +31,7 @@ define([
 ) {
   'use strict';
 
-  var Base = Lateralus.Component;
+  var Base = AEnimaControlPanelComponent;
 
   var ControlPanelComponent = Base.extend({
     name: 'control-panel'

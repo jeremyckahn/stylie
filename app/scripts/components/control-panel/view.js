@@ -5,7 +5,7 @@ define([
 
   ,'text!./template.mustache'
 
-  ,'lateralus.component.tabs'
+  ,'aenima.component.control-panel'
   ,'stylie.component.hidable'
 
   ,'../../constant'
@@ -17,7 +17,7 @@ define([
 
   ,template
 
-  ,TabsComponent
+  ,AEnimaControlPanelComponent
   ,HidableComponent
 
   ,constant
@@ -25,7 +25,7 @@ define([
 ) {
   'use strict';
 
-  var Base = Lateralus.Component.View;
+  var Base = AEnimaControlPanelComponent.View;
   var baseProto = Base.prototype;
 
   var ControlPanelComponentView = Base.extend({
@@ -49,18 +49,6 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
 
-      this.tabsComponent = this.addSubview(TabsComponent.View, {
-        $tabsContainer: this.$tabsContainer,
-        $tabsContentContainer: this.$tabsContentContainer
-      });
-
-      this.hidableView = this.addSubview(HidableComponent.View, {
-        el: this.el
-      });
-
-      this.selectTabFromLocalStorage();
-      this.listenTo(this.tabsComponent, 'tabShown', this.onTabShown.bind(this));
-
       this.$el.dragon({
         handle: this.$tabsContainer
         ,within: this.$el.parent()
@@ -82,14 +70,6 @@ define([
     }
 
     /**
-     * @param {jQuery} $shownTab
-     */
-    ,onTabShown: function ($shownTab) {
-      this.lateralus.model.setUi(
-        'focusedControlPanelTab', $shownTab.data('tabName'));
-    }
-
-    /**
      * Orient the control panel (which is absolutely positioned) to the right
      * of the parent, rather than the left (which is how $.dragon works).  This
      * prevents the control panel from falling off the screen if the user makes
@@ -105,17 +85,6 @@ define([
         left: ''
         ,right: right
       });
-    }
-
-    ,selectTabFromLocalStorage: function () {
-      var focusedTabName = this.lateralus.model.getUi('focusedControlPanelTab');
-
-      if (focusedTabName) {
-        var $focusedTab = this.$tabsContainer.children()
-          .filter('[data-tab-name="' + focusedTabName + '"]');
-
-        this.tabsComponent.selectTab($focusedTab);
-      }
     }
   });
 

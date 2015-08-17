@@ -48,6 +48,19 @@ define([
       ,currentActorModel: function () {
         return this.actorModel;
       }
+
+      /**
+       * @param {Object} cssOpts Gets passed to Rekapi.DOMRenderer#toString.
+       * @return {string}
+       */
+      ,cssAnimationString: function (cssOpts) {
+        return this.applyOrientationToExport(function () {
+          var cssAnimationString = this.rekapi.renderer.toString(cssOpts);
+          cssAnimationString += beaconRuleTemplate;
+
+          return cssAnimationString;
+        });
+      }
     }
 
     ,lateralusEvents: {
@@ -138,19 +151,6 @@ define([
         ,'change'
         ,this.onRekapiTimelineModified.bind(this)
       );
-    }
-
-    /**
-     * @param {Object} opts Gets passed to Rekapi.DOMRenderer#toString.
-     * @return {string}
-     */
-    ,getCssString: function (opts) {
-      return this.applyOrientationToExport(function () {
-        var cssString = this.rekapi.renderer.toString(opts);
-        cssString += beaconRuleTemplate;
-
-        return cssString;
-      });
     }
 
     /**
