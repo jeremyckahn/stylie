@@ -49,6 +49,10 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
 
+      this.hidableView = this.addSubview(HidableComponent.View, {
+        el: this.el
+      });
+
       this.$el.dragon({
         handle: this.$tabsContainer
         ,within: this.$el.parent()
