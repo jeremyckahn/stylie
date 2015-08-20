@@ -67,6 +67,12 @@ define([
 
       this.exportPanelComponent = this.addComponent(ExportPanelComponent, {
         el: this.view.$exportPanel
+      }, {
+        modelAttributes: {
+          cssExportClass: 'stylie'
+          ,analyticsUrl:
+            'https://ga-beacon.appspot.com/UA-42910121-1/stylie?pixel'
+        }
       });
 
       this.htmlPanelComponent = this.addComponent(HtmlPanelComponent, {

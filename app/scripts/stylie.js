@@ -4,8 +4,8 @@ define([
   ,'lateralus'
   ,'keydrown'
 
-  ,'stylie.component.shifty'
-  ,'stylie.component.rekapi'
+  ,'aenima.component.shifty'
+  ,'aenima.component.rekapi'
   ,'stylie.component.container'
 
   ,'./model'
@@ -113,7 +113,7 @@ define([
   };
 
   fn.lateralusEvents = {
-    timelineModified: function () {
+    'rekapi:timelineModified': function () {
       if (this.hasInitialized) {
         this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
       }

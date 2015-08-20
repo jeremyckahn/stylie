@@ -16,6 +16,8 @@ require.config({
     ,underscore: 'bower_components/lodash/dist/lodash'
     ,mustache: 'bower_components/mustache/mustache'
     ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
+    ,'aenima.constant': 'bower_components/aenima/constant'
+    ,'aenima.utils': 'bower_components/aenima/utils'
   }
   ,packages: [{
     name: 'lateralus'
@@ -29,11 +31,11 @@ require.config({
     name: 'lateralus.component.tabs'
     ,location: 'bower_components/lateralus-components/tabs'
   }, {
-    name: 'stylie.component.shifty'
-    ,location: 'scripts/components/shifty'
+    name: 'aenima.component.shifty'
+    ,location: 'bower_components/aenima/components/shifty'
   }, {
-    name: 'stylie.component.rekapi'
-    ,location: 'scripts/components/rekapi'
+    name: 'aenima.component.rekapi'
+    ,location: 'bower_components/aenima/components/rekapi'
   }, {
     name: 'stylie.component.keybindings'
     ,location: 'scripts/components/keybindings'

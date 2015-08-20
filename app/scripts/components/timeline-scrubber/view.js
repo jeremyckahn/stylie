@@ -27,22 +27,22 @@ define([
       /**
        * @param {boolean} isPlaying
        */
-      rekapiPlayStateChange: function (isPlaying) {
+      'rekapi:playStateChange': function (isPlaying) {
         this.syncToRekapiPlayState(isPlaying);
       }
 
       /**
-       * @param {RekapiComponent} rekapiComponent
+       * @param {Rekapi} rekapi
        */
-      ,timelineModified: function (rekapiComponent) {
-        this.syncScrubberToRekapi(rekapiComponent);
+      ,'rekapi:timelineModified': function (rekapi) {
+        this.syncScrubberToRekapi(rekapi);
       }
 
       /**
-       * @param {RekapiComponent} rekapiComponent
+       * @param {Rekapi} rekapi
        */
-      ,animationHasUpdated: function (rekapiComponent) {
-        this.syncScrubberToRekapi(rekapiComponent);
+      ,'rekapi:afterUpdate': function (rekapi) {
+        this.syncScrubberToRekapi(rekapi);
       }
 
       ,userRequestToggleScrubber: function () {
@@ -97,10 +97,9 @@ define([
     }
 
     /**
-     * @param {RekapiComponent} rekapiComponent
+     * @param {Rekapi} rekapi
      */
-    ,syncScrubberToRekapi: function (rekapiComponent) {
-      var rekapi = rekapiComponent.rekapi;
+    ,syncScrubberToRekapi: function (rekapi) {
       var animationLength = rekapi.getAnimationLength();
       this.$scrubber
         .attr('max', animationLength)

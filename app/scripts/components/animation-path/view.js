@@ -41,11 +41,8 @@ define([
         this.render();
       }
 
-      /**
-       * @param {RekapiComponent} rekapiComponent
-       */
-      ,timelineModified: function (rekapiComponent) {
-        this.updatePath(rekapiComponent);
+      ,'rekapi:timelineModified': function () {
+        this.updatePath();
       }
     }
 
@@ -92,11 +89,8 @@ define([
       this.render();
     }
 
-    /**
-     * @param {RekapiComponent} rekapiComponent
-     */
-    ,updatePath: function (rekapiComponent) {
-      this.generatePathPrerender(rekapiComponent);
+    ,updatePath: function () {
+      this.generatePathPrerender();
       this.render();
     }
 
@@ -136,8 +130,8 @@ define([
     /**
      * @param {RekapiComponent} rekapiComponent
      */
-    ,generatePathPoints: function (rekapiComponent) {
-      var actorModel = rekapiComponent.actorModel;
+    ,generatePathPoints: function () {
+      var actorModel = this.collectOne('currentActorModel');
       var numKeyframes = actorModel.transformPropertyCollection.length;
       var points = [];
 
@@ -161,14 +155,11 @@ define([
       return points;
     }
 
-    /**
-     * @param {RekapiComponent} rekapiComponent
-     */
-    ,generatePathPrerender: function (rekapiComponent) {
+    ,generatePathPrerender: function () {
       prerenderBuffer.width = this.$el.width();
       prerenderBuffer.height = this.$el.height();
       var ctx = prerenderBuffer.ctx = prerenderBuffer.getContext('2d');
-      var points = this.generatePathPoints(rekapiComponent);
+      var points = this.generatePathPoints();
 
       var previousPoint;
       ctx.beginPath();

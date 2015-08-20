@@ -55,7 +55,7 @@ define([
       // TODO: This should be emitting a context, not collecting an object and
       // augmenting it.
       this.actorModel = this.collectOne('currentActorModel');
-      this.actorModel.actor.context = this.$actorWrapper[0];
+      this.actorModel.setContext(this.$actorWrapper[0]);
       this.setCenteringClass(this.lateralus.model.getUi('centerToPath'));
     }
 

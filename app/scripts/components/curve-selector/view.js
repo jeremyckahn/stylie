@@ -6,7 +6,7 @@ define([
 
   ,'text!./template.mustache'
 
-  ,'../../constant'
+  ,'aenima.constant'
 
 ], function (
 
@@ -16,7 +16,7 @@ define([
 
   ,template
 
-  ,constant
+  ,aenimaConstant
 
 ) {
   'use strict';
@@ -66,7 +66,7 @@ define([
       var fullList = Object.keys(Tweenable.prototype.formula);
       return this.onlyShowCustomCurves ?
         fullList.filter(function (curve) {
-          return curve.match(constant.CUSTOM_CURVE_PREFIX);
+          return curve.match(aenimaConstant.CUSTOM_CURVE_PREFIX);
         }) : fullList;
     }
   });
