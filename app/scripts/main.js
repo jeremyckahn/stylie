@@ -37,6 +37,9 @@ require.config({
     name: 'aenima.component.rekapi'
     ,location: 'bower_components/aenima/components/rekapi'
   }, {
+    name: 'stylie.component.rekapi'
+    ,location: 'scripts/components/rekapi'
+  }, {
     name: 'stylie.component.keybindings'
     ,location: 'scripts/components/keybindings'
   }, {

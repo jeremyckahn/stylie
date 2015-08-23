@@ -5,7 +5,7 @@ define([
   ,'keydrown'
 
   ,'aenima.component.shifty'
-  ,'aenima.component.rekapi'
+  ,'stylie.component.rekapi'
   ,'stylie.component.container'
 
   ,'./model'
