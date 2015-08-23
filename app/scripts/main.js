@@ -67,8 +67,8 @@ require.config({
     name: 'stylie.component.keyframes-panel'
     ,location: 'scripts/components/keyframes-panel'
   }, {
-    name: 'stylie.component.motion-panel'
-    ,location: 'scripts/components/motion-panel'
+    name: 'aenima.component.motion-panel'
+    ,location: 'bower_components/aenima/components/motion-panel'
   }, {
     name: 'aenima.component.export-panel'
     ,location: 'bower_components/aenima/components/export-panel'
@@ -88,11 +88,11 @@ require.config({
     name: 'stylie.component.keyframe-form'
     ,location: 'scripts/components/keyframe-form'
   }, {
-    name: 'stylie.component.bezierizer'
-    ,location: 'scripts/components/bezierizer'
+    name: 'aenima.component.bezierizer'
+    ,location: 'bower_components/aenima/components/bezierizer'
   }, {
-    name: 'stylie.component.curve-selector'
-    ,location: 'scripts/components/curve-selector'
+    name: 'aenima.component.curve-selector'
+    ,location: 'bower_components/aenima/components/curve-selector'
   }, {
     name: 'stylie.component.preview'
     ,location: 'scripts/components/preview'

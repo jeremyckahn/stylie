@@ -5,7 +5,7 @@ define([
 
   ,'text!./template.mustache'
 
-  ,'stylie.component.curve-selector'
+  ,'aenima.component.curve-selector'
 
 ], function (
 
