@@ -114,6 +114,12 @@ require.config({
   }, {
     name: 'stylie.component.timeline-scrubber'
     ,location: 'scripts/components/timeline-scrubber'
+  }, {
+    name: 'aenima.mixin'
+    ,location: 'bower_components/aenima/mixins'
+  }, {
+    name: 'aenima.model'
+    ,location: 'bower_components/aenima/models'
   }]
 });
 

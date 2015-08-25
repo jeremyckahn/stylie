@@ -2,16 +2,21 @@ define([
 
   'underscore'
   ,'lateralus'
-  ,'./mixins/local-storage-model'
+
+  ,'aenima.model/persisted-model'
 
 ], function (
 
   _
   ,Lateralus
-  ,localStorageMixin
+
+  ,PersistedModel
 
 ) {
   'use strict';
+
+  var Base = PersistedModel;
+  var baseProto = Base.prototype;
 
   var INITIAL_STATE = {
       savedAnimations: {}
@@ -26,13 +31,11 @@ define([
       }
     };
 
-  var StylieModel = Lateralus.Model.extend({
+  var StylieModel = Base.extend({
     localStorageId: 'stylieData'
 
     ,initialize: function () {
-      // TODO: It would be nice if the localStorageMixin methods were mixed in
-      // directly onto StylieModel's prototype.
-      this.mixin(localStorageMixin);
+      baseProto.initialize.apply(this, arguments);
 
       if (this.keys().length) {
         this.retrofitUiData();
@@ -58,25 +61,6 @@ define([
      */
     ,retrofitUiData: function () {
       _.defaults(this.attributes.ui, INITIAL_STATE.ui);
-    }
-
-    /**
-     * @param {string} name
-     * @return {*}
-     */
-    ,getUi: function (name) {
-      return this.get('ui')[name];
-    }
-
-    /**
-     * @param {string} name
-     * @param {*} value
-     */
-    ,setUi: function (name, value) {
-      this.attributes.ui[name] = value;
-
-      // Persist app state to localStorage.
-      this.trigger('change');
     }
   });
 

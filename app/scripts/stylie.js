@@ -9,7 +9,6 @@ define([
   ,'stylie.component.container'
 
   ,'./model'
-  ,'./mixins/local-storage-model'
 
   ,'./constant'
 
@@ -24,7 +23,6 @@ define([
   ,ContainerComponent
 
   ,StylieModel
-  ,localStorageMixin
 
   ,constant
 
