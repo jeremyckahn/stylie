@@ -86,7 +86,7 @@ define([
         this.$el[isSelected ? 'addClass' : 'removeClass']('selected');
       }
 
-      ,destroy: function () {
+      ,remove: function () {
         this.component.dispose();
       }
     }

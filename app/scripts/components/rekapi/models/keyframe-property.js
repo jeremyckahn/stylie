@@ -78,12 +78,6 @@ define([
 
     ,onRemove: function () {
       this.keyframeProperty.actor.removeKeyframe(this.attributes.millisecond);
-
-      // TODO: There really should be more robust support for
-      // Lateralus.Component.Model cleanup.  Make a proper .dispose() method
-      // for this at the Lateralus level.
-      this.stopListening();
-      this.destroy();
     }
 
     /**

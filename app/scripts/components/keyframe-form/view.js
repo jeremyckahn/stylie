@@ -69,7 +69,7 @@ define([
         }, this);
       }
 
-      ,destroy: function () {
+      ,remove: function () {
         this.remove();
       }
 
@@ -156,7 +156,7 @@ define([
 
         // Defer the remove call to the next thread so that the "submit" event
         // is properly caught and handled by this view.
-        _.defer(collection.remove.bind(collection, model));
+        _.defer(collection.remove.bind(collection, model, { dispose: true }));
       }
 
       /**
