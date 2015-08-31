@@ -53,6 +53,14 @@ define([
       });
 
       this.keyframeFormComponents.push(keyframeFormComponent);
+
+      // TODO: This is a weird pattern.  Maybe use a proper Model/Collection
+      // pattern that automatically cleans itself up?
+      this.listenTo(keyframeFormComponent, 'beforeDispose', function () {
+        this.keyframeFormComponents =
+          _.without(this.keyframeFormComponents, keyframeFormComponent);
+      }.bind(this));
+
       this.$keyframesList.append(keyframeFormComponent.view.el);
     }
 

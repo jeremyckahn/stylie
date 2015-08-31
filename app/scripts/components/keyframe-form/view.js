@@ -70,7 +70,7 @@ define([
       }
 
       ,remove: function () {
-        this.remove();
+        this.component.dispose();
       }
 
       /**
