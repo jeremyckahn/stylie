@@ -44,7 +44,20 @@ define([
         return this.applyOrientationToExport(
           baseProto.provide.cssAnimationString.bind(this, cssOpts));
       }
+
+      /**
+       * TODO: Perhaps this can be provided from the ActorModel class itself?
+       * @return {ActorModel}
+       */
+      ,currentActorModel: function () {
+        return this.actorModel;
+      }
     }, baseProto.provide)
+
+    ,initialize: function () {
+      baseProto.initialize.apply(this, arguments);
+      this.setupActor();
+    }
 
     /**
      * @param {Function} exportProcessor
