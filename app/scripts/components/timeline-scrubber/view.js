@@ -25,10 +25,10 @@ define([
 
     ,lateralusEvents: {
       /**
-       * @param {boolean} isPlaying
+       * @param {Rekapi} rekapi
        */
-      'rekapi:playStateChange': function (isPlaying) {
-        this.syncToRekapiPlayState(isPlaying);
+      'rekapi:playStateChange': function (rekapi) {
+        this.syncToRekapiPlayState(rekapi.isPlaying());
       }
 
       /**
