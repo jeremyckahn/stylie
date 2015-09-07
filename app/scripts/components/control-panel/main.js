@@ -11,7 +11,7 @@ define([
   ,'aenima.component.motion-panel'
   ,'aenima.component.export-panel'
   ,'stylie.component.html-panel'
-  ,'stylie.component.management-panel'
+  ,'aenima.component.management-panel'
 
 ], function (
 
