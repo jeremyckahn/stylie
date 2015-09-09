@@ -40,6 +40,9 @@ require.config({
     name: 'stylie.component.rekapi'
     ,location: 'scripts/components/rekapi'
   }, {
+    name: 'aenima.component.keybindings'
+    ,location: 'bower_components/aenima/components/keybindings'
+  }, {
     name: 'stylie.component.keybindings'
     ,location: 'scripts/components/keybindings'
   }, {

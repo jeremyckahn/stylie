@@ -12,7 +12,7 @@
     "jquery": "~2.1.3",
     "jquery-cubelet": "~0.3.0",
     "jquery-mousewheel": "~3.1.12",
-    "aenima": "~0.0.8"
+    "aenima": "~0.0.9"
   },
   "resolutions": {
     "jquery-dragon": "~0.4.0",
