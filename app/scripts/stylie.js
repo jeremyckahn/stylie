@@ -156,7 +156,7 @@ define([
         ,initCallback: function () {
           xdLocalStorage.setItem(
             '_stylieExport'
-            ,JSON.stringify(this.rekapiComponent.exportTimeline())
+            ,JSON.stringify(this.rekapiComponent.exportTimelineForMantra())
           );
 
           window.location.href = constant.mantraRoot;

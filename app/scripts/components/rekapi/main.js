@@ -2,6 +2,7 @@ define([
 
   'underscore'
   ,'lateralus'
+  ,'rekapi'
 
   ,'./models/actor'
 
@@ -11,6 +12,7 @@ define([
 
   _
   ,Lateralus
+  ,Rekapi
 
   ,ActorModel
 
@@ -90,6 +92,16 @@ define([
         actorModel: this.actorModel.toJSON()
         ,bezierCurves: this.bezierCurves
       };
+    }
+
+    /**
+     * @return {Object}
+     */
+    ,exportTimelineForMantra: function () {
+      var exportRekapi = new Rekapi();
+      exportRekapi.addActor(this.actorModel.exportForMantra());
+
+      return exportRekapi.exportTimeline();
     }
 
     /**

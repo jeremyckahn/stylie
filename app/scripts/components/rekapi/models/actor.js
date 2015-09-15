@@ -185,6 +185,34 @@ define([
 
       this.rekapiComponent.endBulkKeyframeOperation();
     }
+
+    /**
+     * @return {Rekapi.Actor}
+     */
+    ,exportForMantra: function () {
+      var exportActor = new Rekapi.Actor();
+      var transformProperties = this.transformPropertyCollection.toJSON();
+
+      transformProperties.forEach(function (transformProperty) {
+        exportActor.keyframe(transformProperty.millisecond, {
+          translateX: transformProperty.x + 'px'
+          ,translateY: transformProperty.y + 'px'
+          ,scale: transformProperty.scale
+          ,rotateX: transformProperty.rotationX + 'deg'
+          ,rotateY: transformProperty.rotationY + 'deg'
+          ,rotateZ: transformProperty.rotationZ + 'deg'
+        }, {
+          translateX: transformProperty.easing_x
+          ,translateY: transformProperty.easing_y
+          ,scale: transformProperty.easing_scale
+          ,rotateX: transformProperty.easing_rotationX
+          ,rotateY: transformProperty.easing_rotationY
+          ,rotateZ: transformProperty.easing_rotationZ
+        });
+      }, this);
+
+      return exportActor;
+    }
   });
 
   return ActorModel;
