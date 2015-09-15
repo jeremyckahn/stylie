@@ -3,6 +3,11 @@
 
 require.config({
   baseUrl: '/'
+  ,shim: {
+    xdLocalStorage: {
+      exports: 'xdLocalStorage'
+    }
+  }
   ,paths: {
     text: 'bower_components/requirejs-text/text'
     ,jquery: 'scripts/lib/custom-jquery'
@@ -18,6 +23,8 @@ require.config({
     ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
     ,'aenima.constant': 'bower_components/aenima/constant'
     ,'aenima.utils': 'bower_components/aenima/utils'
+    ,xdLocalStorage:
+      'bower_components/xdLocalStorage/dist/scripts/xdLocalStorage.min'
   }
   ,packages: [{
     name: 'lateralus'

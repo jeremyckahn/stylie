@@ -3,6 +3,7 @@ define([
   'underscore'
   ,'lateralus'
   ,'keydrown'
+  ,'xdLocalStorage'
 
   ,'aenima.component.shifty'
   ,'stylie.component.rekapi'
@@ -17,6 +18,7 @@ define([
   _
   ,Lateralus
   ,kd
+  ,xdLocalStorage
 
   ,ShiftyComponent
   ,RekapiComponent
@@ -146,6 +148,20 @@ define([
     ,userRequestToggleRotationEditMode: function () {
       this.model.set(
         'isRotationModeEnabled', !this.model.get('isRotationModeEnabled'));
+    }
+
+    ,userRequestExportToMantra: function () {
+      xdLocalStorage.init({
+        iframeUrl: constant.mantraRoot + 'import.html'
+        ,initCallback: function () {
+          xdLocalStorage.setItem(
+            '_stylieExport'
+            ,JSON.stringify(this.rekapiComponent.exportTimeline())
+          );
+
+          window.location.href = constant.mantraRoot;
+        }.bind(this)
+      });
     }
   };
 
