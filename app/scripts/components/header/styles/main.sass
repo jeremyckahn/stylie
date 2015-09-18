@@ -42,6 +42,11 @@
   .icon-button.export
     +icon-button($export-button-gradient-inner, $export-button-gradient-outer)
 
+    // Disabling export functionality because of
+    // https://github.com/ofirdagan/cross-domain-local-storage/issues/10
+    .safari &
+      display: none
+
     i
       left: 1px
       top: 0
