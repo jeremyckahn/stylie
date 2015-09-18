@@ -155,7 +155,7 @@ define([
         iframeUrl: constant.mantraRoot + 'import.html'
         ,initCallback: function () {
           xdLocalStorage.setItem(
-            '_stylieExport'
+            '_export'
             ,JSON.stringify(this.rekapiComponent.exportTimelineForMantra())
           );
 
