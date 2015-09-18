@@ -1,7 +1,7 @@
 {
   "name": "stylie",
   "license": "CC BY-NC-SA",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "dependencies": {
     "aenima": "~0.0.9",
     "bezierizer": "~0.1.0",
