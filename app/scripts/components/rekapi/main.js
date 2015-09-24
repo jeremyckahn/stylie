@@ -90,7 +90,7 @@ define([
     ,toJSON: function () {
       return {
         actorModel: this.actorModel.toJSON()
-        ,bezierCurves: this.bezierCurves
+        ,curves: this.curves
       };
     }
 
@@ -112,7 +112,7 @@ define([
       var animationData =
         this.lateralus.model.get('savedAnimations')[animationName];
 
-      this.emit('loadBezierCurves', animationData.bezierCurves);
+      this.emit('loadBezierCurves', animationData.curves);
       this.actorModel.setKeyframes(
         animationData.actorModel.transformPropertyCollection);
     }
