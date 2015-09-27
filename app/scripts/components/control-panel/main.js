@@ -63,6 +63,10 @@ define([
 
       this.motionPanelComponent = this.addComponent(MotionPanelComponent, {
         el: this.view.$motionPanel
+      }, {
+        modelAttributes: {
+          enableOnionSkinToggle: false
+        }
       });
 
       this.exportPanelComponent = this.addComponent(ExportPanelComponent, {
