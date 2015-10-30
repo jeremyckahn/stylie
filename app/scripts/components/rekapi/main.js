@@ -108,13 +108,24 @@ define([
      * @param {string} animationName
      */
     ,fromJSON: function (animationName) {
-      this.clearCurrentAnimation();
+      this.lateralus.model.set('isLoadingTimeline', true, { silent: true });
       var animationData =
         this.lateralus.model.get('savedAnimations')[animationName];
 
+      // TODO: The requestClearTimeline event should be emitted from
+      // clearCurrentAnimation (AEnima method).  That method is currently being
+      // utilized by Mantra in a slightly different way and might need some
+      // refactoring before requestClearTimeline can be moved into it.
+      this.emit('requestClearTimeline');
+      this.clearCurrentAnimation();
+
       this.emit('loadBezierCurves', animationData.curves);
+
       this.actorModel.setKeyframes(
         animationData.actorModel.transformPropertyCollection);
+
+      this.lateralus.model.set('isLoadingTimeline', false, { silent: true });
+      this.doTimelineUpdate();
     }
   });
 

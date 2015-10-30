@@ -21,6 +21,7 @@ define([
   var INITIAL_STATE = {
       savedAnimations: {}
       ,isRotationModeEnabled: false
+      ,isLoadingTimeline: false
       ,ui: {
         exportOrientation: 'first-keyframe'
         ,focusedControlPanelTab: ''
