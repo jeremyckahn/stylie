@@ -43,6 +43,13 @@ define([
     ,keyUpEventMap: {
       SHIFT: 'userRequestDisableKeyframeSelection'
     }
+
+    /**
+     * @override
+     */
+    ,metaKeyPressEventMap: {
+      A: 'userRequestSelectAllKeyframes'
+    }
   });
 
   return KeybindingsComponent;

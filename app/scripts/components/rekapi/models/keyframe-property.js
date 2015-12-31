@@ -56,6 +56,14 @@ define([
       userRequestDeselectAllKeyframes: function () {
         this.set('isSelected', false);
       }
+
+      /**
+       * @param  {jQuery.Event} evt
+       */
+      ,userRequestSelectAllKeyframes: function (evt) {
+        evt.preventDefault();
+        this.set('isSelected', true);
+      }
     }
 
     ,initialize: function (attributes) {
