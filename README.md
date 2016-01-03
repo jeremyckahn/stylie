@@ -39,7 +39,7 @@ You can build the project with:
 grunt build
 ````
 
-And test the build load locally with:
+And test the optimized build locally with:
 
 ````
 grunt serve:dist
@@ -58,4 +58,4 @@ license](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).  Don't
 worry, this license does not extend to the animations you create with Stylie,
 just the application itself.  You are free to use the animations created by
 Stylie however you please.  You are encouraged to use and modify the code to
-suit your needs, as well as redistribute it noncommercially.
+suit your needs, as well as redistribute it non-commercially.
