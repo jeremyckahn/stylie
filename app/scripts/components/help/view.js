@@ -7,6 +7,8 @@ define([
 
   ,'stylie.component.modal'
 
+  ,'aenima.utils'
+
 ], function (
 
   _
@@ -15,6 +17,8 @@ define([
   ,template
 
   ,ModalComponent
+
+  ,aenimaUtils
 
 ) {
   'use strict';
@@ -36,6 +40,15 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+    }
+
+    /**
+     * @override
+     */
+    ,getTemplateRenderData: function () {
+      return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
+        metaKey: aenimaUtils.isMac() ? '⌘' : 'Ctrl'
+      });
     }
   });
 
