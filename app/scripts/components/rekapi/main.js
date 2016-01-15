@@ -56,6 +56,20 @@ define([
       }
     }, baseProto.provide)
 
+
+    ,lateralusEvents: {
+      /**
+       * @param {KeyboardEvent} evt
+       */
+      userRequestUndo: function (evt) {
+        // Prevent focusing of the previously-modified input element
+        evt.preventDefault();
+
+        this.revertToPreviouslyRecordedUndoState();
+      }
+    }
+
+
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
       this.setupActor();
@@ -105,12 +119,24 @@ define([
     }
 
     /**
-     * @param {string} animationName
+     * @override
      */
-    ,fromJSON: function (animationName) {
+    ,importTimeline: function (timeline) {
+      this.fromJSON(timeline);
+    }
+
+    /**
+     * @override
+     */
+    ,exportTimeline: function () {
+      return this.toJSON();
+    }
+
+    /**
+     * @param {Object} animationData
+     */
+    ,fromJSON: function (animationData) {
       this.lateralus.model.set('isLoadingTimeline', true, { silent: true });
-      var animationData =
-        this.lateralus.model.get('savedAnimations')[animationName];
 
       // TODO: The requestClearTimeline event should be emitted from
       // clearCurrentAnimation (AEnima method).  That method is currently being
@@ -126,6 +152,14 @@ define([
 
       this.lateralus.model.set('isLoadingTimeline', false, { silent: true });
       this.doTimelineUpdate();
+    }
+
+    /**
+     * @override
+     */
+    ,revertToPreviouslyRecordedUndoState: function () {
+      this.emit('userRequestDeselectAllKeyframes');
+      baseProto.revertToPreviouslyRecordedUndoState.apply(this, arguments);
     }
   });
 

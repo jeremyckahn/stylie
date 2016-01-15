@@ -23,7 +23,8 @@ define([
 
   var Base = AEnimaRekapiComponent.KeyframePropertyModel;
 
-  var NUMBER_PROPERTIES = [
+  var SCALE_UNDO_DEBOUNCE = 1000;
+    var NUMBER_PROPERTIES = [
     'millisecond'
     ,'x'
     ,'y'
@@ -78,10 +79,26 @@ define([
 
       this.on('change', this.onChange.bind(this));
       this.on('remove', this.onRemove.bind(this));
+      this.on('change:scale'
+        ,_.debounce(
+          this.onChangeScale.bind(this)
+          ,SCALE_UNDO_DEBOUNCE
+          ,{
+            leading: true
+            ,trailing: false
+          }
+        )
+      );
     }
 
     ,onChange: function () {
       this.updateRawKeyframeProperty();
+    }
+
+    ,onChangeScale: function () {
+      if (this.lateralus.model.get('isRotationModeEnabled')) {
+        this.emit('requestRecordUndoState');
+      }
     }
 
     ,onRemove: function () {

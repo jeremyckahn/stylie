@@ -96,10 +96,18 @@ define([
         this.setUiStateToModel();
       }
 
+      ,dragStart: function () {
+        this.emit('requestRecordUndoState');
+      }
+
       ,click: function () {
         if (kd.SHIFT.isDown()) {
           this.model.set('isSelected', !this.model.get('isSelected'));
         }
+      }
+
+      ,'mousedown .cubelet-container': function () {
+        this.emit('requestRecordUndoState');
       }
 
       ,'change .rotation-control': function () {
@@ -127,6 +135,12 @@ define([
     }
 
     ,deferredInitialize: function () {
+      // Check to see if this View's component/model has been torn down and
+      // abort if so.  This can happen if the user is making rapid undo inputs.
+      if (!_.size(this.model)) {
+        return;
+      }
+
       this.$el.dragon({
         within: this.$el.parent()
       });

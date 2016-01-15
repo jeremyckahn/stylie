@@ -37,6 +37,7 @@ define([
 
     ,lateralusEvents: {
       userRequestNewKeyframe: function () {
+        this.emit('requestRecordUndoState');
         this.addNewKeyframe();
       }
 

@@ -49,6 +49,7 @@ define([
      */
     ,metaKeyPressEventMap: {
       A: 'userRequestSelectAllKeyframes'
+      ,Z: 'userRequestUndo'
     }
   });
 

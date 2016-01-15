@@ -141,6 +141,7 @@ define([
     }
 
     ,userRequestResetAnimation: function () {
+      this.emit('requestRecordUndoState');
       this.rekapiComponent.clearCurrentAnimation();
       this.createDefaultAnimation();
     }
@@ -226,7 +227,8 @@ define([
    * @param {string} animationName
    */
   fn.loadAnimation = function (animationName) {
-    this.rekapiComponent.fromJSON(animationName);
+    var animationData = this.model.get('savedAnimations')[animationName];
+    this.rekapiComponent.fromJSON(animationData);
   };
 
   /**

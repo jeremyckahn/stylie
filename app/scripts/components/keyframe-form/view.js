@@ -87,6 +87,7 @@ define([
        * @param {jQuery.Event} evt
        */
       'change .curve': function (evt) {
+        this.emit('requestRecordUndoState');
         var $target = $(evt.target);
         var property = $target.data('property');
         this.model.set('easing_' + property, $target.val());
@@ -139,6 +140,7 @@ define([
       }
 
       ,'focus input': function () {
+        this.emit('requestRecordUndoState');
         this.emit('userRequestDeselectAllKeyframes');
         this.model.set('isSelected', true);
       }
@@ -151,6 +153,7 @@ define([
       }
 
       ,'click .delete': function () {
+        this.emit('requestRecordUndoState');
         var model = this.model;
         var collection = model.collection;
 
