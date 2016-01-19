@@ -5,7 +5,7 @@ define([
 
   ,'text!./template.mustache'
 
-  ,'stylie.component.modal'
+  ,'aenima.component.modal'
 
   ,'aenima.utils'
 

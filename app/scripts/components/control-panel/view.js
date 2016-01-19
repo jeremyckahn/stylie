@@ -6,7 +6,7 @@ define([
   ,'text!./template.mustache'
 
   ,'aenima.component.control-panel'
-  ,'stylie.component.hidable'
+  ,'aenima.component.hidable'
 
   ,'../../constant'
 

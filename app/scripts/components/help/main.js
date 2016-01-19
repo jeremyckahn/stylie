@@ -1,6 +1,6 @@
 define([
 
-  'stylie.component.modal'
+  'aenima.component.modal'
 
   ,'./view'
   ,'text!./template.mustache'

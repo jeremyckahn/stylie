@@ -50,11 +50,14 @@ require.config({
     name: 'aenima.component.keybindings'
     ,location: 'bower_components/aenima/components/keybindings'
   }, {
+    name: 'aenima.component.hidable'
+    ,location: 'bower_components/aenima/components/hidable'
+  }, {
+    name: 'aenima.component.modal'
+    ,location: 'bower_components/aenima/components/modal'
+  }, {
     name: 'stylie.component.keybindings'
     ,location: 'scripts/components/keybindings'
-  }, {
-    name: 'stylie.component.hidable'
-    ,location: 'scripts/components/hidable'
   }, {
     name: 'stylie.component.container'
     ,location: 'scripts/components/container'
@@ -62,8 +65,8 @@ require.config({
     name: 'stylie.component.header'
     ,location: 'scripts/components/header'
   }, {
-    name: 'stylie.component.modal'
-    ,location: 'scripts/components/modal'
+    name: 'aenima.component.modal'
+    ,location: 'bower_components/aenima/components/modal'
   }, {
     name: 'stylie.component.help'
     ,location: 'scripts/components/help'
