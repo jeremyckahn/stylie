@@ -1,13 +1,13 @@
 define([
 
-  'lateralus'
+  'stylie.component.modal'
 
   ,'./view'
   ,'text!./template.mustache'
 
 ], function (
 
-  Lateralus
+  ModalComponent
 
   ,View
   ,template
@@ -15,7 +15,7 @@ define([
 ) {
   'use strict';
 
-  var Base = Lateralus.Component;
+  var Base = ModalComponent;
 
   var HelpComponent = Base.extend({
     name: 'help'
