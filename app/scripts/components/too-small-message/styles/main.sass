@@ -2,18 +2,18 @@
 @import 'compass/css3/images'
 
 .too-small-message-view
-  color: $modal-text-color
+  color: $aenima-modal-text-color
   display: none
   padding: 2em
   z-index: 20
-  +background-image(linear-gradient(to bottom, $header-gradient-top-color, $header-gradient-bottom-color))
+  +background-image(linear-gradient(to bottom, $aenima-modal-gradient-top-color, $aenima-modal-gradient-bottom-color))
 
   @media (max-width: 600px)
     display: block
 
   h1,
   h2
-    color: $modal-text-standout-color
+    color: $aenima-modal-text-standout-color
     font-weight: lighter
   a
 
@@ -21,13 +21,13 @@
     &:link,
     &:hover,
     &:visited
-      color: $modal-link-color
+      color: $aenima-modal-link-color
       font-weight: bold
       text-decoration: none
 
     &:hover
-      color: $modal-link-color-hover
+      color: $aenima-modal-link-color-hover
 
   p
-    font-size: $modal-font-size
-    line-height: $modal-line-height
+    font-size: $aenima-modal-font-size
+    line-height: $aenima-modal-line-height
