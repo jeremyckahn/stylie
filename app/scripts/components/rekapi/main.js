@@ -56,7 +56,6 @@ define([
       }
     }, baseProto.provide)
 
-
     ,lateralusEvents: {
       /**
        * @param {KeyboardEvent} evt
@@ -68,7 +67,6 @@ define([
         this.revertToPreviouslyRecordedUndoState();
       }
     }
-
 
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
