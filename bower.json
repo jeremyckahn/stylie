@@ -12,7 +12,7 @@
     "jquery-mousewheel": "~3.1.12",
     "keydrown": "~1.2.1",
     "lateralus": "~0.9.3",
-    "rekapi": "~1.6.1",
+    "rekapi": "~1.6.3",
     "xdLocalStorage": "~2.0.1"
   },
   "resolutions": {
