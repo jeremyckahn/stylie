@@ -1,9 +1,10 @@
 {
   "name": "stylie",
   "license": "CC BY-NC-SA",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "dependencies": {
     "aenima": "~0.3.2",
+    "backbone": "~1.1.2",
     "bezierizer": "~0.1.0",
     "bootstrap-sass-official": "~3.2.0",
     "jquery": "~2.1.3",
@@ -12,6 +13,7 @@
     "jquery-mousewheel": "~3.1.12",
     "keydrown": "~1.2.1",
     "lateralus": "~0.9.3",
+    "lodash": "~2.4.1",
     "rekapi": "~1.6.3",
     "xdLocalStorage": "~2.0.1"
   },
@@ -19,6 +21,9 @@
     "jquery-dragon": "~0.4.5",
     "jquery": "~2.1.3",
     "lateralus": "~0.9.3",
-    "shifty": "1.2.2"
+    "shifty": "1.5.2",
+    "underscore": ">=1.7.0",
+    "lodash": "~2.4.1",
+    "backbone": "~1.1.2"
   }
 }
