@@ -1,6 +1,9 @@
 .actor-container-view
 
   .actor-wrapper
+    // This font-size is needed to prevent extraneous padding around the actor
+    // image (https://github.com/jeremyckahn/mantra/issues/1)
+    font-size: 0
     position: absolute
 
     &.centered
