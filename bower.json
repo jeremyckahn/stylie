@@ -3,7 +3,7 @@
   "license": "CC BY-NC-SA",
   "version": "2.5.3",
   "dependencies": {
-    "aenima": "~0.3.2",
+    "aenima": "~0.3.3",
     "backbone": "~1.1.2",
     "bezierizer": "~0.1.0",
     "bootstrap-sass-official": "~3.2.0",
@@ -14,7 +14,7 @@
     "keydrown": "~1.2.1",
     "lateralus": "~0.9.3",
     "lodash": "~2.4.1",
-    "rekapi": "~1.6.3",
+    "rekapi": "~1.7.1",
     "xdLocalStorage": "~2.0.1"
   },
   "resolutions": {
