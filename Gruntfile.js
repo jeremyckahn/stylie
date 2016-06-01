@@ -202,6 +202,17 @@ module.exports = function (grunt) {
             'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*'
           ]
         }]
+      },
+      package: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '.',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            'package.json'
+          ]
+        }]
       }
     },
     bower: {
@@ -291,6 +302,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('deploy', [
     'build',
+    'copy:package',
     'gh-pages'
   ]);
 
