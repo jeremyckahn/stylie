@@ -289,6 +289,16 @@ module.exports = function (grunt) {
     'appcache'
   ]);
 
+  grunt.registerTask('fast-build', [
+    'compass:dist',
+    'useminPrepare',
+    'requirejs',
+    'htmlmin',
+    'concat',
+    'cssmin',
+    'usemin',
+  ]);
+
   grunt.registerTask('deploy', [
     'build',
     'copy:package',
