@@ -20,6 +20,9 @@ define([
 
   var INITIAL_STATE = {
       savedAnimations: {}
+
+      // TODO: Move isRotationModeEnabled and isLoadingTimeline to the .set in
+      // initialize?
       ,isRotationModeEnabled: false
       ,isLoadingTimeline: false
       ,ui: {
@@ -44,9 +47,13 @@ define([
         this.setInitialState();
       }
 
-      // Override whatever is in localStorage for this property, it's weird to
-      // start with Rotation Mode enabled
-      this.set('isRotationModeEnabled', false);
+      this.set({
+        // Override whatever is in localStorage for this property, it's weird
+        // to start with Rotation Mode enabled
+        isRotationModeEnabled: false
+
+        ,env: window.env || {}
+      });
     }
 
     ,setInitialState: function () {
