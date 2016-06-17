@@ -27,7 +27,11 @@
     "grunt-usemin": "~0.1.12",
     "jshint-stylish": "~0.1.5",
     "load-grunt-tasks": "~0.3.0",
+    "nodemon": "^1.9.2",
     "time-grunt": "~0.2.8"
+  },
+  "scripts": {
+    "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\""
   },
   "engines": {
     "node": ">=0.10.0"
