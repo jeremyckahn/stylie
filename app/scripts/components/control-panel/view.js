@@ -74,6 +74,15 @@ define([
     }
 
     /**
+     * @override
+     */
+    ,getTemplateRenderData: function () {
+      return _.extend({
+        showUserPanel: this.lateralus.model.get('hasApi')
+      }, baseProto.getTemplateRenderData.apply(this, arguments));
+    }
+
+    /**
      * Orient the control panel (which is absolutely positioned) to the right
      * of the parent, rather than the left (which is how $.dragon works).  This
      * prevents the control panel from falling off the screen if the user makes

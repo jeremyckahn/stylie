@@ -11,6 +11,8 @@ define([
 
   ,'./model'
 
+  ,'aenima.data-adapter'
+
   ,'./constant'
 
 ], function (
@@ -26,6 +28,8 @@ define([
 
   ,StylieModel
 
+  ,DataAdapter
+
   ,constant
 
 ) {
@@ -39,6 +43,10 @@ define([
   var Stylie = Lateralus.beget(function () {
     Lateralus.apply(this, arguments);
     this.hasInitialized = false;
+
+    this.dataAdapter = new DataAdapter({
+      apiRoot: constant.API_ROOT
+    });
 
     kd.run(kd.tick);
 
@@ -164,6 +172,16 @@ define([
         }.bind(this)
       });
     }
+
+    /**
+     * @param {Object} userData
+     */
+    ,userCreated: function (userData) {
+      this.login(
+        userData.name
+        ,this.collectOne('enteredPassword')
+      );
+    }
   };
 
   fn.initHacks = function () {
@@ -242,6 +260,19 @@ define([
     this.model.trigger('change');
 
     this.emit('savedAnimationListUpdated', this.getSavedAnimationDisplayList());
+  };
+
+  /**
+   * @param {string} name
+   * @param {string} password
+   * @return {jqXHR}
+   */
+  fn.login = function (name, password) {
+    this.dataAdapter
+      .login({ name: name, password: password })
+      .then(function (user) {
+        this.emit('userLoggedIn', user);
+      }.bind(this));
   };
 
   return Stylie;

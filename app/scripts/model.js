@@ -53,6 +53,8 @@ define([
         isRotationModeEnabled: false
 
         ,env: window.env || {}
+
+        ,hasApi: this.lateralus.getQueryParam('hasApi')
       });
     }
 

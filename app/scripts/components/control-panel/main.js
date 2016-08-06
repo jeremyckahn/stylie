@@ -12,6 +12,7 @@ define([
   ,'aenima.component.export-panel'
   ,'stylie.component.html-panel'
   ,'aenima.component.management-panel'
+  ,'aenima.component.user-panel'
 
 ], function (
 
@@ -27,6 +28,7 @@ define([
   ,ExportPanelComponent
   ,HtmlPanelComponent
   ,ManagementPanelComponent
+  ,UserPanelComponent
 
 ) {
   'use strict';
@@ -87,6 +89,13 @@ define([
           this.addComponent(ManagementPanelComponent, {
         el: this.view.$managementPanel
       });
+
+      if (this.lateralus.model.get('hasApi')) {
+        this.userPanelComponent =
+            this.addComponent(UserPanelComponent, {
+          el: this.view.$userPanel
+        });
+      }
     }
   });
 

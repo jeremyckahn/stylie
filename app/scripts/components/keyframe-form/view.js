@@ -65,7 +65,7 @@ define([
         var invalidFields = JSON.parse(error.message.split('|')[1]);
 
         invalidFields.forEach(function (invalidField) {
-          this['$' + invalidField].addClass(INVALID_CLASS);
+          this['$' + invalidField].parent('label').addClass(INVALID_CLASS);
         }, this);
       }
 
@@ -201,7 +201,7 @@ define([
 
       propertyList.forEach(function (propertyObject) {
         var $propertyField = this['$' + propertyObject.name];
-        $propertyField.removeClass(INVALID_CLASS);
+        $propertyField.parent('label').removeClass(INVALID_CLASS);
 
         var input = $propertyField[0];
 
@@ -255,7 +255,7 @@ define([
 
     ,disableMillisecondEditing: function () {
       this.$millisecondInputContainer.removeClass(EDITING_CLASS);
-      this.$millisecond.removeClass(INVALID_CLASS);
+      this.$millisecond.parent('label').removeClass(INVALID_CLASS);
     }
 
     ,saveMillisecondToModel: function () {

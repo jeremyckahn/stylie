@@ -23,6 +23,7 @@ require.config({
     ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
     ,'aenima.constant': 'bower_components/aenima/constant'
     ,'aenima.utils': 'bower_components/aenima/utils'
+    ,'aenima.data-adapter': 'bower_components/aenima/data-adapter'
     ,xdLocalStorage:
       'bower_components/xdLocalStorage/dist/scripts/xdLocalStorage.min'
   }
@@ -100,6 +101,15 @@ require.config({
   }, {
     name: 'aenima.component.management-panel'
     ,location: 'bower_components/aenima/components/management-panel'
+  }, {
+    name: 'aenima.component.user-panel'
+    ,location: 'bower_components/aenima/components/user-panel'
+  }, {
+    name: 'aenima.component.user-creation'
+    ,location: 'bower_components/aenima/components/user-creation'
+  }, {
+    name: 'aenima.component.user-display'
+    ,location: 'bower_components/aenima/components/user-display'
   }, {
     name: 'stylie.component.keyframe-form'
     ,location: 'scripts/components/keyframe-form'
