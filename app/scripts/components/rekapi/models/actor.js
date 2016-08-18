@@ -7,9 +7,9 @@ define([
 
   ,'../collections/keyframe-property'
 
-  ,'aenima.component.rekapi'
+  ,'aenima/components/rekapi/main'
 
-  ,'aenima.constant'
+  ,'aenima/constant'
 
 ], function (
 

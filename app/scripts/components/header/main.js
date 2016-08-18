@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var HeaderComponent = Base.extend({
-    name: 'header'
+    name: 'stylie-header'
     ,View: View
     ,template: template
   });

@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var CrosshairContainerComponent = Base.extend({
-    name: 'crosshair-container'
+    name: 'stylie-crosshair-container'
     ,View: View
     ,template: template
   });

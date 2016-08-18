@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var KeyframeFormComponent = Base.extend({
-    name: 'keyframe-form'
+    name: 'stylie-keyframe-form'
     ,View: View
     ,template: template
   });

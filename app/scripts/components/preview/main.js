@@ -5,10 +5,10 @@ define([
   ,'./view'
   ,'text!./template.mustache'
 
-  ,'stylie.component.animation-path'
-  ,'stylie.component.crosshair-container'
-  ,'stylie.component.actor-container'
-  ,'stylie.component.timeline-scrubber'
+  ,'../animation-path/main'
+  ,'../crosshair-container/main'
+  ,'../actor-container/main'
+  ,'../timeline-scrubber/main'
 
 ], function (
 
@@ -28,7 +28,7 @@ define([
   var Base = Lateralus.Component;
 
   var PreviewComponent = Base.extend({
-    name: 'preview'
+    name: 'stylie-preview'
     ,View: View
     ,template: template
 

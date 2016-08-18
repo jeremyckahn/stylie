@@ -1,8 +1,7 @@
-@import 'app/styles/variables.sass'
 @import 'compass/css3/images'
 @import "compass/css3/flexbox"
 
-.header-view
+.stylie-header-view
   color: $header-color
   height: $header-height
   padding-left: 4em
@@ -37,10 +36,10 @@
     width: 85%
 
   .help
-    +icon-button($help-button-gradient-inner, $help-button-gradient-outer)
+    +bordered-icon-background($help-button-gradient-inner, $help-button-gradient-outer)
 
-  .icon-button.export
-    +icon-button($export-button-gradient-inner, $export-button-gradient-outer)
+  .bordered-icon.export
+    +bordered-icon-background($export-button-gradient-inner, $export-button-gradient-outer)
 
     // Disabling export functionality because of
     // https://github.com/ofirdagan/cross-domain-local-storage/issues/10
@@ -52,4 +51,4 @@
       top: 0
 
   .reset
-    +icon-button($reset-button-gradient-inner, $reset-button-gradient-outer)
+    +bordered-icon-background($reset-button-gradient-inner, $reset-button-gradient-outer)

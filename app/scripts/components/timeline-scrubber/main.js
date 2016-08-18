@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var TimelineScrubberComponent = Base.extend({
-    name: 'timeline-scrubber'
+    name: 'stylie-timeline-scrubber'
     ,View: View
     ,template: template
   });

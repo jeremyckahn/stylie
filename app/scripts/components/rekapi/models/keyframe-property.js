@@ -4,7 +4,7 @@ define([
   ,'lateralus'
   ,'mustache'
 
-  ,'aenima.component.rekapi'
+  ,'aenima/components/rekapi/main'
 
   ,'text!../templates/transform-string.mustache'
 

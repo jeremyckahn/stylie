@@ -5,8 +5,8 @@ define([
 
   ,'text!./template.mustache'
 
-  ,'aenima.component.control-panel'
-  ,'aenima.component.hidable'
+  ,'aenima/components/control-panel/main'
+  ,'aenima/components/hidable/main'
 
   ,'../../constant'
 
@@ -48,6 +48,7 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
+      this.$el.addClass('control-panel-view');
 
       this.hidableView = this.addSubview(HidableComponent.View, {
         el: this.el
@@ -77,8 +78,12 @@ define([
      * @override
      */
     ,getTemplateRenderData: function () {
+      var isEmbedded = this.lateralus.model.get('isEmbedded');
+
       return _.extend({
-        showUserPanel: this.lateralus.model.get('hasApi')
+        showExportPanel: !isEmbedded
+        ,showHtmlPanel: !isEmbedded
+        ,showUserPanel: this.lateralus.model.get('hasApi')
       }, baseProto.getTemplateRenderData.apply(this, arguments));
     }
 

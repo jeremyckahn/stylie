@@ -5,11 +5,11 @@ define([
   ,'./view'
   ,'text!./template.mustache'
 
-  ,'stylie.component.header'
-  ,'stylie.component.help'
-  ,'stylie.component.too-small-message'
-  ,'stylie.component.control-panel'
-  ,'stylie.component.preview'
+  ,'../header/main'
+  ,'../help/main'
+  ,'../too-small-message/main'
+  ,'../control-panel/main'
+  ,'../preview/main'
 
 ], function (
 
@@ -30,23 +30,25 @@ define([
   var Base = Lateralus.Component;
 
   var ContainerComponent = Base.extend({
-    name: 'container'
+    name: 'stylie-container'
     ,View: View
     ,template: template
 
     ,initialize: function () {
-      this.headerComponent = this.addComponent(HeaderComponent, {
-        el: this.view.$header[0]
-      });
+      if (!this.lateralus.model.get('isEmbedded')) {
+        this.headerComponent = this.addComponent(HeaderComponent, {
+          el: this.view.$header[0]
+        });
 
-      this.helpComponent = this.addComponent(HelpComponent, {
-        el: this.view.$help[0]
-      });
+        this.helpComponent = this.addComponent(HelpComponent, {
+          el: this.view.$help[0]
+        });
 
-      this.tooSmallMessageComponent = this.addComponent(
-          TooSmallMessageComponent, {
-        el: this.view.$tooSmallMessage[0]
-      });
+        this.tooSmallMessageComponent = this.addComponent(
+            TooSmallMessageComponent, {
+          el: this.view.$tooSmallMessage[0]
+        });
+      }
 
       this.controlPanelComponent = this.addComponent(ControlPanelComponent, {
         el: this.view.$controlPanel[0]

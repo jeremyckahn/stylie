@@ -1,12 +1,14 @@
 define([
 
-  'lateralus'
+  'underscore'
+  ,'lateralus'
 
   ,'text!./template.mustache'
 
 ], function (
 
-  Lateralus
+  _
+  ,Lateralus
 
   ,template
 
@@ -45,7 +47,11 @@ define([
         $(evt.target).change();
       }
 
-      ,'click .mode-toggles .rotation': function () {
+      ,'click .sidebar-controls .reset': function () {
+        this.emit('userRequestResetAnimation');
+      }
+
+      ,'click .sidebar-controls .rotation': function () {
         this.emit('userRequestToggleRotationEditMode');
       }
 
@@ -59,11 +65,24 @@ define([
      */
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
-      this.$el.addClass('loading');
+      this.$el
+        .addClass('loading')
+        .addClass(
+          this.lateralus.model.get('isEmbedded') ? 'embedded' : 'standalone'
+        );
     }
 
     ,deferredInitialize: function () {
       this.$el.removeClass('loading');
+    }
+
+    /**
+     * @override
+     */
+    ,getTemplateRenderData: function () {
+      return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
+        isEmbedded: this.lateralus.model.get('isEmbedded')
+      });
     }
   });
 

@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var HtmlPanelComponent = Base.extend({
-    name: 'html-panel'
+    name: 'stylie-html-panel'
     ,View: View
     ,template: template
   });

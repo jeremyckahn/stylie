@@ -5,14 +5,14 @@ define([
   ,'./view'
   ,'text!./template.mustache'
 
-  ,'aenima.component.control-panel'
+  ,'aenima/components/control-panel/main'
 
-  ,'stylie.component.keyframes-panel'
-  ,'aenima.component.motion-panel'
-  ,'aenima.component.export-panel'
-  ,'stylie.component.html-panel'
-  ,'aenima.component.management-panel'
-  ,'aenima.component.user-panel'
+  ,'../keyframes-panel/main'
+  ,'aenima/components/motion-panel/main'
+  ,'aenima/components/export-panel/main'
+  ,'../html-panel/main'
+  ,'aenima/components/management-panel/main'
+  ,'aenima/components/user-panel/main'
 
 ], function (
 
@@ -36,7 +36,7 @@ define([
   var Base = AEnimaControlPanelComponent;
 
   var ControlPanelComponent = Base.extend({
-    name: 'control-panel'
+    name: 'stylie-control-panel'
     ,View: View
     ,template: template
 
@@ -52,7 +52,9 @@ define([
        */
       cssConfigObject: function () {
         var motionPanelJson = this.motionPanelComponent.toJSON();
-        var exportPanelJson = this.exportPanelComponent.toJSON();
+        var exportPanelJson = this.exportPanelComponent ?
+          this.exportPanelComponent.toJSON()
+          : {};
 
         return _.extend(motionPanelJson, exportPanelJson);
       }
@@ -71,26 +73,30 @@ define([
         }
       });
 
-      this.exportPanelComponent = this.addComponent(ExportPanelComponent, {
-        el: this.view.$exportPanel
-      }, {
-        modelAttributes: {
-          cssExportClass: 'stylie'
-          ,analyticsUrl:
-            'https://ga-beacon.appspot.com/UA-42910121-1/stylie?pixel'
-        }
-      });
+      if (this.view.$exportPanel) {
+        this.exportPanelComponent = this.addComponent(ExportPanelComponent, {
+          el: this.view.$exportPanel
+        }, {
+          modelAttributes: {
+            cssExportClass: 'stylie'
+            ,analyticsUrl:
+              'https://ga-beacon.appspot.com/UA-42910121-1/stylie?pixel'
+          }
+        });
+      }
 
-      this.htmlPanelComponent = this.addComponent(HtmlPanelComponent, {
-        el: this.view.$htmlPanel
-      });
+      if (this.view.$htmlPanel) {
+        this.htmlPanelComponent = this.addComponent(HtmlPanelComponent, {
+          el: this.view.$htmlPanel
+        });
+      }
 
       this.managementPanelComponent =
           this.addComponent(ManagementPanelComponent, {
         el: this.view.$managementPanel
       });
 
-      if (this.lateralus.model.get('hasApi')) {
+      if (this.view.$userPanel) {
         this.userPanelComponent =
             this.addComponent(UserPanelComponent, {
           el: this.view.$userPanel

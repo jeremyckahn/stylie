@@ -4,7 +4,7 @@ define([
   ,'lateralus'
   ,'keydrown'
 
-  ,'aenima.component.keybindings'
+  ,'aenima/components/keybindings/main'
 
 ], function (
 
@@ -20,7 +20,7 @@ define([
   var Base = AEnimaKeybindings;
 
   var KeybindingsComponent = Base.extend({
-    name: 'keybindings'
+    name: 'stylie-keybindings'
 
     /**
      * @override

@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var ActorContainerComponent = Base.extend({
-    name: 'actor-container'
+    name: 'stylie-actor-container'
     ,View: View
     ,template: template
   });

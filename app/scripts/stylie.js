@@ -5,14 +5,14 @@ define([
   ,'keydrown'
   ,'xdLocalStorage'
 
-  ,'aenima.component.shifty'
-  ,'stylie.component.rekapi'
-  ,'stylie.component.keybindings'
-  ,'stylie.component.container'
+  ,'aenima/components/shifty/main'
+  ,'./components/rekapi/main'
+  ,'./components/keybindings/main'
+  ,'./components/container/main'
 
   ,'./model'
 
-  ,'aenima.data-adapter'
+  ,'aenima/data-adapter'
 
   ,'./constant'
 
@@ -39,11 +39,17 @@ define([
 
   /**
    * @param {Element} el
+   * @param {Object} [options]
+   * @param {boolean} [options.isEmbedded]
+   * @param {string} [options.embeddedImgRoot]
    * @extends {Lateralus}
    * @constuctor
    */
-  var Stylie = Lateralus.beget(function () {
+  var Stylie = Lateralus.beget(function (el, options) {
+    this.options = _.clone(options || {});
+
     Lateralus.apply(this, arguments);
+
     this.hasInitialized = false;
 
     this.dataAdapter = new DataAdapter({
@@ -59,7 +65,9 @@ define([
     this.keybindingsComponent = this.addComponent(KeybindingsComponent);
     this.containerComponent = this.addComponent(ContainerComponent);
 
-    this.shiftyComponent.addNewCurve();
+    if (!this.model.get('isEmbedded')) {
+      this.shiftyComponent.addNewCurve();
+    }
     _.defer(this.deferredInitialize.bind(this));
   }, {
     Model: StylieModel
@@ -263,6 +271,13 @@ define([
     this.model.trigger('change');
 
     this.emit('savedAnimationListUpdated', this.getSavedAnimationDisplayList());
+  };
+
+  /**
+   * @return {Object}
+   */
+  fn.exportTimelineForMantra = function () {
+    return this.rekapiComponent.exportTimelineForMantra();
   };
 
   /**

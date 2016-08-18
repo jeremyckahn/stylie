@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var KeyframesPanelComponent = Base.extend({
-    name: 'keyframes-panel'
+    name: 'stylie-keyframes-panel'
     ,View: View
     ,template: template
   });

@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var CrosshairComponent = Base.extend({
-    name: 'crosshair'
+    name: 'stylie-crosshair'
     ,View: View
     ,template: template
   });

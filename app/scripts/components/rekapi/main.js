@@ -6,7 +6,7 @@ define([
 
   ,'./models/actor'
 
-  ,'aenima.component.rekapi'
+  ,'aenima/components/rekapi/main'
 
 ], function (
 
@@ -25,7 +25,7 @@ define([
   var baseProto = Base.prototype;
 
   var RekapiComponent = Base.extend({
-    name: 'rekapi'
+    name: 'stylie-rekapi'
 
     ,ActorModel: ActorModel
 

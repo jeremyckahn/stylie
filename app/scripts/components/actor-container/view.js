@@ -1,6 +1,7 @@
 define([
 
   'jquery'
+  ,'underscore'
   ,'lateralus'
 
   ,'text!./template.mustache'
@@ -8,6 +9,7 @@ define([
 ], function (
 
   $
+  ,_
   ,Lateralus
 
   ,template
@@ -64,6 +66,15 @@ define([
      */
     ,setCenteringClass: function (isCentered) {
       this.$actorWrapper[isCentered ? 'addClass' : 'removeClass']('centered');
+    }
+
+    /**
+     * @override
+     */
+    ,getTemplateRenderData: function () {
+      return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
+        embeddedImgRoot: this.lateralus.model.get('embeddedImgRoot')
+      });
     }
   });
 

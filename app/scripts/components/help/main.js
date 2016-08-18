@@ -1,6 +1,6 @@
 define([
 
-  'aenima.component.modal'
+  'aenima/components/modal/main'
 
   ,'./view'
   ,'text!./template.mustache'
@@ -18,7 +18,7 @@ define([
   var Base = ModalComponent;
 
   var HelpComponent = Base.extend({
-    name: 'help'
+    name: 'stylie-help'
     ,View: View
     ,template: template
   });

@@ -1,12 +1,21 @@
+{{^isEmbedded}}
 <header class="$header fill"></header>
+{{/isEmbedded}}
 <div class="fill workspace">
   <div class="$controlPanel"></div>
   <div class="$preview fill"></div>
-  <div class="mode-toggles">
-    <button class="icon-button rotation" title="Toggle Rotation/Scale Mode">
-      <i class="glyphicon glyphicon-repeat"></i>
+  <div class="sidebar-controls">
+    {{#isEmbedded}}
+    <button class="bordered-icon reset" title="Remove all keyframes and start over">
+      <i class="glyphicon glyphicon-refresh"></i>
+    </button>
+    {{/isEmbedded}}
+    <button class="bordered-icon rotation" title="Toggle Rotation/Scale Mode">
+      <i class="glyphicon glyphicon-screenshot"></i>
     </button>
   </div>
 </div>
+{{^isEmbedded}}
 <div class="$help fill"></div>
 <div class="$tooSmallMessage fill"></div>
+{{/isEmbedded}}

@@ -4,7 +4,7 @@ define([
 
   ,'text!./template.mustache'
 
-  ,'stylie.component.crosshair'
+  ,'../crosshair/main'
 
 ], function (
 

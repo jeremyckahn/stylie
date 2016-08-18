@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var TooSmallMessageComponent = Base.extend({
-    name: 'too-small-message'
+    name: 'stylie-too-small-message'
     ,View: View
     ,template: template
   });

@@ -1,8 +1,12 @@
 <ul class="$tabsContainer tabs-container">
   <li data-tab-name="keyframes"><a href="#">Keyframes</a></li>
   <li data-tab-name="motion"><a href="#">Motion</a></li>
+  {{#showExportPanel}}
   <li data-tab-name="export"><a href="#">Export</a></li>
+  {{/showExportPanel}}
+  {{#showHtmlPanel}}
   <li data-tab-name="html"><a href="#">HTML</a></li>
+  {{/showHtmlPanel}}
   <li data-tab-name="management"><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
   {{#showUserPanel}}
   <li data-tab-name="user"><a href="#"><i class="glyphicon glyphicon-user"></i></a></li>
@@ -11,8 +15,12 @@
 <ul class="$tabsContentContainer">
   <li class="$keyframesPanel" data-tab-name="keyframes"></li>
   <li class="$motionPanel" data-tab-name="motion"></li>
+  {{#showExportPanel}}
   <li class="$exportPanel" data-tab-name="export"></li>
+  {{/showExportPanel}}
+  {{#showHtmlPanel}}
   <li class="$htmlPanel" data-tab-name="html"></li>
+  {{/showHtmlPanel}}
   <li class="$managementPanel" data-tab-name="management"></li>
   {{#showUserPanel}}
   <li class="$userPanel" data-tab-name="user"></li>

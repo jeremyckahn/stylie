@@ -18,7 +18,7 @@ define([
   var Base = Lateralus.Component;
 
   var AnimationPathComponent = Base.extend({
-    name: 'animation-path'
+    name: 'stylie-animation-path'
     ,View: View
     ,template: template
   });

@@ -3,7 +3,7 @@ define([
   'underscore'
   ,'lateralus'
 
-  ,'aenima.model/persisted-model'
+  ,'aenima/models/persisted-model'
 
 ], function (
 
@@ -41,13 +41,19 @@ define([
     ,initialize: function () {
       baseProto.initialize.apply(this, arguments);
 
-      if (this.keys().length) {
+      var isEmbedded = this.lateralus.getQueryParam('isEmbedded');
+
+      if (isEmbedded) {
+        this.localStorageSave = _.noop;
+      }
+
+      if (this.keys().length && !isEmbedded) {
         this.retrofitUiData();
       } else {
         this.setInitialState();
       }
 
-      this.set({
+      this.set(_.extend({
         // Override whatever is in localStorage for this property, it's weird
         // to start with Rotation Mode enabled
         isRotationModeEnabled: false
@@ -55,7 +61,9 @@ define([
         ,env: window.env || {}
 
         ,hasApi: this.lateralus.getQueryParam('hasApi')
-      });
+        ,isEmbedded: isEmbedded
+        ,embeddedImgRoot: '/'
+      }, this.lateralus.options));
     }
 
     ,setInitialState: function () {

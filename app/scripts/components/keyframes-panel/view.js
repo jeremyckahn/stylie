@@ -5,7 +5,7 @@ define([
 
   ,'text!./template.mustache'
 
-  ,'stylie.component.keyframe-form'
+  ,'../keyframe-form/main'
 
 ], function (
 

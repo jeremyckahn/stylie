@@ -3,7 +3,7 @@ define([
   'backbone'
   ,'lateralus'
 
-  ,'aenima.component.rekapi'
+  ,'aenima/components/rekapi/main'
 
   ,'../models/keyframe-property'
 
