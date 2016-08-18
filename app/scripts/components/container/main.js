@@ -5,7 +5,6 @@ define([
   ,'./view'
   ,'text!./template.mustache'
 
-  ,'stylie.component.keybindings'
   ,'stylie.component.header'
   ,'stylie.component.help'
   ,'stylie.component.too-small-message'
@@ -19,7 +18,6 @@ define([
   ,View
   ,template
 
-  ,KeybindingsComponent
   ,HeaderComponent
   ,HelpComponent
   ,TooSmallMessageComponent
@@ -37,8 +35,6 @@ define([
     ,template: template
 
     ,initialize: function () {
-      this.keybindingsComponent = this.addComponent(KeybindingsComponent);
-
       this.headerComponent = this.addComponent(HeaderComponent, {
         el: this.view.$header[0]
       });

@@ -7,6 +7,7 @@ define([
 
   ,'aenima.component.shifty'
   ,'stylie.component.rekapi'
+  ,'stylie.component.keybindings'
   ,'stylie.component.container'
 
   ,'./model'
@@ -24,6 +25,7 @@ define([
 
   ,ShiftyComponent
   ,RekapiComponent
+  ,KeybindingsComponent
   ,ContainerComponent
 
   ,StylieModel
@@ -54,6 +56,7 @@ define([
 
     this.shiftyComponent = this.addComponent(ShiftyComponent);
     this.rekapiComponent = this.addComponent(RekapiComponent);
+    this.keybindingsComponent = this.addComponent(KeybindingsComponent);
     this.containerComponent = this.addComponent(ContainerComponent);
 
     this.shiftyComponent.addNewCurve();
