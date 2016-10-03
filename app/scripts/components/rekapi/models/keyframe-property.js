@@ -205,6 +205,10 @@ define([
       var keyframeProperty = this.keyframeProperty;
       var actor = keyframeProperty.actor;
 
+      if (millisecond !== keyframeProperty.millisecond) {
+        actor.moveKeyframe(keyframeProperty.millisecond, millisecond);
+      }
+
       // It is necessary to go through actor.modifyKeyframe here so that the
       // timelineModified Rekapi event fires.
       //
@@ -215,10 +219,6 @@ define([
       }, {
         transform: this.getEasing()
       });
-
-      if (millisecond !== keyframeProperty.millisecond) {
-        actor.moveKeyframe(keyframeProperty.millisecond, millisecond);
-      }
     }
   });
 

@@ -111,7 +111,7 @@ define([
         }
       }
 
-      ,'change input[type=number]': function () {
+      ,'change .property input[type=number]': function () {
         this.updateModelFromForm();
       }
 
