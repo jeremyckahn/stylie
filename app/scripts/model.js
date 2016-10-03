@@ -62,7 +62,7 @@ define([
 
         ,hasApi: this.lateralus.getQueryParam('hasApi')
         ,isEmbedded: isEmbedded
-        ,embeddedImgRoot: '/'
+        ,embeddedImgRoot: './'
       }, this.lateralus.options));
     }
 
