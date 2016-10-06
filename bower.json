@@ -14,8 +14,7 @@
     "keydrown": "~1.2.1",
     "lateralus": "~0.9.3",
     "lodash": "~3.10.1",
-    "rekapi": "~1.7.1",
-    "xdLocalStorage": "~2.0.1"
+    "rekapi": "~1.7.1"
   },
   "resolutions": {
     "jquery-dragon": "~0.4.5",

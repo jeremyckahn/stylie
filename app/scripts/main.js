@@ -3,11 +3,6 @@
 
 require.config({
   baseUrl: '/'
-  ,shim: {
-    xdLocalStorage: {
-      exports: 'xdLocalStorage'
-    }
-  }
   ,paths: {
     text: 'bower_components/requirejs-text/text'
     ,jquery: 'scripts/lib/custom-jquery'
@@ -21,8 +16,6 @@ require.config({
     ,underscore: 'bower_components/lodash/lodash'
     ,mustache: 'bower_components/mustache/mustache'
     ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
-    ,xdLocalStorage:
-      'bower_components/xdLocalStorage/dist/scripts/xdLocalStorage.min'
   }
   ,packages: [{
     name: 'lateralus'

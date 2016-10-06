@@ -25,10 +25,6 @@ define([
         this.emit('userRequestToggleHelpModal');
       }
 
-      ,'click .export': function () {
-        this.emit('userRequestExportToMantra');
-      }
-
       ,'click .reset': function () {
         this.emit('userRequestResetAnimation');
       }

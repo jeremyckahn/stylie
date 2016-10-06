@@ -38,17 +38,5 @@
   .help
     +bordered-icon-background($help-button-gradient-inner, $help-button-gradient-outer)
 
-  .bordered-icon.export
-    +bordered-icon-background($export-button-gradient-inner, $export-button-gradient-outer)
-
-    // Disabling export functionality because of
-    // https://github.com/ofirdagan/cross-domain-local-storage/issues/10
-    .safari &
-      display: none
-
-    i
-      left: 1px
-      top: 0
-
   .reset
     +bordered-icon-background($reset-button-gradient-inner, $reset-button-gradient-outer)
