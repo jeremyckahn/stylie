@@ -4,6 +4,7 @@ define([
   ,'lateralus'
   ,'keydrown'
 
+  ,'aenima/mixins/lateralus'
   ,'aenima/components/shifty/main'
   ,'./components/rekapi/main'
   ,'./components/keybindings/main'
@@ -21,6 +22,7 @@ define([
   ,Lateralus
   ,kd
 
+  ,LateralusMixins
   ,ShiftyComponent
   ,RekapiComponent
   ,KeybindingsComponent
@@ -129,7 +131,7 @@ define([
     actorModel.addNewKeyframe();
   };
 
-  fn.lateralusEvents = {
+  fn.lateralusEvents = _.extend({
     'rekapi:timelineModified': function () {
       if (this.hasInitialized) {
         this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
@@ -167,17 +169,9 @@ define([
       this.model.set(
         'isRotationModeEnabled', !this.model.get('isRotationModeEnabled'));
     }
+  }, LateralusMixins.lateralusEvents);
 
-    /**
-     * @param {Object} userData
-     */
-    ,userCreated: function (userData) {
-      this.login(
-        userData.name
-        ,this.collectOne('enteredPassword')
-      );
-    }
-  };
+  _.extend(fn, LateralusMixins.fn);
 
   fn.initHacks = function () {
     var hasSafari = navigator.userAgent.match(/safari/i);
@@ -262,19 +256,6 @@ define([
    */
   fn.exportTimelineForMantra = function () {
     return this.rekapiComponent.exportTimelineForMantra();
-  };
-
-  /**
-   * @param {string} name
-   * @param {string} password
-   * @return {jqXHR}
-   */
-  fn.login = function (name, password) {
-    this.dataAdapter
-      .login({ name: name, password: password })
-      .then(function (user) {
-        this.emit('userLoggedIn', user);
-      }.bind(this));
   };
 
   return Stylie;
