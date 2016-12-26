@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
           '<%= yeoman.app %>/scripts/components/**/*.{scss,sass}',
-          '<%= yeoman.app %>/bower_components/aenima/**/*.{scss,sass}'
+          '<%= yeoman.app %>/node_modules/aenima/**/*.{scss,sass}'
         ],
         tasks: ['compass']
       },
@@ -49,7 +49,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/*.html',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/**/*.{js,mustache}',
-          '{.tmp,<%= yeoman.app %>}/bower_components/aenima/**/*.{js,mustache}',
+          '{.tmp,<%= yeoman.app %>}/node_modules/aenima/**/*.{js,mustache}',
           '<%= yeoman.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp}',
           '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}'
         ]
@@ -199,7 +199,7 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*'
+            'node_modules/bootstrap-sass/assets/fonts/bootstrap/*'
           ]
         }]
       },
@@ -215,11 +215,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    bower: {
-      all: {
-        rjsConfig: '<%= yeoman.app %>/scripts/main.js'
-      }
-    },
     'gh-pages': {
       options: {
         base: 'dist',
@@ -229,7 +224,7 @@ module.exports = function (grunt) {
     },
     bump: {
       options: {
-        files: ['package.json', 'bower.json'],
+        files: ['package.json'],
         commit: false,
         createTag: false,
         tagName: '%VERSION%',

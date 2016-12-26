@@ -4,22 +4,22 @@
 require.config({
   baseUrl: '/'
   ,paths: {
-    text: 'bower_components/requirejs-text/text'
+    text: 'node_modules/requirejs-text/text'
     ,jquery: 'scripts/lib/custom-jquery'
-    ,'jquery-mousewheel': 'bower_components/jquery-mousewheel/jquery.mousewheel'
-    ,'jquery-dragon': 'bower_components/jquery-dragon/src/jquery.dragon'
-    ,'jquery-cubelet': 'bower_components/jquery-cubelet/dist/jquery.cubelet'
-    ,shifty: 'bower_components/shifty/dist/shifty'
-    ,rekapi: 'bower_components/rekapi/dist/rekapi'
-    ,keydrown: 'bower_components/keydrown/dist/keydrown'
-    ,backbone: 'bower_components/backbone/backbone'
-    ,underscore: 'bower_components/lodash/lodash'
-    ,mustache: 'bower_components/mustache/mustache'
-    ,bezierizer: 'bower_components/bezierizer/dist/bezierizer'
+    ,'jquery-mousewheel': 'node_modules/jquery-mousewheel/jquery.mousewheel'
+    ,'jquery-dragon': 'node_modules/jquery-dragon/src/jquery.dragon'
+    ,'jquery-cubelet': 'node_modules/jquery-cubelet/dist/jquery.cubelet'
+    ,shifty: 'node_modules/shifty/dist/shifty'
+    ,rekapi: 'node_modules/rekapi/dist/rekapi'
+    ,keydrown: 'node_modules/keydrown/dist/keydrown'
+    ,backbone: 'node_modules/backbone/backbone'
+    ,underscore: 'node_modules/lodash/index'
+    ,mustache: 'node_modules/mustache/mustache'
+    ,bezierizer: 'node_modules/bezierizer/dist/bezierizer'
   }
   ,packages: [{
     name: 'lateralus'
-    ,location: 'bower_components/lateralus/scripts'
+    ,location: 'node_modules/lateralus/scripts'
     ,main: 'lateralus'
   }, {
     name: 'stylie'
@@ -27,10 +27,10 @@ require.config({
     ,main: 'stylie'
   }, {
     name: 'lateralus.component.tabs'
-    ,location: 'bower_components/lateralus-components/tabs'
+    ,location: 'node_modules/lateralus-components/tabs'
   }, {
     name: 'aenima'
-    ,location: 'bower_components/aenima'
+    ,location: 'node_modules/aenima'
   }]
 });
 
