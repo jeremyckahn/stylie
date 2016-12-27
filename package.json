@@ -47,7 +47,7 @@
   },
   "scripts": {
     "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\"",
-    "setup": "rm -f app/node_modules && ln -s ../node_modules app/node_modules"
+    "postinstall": "rm -f app/node_modules && ln -s ../node_modules app/node_modules"
   },
   "engines": {
     "node": ">=0.10.0"

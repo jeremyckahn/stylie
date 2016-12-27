@@ -19,7 +19,7 @@ Requirements:
 Clone this repo and install the dependencies:
 
 ````
-npm install && npm run setup
+npm install
 ````
 
 To run the app:
