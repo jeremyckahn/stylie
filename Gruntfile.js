@@ -199,7 +199,8 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            'node_modules/bootstrap-sass/assets/fonts/bootstrap/*'
+            'node_modules/bootstrap-sass/assets/fonts/bootstrap/*',
+            '.nojekyll'
           ]
         }]
       },
@@ -220,7 +221,7 @@ module.exports = function (grunt) {
         base: 'dist',
         message: 'Automated deploy commit.'
       },
-      src: '**/*'
+      src: ['**/*', 'index.html', '.nojekyll']
     },
     bump: {
       options: {
