@@ -1,6 +1,7 @@
 define([
 
-  'lateralus'
+  'jquery'
+  ,'lateralus'
   ,'underscore'
   ,'shifty'
 
@@ -10,7 +11,8 @@ define([
 
 ], function (
 
-  Lateralus
+  $
+  ,Lateralus
   ,_
   ,Tweenable
 

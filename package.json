@@ -3,7 +3,7 @@
   "version": "2.6.3",
   "license": "CC BY-NC-SA",
   "dependencies": {
-    "aenima": "0.7.1",
+    "aenima": "0.7.2",
     "backbone": "1.2.1",
     "bezierizer": "0.1.0",
     "bootstrap-sass": "3.2.0",
@@ -13,9 +13,10 @@
     "jquery-mousewheel": "~3.1.12",
     "keydrown": "~1.2.1",
     "lateralus": "~0.9.3",
+    "lateralus-components": "Jellyvision/lateralus-components.git#0.0.10",
     "lodash": "~3.10.1",
     "mustache": "^2.3.0",
-    "rekapi": "~1.7.1",
+    "rekapi": "~1.7.4",
     "requirejs": "2.1.15",
     "requirejs-text": "2.0.12"
   },
@@ -35,15 +36,17 @@
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-contrib-uglify": "~0.3.1",
     "grunt-contrib-watch": "~0.5.3",
+    "grunt-exec": "^1.0.1",
     "grunt-gh-pages": "^0.9.1",
     "grunt-open": "~0.2.3",
-    "grunt-requirejs": "~0.4.0",
     "grunt-rev": "^0.1.0",
-    "grunt-usemin": "~0.1.12",
+    "grunt-usemin": "3.0.0",
     "jshint-stylish": "~0.1.5",
     "load-grunt-tasks": "~0.3.0",
     "nodemon": "^1.9.2",
-    "time-grunt": "~0.2.8"
+    "raw-loader": "^0.5.1",
+    "time-grunt": "~0.2.8",
+    "webpack": "^1.14.0"
   },
   "scripts": {
     "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\"",

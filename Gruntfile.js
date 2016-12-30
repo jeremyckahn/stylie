@@ -117,26 +117,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    requirejs: {
-      dist: {
-        // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
-        options: {
-          baseUrl: '<%= yeoman.app %>',
-          optimize: 'none',
-          // TODO: Figure out how to make sourcemaps work with grunt-usemin
-          // https://github.com/yeoman/grunt-usemin/issues/30
-          //generateSourceMaps: true,
-          // required to support SourceMaps
-          // http://requirejs.org/docs/errors.html#sourcemapcomments
-          preserveLicenseComments: false,
-          useStrict: true,
-          wrap: true,
-          mainConfigFile: 'app/scripts/main.js',
-          name: 'scripts/main'
-          //uglify2: {} // https://github.com/mishoo/UglifyJS2
-        }
-      }
-    },
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
       options: {
@@ -147,7 +127,12 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        dirs: ['<%= yeoman.dist %>']
+        dirs: ['<%= yeoman.dist %>'],
+        blockReplacements: {
+          remove: function () {
+            return '';
+          }
+        }
       }
     },
     imagemin: {
@@ -221,7 +206,14 @@ module.exports = function (grunt) {
         base: 'dist',
         message: 'Automated deploy commit.'
       },
-      src: ['**/*', 'index.html', '.nojekyll']
+      src: [
+        '**/*',
+        'index.html',
+        'stylie.js',
+        'stylie.js.map',
+        'manifest.appcache',
+        '.nojekyll'
+      ]
     },
     bump: {
       options: {
@@ -248,6 +240,9 @@ module.exports = function (grunt) {
         },
         network: '*'
       }
+    },
+    exec: {
+      webpack: './node_modules/.bin/webpack -d --optimize-minimize'
     }
   });
 
@@ -274,7 +269,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'compass:dist',
     'useminPrepare',
-    'requirejs',
+    'exec:webpack',
     'imagemin',
     'htmlmin',
     'concat',
@@ -288,7 +283,7 @@ module.exports = function (grunt) {
   grunt.registerTask('fast-build', [
     'compass:dist',
     'useminPrepare',
-    'requirejs',
+    'exec:webpack',
     'htmlmin',
     'concat',
     'cssmin',
