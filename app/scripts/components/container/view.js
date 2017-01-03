@@ -1,13 +1,15 @@
 define([
 
-  'underscore'
+  'jquery'
+  ,'underscore'
   ,'lateralus'
 
   ,'text!./template.mustache'
 
 ], function (
 
-  _
+  $
+  ,_
   ,Lateralus
 
   ,template
