@@ -47,9 +47,9 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/**/*.{js,mustache}',
-          '{.tmp,<%= yeoman.app %>}/node_modules/aenima/**/*.{js,mustache}',
+          '<%= yeoman.app %>/styles/main.css',
+          '<%= yeoman.app %>/scripts/**/*.{js,mustache}',
+          '<%= yeoman.app %>/node_modules/aenima/**/*.{js,mustache}',
           '<%= yeoman.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp}',
           '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}'
         ]
@@ -66,7 +66,6 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               lrSnippet,
-              mountFolder(connect, '.tmp'),
               mountFolder(connect, yeomanConfig.app)
             ];
           }
@@ -88,8 +87,7 @@ module.exports = function (grunt) {
       }
     },
     clean: {
-      dist: ['.tmp', '<%= yeoman.dist %>/*'],
-      server: '.tmp'
+      dist: ['<%= yeoman.dist %>/*']
     },
     jshint: {
       options: {
@@ -105,7 +103,7 @@ module.exports = function (grunt) {
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
+        cssDir: '<%= yeoman.app %>/styles',
         imagesDir: '<%= yeoman.app %>/img',
         importPath: './',
         relativeAssets: true
@@ -149,8 +147,7 @@ module.exports = function (grunt) {
       dist: {
         files: {
           '<%= yeoman.dist %>/styles/main.css': [
-            '.tmp/styles/{,*/}*.css',
-            '<%= yeoman.app %>/styles/{,*/}*.css'
+            '<%= yeoman.app %>/styles/main.css'
           ]
         }
       }
@@ -257,7 +254,6 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      'clean:server',
       'compass:server',
       'connect:livereload',
       'open:server',
