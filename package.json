@@ -3,7 +3,7 @@
   "version": "2.6.3",
   "license": "CC BY-NC-SA",
   "dependencies": {
-    "aenima": "0.7.2",
+    "aenima": "0.7.3",
     "backbone": "1.2.1",
     "bezierizer": "0.1.0",
     "bootstrap-sass": "3.2.0",
@@ -46,11 +46,11 @@
     "nodemon": "^1.9.2",
     "raw-loader": "^0.5.1",
     "time-grunt": "~0.2.8",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
-    "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\"",
-    "postinstall": "rm -f app/node_modules && ln -s ../node_modules app/node_modules"
+    "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\""
   },
   "engines": {
     "node": ">=0.10.0"

@@ -2,7 +2,7 @@ const path = require('path');
 const Webpack = require('webpack');
 
 const modulePaths = [
-  'app/scripts',
+  'scripts',
   path.join(__dirname, 'node_modules')
 ];
 
