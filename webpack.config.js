@@ -55,5 +55,9 @@ module.exports = {
         comments: false
       }
     })
-  ]
+  ],
+  devServer: {
+    port: 9005,
+    open: true
+  }
 };
