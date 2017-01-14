@@ -7,11 +7,10 @@ const modulePaths = [
 ];
 
 module.exports = {
-  entry: 'stylie.js',
+  entry: 'main.js',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'stylie.js',
-    libraryTarget: 'amd'
+    filename: 'main.js',
   },
   devtool: 'source-map',
   resolveLoader: {
@@ -57,7 +56,6 @@ module.exports = {
     })
   ],
   devServer: {
-    port: 9005,
-    open: true
+    port: 9005
   }
 };
