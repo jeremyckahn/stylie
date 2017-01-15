@@ -57,5 +57,8 @@ module.exports = {
   ],
   devServer: {
     port: 9005
+  },
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, './node_modules/compass-mixins/lib')]
   }
 };

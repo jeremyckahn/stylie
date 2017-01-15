@@ -33,21 +33,12 @@ module.exports = function (grunt) {
         nospawn: true,
         livereload: LIVERELOAD_PORT
       },
-      compass: {
-        files: [
-          '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
-          '<%= yeoman.app %>/scripts/components/**/*.{scss,sass}',
-          '<%= yeoman.app %>/node_modules/aenima/**/*.{scss,sass}'
-        ],
-        tasks: ['compass']
-      },
       livereload: {
         options: {
           livereload: grunt.option('livereloadport') || LIVERELOAD_PORT
         },
         files: [
           '<%= yeoman.app %>/*.html',
-          '<%= yeoman.app %>/styles/main.css',
           '<%= yeoman.app %>/scripts/**/*.{js,mustache}',
           '<%= yeoman.app %>/node_modules/aenima/**/*.{js,mustache}',
           '<%= yeoman.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp}',
@@ -100,39 +91,6 @@ module.exports = function (grunt) {
         '<%= yeoman.app %>/scripts/components/{,*/}*.js'
       ]
     },
-    compass: {
-      options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '<%= yeoman.app %>/styles',
-        imagesDir: '<%= yeoman.app %>/img',
-        importPath: './',
-        relativeAssets: true
-      },
-      dist: {},
-      server: {
-        options: {
-          debugInfo: true
-        }
-      }
-    },
-    useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
-      options: {
-        dest: '<%= yeoman.dist %>'
-      }
-    },
-    usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-      options: {
-        dirs: ['<%= yeoman.dist %>'],
-        blockReplacements: {
-          remove: function () {
-            return '';
-          }
-        }
-      }
-    },
     imagemin: {
       dist: {
         files: [{
@@ -140,36 +98,6 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/img',
           src: '{,*/}*.{png,jpg,jpeg}',
           dest: '<%= yeoman.dist %>/img'
-        }]
-      }
-    },
-    cssmin: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/styles/main.css': [
-            '<%= yeoman.app %>/styles/main.css'
-          ]
-        }
-      }
-    },
-    htmlmin: {
-      dist: {
-        options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>',
-          src: '*.html',
-          dest: '<%= yeoman.dist %>'
         }]
       }
     },
@@ -194,6 +122,17 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             'package.json'
+          ]
+        }]
+      },
+      index: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '.',
+          dest: '<%= yeoman.dist %>',
+          src: [
+            'index.html'
           ]
         }]
       }
@@ -254,7 +193,6 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      'compass:server',
       'connect:livereload',
       'open:server',
       'watch'
@@ -263,26 +201,15 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'compass:dist',
-    'useminPrepare',
     'exec:webpack',
     'imagemin',
-    'htmlmin',
-    'concat',
-    'cssmin',
+    'copy:index',
     'copy:fonts',
-    'usemin',
     'appcache'
   ]);
 
   grunt.registerTask('fast-build', [
-    'compass:dist',
-    'useminPrepare',
     'exec:webpack',
-    'htmlmin',
-    'concat',
-    'cssmin',
-    'usemin',
   ]);
 
   grunt.registerTask('deploy', [
