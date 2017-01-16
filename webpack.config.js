@@ -1,6 +1,8 @@
 const path = require('path');
 const Webpack = require('webpack');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const modulePaths = [
   'scripts',
   path.join(__dirname, 'node_modules')
@@ -59,6 +61,10 @@ module.exports = {
     port: 9005
   },
   sassLoader: {
-    includePaths: [path.resolve(__dirname, './node_modules/compass-mixins/lib')]
+    includePaths: [
+      path.resolve(__dirname, './node_modules/compass-mixins/lib')
+    ],
+    outputStyle: isProduction ? 'compressed' : 'expanded',
+    sourceComments: !isProduction
   }
 };

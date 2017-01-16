@@ -123,7 +123,7 @@ module.exports = function (grunt) {
       }
     },
     exec: {
-      webpack: './node_modules/.bin/webpack -d --optimize-minimize'
+      webpack: 'export NODE_ENV=production && ./node_modules/.bin/webpack -d --optimize-minimize'
     }
   });
 
