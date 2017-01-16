@@ -20,15 +20,14 @@
     "rekapi": "~1.7.4"
   },
   "devDependencies": {
+    "appcache-manifest": "^2.0.0",
     "grunt": "~0.4.1",
-    "grunt-appcache": "^0.1.8",
     "grunt-bump": "0.0.17",
-    "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-imagemin": "1.0.1",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-exec": "^1.0.1",
     "grunt-gh-pages": "^0.9.1",
+    "imagemin-cli": "^3.0.0",
     "jshint-stylish": "~0.1.5",
     "load-grunt-tasks": "~0.3.0",
     "node-sass": "^4.3.0",
@@ -41,9 +40,10 @@
     "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
-    "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\""
+    "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\"",
+    "build": "sh task.sh build"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=7.1.0"
   }
 }

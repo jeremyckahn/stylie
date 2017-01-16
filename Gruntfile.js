@@ -22,9 +22,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
-    clean: {
-      dist: ['<%= yeoman.dist %>/*']
-    },
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -36,29 +33,7 @@ module.exports = function (grunt) {
         '<%= yeoman.app %>/scripts/components/{,*/}*.js'
       ]
     },
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/img',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= yeoman.dist %>/img'
-        }]
-      }
-    },
     copy: {
-      fonts: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            'node_modules/bootstrap-sass/assets/fonts/bootstrap/*',
-            '.nojekyll'
-          ]
-        }]
-      },
       package: {
         files: [{
           expand: true,
@@ -67,17 +42,6 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             'package.json'
-          ]
-        }]
-      },
-      index: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '.',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            'index.html'
           ]
         }]
       }
@@ -106,34 +70,14 @@ module.exports = function (grunt) {
         push: false
       }
     },
-    appcache: {
-      options: {
-        basePath: '<%= yeoman.dist %>',
-        preferOnline: true
-      },
-      all: {
-        dest: '<%= yeoman.dist %>/manifest.appcache',
-        cache: {
-          patterns: [
-            '<%= yeoman.dist %>/**/**',
-            'manifest.appcache'
-          ]
-        },
-        network: '*'
-      }
-    },
     exec: {
-      webpack: 'export NODE_ENV=production && ./node_modules/.bin/webpack -d --optimize-minimize'
+      webpack: 'export NODE_ENV=production && ./node_modules/.bin/webpack -d --optimize-minimize',
+      build: 'npm run build'
     }
   });
 
   grunt.registerTask('build', [
-    'clean:dist',
-    'exec:webpack',
-    'imagemin',
-    'copy:index',
-    'copy:fonts',
-    'appcache'
+    'exec:build'
   ]);
 
   grunt.registerTask('fast-build', [
