@@ -41,7 +41,8 @@
   },
   "scripts": {
     "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\"",
-    "build": "sh task.sh build"
+    "build": "sh task.sh build",
+    "start": "webpack-dev-server"
   },
   "engines": {
     "node": ">=7.1.0"

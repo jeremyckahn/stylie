@@ -25,7 +25,7 @@ npm install
 To run the app:
 
 ````
-grunt serve
+npm run start
 ````
 
 You can now access Stylie from http://localhost:9000.
@@ -35,13 +35,7 @@ You can now access Stylie from http://localhost:9000.
 You can build the project with:
 
 ````
-grunt build
-````
-
-And test the optimized build locally with:
-
-````
-grunt serve:dist
+npm run build
 ````
 
 ## Contributors
