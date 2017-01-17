@@ -25,7 +25,7 @@ npm install
 To run the app:
 
 ````
-npm run start
+npm start
 ````
 
 You can now access Stylie from http://localhost:9000.
