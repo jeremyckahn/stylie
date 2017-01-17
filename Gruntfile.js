@@ -22,17 +22,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: [
-        'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/*.js',
-        '<%= yeoman.app %>/scripts/components/{,*/}*.js'
-      ]
-    },
     copy: {
       package: {
         files: [{
@@ -83,10 +72,5 @@ module.exports = function (grunt) {
     'build',
     'copy:package',
     'gh-pages'
-  ]);
-
-  grunt.registerTask('default', [
-    'jshint',
-    'build'
   ]);
 };

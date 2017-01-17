@@ -53,4 +53,11 @@ prefer-online" >> "$DIST/manifest.appcache"
       --watch styles \
       --exec "npm run build:js"
   ;;
+
+  lint )
+    jshint \
+      --config=".jshintrc" \
+      scripts --exclude="scripts/lib/*" \
+      && echo "All good! 👍"
+  ;;
 esac
