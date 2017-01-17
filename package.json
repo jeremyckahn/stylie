@@ -40,8 +40,9 @@
     "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
-    "fast-build:watch": "nodemon --watch app/scripts --exec \"grunt fast-build\"",
+    "fast-build:watch": "sh task.sh fast-build:watch",
     "build": "sh task.sh build",
+    "build:js": "sh task.sh build:js",
     "start": "webpack-dev-server"
   },
   "engines": {

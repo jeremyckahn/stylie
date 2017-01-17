@@ -13,7 +13,7 @@ case "$COMMAND" in
 
     rm -rf "$DIST"
 
-    webpack -d --optimize-minimize
+    npm run build:js
 
     imagemin \
       img/*.{png,jpg,jpeg} \
@@ -40,5 +40,17 @@ case "$COMMAND" in
 SETTINGS:
 prefer-online" >> "$DIST/manifest.appcache"
 
+  ;;
+
+  build:js )
+    echo "Building JavaScript and CSS... please wait a moment."
+    webpack -d --optimize-minimize
+  ;;
+
+  fast-build:watch )
+    nodemon \
+      --watch scripts \
+      --watch styles \
+      --exec "npm run build:js"
   ;;
 esac

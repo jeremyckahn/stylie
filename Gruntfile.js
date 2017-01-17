@@ -71,17 +71,12 @@ module.exports = function (grunt) {
       }
     },
     exec: {
-      webpack: 'export NODE_ENV=production && ./node_modules/.bin/webpack -d --optimize-minimize',
       build: 'npm run build'
     }
   });
 
   grunt.registerTask('build', [
     'exec:build'
-  ]);
-
-  grunt.registerTask('fast-build', [
-    'exec:webpack',
   ]);
 
   grunt.registerTask('deploy', [
