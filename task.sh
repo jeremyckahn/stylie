@@ -47,6 +47,17 @@ prefer-online" >> "$DIST/manifest.appcache"
     webpack -d --optimize-minimize
   ;;
 
+  deploy )
+    npm run build
+    cp package.json "$DIST/package.json"
+
+    gh-pages \
+      --dotfiles \
+      --dist="$DIST" \
+      --src="**/**" \
+      --message="Automated deploy commit."
+  ;;
+
   fast-build:watch )
     nodemon \
       --watch scripts \

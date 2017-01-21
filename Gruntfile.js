@@ -22,33 +22,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
-    copy: {
-      package: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '.',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            'package.json'
-          ]
-        }]
-      }
-    },
-    'gh-pages': {
-      options: {
-        base: 'dist',
-        message: 'Automated deploy commit.'
-      },
-      src: [
-        '**/*',
-        'index.html',
-        'stylie.js',
-        'stylie.js.map',
-        'manifest.appcache',
-        '.nojekyll'
-      ]
-    },
     bump: {
       options: {
         files: ['package.json'],
@@ -58,19 +31,6 @@ module.exports = function (grunt) {
         tagMessage: 'Version %VERSION%',
         push: false
       }
-    },
-    exec: {
-      build: 'npm run build'
     }
   });
-
-  grunt.registerTask('build', [
-    'exec:build'
-  ]);
-
-  grunt.registerTask('deploy', [
-    'build',
-    'copy:package',
-    'gh-pages'
-  ]);
 };
