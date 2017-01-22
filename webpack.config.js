@@ -1,6 +1,7 @@
 const path = require('path');
 const Webpack = require('webpack');
 
+const { version } = require('./package.json');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const modulePaths = [
@@ -55,7 +56,8 @@ module.exports = {
       output: {
         comments: false
       }
-    })
+    }),
+    new Webpack.BannerPlugin(version)
   ],
   devServer: {
     port: 9005
