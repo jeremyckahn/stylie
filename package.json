@@ -39,7 +39,10 @@
     "build:js": "sh task.sh build:js",
     "deploy": "sh task.sh deploy",
     "start": "webpack-dev-server",
-    "lint": "sh task.sh lint"
+    "lint": "sh task.sh lint",
+    "preversion": "npm run lint",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags && npm run deploy"
   },
   "engines": {
     "node": ">=7.1.0"
