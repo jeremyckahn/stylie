@@ -38,6 +38,16 @@ You can build the project with:
 npm run build
 ````
 
+## Releasing
+
+Release process uses standard [npm version](https://docs.npmjs.com/cli/version) process:
+
+````
+npm version [major|minor|patch]
+````
+
+You'll need Git remote repo write/push permissions for this to work.
+
 ## Contributors
 
 I can't design things, but I know people that can.  The overall look of the app
