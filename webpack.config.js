@@ -2,38 +2,26 @@ const path = require('path');
 const Webpack = require('webpack');
 
 const { version } = require('./package.json');
-const isProduction = process.env.NODE_ENV === 'production';
-
-const modulePaths = [
-  'scripts',
-  path.join(__dirname, 'node_modules')
-];
 
 module.exports = {
-  entry: 'main.js',
+  entry: './scripts/main.js',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
   devtool: 'source-map',
   resolveLoader: {
-
-    // http://webpack.github.io/docs/troubleshooting.html#npm-linked-modules-doesn-t-find-their-dependencies
-    fallback: modulePaths,
-
     alias: {
       text: 'raw-loader'
     }
   },
   resolve: {
-    modulesDirectories: modulePaths,
-
-    // http://webpack.github.io/docs/troubleshooting.html#npm-linked-modules-doesn-t-find-their-dependencies
-    fallback: modulePaths,
-
+    modules: [
+      'node_modules'
+    ],
     alias: {
       underscore: 'lodash',
-      jquery: 'lib/custom-jquery',
+      jquery: path.resolve(__dirname, 'scripts/lib/custom-jquery'),
       'jquery-mousewheel': 'jquery-mousewheel/jquery.mousewheel',
       'jquery-dragon': 'jquery-dragon/src/jquery.dragon',
       'jquery-cubelet': 'jquery-cubelet/dist/jquery.cubelet',
@@ -46,6 +34,35 @@ module.exports = {
       aenima: 'aenima',
       bezierizer: 'bezierizer/dist/bezierizer'
     }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: path.join(__dirname, 'node_modules')
+      }, {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        use: [{
+          loader: 'file-loader'
+        }]
+      }, {
+        test: /\.(sass|scss|css)$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader'
+        }, {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true,
+            includePaths: [
+              path.resolve(__dirname, './node_modules/compass-mixins/lib')
+            ]
+          }
+        }]
+      }
+    ]
   },
   plugins: [
     new Webpack.optimize.UglifyJsPlugin({
@@ -61,12 +78,5 @@ module.exports = {
   ],
   devServer: {
     port: 9005
-  },
-  sassLoader: {
-    includePaths: [
-      path.resolve(__dirname, './node_modules/compass-mixins/lib')
-    ],
-    outputStyle: isProduction ? 'compressed' : 'expanded',
-    sourceComments: !isProduction
   }
 };
