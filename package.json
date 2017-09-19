@@ -1,6 +1,6 @@
 {
   "name": "@jeremyckahn/stylie",
-  "version": "2.6.4",
+  "version": "2.7.1",
   "license": "CC BY-NC-SA",
   "dependencies": {
     "aenima": "0.7.3",
