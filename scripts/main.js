@@ -1,4 +1,4 @@
-require('!style-loader!raw-loader!sass-loader!../styles/main.sass');
-const Stylie = require('stylie');
+import '../styles/main.sass';
+import Stylie from './stylie';
 
 window.stylie = new Stylie(document.getElementById('stylie'));
