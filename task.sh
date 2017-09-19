@@ -3,7 +3,6 @@
 COMMAND=$1
 BIN="./node_modules/.bin"
 DIST="dist"
-FONT_DIR="node_modules/bootstrap-sass/assets/fonts/bootstrap/"
 
 export PATH=$BIN:$PATH
 
@@ -22,16 +21,9 @@ case "$COMMAND" in
     cp index.html "$DIST/"
     cp .nojekyll "$DIST/"
 
-    mkdir -p "$DIST/$FONT_DIR"
-    cp -r \
-      "$FONT_DIR"* \
-      "$DIST/$FONT_DIR"
-
     appcache-manifest \
-      "$DIST/index.html" \
-      "$DIST/main.js" \
-      "$DIST/img/*" \
-      "$DIST/$FONT_DIR*" \
+      "$DIST/"{index.html,main.js,img/*} \
+      "$DIST/*".{png,svg,woff,eot,ttf} \
       --network-star \
       -prefix="/stylie" \
       --output="$DIST/manifest.appcache"
