@@ -1,7 +1,12 @@
+'use strict';
+
 const path = require('path');
 const Webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const { version } = require('./package.json');
+
+const rootDir = modulePath => path.resolve(__dirname, modulePath);
 
 module.exports = {
   entry: './scripts/main.js',
@@ -19,20 +24,21 @@ module.exports = {
     modules: [
       'node_modules'
     ],
+    symlinks: false,
     alias: {
       underscore: 'lodash',
-      jquery: path.resolve(__dirname, 'scripts/lib/custom-jquery'),
-      'jquery-mousewheel': 'jquery-mousewheel/jquery.mousewheel',
-      'jquery-dragon': 'jquery-dragon/src/jquery.dragon',
-      'jquery-cubelet': 'jquery-cubelet/dist/jquery.cubelet',
-      shifty: 'shifty/dist/shifty',
-      rekapi: 'rekapi/dist/rekapi',
-      keydrown: 'keydrown/dist/keydrown',
-      backbone: 'backbone/backbone',
-      lateralus: 'lateralus/dist/lateralus',
-      'lateralus.component.tabs': 'lateralus-components/tabs/main',
-      aenima: 'aenima',
-      bezierizer: 'bezierizer/dist/bezierizer'
+      lodash: rootDir('node_modules/lodash/index.js'),
+      jquery: rootDir('scripts/lib/custom-jquery'),
+      'jquery-mousewheel': rootDir('node_modules/jquery-mousewheel/jquery.mousewheel'),
+      'jquery-dragon': rootDir('node_modules/jquery-dragon/src/jquery.dragon'),
+      'jquery-cubelet': rootDir('node_modules/jquery-cubelet/dist/jquery.cubelet'),
+      rekapi: rootDir('node_modules/rekapi/src/main'),
+      shifty: rootDir('node_modules/shifty/src/main'),
+      keydrown: rootDir('node_modules/keydrown/dist/keydrown'),
+      lateralus: rootDir('node_modules/lateralus/dist/lateralus'),
+      'lateralus.component.tabs': rootDir('node_modules/lateralus-components/tabs/main'),
+      aenima: rootDir('node_modules/aenima'),
+      bezierizer: rootDir('node_modules/bezierizer/dist/bezierizer')
     }
   },
   module: {
@@ -40,7 +46,13 @@ module.exports = {
       {
         test: /\.js$/,
         use: 'babel-loader',
-        exclude: path.join(__dirname, 'node_modules')
+        include: [
+          rootDir('scripts'),
+          rootDir('node_modules/shifty'),
+          rootDir('node_modules/rekapi'),
+          rootDir('node_modules/aenima'),
+          rootDir('node_modules/webpack-dev-server')
+        ]
       }, {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         use: [{
@@ -65,14 +77,17 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin([ 'dist' ]),
     new Webpack.optimize.UglifyJsPlugin({
       compress: {
         dead_code: true,
-        unused: true
+        unused: true,
+        warnings: false
       },
       output: {
         comments: false
-      }
+      },
+      sourceMap: true
     }),
     new Webpack.BannerPlugin(version)
   ],
