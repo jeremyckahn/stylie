@@ -36,7 +36,7 @@ prefer-online" >> "$DIST/manifest.appcache"
 
   build:js )
     echo "Building JavaScript and CSS... please wait a moment."
-    webpack -d --optimize-minimize
+    webpack
   ;;
 
   deploy )

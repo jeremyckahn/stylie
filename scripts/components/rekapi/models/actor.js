@@ -97,14 +97,14 @@ define([
         ,silentOptionObject
       );
 
-      this.keyframe(millisecond, {
+      this.actor.keyframe(millisecond, {
         transform: keyframePropertyModel.getValue()
       }, {
         transform: keyframePropertyModel.getEasing()
       });
 
       var keyframeProperty =
-        this.getKeyframeProperty('transform', millisecond);
+        this.actor.getKeyframeProperty('transform', millisecond);
 
       keyframePropertyModel.bindToRawKeyframeProperty(keyframeProperty);
 

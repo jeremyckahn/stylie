@@ -117,20 +117,6 @@ define([
     }
 
     /**
-     * @override
-     */
-    ,importTimeline: function (timeline) {
-      this.fromJSON(timeline);
-    }
-
-    /**
-     * @override
-     */
-    ,exportTimeline: function () {
-      return this.toJSON();
-    }
-
-    /**
      * @param {Object} animationData
      */
     ,fromJSON: function (animationData) {

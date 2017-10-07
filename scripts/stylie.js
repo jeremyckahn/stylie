@@ -64,10 +64,6 @@ define([
     this.rekapiComponent = this.addComponent(RekapiComponent);
     this.keybindingsComponent = this.addComponent(KeybindingsComponent);
     this.containerComponent = this.addComponent(ContainerComponent);
-
-    if (!this.model.get('isEmbedded')) {
-      this.shiftyComponent.addNewCurve();
-    }
     _.defer(this.deferredInitialize.bind(this));
   }, {
     Model: StylieModel
@@ -76,6 +72,10 @@ define([
   var fn = Stylie.prototype;
 
   fn.deferredInitialize = function () {
+    if (!this.model.get('isEmbedded')) {
+      this.shiftyComponent.addNewCurve();
+    }
+
     var savedAnimations = this.model.get('savedAnimations');
     var transientAnimation = savedAnimations[constant.TRANSIENT_ANIMATION_NAME];
 
