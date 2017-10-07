@@ -1,9 +1,9 @@
 {
   "name": "@jeremyckahn/stylie",
-  "version": "2.7.2",
+  "version": "2.8.0",
   "license": "CC BY-NC-SA",
   "dependencies": {
-    "aenima": "0.7.3",
+    "aenima": "0.8.0",
     "backbone": "1.2.1",
     "bezierizer": "0.1.0",
     "bootstrap-sass": "3.2.0",
@@ -17,13 +17,16 @@
     "lateralus-components": "Jellyvision/lateralus-components.git#0.0.10",
     "lodash": "~3.10.1",
     "mustache": "^2.3.0",
-    "rekapi": "~1.7.4"
+    "rekapi": "~2.0.4",
+    "shifty": "^2.1.2"
   },
   "devDependencies": {
     "appcache-manifest": "^2.0.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
     "banner-webpack-plugin": "^0.1.3",
+    "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "file-loader": "^0.11.2",
     "gh-pages": "^0.12.0",
@@ -34,8 +37,8 @@
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "webpack": "^3.5.6",
-    "webpack-dev-server": "^2.7.1"
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
   },
   "scripts": {
     "fast-build:watch": "sh task.sh fast-build:watch",
