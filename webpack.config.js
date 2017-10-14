@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const Webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
