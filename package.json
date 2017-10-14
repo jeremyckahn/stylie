@@ -48,7 +48,7 @@
     "start": "webpack-dev-server",
     "lint": "sh task.sh lint",
     "preversion": "npm run lint",
-    "postversion": "git push && git push --tags && npm run deploy"
+    "postversion": "git push && git push --tags && npm run deploy && npm publish"
   },
   "engines": {
     "node": ">=7.1.0"
