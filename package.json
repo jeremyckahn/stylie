@@ -2,6 +2,7 @@
   "name": "@jeremyckahn/stylie",
   "version": "2.8.0",
   "license": "CC BY-NC-SA",
+  "main": "dist/stylie.js",
   "dependencies": {
     "aenima": "0.8.0",
     "backbone": "1.2.1",

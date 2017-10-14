@@ -16,6 +16,8 @@ define([
 
   ,'./constant'
 
+  ,'../styles/main.sass'
+
 ], function (
 
   _

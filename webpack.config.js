@@ -7,10 +7,16 @@ const { version } = require('./package.json');
 const rootDir = modulePath => path.resolve(__dirname, modulePath);
 
 module.exports = {
-  entry: './scripts/main.js',
+  entry: {
+    main: './scripts/main.js',
+    stylie: './scripts/stylie.js'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'main.js',
+    filename: '[name].js',
+    library: 'stylie',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   devtool: 'source-map',
   resolveLoader: {
