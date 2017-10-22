@@ -12,7 +12,7 @@ define([
 
   _
   ,Lateralus
-  ,Rekapi
+  ,rekapi
 
   ,ActorModel
 
@@ -23,6 +23,8 @@ define([
 
   var Base = AEnimaRekapiComponent;
   var baseProto = Base.prototype;
+
+  const { Rekapi } = rekapi;
 
   var RekapiComponent = Base.extend({
     name: 'stylie-rekapi'
