@@ -1,6 +1,6 @@
 {
   "name": "@jeremyckahn/stylie",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "license": "CC BY-NC-SA",
   "main": "dist/stylie.js",
   "dependencies": {
