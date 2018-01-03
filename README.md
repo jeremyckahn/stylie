@@ -10,12 +10,6 @@ manual.
 
 ## Install locally
 
-Requirements:
-
-* [NodeJS](http://nodejs.org/)/NPM,
-* [Grunt](http://gruntjs.com/)
-* [Sass](http://sass-lang.com/) and [Compass](http://compass-style.org/)
-
 Clone this repo and install the dependencies:
 
 ````
