@@ -1,45 +1,41 @@
-define([
-  'underscore',
-  'lateralus',
-  'text!./template.mustache',
-  'aenima/components/modal/main',
-  'aenima/utils',
-], function(_, Lateralus, template, ModalComponent, aenimaUtils) {
-  'use strict';
+import _ from 'underscore';
+import Lateralus from 'lateralus';
+import template from 'text!./template.mustache';
+import ModalComponent from 'aenima/components/modal/main';
+import aenimaUtils from 'aenima/utils';
 
-  var Base = ModalComponent.View;
-  var baseProto = Base.prototype;
+var Base = ModalComponent.View;
+var baseProto = Base.prototype;
 
-  var HelpComponentView = Base.extend({
-    template: template,
+var HelpComponentView = Base.extend({
+  template: template,
 
-    lateralusEvents: _.extend(
-      {
-        userRequestToggleHelpModal: function() {
-          if (!this.lateralus.model.get('isEmbedded')) {
-            this.hidableView.toggle();
-          }
-        },
+  lateralusEvents: _.extend(
+    {
+      userRequestToggleHelpModal: function() {
+        if (!this.lateralus.model.get('isEmbedded')) {
+          this.hidableView.toggle();
+        }
       },
-      baseProto.lateralusEvents
-    ),
-
-    /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
-     */
-    initialize: function() {
-      baseProto.initialize.apply(this, arguments);
     },
+    baseProto.lateralusEvents
+  ),
 
-    /**
-     * @override
-     */
-    getTemplateRenderData: function() {
-      return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
-        metaKey: aenimaUtils.isMac() ? '⌘' : 'Ctrl',
-      });
-    },
-  });
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize: function() {
+    baseProto.initialize.apply(this, arguments);
+  },
 
-  return HelpComponentView;
+  /**
+   * @override
+   */
+  getTemplateRenderData: function() {
+    return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
+      metaKey: aenimaUtils.isMac() ? '⌘' : 'Ctrl',
+    });
+  },
 });
+
+export default HelpComponentView;

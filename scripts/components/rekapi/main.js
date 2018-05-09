@@ -1,145 +1,139 @@
-define([
-  'underscore',
-  'lateralus',
-  'rekapi',
-  './models/actor',
-  'aenima/components/rekapi/main',
-], function(_, Lateralus, rekapi, ActorModel, AEnimaRekapiComponent) {
-  'use strict';
+import _ from 'underscore';
+import Lateralus from 'lateralus';
+import Rekapi from 'rekapi';
+import ActorModel from './models/actor';
+import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
 
-  var Base = AEnimaRekapiComponent;
-  var baseProto = Base.prototype;
+var Base = AEnimaRekapiComponent;
+var baseProto = Base.prototype;
 
-  const { Rekapi } = rekapi;
+var RekapiComponent = Base.extend({
+  name: 'stylie-rekapi',
 
-  var RekapiComponent = Base.extend({
-    name: 'stylie-rekapi',
+  ActorModel: ActorModel,
 
-    ActorModel: ActorModel,
-
-    provide: _.defaults(
-      {
-        /**
-         * @return {Object}
-         */
-        timelineExport: function() {
-          return this.applyOrientationToExport(
-            baseProto.provide.timelineExport.bind(this)
-          );
-        },
-
-        /**
-         * @param {Object} cssOpts Gets passed to Rekapi.DOMRenderer#toString.
-         * @return {string}
-         */
-        cssAnimationString: function(cssOpts) {
-          return this.applyOrientationToExport(
-            baseProto.provide.cssAnimationString.bind(this, cssOpts)
-          );
-        },
-
-        /**
-         * TODO: Perhaps this can be provided from the ActorModel class itself?
-         * @return {ActorModel}
-         */
-        currentActorModel: function() {
-          return this.actorModel;
-        },
-      },
-      baseProto.provide
-    ),
-
-    lateralusEvents: {
+  provide: _.defaults(
+    {
       /**
-       * @param {KeyboardEvent} evt
+       * @return {Object}
        */
-      userRequestUndo: function(evt) {
-        // Prevent focusing of the previously-modified input element
-        evt.preventDefault();
+      timelineExport: function() {
+        return this.applyOrientationToExport(
+          baseProto.provide.timelineExport.bind(this)
+        );
+      },
 
-        this.revertToPreviouslyRecordedUndoState();
+      /**
+       * @param {Object} cssOpts Gets passed to Rekapi.DOMRenderer#toString.
+       * @return {string}
+       */
+      cssAnimationString: function(cssOpts) {
+        return this.applyOrientationToExport(
+          baseProto.provide.cssAnimationString.bind(this, cssOpts)
+        );
+      },
+
+      /**
+       * TODO: Perhaps this can be provided from the ActorModel class itself?
+       * @return {ActorModel}
+       */
+      currentActorModel: function() {
+        return this.actorModel;
       },
     },
+    baseProto.provide
+  ),
 
-    initialize: function() {
-      baseProto.initialize.apply(this, arguments);
-      this.setupActor();
-    },
-
+  lateralusEvents: {
     /**
-     * @param {Function} exportProcessor
-     * @return {*}
+     * @param {KeyboardEvent} evt
      */
-    applyOrientationToExport: function(exportProcessor) {
-      var needToAccountForOffset =
-        this.lateralus.model.getUi('exportOrientation') === 'first-keyframe';
+    userRequestUndo: function(evt) {
+      // Prevent focusing of the previously-modified input element
+      evt.preventDefault();
 
-      var offset = this.actorModel.getFirstKeyframeOffset();
-
-      if (needToAccountForOffset) {
-        this.actorModel.prepareForExport(offset);
-      }
-
-      var exportedAnimation = exportProcessor.call(this);
-
-      if (needToAccountForOffset) {
-        this.actorModel.cleanupAfterExport(offset);
-      }
-
-      return exportedAnimation;
+      this.revertToPreviouslyRecordedUndoState();
     },
+  },
 
-    /**
-     * @return {Object}
-     */
-    toJSON: function() {
-      return {
-        actorModel: this.actorModel.toJSON(),
-        curves: this.curves,
-      };
-    },
+  initialize: function() {
+    baseProto.initialize.apply(this, arguments);
+    this.setupActor();
+  },
 
-    /**
-     * @return {Object}
-     */
-    exportTimelineForMantra: function() {
-      var exportRekapi = new Rekapi();
-      exportRekapi.addActor(this.actorModel.exportForMantra());
+  /**
+   * @param {Function} exportProcessor
+   * @return {*}
+   */
+  applyOrientationToExport: function(exportProcessor) {
+    var needToAccountForOffset =
+      this.lateralus.model.getUi('exportOrientation') === 'first-keyframe';
 
-      return exportRekapi.exportTimeline();
-    },
+    var offset = this.actorModel.getFirstKeyframeOffset();
 
-    /**
-     * @param {Object} animationData
-     */
-    fromJSON: function(animationData) {
-      this.lateralus.model.set('isLoadingTimeline', true, { silent: true });
+    if (needToAccountForOffset) {
+      this.actorModel.prepareForExport(offset);
+    }
 
-      // TODO: The requestClearTimeline event should be emitted from
-      // clearCurrentAnimation (AEnima method).  That method is currently being
-      // utilized by Mantra in a slightly different way and might need some
-      // refactoring before requestClearTimeline can be moved into it.
-      this.emit('requestClearTimeline');
-      this.clearCurrentAnimation();
+    var exportedAnimation = exportProcessor.call(this);
 
-      this.emit('loadBezierCurves', animationData.curves);
+    if (needToAccountForOffset) {
+      this.actorModel.cleanupAfterExport(offset);
+    }
 
-      this.actorModel.setKeyframes(
-        animationData.actorModel.transformPropertyCollection
-      );
+    return exportedAnimation;
+  },
 
-      this.lateralus.model.set('isLoadingTimeline', false, { silent: true });
-      this.doTimelineUpdate();
-    },
+  /**
+   * @return {Object}
+   */
+  toJSON: function() {
+    return {
+      actorModel: this.actorModel.toJSON(),
+      curves: this.curves,
+    };
+  },
 
-    /**
-     * @override
-     */
-    revertToPreviouslyRecordedUndoState: function() {
-      this.emit('userRequestDeselectAllKeyframes');
-      baseProto.revertToPreviouslyRecordedUndoState.apply(this, arguments);
-    },
-  });
+  /**
+   * @return {Object}
+   */
+  exportTimelineForMantra: function() {
+    var exportRekapi = new Rekapi();
+    exportRekapi.addActor(this.actorModel.exportForMantra());
 
-  return RekapiComponent;
+    return exportRekapi.exportTimeline();
+  },
+
+  /**
+   * @param {Object} animationData
+   */
+  fromJSON: function(animationData) {
+    this.lateralus.model.set('isLoadingTimeline', true, { silent: true });
+
+    // TODO: The requestClearTimeline event should be emitted from
+    // clearCurrentAnimation (AEnima method).  That method is currently being
+    // utilized by Mantra in a slightly different way and might need some
+    // refactoring before requestClearTimeline can be moved into it.
+    this.emit('requestClearTimeline');
+    this.clearCurrentAnimation();
+
+    this.emit('loadBezierCurves', animationData.curves);
+
+    this.actorModel.setKeyframes(
+      animationData.actorModel.transformPropertyCollection
+    );
+
+    this.lateralus.model.set('isLoadingTimeline', false, { silent: true });
+    this.doTimelineUpdate();
+  },
+
+  /**
+   * @override
+   */
+  revertToPreviouslyRecordedUndoState: function() {
+    this.emit('userRequestDeselectAllKeyframes');
+    baseProto.revertToPreviouslyRecordedUndoState.apply(this, arguments);
+  },
 });
+
+export default RekapiComponent;

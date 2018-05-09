@@ -1,71 +1,67 @@
-define([
-  'jquery',
-  'underscore',
-  'lateralus',
-  'text!./template.mustache',
-], function($, _, Lateralus, template) {
-  'use strict';
+import $ from 'jquery';
+import _ from 'underscore';
+import Lateralus from 'lateralus';
+import template from 'text!./template.mustache';
 
-  var Base = Lateralus.Component.View;
-  var baseProto = Base.prototype;
+var Base = Lateralus.Component.View;
+var baseProto = Base.prototype;
 
-  var ActorContainerComponentView = Base.extend({
-    template: template,
+var ActorContainerComponentView = Base.extend({
+  template: template,
 
-    provide: {
-      /**
-       * @return {string}
-       */
-      actorHtml: function() {
-        return $.trim(this.$actorWrapper.html());
-      },
-    },
-
-    lateralusEvents: {
-      /**
-       * @param {boolean} isCentered
-       */
-      userRequestUpdateCenteringSetting: function(isCentered) {
-        this.setCenteringClass(isCentered);
-      },
-
-      /**
-       * @param {string} newHtml
-       */
-      userRequestUpdateActorHtml: function(newHtml) {
-        this.$actorWrapper.html(newHtml);
-      },
-    },
-
+  provide: {
     /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
+     * @return {string}
      */
-    initialize: function() {
-      baseProto.initialize.apply(this, arguments);
-
-      // TODO: This should be emitting a context, not collecting an object and
-      // augmenting it.
-      this.actorModel = this.collectOne('currentActorModel');
-      this.actorModel.setContext(this.$actorWrapper[0]);
-      this.setCenteringClass(this.lateralus.model.getUi('centerToPath'));
+    actorHtml: function() {
+      return $.trim(this.$actorWrapper.html());
     },
+  },
 
+  lateralusEvents: {
     /**
      * @param {boolean} isCentered
      */
-    setCenteringClass: function(isCentered) {
-      this.$actorWrapper[isCentered ? 'addClass' : 'removeClass']('centered');
+    userRequestUpdateCenteringSetting: function(isCentered) {
+      this.setCenteringClass(isCentered);
     },
 
     /**
-     * @override
+     * @param {string} newHtml
      */
-    getTemplateRenderData: function() {
-      return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
-        embeddedImgRoot: this.lateralus.model.get('embeddedImgRoot'),
-      });
+    userRequestUpdateActorHtml: function(newHtml) {
+      this.$actorWrapper.html(newHtml);
     },
-  });
+  },
 
-  return ActorContainerComponentView;
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize: function() {
+    baseProto.initialize.apply(this, arguments);
+
+    // TODO: This should be emitting a context, not collecting an object and
+    // augmenting it.
+    this.actorModel = this.collectOne('currentActorModel');
+    this.actorModel.setContext(this.$actorWrapper[0]);
+    this.setCenteringClass(this.lateralus.model.getUi('centerToPath'));
+  },
+
+  /**
+   * @param {boolean} isCentered
+   */
+  setCenteringClass: function(isCentered) {
+    this.$actorWrapper[isCentered ? 'addClass' : 'removeClass']('centered');
+  },
+
+  /**
+   * @override
+   */
+  getTemplateRenderData: function() {
+    return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
+      embeddedImgRoot: this.lateralus.model.get('embeddedImgRoot'),
+    });
+  },
 });
+
+export default ActorContainerComponentView;

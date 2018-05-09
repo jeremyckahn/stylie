@@ -1,81 +1,77 @@
-define([
-  'jquery',
-  'underscore',
-  'lateralus',
-  'text!./template.mustache',
-], function($, _, Lateralus, template) {
-  'use strict';
+import $ from 'jquery';
+import _ from 'underscore';
+import Lateralus from 'lateralus';
+import template from 'text!./template.mustache';
 
-  var Base = Lateralus.Component.View;
-  var baseProto = Base.prototype;
+var Base = Lateralus.Component.View;
+var baseProto = Base.prototype;
 
-  var ContainerComponentView = Base.extend({
-    template: template,
+var ContainerComponentView = Base.extend({
+  template: template,
 
-    className: 'aenima',
+  className: 'aenima',
 
-    events: {
-      /**
-       * Force a range input "drag" to trigger a "change" event.
-       * @param {jQuery.Event} evt
-       */
-      'mousemove input[type=range]': function(evt) {
-        $(evt.target).change();
-      },
-
-      /**
-       * Force a number input "hold" to trigger a "change" event.
-       * @param {jQuery.Event} evt
-       */
-      'keydown input[type=number]': function(evt) {
-        $(evt.target).change();
-      },
-
-      /**
-       * @param {jQuery.Event} evt
-       */
-      'mousewheel input[type=number]': function(evt) {
-        $(evt.target).change();
-      },
-
-      'click .sidebar-controls .reset': function() {
-        this.emit('userRequestResetAnimation');
-      },
-
-      'click .sidebar-controls .rotation': function() {
-        this.emit('userRequestToggleRotationEditMode');
-      },
-
-      'focus input': function() {
-        this.emit('userRequestDisableKeyframeSelection');
-      },
+  events: {
+    /**
+     * Force a range input "drag" to trigger a "change" event.
+     * @param {jQuery.Event} evt
+     */
+    'mousemove input[type=range]': function(evt) {
+      $(evt.target).change();
     },
 
     /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
+     * Force a number input "hold" to trigger a "change" event.
+     * @param {jQuery.Event} evt
      */
-    initialize: function() {
-      baseProto.initialize.apply(this, arguments);
-      this.$el
-        .addClass('loading')
-        .addClass(
-          this.lateralus.model.get('isEmbedded') ? 'embedded' : 'standalone'
-        );
-    },
-
-    deferredInitialize: function() {
-      this.$el.removeClass('loading');
+    'keydown input[type=number]': function(evt) {
+      $(evt.target).change();
     },
 
     /**
-     * @override
+     * @param {jQuery.Event} evt
      */
-    getTemplateRenderData: function() {
-      return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
-        isEmbedded: this.lateralus.model.get('isEmbedded'),
-      });
+    'mousewheel input[type=number]': function(evt) {
+      $(evt.target).change();
     },
-  });
 
-  return ContainerComponentView;
+    'click .sidebar-controls .reset': function() {
+      this.emit('userRequestResetAnimation');
+    },
+
+    'click .sidebar-controls .rotation': function() {
+      this.emit('userRequestToggleRotationEditMode');
+    },
+
+    'focus input': function() {
+      this.emit('userRequestDisableKeyframeSelection');
+    },
+  },
+
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize: function() {
+    baseProto.initialize.apply(this, arguments);
+    this.$el
+      .addClass('loading')
+      .addClass(
+        this.lateralus.model.get('isEmbedded') ? 'embedded' : 'standalone'
+      );
+  },
+
+  deferredInitialize: function() {
+    this.$el.removeClass('loading');
+  },
+
+  /**
+   * @override
+   */
+  getTemplateRenderData: function() {
+    return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
+      isEmbedded: this.lateralus.model.get('isEmbedded'),
+    });
+  },
 });
+
+export default ContainerComponentView;
