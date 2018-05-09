@@ -1,39 +1,27 @@
 define([
-
-  'underscore'
-  ,'lateralus'
-  ,'keydrown'
-
-  ,'aenima/mixins/lateralus'
-  ,'aenima/components/shifty/main'
-  ,'./components/rekapi/main'
-  ,'./components/keybindings/main'
-  ,'./components/container/main'
-
-  ,'./model'
-
-  ,'aenima/data-adapter'
-
-  ,'./constant'
-
-], function (
-
-  _
-  ,Lateralus
-  ,kd
-
-  ,LateralusMixins
-  ,ShiftyComponent
-  ,RekapiComponent
-  ,KeybindingsComponent
-  ,ContainerComponent
-
-  ,StylieModel
-
-  ,DataAdapter
-
-  ,constant
-
+  'underscore',
+  'lateralus',
+  'keydrown',
+  'aenima/mixins/lateralus',
+  'aenima/components/shifty/main',
+  './components/rekapi/main',
+  './components/keybindings/main',
+  './components/container/main',
+  './model',
+  'aenima/data-adapter',
+  './constant',
+], function(
+  _,
+  Lateralus,
+  kd,
+  LateralusMixins,
+  ShiftyComponent,
+  RekapiComponent,
+  KeybindingsComponent,
+  ContainerComponent,
+  StylieModel,
+  DataAdapter,
+  constant
 ) {
   'use strict';
 
@@ -45,33 +33,36 @@ define([
    * @extends {Lateralus}
    * @constuctor
    */
-  var Stylie = Lateralus.beget(function (el, options) {
-    this.options = _.clone(options || {});
+  var Stylie = Lateralus.beget(
+    function(el, options) {
+      this.options = _.clone(options || {});
 
-    Lateralus.apply(this, arguments);
+      Lateralus.apply(this, arguments);
 
-    this.hasInitialized = false;
+      this.hasInitialized = false;
 
-    this.dataAdapter = new DataAdapter({
-      apiRoot: constant.API_ROOT
-    });
+      this.dataAdapter = new DataAdapter({
+        apiRoot: constant.API_ROOT,
+      });
 
-    kd.run(kd.tick);
+      kd.run(kd.tick);
 
-    this.initHacks();
+      this.initHacks();
 
-    this.shiftyComponent = this.addComponent(ShiftyComponent);
-    this.rekapiComponent = this.addComponent(RekapiComponent);
-    this.keybindingsComponent = this.addComponent(KeybindingsComponent);
-    this.containerComponent = this.addComponent(ContainerComponent);
-    _.defer(this.deferredInitialize.bind(this));
-  }, {
-    Model: StylieModel
-  });
+      this.shiftyComponent = this.addComponent(ShiftyComponent);
+      this.rekapiComponent = this.addComponent(RekapiComponent);
+      this.keybindingsComponent = this.addComponent(KeybindingsComponent);
+      this.containerComponent = this.addComponent(ContainerComponent);
+      _.defer(this.deferredInitialize.bind(this));
+    },
+    {
+      Model: StylieModel,
+    }
+  );
 
   var fn = Stylie.prototype;
 
-  fn.deferredInitialize = function () {
+  fn.deferredInitialize = function() {
     if (!this.model.get('isEmbedded')) {
       this.shiftyComponent.addNewCurve();
     }
@@ -94,20 +85,17 @@ define([
     // Necessary for keeping the UI in sync after startup.
     this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
 
-    this.emit(
-      'savedAnimationListUpdated'
-      ,this.getSavedAnimationDisplayList()
-    );
+    this.emit('savedAnimationListUpdated', this.getSavedAnimationDisplayList());
 
     this.hasInitialized = true;
   };
 
-  var queryParams = (function () {
+  var queryParams = (function() {
     var queryString = location.search.slice(1);
     var stringChunks = queryString.split('&');
 
     var accumulator = {};
-    stringChunks.forEach(function (stringChunk) {
+    stringChunks.forEach(function(stringChunk) {
       var pair = stringChunk.split('=');
       accumulator[pair[0]] = pair[1];
     });
@@ -119,61 +107,66 @@ define([
    * @param {string} param
    * @return {*}
    */
-  fn.getQueryParam = function (param) {
+  fn.getQueryParam = function(param) {
     return queryParams[param];
   };
 
-  fn.createDefaultAnimation = function () {
+  fn.createDefaultAnimation = function() {
     var actorModel = this.rekapiComponent.actorModel;
     actorModel.addNewKeyframe({
-      state: this.getInitialKeyframeState()
+      state: this.getInitialKeyframeState(),
     });
     actorModel.addNewKeyframe();
   };
 
-  fn.lateralusEvents = _.extend({
-    'rekapi:timelineModified': function () {
-      if (this.hasInitialized) {
-        this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
-      }
-    }
+  fn.lateralusEvents = _.extend(
+    {
+      'rekapi:timelineModified': function() {
+        if (this.hasInitialized) {
+          this.saveCurrentAnimationAs(constant.TRANSIENT_ANIMATION_NAME);
+        }
+      },
 
-    /**
-     * @param {string} animationName
-     */
-    ,userRequestSaveCurrentAnimation: function (animationName) {
-      this.saveCurrentAnimationAs(animationName);
-    }
+      /**
+       * @param {string} animationName
+       */
+      userRequestSaveCurrentAnimation: function(animationName) {
+        this.saveCurrentAnimationAs(animationName);
+      },
 
-    /**
-     * @param {string} animationName
-     */
-    ,userRequestLoadAnimation: function (animationName) {
-      this.loadAnimation(animationName);
-    }
+      /**
+       * @param {string} animationName
+       */
+      userRequestLoadAnimation: function(animationName) {
+        this.loadAnimation(animationName);
+      },
 
-    /**
-     * @param {string} animationName
-     */
-    ,userRequestDeleteAnimation: function (animationName) {
-      this.deleteAnimation(animationName);
-    }
+      /**
+       * @param {string} animationName
+       */
+      userRequestDeleteAnimation: function(animationName) {
+        this.deleteAnimation(animationName);
+      },
 
-    ,userRequestResetAnimation: function () {
-      this.emit('requestRecordUndoState');
-      this.rekapiComponent.clearCurrentAnimation();
-      this.createDefaultAnimation();
-    }
+      userRequestResetAnimation: function() {
+        this.emit('requestRecordUndoState');
+        this.rekapiComponent.clearCurrentAnimation();
+        this.createDefaultAnimation();
+      },
 
-    ,userRequestToggleRotationEditMode: function () {
-      this.model.set(
-        'isRotationModeEnabled', !this.model.get('isRotationModeEnabled'));
-    }
-  }, LateralusMixins.lateralusEvents);
+      userRequestToggleRotationEditMode: function() {
+        this.model.set(
+          'isRotationModeEnabled',
+          !this.model.get('isRotationModeEnabled')
+        );
+      },
+    },
+    LateralusMixins.lateralusEvents
+  );
 
   _.extend(fn, LateralusMixins.fn);
 
-  fn.initHacks = function () {
+  fn.initHacks = function() {
     var hasSafari = navigator.userAgent.match(/safari/i);
     var hasChrome = navigator.userAgent.match(/chrome/i);
     var isFirefox = navigator.userAgent.match(/firefox/i);
@@ -190,17 +183,17 @@ define([
   /**
    * @return {Object}
    */
-  fn.getInitialKeyframeState = function () {
+  fn.getInitialKeyframeState = function() {
     return {
-      x: 50
-      ,y: this.containerComponent.view.$el.height() / 2
+      x: 50,
+      y: this.containerComponent.view.$el.height() / 2,
     };
   };
 
   /**
    * @return {Array.<string>}
    */
-  fn.getSavedAnimationDisplayList = function () {
+  fn.getSavedAnimationDisplayList = function() {
     var rawList = this.model.get('savedAnimations');
     return Object.keys(_.omit(rawList, constant.TRANSIENT_ANIMATION_NAME));
   };
@@ -208,13 +201,14 @@ define([
   /**
    * @param {string} animationName
    */
-  fn.saveCurrentAnimationAs = function (animationName) {
+  fn.saveCurrentAnimationAs = function(animationName) {
     var savedAnimations = this.model.get('savedAnimations');
 
     // A safe copy is needed to sever any deep object references (specifically,
     // the curves sub-object gets modified by this.loadAnimation).
-    var animationCopy =
-      JSON.parse(JSON.stringify(this.rekapiComponent.toJSON()));
+    var animationCopy = JSON.parse(
+      JSON.stringify(this.rekapiComponent.toJSON())
+    );
     savedAnimations[animationName] = animationCopy;
     this.model.set('savedAnimations', savedAnimations);
 
@@ -223,9 +217,9 @@ define([
 
     if (animationName !== constant.TRANSIENT_ANIMATION_NAME) {
       this.emit(
-        'savedAnimationListUpdated'
-        ,this.getSavedAnimationDisplayList()
-        ,animationName
+        'savedAnimationListUpdated',
+        this.getSavedAnimationDisplayList(),
+        animationName
       );
     }
   };
@@ -233,7 +227,7 @@ define([
   /**
    * @param {string} animationName
    */
-  fn.loadAnimation = function (animationName) {
+  fn.loadAnimation = function(animationName) {
     var animationData = this.model.get('savedAnimations')[animationName];
     this.rekapiComponent.fromJSON(animationData);
   };
@@ -241,7 +235,7 @@ define([
   /**
    * @param {string} animationName
    */
-  fn.deleteAnimation = function (animationName) {
+  fn.deleteAnimation = function(animationName) {
     var savedAnimations = this.model.get('savedAnimations');
     this.model.set('savedAnimations', _.omit(savedAnimations, animationName));
 
@@ -254,7 +248,7 @@ define([
   /**
    * @return {Object}
    */
-  fn.exportTimelineForMantra = function () {
+  fn.exportTimelineForMantra = function() {
     return this.rekapiComponent.exportTimelineForMantra();
   };
 

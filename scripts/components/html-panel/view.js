@@ -1,15 +1,6 @@
-define([
-
-  'lateralus'
-
-  ,'text!./template.mustache'
-
-], function (
-
-  Lateralus
-
-  ,template
-
+define(['lateralus', 'text!./template.mustache'], function(
+  Lateralus,
+  template
 ) {
   'use strict';
 
@@ -17,24 +8,24 @@ define([
   var baseProto = Base.prototype;
 
   var HtmlPanelComponentView = Base.extend({
-    template: template
+    template: template,
 
-    ,events: {
-      'keyup textarea': function () {
+    events: {
+      'keyup textarea': function() {
         this.emit('userRequestUpdateActorHtml', this.$html.val());
-      }
-    }
+      },
+    },
 
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
-    ,initialize: function () {
+    initialize: function() {
       baseProto.initialize.apply(this, arguments);
-    }
+    },
 
-    ,deferredInitialize: function () {
+    deferredInitialize: function() {
       this.$html.html(this.collectOne('actorHtml'));
-    }
+    },
   });
 
   return HtmlPanelComponentView;

@@ -1,24 +1,10 @@
 define([
-
-  'underscore'
-  ,'lateralus'
-  ,'rekapi'
-
-  ,'./models/actor'
-
-  ,'aenima/components/rekapi/main'
-
-], function (
-
-  _
-  ,Lateralus
-  ,rekapi
-
-  ,ActorModel
-
-  ,AEnimaRekapiComponent
-
-) {
+  'underscore',
+  'lateralus',
+  'rekapi',
+  './models/actor',
+  'aenima/components/rekapi/main',
+], function(_, Lateralus, rekapi, ActorModel, AEnimaRekapiComponent) {
   'use strict';
 
   var Base = AEnimaRekapiComponent;
@@ -27,59 +13,64 @@ define([
   const { Rekapi } = rekapi;
 
   var RekapiComponent = Base.extend({
-    name: 'stylie-rekapi'
+    name: 'stylie-rekapi',
 
-    ,ActorModel: ActorModel
+    ActorModel: ActorModel,
 
-    ,provide: _.defaults({
-      /**
-       * @return {Object}
-       */
-      timelineExport: function () {
-        return this.applyOrientationToExport(
-          baseProto.provide.timelineExport.bind(this));
-      }
+    provide: _.defaults(
+      {
+        /**
+         * @return {Object}
+         */
+        timelineExport: function() {
+          return this.applyOrientationToExport(
+            baseProto.provide.timelineExport.bind(this)
+          );
+        },
 
-      /**
-       * @param {Object} cssOpts Gets passed to Rekapi.DOMRenderer#toString.
-       * @return {string}
-       */
-      ,cssAnimationString: function (cssOpts) {
-        return this.applyOrientationToExport(
-          baseProto.provide.cssAnimationString.bind(this, cssOpts));
-      }
+        /**
+         * @param {Object} cssOpts Gets passed to Rekapi.DOMRenderer#toString.
+         * @return {string}
+         */
+        cssAnimationString: function(cssOpts) {
+          return this.applyOrientationToExport(
+            baseProto.provide.cssAnimationString.bind(this, cssOpts)
+          );
+        },
 
-      /**
-       * TODO: Perhaps this can be provided from the ActorModel class itself?
-       * @return {ActorModel}
-       */
-      ,currentActorModel: function () {
-        return this.actorModel;
-      }
-    }, baseProto.provide)
+        /**
+         * TODO: Perhaps this can be provided from the ActorModel class itself?
+         * @return {ActorModel}
+         */
+        currentActorModel: function() {
+          return this.actorModel;
+        },
+      },
+      baseProto.provide
+    ),
 
-    ,lateralusEvents: {
+    lateralusEvents: {
       /**
        * @param {KeyboardEvent} evt
        */
-      userRequestUndo: function (evt) {
+      userRequestUndo: function(evt) {
         // Prevent focusing of the previously-modified input element
         evt.preventDefault();
 
         this.revertToPreviouslyRecordedUndoState();
-      }
-    }
+      },
+    },
 
-    ,initialize: function () {
+    initialize: function() {
       baseProto.initialize.apply(this, arguments);
       this.setupActor();
-    }
+    },
 
     /**
      * @param {Function} exportProcessor
      * @return {*}
      */
-    ,applyOrientationToExport: function (exportProcessor) {
+    applyOrientationToExport: function(exportProcessor) {
       var needToAccountForOffset =
         this.lateralus.model.getUi('exportOrientation') === 'first-keyframe';
 
@@ -96,32 +87,32 @@ define([
       }
 
       return exportedAnimation;
-    }
+    },
 
     /**
      * @return {Object}
      */
-    ,toJSON: function () {
+    toJSON: function() {
       return {
-        actorModel: this.actorModel.toJSON()
-        ,curves: this.curves
+        actorModel: this.actorModel.toJSON(),
+        curves: this.curves,
       };
-    }
+    },
 
     /**
      * @return {Object}
      */
-    ,exportTimelineForMantra: function () {
+    exportTimelineForMantra: function() {
       var exportRekapi = new Rekapi();
       exportRekapi.addActor(this.actorModel.exportForMantra());
 
       return exportRekapi.exportTimeline();
-    }
+    },
 
     /**
      * @param {Object} animationData
      */
-    ,fromJSON: function (animationData) {
+    fromJSON: function(animationData) {
       this.lateralus.model.set('isLoadingTimeline', true, { silent: true });
 
       // TODO: The requestClearTimeline event should be emitted from
@@ -134,19 +125,20 @@ define([
       this.emit('loadBezierCurves', animationData.curves);
 
       this.actorModel.setKeyframes(
-        animationData.actorModel.transformPropertyCollection);
+        animationData.actorModel.transformPropertyCollection
+      );
 
       this.lateralus.model.set('isLoadingTimeline', false, { silent: true });
       this.doTimelineUpdate();
-    }
+    },
 
     /**
      * @override
      */
-    ,revertToPreviouslyRecordedUndoState: function () {
+    revertToPreviouslyRecordedUndoState: function() {
       this.emit('userRequestDeselectAllKeyframes');
       baseProto.revertToPreviouslyRecordedUndoState.apply(this, arguments);
-    }
+    },
   });
 
   return RekapiComponent;

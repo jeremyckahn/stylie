@@ -1,57 +1,44 @@
 define([
-
-  'underscore'
-  ,'lateralus'
-
-  ,'text!./template.mustache'
-
-  ,'aenima/components/modal/main'
-
-  ,'aenima/utils'
-
-], function (
-
-  _
-  ,Lateralus
-
-  ,template
-
-  ,ModalComponent
-
-  ,aenimaUtils
-
-) {
+  'underscore',
+  'lateralus',
+  'text!./template.mustache',
+  'aenima/components/modal/main',
+  'aenima/utils',
+], function(_, Lateralus, template, ModalComponent, aenimaUtils) {
   'use strict';
 
   var Base = ModalComponent.View;
   var baseProto = Base.prototype;
 
   var HelpComponentView = Base.extend({
-    template: template
+    template: template,
 
-    ,lateralusEvents: _.extend({
-      userRequestToggleHelpModal: function () {
-        if (!this.lateralus.model.get('isEmbedded')) {
-          this.hidableView.toggle();
-        }
-      }
-    }, baseProto.lateralusEvents)
+    lateralusEvents: _.extend(
+      {
+        userRequestToggleHelpModal: function() {
+          if (!this.lateralus.model.get('isEmbedded')) {
+            this.hidableView.toggle();
+          }
+        },
+      },
+      baseProto.lateralusEvents
+    ),
 
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
-    ,initialize: function () {
+    initialize: function() {
       baseProto.initialize.apply(this, arguments);
-    }
+    },
 
     /**
      * @override
      */
-    ,getTemplateRenderData: function () {
+    getTemplateRenderData: function() {
       return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
-        metaKey: aenimaUtils.isMac() ? '⌘' : 'Ctrl'
+        metaKey: aenimaUtils.isMac() ? '⌘' : 'Ctrl',
       });
-    }
+    },
   });
 
   return HelpComponentView;

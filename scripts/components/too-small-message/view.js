@@ -1,15 +1,6 @@
-define([
-
-  'lateralus'
-
-  ,'text!./template.mustache'
-
-], function (
-
-  Lateralus
-
-  ,template
-
+define(['lateralus', 'text!./template.mustache'], function(
+  Lateralus,
+  template
 ) {
   'use strict';
 
@@ -17,14 +8,14 @@ define([
   var baseProto = Base.prototype;
 
   var TooSmallMessageComponentView = Base.extend({
-    template: template
+    template: template,
 
     /**
      * @param {Object} [options] See http://backbonejs.org/#View-constructor
      */
-    ,initialize: function () {
+    initialize: function() {
       baseProto.initialize.apply(this, arguments);
-    }
+    },
   });
 
   return TooSmallMessageComponentView;
