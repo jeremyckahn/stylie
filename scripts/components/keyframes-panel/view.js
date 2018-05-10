@@ -3,10 +3,10 @@ import Lateralus from 'lateralus';
 import template from 'text!./template.mustache';
 import KeyframeFormComponent from '../keyframe-form/main';
 
-var Base = Lateralus.Component.View;
-var baseProto = Base.prototype;
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-var KeyframesPanelComponentView = Base.extend({
+const KeyframesPanelComponentView = Base.extend({
   template: template,
 
   events: {
@@ -23,7 +23,7 @@ var KeyframesPanelComponentView = Base.extend({
      * @param {Backbone.Model} keyframePropertyModel
      */
     keyframePropertyAdded: function(keyframePropertyModel) {
-      var keyframeFormComponent = this.addComponent(KeyframeFormComponent, {
+      const keyframeFormComponent = this.addComponent(KeyframeFormComponent, {
         model: keyframePropertyModel,
       });
 
@@ -34,7 +34,7 @@ var KeyframesPanelComponentView = Base.extend({
       this.$keyframesList.children().detach();
 
       collection.each(function(model) {
-        var keyframeFormComponent = _.find(this.component.components, function(
+        const keyframeFormComponent = _.find(this.component.components, function(
           component
         ) {
           return component.view.model === model;

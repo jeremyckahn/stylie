@@ -6,9 +6,9 @@ import CrosshairContainerComponent from '../crosshair-container/main';
 import ActorContainerComponent from '../actor-container/main';
 import TimelineScrubberComponent from '../timeline-scrubber/main';
 
-var Base = Lateralus.Component;
+const Base = Lateralus.Component;
 
-var PreviewComponent = Base.extend({
+const PreviewComponent = Base.extend({
   name: 'stylie-preview',
   View: View,
   template: template,

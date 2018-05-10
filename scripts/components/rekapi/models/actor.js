@@ -6,10 +6,10 @@ import KeyframePropertyCollection from '../collections/keyframe-property';
 import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
 import constant from 'aenima/constant';
 
-var Base = AEnimaRekapiComponent.ActorModel;
-var baseProto = Base.prototype;
+const Base = AEnimaRekapiComponent.ActorModel;
+const baseProto = Base.prototype;
 
-var silentOptionObject = { silent: true };
+const silentOptionObject = { silent: true };
 
 var ActorModel = Base.extend({
   KeyframePropertyCollection: KeyframePropertyCollection,
@@ -42,15 +42,15 @@ var ActorModel = Base.extend({
    * @param {string} [opt_options.easing]
    */
   addNewKeyframe: function(opt_options) {
-    var options = opt_options || {};
-    var keyframePropertyAttributes = options.state || {};
-    var transformPropertyCollection = this.transformPropertyCollection;
+    const options = opt_options || {};
+    let keyframePropertyAttributes = options.state || {};
+    const transformPropertyCollection = this.transformPropertyCollection;
 
     if (options.easing) {
       _.extend(keyframePropertyAttributes, { easing: options.easing });
     }
 
-    var millisecond = options.millisecond || 0;
+    let millisecond = options.millisecond || 0;
 
     if (transformPropertyCollection.length && !opt_options) {
       keyframePropertyAttributes = transformPropertyCollection.last().toJSON();
@@ -71,7 +71,7 @@ var ActorModel = Base.extend({
 
     // Add the model silently here, the "add" event is fired explicitly later
     // in this function.
-    var keyframePropertyModel = transformPropertyCollection.add(
+    const keyframePropertyModel = transformPropertyCollection.add(
       keyframePropertyAttributes || {},
       silentOptionObject
     );
@@ -86,7 +86,7 @@ var ActorModel = Base.extend({
       }
     );
 
-    var keyframeProperty = this.actor.getKeyframeProperty(
+    const keyframeProperty = this.actor.getKeyframeProperty(
       'transform',
       millisecond
     );
@@ -107,13 +107,13 @@ var ActorModel = Base.extend({
    * @return {{x: number, y: number}}
    */
   getFirstKeyframeOffset: function() {
-    var firstKeyframe = this.transformPropertyCollection.first();
+    const firstKeyframe = this.transformPropertyCollection.first();
 
     if (!firstKeyframe) {
       return { x: 0, y: 0 };
     }
 
-    var firstKeyframeJson = firstKeyframe.toJSON();
+    const firstKeyframeJson = firstKeyframe.toJSON();
 
     return {
       x: firstKeyframeJson.x,
@@ -178,8 +178,8 @@ var ActorModel = Base.extend({
    * @return {Rekapi.Actor}
    */
   exportForMantra: function() {
-    var exportActor = new Rekapi.Actor();
-    var transformProperties = this.transformPropertyCollection.toJSON();
+    const exportActor = new Rekapi.Actor();
+    const transformProperties = this.transformPropertyCollection.toJSON();
 
     transformProperties.forEach(function(transformProperty) {
       exportActor.keyframe(

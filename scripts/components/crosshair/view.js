@@ -5,10 +5,10 @@ import template from 'text!./template.mustache';
 import 'jquery-mousewheel';
 import 'jquery-cubelet';
 
-var Base = Lateralus.Component.View;
-var baseProto = Base.prototype;
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-var CrosshairComponentView = Base.extend({
+const CrosshairComponentView = Base.extend({
   template: template,
 
   lateralusEvents: {
@@ -38,7 +38,7 @@ var CrosshairComponentView = Base.extend({
         return;
       }
 
-      var attrs = this.model.toJSON();
+      const attrs = this.model.toJSON();
       this.model.set({
         x: attrs.x + diff.x,
         y: attrs.y + diff.y,
@@ -137,8 +137,8 @@ var CrosshairComponentView = Base.extend({
   },
 
   render: function() {
-    var json = this.model.toJSON();
-    var halfBoxSize = this.$el.height() / 2;
+    const json = this.model.toJSON();
+    const halfBoxSize = this.$el.height() / 2;
 
     // Orient to the center of the crosshair, not the top-left
     this.$el.css({
@@ -163,7 +163,7 @@ var CrosshairComponentView = Base.extend({
    * @return {string}
    */
   getRotationTransformStringFromModel: function() {
-    var json = this.model.toJSON();
+    const json = this.model.toJSON();
 
     return (
       'rotateX(' +
@@ -179,8 +179,8 @@ var CrosshairComponentView = Base.extend({
   },
 
   setUiStateToModel: function() {
-    var cubeletCoords = this.$rotationControl.cubeletGetCoords();
-    var halfBoxSize = this.$el.height() / 2;
+    const cubeletCoords = this.$rotationControl.cubeletGetCoords();
+    const halfBoxSize = this.$el.height() / 2;
 
     this.model.set(
       {
@@ -198,9 +198,9 @@ var CrosshairComponentView = Base.extend({
       }
     );
 
-    var previousAttributes = this.model.previousAttributes();
-    var attrs = this.model.toJSON();
-    var diff = {
+    const previousAttributes = this.model.previousAttributes();
+    const attrs = this.model.toJSON();
+    const diff = {
       x: attrs.x - previousAttributes.x,
       y: attrs.y - previousAttributes.y,
       rotationX: attrs.rotationX - previousAttributes.rotationX,

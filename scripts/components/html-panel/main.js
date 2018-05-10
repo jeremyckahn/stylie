@@ -2,9 +2,9 @@ import Lateralus from 'lateralus';
 import View from './view';
 import template from 'text!./template.mustache';
 
-var Base = Lateralus.Component;
+const Base = Lateralus.Component;
 
-var HtmlPanelComponent = Base.extend({
+const HtmlPanelComponent = Base.extend({
   name: 'stylie-html-panel',
   View: View,
   template: template,

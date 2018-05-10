@@ -4,10 +4,10 @@ import Mustache from 'mustache';
 import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
 import transformStringTemplate from 'text!../templates/transform-string.mustache';
 
-var Base = AEnimaRekapiComponent.KeyframePropertyModel;
+const Base = AEnimaRekapiComponent.KeyframePropertyModel;
 
-var SCALE_UNDO_DEBOUNCE = 1000;
-var NUMBER_PROPERTIES = [
+const SCALE_UNDO_DEBOUNCE = 1000;
+const NUMBER_PROPERTIES = [
   'millisecond',
   'x',
   'y',
@@ -90,7 +90,7 @@ var KeyframePropertyModel = Base.extend({
    * easing curves.
    */
   setEasingFromString: function(easingString) {
-    var easingStringChunks = easingString.split(' ');
+    const easingStringChunks = easingString.split(' ');
 
     [
       'easing_x',
@@ -100,7 +100,7 @@ var KeyframePropertyModel = Base.extend({
       'easing_rotationY',
       'easing_rotationZ',
     ].forEach(function(property, i) {
-      var easingChunk = easingStringChunks[i];
+      const easingChunk = easingStringChunks[i];
 
       if (easingChunk) {
         this.attributes[property] = easingChunk;
@@ -123,7 +123,7 @@ var KeyframePropertyModel = Base.extend({
    * @return {string}
    */
   getEasing: function() {
-    var attributes = this.attributes;
+    const attributes = this.attributes;
 
     return [
       attributes.easing_x,
@@ -140,11 +140,11 @@ var KeyframePropertyModel = Base.extend({
    * @return {Error=}
    */
   validate: function(attributes) {
-    var invalidFields = _.filter(NUMBER_PROPERTIES, function(numberProperty) {
+    const invalidFields = _.filter(NUMBER_PROPERTIES, function(numberProperty) {
       return isNaN(attributes[numberProperty]);
     });
 
-    var millisecond = attributes.millisecond;
+    const millisecond = attributes.millisecond;
 
     if (
       // If the millisecond is changing
@@ -177,9 +177,9 @@ var KeyframePropertyModel = Base.extend({
       return;
     }
 
-    var millisecond = this.attributes.millisecond;
+    const millisecond = this.attributes.millisecond;
     var keyframeProperty = this.keyframeProperty;
-    var actor = keyframeProperty.actor;
+    const actor = keyframeProperty.actor;
 
     if (millisecond !== keyframeProperty.millisecond) {
       actor.moveKeyframe(keyframeProperty.millisecond, millisecond);

@@ -2,10 +2,10 @@ import _ from 'underscore';
 import Lateralus from 'lateralus';
 import PersistedModel from 'aenima/models/persisted-model';
 
-var Base = PersistedModel;
-var baseProto = Base.prototype;
+const Base = PersistedModel;
+const baseProto = Base.prototype;
 
-var INITIAL_STATE = {
+const INITIAL_STATE = {
   savedAnimations: {},
 
   // TODO: Move isRotationModeEnabled and isLoadingTimeline to the .set in
@@ -22,13 +22,13 @@ var INITIAL_STATE = {
   },
 };
 
-var StylieModel = Base.extend({
+const StylieModel = Base.extend({
   localStorageId: 'stylieData',
 
   initialize: function() {
     baseProto.initialize.apply(this, arguments);
 
-    var isEmbedded = this.lateralus.getQueryParam('isEmbedded');
+    const isEmbedded = this.lateralus.getQueryParam('isEmbedded');
 
     if (isEmbedded) {
       this.localStorageSave = _.noop;

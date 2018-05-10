@@ -5,10 +5,10 @@ import AEnimaControlPanelComponent from 'aenima/components/control-panel/main';
 import HidableComponent from 'aenima/components/hidable/main';
 import constant from '../../constant';
 
-var Base = AEnimaControlPanelComponent.View;
-var baseProto = Base.prototype;
+const Base = AEnimaControlPanelComponent.View;
+const baseProto = Base.prototype;
 
-var ControlPanelComponentView = Base.extend({
+const ControlPanelComponentView = Base.extend({
   template: template,
 
   lateralusEvents: {
@@ -41,9 +41,9 @@ var ControlPanelComponentView = Base.extend({
   },
 
   deferredInitialize: function() {
-    var width = this.$el.outerWidth(true);
-    var parentWidth = this.$el.parent().width();
-    var left = parentWidth - width - constant.CONTROL_PANEL_PADDING_FROM_CORNER;
+    const width = this.$el.outerWidth(true);
+    const parentWidth = this.$el.parent().width();
+    const left = parentWidth - width - constant.CONTROL_PANEL_PADDING_FROM_CORNER;
 
     this.$el.css({
       top: constant.CONTROL_PANEL_PADDING_FROM_CORNER,
@@ -57,7 +57,7 @@ var ControlPanelComponentView = Base.extend({
    * @override
    */
   getTemplateRenderData: function() {
-    var isEmbedded = this.lateralus.model.get('isEmbedded');
+    const isEmbedded = this.lateralus.model.get('isEmbedded');
 
     return _.extend(
       {
@@ -76,10 +76,10 @@ var ControlPanelComponentView = Base.extend({
    * their browser window smaller.
    */
   orientToRight: function() {
-    var left = parseInt(this.$el.css('left'), 10);
-    var width = this.$el.outerWidth(true);
-    var parentWidth = this.$el.parent().width();
-    var right = parentWidth - left - width;
+    const left = parseInt(this.$el.css('left'), 10);
+    const width = this.$el.outerWidth(true);
+    const parentWidth = this.$el.parent().width();
+    const right = parentWidth - left - width;
 
     this.$el.css({
       left: '',

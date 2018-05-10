@@ -3,10 +3,10 @@ import _ from 'underscore';
 import Lateralus from 'lateralus';
 import template from 'text!./template.mustache';
 
-var Base = Lateralus.Component.View;
-var baseProto = Base.prototype;
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-var ActorContainerComponentView = Base.extend({
+const ActorContainerComponentView = Base.extend({
   template: template,
 
   provide: {

@@ -9,9 +9,9 @@ import HtmlPanelComponent from '../html-panel/main';
 import ManagementPanelComponent from 'aenima/components/management-panel/main';
 import UserPanelComponent from 'aenima/components/user-panel/main';
 
-var Base = AEnimaControlPanelComponent;
+const Base = AEnimaControlPanelComponent;
 
-var ControlPanelComponent = Base.extend({
+const ControlPanelComponent = Base.extend({
   name: 'stylie-control-panel',
   View: View,
   template: template,
@@ -27,8 +27,8 @@ var ControlPanelComponent = Base.extend({
      * }}
      */
     cssConfigObject: function() {
-      var motionPanelJson = this.motionPanelComponent.toJSON();
-      var exportPanelJson = this.exportPanelComponent
+      const motionPanelJson = this.motionPanelComponent.toJSON();
+      const exportPanelJson = this.exportPanelComponent
         ? this.exportPanelComponent.toJSON()
         : {};
 

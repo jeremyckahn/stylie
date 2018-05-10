@@ -4,10 +4,10 @@ import template from 'text!./template.mustache';
 import ModalComponent from 'aenima/components/modal/main';
 import aenimaUtils from 'aenima/utils';
 
-var Base = ModalComponent.View;
-var baseProto = Base.prototype;
+const Base = ModalComponent.View;
+const baseProto = Base.prototype;
 
-var HelpComponentView = Base.extend({
+const HelpComponentView = Base.extend({
   template: template,
 
   lateralusEvents: _.extend(

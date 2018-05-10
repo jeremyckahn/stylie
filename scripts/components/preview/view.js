@@ -3,10 +3,10 @@ import Lateralus from 'lateralus';
 import kd from 'keydrown';
 import template from 'text!./template.mustache';
 
-var Base = Lateralus.Component.View;
-var baseProto = Base.prototype;
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-var PreviewComponentView = Base.extend({
+const PreviewComponentView = Base.extend({
   template: template,
 
   lateralusEvents: {
@@ -24,7 +24,7 @@ var PreviewComponentView = Base.extend({
      * @param {jQuery.Event} evt
      */
     mouseup: function(evt) {
-      var lastMouseDownCoords = this.lastMouseDownCoords;
+      const lastMouseDownCoords = this.lastMouseDownCoords;
 
       if (
         !kd.SHIFT.isDown() &&

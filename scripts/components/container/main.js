@@ -7,9 +7,9 @@ import TooSmallMessageComponent from '../too-small-message/main';
 import ControlPanelComponent from '../control-panel/main';
 import PreviewComponent from '../preview/main';
 
-var Base = Lateralus.Component;
+const Base = Lateralus.Component;
 
-var ContainerComponent = Base.extend({
+const ContainerComponent = Base.extend({
   name: 'stylie-container',
   View: View,
   template: template,

@@ -2,10 +2,10 @@ import Lateralus from 'lateralus';
 import template from 'text!./template.mustache';
 import HidableComponent from 'aenima/components/hidable/main';
 
-var Base = Lateralus.Component.View;
-var baseProto = Base.prototype;
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-var TimelineScrubberComponentView = Base.extend({
+const TimelineScrubberComponentView = Base.extend({
   template: template,
 
   lateralusEvents: {
@@ -85,7 +85,7 @@ var TimelineScrubberComponentView = Base.extend({
    * @param {Rekapi} rekapi
    */
   syncScrubberToRekapi: function(rekapi) {
-    var animationLength = rekapi.getAnimationLength();
+    const animationLength = rekapi.getAnimationLength();
     this.$scrubber
       .attr('max', animationLength)
       .val(rekapi.getLastPositionUpdated() * animationLength);

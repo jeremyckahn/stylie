@@ -18,7 +18,7 @@ import constant from './constant';
  * @extends {Lateralus}
  * @constuctor
  */
-var Stylie = Lateralus.beget(
+const Stylie = Lateralus.beget(
   function(el, options) {
     this.options = _.clone(options || {});
 
@@ -45,15 +45,15 @@ var Stylie = Lateralus.beget(
   }
 );
 
-var fn = Stylie.prototype;
+const fn = Stylie.prototype;
 
 fn.deferredInitialize = function() {
   if (!this.model.get('isEmbedded')) {
     this.shiftyComponent.addNewCurve();
   }
 
-  var savedAnimations = this.model.get('savedAnimations');
-  var transientAnimation = savedAnimations[constant.TRANSIENT_ANIMATION_NAME];
+  const savedAnimations = this.model.get('savedAnimations');
+  const transientAnimation = savedAnimations[constant.TRANSIENT_ANIMATION_NAME];
 
   if (transientAnimation) {
     this.loadAnimation(constant.TRANSIENT_ANIMATION_NAME);
@@ -75,13 +75,13 @@ fn.deferredInitialize = function() {
   this.hasInitialized = true;
 };
 
-var queryParams = (function() {
-  var queryString = location.search.slice(1);
-  var stringChunks = queryString.split('&');
+const queryParams = (function() {
+  const queryString = location.search.slice(1);
+  const stringChunks = queryString.split('&');
 
-  var accumulator = {};
+  const accumulator = {};
   stringChunks.forEach(function(stringChunk) {
-    var pair = stringChunk.split('=');
+    const pair = stringChunk.split('=');
     accumulator[pair[0]] = pair[1];
   });
 
@@ -97,7 +97,7 @@ fn.getQueryParam = function(param) {
 };
 
 fn.createDefaultAnimation = function() {
-  var actorModel = this.rekapiComponent.actorModel;
+  const actorModel = this.rekapiComponent.actorModel;
   actorModel.addNewKeyframe({
     state: this.getInitialKeyframeState(),
   });
@@ -152,9 +152,9 @@ fn.lateralusEvents = _.extend(
 _.extend(fn, LateralusMixins.fn);
 
 fn.initHacks = function() {
-  var hasSafari = navigator.userAgent.match(/safari/i);
-  var hasChrome = navigator.userAgent.match(/chrome/i);
-  var isFirefox = navigator.userAgent.match(/firefox/i);
+  const hasSafari = navigator.userAgent.match(/safari/i);
+  const hasChrome = navigator.userAgent.match(/chrome/i);
+  const isFirefox = navigator.userAgent.match(/firefox/i);
 
   if (hasSafari && !hasChrome) {
     this.$el.addClass('safari');
@@ -179,7 +179,7 @@ fn.getInitialKeyframeState = function() {
  * @return {Array.<string>}
  */
 fn.getSavedAnimationDisplayList = function() {
-  var rawList = this.model.get('savedAnimations');
+  const rawList = this.model.get('savedAnimations');
   return Object.keys(_.omit(rawList, constant.TRANSIENT_ANIMATION_NAME));
 };
 
@@ -187,11 +187,11 @@ fn.getSavedAnimationDisplayList = function() {
  * @param {string} animationName
  */
 fn.saveCurrentAnimationAs = function(animationName) {
-  var savedAnimations = this.model.get('savedAnimations');
+  const savedAnimations = this.model.get('savedAnimations');
 
   // A safe copy is needed to sever any deep object references (specifically,
   // the curves sub-object gets modified by this.loadAnimation).
-  var animationCopy = JSON.parse(JSON.stringify(this.rekapiComponent.toJSON()));
+  const animationCopy = JSON.parse(JSON.stringify(this.rekapiComponent.toJSON()));
   savedAnimations[animationName] = animationCopy;
   this.model.set('savedAnimations', savedAnimations);
 
@@ -211,7 +211,7 @@ fn.saveCurrentAnimationAs = function(animationName) {
  * @param {string} animationName
  */
 fn.loadAnimation = function(animationName) {
-  var animationData = this.model.get('savedAnimations')[animationName];
+  const animationData = this.model.get('savedAnimations')[animationName];
   this.rekapiComponent.fromJSON(animationData);
 };
 
@@ -219,7 +219,7 @@ fn.loadAnimation = function(animationName) {
  * @param {string} animationName
  */
 fn.deleteAnimation = function(animationName) {
-  var savedAnimations = this.model.get('savedAnimations');
+  const savedAnimations = this.model.get('savedAnimations');
   this.model.set('savedAnimations', _.omit(savedAnimations, animationName));
 
   // Force a change event to persist the animation list to localStorage.

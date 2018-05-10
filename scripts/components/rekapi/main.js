@@ -4,10 +4,10 @@ import Rekapi from 'rekapi';
 import ActorModel from './models/actor';
 import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
 
-var Base = AEnimaRekapiComponent;
-var baseProto = Base.prototype;
+const Base = AEnimaRekapiComponent;
+const baseProto = Base.prototype;
 
-var RekapiComponent = Base.extend({
+const RekapiComponent = Base.extend({
   name: 'stylie-rekapi',
 
   ActorModel: ActorModel,
@@ -66,16 +66,16 @@ var RekapiComponent = Base.extend({
    * @return {*}
    */
   applyOrientationToExport: function(exportProcessor) {
-    var needToAccountForOffset =
+    const needToAccountForOffset =
       this.lateralus.model.getUi('exportOrientation') === 'first-keyframe';
 
-    var offset = this.actorModel.getFirstKeyframeOffset();
+    const offset = this.actorModel.getFirstKeyframeOffset();
 
     if (needToAccountForOffset) {
       this.actorModel.prepareForExport(offset);
     }
 
-    var exportedAnimation = exportProcessor.call(this);
+    const exportedAnimation = exportProcessor.call(this);
 
     if (needToAccountForOffset) {
       this.actorModel.cleanupAfterExport(offset);
@@ -98,7 +98,7 @@ var RekapiComponent = Base.extend({
    * @return {Object}
    */
   exportTimelineForMantra: function() {
-    var exportRekapi = new Rekapi();
+    const exportRekapi = new Rekapi();
     exportRekapi.addActor(this.actorModel.exportForMantra());
 
     return exportRekapi.exportTimeline();

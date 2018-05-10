@@ -3,8 +3,8 @@ import Lateralus from 'lateralus';
 import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
 import KeyframePropertyModel from '../models/keyframe-property';
 
-var Base = AEnimaRekapiComponent.KeyframePropertyCollection;
-var baseProto = Base.prototype;
+const Base = AEnimaRekapiComponent.KeyframePropertyCollection;
+const baseProto = Base.prototype;
 
 var KeyframePropertyCollection = Base.extend({
   model: KeyframePropertyModel,

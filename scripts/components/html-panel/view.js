@@ -1,10 +1,10 @@
 import Lateralus from 'lateralus';
 import template from 'text!./template.mustache';
 
-var Base = Lateralus.Component.View;
-var baseProto = Base.prototype;
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-var HtmlPanelComponentView = Base.extend({
+const HtmlPanelComponentView = Base.extend({
   template: template,
 
   events: {

@@ -3,9 +3,9 @@ import Lateralus from 'lateralus';
 import kd from 'keydrown';
 import AEnimaKeybindings from 'aenima/components/keybindings/main';
 
-var Base = AEnimaKeybindings;
+const Base = AEnimaKeybindings;
 
-var KeybindingsComponent = Base.extend({
+const KeybindingsComponent = Base.extend({
   name: 'stylie-keybindings',
 
   /**

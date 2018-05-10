@@ -2,10 +2,10 @@ import Lateralus from 'lateralus';
 import template from 'text!./template.mustache';
 import CrosshairComponent from '../crosshair/main';
 
-var Base = Lateralus.Component.View;
-var baseProto = Base.prototype;
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-var CrosshairContainerComponentView = Base.extend({
+const CrosshairContainerComponentView = Base.extend({
   template: template,
 
   lateralusEvents: {
@@ -47,9 +47,9 @@ var CrosshairContainerComponentView = Base.extend({
    * @param {KeyframePropertyModel} keyframePropertyModel
    */
   addCrosshair: function(keyframePropertyModel) {
-    var crosshairEl = document.createElement('div');
+    const crosshairEl = document.createElement('div');
 
-    var crosshairComponent = this.addComponent(CrosshairComponent, {
+    const crosshairComponent = this.addComponent(CrosshairComponent, {
       el: crosshairEl,
       model: keyframePropertyModel,
     });

@@ -1,4 +1,4 @@
-var isLocalhost = window.location.hostname === 'localhost';
+const isLocalhost = window.location.hostname === 'localhost';
 
 export default {
   CONTROL_PANEL_PADDING_FROM_CORNER: 30,

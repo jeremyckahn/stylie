@@ -4,10 +4,10 @@ import Lateralus from 'lateralus';
 import template from 'text!./template.mustache';
 import CurveSelectorComponent from 'aenima/components/curve-selector/main';
 
-var Base = Lateralus.Component.View;
-var baseProto = Base.prototype;
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-var PROPERTY_RENDER_LIST = [
+const PROPERTY_RENDER_LIST = [
   { name: 'x', displayName: 'x' },
   { name: 'y', displayName: 'y' },
   { name: 'scale', displayName: 's' },
@@ -16,10 +16,10 @@ var PROPERTY_RENDER_LIST = [
   { name: 'rotationZ', displayName: 'rZ' },
 ];
 
-var INVALID_CLASS = 'invalid';
-var EDITING_CLASS = 'editing';
+const INVALID_CLASS = 'invalid';
+const EDITING_CLASS = 'editing';
 
-var KeyframeFormComponentView = Base.extend({
+const KeyframeFormComponentView = Base.extend({
   template: template,
 
   tagName: 'li',
@@ -47,7 +47,7 @@ var KeyframeFormComponentView = Base.extend({
      * @param {Error} error
      */
     invalid: function(model, error) {
-      var invalidFields = JSON.parse(error.message.split('|')[1]);
+      const invalidFields = JSON.parse(error.message.split('|')[1]);
 
       invalidFields.forEach(function(invalidField) {
         this['$' + invalidField].parent('label').addClass(INVALID_CLASS);
@@ -73,8 +73,8 @@ var KeyframeFormComponentView = Base.extend({
      */
     'change .curve': function(evt) {
       this.emit('requestRecordUndoState');
-      var $target = $(evt.target);
-      var property = $target.data('property');
+      const $target = $(evt.target);
+      const property = $target.data('property');
       this.model.set('easing_' + property, $target.val());
     },
 
@@ -91,7 +91,7 @@ var KeyframeFormComponentView = Base.extend({
         evt.keyCode === 27
       ) {
         // escape
-        var $target = $(evt.target);
+        const $target = $(evt.target);
         $target.blur().change();
       }
     },
@@ -143,8 +143,8 @@ var KeyframeFormComponentView = Base.extend({
 
     'click .delete': function() {
       this.emit('requestRecordUndoState');
-      var model = this.model;
-      var collection = model.collection;
+      const model = this.model;
+      const collection = model.collection;
 
       // Defer the remove call to the next thread so that the "submit" event
       // is properly caught and handled by this view.
@@ -169,8 +169,8 @@ var KeyframeFormComponentView = Base.extend({
     // Select the correct easing curve for each property, according to
     // this.model
     PROPERTY_RENDER_LIST.forEach(function(propertyObject) {
-      var name = propertyObject.name;
-      var $select = this['$' + name + 'Select'];
+      const name = propertyObject.name;
+      const $select = this['$' + name + 'Select'];
 
       if ($select) {
         this.addSubview(CurveSelectorComponent.View, {
@@ -183,15 +183,15 @@ var KeyframeFormComponentView = Base.extend({
   },
 
   updateModelFromForm: function() {
-    var setObject = {};
+    const setObject = {};
 
-    var propertyList = PROPERTY_RENDER_LIST.concat([{ name: 'millisecond' }]);
+    const propertyList = PROPERTY_RENDER_LIST.concat([{ name: 'millisecond' }]);
 
     propertyList.forEach(function(propertyObject) {
-      var $propertyField = this['$' + propertyObject.name];
+      const $propertyField = this['$' + propertyObject.name];
       $propertyField.parent('label').removeClass(INVALID_CLASS);
 
-      var input = $propertyField[0];
+      const input = $propertyField[0];
 
       setObject[propertyObject.name] = input.validity.valid
         ? input.valueAsNumber
@@ -205,13 +205,13 @@ var KeyframeFormComponentView = Base.extend({
   },
 
   getTemplateRenderData: function() {
-    var renderData = baseProto.getTemplateRenderData.apply(this, arguments);
+    const renderData = baseProto.getTemplateRenderData.apply(this, arguments);
 
-    var isFirstKeyframe = this.model.get('millisecond') === 0;
+    const isFirstKeyframe = this.model.get('millisecond') === 0;
 
     return _.extend(renderData, {
       properties: PROPERTY_RENDER_LIST.map(function(propertyObject) {
-        var name = propertyObject.name;
+        const name = propertyObject.name;
 
         return {
           name: name,
@@ -228,7 +228,7 @@ var KeyframeFormComponentView = Base.extend({
 
   render: function() {
     PROPERTY_RENDER_LIST.forEach(function(propertyObject) {
-      var propertyName = propertyObject.name;
+      const propertyName = propertyObject.name;
       this['$' + propertyName].val(this.model.get(propertyName));
     }, this);
   },
@@ -254,7 +254,7 @@ var KeyframeFormComponentView = Base.extend({
       validate: true,
     });
 
-    var validatedMillisecond = this.model.get('millisecond');
+    const validatedMillisecond = this.model.get('millisecond');
     this.$millisecond.val(validatedMillisecond);
     this.$millisecondDisplay.text(validatedMillisecond);
   },
