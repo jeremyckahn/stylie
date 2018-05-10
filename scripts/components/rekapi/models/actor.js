@@ -185,12 +185,12 @@ var ActorModel = Base.extend({
       exportActor.keyframe(
         transformProperty.millisecond,
         {
-          translateX: transformProperty.x + 'px',
-          translateY: transformProperty.y + 'px',
+          translateX: `${transformProperty.x}px`,
+          translateY: `${transformProperty.y}px`,
           scale: transformProperty.scale,
-          rotateX: transformProperty.rotationX + 'deg',
-          rotateY: transformProperty.rotationY + 'deg',
-          rotateZ: transformProperty.rotationZ + 'deg',
+          rotateX: `${transformProperty.rotationX}deg`,
+          rotateY: `${transformProperty.rotationY}deg`,
+          rotateZ: `${transformProperty.rotationZ}deg`,
         },
         {
           translateX: transformProperty.easing_x,

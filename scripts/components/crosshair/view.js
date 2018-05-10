@@ -165,17 +165,7 @@ const CrosshairComponentView = Base.extend({
   getRotationTransformStringFromModel() {
     const json = this.model.toJSON();
 
-    return (
-      'rotateX(' +
-      json.rotationX +
-      'deg) rotateY(' +
-      json.rotationY +
-      'deg) rotateZ(' +
-      json.rotationZ +
-      'deg) scale(' +
-      json.scale +
-      ')'
-    );
+    return `rotateX(${json.rotationX}deg) rotateY(${json.rotationY}deg) rotateZ(${json.rotationZ}deg) scale(${json.scale})`;
   },
 
   setUiStateToModel() {

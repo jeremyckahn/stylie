@@ -158,7 +158,7 @@ var KeyframePropertyModel = Base.extend({
 
     if (invalidFields.length) {
       return new Error(
-        'Invalid KeyframePropertyModel values|' + JSON.stringify(invalidFields)
+        `Invalid KeyframePropertyModel values|${JSON.stringify(invalidFields)}`
       );
     }
   },
