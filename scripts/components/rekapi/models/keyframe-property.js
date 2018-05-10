@@ -140,7 +140,9 @@ var KeyframePropertyModel = Base.extend({
    * @return {Error=}
    */
   validate(attributes) {
-    const invalidFields = _.filter(NUMBER_PROPERTIES, numberProperty => isNaN(attributes[numberProperty]));
+    const invalidFields = _.filter(NUMBER_PROPERTIES, numberProperty =>
+      isNaN(attributes[numberProperty])
+    );
 
     const millisecond = attributes.millisecond;
 
@@ -150,8 +152,7 @@ var KeyframePropertyModel = Base.extend({
       // And millisecond is not already invalid
       !_.contains(invalidFields, 'millisecond') &&
       // And the keyframe already exists or is negative
-      (this.collection.findWhere({ millisecond }) ||
-        millisecond < 0)
+      (this.collection.findWhere({ millisecond }) || millisecond < 0)
     ) {
       invalidFields.push('millisecond');
     }

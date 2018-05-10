@@ -34,7 +34,10 @@ const KeyframesPanelComponentView = Base.extend({
       this.$keyframesList.children().detach();
 
       collection.each(function(model) {
-        const keyframeFormComponent = _.find(this.component.components, component => component.view.model === model);
+        const keyframeFormComponent = _.find(
+          this.component.components,
+          component => component.view.model === model
+        );
 
         this.$keyframesList.append(keyframeFormComponent.view.el);
       }, this);

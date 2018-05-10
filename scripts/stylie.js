@@ -191,7 +191,9 @@ fn.saveCurrentAnimationAs = function(animationName) {
 
   // A safe copy is needed to sever any deep object references (specifically,
   // the curves sub-object gets modified by this.loadAnimation).
-  const animationCopy = JSON.parse(JSON.stringify(this.rekapiComponent.toJSON()));
+  const animationCopy = JSON.parse(
+    JSON.stringify(this.rekapiComponent.toJSON())
+  );
   savedAnimations[animationName] = animationCopy;
   this.model.set('savedAnimations', savedAnimations);
 

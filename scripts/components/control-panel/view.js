@@ -43,7 +43,8 @@ const ControlPanelComponentView = Base.extend({
   deferredInitialize() {
     const width = this.$el.outerWidth(true);
     const parentWidth = this.$el.parent().width();
-    const left = parentWidth - width - constant.CONTROL_PANEL_PADDING_FROM_CORNER;
+    const left =
+      parentWidth - width - constant.CONTROL_PANEL_PADDING_FROM_CORNER;
 
     this.$el.css({
       top: constant.CONTROL_PANEL_PADDING_FROM_CORNER,

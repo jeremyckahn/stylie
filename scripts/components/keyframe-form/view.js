@@ -108,12 +108,9 @@ const KeyframeFormComponentView = Base.extend({
       // delayed by 16 milliseconds.
       //
       // Ugh.
-      _.delay(
-        () => {
-          this.$millisecond.focus();
-        },
-        16
-      );
+      _.delay(() => {
+        this.$millisecond.focus();
+      }, 16);
     },
 
     /**
