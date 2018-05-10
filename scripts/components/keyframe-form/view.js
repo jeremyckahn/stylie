@@ -109,9 +109,9 @@ const KeyframeFormComponentView = Base.extend({
       //
       // Ugh.
       _.delay(
-        function() {
+        () => {
           this.$millisecond.focus();
-        }.bind(this),
+        },
         16
       );
     },
@@ -210,7 +210,7 @@ const KeyframeFormComponentView = Base.extend({
     const isFirstKeyframe = this.model.get('millisecond') === 0;
 
     return _.extend(renderData, {
-      properties: PROPERTY_RENDER_LIST.map(function(propertyObject) {
+      properties: PROPERTY_RENDER_LIST.map(propertyObject => {
         const name = propertyObject.name;
 
         return {

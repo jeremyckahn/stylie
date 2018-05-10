@@ -80,7 +80,7 @@ const queryParams = (function() {
   const stringChunks = queryString.split('&');
 
   const accumulator = {};
-  stringChunks.forEach(function(stringChunk) {
+  stringChunks.forEach(stringChunk => {
     const pair = stringChunk.split('=');
     accumulator[pair[0]] = pair[1];
   });

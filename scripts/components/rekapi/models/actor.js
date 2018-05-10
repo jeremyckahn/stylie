@@ -127,7 +127,7 @@ var ActorModel = Base.extend({
    */
   prepareForExport: function(offset) {
     this.transformPropertyCollection.each(function(model) {
-      ['x', 'y'].forEach(function(property) {
+      ['x', 'y'].forEach(property => {
         model.set(
           property,
           model.get(property) - offset[property],
@@ -145,7 +145,7 @@ var ActorModel = Base.extend({
    */
   cleanupAfterExport: function(offset) {
     this.transformPropertyCollection.each(function(model) {
-      ['x', 'y'].forEach(function(property) {
+      ['x', 'y'].forEach(property => {
         model.set(
           property,
           model.get(property) + offset[property],
@@ -181,7 +181,7 @@ var ActorModel = Base.extend({
     const exportActor = new Rekapi.Actor();
     const transformProperties = this.transformPropertyCollection.toJSON();
 
-    transformProperties.forEach(function(transformProperty) {
+    transformProperties.forEach(transformProperty => {
       exportActor.keyframe(
         transformProperty.millisecond,
         {

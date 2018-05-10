@@ -140,9 +140,7 @@ var KeyframePropertyModel = Base.extend({
    * @return {Error=}
    */
   validate: function(attributes) {
-    const invalidFields = _.filter(NUMBER_PROPERTIES, function(numberProperty) {
-      return isNaN(attributes[numberProperty]);
-    });
+    const invalidFields = _.filter(NUMBER_PROPERTIES, numberProperty => isNaN(attributes[numberProperty]));
 
     const millisecond = attributes.millisecond;
 

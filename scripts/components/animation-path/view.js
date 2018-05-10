@@ -149,7 +149,7 @@ const AnimationPathComponentView = Base.extend({
 
     let previousPoint;
     ctx.beginPath();
-    _.each(points, function(point) {
+    _.each(points, point => {
       if (previousPoint) {
         ctx.lineTo(point.x, point.y);
       } else {
