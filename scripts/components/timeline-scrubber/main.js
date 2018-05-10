@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const TimelineScrubberComponent = Base.extend({
   name: 'stylie-timeline-scrubber',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default TimelineScrubberComponent;

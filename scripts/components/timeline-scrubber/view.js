@@ -6,7 +6,7 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const TimelineScrubberComponentView = Base.extend({
-  template: template,
+  template,
 
   lateralusEvents: {
     /**
@@ -30,7 +30,7 @@ const TimelineScrubberComponentView = Base.extend({
       this.syncScrubberToRekapi(rekapi);
     },
 
-    userRequestToggleScrubber: function() {
+    userRequestToggleScrubber() {
       this.hidableView.toggle();
     },
   },
@@ -60,7 +60,7 @@ const TimelineScrubberComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
 
     this.hidableView = this.addSubview(HidableComponent.View, {
@@ -71,7 +71,7 @@ const TimelineScrubberComponentView = Base.extend({
   /**
    * @param {boolean} isPlaying
    */
-  syncToRekapiPlayState: function(isPlaying) {
+  syncToRekapiPlayState(isPlaying) {
     if (isPlaying) {
       this.$play.addClass('hide');
       this.$pause.removeClass('hide');
@@ -84,14 +84,14 @@ const TimelineScrubberComponentView = Base.extend({
   /**
    * @param {Rekapi} rekapi
    */
-  syncScrubberToRekapi: function(rekapi) {
+  syncScrubberToRekapi(rekapi) {
     const animationLength = rekapi.getAnimationLength();
     this.$scrubber
       .attr('max', animationLength)
       .val(rekapi.getLastPositionUpdated() * animationLength);
   },
 
-  syncRekapiToScrubber: function() {
+  syncRekapiToScrubber() {
     this.emit('userRequestSetPlayheadMillisecond', this.$scrubber.val());
   },
 });

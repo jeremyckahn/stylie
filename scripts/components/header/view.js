@@ -5,7 +5,7 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const HeaderComponentView = Base.extend({
-  template: template,
+  template,
 
   events: {
     'click .help': function() {
@@ -21,7 +21,7 @@ const HeaderComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
   },
 });

@@ -6,28 +6,28 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const CrosshairContainerComponentView = Base.extend({
-  template: template,
+  template,
 
   lateralusEvents: {
     /**
      * @param {boolean} showPath
      */
-    userRequestUpdateShowPathSetting: function(showPath) {
+    userRequestUpdateShowPathSetting(showPath) {
       this.$el[showPath ? 'removeClass' : 'addClass']('transparent');
     },
 
     /**
      * @param {KeyframePropertyModel} keyframePropertyModel
      */
-    keyframePropertyAdded: function(keyframePropertyModel) {
+    keyframePropertyAdded(keyframePropertyModel) {
       this.addCrosshair(keyframePropertyModel);
     },
 
-    userRequestStartRotationEditMode: function() {
+    userRequestStartRotationEditMode() {
       this.setRotationModeEnablement(true);
     },
 
-    userRequestEndRotationEditMode: function() {
+    userRequestEndRotationEditMode() {
       this.setRotationModeEnablement(false);
     },
   },
@@ -35,7 +35,7 @@ const CrosshairContainerComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
 
     if (!this.lateralus.model.getUi('showPath')) {
@@ -46,7 +46,7 @@ const CrosshairContainerComponentView = Base.extend({
   /**
    * @param {KeyframePropertyModel} keyframePropertyModel
    */
-  addCrosshair: function(keyframePropertyModel) {
+  addCrosshair(keyframePropertyModel) {
     const crosshairEl = document.createElement('div');
 
     const crosshairComponent = this.addComponent(CrosshairComponent, {
@@ -60,7 +60,7 @@ const CrosshairContainerComponentView = Base.extend({
   /**
    * @param {boolean} enabled
    */
-  setRotationModeEnablement: function(enabled) {
+  setRotationModeEnablement(enabled) {
     this.$el[enabled ? 'addClass' : 'removeClass']('rotation-mode');
   },
 });

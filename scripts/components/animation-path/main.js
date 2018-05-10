@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const AnimationPathComponent = Base.extend({
   name: 'stylie-animation-path',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default AnimationPathComponent;

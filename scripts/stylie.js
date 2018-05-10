@@ -115,31 +115,31 @@ fn.lateralusEvents = _.extend(
     /**
      * @param {string} animationName
      */
-    userRequestSaveCurrentAnimation: function(animationName) {
+    userRequestSaveCurrentAnimation(animationName) {
       this.saveCurrentAnimationAs(animationName);
     },
 
     /**
      * @param {string} animationName
      */
-    userRequestLoadAnimation: function(animationName) {
+    userRequestLoadAnimation(animationName) {
       this.loadAnimation(animationName);
     },
 
     /**
      * @param {string} animationName
      */
-    userRequestDeleteAnimation: function(animationName) {
+    userRequestDeleteAnimation(animationName) {
       this.deleteAnimation(animationName);
     },
 
-    userRequestResetAnimation: function() {
+    userRequestResetAnimation() {
       this.emit('requestRecordUndoState');
       this.rekapiComponent.clearCurrentAnimation();
       this.createDefaultAnimation();
     },
 
-    userRequestToggleRotationEditMode: function() {
+    userRequestToggleRotationEditMode() {
       this.model.set(
         'isRotationModeEnabled',
         !this.model.get('isRotationModeEnabled')

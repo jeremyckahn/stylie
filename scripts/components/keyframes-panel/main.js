@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const KeyframesPanelComponent = Base.extend({
   name: 'stylie-keyframes-panel',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default KeyframesPanelComponent;

@@ -6,8 +6,8 @@ const Base = ModalComponent;
 
 const HelpComponent = Base.extend({
   name: 'stylie-help',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default HelpComponent;

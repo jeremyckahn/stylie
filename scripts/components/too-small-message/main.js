@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const TooSmallMessageComponent = Base.extend({
   name: 'stylie-too-small-message',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default TooSmallMessageComponent;

@@ -25,7 +25,7 @@ const INITIAL_STATE = {
 const StylieModel = Base.extend({
   localStorageId: 'stylieData',
 
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
 
     const isEmbedded = this.lateralus.getQueryParam('isEmbedded');
@@ -50,7 +50,7 @@ const StylieModel = Base.extend({
           env: window.env || {},
 
           hasApi: this.lateralus.getQueryParam('hasApi'),
-          isEmbedded: isEmbedded,
+          isEmbedded,
           embeddedImgRoot: './',
         },
         this.lateralus.options
@@ -58,7 +58,7 @@ const StylieModel = Base.extend({
     );
   },
 
-  setInitialState: function() {
+  setInitialState() {
     // Call .set() directly instead of leveraging Backbone.Model#defaults to
     // prevent shared prototype references.
     this.set(INITIAL_STATE);
@@ -69,7 +69,7 @@ const StylieModel = Base.extend({
    * data must be partially, retroactively re-initialized to prevent corrupt
    * UI state.
    */
-  retrofitUiData: function() {
+  retrofitUiData() {
     _.defaults(this.attributes.ui, INITIAL_STATE.ui);
   },
 });

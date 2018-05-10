@@ -11,10 +11,10 @@ const Base = Lateralus.Component;
 
 const ContainerComponent = Base.extend({
   name: 'stylie-container',
-  View: View,
-  template: template,
+  View,
+  template,
 
-  initialize: function() {
+  initialize() {
     if (!this.lateralus.model.get('isEmbedded')) {
       this.headerComponent = this.addComponent(HeaderComponent, {
         el: this.view.$header[0],

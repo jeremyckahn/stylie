@@ -9,7 +9,7 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const CrosshairComponentView = Base.extend({
-  template: template,
+  template,
 
   lateralusEvents: {
     /**
@@ -33,7 +33,7 @@ const CrosshairComponentView = Base.extend({
      *   scale: number
      * }} diff
      */
-    moveSelectedCrosshairByDiff: function(diff) {
+    moveSelectedCrosshairByDiff(diff) {
       if (this.isPrimarySelectedCrosshair || !this.model.get('isSelected')) {
         return;
       }
@@ -56,7 +56,7 @@ const CrosshairComponentView = Base.extend({
      * @param {Object} options
      * @param {boolean} options.changedByCrosshairView
      */
-    change: function(model, options) {
+    change(model, options) {
       if (!options.changedByCrosshairView) {
         this.render();
       }
@@ -70,21 +70,21 @@ const CrosshairComponentView = Base.extend({
       this.$el[isSelected ? 'addClass' : 'removeClass']('selected');
     },
 
-    remove: function() {
+    remove() {
       this.component.dispose();
     },
   },
 
   events: {
-    drag: function() {
+    drag() {
       this.setUiStateToModel();
     },
 
-    dragStart: function() {
+    dragStart() {
       this.emit('requestRecordUndoState');
     },
 
-    click: function() {
+    click() {
       if (kd.SHIFT.isDown()) {
         this.model.set('isSelected', !this.model.get('isSelected'));
       }
@@ -104,7 +104,7 @@ const CrosshairComponentView = Base.extend({
    * @param {Object} options See http://backbonejs.org/#View-constructor
    * @param {KeyframePropertyModel} options.model
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
     this.isPrimarySelectedCrosshair = false;
 
@@ -116,7 +116,7 @@ const CrosshairComponentView = Base.extend({
     this.$el.css('display', 'none');
   },
 
-  deferredInitialize: function() {
+  deferredInitialize() {
     // Check to see if this View's component/model has been torn down and
     // abort if so.  This can happen if the user is making rapid undo inputs.
     if (!_.size(this.model)) {
@@ -136,7 +136,7 @@ const CrosshairComponentView = Base.extend({
     this.$el.css('display', '');
   },
 
-  render: function() {
+  render() {
     const json = this.model.toJSON();
     const halfBoxSize = this.$el.height() / 2;
 
@@ -162,7 +162,7 @@ const CrosshairComponentView = Base.extend({
   /**
    * @return {string}
    */
-  getRotationTransformStringFromModel: function() {
+  getRotationTransformStringFromModel() {
     const json = this.model.toJSON();
 
     return (
@@ -178,7 +178,7 @@ const CrosshairComponentView = Base.extend({
     );
   },
 
-  setUiStateToModel: function() {
+  setUiStateToModel() {
     const cubeletCoords = this.$rotationControl.cubeletGetCoords();
     const halfBoxSize = this.$el.height() / 2;
 
@@ -216,12 +216,12 @@ const CrosshairComponentView = Base.extend({
     }
   },
 
-  enableRotationEditMode: function() {
+  enableRotationEditMode() {
     this.$el.dragonDisable();
     this.$rotationControl.cubeletShow();
   },
 
-  disableRotationEditMode: function() {
+  disableRotationEditMode() {
     this.$el.dragonEnable();
     this.$rotationControl.cubeletHide();
   },

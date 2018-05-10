@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const HtmlPanelComponent = Base.extend({
   name: 'stylie-html-panel',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default HtmlPanelComponent;

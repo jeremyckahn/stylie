@@ -13,12 +13,12 @@ var KeyframePropertyCollection = Base.extend({
     /**
      * @param {boolean} isCentered
      */
-    userRequestUpdateCenteringSetting: function(isCentered) {
+    userRequestUpdateCenteringSetting(isCentered) {
       this.setCenteringRules(isCentered);
     },
   },
 
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
     this.setCenteringRules(this.lateralus.model.getUi('centerToPath'));
   },
@@ -26,7 +26,7 @@ var KeyframePropertyCollection = Base.extend({
   /**
    * @param {boolean} isCentered
    */
-  setCenteringRules: function(isCentered) {
+  setCenteringRules(isCentered) {
     this.invoke('set', 'isCentered', isCentered);
   },
 });

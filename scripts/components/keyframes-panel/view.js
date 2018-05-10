@@ -7,7 +7,7 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const KeyframesPanelComponentView = Base.extend({
-  template: template,
+  template,
 
   events: {
     'click .add-keyframe': function() {
@@ -22,7 +22,7 @@ const KeyframesPanelComponentView = Base.extend({
     /**
      * @param {Backbone.Model} keyframePropertyModel
      */
-    keyframePropertyAdded: function(keyframePropertyModel) {
+    keyframePropertyAdded(keyframePropertyModel) {
       const keyframeFormComponent = this.addComponent(KeyframeFormComponent, {
         model: keyframePropertyModel,
       });
@@ -30,7 +30,7 @@ const KeyframesPanelComponentView = Base.extend({
       this.$keyframesList.append(keyframeFormComponent.view.el);
     },
 
-    confirmNewKeyframeOrder: function(collection) {
+    confirmNewKeyframeOrder(collection) {
       this.$keyframesList.children().detach();
 
       collection.each(function(model) {
@@ -44,7 +44,7 @@ const KeyframesPanelComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
   },
 });

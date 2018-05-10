@@ -10,14 +10,14 @@ const baseProto = Base.prototype;
 const RekapiComponent = Base.extend({
   name: 'stylie-rekapi',
 
-  ActorModel: ActorModel,
+  ActorModel,
 
   provide: _.defaults(
     {
       /**
        * @return {Object}
        */
-      timelineExport: function() {
+      timelineExport() {
         return this.applyOrientationToExport(
           baseProto.provide.timelineExport.bind(this)
         );
@@ -27,7 +27,7 @@ const RekapiComponent = Base.extend({
        * @param {Object} cssOpts Gets passed to Rekapi.DOMRenderer#toString.
        * @return {string}
        */
-      cssAnimationString: function(cssOpts) {
+      cssAnimationString(cssOpts) {
         return this.applyOrientationToExport(
           baseProto.provide.cssAnimationString.bind(this, cssOpts)
         );
@@ -37,7 +37,7 @@ const RekapiComponent = Base.extend({
        * TODO: Perhaps this can be provided from the ActorModel class itself?
        * @return {ActorModel}
        */
-      currentActorModel: function() {
+      currentActorModel() {
         return this.actorModel;
       },
     },
@@ -48,7 +48,7 @@ const RekapiComponent = Base.extend({
     /**
      * @param {KeyboardEvent} evt
      */
-    userRequestUndo: function(evt) {
+    userRequestUndo(evt) {
       // Prevent focusing of the previously-modified input element
       evt.preventDefault();
 
@@ -56,7 +56,7 @@ const RekapiComponent = Base.extend({
     },
   },
 
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
     this.setupActor();
   },
@@ -65,7 +65,7 @@ const RekapiComponent = Base.extend({
    * @param {Function} exportProcessor
    * @return {*}
    */
-  applyOrientationToExport: function(exportProcessor) {
+  applyOrientationToExport(exportProcessor) {
     const needToAccountForOffset =
       this.lateralus.model.getUi('exportOrientation') === 'first-keyframe';
 
@@ -87,7 +87,7 @@ const RekapiComponent = Base.extend({
   /**
    * @return {Object}
    */
-  toJSON: function() {
+  toJSON() {
     return {
       actorModel: this.actorModel.toJSON(),
       curves: this.curves,
@@ -97,7 +97,7 @@ const RekapiComponent = Base.extend({
   /**
    * @return {Object}
    */
-  exportTimelineForMantra: function() {
+  exportTimelineForMantra() {
     const exportRekapi = new Rekapi();
     exportRekapi.addActor(this.actorModel.exportForMantra());
 
@@ -107,7 +107,7 @@ const RekapiComponent = Base.extend({
   /**
    * @param {Object} animationData
    */
-  fromJSON: function(animationData) {
+  fromJSON(animationData) {
     this.lateralus.model.set('isLoadingTimeline', true, { silent: true });
 
     // TODO: The requestClearTimeline event should be emitted from
@@ -130,7 +130,7 @@ const RekapiComponent = Base.extend({
   /**
    * @override
    */
-  revertToPreviouslyRecordedUndoState: function() {
+  revertToPreviouslyRecordedUndoState() {
     this.emit('userRequestDeselectAllKeyframes');
     baseProto.revertToPreviouslyRecordedUndoState.apply(this, arguments);
   },

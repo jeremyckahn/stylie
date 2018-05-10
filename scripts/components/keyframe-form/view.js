@@ -20,12 +20,12 @@ const INVALID_CLASS = 'invalid';
 const EDITING_CLASS = 'editing';
 
 const KeyframeFormComponentView = Base.extend({
-  template: template,
+  template,
 
   tagName: 'li',
 
   lateralusEvents: {
-    disableMillisecondEditing: function() {
+    disableMillisecondEditing() {
       this.disableMillisecondEditing();
     },
   },
@@ -36,7 +36,7 @@ const KeyframeFormComponentView = Base.extend({
      * @param {Object} options
      * @param {boolean} options.changedByFormView
      */
-    change: function(model, options) {
+    change(model, options) {
       if (!options.changedByFormView) {
         this.render();
       }
@@ -46,7 +46,7 @@ const KeyframeFormComponentView = Base.extend({
      * @param {KeyframePropertyModel} model
      * @param {Error} error
      */
-    invalid: function(model, error) {
+    invalid(model, error) {
       const invalidFields = JSON.parse(error.message.split('|')[1]);
 
       invalidFields.forEach(function(invalidField) {
@@ -54,7 +54,7 @@ const KeyframeFormComponentView = Base.extend({
       }, this);
     },
 
-    remove: function() {
+    remove() {
       this.component.dispose();
     },
 
@@ -163,7 +163,7 @@ const KeyframeFormComponentView = Base.extend({
    * @param {Object} options See http://backbonejs.org/#View-constructor
    * @param {KeyframePropertyModel} options.model
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
 
     // Select the correct easing curve for each property, according to
@@ -182,7 +182,7 @@ const KeyframeFormComponentView = Base.extend({
     }, this);
   },
 
-  updateModelFromForm: function() {
+  updateModelFromForm() {
     const setObject = {};
 
     const propertyList = PROPERTY_RENDER_LIST.concat([{ name: 'millisecond' }]);
@@ -204,7 +204,7 @@ const KeyframeFormComponentView = Base.extend({
     });
   },
 
-  getTemplateRenderData: function() {
+  getTemplateRenderData() {
     const renderData = baseProto.getTemplateRenderData.apply(this, arguments);
 
     const isFirstKeyframe = this.model.get('millisecond') === 0;
@@ -214,7 +214,7 @@ const KeyframeFormComponentView = Base.extend({
         const name = propertyObject.name;
 
         return {
-          name: name,
+          name,
           value: renderData[name],
           displayName: propertyObject.displayName,
         };
@@ -226,14 +226,14 @@ const KeyframeFormComponentView = Base.extend({
     });
   },
 
-  render: function() {
+  render() {
     PROPERTY_RENDER_LIST.forEach(function(propertyObject) {
       const propertyName = propertyObject.name;
       this['$' + propertyName].val(this.model.get(propertyName));
     }, this);
   },
 
-  enableMillisecondEditing: function() {
+  enableMillisecondEditing() {
     if (
       this.model.get('millisecond') === 0 ||
       this.$millisecondInputContainer.hasClass(EDITING_CLASS)
@@ -244,12 +244,12 @@ const KeyframeFormComponentView = Base.extend({
     this.$millisecondInputContainer.addClass(EDITING_CLASS);
   },
 
-  disableMillisecondEditing: function() {
+  disableMillisecondEditing() {
     this.$millisecondInputContainer.removeClass(EDITING_CLASS);
     this.$millisecond.parent('label').removeClass(INVALID_CLASS);
   },
 
-  saveMillisecondToModel: function() {
+  saveMillisecondToModel() {
     this.model.set('millisecond', +this.$millisecond.val(), {
       validate: true,
     });

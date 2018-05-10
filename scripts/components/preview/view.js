@@ -7,14 +7,14 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const PreviewComponentView = Base.extend({
-  template: template,
+  template,
 
   lateralusEvents: {
-    userRequestEnableKeyframeSelection: function() {
+    userRequestEnableKeyframeSelection() {
       this.$el.addClass('keyframe-selection-mode-enabled');
     },
 
-    userRequestDisableKeyframeSelection: function() {
+    userRequestDisableKeyframeSelection() {
       this.$el.removeClass('keyframe-selection-mode-enabled');
     },
   },
@@ -23,7 +23,7 @@ const PreviewComponentView = Base.extend({
     /**
      * @param {jQuery.Event} evt
      */
-    mouseup: function(evt) {
+    mouseup(evt) {
       const lastMouseDownCoords = this.lastMouseDownCoords;
 
       if (
@@ -38,7 +38,7 @@ const PreviewComponentView = Base.extend({
     /**
      * @param {jQuery.Event} evt
      */
-    mousedown: function(evt) {
+    mousedown(evt) {
       this.lastMouseDownCoords = _.pick(evt, 'clientX', 'clientY');
     },
   },
@@ -46,7 +46,7 @@ const PreviewComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
     this.lastMouseDownCoords = {};
   },

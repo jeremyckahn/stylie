@@ -13,8 +13,8 @@ const Base = AEnimaControlPanelComponent;
 
 const ControlPanelComponent = Base.extend({
   name: 'stylie-control-panel',
-  View: View,
-  template: template,
+  View,
+  template,
 
   provide: {
     /**
@@ -26,7 +26,7 @@ const ControlPanelComponent = Base.extend({
      *   iterations: boolean|undefined
      * }}
      */
-    cssConfigObject: function() {
+    cssConfigObject() {
       const motionPanelJson = this.motionPanelComponent.toJSON();
       const exportPanelJson = this.exportPanelComponent
         ? this.exportPanelComponent.toJSON()
@@ -36,7 +36,7 @@ const ControlPanelComponent = Base.extend({
     },
   },
 
-  initialize: function() {
+  initialize() {
     this.addComponent(KeyframePanelComponent, {
       el: this.view.$keyframesPanel,
     });

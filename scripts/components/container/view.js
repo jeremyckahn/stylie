@@ -7,7 +7,7 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const ContainerComponentView = Base.extend({
-  template: template,
+  template,
 
   className: 'aenima',
 
@@ -51,7 +51,7 @@ const ContainerComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
     this.$el
       .addClass('loading')
@@ -60,14 +60,14 @@ const ContainerComponentView = Base.extend({
       );
   },
 
-  deferredInitialize: function() {
+  deferredInitialize() {
     this.$el.removeClass('loading');
   },
 
   /**
    * @override
    */
-  getTemplateRenderData: function() {
+  getTemplateRenderData() {
     return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
       isEmbedded: this.lateralus.model.get('isEmbedded'),
     });

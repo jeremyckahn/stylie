@@ -14,13 +14,13 @@ const $win = $(window);
 const PATH_RENDER_GRANULARITY = constant.PATH_RENDER_GRANULARITY;
 
 const AnimationPathComponentView = Base.extend({
-  template: template,
+  template,
 
   lateralusEvents: {
     /**
      * @param {boolean} showPath
      */
-    userRequestUpdateShowPathSetting: function(showPath) {
+    userRequestUpdateShowPathSetting(showPath) {
       this.$el[showPath ? 'removeClass' : 'addClass']('transparent');
       this.render();
     },
@@ -33,7 +33,7 @@ const AnimationPathComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
     this.context = this.$el[0].getContext('2d');
 
@@ -44,12 +44,12 @@ const AnimationPathComponentView = Base.extend({
     $win.on('resize', _.bind(this.onWindowResize, this));
   },
 
-  deferredInitialize: function() {
+  deferredInitialize() {
     const $parent = this.$el.parent();
     this.resize($parent.width(), $parent.height());
   },
 
-  onWindowResize: function() {
+  onWindowResize() {
     this.resize($win.width(), $win.height());
   },
 
@@ -57,8 +57,8 @@ const AnimationPathComponentView = Base.extend({
    * @param {number} width
    * @param {number} height
    */
-  resize: function(width, height) {
-    const dims = { width: width, height: height };
+  resize(width, height) {
+    const dims = { width, height };
 
     _.each(
       ['width', 'height'],
@@ -75,7 +75,7 @@ const AnimationPathComponentView = Base.extend({
     this.render();
   },
 
-  updatePath: function() {
+  updatePath() {
     this.generatePathPrerender();
     this.render();
   },
@@ -89,7 +89,7 @@ const AnimationPathComponentView = Base.extend({
    * @param {string} easeY
    * @return {Array.<{x: number, y: number}>}
    */
-  generatePathSegment: function(x1, x2, y1, y2, easeX, easeY) {
+  generatePathSegment(x1, x2, y1, y2, easeX, easeY) {
     const points = [];
     const from = {
       x: x1,
@@ -115,7 +115,7 @@ const AnimationPathComponentView = Base.extend({
   /**
    * @param {RekapiComponent} rekapiComponent
    */
-  generatePathPoints: function() {
+  generatePathPoints() {
     const actorModel = this.collectOne('currentActorModel');
     const numKeyframes = actorModel.transformPropertyCollection.length;
     let points = [];
@@ -141,7 +141,7 @@ const AnimationPathComponentView = Base.extend({
     return points;
   },
 
-  generatePathPrerender: function() {
+  generatePathPrerender() {
     prerenderBuffer.width = this.$el.width();
     prerenderBuffer.height = this.$el.height();
     const ctx = (prerenderBuffer.ctx = prerenderBuffer.getContext('2d'));
@@ -165,7 +165,7 @@ const AnimationPathComponentView = Base.extend({
     ctx.closePath();
   },
 
-  render: function() {
+  render() {
     // Quick way to clear the canvas
     this.$el[0].width = this.$el.width();
 

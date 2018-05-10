@@ -10,10 +10,10 @@ const Base = Lateralus.Component;
 
 const PreviewComponent = Base.extend({
   name: 'stylie-preview',
-  View: View,
-  template: template,
+  View,
+  template,
 
-  initialize: function() {
+  initialize() {
     this.addComponent(AnimationPathComponent, {
       el: this.view.$animationPath[0],
     });

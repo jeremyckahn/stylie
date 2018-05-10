@@ -12,15 +12,15 @@ const baseProto = Base.prototype;
 const silentOptionObject = { silent: true };
 
 var ActorModel = Base.extend({
-  KeyframePropertyCollection: KeyframePropertyCollection,
+  KeyframePropertyCollection,
 
   lateralusEvents: {
-    userRequestNewKeyframe: function() {
+    userRequestNewKeyframe() {
       this.emit('requestRecordUndoState');
       this.addNewKeyframe();
     },
 
-    millisecondEditingEnd: function() {
+    millisecondEditingEnd() {
       this.emit('confirmNewKeyframeOrder', this.transformPropertyCollection);
     },
   },
@@ -31,7 +31,7 @@ var ActorModel = Base.extend({
    *   @param {RekapiComponent} rekapiComponent
    *   @param {RekapiActor} actor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
   },
 
@@ -41,7 +41,7 @@ var ActorModel = Base.extend({
    * @param {Object} [opt_options.state]
    * @param {string} [opt_options.easing]
    */
-  addNewKeyframe: function(opt_options) {
+  addNewKeyframe(opt_options) {
     const options = opt_options || {};
     let keyframePropertyAttributes = options.state || {};
     const transformPropertyCollection = this.transformPropertyCollection;
@@ -106,7 +106,7 @@ var ActorModel = Base.extend({
   /**
    * @return {{x: number, y: number}}
    */
-  getFirstKeyframeOffset: function() {
+  getFirstKeyframeOffset() {
     const firstKeyframe = this.transformPropertyCollection.first();
 
     if (!firstKeyframe) {
@@ -125,7 +125,7 @@ var ActorModel = Base.extend({
    * Helper method for RekapiComponent#applyOrientationToExport.
    * @param {{ x: number, y: number }} offset
    */
-  prepareForExport: function(offset) {
+  prepareForExport(offset) {
     this.transformPropertyCollection.each(function(model) {
       ['x', 'y'].forEach(property => {
         model.set(
@@ -143,7 +143,7 @@ var ActorModel = Base.extend({
    * Helper method for RekapiComponent#applyOrientationToExport.
    * @param {{ x: number, y: number }} offset
    */
-  cleanupAfterExport: function(offset) {
+  cleanupAfterExport(offset) {
     this.transformPropertyCollection.each(function(model) {
       ['x', 'y'].forEach(property => {
         model.set(
@@ -160,7 +160,7 @@ var ActorModel = Base.extend({
   /**
    * @param {Array.<Object>} keyframes
    */
-  setKeyframes: function(keyframes) {
+  setKeyframes(keyframes) {
     this.rekapiComponent.beginBulkKeyframeOperation();
     this.removeAllKeyframes();
 
@@ -177,7 +177,7 @@ var ActorModel = Base.extend({
   /**
    * @return {Rekapi.Actor}
    */
-  exportForMantra: function() {
+  exportForMantra() {
     const exportActor = new Rekapi.Actor();
     const transformProperties = this.transformPropertyCollection.toJSON();
 

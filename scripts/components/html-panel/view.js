@@ -5,7 +5,7 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const HtmlPanelComponentView = Base.extend({
-  template: template,
+  template,
 
   events: {
     'keyup textarea': function() {
@@ -16,11 +16,11 @@ const HtmlPanelComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
   },
 
-  deferredInitialize: function() {
+  deferredInitialize() {
     this.$html.html(this.collectOne('actorHtml'));
   },
 });

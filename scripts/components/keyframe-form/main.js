@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const KeyframeFormComponent = Base.extend({
   name: 'stylie-keyframe-form',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default KeyframeFormComponent;

@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const CrosshairComponent = Base.extend({
   name: 'stylie-crosshair',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default CrosshairComponent;

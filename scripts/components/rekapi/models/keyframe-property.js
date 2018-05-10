@@ -37,20 +37,20 @@ var KeyframePropertyModel = Base.extend({
   },
 
   lateralusEvents: {
-    userRequestDeselectAllKeyframes: function() {
+    userRequestDeselectAllKeyframes() {
       this.set('isSelected', false);
     },
 
     /**
      * @param  {jQuery.Event} evt
      */
-    userRequestSelectAllKeyframes: function(evt) {
+    userRequestSelectAllKeyframes(evt) {
       evt.preventDefault();
       this.set('isSelected', true);
     },
   },
 
-  initialize: function(attributes) {
+  initialize(attributes) {
     this.keyframeProperty = null;
 
     if (typeof attributes.easing === 'string') {
@@ -71,17 +71,17 @@ var KeyframePropertyModel = Base.extend({
     );
   },
 
-  onChange: function() {
+  onChange() {
     this.updateRawKeyframeProperty();
   },
 
-  onChangeScale: function() {
+  onChangeScale() {
     if (this.lateralus.model.get('isRotationModeEnabled')) {
       this.emit('requestRecordUndoState');
     }
   },
 
-  onRemove: function() {
+  onRemove() {
     this.keyframeProperty.actor.removeKeyframe(this.attributes.millisecond);
   },
 
@@ -89,7 +89,7 @@ var KeyframePropertyModel = Base.extend({
    * @param {string} easingString A Rekapi-style, space-delimited list of
    * easing curves.
    */
-  setEasingFromString: function(easingString) {
+  setEasingFromString(easingString) {
     const easingStringChunks = easingString.split(' ');
 
     [
@@ -111,7 +111,7 @@ var KeyframePropertyModel = Base.extend({
   /**
    * @return {string}
    */
-  getValue: function() {
+  getValue() {
     return Mustache.render(
       // Strip out any newlines
       transformStringTemplate.replace(/\n/g, ''),
@@ -122,7 +122,7 @@ var KeyframePropertyModel = Base.extend({
   /**
    * @return {string}
    */
-  getEasing: function() {
+  getEasing() {
     const attributes = this.attributes;
 
     return [
@@ -139,7 +139,7 @@ var KeyframePropertyModel = Base.extend({
    * @param {Object} attributes
    * @return {Error=}
    */
-  validate: function(attributes) {
+  validate(attributes) {
     const invalidFields = _.filter(NUMBER_PROPERTIES, numberProperty => isNaN(attributes[numberProperty]));
 
     const millisecond = attributes.millisecond;
@@ -150,7 +150,7 @@ var KeyframePropertyModel = Base.extend({
       // And millisecond is not already invalid
       !_.contains(invalidFields, 'millisecond') &&
       // And the keyframe already exists or is negative
-      (this.collection.findWhere({ millisecond: millisecond }) ||
+      (this.collection.findWhere({ millisecond }) ||
         millisecond < 0)
     ) {
       invalidFields.push('millisecond');
@@ -166,11 +166,11 @@ var KeyframePropertyModel = Base.extend({
   /**
    * @param {Rekapi.KeyframeProperty} keyframeProperty
    */
-  bindToRawKeyframeProperty: function(keyframeProperty) {
+  bindToRawKeyframeProperty(keyframeProperty) {
     this.keyframeProperty = keyframeProperty;
   },
 
-  updateRawKeyframeProperty: function() {
+  updateRawKeyframeProperty() {
     if (!this.keyframeProperty) {
       return;
     }

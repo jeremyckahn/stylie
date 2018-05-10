@@ -9,16 +9,16 @@ const Base = AEnimaControlPanelComponent.View;
 const baseProto = Base.prototype;
 
 const ControlPanelComponentView = Base.extend({
-  template: template,
+  template,
 
   lateralusEvents: {
-    userRequestToggleControlPanel: function() {
+    userRequestToggleControlPanel() {
       this.hidableView.toggle();
     },
   },
 
   events: {
-    dragEnd: function() {
+    dragEnd() {
       this.orientToRight();
     },
   },
@@ -26,7 +26,7 @@ const ControlPanelComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
     this.$el.addClass('control-panel-view');
 
@@ -40,14 +40,14 @@ const ControlPanelComponentView = Base.extend({
     });
   },
 
-  deferredInitialize: function() {
+  deferredInitialize() {
     const width = this.$el.outerWidth(true);
     const parentWidth = this.$el.parent().width();
     const left = parentWidth - width - constant.CONTROL_PANEL_PADDING_FROM_CORNER;
 
     this.$el.css({
       top: constant.CONTROL_PANEL_PADDING_FROM_CORNER,
-      left: left,
+      left,
     });
 
     this.orientToRight();
@@ -56,7 +56,7 @@ const ControlPanelComponentView = Base.extend({
   /**
    * @override
    */
-  getTemplateRenderData: function() {
+  getTemplateRenderData() {
     const isEmbedded = this.lateralus.model.get('isEmbedded');
 
     return _.extend(
@@ -75,7 +75,7 @@ const ControlPanelComponentView = Base.extend({
    * prevents the control panel from falling off the screen if the user makes
    * their browser window smaller.
    */
-  orientToRight: function() {
+  orientToRight() {
     const left = parseInt(this.$el.css('left'), 10);
     const width = this.$el.outerWidth(true);
     const parentWidth = this.$el.parent().width();
@@ -83,7 +83,7 @@ const ControlPanelComponentView = Base.extend({
 
     this.$el.css({
       left: '',
-      right: right,
+      right,
     });
   },
 });

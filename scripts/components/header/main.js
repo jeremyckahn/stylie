@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const HeaderComponent = Base.extend({
   name: 'stylie-header',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default HeaderComponent;

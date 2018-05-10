@@ -5,12 +5,12 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const TooSmallMessageComponentView = Base.extend({
-  template: template,
+  template,
 
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
   },
 });

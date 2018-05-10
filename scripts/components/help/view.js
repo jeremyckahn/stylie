@@ -8,11 +8,11 @@ const Base = ModalComponent.View;
 const baseProto = Base.prototype;
 
 const HelpComponentView = Base.extend({
-  template: template,
+  template,
 
   lateralusEvents: _.extend(
     {
-      userRequestToggleHelpModal: function() {
+      userRequestToggleHelpModal() {
         if (!this.lateralus.model.get('isEmbedded')) {
           this.hidableView.toggle();
         }
@@ -24,14 +24,14 @@ const HelpComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
   },
 
   /**
    * @override
    */
-  getTemplateRenderData: function() {
+  getTemplateRenderData() {
     return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
       metaKey: aenimaUtils.isMac() ? '⌘' : 'Ctrl',
     });

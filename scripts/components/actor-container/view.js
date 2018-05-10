@@ -7,13 +7,13 @@ const Base = Lateralus.Component.View;
 const baseProto = Base.prototype;
 
 const ActorContainerComponentView = Base.extend({
-  template: template,
+  template,
 
   provide: {
     /**
      * @return {string}
      */
-    actorHtml: function() {
+    actorHtml() {
       return $.trim(this.$actorWrapper.html());
     },
   },
@@ -22,14 +22,14 @@ const ActorContainerComponentView = Base.extend({
     /**
      * @param {boolean} isCentered
      */
-    userRequestUpdateCenteringSetting: function(isCentered) {
+    userRequestUpdateCenteringSetting(isCentered) {
       this.setCenteringClass(isCentered);
     },
 
     /**
      * @param {string} newHtml
      */
-    userRequestUpdateActorHtml: function(newHtml) {
+    userRequestUpdateActorHtml(newHtml) {
       this.$actorWrapper.html(newHtml);
     },
   },
@@ -37,7 +37,7 @@ const ActorContainerComponentView = Base.extend({
   /**
    * @param {Object} [options] See http://backbonejs.org/#View-constructor
    */
-  initialize: function() {
+  initialize() {
     baseProto.initialize.apply(this, arguments);
 
     // TODO: This should be emitting a context, not collecting an object and
@@ -50,14 +50,14 @@ const ActorContainerComponentView = Base.extend({
   /**
    * @param {boolean} isCentered
    */
-  setCenteringClass: function(isCentered) {
+  setCenteringClass(isCentered) {
     this.$actorWrapper[isCentered ? 'addClass' : 'removeClass']('centered');
   },
 
   /**
    * @override
    */
-  getTemplateRenderData: function() {
+  getTemplateRenderData() {
     return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
       embeddedImgRoot: this.lateralus.model.get('embeddedImgRoot'),
     });

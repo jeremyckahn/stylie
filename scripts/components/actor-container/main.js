@@ -6,8 +6,8 @@ const Base = Lateralus.Component;
 
 const ActorContainerComponent = Base.extend({
   name: 'stylie-actor-container',
-  View: View,
-  template: template,
+  View,
+  template,
 });
 
 export default ActorContainerComponent;
