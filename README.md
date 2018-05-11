@@ -22,7 +22,7 @@ To run the app:
 npm start
 ````
 
-You can now access Stylie from http://localhost:9000.
+You can now access Stylie from http://localhost:9005.
 
 ## Developing Stylie
 
