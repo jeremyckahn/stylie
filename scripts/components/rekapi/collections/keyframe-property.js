@@ -1,51 +1,34 @@
-define([
+import Backbone from 'backbone';
+import Lateralus from 'lateralus';
+import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
+import KeyframePropertyModel from '../models/keyframe-property';
 
-  'backbone'
-  ,'lateralus'
+const Base = AEnimaRekapiComponent.KeyframePropertyCollection;
+const baseProto = Base.prototype;
 
-  ,'aenima/components/rekapi/main'
+var KeyframePropertyCollection = Base.extend({
+  model: KeyframePropertyModel,
 
-  ,'../models/keyframe-property'
-
-], function (
-
-  Backbone
-  ,Lateralus
-
-  ,AEnimaRekapiComponent
-
-  ,KeyframePropertyModel
-
-) {
-  'use strict';
-
-  var Base = AEnimaRekapiComponent.KeyframePropertyCollection;
-  var baseProto = Base.prototype;
-
-  var KeyframePropertyCollection = Base.extend({
-    model: KeyframePropertyModel
-
-    ,lateralusEvents: {
-      /**
-       * @param {boolean} isCentered
-       */
-      userRequestUpdateCenteringSetting: function (isCentered) {
-        this.setCenteringRules(isCentered);
-      }
-    }
-
-    ,initialize: function () {
-      baseProto.initialize.apply(this, arguments);
-      this.setCenteringRules(this.lateralus.model.getUi('centerToPath'));
-    }
-
+  lateralusEvents: {
     /**
      * @param {boolean} isCentered
      */
-    ,setCenteringRules: function (isCentered) {
-      this.invoke('set', 'isCentered', isCentered);
-    }
-  });
+    userRequestUpdateCenteringSetting(isCentered) {
+      this.setCenteringRules(isCentered);
+    },
+  },
 
-  return KeyframePropertyCollection;
+  initialize() {
+    baseProto.initialize.apply(this, arguments);
+    this.setCenteringRules(this.lateralus.model.getUi('centerToPath'));
+  },
+
+  /**
+   * @param {boolean} isCentered
+   */
+  setCenteringRules(isCentered) {
+    this.invoke('set', 'isCentered', isCentered);
+  },
 });
+
+export default KeyframePropertyCollection;

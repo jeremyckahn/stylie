@@ -1,27 +1,13 @@
-define([
+import Lateralus from 'lateralus';
+import View from './view';
+import template from 'text!./template.mustache';
 
-  'lateralus'
+const Base = Lateralus.Component;
 
-  ,'./view'
-  ,'text!./template.mustache'
-
-], function (
-
-  Lateralus
-
-  ,View
-  ,template
-
-) {
-  'use strict';
-
-  var Base = Lateralus.Component;
-
-  var HtmlPanelComponent = Base.extend({
-    name: 'stylie-html-panel'
-    ,View: View
-    ,template: template
-  });
-
-  return HtmlPanelComponent;
+const HtmlPanelComponent = Base.extend({
+  name: 'stylie-html-panel',
+  View,
+  template,
 });
+
+export default HtmlPanelComponent;

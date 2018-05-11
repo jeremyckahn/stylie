@@ -1,7 +1,8 @@
 {
   "name": "@jeremyckahn/stylie",
-  "version": "2.8.0",
+  "version": "2.10.0",
   "license": "CC BY-NC-SA",
+  "main": "dist/stylie.js",
   "dependencies": {
     "aenima": "0.8.0",
     "backbone": "1.2.1",
@@ -28,17 +29,20 @@
     "banner-webpack-plugin": "^0.1.3",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
-    "file-loader": "^0.11.2",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "file-loader": "^1.1.11",
     "gh-pages": "^0.12.0",
     "imagemin-cli": "^3.0.0",
-    "jshint": "^2.9.4",
     "node-sass": "^4.5.3",
     "nodemon": "^1.9.2",
+    "prettier": "^1.12.1",
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
+    "webpack": "^4.8.1",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4"
   },
   "scripts": {
     "fast-build:watch": "sh task.sh fast-build:watch",
@@ -46,9 +50,10 @@
     "build:js": "sh task.sh build:js",
     "deploy": "sh task.sh deploy",
     "start": "webpack-dev-server",
-    "lint": "sh task.sh lint",
+    "lint": "eslint --ignore scripts/lib scripts",
+    "prettier": "prettier --single-quote --trailing-comma es5 'scripts/**/*.js' --write",
     "preversion": "npm run lint",
-    "postversion": "git push && git push --tags && npm run deploy"
+    "postversion": "git push && git push --tags && npm run deploy && npm publish"
   },
   "engines": {
     "node": ">=7.1.0"

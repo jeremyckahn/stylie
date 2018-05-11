@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const Webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -9,10 +7,17 @@ const { version } = require('./package.json');
 const rootDir = modulePath => path.resolve(__dirname, modulePath);
 
 module.exports = {
-  entry: './scripts/main.js',
+  entry: {
+    main: './scripts/main.js',
+    stylie: './scripts/stylie.js'
+  },
+  mode: 'production',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'main.js',
+    filename: '[name].js',
+    library: 'stylie',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   devtool: 'source-map',
   resolveLoader: {
@@ -78,17 +83,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin([ 'dist' ]),
-    new Webpack.optimize.UglifyJsPlugin({
-      compress: {
-        dead_code: true,
-        unused: true,
-        warnings: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: true
-    }),
     new Webpack.BannerPlugin(version)
   ],
   devServer: {

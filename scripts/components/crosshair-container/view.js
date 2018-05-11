@@ -1,84 +1,68 @@
-define([
+import Lateralus from 'lateralus';
+import template from 'text!./template.mustache';
+import CrosshairComponent from '../crosshair/main';
 
-  'lateralus'
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-  ,'text!./template.mustache'
+const CrosshairContainerComponentView = Base.extend({
+  template,
 
-  ,'../crosshair/main'
-
-], function (
-
-  Lateralus
-
-  ,template
-
-  ,CrosshairComponent
-
-) {
-  'use strict';
-
-  var Base = Lateralus.Component.View;
-  var baseProto = Base.prototype;
-
-  var CrosshairContainerComponentView = Base.extend({
-    template: template
-
-    ,lateralusEvents: {
-      /**
-       * @param {boolean} showPath
-       */
-      userRequestUpdateShowPathSetting: function (showPath) {
-        this.$el[showPath ? 'removeClass' : 'addClass']('transparent');
-      }
-
-      /**
-       * @param {KeyframePropertyModel} keyframePropertyModel
-       */
-      ,keyframePropertyAdded: function (keyframePropertyModel) {
-        this.addCrosshair(keyframePropertyModel);
-      }
-
-      ,userRequestStartRotationEditMode: function () {
-        this.setRotationModeEnablement(true);
-      }
-
-      ,userRequestEndRotationEditMode: function () {
-        this.setRotationModeEnablement(false);
-      }
-    }
-
+  lateralusEvents: {
     /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
+     * @param {boolean} showPath
      */
-    ,initialize: function () {
-      baseProto.initialize.apply(this, arguments);
-
-      if (!this.lateralus.model.getUi('showPath')) {
-        this.$el.addClass('transparent');
-      }
-    }
+    userRequestUpdateShowPathSetting(showPath) {
+      this.$el[showPath ? 'removeClass' : 'addClass']('transparent');
+    },
 
     /**
      * @param {KeyframePropertyModel} keyframePropertyModel
      */
-    ,addCrosshair: function (keyframePropertyModel) {
-      var crosshairEl = document.createElement('div');
+    keyframePropertyAdded(keyframePropertyModel) {
+      this.addCrosshair(keyframePropertyModel);
+    },
 
-      var crosshairComponent = this.addComponent(CrosshairComponent, {
-        el: crosshairEl
-        ,model: keyframePropertyModel
-      });
+    userRequestStartRotationEditMode() {
+      this.setRotationModeEnablement(true);
+    },
 
-      crosshairComponent.view.$el.appendTo(this.$el);
+    userRequestEndRotationEditMode() {
+      this.setRotationModeEnablement(false);
+    },
+  },
+
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize() {
+    baseProto.initialize.apply(this, arguments);
+
+    if (!this.lateralus.model.getUi('showPath')) {
+      this.$el.addClass('transparent');
     }
+  },
 
-    /**
-     * @param {boolean} enabled
-     */
-    ,setRotationModeEnablement: function (enabled) {
-      this.$el[enabled ? 'addClass' : 'removeClass']('rotation-mode');
-    }
-  });
+  /**
+   * @param {KeyframePropertyModel} keyframePropertyModel
+   */
+  addCrosshair(keyframePropertyModel) {
+    const crosshairEl = document.createElement('div');
 
-  return CrosshairContainerComponentView;
+    const crosshairComponent = this.addComponent(CrosshairComponent, {
+      el: crosshairEl,
+      model: keyframePropertyModel,
+    });
+
+    crosshairComponent.view.$el.appendTo(this.$el);
+  },
+
+  /**
+   * @param {boolean} enabled
+   */
+  setRotationModeEnablement(enabled) {
+    this.$el[enabled ? 'addClass' : 'removeClass']('rotation-mode');
+  },
 });
+
+export default CrosshairContainerComponentView;

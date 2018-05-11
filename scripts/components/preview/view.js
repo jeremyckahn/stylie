@@ -1,68 +1,55 @@
-define([
+import _ from 'underscore';
+import Lateralus from 'lateralus';
+import kd from 'keydrown';
+import template from 'text!./template.mustache';
 
-  'underscore'
-  ,'lateralus'
-  ,'keydrown'
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-  ,'text!./template.mustache'
+const PreviewComponentView = Base.extend({
+  template,
 
-], function (
+  lateralusEvents: {
+    userRequestEnableKeyframeSelection() {
+      this.$el.addClass('keyframe-selection-mode-enabled');
+    },
 
-  _
-  ,Lateralus
-  ,kd
+    userRequestDisableKeyframeSelection() {
+      this.$el.removeClass('keyframe-selection-mode-enabled');
+    },
+  },
 
-  ,template
+  events: {
+    /**
+     * @param {jQuery.Event} evt
+     */
+    mouseup(evt) {
+      const lastMouseDownCoords = this.lastMouseDownCoords;
 
-) {
-  'use strict';
-
-  var Base = Lateralus.Component.View;
-  var baseProto = Base.prototype;
-
-  var PreviewComponentView = Base.extend({
-    template: template
-
-    ,lateralusEvents: {
-      userRequestEnableKeyframeSelection: function () {
-        this.$el.addClass('keyframe-selection-mode-enabled');
+      if (
+        !kd.SHIFT.isDown() &&
+        evt.clientX === lastMouseDownCoords.clientX &&
+        evt.clientY === lastMouseDownCoords.clientY
+      ) {
+        this.emit('userRequestDeselectAllKeyframes');
       }
-
-      ,userRequestDisableKeyframeSelection: function () {
-        this.$el.removeClass('keyframe-selection-mode-enabled');
-      }
-    }
-
-    ,events: {
-      /**
-       * @param {jQuery.Event} evt
-       */
-      mouseup: function (evt) {
-        var lastMouseDownCoords = this.lastMouseDownCoords;
-
-        if (!kd.SHIFT.isDown() &&
-            evt.clientX === lastMouseDownCoords.clientX &&
-            evt.clientY === lastMouseDownCoords.clientY) {
-          this.emit('userRequestDeselectAllKeyframes');
-        }
-      }
-
-      /**
-       * @param {jQuery.Event} evt
-       */
-      ,mousedown: function (evt) {
-        this.lastMouseDownCoords = _.pick(evt, 'clientX', 'clientY');
-      }
-    }
+    },
 
     /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
+     * @param {jQuery.Event} evt
      */
-    ,initialize: function () {
-      baseProto.initialize.apply(this, arguments);
-      this.lastMouseDownCoords = {};
-    }
-  });
+    mousedown(evt) {
+      this.lastMouseDownCoords = _.pick(evt, 'clientX', 'clientY');
+    },
+  },
 
-  return PreviewComponentView;
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize() {
+    baseProto.initialize.apply(this, arguments);
+    this.lastMouseDownCoords = {};
+  },
 });
+
+export default PreviewComponentView;

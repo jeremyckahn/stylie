@@ -1,27 +1,13 @@
-define([
+import Lateralus from 'lateralus';
+import View from './view';
+import template from 'text!./template.mustache';
 
-  'lateralus'
+const Base = Lateralus.Component;
 
-  ,'./view'
-  ,'text!./template.mustache'
-
-], function (
-
-  Lateralus
-
-  ,View
-  ,template
-
-) {
-  'use strict';
-
-  var Base = Lateralus.Component;
-
-  var KeyframeFormComponent = Base.extend({
-    name: 'stylie-keyframe-form'
-    ,View: View
-    ,template: template
-  });
-
-  return KeyframeFormComponent;
+const KeyframeFormComponent = Base.extend({
+  name: 'stylie-keyframe-form',
+  View,
+  template,
 });
+
+export default KeyframeFormComponent;

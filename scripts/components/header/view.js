@@ -1,42 +1,29 @@
-define([
+import Lateralus from 'lateralus';
+import template from 'text!./template.mustache';
 
-  'lateralus'
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-  ,'text!./template.mustache'
+const HeaderComponentView = Base.extend({
+  template,
 
-], function (
+  events: {
+    'click .help': function() {
+      this.$help.blur();
+      this.emit('userRequestToggleHelpModal');
+    },
 
-  Lateralus
+    'click .reset': function() {
+      this.emit('userRequestResetAnimation');
+    },
+  },
 
-  ,template
-
-) {
-  'use strict';
-
-  var Base = Lateralus.Component.View;
-  var baseProto = Base.prototype;
-
-  var HeaderComponentView = Base.extend({
-    template: template
-
-    ,events: {
-      'click .help': function () {
-        this.$help.blur();
-        this.emit('userRequestToggleHelpModal');
-      }
-
-      ,'click .reset': function () {
-        this.emit('userRequestResetAnimation');
-      }
-    }
-
-    /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
-     */
-    ,initialize: function () {
-      baseProto.initialize.apply(this, arguments);
-    }
-  });
-
-  return HeaderComponentView;
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize() {
+    baseProto.initialize.apply(this, arguments);
+  },
 });
+
+export default HeaderComponentView;

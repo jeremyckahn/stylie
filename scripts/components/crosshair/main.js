@@ -1,27 +1,13 @@
-define([
+import Lateralus from 'lateralus';
+import View from './view';
+import template from 'text!./template.mustache';
 
-  'lateralus'
+const Base = Lateralus.Component;
 
-  ,'./view'
-  ,'text!./template.mustache'
-
-], function (
-
-  Lateralus
-
-  ,View
-  ,template
-
-) {
-  'use strict';
-
-  var Base = Lateralus.Component;
-
-  var CrosshairComponent = Base.extend({
-    name: 'stylie-crosshair'
-    ,View: View
-    ,template: template
-  });
-
-  return CrosshairComponent;
+const CrosshairComponent = Base.extend({
+  name: 'stylie-crosshair',
+  View,
+  template,
 });
+
+export default CrosshairComponent;

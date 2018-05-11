@@ -1,72 +1,55 @@
-define([
+import _ from 'underscore';
+import Lateralus from 'lateralus';
+import template from 'text!./template.mustache';
+import KeyframeFormComponent from '../keyframe-form/main';
 
-  'underscore'
-  ,'lateralus'
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-  ,'text!./template.mustache'
+const KeyframesPanelComponentView = Base.extend({
+  template,
 
-  ,'../keyframe-form/main'
+  events: {
+    'click .add-keyframe': function() {
+      this.emit('userRequestNewKeyframe');
+    },
+  },
 
-], function (
-
-  _
-  ,Lateralus
-
-  ,template
-
-  ,KeyframeFormComponent
-
-) {
-  'use strict';
-
-  var Base = Lateralus.Component.View;
-  var baseProto = Base.prototype;
-
-  var KeyframesPanelComponentView = Base.extend({
-    template: template
-
-    ,events: {
-      'click .add-keyframe': function () {
-        this.emit('userRequestNewKeyframe');
-      }
-    }
-
+  /**
+   * @param {KeyframePropertyCollection} collection
+   */
+  lateralusEvents: {
     /**
-     * @param {KeyframePropertyCollection} collection
+     * @param {Backbone.Model} keyframePropertyModel
      */
-    ,lateralusEvents: {
-      /**
-       * @param {Backbone.Model} keyframePropertyModel
-       */
-      keyframePropertyAdded: function (keyframePropertyModel) {
-        var keyframeFormComponent = this.addComponent(KeyframeFormComponent, {
-          model: keyframePropertyModel
-        });
+    keyframePropertyAdded(keyframePropertyModel) {
+      const keyframeFormComponent = this.addComponent(KeyframeFormComponent, {
+        model: keyframePropertyModel,
+      });
+
+      this.$keyframesList.append(keyframeFormComponent.view.el);
+    },
+
+    confirmNewKeyframeOrder(collection) {
+      this.$keyframesList.children().detach();
+
+      collection.each(function(model) {
+        const keyframeFormComponent = _.find(
+          this.component.components,
+          component => component.view.model === model
+        );
 
         this.$keyframesList.append(keyframeFormComponent.view.el);
-      }
+      }, this);
+    },
+  },
 
-      ,confirmNewKeyframeOrder: function (collection) {
-        this.$keyframesList.children().detach();
-
-        collection.each(function (model) {
-          var keyframeFormComponent = _.find(this.component.components
-              ,function (component) {
-            return component.view.model === model;
-          });
-
-          this.$keyframesList.append(keyframeFormComponent.view.el);
-        }, this);
-      }
-    }
-
-    /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
-     */
-    ,initialize: function () {
-      baseProto.initialize.apply(this, arguments);
-    }
-  });
-
-  return KeyframesPanelComponentView;
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize() {
+    baseProto.initialize.apply(this, arguments);
+  },
 });
+
+export default KeyframesPanelComponentView;

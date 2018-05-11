@@ -1,27 +1,13 @@
-define([
+import Lateralus from 'lateralus';
+import View from './view';
+import template from 'text!./template.mustache';
 
-  'lateralus'
+const Base = Lateralus.Component;
 
-  ,'./view'
-  ,'text!./template.mustache'
-
-], function (
-
-  Lateralus
-
-  ,View
-  ,template
-
-) {
-  'use strict';
-
-  var Base = Lateralus.Component;
-
-  var ActorContainerComponent = Base.extend({
-    name: 'stylie-actor-container'
-    ,View: View
-    ,template: template
-  });
-
-  return ActorContainerComponent;
+const ActorContainerComponent = Base.extend({
+  name: 'stylie-actor-container',
+  View,
+  template,
 });
+
+export default ActorContainerComponent;

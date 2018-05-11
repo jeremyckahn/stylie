@@ -1,41 +1,28 @@
-define([
+import Lateralus from 'lateralus';
+import template from 'text!./template.mustache';
 
-  'lateralus'
+const Base = Lateralus.Component.View;
+const baseProto = Base.prototype;
 
-  ,'text!./template.mustache'
+const HtmlPanelComponentView = Base.extend({
+  template,
 
-], function (
+  events: {
+    'keyup textarea': function() {
+      this.emit('userRequestUpdateActorHtml', this.$html.val());
+    },
+  },
 
-  Lateralus
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize() {
+    baseProto.initialize.apply(this, arguments);
+  },
 
-  ,template
-
-) {
-  'use strict';
-
-  var Base = Lateralus.Component.View;
-  var baseProto = Base.prototype;
-
-  var HtmlPanelComponentView = Base.extend({
-    template: template
-
-    ,events: {
-      'keyup textarea': function () {
-        this.emit('userRequestUpdateActorHtml', this.$html.val());
-      }
-    }
-
-    /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
-     */
-    ,initialize: function () {
-      baseProto.initialize.apply(this, arguments);
-    }
-
-    ,deferredInitialize: function () {
-      this.$html.html(this.collectOne('actorHtml'));
-    }
-  });
-
-  return HtmlPanelComponentView;
+  deferredInitialize() {
+    this.$html.html(this.collectOne('actorHtml'));
+  },
 });
+
+export default HtmlPanelComponentView;

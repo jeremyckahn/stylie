@@ -1,220 +1,210 @@
-define([
+import _ from 'underscore';
+import Backbone from 'backbone';
+import Lateralus from 'lateralus';
+import Rekapi from 'rekapi';
+import KeyframePropertyCollection from '../collections/keyframe-property';
+import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
+import constant from 'aenima/constant';
 
-  'underscore'
-  ,'backbone'
-  ,'lateralus'
-  ,'rekapi'
+const Base = AEnimaRekapiComponent.ActorModel;
+const baseProto = Base.prototype;
 
-  ,'../collections/keyframe-property'
+const silentOptionObject = { silent: true };
 
-  ,'aenima/components/rekapi/main'
+var ActorModel = Base.extend({
+  KeyframePropertyCollection,
 
-  ,'aenima/constant'
+  lateralusEvents: {
+    userRequestNewKeyframe() {
+      this.emit('requestRecordUndoState');
+      this.addNewKeyframe();
+    },
 
-], function (
+    millisecondEditingEnd() {
+      this.emit('confirmNewKeyframeOrder', this.transformPropertyCollection);
+    },
+  },
 
-  _
-  ,Backbone
-  ,Lateralus
-  ,Rekapi
+  /**
+   * @param {Object} attributes
+   * @param {Object} options
+   *   @param {RekapiComponent} rekapiComponent
+   *   @param {RekapiActor} actor
+   */
+  initialize() {
+    baseProto.initialize.apply(this, arguments);
+  },
 
-  ,KeyframePropertyCollection
+  /**
+   * @param {Object=} [opt_options]
+   * @param {number} [opt_options.millisecond]
+   * @param {Object} [opt_options.state]
+   * @param {string} [opt_options.easing]
+   */
+  addNewKeyframe(opt_options) {
+    const options = opt_options || {};
+    let keyframePropertyAttributes = options.state || {};
+    const transformPropertyCollection = this.transformPropertyCollection;
 
-  ,AEnimaRekapiComponent
+    if (options.easing) {
+      _.extend(keyframePropertyAttributes, { easing: options.easing });
+    }
 
-  ,constant
+    let millisecond = options.millisecond || 0;
 
-) {
-  'use strict';
+    if (transformPropertyCollection.length && !opt_options) {
+      keyframePropertyAttributes = transformPropertyCollection.last().toJSON();
 
-  var Base = AEnimaRekapiComponent.ActorModel;
-  var baseProto = Base.prototype;
+      keyframePropertyAttributes.x += constant.NEW_KEYFRAME_X_INCREASE;
+      keyframePropertyAttributes.millisecond +=
+        constant.NEW_KEYFRAME_MS_INCREASE;
 
-  var silentOptionObject = { silent: true };
+      millisecond = keyframePropertyAttributes.millisecond;
+    } else {
+      keyframePropertyAttributes.millisecond = millisecond;
+    }
 
-  var ActorModel = Base.extend({
-    KeyframePropertyCollection: KeyframePropertyCollection
+    keyframePropertyAttributes.isCentered = this.collectOne(
+      'cssConfigObject'
+    ).isCentered;
+    keyframePropertyAttributes.isSelected = false;
 
-    ,lateralusEvents: {
-      userRequestNewKeyframe: function () {
-        this.emit('requestRecordUndoState');
-        this.addNewKeyframe();
+    // Add the model silently here, the "add" event is fired explicitly later
+    // in this function.
+    const keyframePropertyModel = transformPropertyCollection.add(
+      keyframePropertyAttributes || {},
+      silentOptionObject
+    );
+
+    this.actor.keyframe(
+      millisecond,
+      {
+        transform: keyframePropertyModel.getValue(),
+      },
+      {
+        transform: keyframePropertyModel.getEasing(),
       }
+    );
 
-      ,millisecondEditingEnd: function () {
-        this.emit('confirmNewKeyframeOrder', this.transformPropertyCollection);
-      }
+    const keyframeProperty = this.actor.getKeyframeProperty(
+      'transform',
+      millisecond
+    );
+
+    keyframePropertyModel.bindToRawKeyframeProperty(keyframeProperty);
+
+    // Rekapi and the Collection are now in sync, notify the listeners.
+    transformPropertyCollection.trigger(
+      'add',
+      keyframeProperty,
+      transformPropertyCollection
+    );
+
+    this.emit('keyframePropertyAdded', keyframePropertyModel);
+  },
+
+  /**
+   * @return {{x: number, y: number}}
+   */
+  getFirstKeyframeOffset() {
+    const firstKeyframe = this.transformPropertyCollection.first();
+
+    if (!firstKeyframe) {
+      return { x: 0, y: 0 };
     }
 
-    /**
-     * @param {Object} attributes
-     * @param {Object} options
-     *   @param {RekapiComponent} rekapiComponent
-     *   @param {RekapiActor} actor
-     */
-    ,initialize: function () {
-      baseProto.initialize.apply(this, arguments);
-    }
+    const firstKeyframeJson = firstKeyframe.toJSON();
 
-    /**
-     * @param {Object=} [opt_options]
-     * @param {number} [opt_options.millisecond]
-     * @param {Object} [opt_options.state]
-     * @param {string} [opt_options.easing]
-     */
-    ,addNewKeyframe: function (opt_options) {
-      var options = opt_options || {};
-      var keyframePropertyAttributes = options.state || {};
-      var transformPropertyCollection = this.transformPropertyCollection;
+    return {
+      x: firstKeyframeJson.x,
+      y: firstKeyframeJson.y,
+    };
+  },
 
-      if (options.easing) {
-        _.extend(keyframePropertyAttributes, { easing: options.easing });
-      }
+  /**
+   * Helper method for RekapiComponent#applyOrientationToExport.
+   * @param {{ x: number, y: number }} offset
+   */
+  prepareForExport(offset) {
+    this.transformPropertyCollection.each(function(model) {
+      ['x', 'y'].forEach(property => {
+        model.set(
+          property,
+          model.get(property) - offset[property],
+          silentOptionObject
+        );
 
-      var millisecond = options.millisecond || 0;
-
-      if (transformPropertyCollection.length && !opt_options) {
-        keyframePropertyAttributes =
-          transformPropertyCollection.last().toJSON();
-
-        keyframePropertyAttributes.x += constant.NEW_KEYFRAME_X_INCREASE;
-        keyframePropertyAttributes.millisecond +=
-          constant.NEW_KEYFRAME_MS_INCREASE;
-
-        millisecond = keyframePropertyAttributes.millisecond;
-      } else {
-        keyframePropertyAttributes.millisecond = millisecond;
-      }
-
-      keyframePropertyAttributes.isCentered =
-        this.collectOne('cssConfigObject').isCentered;
-      keyframePropertyAttributes.isSelected = false;
-
-      // Add the model silently here, the "add" event is fired explicitly later
-      // in this function.
-      var keyframePropertyModel = transformPropertyCollection.add(
-        keyframePropertyAttributes || {}
-        ,silentOptionObject
-      );
-
-      this.actor.keyframe(millisecond, {
-        transform: keyframePropertyModel.getValue()
-      }, {
-        transform: keyframePropertyModel.getEasing()
-      });
-
-      var keyframeProperty =
-        this.actor.getKeyframeProperty('transform', millisecond);
-
-      keyframePropertyModel.bindToRawKeyframeProperty(keyframeProperty);
-
-      // Rekapi and the Collection are now in sync, notify the listeners.
-      transformPropertyCollection.trigger(
-        'add'
-        ,keyframeProperty
-        ,transformPropertyCollection
-      );
-
-      this.emit('keyframePropertyAdded', keyframePropertyModel);
-    }
-
-    /**
-     * @return {{x: number, y: number}}
-     */
-    ,getFirstKeyframeOffset: function () {
-      var firstKeyframe = this.transformPropertyCollection.first();
-
-      if (!firstKeyframe) {
-        return { x: 0, y: 0 };
-      }
-
-      var firstKeyframeJson = firstKeyframe.toJSON();
-
-      return {
-        x: firstKeyframeJson.x
-        ,y: firstKeyframeJson.y
-      };
-    }
-
-    /**
-     * Helper method for RekapiComponent#applyOrientationToExport.
-     * @param {{ x: number, y: number }} offset
-     */
-    ,prepareForExport: function (offset) {
-      this.transformPropertyCollection.each(function (model) {
-        ['x', 'y'].forEach(function (property) {
-          model.set(
-            property
-            ,model.get(property) - offset[property]
-            ,silentOptionObject);
-
-          model.updateRawKeyframeProperty();
-        }, this);
-      });
-    }
-
-    /**
-     * Helper method for RekapiComponent#applyOrientationToExport.
-     * @param {{ x: number, y: number }} offset
-     */
-    ,cleanupAfterExport: function (offset) {
-      this.transformPropertyCollection.each(function (model) {
-        ['x', 'y'].forEach(function (property) {
-          model.set(
-            property
-            ,model.get(property) + offset[property]
-            ,silentOptionObject);
-
-          model.updateRawKeyframeProperty();
-        }, this);
-      });
-    }
-
-    /**
-     * @param {Array.<Object>} keyframes
-     */
-    ,setKeyframes: function (keyframes) {
-      this.rekapiComponent.beginBulkKeyframeOperation();
-      this.removeAllKeyframes();
-
-      keyframes.forEach(function (keyframe) {
-        this.addNewKeyframe({
-          millisecond: keyframe.millisecond
-          ,state: _.omit(keyframe, 'millisecond')
-        });
+        model.updateRawKeyframeProperty();
       }, this);
+    });
+  },
 
-      this.rekapiComponent.endBulkKeyframeOperation();
-    }
+  /**
+   * Helper method for RekapiComponent#applyOrientationToExport.
+   * @param {{ x: number, y: number }} offset
+   */
+  cleanupAfterExport(offset) {
+    this.transformPropertyCollection.each(function(model) {
+      ['x', 'y'].forEach(property => {
+        model.set(
+          property,
+          model.get(property) + offset[property],
+          silentOptionObject
+        );
 
-    /**
-     * @return {Rekapi.Actor}
-     */
-    ,exportForMantra: function () {
-      var exportActor = new Rekapi.Actor();
-      var transformProperties = this.transformPropertyCollection.toJSON();
-
-      transformProperties.forEach(function (transformProperty) {
-        exportActor.keyframe(transformProperty.millisecond, {
-          translateX: transformProperty.x + 'px'
-          ,translateY: transformProperty.y + 'px'
-          ,scale: transformProperty.scale
-          ,rotateX: transformProperty.rotationX + 'deg'
-          ,rotateY: transformProperty.rotationY + 'deg'
-          ,rotateZ: transformProperty.rotationZ + 'deg'
-        }, {
-          translateX: transformProperty.easing_x
-          ,translateY: transformProperty.easing_y
-          ,scale: transformProperty.easing_scale
-          ,rotateX: transformProperty.easing_rotationX
-          ,rotateY: transformProperty.easing_rotationY
-          ,rotateZ: transformProperty.easing_rotationZ
-        });
+        model.updateRawKeyframeProperty();
       }, this);
+    });
+  },
 
-      return exportActor;
-    }
-  });
+  /**
+   * @param {Array.<Object>} keyframes
+   */
+  setKeyframes(keyframes) {
+    this.rekapiComponent.beginBulkKeyframeOperation();
+    this.removeAllKeyframes();
 
-  return ActorModel;
+    keyframes.forEach(function(keyframe) {
+      this.addNewKeyframe({
+        millisecond: keyframe.millisecond,
+        state: _.omit(keyframe, 'millisecond'),
+      });
+    }, this);
+
+    this.rekapiComponent.endBulkKeyframeOperation();
+  },
+
+  /**
+   * @return {Rekapi.Actor}
+   */
+  exportForMantra() {
+    const exportActor = new Rekapi.Actor();
+    const transformProperties = this.transformPropertyCollection.toJSON();
+
+    transformProperties.forEach(transformProperty => {
+      exportActor.keyframe(
+        transformProperty.millisecond,
+        {
+          translateX: `${transformProperty.x}px`,
+          translateY: `${transformProperty.y}px`,
+          scale: transformProperty.scale,
+          rotateX: `${transformProperty.rotationX}deg`,
+          rotateY: `${transformProperty.rotationY}deg`,
+          rotateZ: `${transformProperty.rotationZ}deg`,
+        },
+        {
+          translateX: transformProperty.easing_x,
+          translateY: transformProperty.easing_y,
+          scale: transformProperty.easing_scale,
+          rotateX: transformProperty.easing_rotationX,
+          rotateY: transformProperty.easing_rotationY,
+          rotateZ: transformProperty.easing_rotationZ,
+        }
+      );
+    }, this);
+
+    return exportActor;
+  },
 });
+
+export default ActorModel;

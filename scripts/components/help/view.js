@@ -1,58 +1,41 @@
-define([
+import _ from 'underscore';
+import Lateralus from 'lateralus';
+import template from 'text!./template.mustache';
+import ModalComponent from 'aenima/components/modal/main';
+import aenimaUtils from 'aenima/utils';
 
-  'underscore'
-  ,'lateralus'
+const Base = ModalComponent.View;
+const baseProto = Base.prototype;
 
-  ,'text!./template.mustache'
+const HelpComponentView = Base.extend({
+  template,
 
-  ,'aenima/components/modal/main'
-
-  ,'aenima/utils'
-
-], function (
-
-  _
-  ,Lateralus
-
-  ,template
-
-  ,ModalComponent
-
-  ,aenimaUtils
-
-) {
-  'use strict';
-
-  var Base = ModalComponent.View;
-  var baseProto = Base.prototype;
-
-  var HelpComponentView = Base.extend({
-    template: template
-
-    ,lateralusEvents: _.extend({
-      userRequestToggleHelpModal: function () {
+  lateralusEvents: _.extend(
+    {
+      userRequestToggleHelpModal() {
         if (!this.lateralus.model.get('isEmbedded')) {
           this.hidableView.toggle();
         }
-      }
-    }, baseProto.lateralusEvents)
+      },
+    },
+    baseProto.lateralusEvents
+  ),
 
-    /**
-     * @param {Object} [options] See http://backbonejs.org/#View-constructor
-     */
-    ,initialize: function () {
-      baseProto.initialize.apply(this, arguments);
-    }
+  /**
+   * @param {Object} [options] See http://backbonejs.org/#View-constructor
+   */
+  initialize() {
+    baseProto.initialize.apply(this, arguments);
+  },
 
-    /**
-     * @override
-     */
-    ,getTemplateRenderData: function () {
-      return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
-        metaKey: aenimaUtils.isMac() ? '⌘' : 'Ctrl'
-      });
-    }
-  });
-
-  return HelpComponentView;
+  /**
+   * @override
+   */
+  getTemplateRenderData() {
+    return _.extend(baseProto.getTemplateRenderData.apply(this, arguments), {
+      metaKey: aenimaUtils.isMac() ? '⌘' : 'Ctrl',
+    });
+  },
 });
+
+export default HelpComponentView;
