@@ -11,6 +11,7 @@ module.exports = {
     main: './scripts/main.js',
     stylie: './scripts/stylie.js'
   },
+  mode: 'production',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
@@ -82,17 +83,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin([ 'dist' ]),
-    new Webpack.optimize.UglifyJsPlugin({
-      compress: {
-        dead_code: true,
-        unused: true,
-        warnings: false
-      },
-      output: {
-        comments: false
-      },
-      sourceMap: true
-    }),
     new Webpack.BannerPlugin(version)
   ],
   devServer: {
