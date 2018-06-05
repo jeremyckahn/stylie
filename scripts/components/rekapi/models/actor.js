@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
 import Lateralus from 'lateralus';
-import Rekapi from 'rekapi';
+import { Actor } from 'rekapi';
 import KeyframePropertyCollection from '../collections/keyframe-property';
 import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
 import constant from 'aenima/constant';
@@ -178,7 +178,7 @@ var ActorModel = Base.extend({
    * @return {Rekapi.Actor}
    */
   exportForMantra() {
-    const exportActor = new Rekapi.Actor();
+    const exportActor = new Actor();
     const transformProperties = this.transformPropertyCollection.toJSON();
 
     transformProperties.forEach(transformProperty => {

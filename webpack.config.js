@@ -51,13 +51,7 @@ module.exports = {
       {
         test: /\.js$/,
         use: 'babel-loader',
-        include: [
-          rootDir('scripts'),
-          rootDir('node_modules/shifty'),
-          rootDir('node_modules/rekapi'),
-          rootDir('node_modules/aenima'),
-          rootDir('node_modules/webpack-dev-server')
-        ]
+        exclude: /node_modules/
       }, {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         use: [{

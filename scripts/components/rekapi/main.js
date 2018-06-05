@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import Lateralus from 'lateralus';
-import Rekapi from 'rekapi';
+import { Rekapi } from 'rekapi';
 import ActorModel from './models/actor';
 import AEnimaRekapiComponent from 'aenima/components/rekapi/main';
 
