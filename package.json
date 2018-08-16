@@ -19,7 +19,7 @@
     "lodash": "~3.10.1",
     "mustache": "^2.3.0",
     "rekapi": "~2.0.4",
-    "shifty": "^2.1.2"
+    "shifty": "^2.6.0"
   },
   "devDependencies": {
     "appcache-manifest": "^2.0.0",
