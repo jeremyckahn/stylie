@@ -8,6 +8,6 @@ export default {
   TRANSIENT_ANIMATION_NAME: '__transientAnimation',
   mantraRoot: isLocalhost
     ? 'http://localhost:9009/'
-    : 'http://jeremyckahn.github.io/mantra/',
+    : 'https://jeremyckahn.github.io/mantra/',
   API_ROOT: 'http://localhost:8666/api',
 };
