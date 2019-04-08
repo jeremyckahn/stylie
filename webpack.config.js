@@ -38,7 +38,7 @@ module.exports = {
       'jquery-dragon': rootDir('node_modules/jquery-dragon/src/jquery.dragon'),
       'jquery-cubelet': rootDir('node_modules/jquery-cubelet/dist/jquery.cubelet'),
       rekapi: rootDir('node_modules/rekapi/src/main'),
-      shifty: rootDir('node_modules/shifty/src/main'),
+      shifty: rootDir('node_modules/shifty/src/index'),
       keydrown: rootDir('node_modules/keydrown/dist/keydrown'),
       lateralus: rootDir('node_modules/lateralus/dist/lateralus'),
       'lateralus.component.tabs': rootDir('node_modules/lateralus-components/tabs/main'),

@@ -5,7 +5,7 @@
 Stylie is a fun tool for easily creating CSS 3 animations. Quickly design your
 animation graphically, grab the generated CSS and go!  To learn how to use the
 app, either run it locally (see below) or go to
-http://jeremyckahn.github.io/stylie/ and click the "?" icon in the header for a
+https://jeremyckahn.github.io/stylie/ and click the "?" icon in the header for a
 manual.
 
 ## Install locally
@@ -51,7 +51,7 @@ was masterfully crafted by [@nrrrdcore](https://github.com/nrrrdcore).
 ## License
 
 Stylie is distributed under a [CC BY-NC-SA
-license](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).  Don't
+license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).  Don't
 worry, this license does not extend to the animations you create with Stylie,
 just the application itself.  You are free to use the animations created by
 Stylie however you please.  You are encouraged to use and modify the code to

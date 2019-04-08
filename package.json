@@ -1,6 +1,6 @@
 {
   "name": "@jeremyckahn/stylie",
-  "version": "2.10.1",
+  "version": "2.10.2",
   "license": "CC BY-NC-SA",
   "main": "dist/stylie.js",
   "dependencies": {
@@ -19,13 +19,14 @@
     "lodash": "~3.10.1",
     "mustache": "^2.3.0",
     "rekapi": "~2.0.4",
-    "shifty": "^2.1.2"
+    "shifty": "^2.6.0"
   },
   "devDependencies": {
     "appcache-manifest": "^2.0.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
     "banner-webpack-plugin": "^0.1.3",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
@@ -34,7 +35,7 @@
     "file-loader": "^1.1.11",
     "gh-pages": "^0.12.0",
     "imagemin-cli": "^3.0.0",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.11.0",
     "nodemon": "^1.9.2",
     "prettier": "^1.12.1",
     "raw-loader": "^0.5.1",
