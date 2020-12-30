@@ -2,7 +2,6 @@ import _ from 'underscore';
 import Lateralus from 'lateralus';
 import kd from 'keydrown';
 import template from 'text!./template.mustache';
-import 'jquery-mousewheel';
 import 'jquery-cubelet';
 
 const Base = Lateralus.Component.View;
