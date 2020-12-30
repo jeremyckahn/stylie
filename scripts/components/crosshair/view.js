@@ -2,7 +2,6 @@ import _ from 'underscore';
 import Lateralus from 'lateralus';
 import kd from 'keydrown';
 import template from 'text!./template.mustache';
-import 'jquery-mousewheel';
 import 'jquery-cubelet';
 
 const Base = Lateralus.Component.View;
@@ -165,9 +164,7 @@ const CrosshairComponentView = Base.extend({
   getRotationTransformStringFromModel() {
     const json = this.model.toJSON();
 
-    return `rotateX(${json.rotationX}deg) rotateY(${
-      json.rotationY
-    }deg) rotateZ(${json.rotationZ}deg) scale(${json.scale})`;
+    return `rotateX(${json.rotationX}deg) rotateY(${json.rotationY}deg) rotateZ(${json.rotationZ}deg) scale(${json.scale})`;
   },
 
   setUiStateToModel() {

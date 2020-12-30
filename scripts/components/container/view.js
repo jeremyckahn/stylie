@@ -31,7 +31,7 @@ const ContainerComponentView = Base.extend({
     /**
      * @param {jQuery.Event} evt
      */
-    'mousewheel input[type=number]': function(evt) {
+    'wheel input[type=number]': function(evt) {
       $(evt.target).change();
     },
 

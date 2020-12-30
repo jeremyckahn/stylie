@@ -105,7 +105,7 @@ const AnimationPathComponentView = Base.extend({
     };
     let j, point;
     for (j = 0; j <= PATH_RENDER_GRANULARITY; j++) {
-      point = interpolate(from, to, 1 / PATH_RENDER_GRANULARITY * j, easing);
+      point = interpolate(from, to, (1 / PATH_RENDER_GRANULARITY) * j, easing);
       points.push(point);
     }
 
