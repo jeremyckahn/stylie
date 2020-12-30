@@ -1,0 +1,20 @@
+{
+  "short_name": "Stylie",
+  "name": "stylie",
+  "icons": [
+    {
+      "src": "img/stylie-logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/stylie-logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#e5e5e5",
+  "background_color": "#e5e5e5"
+}
