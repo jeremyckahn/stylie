@@ -48,11 +48,15 @@ const TimelineScrubberComponentView = Base.extend({
       this.emit('userRequestStop');
     },
 
+    'touchstart .scrubber': function() {
+      this.emit('userRequestPause');
+    },
+
     'mousedown .scrubber': function() {
       this.emit('userRequestPause');
     },
 
-    'change .scrubber': function() {
+    'input .scrubber': function() {
       this.syncRekapiToScrubber();
     },
   },
