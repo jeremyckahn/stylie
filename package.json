@@ -4,7 +4,7 @@
   "license": "CC BY-NC-SA",
   "main": "dist/stylie.js",
   "dependencies": {
-    "aenima": "0.8.0",
+    "aenima": "^0.8.1",
     "backbone": "1.2.1",
     "bezierizer": "0.1.0",
     "bootstrap-sass": "3.2.0",
