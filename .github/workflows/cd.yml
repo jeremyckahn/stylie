@@ -8,7 +8,7 @@ on:
       - 'master'
 
 jobs:
-  run_tests:
+  run_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.1
