@@ -43,7 +43,7 @@ module.exports = {
       shifty: rootDir('node_modules/shifty/src/index'),
       keydrown: rootDir('node_modules/keydrown/dist/keydrown'),
       lateralus: rootDir('node_modules/lateralus/dist/lateralus'),
-      'lateralus.component.tabs': rootDir('node_modules/lateralus-components/tabs/main'),
+      'lateralus.component.tabs': rootDir('node_modules/@jeremyckahn/lateralus-components/tabs/main'),
       aenima: rootDir('node_modules/aenima'),
       bezierizer: rootDir('node_modules/bezierizer/dist/bezierizer')
     }
