@@ -15,7 +15,7 @@
     "jquery-dragon": "^0.5.1",
     "keydrown": "~1.2.1",
     "lateralus": "~0.9.3",
-    "lodash": "~3.10.1",
+    "lodash": "~4.17.19",
     "mustache": "^2.3.0",
     "rekapi": "~2.0.4",
     "shifty": "~2.7.0"
