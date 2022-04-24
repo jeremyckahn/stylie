@@ -1,6 +1,6 @@
 {
   "name": "@jeremyckahn/stylie",
-  "version": "2.10.2",
+  "version": "2.11.1",
   "license": "CC BY-NC-SA",
   "main": "dist/stylie.js",
   "dependencies": {
@@ -52,7 +52,7 @@
     "lint": "eslint --ignore scripts/lib scripts",
     "prettier": "prettier --single-quote --trailing-comma es5 'scripts/**/*.js' --write",
     "preversion": "npm run lint",
-    "postversion": "git push && git push --tags && npm run deploy && npm publish"
+    "postversion": "git push && git push --tags"
   },
   "engines": {
     "node": ">=7.1.0"
