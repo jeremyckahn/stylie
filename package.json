@@ -34,7 +34,7 @@
     "file-loader": "^1.1.11",
     "gh-pages": "^0.12.0",
     "imagemin-cli": "^3.0.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^8.0.0",
     "nodemon": "^1.9.2",
     "prettier": "^1.12.1",
     "raw-loader": "^0.5.1",
@@ -55,6 +55,6 @@
     "postversion": "git push && git push --tags"
   },
   "engines": {
-    "node": "14.19.1"
+    "node": "16.17.0"
   }
 }
