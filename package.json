@@ -55,6 +55,6 @@
     "postversion": "git push && git push --tags"
   },
   "engines": {
-    "node": ">=7.1.0"
+    "node": "14.19.1"
   }
 }
