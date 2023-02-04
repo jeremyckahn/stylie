@@ -62,8 +62,6 @@ const ControlPanelComponent = Base.extend({
         {
           modelAttributes: {
             cssExportClass: 'stylie',
-            analyticsUrl:
-              'https://ga-beacon.appspot.com/UA-42910121-1/stylie?pixel',
           },
         }
       );
